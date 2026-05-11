@@ -1,0 +1,46 @@
+All references in this course
+A War Story About a Python, a Fork, a Cow, and a Bug 
+https://codeconfessions.substack.com/p/a-war-story-involving-a-python-a
+
+User and Kernel Level Threads
+http://www.cs.iit.edu/~cs561/cs450/ChilkuriDineshThreads/dinesh%27s%20files/User%20and%20Kernel%20Level%20Threads.html#:~:text=Instead%20of%20thread%20table%20in,to%20create%20and%20manage%20threads.
+
+Sharing page tables with mshare()
+https://lwn.net/Articles/895217/
+
+TLB flush
+https://lass.cs.umass.edu/~shenoy/courses/fall12/lectures/notes/Lec06_notes.pdf
+
+DRAM Addressing
+https://docs.amd.com/r/en-US/pg313-network-on-chip/DRAM-Addressing
+
+Linux on 4KB Sector Disks
+https://web.archive.org/web/20190503044834/https://developer.ibm.com/tutorials/l-linux-on-4kb-sector-disks/
+
+RISC vs. CISC: 20 Key Comparisons
+https://www.spiceworks.com/tech/tech-general/articles/risc-vs-cisc/#:~
+=In%20RISC%20processors%2C%20instruction%20decoding,%2C%20Power%20Architecture%2C%20and%20SPARC.
+
+DRAM Basics
+https://tayloredge.com/reference/Electronics/Memory/dram1.pdf
+
+Lets make PostgreSQL multi-threaded
+https://www.postgresql.org/message-id/31cc6df9-53fe-3cd9-af5b-ac0d801163f4%40iki.fi
+
+Objections on PostgreSQL multi-threaded
+https://www.postgresql.org/message-id/20230607213721.al3etgcgtija3ytz%40awork3.anarazel.de
+
+Firefox 3 uses fsync excessively
+https://bugzilla.mozilla.org/show_bug.cgi?id=421482
+
+ARM- Address Space ID
+https://developer.arm.com/documentation/den0013/d/The-Memory-Management-Unit/Multi-tasking-and-OS-usage-of-translation-tables/Address-Space-ID
+
+Linux Kernel Optimization
+https://www.phoronix.com/news/Linux-Kernel-Faster-memchr
+
+Sense Amplifier
+https://en.wikipedia.org/wiki/Sense_amplifier
+
+DMA Details
+https://web.archive.org/web/20070521144721/https://www.science.unitn.it/~fiorella/guidelinux/tlk/node87.html
