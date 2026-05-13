@@ -59,10 +59,6 @@
 ##### 2.2. Bus-Off-Detection
 - The bus-off event is detected by the CAN controller and reported to the software (CAN State Manager) via an interrupt. The CAN State Manager then handles the bus-off event as described in the previous point.
 ```c
-// CanIf receive the bus-off event from the CAN controller and report it to CanSM
-
-```
-```c
 // Flow of bus-off event recieve 
 ISR(OS_2Q1_Can_Transfer_ISR_MCAN_1) // Operating System
 {
@@ -117,6 +113,9 @@ void CanSM_MainFunction(void) // CanSM_Main.c -> CanStack/CanSM
 ... = CanSM_CheckTxRxNotification((uint8)CanSM_NetworkIdx_u8)
 }
 ```
+- And obviously, it is matched with the AUTOSAR architecture for the bus-off event handling as shown in the image below:
+
+![alt text](image-2.png)
 
 ##### 2.3. Bus-Off-End-Detection (Bus-Off Recovery)
 - Bus-off recovery is the procedure the CAN State Manager uses after a CAN controller enters the bus-off state, in order to bring communication back and verify that recovery was successful.
@@ -128,20 +127,17 @@ void CanSM_MainFunction(void) // CanSM_Main.c -> CanStack/CanSM
       - informs ComM with `COMM_SILENT_COMMUNICATION`
       - sets the DEM event `CANSM_E_BUS_OFF`
       - to `DEM_EVENT_STATUS_PRE_FAILED`
-  - Wait the configured recovery time: 
+  - **Wait the configured recovery time**: 
     - The recovery waiting time is configurable:
       - `CanSMBorTimeL1` = level 1, short recovery time
       - `CanSMBorTimeL2` = level 2, long recovery time
-- So during recovery, the network is effectively handled as disturbed/silent.
+    - When the time is exceeds the CanSMBorTimeL2, the CAN State Manager will then try to recover from the bus-off state by restarting the CAN controller and checking if communication is successful again. by jumping to the state `CANSM_S_BUS_OFF_CHECK`.
+      - If it is successful, the CAN State Manager will then report `CANSM_S_NO_BUS_OFF`, else, it just looping the state `CANSM_S_BUS_OFF_RECOVERY_L2`.
 
 #### 3. AUTOSAR Specification for BusOff-End-Detection
 - The AUTOSAR specification for BusOff-End-Detection with two options is described in the AUTOSAR SWS for CAN State Manager (CanSM), [AUTOSAR_CP_SWS_CANStateManager](https://www.autosar.org/fileadmin/standards/R23-11/CP/AUTOSAR_CP_SWS_CANStateManager.pdf).
 
 #### 4. Scope of the requirement
-
-
-
-
 
 ##### CanSMBorTimeTxEnsured
 ![alt text](image.png)
