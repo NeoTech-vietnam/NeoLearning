@@ -53,4 +53,8 @@ func newDeckFromFile(filename string) deck {
 		fmt.Println("Error:", err)
 		os.Exit(1)
 	}
+
+	// Video 29 - Error Handling
+	s := strings.Split(string(bs), ",") // Ace of Spades, Two of Spades, Three of Spades, ...
+	return deck(s)
 }
