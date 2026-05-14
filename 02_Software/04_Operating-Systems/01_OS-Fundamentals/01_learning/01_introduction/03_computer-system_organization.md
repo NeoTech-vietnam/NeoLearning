@@ -40,8 +40,21 @@
 - But how does the controller inform the device driver that it has finished its operation? This is accomplished via an **interrupt**.
 
 ###### Overview
-- Hardware may trigger an interrupt at any time by sending a signal to the CPU, usually by the way of the system bus.
+- Hardware may trigger an interrupt at any time by sending a signal to the CPU, usually by the way of the system bus. Interrupts are used for many other purposes as well and are a key part of how operating systems and hardware interact.
+- When the CPU is interrupted, it stops what it is doing and immediately transfers execution to a fixed location. The fixed location usually contains the starting address where the service routine for the interrupt is located.
+- The **interrupt service routine** (ISR) executes; on completion, the CPU resumes the interrupted computation.
 
+![alt text](image-2.png)
+
+- Interrupts are an important part of a computer architecture. Each computer design has its own interrupt mechanism, but several functions are common.
+- The interrupt must transfer control to the appropriate interrupt service routine.The straightforward method for managing this transfer would be to invoke a generic routine to examine the interrupt information.
+- The routine would call the interrupt-specific handler. However, interrupts must be handled quickly, as they can occur at any time. Therefore, the CPU must be able to determine the appropriate handler directly from the interrupt information.
+- A table of pointers to interrupt routines can be used instead to provide the necessary speed so the interrupt routine can be called via the table, with no intermediate needed.
+- **Table of pointers** is stored in the low memory (the first hundred or so locations) and is called the **interrupt vector**, of addresses is then indexed by a unique number, given with the interrupt request, to provide the address of the interrupt service routine for the interrupting device.
+  - Operating systems as different as Windows and UNIX dispatch interrupts in this manner.
+- The interrupt architecture must also save the state information of whatever was interrupted, so that it can restore this information after servicing the interrupt. If the interrupt routine needs to modify the processor state
+  - For instance, by modifying register values—it must explicitly save the current state and then restore that state before returning. 
+  - After the interrupt is serviced, the saved return address is loaded into the program counter, and the interrupted computation resumes as though the interrupt had not occurred.
 ---
 
 ### Summary Section (Summary of Notes)
