@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"strings"
 )
@@ -57,4 +58,12 @@ func newDeckFromFile(filename string) deck {
 	// Video 29 - Error Handling
 	s := strings.Split(string(bs), ",") // Ace of Spades, Two of Spades, Three of Spades, ...
 	return deck(s)
+}
+
+// Video 30 - Shuffle
+func (d deck) shuffle() {
+	for i := range d {
+		newPosition := rand.Intn(len(d) - 1)
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
