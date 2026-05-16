@@ -51,14 +51,17 @@
   - You can install multiple ports at the same time and switch between them as desired. 
   - You can also install multiple versions of the same port concurrently, allowing your to easily manage projects that use legacy compilers and/or microcontrollers.
 - **VRTA** is a special port plug-in which provides the functionality of RTA-OS on a standard Windows PC. 
-  - This allows you to design and test application behavior without needing real target hardware1. 
+  - This allows you to design and test application behavior without needing real target hardware[^1]. 
   - VRTA comes with a development kit that allows you to build Virtual ECUs that can simulate interrupts, I/O etc.
   - VRTA can be used to emulate multicore AUTOSAR applications.
 - **VRTA-ux** is a similar port plug-in that can be used to create VECUs that run under Linux.
 Linux.
+
 
 ---
 
 ### Summary Section (Summary of Notes)
 
 RTA-OS is a real RTOS that is designed to be high performance, real-time and portable. It is a full implementation of the open-standard AUTOSAR OS specifications and is compliant to the OSEK/VDX OS Standard. The kernel is written in ANSI C that is MISRA-C 2012 compliant, making it suitable for use in systems that conform to ASIL D.
+
+[^1]: Note that VRTA is not a realtime environment, since it operates within the Windows operating system.
