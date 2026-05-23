@@ -35,6 +35,7 @@
  * memory management pages of https://www.FreeRTOS.org for more information.
  */
 #include <stdlib.h>
+#include <stdio.h>
 
 /* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
  * all the API functions to use the MPU wrappers.  That should only be done when
@@ -153,6 +154,8 @@ void vPortInitialiseBlocks(void) {
 /*-----------------------------------------------------------*/
 
 size_t xPortGetFreeHeapSize(void) {
+  printf("xNextFreeByte is: %zu\n", xNextFreeByte);
+  printf("configADJUSTED_HEAP_SIZE is: %zu\n", configADJUSTED_HEAP_SIZE);
   return (configADJUSTED_HEAP_SIZE - xNextFreeByte);
 }
 

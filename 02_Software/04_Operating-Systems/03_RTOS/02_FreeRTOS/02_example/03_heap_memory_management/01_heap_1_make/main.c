@@ -124,9 +124,13 @@ static void prvWorkerTask(void *pvParameters) {
            "Free heap after = %zu bytes\n",
            id, ALLOC_CHUNK_BYTES, pvBlock, xPortGetFreeHeapSize());
   } else {
-    /* Should not reach here with 10 KB heap and 3 small workers,
-     * but heap_1 will call vApplicationMallocFailedHook() above. */
     printf("[Worker %d] allocation FAILED — heap exhausted!\n", id);
+  }
+
+  /* Worker 1 deliberately calls vTaskDelete — triggers assert in heap_1 */
+  if (id == 1) {
+    printf("[Worker %d] calling vTaskDelete(NULL) — expect ASSERT...\n", id);
+    vTaskDelete(NULL);
   }
 
   /* Block forever — memory is never freed with heap_1. */

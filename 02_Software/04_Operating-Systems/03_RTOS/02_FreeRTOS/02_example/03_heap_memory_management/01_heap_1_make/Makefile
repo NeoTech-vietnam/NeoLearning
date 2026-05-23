@@ -13,7 +13,6 @@ KERNEL_DIR := $(FREERTOS_DIR)/01_Source
 
 # Include dependencies
 INCLUDE_DIRS := -I.
-INCLUDE_DIRS += -I..  # FreeRTOSConfig.h lives one level up
 INCLUDE_DIRS += -I$(KERNEL_DIR)/include
 INCLUDE_DIRS += -I$(KERNEL_DIR)/portable/ThirdParty/GCC/Posix
 INCLUDE_DIRS += -I$(KERNEL_DIR)/portable/ThirdParty/GCC/Posix/utils

@@ -115,7 +115,7 @@
  *----------------------------------------------------------*/
 #define INCLUDE_vTaskPrioritySet 1
 #define INCLUDE_uxTaskPriorityGet 1
-#define INCLUDE_vTaskDelete 1  /* enabled for demo — will assert with heap_1 */
+#define INCLUDE_vTaskDelete 1  /* heap_1 cannot free memory — never call vTaskDelete */
 #define INCLUDE_vTaskSuspend 1
 #define INCLUDE_vTaskDelayUntil 1
 #define INCLUDE_vTaskDelay 1
