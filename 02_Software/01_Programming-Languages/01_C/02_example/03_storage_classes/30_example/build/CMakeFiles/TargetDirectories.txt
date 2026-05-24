@@ -1,0 +1,3 @@
+/home/thach/Desktop/workspace/C_Advance_Programming/project/30_example/build/CMakeFiles/main.dir
+/home/thach/Desktop/workspace/C_Advance_Programming/project/30_example/build/CMakeFiles/edit_cache.dir
+/home/thach/Desktop/workspace/C_Advance_Programming/project/30_example/build/CMakeFiles/rebuild_cache.dir
