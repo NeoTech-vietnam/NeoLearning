@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/main.dir/sources/main.c.o CMakeFiles/main.dir/sources/other.c.o -o main 
