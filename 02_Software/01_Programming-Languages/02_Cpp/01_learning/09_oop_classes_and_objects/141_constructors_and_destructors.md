@@ -24,7 +24,7 @@
 - No return type is speciﬁed
 - Can be overloaded
 
-#### Player Constructors
+##### Player Constructors
 ```cpp
 class Player
 {
@@ -40,7 +40,7 @@ public:
 };
 ```
 
-#### Account Constructors
+##### Account Constructors
 ```cpp
 class Account
 {
@@ -63,8 +63,15 @@ public:
 - No return type and no parameters
 - Only 1 destructor is allowed per class – cannot be overloaded!
 - Useful to release memory and other resources
-
-#### Player Destructor
+- The destructor is just the last method the class runs to honor its contract: "I acquired resources, I will release them." Whether that's delete, closing a file, releasing a mutex, or anything else — it's always the class cleaning up after itself.
+- Common real-world uses beyond memory:
+  - Close a file — fclose(file)
+  - Release a mutex/lock — mutex.unlock()
+  - Close a network socket — close(socket_fd)
+  - Log/debug output — like your cout << "Destructor called for " << name in this example
+  - Decrement a reference counter
+  - Notify other systems the object is gone
+##### Player Destructor
 ```cpp
 class Player
 {
@@ -81,7 +88,7 @@ public:
 };
 ```
 
-#### Account Destructor
+##### Account Destructor
 ```cpp
 class Account
 {
@@ -96,6 +103,37 @@ public:
     // Destructor
     ~Account();
 };
+```
+
+##### How Destructors Are Called
+- Automatically when an object goes out of scope
+```cpp
+{
+    Shallow obj {100};
+} // ~Shallow() called automatically here
+```
+- Function parameter passed by value
+```cpp
+void display_shallow(Shallow s) {  // s is a copy
+    cout << s.get_data_value();
+} // ~Shallow() called on s when function returns
+```
+- `delete` on a heap-allocated object
+```cpp
+Shallow *obj = new Shallow{100};
+delete obj;  // ~Shallow() called explicitly here
+```
+- End of `main()`
+```cpp
+int main() {
+    Shallow obj1 {100};
+    Shallow obj2 {obj1};
+    return 0;  // ~Shallow() called on obj2, then obj1 (reverse order)
+}
+```
+- Explicit call (rare, almost never used)
+```cpp
+obj.~Shallow();  // valid but dangerous — avoid this
 ```
 
 #### Creating objects
