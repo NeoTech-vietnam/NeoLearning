@@ -28,9 +28,9 @@ The ComScl_NetMtrx package is responsible for converting communication signals b
 
 The package is structured into several modules, each handling specific aspects of signal conversion and routing. These modules include:
 
-| Module | Responsibility |
-| ------ | -------------- |
-|        |
+| Module                   | Responsibility                              |
+| ------------------------ | ------------------------------------------- |
+| `Can_GeneralTypes.arxml` | Defines general types for CAN communication |
 
 
 ---
