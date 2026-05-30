@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NeoAssistant — Learning & Practice Tracker</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a1f29;
+    --panel-2: #232a37;
+    --border: #2d3748;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #818cf8;
+    --l1: #64748b;
+    --l2: #22c55e;
+    --l3: #f59e0b;
+    --l4: #ef4444;
+    --done: #22c55e;
+    --progress: #f59e0b;
+    --notstarted: #475569;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+    padding: 24px 32px;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  h1 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.08);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    backdrop-filter: blur(8px);
+  }
+
+  .stat-card strong { color: var(--accent); margin-left: 4px; }
+
+  .progress-wrapper {
+    margin-top: 12px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    height: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--progress), var(--done));
+    width: 0%;
+    transition: width 0.4s ease;
+  }
+
+  .progress-label {
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 32px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: var(--panel);
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .filter-group label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { background: var(--panel-2); color: var(--text); }
+  .filter-btn.active {
+    background: var(--accent);
+    color: #0f1419;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .search-box {
+    flex: 1;
+    min-width: 200px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+
+  .search-box:focus { outline: none; border-color: var(--accent); }
+
+  .action-btn {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.15s;
+  }
+
+  .action-btn:hover { background: var(--panel-2); border-color: var(--accent); }
+  .action-btn.danger:hover { border-color: var(--l4); color: var(--l4); }
+
+  .section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    background: var(--panel-2);
+    padding: 14px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .section-header:hover { background: #2a3140; }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-meta {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .section-progress-mini {
+    width: 80px;
+    height: 6px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .section-progress-mini > div {
+    height: 100%;
+    background: var(--done);
+    transition: width 0.3s;
+  }
+
+  .collapse-icon {
+    transition: transform 0.2s;
+    color: var(--muted);
+  }
+  .section.collapsed .collapse-icon { transform: rotate(-90deg); }
+  .section.collapsed table { display: none; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  th, td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    background: rgba(0,0,0,0.2);
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr.row-done { opacity: 0.55; }
+  tr.row-done .topic { text-decoration: line-through; }
+
+  tr.hidden { display: none; }
+
+  .col-num   { width: 36px; color: var(--muted); }
+  .col-level { width: 70px; text-align: center; }
+  .col-status { width: 130px; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .badge-L1 { background: var(--l1); }
+  .badge-L2 { background: var(--l2); }
+  .badge-L3 { background: var(--l3); }
+  .badge-L4 { background: var(--l4); }
+
+  .status-select {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    width: 100%;
+  }
+  .status-select:focus { outline: none; border-color: var(--accent); }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .dot-notstarted { background: var(--notstarted); }
+  .dot-progress { background: var(--progress); }
+  .dot-done { background: var(--done); }
+
+  .topic { font-weight: 500; }
+  .notes { color: var(--muted); font-size: 12px; }
+
+  .legend {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+
+  @media (max-width: 768px) {
+    main { padding: 16px; }
+    header { padding: 16px; }
+    .col-num, th.col-num { display: none; }
+    .notes { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🧠 NeoAssistant — Learning & Practice Tracker</h1>
+  <div class="subtitle">Knowledge & hands-on skills required to build NeoAssistant. Progress is saved locally in your browser.</div>
+
+  <div class="stats-bar" id="statsBar"></div>
+  <div class="progress-wrapper"><div class="progress-bar" id="overallProgress"></div></div>
+  <div class="progress-label" id="overallLabel">0 / 0 completed</div>
+</header>
+
+<main>
+
+  <div class="legend">
+    <div class="legend-item"><span class="badge badge-L1">L1</span> Know — recognize concepts</div>
+    <div class="legend-item"><span class="badge badge-L2">L2</span> Understand — explain & read</div>
+    <div class="legend-item"><span class="badge badge-L3">L3</span> Apply — write working code</div>
+    <div class="legend-item"><span class="badge badge-L4">L4</span> Master — production-ready</div>
+  </div>
+
+  <div class="controls">
+    <input type="text" class="search-box" id="searchBox" placeholder="🔍 Search topics, notes..." />
+
+    <div class="filter-group">
+      <label>Level:</label>
+      <button class="filter-btn active" data-filter-level="all">All</button>
+      <button class="filter-btn" data-filter-level="L1">L1</button>
+      <button class="filter-btn" data-filter-level="L2">L2</button>
+      <button class="filter-btn" data-filter-level="L3">L3</button>
+      <button class="filter-btn" data-filter-level="L4">L4</button>
+    </div>
+
+    <div class="filter-group">
+      <label>Status:</label>
+      <button class="filter-btn active" data-filter-status="all">All</button>
+      <button class="filter-btn" data-filter-status="notstarted">Not started</button>
+      <button class="filter-btn" data-filter-status="progress">In progress</button>
+      <button class="filter-btn" data-filter-status="done">Done</button>
+    </div>
+
+    <button class="action-btn" id="expandAll">Expand all</button>
+    <button class="action-btn" id="collapseAll">Collapse all</button>
+    <button class="action-btn" id="exportBtn">Export JSON</button>
+    <button class="action-btn danger" id="resetBtn">Reset</button>
+  </div>
+
+  <div id="sections"></div>
+
+</main>
+
+<footer>
+  NeoAssistant Learning Tracker · Data persisted via localStorage · See <a href="Concept.md" style="color:var(--accent)">Concept.md</a> for deliverables
+</footer>
+
+<script>
+const DATA = [
+  {
+    title: "1. Programming Languages & Tools",
+    rows: [
+      ["C — embedded idioms, pointers, bitfields, volatile, memory layout", "L4", "Primary language for ESP-IDF firmware"],
+      ["C++ — classes, RAII, templates for embedded", "L3", "LVGL wrappers, driver classes"],
+      ["Python — scripting, test automation, model tooling", "L3", "PC Monitor Tool, ML training"],
+      ["ESP-IDF — project structure, Kconfig, CMake, component model", "L4", "Mandatory for every firmware module"],
+      ["Git — branching, PR flow, semantic commits, submodules", "L3", "Source + KiCad files management"],
+      ["Debugging — OpenOCD, GDB, ESP-IDF monitor, core dump", "L3", "Survival skill during integration"],
+      ["KiCad — schematic capture, PCB layout, footprint editing", "L3", "Phase 2 — PCB design"],
+      ["SolidWorks — basic mechanical / enclosure design", "L2", "Enough to design a 3D-printable case"],
+      ["Flutter / Dart — mobile app development", "L3", "Companion app (Android/iOS)"]
+    ]
+  },
+  {
+    title: "2. FreeRTOS & System Fundamentals",
+    rows: [
+      ["Tasks, priorities, preemptive scheduling", "L4", "Foundation of every firmware task"],
+      ["Queues, semaphores, mutexes, event groups", "L4", "IPC between tasks (Audio↔AI↔UI)"],
+      ["DMA — I2S / SPI descriptors, double buffering", "L4", "Required for audio + display latency"],
+      ["Interrupts & ISR-safe APIs (xQueueSendFromISR, …)", "L3", "Touch, GPIO, timer ISR"],
+      ["Timers — hardware timers, esp_timer, RTC", "L3", "LVGL tick, sensor sampling period"],
+      ["Watchdog — esp_task_wdt, task subscription", "L3", "Required by MonitorTask"],
+      ["Memory — heap_caps_malloc, PSRAM, stack sizing, watermark", "L4", "Directly tied to 8 MB PSRAM budget"],
+      ["Power management — light/deep sleep, wake stubs, wake-on-voice", "L3", "Hit <100 µA deep-sleep target"],
+      ["Clock management — CPU freq scaling, peripheral clocks", "L2", "Battery + performance trade-offs"],
+      ["OTA — dual-partition, rollback, TLS-verified download", "L3", "Phase 1 review-gate requirement"]
+    ]
+  },
+  {
+    title: "3. BSP Driver Development",
+    rows: [
+      ["INMP441 microphone (I2S DMA)", "L4", "Entry point of the entire voice pipeline"],
+      ["MAX98357A speaker amplifier (I2S DMA)", "L3", "TTS playback"],
+      ["OV2640 camera (DVP + esp_camera)", "L3", "Vision subsystem"],
+      ["ILI9341 / ST7789 TFT (SPI)", "L3", "Display backend for LVGL"],
+      ["Capacitive touch / touch pads", "L2", "User input"],
+      ["WS2812B RGB LED (RMT)", "L2", "Status indicator"],
+      ["MPU-6050 accel + gyro (I2C)", "L3", "Sensor-fusion input"],
+      ["QMC5883L magnetometer (I2C)", "L2", "Heading reference"],
+      ["MicroSD card (SPI + VFS/FAT)", "L2", "Logging, audio dump"],
+      ["Battery voltage monitor (ADC)", "L2", "Power UI indicator"]
+    ]
+  },
+  {
+    title: "4. Communication Protocols",
+    rows: [
+      ["I2S — full-duplex audio", "L4", "Mic + Speaker, DMA mandatory"],
+      ["SPI — TFT + SD card", "L3", "Bus sharing, CS management"],
+      ["I2C — IMU + magnetometer", "L3", "Multi-device addressing"],
+      ["DVP (parallel camera bus)", "L2", "Mostly via esp_camera, low-touch"],
+      ["RMT — WS2812B timing", "L2", "LED animation"],
+      ["Wi-Fi STA/AP + HTTP/S client", "L3", "Cloud AI access"],
+      ["MQTT — pub/sub, QoS, TLS", "L3", "Telemetry → MCP server"],
+      ["BLE GATT server", "L3", "Companion-app pairing/config"],
+      ["WebSocket client", "L2", "Streaming JSON"],
+      ["UART / USB-CDC", "L3", "Debug shell + PC monitor link"]
+    ]
+  },
+  {
+    title: "5. Algorithms & Data Structures (DSA)",
+    rows: [
+      ["Ring / circular buffer", "L4", "Core of the audio pipeline"],
+      ["Lock-free queue (SPSC)", "L3", "ISR → task handoff"],
+      ["Finite State Machine (FSM)", "L3", "Voice UI + connectivity state"],
+      ["Sorting & search", "L2", "Command table"],
+      ["Hash map / LUT", "L2", "Fast command dispatch"],
+      ["Linked list", "L2", "Event list, callbacks"]
+    ]
+  },
+  {
+    title: "6. Digital Signal Processing (DSP)",
+    rows: [
+      ["Sampling, Nyquist, quantisation", "L2", "Theoretical foundation"],
+      ["FFT / IFFT (ESP-DSP)", "L3", "Audio spectrum, viewer tool"],
+      ["FIR / IIR filters", "L3", "Noise removal pre-ASR"],
+      ["VAD — Voice Activity Detection", "L3", "Trigger wake-word stage"],
+      ["MFCC — feature extraction", "L2", "Input for ASR model"],
+      ["Image processing basics", "L2", "OV2640 pre-processing"]
+    ]
+  },
+  {
+    title: "7. Sensor Fusion",
+    rows: [
+      ["Complementary filter", "L2", "Basic roll/pitch"],
+      ["Madgwick / Mahony filter", "L3", "Full attitude quaternion"],
+      ["Hard/soft iron calibration (mag)", "L2", "Accurate heading"],
+      ["Fusion → LVGL widget", "L3", "UI dashboard integration"]
+    ]
+  },
+  {
+    title: "8. UI — LVGL",
+    rows: [
+      ["LVGL setup, display flush, tick task", "L3", "Required for every UI screen"],
+      ["Widgets — label, button, arc, chart", "L3", "Component gallery"],
+      ["Animations & transitions", "L2", "UX polish"],
+      ["Touch input integration", "L3", "Interactive control"],
+      ["PSRAM frame buffer", "L3", "Hit ≥25 fps (review gate)"],
+      ["Custom widgets / styles", "L2", "Branding, theming"]
+    ]
+  },
+  {
+    title: "9. AI & Machine Learning (Edge + Cloud)",
+    rows: [
+      ["ESP-SR WakeNet — wake-word", "L3", "'Hey Neo', ≥95% accuracy"],
+      ["ESP-SR MultiNet — command recognition", "L3", "On-device 10+ commands"],
+      ["TensorFlow Lite Micro", "L3", "Custom keyword model"],
+      ["Cloud STT/TTS (HTTP REST)", "L3", "Full voice roundtrip"],
+      ["NLP / prompt engineering (OpenAI / Gemini)", "L3", "Command resolution layer"],
+      ["MCP Server integration", "L3", "Remote ops + telemetry"],
+      ["Model quantisation (INT8)", "L2", "Fit models within PSRAM"]
+    ]
+  },
+  {
+    title: "10. Power & Hardware Design",
+    rows: [
+      ["LiPo charging (TP4056 / IP5306)", "L2", "Safe charging circuit"],
+      ["Sleep modes & power budget", "L3", "Hit targets in Section 8"],
+      ["PCB EMC rules, decoupling, ground plane", "L3", "Phase 2 PCB layout"],
+      ["RF antenna keep-out (Wi-Fi 2.4 GHz)", "L2", "Avoid RSSI degradation"],
+      ["ESD protection", "L2", "USB port, touch pads"]
+    ]
+  },
+  {
+    title: "11. Testing & Quality",
+    rows: [
+      ["Unit testing (Unity / CMock) for ESP-IDF", "L3", "Driver-level tests"],
+      ["Integration / HIL testing", "L3", "Task-interaction validation"],
+      ["Memory leak detection (heap_caps_check_integrity_all)", "L3", "24 h stress run"],
+      ["Profiling — vTaskGetRunTimeStats, GDB profiling", "L3", "CPU% per task"],
+      ["EMC / RF testing — basic awareness", "L1", "Enough to read lab reports"],
+      ["Code style — MISRA-C subset", "L2", "Phase 1 review gate"]
+    ]
+  },
+  {
+    title: "12. Tooling & Release",
+    rows: [
+      ["Python — pyserial, paho-mqtt, pyqtgraph, PyQt6", "L3", "PC Monitor Tool"],
+      ["pyinstaller packaging", "L2", "Single-executable distribution"],
+      ["Flutter BLE / MQTT client", "L3", "Mobile companion"],
+      ["Firmware signing & OTA binary build", "L2", "Release pipeline"],
+      ["Versioning, changelog, semantic releases", "L2", "v1.0.0 tagging"]
+    ]
+  }
+];
+
+const STORAGE_KEY = "neoassistant_tracker_v1";
+const state = loadState();
+let activeLevelFilter = "all";
+let activeStatusFilter = "all";
+let searchQuery = "";
+
+function loadState() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+  } catch { return {}; }
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function getStatus(key) {
+  return state[key] || "notstarted";
+}
+
+function setStatus(key, value) {
+  state[key] = value;
+  saveState();
+  updateStats();
+  applyFilters();
+}
+
+function render() {
+  const container = document.getElementById("sections");
+  container.innerHTML = "";
+
+  DATA.forEach((section, sIdx) => {
+    const sectionEl = document.createElement("div");
+    sectionEl.className = "section";
+    sectionEl.dataset.sectionIdx = sIdx;
+
+    const header = document.createElement("div");
+    header.className = "section-header";
+    header.innerHTML = `
+      <div class="section-title">
+        <span class="collapse-icon">▼</span>
+        ${section.title}
+      </div>
+      <div class="section-meta">
+        <span class="section-count" data-section-count="${sIdx}"></span>
+        <div class="section-progress-mini"><div data-section-bar="${sIdx}" style="width:0%"></div></div>
+      </div>
+    `;
+    header.addEventListener("click", () => sectionEl.classList.toggle("collapsed"));
+
+    const table = document.createElement("table");
+    table.innerHTML = `
+      <thead>
+        <tr>
+          <th class="col-num">#</th>
+          <th>Topic</th>
+          <th class="col-level">Level</th>
+          <th class="col-status">Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    `;
+    const tbody = table.querySelector("tbody");
+
+    section.rows.forEach((row, rIdx) => {
+      const [topic, level, notes] = row;
+      const key = `${sIdx}-${rIdx}`;
+      const status = getStatus(key);
+
+      const tr = document.createElement("tr");
+      tr.dataset.key = key;
+      tr.dataset.level = level;
+      tr.dataset.status = status;
+      tr.dataset.search = (topic + " " + notes).toLowerCase();
+      if (status === "done") tr.classList.add("row-done");
+
+      tr.innerHTML = `
+        <td class="col-num">${rIdx + 1}</td>
+        <td class="topic">${topic}</td>
+        <td class="col-level"><span class="badge badge-${level}">${level}</span></td>
+        <td class="col-status">
+          <select class="status-select" data-key="${key}">
+            <option value="notstarted" ${status==="notstarted"?"selected":""}>● Not started</option>
+            <option value="progress" ${status==="progress"?"selected":""}>● In progress</option>
+            <option value="done" ${status==="done"?"selected":""}>● Done</option>
+          </select>
+        </td>
+        <td class="notes">${notes}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    sectionEl.appendChild(header);
+    sectionEl.appendChild(table);
+    container.appendChild(sectionEl);
+  });
+
+  container.querySelectorAll(".status-select").forEach(sel => {
+    sel.addEventListener("change", e => {
+      const key = e.target.dataset.key;
+      const val = e.target.value;
+      const tr = e.target.closest("tr");
+      tr.dataset.status = val;
+      tr.classList.toggle("row-done", val === "done");
+      setStatus(key, val);
+    });
+  });
+
+  updateStats();
+}
+
+function updateStats() {
+  let total = 0, done = 0, progress = 0;
+  const sectionStats = {};
+
+  DATA.forEach((section, sIdx) => {
+    let sTotal = 0, sDone = 0;
+    section.rows.forEach((_, rIdx) => {
+      const key = `${sIdx}-${rIdx}`;
+      const s = getStatus(key);
+      total++; sTotal++;
+      if (s === "done") { done++; sDone++; }
+      else if (s === "progress") progress++;
+    });
+    sectionStats[sIdx] = { total: sTotal, done: sDone };
+  });
+
+  document.getElementById("overallProgress").style.width = (total ? (done / total * 100) : 0) + "%";
+  document.getElementById("overallLabel").textContent = `${done} / ${total} completed · ${progress} in progress`;
+
+  const statsBar = document.getElementById("statsBar");
+  const levelCounts = { L1: 0, L2: 0, L3: 0, L4: 0 };
+  const levelDone = { L1: 0, L2: 0, L3: 0, L4: 0 };
+  DATA.forEach((section, sIdx) => {
+    section.rows.forEach((row, rIdx) => {
+      const lvl = row[1];
+      levelCounts[lvl]++;
+      if (getStatus(`${sIdx}-${rIdx}`) === "done") levelDone[lvl]++;
+    });
+  });
+  statsBar.innerHTML = `
+    <div class="stat-card">Total<strong>${total}</strong></div>
+    <div class="stat-card">Done<strong>${done}</strong></div>
+    <div class="stat-card">In progress<strong>${progress}</strong></div>
+    <div class="stat-card">L1<strong>${levelDone.L1}/${levelCounts.L1}</strong></div>
+    <div class="stat-card">L2<strong>${levelDone.L2}/${levelCounts.L2}</strong></div>
+    <div class="stat-card">L3<strong>${levelDone.L3}/${levelCounts.L3}</strong></div>
+    <div class="stat-card">L4<strong>${levelDone.L4}/${levelCounts.L4}</strong></div>
+  `;
+
+  Object.entries(sectionStats).forEach(([sIdx, st]) => {
+    const countEl = document.querySelector(`[data-section-count="${sIdx}"]`);
+    const barEl = document.querySelector(`[data-section-bar="${sIdx}"]`);
+    if (countEl) countEl.textContent = `${st.done} / ${st.total}`;
+    if (barEl) barEl.style.width = (st.total ? (st.done / st.total * 100) : 0) + "%";
+  });
+}
+
+function applyFilters() {
+  document.querySelectorAll("tr[data-key]").forEach(tr => {
+    const matchLevel = activeLevelFilter === "all" || tr.dataset.level === activeLevelFilter;
+    const matchStatus = activeStatusFilter === "all" || tr.dataset.status === activeStatusFilter;
+    const matchSearch = !searchQuery || tr.dataset.search.includes(searchQuery);
+    tr.classList.toggle("hidden", !(matchLevel && matchStatus && matchSearch));
+  });
+}
+
+document.querySelectorAll("[data-filter-level]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter-level]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeLevelFilter = btn.dataset.filterLevel;
+    applyFilters();
+  });
+});
+
+document.querySelectorAll("[data-filter-status]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-filter-status]").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    activeStatusFilter = btn.dataset.filterStatus;
+    applyFilters();
+  });
+});
+
+document.getElementById("searchBox").addEventListener("input", e => {
+  searchQuery = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+document.getElementById("expandAll").addEventListener("click", () => {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("collapsed"));
+});
+
+document.getElementById("collapseAll").addEventListener("click", () => {
+  document.querySelectorAll(".section").forEach(s => s.classList.add("collapsed"));
+});
+
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `neoassistant_progress_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  if (confirm("Reset all progress? This cannot be undone.")) {
+    Object.keys(state).forEach(k => delete state[k]);
+    saveState();
+    render();
+  }
+});
+
+render();
+</script>
+
+</body>
+</html>
