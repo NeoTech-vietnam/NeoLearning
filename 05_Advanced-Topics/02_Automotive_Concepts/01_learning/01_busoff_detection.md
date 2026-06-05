@@ -290,6 +290,19 @@ void CanSM_MainFunction(void) // CanSM_Main.c -> CanStack/CanSM
 
 ![alt text](image-20.png)
 
+#### Difference for the testing:
+
+##### `CanSMBorTxConfirmationPolling = false`:
+
+![alt text](image-34.png)
+
+##### `CanSMBorTxConfirmationPolling = true`:
+
+![alt text](image-33.png)
+
+
+In both image, the clearest difference is the behaviour of `cnttick`, while `false` option, the `cntTick` will be increased until it exceeds the value of `canSMBorTimeTxEnsured_u16`, which is `12`, while in the `true` option, the `cntTick` will not be increased as the bus-off state is left immediately after the successful transmission of one PDU, so there is no need to wait for any configured time.
+
 ##### AUTOSAR Architecture for Bus-Off Event Handling:
 
 - And obviously, it is matched with the AUTOSAR architecture for the bus-off event handling as shown in the image below for both options:
