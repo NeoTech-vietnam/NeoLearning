@@ -1,6 +1,6 @@
 # Cornell Notes
 
-## Topic: Internal Memory
+## Topic: Functional Description - Internal Memory
 
 ## Date: 06/06/2026
 

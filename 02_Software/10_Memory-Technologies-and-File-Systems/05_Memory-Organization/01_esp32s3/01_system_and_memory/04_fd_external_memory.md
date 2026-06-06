@@ -1,6 +1,6 @@
 # Cornell Notes
 
-## Topic: External Memory
+## Topic: Functional Description - External Memory
 
 ## Date: 06/06/2026
 
@@ -63,12 +63,11 @@ This operation is used to clear the dirty bits in dirty blocks and update the ne
 If the data in the cache is newer than the one stored in the external memory, then the new data will be considered as a dirty block. The cache tracks these dirty blocks through their dirty bits. When the dirty bits of a data are cleared, the cache will consider the data as new.
 
 ##### 2. Clean
-
-This operation is used to clear dirty bits in the dirty block, without updating data to the external memory. After the clean operation finish, there will still be old data stored in the external memory, while the cache keeps the new one (but the cache does not know about this). The CPU can then read/write the data directly from the cache. **Only DCache has this function**.
+05_fc_gdma_address_space This operation is used to clear dirty bits in the dirty block, without updating data to the external memory. After the clean operation finish, there will still be old data stored in the external memory, while the cache keeps the new one (but the cache does not know about this). The CPU can then read/write the data directly from the cache. **Only DCache has this function**.
 
 #### 3. Invalidate
 
-This operation is used to remove valid data in the cache. Even if the data is a dirty block mentioned above, it will not be updated to the external memory. But for the non-dirty data, it will be only stored in the external memory after this operation.
+This operation is used to remove valid data in the cache. Even if the data is a dirty block mentioned above, it will not be updated to the external memory. But fo05_fc_gdma_address_spacer the non-dirty data, it will be only stored in the external memory after this operation.
 
 The CPU needs to access the external memory in order to read/write this data. As for the dirty blocks, they will be totally lost with only old data in the external memory after this operation.
 
