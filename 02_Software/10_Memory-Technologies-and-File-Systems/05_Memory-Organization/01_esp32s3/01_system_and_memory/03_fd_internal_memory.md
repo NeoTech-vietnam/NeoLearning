@@ -8,9 +8,9 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- [What is Internal ROM 0?](#1-internal-rom-0)
+- [What is Internal ROM 1?](#2-internal-rom-1)
+- [What is Internal SRAM 0?](#3-internal-sram-0)
 
 ---
 
@@ -50,7 +50,7 @@ This means, for example, address 0x4004_0000 and 0x3FF0_0000 correspond to the s
 
 Internal SRAM 0 is a 32 KB, read-and-write memory space, addressed by the CPU through the instruction bus, as shown in Table 4.3-1.
 
-A 16 KB or the total 32 KB of this memory space can be configured as instruction cache (ICache) to store instructions or read-only data of the external memory. In this case, the occupied memory space cannot be accessed by the CPU, while the remaining can still can be accessed by the CPU.
+A 16 KB or the total 32 KB of this memory space can be configured as **instruction cache (ICache)** to store instructions or read-only data of the external memory. In this case, the occupied memory space cannot be accessed by the CPU, while the remaining can still can be accessed by the CPU.
 
 #### 4. Internal SRAM 1
 
@@ -62,7 +62,7 @@ The total 416 KB memory space comprises multiple 8 KB and 16 KB memory (sub-memo
 
 Internal SRAM 2 is a 64 KB, read-and-write memory space, addressed by the CPU through the data bus, as shown in Table 4.3-1.
 
-A 32 KB or the total 64 KB can be configured as data cache (DCache) to cache data of the external memory.
+A 32 KB or the total 64 KB can be configured as **data cache (DCache)** to cache data of the external memory.
 The space used as DCache cannot be accessed by the CPU, while the remaining space can still be accessed by the CPU.
 
 #### 6. RTC FAST Memory
