@@ -91,6 +91,21 @@ Figures 36.3-10 to 36.3-12 show the timing waveforms of U/DTEP and U/DTEZ.
 
 - Similarly, when synchronizing the timer to period value, increasing counting direction will be illegal, namely, `MCPWM_TIMERn_PHASE_DIRECTION` cannot be set to 0. Therefore, when the timer is synchronized to 0, the counting direction can only be increasing, and `MCPWM_TIMERn_PHASE_DIRECTION` will be 0. When the timer is synchronized to the period value, the counting direction can only be decreasing, and `MCPWM_TIMERn_PHASE_DIRECTION` will be 1.
 
+##### PWM Timer Shadow Register
+
+The PWM timer’s period register and the PWM timer’s clock prescaler register have shadow registers. The purpose of a shadow register is to save a copy of the value to be written into the active register at a specific moment synchronized with the hardware. Both register types are defined as follows:
+
+- Active Register: This register is directly responsible for controlling all actions performed by hardware
+
+- Shadow Register: 
+  - It acts as a temporary buffer for a value to be written to the active register. At a specific, user-configured point in time, the value saved in the shadow register is copied to the active register. Before this happens, the content of the shadow register has no direct effect on the controlled hardware. This helps to prevent spurious operation of the hardware, which may happen when a register is asynchronously modified by software. Both the shadow register and the active register have the same memory address.
+  - The software always writes into, or reads from the shadow register.
+  - The moment of updating the clock prescaler’s active register is at the time when the timer starts operating. When `MCPWM_GLOBAL_UP_EN` is set to 1, the moment of updating the period active register can be selected by the following ways. By setting the update method register of `MCPWM_TIMERx_PERIOD_UPMETHOD`, the update can start when the PWM timer is equal to zero, when the PWM timer is equal to period, at a synchronization moment, or immediately. Software can also trigger a globally forced update bit `MCPWM_GLOBAL_FORCE_UP` which will prompt all registers in the module to be updated according to shadow registers.
+
+##### PWM Timer Synchronization and Phase Locking
+
+The PWM modules adopt a flexible synchronization method. Each PWM timer has a synchronization input and a synchronization output. The synchronization input can be selected from three synchronization outputs and three synchronization signals from the GPIO matrix. The synchronization output can be generated from the synchronization input signal, when the PWM timer’s value is equal to period or zero, or software synchronization. Thus, the PWM timers can be chained together with their phase locked. During synchronization, the PWM timer clock prescaler will reset its counter in order to synchronize the PWM timer clock.
+
 ---
 
 ### Summary Section (Summary of Notes)
