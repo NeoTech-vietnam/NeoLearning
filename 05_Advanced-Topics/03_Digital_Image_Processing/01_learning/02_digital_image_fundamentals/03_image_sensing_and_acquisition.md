@@ -6,6 +6,12 @@
 
 ---
 
+$DO NOT JUST TALK ABOUT IT - SHOW IT$
+
+---
+
+---
+
 ### Cue Column (Questions, Keywords, or Prompts)
 
 - First question or keyword
