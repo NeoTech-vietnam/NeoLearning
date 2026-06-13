@@ -1,6 +1,6 @@
 # Cornell Notes
 
-## Topic: Image Sampling and Quantization
+## Topic: Basic Relationships between Pixels
 
 ## Date: 13/06/2026
 
@@ -11,17 +11,17 @@
 ---
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- What are 4-neighbors, diagonal neighbors, and 8-neighbors?
+- How do 4-adjacency, 8-adjacency, and m-adjacency differ?
+- What is a connected component, a region, and a boundary?
+- How are D4, D8, and Euclidean distances defined?
+- Why use m-adjacency instead of only 4- or 8-adjacency?
 
 ---
 
 ### Notes Section (Main Notes)
 
 In the larger context of **Digital Image Fundamentals (Chapter 2)**, understanding the **Basic Relationships between Pixels (Section 2.5)** is crucial because these concepts form the **foundational building blocks for subsequent image processing techniques** discussed throughout the book. This chapter aims to introduce fundamental ideas about how digital images are represented and manipulated, and the relationships between individual pixels are integral to these processes.
-
-Here's a discussion of what the sources say about basic relationships image processing techniques** discussed throughout the book. This chapter aims to introduce fundamental ideas about how digital images are represented and manipulated, and the relationships between individual pixels are integral to these processes.
 
 Here's a discussion of what the sources say about basic relationships between pixels:
 
