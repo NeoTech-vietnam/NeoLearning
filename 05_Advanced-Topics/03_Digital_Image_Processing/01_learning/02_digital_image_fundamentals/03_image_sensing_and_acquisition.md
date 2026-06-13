@@ -6,7 +6,7 @@
 
 ---
 
-> ***"DO NOT JUST TALK ABOUT IT — SHOW IT"***
+<p align="center"><strong><em>"DO NOT JUST TALK ABOUT IT — SHOW IT"</em></strong></p>
 
 ---
 
