@@ -57,7 +57,11 @@ The textbook outlines three principal sensor arrangements for image acquisition:
     *   CCD sensors offer broad sensing properties and can integrate input light signals over long periods for low-noise images.
     *   The process involves an imaging system (e.g., optical lens) that collects and focuses energy onto the sensor array, which then produces outputs that are converted to an analog signal and finally digitized into a digital image.
 
-A **simple image formation model** describes an image, f(x, y), as a 2-D function where x and y are spatial coordinates and the amplitude represents intensity or gray level. This function is a **positive scalar quantity** related to radiated energy. An image can be characterized by two components: **illumination i(x, y)** (amount of source illumination) and **reflectance r(x, y)** (amount of illumination reflected by objects), which combine as a product: **f(x, y) = i(x, y) * r(x, y)**. The model ensures f(x,y) is non-zero and finite. When dealing with transmissivity instead of reflectivity, the model remains conceptually similar.
+A **simple image formation model** describes an image, $f(x, y)$, as a 2-D function where $x$ and $y$ are spatial coordinates and the amplitude represents intensity or gray level. This function is a **positive scalar quantity** related to radiated energy. An image can be characterized by two components: **illumination $i(x, y)$** (amount of source illumination) and **reflectance $r(x, y)$** (amount of illumination reflected by objects), which combine as a product:
+
+$f(x, y) = i(x, y) * r(x, y)$
+
+The model ensures $f(x,y)$ is non-zero and finite. When dealing with transmissivity instead of reflectivity, the model remains conceptually similar.
 
 Finally, the output of most sensors is a **continuous voltage waveform**. To create a true digital image, this continuous data must be converted into digital form through two subsequent processes: **sampling** (digitizing coordinate values) and **quantization** (digitizing amplitude values). The sensor arrangement dictates the sampling method. The quality of the digital image is largely determined by the number of samples and discrete intensity levels used in these processes.
 
