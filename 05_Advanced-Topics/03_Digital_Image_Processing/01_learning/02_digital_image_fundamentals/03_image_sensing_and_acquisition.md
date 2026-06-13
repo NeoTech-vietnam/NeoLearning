@@ -6,9 +6,7 @@
 
 ---
 
-$DO NOT JUST TALK ABOUT IT - SHOW IT$
-
----
+> ***"DO NOT JUST TALK ABOUT IT — SHOW IT"***
 
 ---
 
@@ -24,7 +22,7 @@ $DO NOT JUST TALK ABOUT IT - SHOW IT$
 
 In the context of **Digital Image Fundamentals (Chapter 2)**, **Image Sensing and Acquisition (Section 2.3)** is presented as the foundational step in converting real-world information into a digital image format. This chapter lays out the basic concepts necessary for understanding how digital images are created and processed.
 
-The primary objective of image sensing and acquisition is to **generate digital images from sensed data** [11 as the foundational step in converting real-world information into a digital image format. This chapter lays out the basic concepts necessary for understanding how digital images are created and processed.
+The primary objective of image sensing and acquisition is to **generate digital images from sensed data** as the foundational step in converting real-world information into a digital image format. This chapter lays out the basic concepts necessary for understanding how digital images are created and processed.
 
 The primary objective of image sensing and acquisition is to **generate digital images from sensed data**. This process typically involves two main elements: an **illumination source** and the **interaction of energy from that source with the scene elements** being imaged. This interaction can be through reflection or absorption of energy. For instance, light reflecting from a surface or X-rays transmitting through a patient's body are examples of these interactions. In some cases, the reflected or transmitted energy is focused onto a **photoconverter** (like a phosphor screen) that converts the energy into visible light.
 
