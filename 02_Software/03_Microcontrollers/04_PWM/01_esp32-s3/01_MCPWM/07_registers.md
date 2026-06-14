@@ -7,10 +7,7 @@
 
 Set and reset by hardware.
 
-`MCPWM_FH0_CBC_ON` (RO):
 
-Set and reset by hardware.
-- If set: cycle-by-cycle mode action is on-going.
 
 `MCPWM_FH0_OST_ON` (RO):
 
@@ -85,146 +82,431 @@ Source selection for PWM generator 1 event_t0, take effect immediately.
 `MCPWM_GEN1_T1_SEL` (R/W):
 
 Source selection for PWM generator 1 event_t1, take effect immediately.
-- 0: fault_event0
-- 1: fault_event1
-- 2: fault_event2
-- 3: sync_taken
-- 4: none
+- 0: fault_event0 ![alt text](image-78.png)
+
+`MCPWM_GEN1_A_UTEZ` (R/W):
+
+Action on PWM1A triggered by event TEZ when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEP` (R/W):
+
+Action on PWM1A triggered by event TEP when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEA` (R/W):
+
+Action on PWM1A triggered by event TEA when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEB` (R/W):
+
+Action on PWM1A triggered by event TEB when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UT0` (R/W):
+
+Action on PWM1A triggered by event_t0 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UT1` (R/W):
+
+Action on PWM1A triggered by event_t1 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEZ` (R/W):
+
+Action on PWM1A triggered by event TEZ when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEP` (R/W):
+
+Action on PWM1A triggered by event TEP when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEA` (R/W):
+
+Action on PWM1A triggered by event TEA when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEB` (R/W):
+
+Action on PWM1A triggered by event TEB when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DT0` (R/W):
+
+Action on PWM1A triggered by event_t0 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DT1` (R/W):
+
+Action on PWM1A triggered by event_t1 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
 
 ---
 
-![alt text](image-77.png)
+![alt text](image-79.png)
 
-`MCPWM_GEN1_CNTUFORCE_UPMETHOD` (R/W):
+`MCPWM_GEN1_B_UTEZ` (R/W):
 
-Updating method for continuous software force of PWM generator 1.
-- When all bits are set to 0: immediately
-- When bit0 is set to 1: TEZ
-- When bit1 is set to 1: TEP
-- When bit2 is set to 1: TEA
-- When bit3 is set to 1: TEB
-- When bit4 is set to 1: sync
-- When bit5 is set to 1: disable update
-
-(TEA/B here and below means an event generated when the timer’s value equals to that of register A/B.)
-
-`MCPWM_GEN1_A_CNTUFORCE_MODE` (R/W):
-
-Continuous software force mode for PWM1A.
-- 0: disabled
+Action on PWM1B triggered by event TEZ when timer increasing.
+- 0: no change
 - 1: low
 - 2: high
-- 3: disabled
+- 3: toggle
 
-`MCPWM_GEN1_B_CNTUFORCE_MODE` (R/W):
+`MCPWM_GEN1_B_UTEP` (R/W):
 
-Continuous software force mode for PWM1B.
-- 0: disabled
+Action on PWM1B triggered by event TEP when timer increasing.
+- 0: no change
 - 1: low
 - 2: high
-- 3: disabled
+- 3: toggle
 
-`MCPWM_GEN1_A_NCIFORCE` (R/W):
+`MCPWM_GEN1_B_UTEA` (R/W):
 
-Trigger of non-continuous immediate software-force event for PWM1A.
-- Toggle triggers a force event.
-
-`MCPWM_GEN1_A_NCIFORCE_MODE` (R/W):
-
-Non-continuous immediate software force mode for PWM1A.
-- 0: disabled
+Action on PWM1B triggered by event TEA when timer increasing.
+- 0: no change
 - 1: low
 - 2: high
-- 3: disabled
+- 3: toggle
 
-`MCPWM_GEN1_B_NCIFORCE` (R/W):
+`MCPWM_GEN1_B_UTEB` (R/W):
 
-Trigger of non-continuous immediate software-force event for PWM1B.
-- Toggle triggers a force event.
-
-`MCPWM_GEN1_B_NCIFORCE_MODE` (R/W):
-
-Non-continuous immediate software force mode for PWM1B.
-- 0: disabled
+Action on PWM1B triggered by event TEB when timer increasing.
+- 0: no change
 - 1: low
 - 2: high
-- 3: disabled `MCPWM_GEN1_CFG_UPMETHOD` (R/W):
+- 3: toggle
 
-Update method for PWM generator 1’s active register of configuration.
-- When all bits are set to 0: immediately
-- When bit0 is set to 1: TEZ
-- When bit1 is set to 1: sync
-- When bit3 is set to 1: disable the update
+`MCPWM_GEN1_B_UT0` (R/W):
 
-`MCPWM_GEN1_T0_SEL` (R/W):
+Action on PWM1B triggered by event_t0 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
 
-Source selection for PWM generator 1 event_t0, take effect immediately.
-- 0: fault_event0
-- 1: fault_event1
-- 2: fault_event2
-- 3: sync_taken
-- 4: none
+`MCPWM_GEN1_B_UT1` (R/W):
 
-`MCPWM_GEN1_T1_SEL` (R/W):
+Action on PWM1B triggered by event_t1 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
 
-Source selection for PWM generator 1 event_t1, take effect immediately.
-- 0: fault_event0
-- 1: fault_event1
-- 2: fault_event2
-- 3: sync_taken
-- 4: none Set and reset by hardware.
-- If set: cycle-by-cycle mode action is on-going.
+`MCPWM_GEN1_B_DTEZ` (R/W):
 
-`MCPWM_FH0_OST_ON` (RO):
+Action on PWM1B triggered by event TEZ when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
 
-Set and reset by hardware.
-- If set: one-shot mode action is on-going.
+`MCPWM_GEN1_B_DTEP` (R/W):
+
+Action on PWM1B triggered by event TEP when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEA` (R/W):
+
+Action on PWM1B triggered by event TEA when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEB` (R/W):
+
+Action on PWM1B triggered by event TEB when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DT0` (R/W):
+
+Action on PWM1B triggered by event_t0 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DT1` (R/W):
+
+Action on PWM1B triggered by event_t1 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
 
 ---
 
-![alt text](image-73.png)
+![alt text](image-80.png)
 
-`MCPWM_GEN1_A_UPMETHOD` (R/W):
+`MCPWM_DT1_FED_UPMETHOD` (R/W):
 
-Update method for PWM generator 1 time stamp A’s active register.
-- When all bits are set to 0: immediately
-- When bit0 is set to 1: TEZ
-- When bit1 is set to 1: TEP
+Update method for FED (falling edge delay) active register.
+- 0: immediate
+- When bit0 is set to 1: tez
+- When bit1 is set to 1: tep
 - When bit2 is set to 1: sync
 - When bit3 is set to 1: disable the update
 
-`MCPWM_GEN1_B_UPMETHOD` (R/W):
+`MCPWM_DT1_RED_UPMETHOD` (R/W):
 
-Update method for PWM generator 1 time stamp B’s active register.
-- When all bits are set to 0: immediately
-- When bit0 is set to 1: TEZ
-- When bit1 is set to 1: TEP
+Update method for RED (rising edge delay) active register.
+- 0: immediate
+- When bit0 is set to 1: tez
+- When bit1 is set to 1: tep
 - When bit2 is set to 1: sync
 - When bit3 is set to 1: disable the update
 
-`MCPWM_GEN1_A_SHDW_FULL` (R/WTC/SC):
+`MCPWM_DT1_DEB_MODE` (R/W):
 
-Set and reset by hardware.
-- If set: PWM generator 1 time stamp A’s shadow reg is filled and waiting to be transferred to A’s active reg.
-- If cleared: A’s active reg has been updated with shadow register latest value.
+S8 in table 36.3-5, dual-edge B mode.
+- 0: fed/red take effect on different path separately
+- 1: fed/red take effect on B path, A out is in bypass or dulpB mode
 
-`MCPWM_GEN1_B_SHDW_FULL` (R/WTC/SC):
+`MCPWM_DT1_A_OUTSWAP` (R/W):
 
-Set and reset by hardware.
-- If set: PWM generator 1 time stamp B’s shadow reg is filled and waiting to be transferred to B’s active reg.
-- If cleared: B’s active reg has been updated with shadow register latest value.
+S6 in table 36.3-5.
+
+`MCPWM_DT1_B_OUTSWAP` (R/W):
+
+S7 in table 36.3-5.
+
+`MCPWM_DT1_RED_INSEL` (R/W):
+
+S4 in table 36.3-5.
+
+`MCPWM_DT1_FED_INSEL` (R/W):
+
+S5 in table 36.3-5.
+
+`MCPWM_DT1_RED_OUTINVERT` (R/W):
+
+S2 in table 36.3-5.
+
+`MCPWM_DT1_FED_OUTINVERT` (R/W):
+
+S3 in table 36.3-5.
+
+`MCPWM_DT1_A_OUTBYPASS` (R/W):
+
+S1 in table 36.3-5.
+
+`MCPWM_DT1_B_OUTBYPASS` (R/W):
+
+S0 in table 36.3-5.
+
+`MCPWM_DT1_CLK_SEL` (R/W):
+
+Dead time generator 1 clock selection.
+- 0: PWM_clk
+- 1: PT_clk
 
 ---
 
-![alt text](image-74.png)
+![alt text](image-81.png)
 
-`MCPWM_GEN1_A` (R/W):
+`MCPWM_DT1_FED` (R/W):
 
-PWM generator 1 time stamp A’s shadow register.
+Shadow register for FED.
 
 ---
 
-![alt text](image-75.png)
+![alt text](image-82.png)
+
+`MCPWM_DT1_RED` (R/W):
+
+Shadow register for RED.
+
+---
+
+![alt text](image-83.png)
+
+`MCPWM_CARRIER1_EN` (R/W):
+
+When set, carrier1 function is enabled. When cleared, carrier1 is bypassed.
+
+`MCPWM_CARRIER1_PRESCALE` (R/W):
+
+PWM carrier1 clock (PC_clk) prescale value.
+Period of PC_clk = period of PWM_clk * (PWM_CARRIER0_PRESCALE + 1).
+
+`MCPWM_CARRIER1_DUTY` (R/W):
+
+Carrier duty selection.
+Duty = PWM_CARRIER0_DUTY/8.
+
+`MCPWM_CARRIER1_OSHTWTH` (R/W):
+
+Width of the first pulse in number of periods of the carrier.
+
+`MCPWM_CARRIER1_OUT_INVERT` (R/W):
+
+When set, invert the output of PWM1A and PWM1B for this sub-module.
+
+`MCPWM_CARRIER1_IN_INVERT` (R/W):
+
+When set, invert the input of PWM1A and PWM1B for this sub-module.
+
+---
+
+![alt text](image-84.png)
+
+`MCPWM_FH1_SW_CBC` (R/W):
+
+Enable register for software force cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F2_CBC` (R/W):
+
+event_f2 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F1_CBC` (R/W):
+
+event_f1 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F0_CBC` (R/W):
+
+event_f0 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_SW_OST` (R/W):
+
+Enable register for software force one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F2_OST` (R/W):
+
+event_f2 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F1_OST` (R/W):
+
+event_f1 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F0_OST` (R/W):
+
+event_f0 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_A_CBC_D` (R/W):
+
+Cycle-by-cycle mode action on PWM1A when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_CBC_U` (R/W):
+
+Cycle-by-cycle mode action on PWM1A when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_OST_D` (R/W):
+
+One-shot mode action on PWM1A when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_OST_U` (R/W):
+
+One-shot mode action on PWM1A when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_CBC_D` (R/W):
+
+Cycle-by-cycle mode action on PWM1B when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_CBC_U` (R/W):
+
+Cycle-by-cycle mode action on PWM1B when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_OST_D` (R/W):
+
+One-shot mode action on PWM1B when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_OST_U` (R/W):
+
+One-shot mode action on PWM1B when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
 
 `MCPWM_GEN1_B` (R/W):
 
@@ -356,10 +638,10 @@ Update method for active register of PWM timer2 period.
 
 PWM timer2 start and stop control.
 
-- 0: if PWM timer2 starts, then stops at TEZ;
-- 1: if timer2 starts, then stops at TEP;
-- 2: PWM timer2 starts and runs on;
-- 3: timer2 starts and stops at the next TEZ;
+- 0: if PWM timer2 starts, then stops at TEZ
+- 1: if timer2 starts, then stops at TEP
+- 2: PWM timer2 starts and runs on
+- 3: timer2 starts and stops at the next TEZ
 - 4: timer2 starts and stops at the next TEP.
 
 **TEP** here and below means **T**imer **E**qual **P**eriod event.
@@ -426,36 +708,36 @@ Current direction of PWM timer2 counter.
 
 Select sync input for PWM timer0.
 
-- 1: PWM timer0 sync_out;
-- 2: PWM timer1 sync_out;
-- 3: PWM timer2 sync_out;
-- 4: SYNC0 from GPIO matrix;
-- 5: SYNC1 from GPIO matrix;
-- 6: SYNC2 from GPIO matrix;
+- 1: PWM timer0 sync_out
+- 2: PWM timer1 sync_out
+- 3: PWM timer2 sync_out
+- 4: SYNC0 from GPIO matrix
+- 5: SYNC1 from GPIO matrix
+- 6: SYNC2 from GPIO matrix
 - Other values: no sync input selected.
 
 `MCPWM_TIMER1_SYNCISEL` (R/W):
 
 Select sync input for PWM timer1.
 
-- 1: PWM timer0 sync_out;
-- 2: PWM timer1 sync_out;
-- 3: PWM timer2 sync_out;
-- 4: SYNC0 from GPIO matrix;
-- 5: SYNC1 from GPIO matrix;
-- 6: SYNC2 from GPIO matrix;
+- 1: PWM timer0 sync_out
+- 2: PWM timer1 sync_out
+- 3: PWM timer2 sync_out
+- 4: SYNC0 from GPIO matrix
+- 5: SYNC1 from GPIO matrix
+- 6: SYNC2 from GPIO matrix
 - Other values: no sync input selected.
 
 `MCPWM_TIMER2_SYNCISEL` (R/W):
 
 Select sync input for PWM timer2.
 
-- 1: PWM timer0 sync_out;
-- 2: PWM timer1 sync_out;
-- 3: PWM timer2 sync_out;
-- 4: SYNC0 from GPIO matrix;
-- 5: SYNC1 from GPIO matrix;
-- 6: SYNC2 from GPIO matrix.
+- 1: PWM timer0 sync_out
+- 2: PWM timer1 sync_out
+- 3: PWM timer2 sync_out
+- 4: SYNC0 from GPIO matrix
+- 5: SYNC1 from GPIO matrix
+- 6: SYNC2 from GPIO matrix
 - Other values: no sync input selected.
 
 `MCPWM_EXTERNAL_SYNCI0_INVERT` (R/W):
@@ -1115,8 +1397,6 @@ Set and reset by hardware.
 Set and reset by hardware.
 - If set: one-shot mode action is on-going.
 
-`MCPWM_GEN1_T0_SEL`
-
 ---
 
 ![alt text](image-73.png)
@@ -1255,3 +1535,434 @@ Non-continuous immediate software force mode for PWM1B.
 - 1: low
 - 2: high
 - 3: disabled
+
+---
+
+![alt text](image-78.png)
+
+`MCPWM_GEN1_A_UTEZ` (R/W):
+
+Action on PWM1A triggered by event TEZ when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEP` (R/W):
+
+Action on PWM1A triggered by event TEP when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEA` (R/W):
+
+Action on PWM1A triggered by event TEA when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UTEB` (R/W):
+
+Action on PWM1A triggered by event TEB when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UT0` (R/W):
+
+Action on PWM1A triggered by event_t0 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_UT1` (R/W):
+
+Action on PWM1A triggered by event_t1 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEZ` (R/W):
+
+Action on PWM1A triggered by event TEZ when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEP` (R/W):
+
+Action on PWM1A triggered by event TEP when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEA` (R/W):
+
+Action on PWM1A triggered by event TEA when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DTEB` (R/W):
+
+Action on PWM1A triggered by event TEB when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DT0` (R/W):
+
+Action on PWM1A triggered by event_t0 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_A_DT1` (R/W):
+
+Action on PWM1A triggered by event_t1 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+---
+
+![alt text](image-79.png)
+
+`MCPWM_GEN1_B_UTEZ` (R/W):
+
+Action on PWM1B triggered by event TEZ when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_UTEP` (R/W):
+
+Action on PWM1B triggered by event TEP when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_UTEA` (R/W):
+
+Action on PWM1B triggered by event TEA when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_UTEB` (R/W):
+
+Action on PWM1B triggered by event TEB when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_UT0` (R/W):
+
+Action on PWM1B triggered by event_t0 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_UT1` (R/W):
+
+Action on PWM1B triggered by event_t1 when timer increasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEZ` (R/W):
+
+Action on PWM1B triggered by event TEZ when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEP` (R/W):
+
+Action on PWM1B triggered by event TEP when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEA` (R/W):
+
+Action on PWM1B triggered by event TEA when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DTEB` (R/W):
+
+Action on PWM1B triggered by event TEB when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DT0` (R/W):
+
+Action on PWM1B triggered by event_t0 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+`MCPWM_GEN1_B_DT1` (R/W):
+
+Action on PWM1B triggered by event_t1 when timer decreasing.
+- 0: no change
+- 1: low
+- 2: high
+- 3: toggle
+
+---
+
+![alt text](image-80.png)
+
+`MCPWM_DT1_FED_UPMETHOD` (R/W):
+
+Update method for FED (falling edge delay) active register.
+- 0: immediate
+- When bit0 is set to 1: TEZ
+- When bit1 is set to 1: TEP
+- When bit2 is set to 1: sync
+- When bit3 is set to 1: disable the update
+
+`MCPWM_DT1_RED_UPMETHOD` (R/W):
+
+Update method for RED (rising edge delay) active register.
+- 0: immediate
+- When bit0 is set to 1: TEZ
+- When bit1 is set to 1: TEP
+- When bit2 is set to 1: sync
+- When bit3 is set to 1: disable the update
+
+`MCPWM_DT1_DEB_MODE` (R/W):
+
+S8 in table 36.3-5, dual-edge B mode.
+- 0: fed/red take effect on different path separately
+- 1: fed/red take effect on B path, A out is in bypass or dulpB mode
+
+`MCPWM_DT1_A_OUTSWAP` (R/W):
+
+S6 in table 36.3-5.
+
+`MCPWM_DT1_B_OUTSWAP` (R/W):
+
+S7 in table 36.3-5.
+
+`MCPWM_DT1_RED_INSEL` (R/W):
+
+S4 in table 36.3-5.
+
+`MCPWM_DT1_FED_INSEL` (R/W):
+
+S5 in table 36.3-5.
+
+`MCPWM_DT1_RED_OUTINVERT` (R/W):
+
+S2 in table 36.3-5.
+
+`MCPWM_DT1_FED_OUTINVERT` (R/W):
+
+S3 in table 36.3-5.
+
+`MCPWM_DT1_A_OUTBYPASS` (R/W):
+
+S1 in table 36.3-5.
+
+`MCPWM_DT1_B_OUTBYPASS` (R/W):
+
+S0 in table 36.3-5.
+
+`MCPWM_DT1_CLK_SEL` (R/W):
+
+Dead time generator 1 clock selection.
+- 0: PWM_clk
+- 1: PT_clk
+
+---
+
+![alt text](image-81.png)
+
+![alt text](image-81.png)
+
+`MCPWM_DT1_FED` (R/W):
+
+Shadow register for FED.
+
+---
+
+![alt text](image-82.png)
+
+`MCPWM_DT1_RED` (R/W):
+
+Shadow register for RED.
+
+---
+
+![alt text](image-83.png)
+
+`MCPWM_CARRIER1_EN` (R/W):
+
+When set, carrier1 function is enabled.
+- When cleared: carrier1 is bypassed.
+
+`MCPWM_CARRIER1_PRESCALE` (R/W):
+
+PWM carrier1 clock (PC_clk) prescale value.
+Period of PC_clk = period of PWM_clk * (PWM_CARRIER0_PRESCALE + 1).
+
+`MCPWM_CARRIER1_DUTY` (R/W):
+
+Carrier duty selection.
+Duty = PWM_CARRIER0_DUTY/8.
+
+`MCPWM_CARRIER1_OSHTWTH` (R/W):
+
+Width of the first pulse in number of periods of the carrier.
+
+`MCPWM_CARRIER1_OUT_INVERT` (R/W):
+
+When set, invert the output of PWM1A and PWM1B for this sub-module.
+
+`MCPWM_CARRIER1_IN_INVERT` (R/W):
+
+When set, invert the input of PWM1A and PWM1B for this sub-module.
+
+---
+
+![alt text](image-84.png)
+
+`MCPWM_FH1_SW_CBC` (R/W):
+
+Enable register for software force cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F2_CBC` (R/W):
+
+event_f2 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F1_CBC` (R/W):
+
+event_f1 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F0_CBC` (R/W):
+
+event_f0 will trigger cycle-by-cycle mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_SW_OST` (R/W):
+
+Enable register for software force one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F2_OST` (R/W):
+
+event_f2 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F1_OST` (R/W):
+
+event_f1 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_F0_OST` (R/W):
+
+event_f0 will trigger one-shot mode action.
+- 0: disable
+- 1: enable
+
+`MCPWM_FH1_A_CBC_D` (R/W):
+
+Cycle-by-cycle mode action on PWM1A when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_CBC_U` (R/W):
+
+Cycle-by-cycle mode action on PWM1A when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_OST_D` (R/W):
+
+One-shot mode action on PWM1A when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_A_OST_U` (R/W):
+
+One-shot mode action on PWM1A when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_CBC_D` (R/W):
+
+Cycle-by-cycle mode action on PWM1B when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_CBC_U` (R/W):
+
+Cycle-by-cycle mode action on PWM1B when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_OST_D` (R/W):
+
+One-shot mode action on PWM1B when fault event occurs and timer is decreasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
+
+`MCPWM_FH1_B_OST_U` (R/W):
+
+One-shot mode action on PWM1B when fault event occurs and timer is increasing.
+- 0: do nothing
+- 1: force low
+- 2: force high
+- 3: toggle
