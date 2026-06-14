@@ -114,7 +114,7 @@ The duty modulation for `PWMxA` is set by B, active high and proportional to B
 
 The duty modulation for `PWMxB` is set by A, active high and proportional to A
 
-$Period = (MCPWM\_TIMERx\_PERIOD + 1) × T_{PT\_clk}$
+$Period = (MCPWM\_TIMERx\_PERIOD + 1) \times T_{PT\_clk}$
 
 ![alt text](image-24.png)
 
@@ -122,7 +122,7 @@ Pulses may be generated anywhere within the PWM cycle (zero – period).
 
 `PWMxA`’s high time duty is proportional to (B – A).
 
-$Period = (MCPWM\_TIMERx\_PERIOD + 1) × T_{PT\_clk}$
+$Period = (MCPWM\_TIMERx\_PERIOD + 1) \times T_{PT\_clk}$
 
 ![alt text](image-25.png)
 
@@ -132,7 +132,7 @@ The duty modulation for `PWMxB` is set by B, active high and proportional to B.
 
 Outputs `PWMxA` and `PWMxB` can drive independent switches.
 
-$Period = (2 × MCPWM\_TIMERx\_PERIOD + 1) × T_{PT\_clk}$
+$Period = (2 \times MCPWM\_TIMERx\_PERIOD + 1) \times T_{PT\_clk}$
 
 ![alt text](image-26.png)
 
@@ -144,7 +144,7 @@ Outputs `PWMx` can drive upper/lower (complementary) switches.
 
 Dead-time = B – A; Edge placement is fully programmable by software. Use the dead-time generator module if another edge delay method is required.
 
-$Period = (2 × MCPWM\_TIMERx\_PERIOD + 1) × T_{PT\_clk}$
+$Period = (2 \times MCPWM\_TIMERx\_PERIOD + 1) \times T_{PT\_clk}$
 
 **Software-Force Events**
 
@@ -204,6 +204,118 @@ All switch combinations are supported, but not all of them represent the typical
 
 **Note:**
 - For all the modes above, the position of the binary switches S4 to S8 is set to 0.
+
+**Mode 1: Bypass delays on both falling (FED) as well as raising edge (RED)**
+
+In this mode the dead time submodule is disabled. Signals `PWMxA` and `PWMxB` pass through without any modifications.
+
+**Mode 2-5: Classical Dead Time Polarity Settings**
+
+These modes represent typical configurations of polarity and should cover the active-high/low modes in available industry power switch gate drivers. The typical waveforms are shown in Figures 36.3-22 to 36.3-25.
+
+**Modes 6 and 7: Bypass delay on falling edge (FED) or rising edge (RED)**
+
+In these modes, either RED (Rising Edge Delay) or FED (Falling Edge Delay) is bypassed. As a result, the corresponding delay is not applied.
+
+![alt text](image-32.png)
+
+![alt text](image-33.png)
+
+![alt text](image-34.png)
+
+![alt text](image-35.png)
+
+Rising edge (RED) and falling edge (FED) delays may be set up independently. The delay value is programmed using the 16-bit registers `MCPWM_DTx_RED` and `MCPWM_DTx_FED`. The register value represents the number of clock (`DT_clk`) periods by which a signal edge is delayed. `DT_CLK` can be selected from `PWM_clk` or `PT_clk` through register `MCPWM_DTx_CLK_SEL`.
+
+To calculate the delay on falling edge (FED) and rising edge (RED), use the following formulas:
+
+$FED = MCPWM\_DTx\_FED \times T_{DT\_clk}$ 
+
+$RED = MCPWM\_DTx\_RED \times T_{DT\_clk}$
+
+##### PWM Carrier Submodule
+
+The coupling of PWM output to a motor driver may need isolation with a transformer. Transformers deliver only AC signals, while the duty cycle of a PWM signal may range anywhere from 0% to 100%. The PWM carrier submodule passes such a PWM signal through a transformer by using a high frequency carrier to modulate the signal.
+
+**Function Overview**
+
+The following key characteristics of this submodule are configurable:
+- Carrier frequency
+- Pulse width of the first pulse
+- Duty cycle of the second and the subsequent pulses
+- Enabling/disabling the carrier function
+
+**Operational Highlights**
+
+The PWM carrier clock (PC_clk) is derived from PWM_clk. The frequency and duty cycle are configured by the `MCPWM_CARRIERx_PRESCALE` and `MCPWM_CARRIERx_DUTY` bits in the `MCPWM_CARRIERx_CFG_REG` register. The purpose of one-shot pulses is to provide high-energy impulse to reliably turn on the power switch. Subsequent pulses sustain the power-on status. The width of a one-shot pulse is configurable with the `MCPWM_CARRIERx_OSHTWTH` bits. Enabling/disabling of the carrier submodule is done with the `MCPWM_CARRIERx_EN` bit.
+
+**Waveform Examples**
+
+Figure 36.3-26 shows an example of waveforms, where a carrier is superimposed on original PWM pulses.
+This figure do not show the first one-shot pulse and the duty-cycle control. Related details are covered in the following two sections.
+
+![alt text](image-36.png)
+
+**One-Shot Pulse**
+
+The width of the first pulse is configurable. It may assume one of 16 possible values and is described by the formula below:
+
+$T_{1stpulse} = T_{PWM\_clk} \times 8 \times (MCPWM\_CARRIERx\_PRESCALE + 1) \times (MCPWM\_CARRIERx\_OSHTWTH + 1)$
+
+Where:
+- $T_{1stpulse}$ is the period of the PWM clock (PWM_clk).
+- $(MCPWM\_CARRIERx\_PRESCALE + 1)$ is the width of the first pulse (whose value ranges from 1 to 16).
+- $(MCPWM\_CARRIERx\_OSHTWTH + 1)$ is the PWM carrier clock’s (PC_clk) prescaler value.
+
+The first one-shot pulse and subsequent sustaining pulses are shown in Figure 36.3-27.
+
+![alt text](image-37.png)
+
+**Duty Cycle Control**
+
+After issuing the first one-shot pulse, the remaining PWM signal is modulated according to the carrier frequency. Users can configure the duty cycle of this signal. Tuning of duty may be required, so that the signal passes through the isolating transformer and can still operate (turn on/off) the motor drive, changing rotation speed and direction.
+
+The duty cycle may be set to one of seven values, using `MCPWM_CARRIERx_DUTY`, or bits [7:5] of register `MCPWM_CARRIERx_CFG_REG`.
+
+Below is the formula for calculating the duty cycle:
+
+$Duty = MCPWM\_CARRIERx\_DUTY ÷ 8$
+
+All seven settings of the duty cycle are shown in Figure 36.3-28.
+
+![alt text](image-38.png)
+
+##### Fault Handler Submodule
+
+Each MCPWM peripheral is connected to three fault signals (FAULT0, FAULT1 and FAULT2) which are sourced from the GPIO matrix. These signals are intended to indicate external fault conditions, and may be preprocessed by the fault detection submodule to generate fault events. Fault events can then execute the user code to control MCPWM outputs in response to specific faults.
+
+**Function of Fault Handler Submodule**
+
+The key actions performed by the fault handler submodule are:
+
+- Forcing outputs PWMxA and PWMxB, upon detected fault, to one of the following states:
+  - High
+  - Low
+  - Toggle
+  - No action taken
+- Execution of one-shot trip (OST) upon detection of over-current conditions/short circuits.
+- Cycle-by-cycle tripping (CBC) to provide current-limiting operation.
+- Allocation of either one-shot or cycle-by-cycle operation for each fault signal.
+- Generation of interrupts for each fault input.
+- Support for software-force tripping.
+- Enabling or disabling of submodule function as required.
+
+**Operation and Configuration Tips**
+
+This section provides the operational tips and set-up options for the fault handler submodule.
+
+Fault signals coming from pins are sampled and synced in the GPIO matrix. In order to guarantee the successful sampling of fault pulses, each pulse duration must be at least two APB clock cycles. The fault detection submodule will then sample fault signals by using PWM_clk. So, the duration of fault pulses coming from GPIO matrix must be at least one PWM_clk cycle. Differently put, regardless of the period relation between APB clock and PWM_clk, the width of fault signal pulses on pins must be at least equal to the sum of two APB clock cycles and one PWM_clk cycle.
+
+Each level of fault signals, FAULT0 to FAULT2, can be used by the fault handler submodule to generate fault events (fault_event0 to fault_event2). Every fault event can be configured individually to provide CBC action, OST action, or none
+
+- **Cycle-by-Cycle (CBC) action:** When CBC action is triggered, the state of `PWMxA` and `PWMxB` will be changed immediately according to the configuration of fields `MCPWM_FHx_A_CBC_U/D` and `MCPWM_FHx_B_CBC_U/D`. Different actions can be indicted when the PWM timer is incrementing or decrementing. Different CBC action interrupts can be triggered for different fault events. Status field `MCPWM_FHx_CBC_ON` indicates whether a CBC action is on or off. When the fault event is no longer present, CBC actions on `PWMxA/B` will be cleared at a specified point, which is either a `D/UTEP` or `D/UTEZ` event. Field `MCPWM_FHx_CBCPULSE` determines at which event `PWMxA` and `PWMxB` will be able to resume normal actions. Therefore, in this mode, the CBC action is cleared or refreshed upon every PWM cycle
+- **One-Shot Trip (OST) action:** When OST action is triggered, the state of `PWMxA` and `PWMxB` will be changed immediately, depending on the setting of fields `MCPWM_FHx_A_OST_U/D` and `MCPWM_FHx_B_OST_U/D`. Different actions can be configured when PWM timer is incrementing or decrementing. Different OST action interrupts can be triggered form different fault events. Status field `MCPWM_FHx_OST_ON` indicates whether an OST action is on or off. The OST actions on `PWMxA/B` are not automatically cleared when the fault event is no longer present. One-shot actions must be cleared manually by setting the rising edge of the `MCPWM_FHx_CLR_OST` bit.
+
 
 ---
 
