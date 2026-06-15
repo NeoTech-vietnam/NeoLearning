@@ -76,4 +76,6 @@ double area = PI * radius * radius;
 
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+- Macros can be used for generic programming but lack type safety.
+- Function templates and class templates provide a safer and more flexible way to achieve generic programming.
+- Always be cautious with macros to avoid unexpected behavior.
