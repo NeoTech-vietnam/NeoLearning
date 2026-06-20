@@ -2,6 +2,8 @@
 
 A structured knowledge repository for Embedded Systems Engineering, organized following the [Embedded Engineering Roadmap](Embedded-Engineering-Roadmap.md).
 
+
+
 ---
 
 ## 01 — Hardware
