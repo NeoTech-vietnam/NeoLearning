@@ -81,6 +81,26 @@ Create MCPWM timer.
 - `ESP_ERR_NOT_FOUND`: Create MCPWM timer failed because all hardware timers are used - up and no more free one
 - `ESP_FAIL`: Create MCPWM timer failed because of other error
 
+---
+
+```c
+esp_err_t mcpwm_set_prescale(mcpwm_group_t *group, uint32_t expect_module_resolution_hz, uint32_t module_prescale_max, uint32_t *ret_module_prescale)
+```
+
+`mcpwm_set_prescale` computes and applies the MCPWM group and module prescalers needed to achieve a requested module resolution from the peripheral source clock. It validates inputs, searches for a valid prescale combination when the default does not fit, updates the shared group prescale atomically, returns the chosen module prescale if requested, and reports errors for invalid arguments, impossible clock resolution, or prescale conflicts.
+
+**Parameters:**
+- `group` **-- [in]** MCPWM group handle
+- `expect_module_resolution_hz` **-- [in]** Expected module resolution in Hz
+- `module_prescale_max` **-- [in]** Maximum allowed module prescale
+- `ret_module_prescale` **-- [out]** Returned module prescale
+
+**Returns:**
+- `ESP_OK`: Set prescale successfully
+- `ESP_RETURN_ON_FALSE`: Invalid argument | Set group prescale failed, group clock cannot match the resolution | Group prescale conflict
+- `ESP_RETURN_ON_ERROR`: Get clock source freq failed
+
+---
 
 ##### Structures
 
@@ -91,9 +111,10 @@ Create MCPWM timer.
  */
 typedef struct {
     int group_id;                        /*!< Specify from which group to allocate the MCPWM timer */
-    mcpwm_timer_clock_source_t clk_src;  /*!< MCPWM timer clock source */
+    mcpwm_timer_clock_source_t clk_src;  /*!< MCPWM timer clock source. There is only 
+                                              one actual hardware clock source available for the MCPWM timer on that target (SOC_MOD_CLK_PLL_F160M) */
     uint32_t resolution_hz;              /*!< Counter resolution in Hz
-                                              The step size of each count tick equals to (1 / resolution_hz) seconds */
+                                              The step size of each count tick equals to (1 / resolution_hz) seconds. */
     mcpwm_timer_count_mode_t count_mode; /*!< Count mode */
     uint32_t period_ticks;               /*!< Number of count ticks within a period. For up-down mode, the timer peak value is half of the period_ticks */
     int intr_priority;                   /*!< MCPWM timer interrupt priority,
@@ -110,9 +131,12 @@ typedef struct {
 - **Public Members**
   - `int group_id` - Specify from which group to allocate the MCPWM timer
   - `mcpwm_timer_clock_source_t clk_src` - MCPWM timer clock source
-  - `uint32_t resolution_hz` - Counter resolution in Hz. The step size of each count tick equals to (1 / resolution_hz) seconds
+  - `uint32_t resolution_hz` - Counter resolution in Hz. The step size of each count tick equals to (1 / resolution_hz) seconds. This value is also used with the prescale to calculate the actual timer clock via a low level function `mcpwm_set_prescale`
   - `mcpwm_timer_count_mode_t count_mode` - Count mode
-  - `uint32_t period_ticks` - Number of count ticks within a period. For up-down mode, the timer peak value is half of the period_ticks
+  - `uint32_t period_ticks` - Number of count ticks within a period. For up-down mode, the timer peak value is half of the period_ticks. This is desribe as `Period` mentioned in **Technical Reference Manual** ![alt text](../01_technical_reference_manual/image-13.png) and the `period_ticks` is not allowed to be zero or greater than `MCPWM_LL_MAX_COUNT_VALUE` in `mcpwm_ll.h`, which is defined as:
+    ```c
+    #define MCPWM_LL_MAX_COUNT_VALUE 65536
+    ```
   - `int intr_priority` - MCPWM timer interrupt priority, if set to 0, the driver will try to allocate an interrupt with a relative low priority (1,2,3)
   - `struct flags` - Extra configuration flags for timer
     - `uint32_t update_period_on_empty: 1` - Whether to update period when timer counts to zero
