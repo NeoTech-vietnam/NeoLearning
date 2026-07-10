@@ -43,13 +43,13 @@ The downside of arrays is that we cannot adjust their size in the middle of a pr
 
 Actually, we can eﬃciently enlarge arrays as we need them, through the miracle of **dynamic arrays**. Suppose we start with an array of size 1, and double its size from m to 2m each time we run out of space. This doubling process involves allocating a new contiguous array of size 2m, copying the contents of the old array to the lower half of the new one, and returning the space used by the old array to the storage allocation system.
 
-The apparent waste in this procedure involves the recopying of the old contents on each expansion. How many times might an element have to be recopied after a total of n insertions? Well, the ﬁrst inserted element will have been recopied when the array expands after the ﬁrst, second, fourth, eighth,... insertions. It will take log2n doublings until the array gets to have n positions. However, most elements do not suﬀer much upheaval. Indeed, the (n/2 + 1)st through nth elements will move at most once and might never have to move at all.
+The apparent waste in this procedure involves the recopying of the old contents on each expansion. **How many times might an element have to be recopied after a total of n insertions?** Well, the ﬁrst inserted element will have been recopied when the array expands after the ﬁrst, second, fourth, eighth,... insertions. It will take log2(n) doublings until the array gets to have n positions. However, most elements do not suﬀer much upheaval. Indeed, the (n/2 + 1)st through nth elements will move at most once and might never have to move at all.
 
 If half the elements move once, a quarter of the elements twice, and so on, the total number of movements M is given by
 
 ![alt text](image.png)
 
-Thus, each of the n elements move only two times on average, and the total work of managing the dynamic array is the same O(n) as it would have been if a single array of suﬃcient size had been allocated in advance!
+Thus, each of the n elements move only **two times** on average, and the total work of managing the dynamic array is the same O(n) as it would have been if a single array of suﬃcient size had been allocated in advance!
 
 The primary thing lost using dynamic arrays is the guarantee that each array access takes constant time *in the worst case*. Now all the queries will be fast, except for those relatively few queries triggering array doubling. What we get instead is a promise that the nth array access will be completed quickly enough that the total eﬀort expended so far will still be O(n). Such amortized guarantees arise frequently in the analysis of data structures.
 
@@ -107,6 +107,71 @@ void insert_list(list **l, item_type x)
     *l = p;
 }
 ```
+
+Two C-isms to note. First, the malloc function allocates a chunk of memory of suﬃcient size for a new node to contain x. Second, the funny double star (`**l`) denotes that `l` is a pointer to a pointer to a list node. Thus the last line, `*l=p;` copies `p` to the place pointed to by `l`, which is the external variable maintaining access to the head of the list.
+
+##### Deletion From a List
+
+Deletion from a linked list is somewhat more complicated. First, we must ﬁnd a pointer to the predecessor of the item to be deleted. We do this recursively:
+
+```c
+list *predecessor_list(list *l, item_type x)
+{
+if ((l == NULL) || (l->next == NULL)) {
+    printf("Error: predecessor sought on null list.\n");
+        return(NULL);
+    }
+    if ((l->next)->item == x)
+        return(l);
+    else
+        return( predecessor_list(l->next, x) );
+}
+```
+
+The predecessor is needed because it points to the doomed node, so its next pointer must be changed. The actual deletion operation is simple, once ruling out the case that the to-be-deleted element does not exist. Special care must be taken to reset the pointer to the head of the list (l) when the ﬁrst element is deleted:
+
+```c
+delete_list(list **l, item_type x)
+{
+    list *p; /* item pointer */
+    list *pred; /* predecessor pointer */
+    list *search_list(), *predecessor_list();
+    p = search_list(*l,x);
+    if (p != NULL) {
+        pred = predecessor_list(*l,x);
+        if (pred == NULL) /* splice out out list */
+            *l = p->next;
+        else
+            pred->next = p->next;
+        free(p); /* free memory used by node */
+    }
+}
+```
+
+C language requires explicit deallocation of memory, so we must free the deleted node after we are ﬁnished with it to return the memory to the system.
+
+#### Comparison
+
+The relative advantages of linked lists over static arrays include:
+- Overﬂow on linked structures can never occur unless the memory is actually full.
+- Insertions and deletions are simpler than for contiguous (array) lists.
+- With large records, moving pointers is easier and faster than moving the items themselves.
+
+while the relative advantages of arrays include:
+
+- Linked structures require extra space for storing pointer ﬁelds.
+- Linked lists do not allow eﬃcient random access to items.
+- Arrays allow better memory locality and cache performance than random pointer jumping.
+
+> Take-Home Lesson: Dynamic memory allocation provides us with ﬂexibility on how and where we use our limited storage resources.
+
+One ﬁnal thought about these fundamental structures is that they can be thought of as recursive objects:
+
+- Lists – Chopping the ﬁrst element oﬀ a linked list leaves a smaller linked list.
+This same argument works for strings, since removing characters from string leaves a string. Lists are recursive objects.
+- Arrays – Splitting the ﬁrst k elements oﬀ of an n element array gives two smaller arrays, of size k and n − k, respectively. Arrays are recursive objects.
+
+This insight leads to simpler list processing, and eﬃcient divide-and-conquer algorithms such as quicksort and binary search.
 
 ---
 
