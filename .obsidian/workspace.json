@@ -1,0 +1,208 @@
+{
+  "main": {
+    "id": "2b9b700f8d45b2d8",
+    "type": "split",
+    "children": [
+      {
+        "id": "efb243d1ca80f145",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "25d53cd02f82dd56",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01_demo_heap_idf_memory_managament"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cce97e22347f6ee5",
+    "type": "split",
+    "children": [
+      {
+        "id": "a7466170d372a22f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "11d8b750728fa289",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "8931ff15081abb41",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f7a6fa559d4d475a",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2b9232523650e003",
+    "type": "split",
+    "children": [
+      {
+        "id": "e4bbfe9541c96d66",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3771e49993e9dfaa",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 01_demo_heap_idf_memory_managament"
+            }
+          },
+          {
+            "id": "d1298c4fa5099dce",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 01_demo_heap_idf_memory_managament"
+            }
+          },
+          {
+            "id": "490d6999e34644b2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "bc3607dd48322a20",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "fb54832e96a3ff36",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 01_demo_heap_idf_memory_managament"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "11d8b750728fa289",
+  "lastOpenFiles": [
+    "Examples/ESP32/FreeRTOS/02_Software/03_Microcontrollers/04_PWM/01_MCPWM/01_note/01_demo_project_for_mcpwm.md",
+    "Examples/CLONE_GUIDE.md",
+    "Examples/Window/README.md",
+    "Examples/STM32/README.md",
+    "06_Product_Concepts/04_NeoAssisstant/Learning_Tracker.md",
+    "06_Product_Concepts/04_NeoAssisstant/Concept.md",
+    "Embedded-Engineering-Roadmap.md",
+    "CLAUDE.md",
+    "Untitled.canvas",
+    "02_Software/04_Operating-Systems/03_RTOS/02_FreeRTOS/03_resources/01_FreeRTOS/01_Source/examples/README.md",
+    "02_Software/01_Programming-Languages/02_Cpp/01_learning/05_controlling_program_flow/image-36.png",
+    "03_Interfaces-and-Protocols/06_Network/02_UDP.md",
+    "README.md",
+    "REPO_STRUCTURE.md",
+    "REPO_STRUCTURE.md.tmp.5664.db860106ddbf",
+    "REPO_STRUCTURE.md.tmp.5664.d4fc9bf56232",
+    "REPO_STRUCTURE.md.tmp.5664.5a6dac0ce2d2",
+    "Untitled.base",
+    "02_Software/01_Programming-Languages/02_Cpp/01_learning/04_statements_and_operators/64_using_operators.md"
+  ]
+}
