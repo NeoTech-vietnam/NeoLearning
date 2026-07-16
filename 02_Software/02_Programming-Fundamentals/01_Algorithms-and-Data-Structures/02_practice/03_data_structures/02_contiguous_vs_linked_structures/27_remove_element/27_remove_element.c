@@ -55,6 +55,8 @@ Constraints:
 
 */
 
+#include <stdio.h>
+
 int removeElement(int* nums, int numsSize, int val) {
     int left = 0;
     for (int right = 0; right < numsSize; right++) {
