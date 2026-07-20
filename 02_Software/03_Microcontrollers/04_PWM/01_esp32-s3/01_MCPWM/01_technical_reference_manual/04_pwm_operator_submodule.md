@@ -319,6 +319,14 @@ Each level of fault signals, FAULT0 to FAULT2, can be used by the fault handler 
 
 ---
 
+#### Related Use Cases
+
+- [Operator, Comparator, and Generator Pipeline](../03_use_cases/04_operator_comparator_and_generator.md)
+- [Complementary PWM and Dead Time](../03_use_cases/06_complementary_pwm_and_dead_time.md)
+- [Carrier Modulation and Generator Force Actions](../03_use_cases/07_carrier_and_force_actions.md)
+- [Fault Detection and Brake Actions](../03_use_cases/09_faults_and_brake_actions.md)
+- [Private/HAL/LL APIs mapped to operator TRM keywords](../03_use_cases/15_mcpwm_apis.md#trm-map-operator-compare)
+
 ### Summary Section (Summary of Notes)
 
 - The PWM generator can handle multiple events simultaneously, with hardware prioritization.

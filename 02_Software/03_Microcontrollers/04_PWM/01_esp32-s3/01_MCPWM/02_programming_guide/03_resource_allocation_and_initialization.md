@@ -35,6 +35,12 @@ As displayed in the diagram, the MCPWM peripheral consists of several submodules
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Lifecycle and Common API Flow](../03_use_cases/02_mcpwm_lifecycle_and_common_api_flow.md)
+- [Operator, Comparator, and Generator Pipeline](../03_use_cases/04_operator_comparator_and_generator.md)
+- [MCPWM Debugging and Common Failures](../03_use_cases/14_debugging_and_common_failures.md)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

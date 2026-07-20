@@ -306,6 +306,12 @@ typedef struct {
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Lifecycle and Common API Flow](../03_use_cases/02_mcpwm_lifecycle_and_common_api_flow.md)
+- [Timer Creation, Clock Selection, and Prescaling](../03_use_cases/03_timer_clock_and_prescaler.md)
+- [Synchronization and Phase Control](../03_use_cases/08_synchronization_and_phase_control.md)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

@@ -34,6 +34,12 @@ The abbreviations given in Column **Access** are explained in Section Access Typ
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
+- [MCPWM Debugging and Common Failures](../03_use_cases/14_debugging_and_common_failures.md)
+- [Private/HAL/LL APIs to TRM keyword and register crosswalk](../03_use_cases/15_mcpwm_apis.md#trm-private-api-crosswalk)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

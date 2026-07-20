@@ -64,6 +64,12 @@ An overview of the submodules’ function in Figure 36.2-1 is shown below:
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
+- [Complete MCPWM Application Sequences](../03_use_cases/13_complete_application_sequences.md)
+- [Private APIs: resource ownership and group mapping](../03_use_cases/15_mcpwm_apis.md#trm-map-resource-ownership)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

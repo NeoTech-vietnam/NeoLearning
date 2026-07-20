@@ -60,6 +60,11 @@ Description of the MCPWM functionality is divided into the following sections:
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
+- [MCPWM Lifecycle and Common API Flow](../03_use_cases/02_mcpwm_lifecycle_and_common_api_flow.md)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

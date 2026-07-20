@@ -108,6 +108,13 @@ The PWM modules adopt a flexible synchronization method. Each PWM timer has a sy
 
 ---
 
+#### Related Use Cases
+
+- [Timer Creation, Clock Selection, and Prescaling](../03_use_cases/03_timer_clock_and_prescaler.md)
+- [Basic Edge-Aligned and Symmetric PWM](../03_use_cases/05_basic_and_symmetric_pwm.md)
+- [Synchronization and Phase Control](../03_use_cases/08_synchronization_and_phase_control.md)
+- [Private/HAL/LL APIs mapped to timer TRM keywords](../03_use_cases/15_mcpwm_apis.md#trm-map-timer)
+
 ### Summary Section (Summary of Notes)
 
 - The PWM timer has three working modes: Count-Up, Count-Down, and Count-Up-Down.

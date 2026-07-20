@@ -79,6 +79,12 @@ Configuration options:
 
 ---
 
+#### Related Use Cases
+
+- [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
+- [Operator, Comparator, and Generator Pipeline](../03_use_cases/04_operator_comparator_and_generator.md)
+- [Private APIs: clock, prescaler, and submodule mapping](../03_use_cases/15_mcpwm_apis.md#trm-map-clock-prescale)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

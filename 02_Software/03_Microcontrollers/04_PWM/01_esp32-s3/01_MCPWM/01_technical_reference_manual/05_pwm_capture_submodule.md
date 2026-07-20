@@ -42,6 +42,12 @@ The capture signal coming to a capture channel will be inverted first, if needed
 
 ---
 
+#### Related Use Cases
+
+- [Capture Timer, Channels, and Pulse Measurement](../03_use_cases/10_capture_timer_and_channels.md)
+- [Interrupts, Callbacks, IRAM, and Thread Safety](../03_use_cases/11_interrupts_callbacks_and_runtime_safety.md)
+- [Private/HAL/LL APIs mapped to capture TRM keywords](../03_use_cases/15_mcpwm_apis.md#trm-map-capture)
+
 ### Summary Section (Summary of Notes)
 
 [Insert a brief summary of the key ideas and takeaways]

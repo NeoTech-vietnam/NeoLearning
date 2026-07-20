@@ -3356,3 +3356,12 @@ Force clock on for this register file.
 `MCPWM_DATE` (R/W):
 
 Version of this register file.
+
+---
+
+#### Related Use Cases
+
+- [Timer Creation, Clock Selection, and Prescaling](../03_use_cases/03_timer_clock_and_prescaler.md)
+- [Operator, Comparator, and Generator Pipeline](../03_use_cases/04_operator_comparator_and_generator.md)
+- [MCPWM Debugging and Common Failures](../03_use_cases/14_debugging_and_common_failures.md)
+- [Private/HAL/LL APIs to TRM keyword and register crosswalk](../03_use_cases/15_mcpwm_apis.md#trm-private-api-crosswalk)
