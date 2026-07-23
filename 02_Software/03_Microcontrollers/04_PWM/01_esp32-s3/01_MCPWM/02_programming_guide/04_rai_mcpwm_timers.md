@@ -12,9 +12,9 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- Which timer configuration fields control group, clock, resolution, period, and count mode?
+- How does the first timer constrain the shared MCPWM group prescaler?
+- Which internal HAL/LL steps claim, initialize, and release a hardware timer?
 
 ---
 
@@ -278,7 +278,7 @@ typedef struct {
   - `mcpwm_timer_clock_source_t clk_src` - MCPWM timer clock source
   - `uint32_t resolution_hz` - Counter resolution in Hz. The step size of each count tick equals to (1 / resolution_hz) seconds. This value is also used with the prescale to calculate the actual timer clock via a low level function `mcpwm_set_prescale`
   - `mcpwm_timer_count_mode_t count_mode` - Count mode
-  - `uint32_t period_ticks` - Number of count ticks within a period. For up-down mode, the timer peak value is half of the period_ticks. This is desribe as `Period` mentioned in **Technical Reference Manual** ![alt text](../01_technical_reference_manual/image-13.png) and the `period_ticks` is not allowed to be zero or greater than `MCPWM_LL_MAX_COUNT_VALUE` in `mcpwm_ll.h`, which is defined as:
+  - `uint32_t period_ticks` - Number of count ticks within a period. For up-down mode, the timer peak value is half of `period_ticks`. This is the `Period` relationship shown in the TRM: ![MCPWM timer period and timing events](../01_technical_reference_manual/image-13.png). The value must be nonzero and no greater than `MCPWM_LL_MAX_COUNT_VALUE` from `mcpwm_ll.h`:
     ```c
     #define MCPWM_LL_MAX_COUNT_VALUE 65536
     ```
@@ -286,7 +286,7 @@ typedef struct {
   - `struct flags` - Extra configuration flags for timer
     - `uint32_t update_period_on_empty: 1` - Whether to update period when timer counts to zero
     - `uint32_t update_period_on_sync: 1` - Whether to update period on sync event
-    - `uint32_t allow_pd: 1` - Set to allow power down. When this flag set, the driver will backup/restore the MCPWM registers before/after entering/exist sleep mode. By this approach, the system can power off MCPWM's power domain. This can save power, but at the expense of more RAM being consumed.
+    - `uint32_t allow_pd: 1` - Requests register backup/restore around power-down on targets with MCPWM sleep retention. ESP32-S3 lacks `SOC_MCPWM_SUPPORT_SLEEP_RETENTION` in ESP-IDF `v6.0.1`, so setting this flag returns `ESP_ERR_NOT_SUPPORTED`.
 
 ##### Detailed information
 
@@ -314,4 +314,4 @@ typedef struct {
 
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+Create timers with a valid group, clock, resolution, period, and count mode. The first timer fixes the shared group prescaler; resolve incompatible requested resolutions by changing allocation order or resolutions. Register callbacks before enable, start only after enable, and stop/disable before deletion.
