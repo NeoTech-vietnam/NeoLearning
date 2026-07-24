@@ -94,7 +94,31 @@ Immediately follow each strategy with:
 <one Mermaid fence only>
 ```
 
-Flow subsection must contain no prose, ASCII diagram, or table.
+This first flow is the reusable, value-agnostic algorithm flow. Preserve it when adding a concrete example.
+
+After the generic flow, add one real execution:
+
+```text
+## Worked Example X: <strategy name> on `<concrete input>`
+
+<one concise setup sentence>
+
+### Strategy X Worked Example Flow
+
+<one Mermaid fence only>
+```
+
+Add both flows for every documented strategy:
+
+- Keep `### Strategy X Flow` generic so it explains the algorithm for any valid input.
+- Use a locally supplied example when it exercises the strategy clearly; otherwise use a small valid case supported by the local constraints.
+- Start the worked flow with the actual input and initialized variables, pointers, indexes, or data structure.
+- Show actual values after each meaningful save, comparison, mutation, pointer move, loop iteration, or phase.
+- End with the concrete returned value or output structure.
+- For recursion, show descent, the base case, and every meaningful unwind update.
+- Keep optional trace tables in addition to, not instead of, the worked-example Mermaid flow.
+
+Each generic or worked-example flow subsection must contain one Mermaid fence only, with no prose, ASCII diagram, or table inside it.
 
 ## Remaining Sections
 

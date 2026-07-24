@@ -44,8 +44,10 @@ def strategy_letters(text: str) -> set[str]:
     return set(re.findall(r"^## Strategy ([A-Z])(?:\b|:)", text, re.MULTILINE))
 
 
-def flow_blocks(text: str) -> dict[str, str]:
-    heading_pattern = re.compile(r"^### Strategy ([A-Z]) Flow\s*$", re.MULTILINE)
+def headed_blocks(
+    text: str,
+    heading_pattern: re.Pattern[str],
+) -> dict[str, str]:
     headings = list(heading_pattern.finditer(text))
     blocks: dict[str, str] = {}
 
@@ -60,6 +62,23 @@ def flow_blocks(text: str) -> dict[str, str]:
         blocks[heading.group(1)] = text[heading.end() : end].strip()
 
     return blocks
+
+
+def flow_blocks(text: str) -> dict[str, str]:
+    return headed_blocks(
+        text,
+        re.compile(r"^### Strategy ([A-Z]) Flow\s*$", re.MULTILINE),
+    )
+
+
+def worked_example_flow_blocks(text: str) -> dict[str, str]:
+    return headed_blocks(
+        text,
+        re.compile(
+            r"^### Strategy ([A-Z]) Worked Example Flow\s*$",
+            re.MULTILINE,
+        ),
+    )
 
 
 def validate_note(path: Path) -> list[str]:
@@ -93,9 +112,16 @@ def validate_note(path: Path) -> list[str]:
 
     strategies = strategy_letters(text)
     flows = flow_blocks(text)
+    worked_example_flows = worked_example_flow_blocks(text)
 
     missing_flows = sorted(strategies - flows.keys())
     extra_flows = sorted(flows.keys() - strategies)
+    missing_worked_example_flows = sorted(
+        strategies - worked_example_flows.keys()
+    )
+    extra_worked_example_flows = sorted(
+        worked_example_flows.keys() - strategies
+    )
 
     if missing_flows:
         errors.append(
@@ -105,18 +131,37 @@ def validate_note(path: Path) -> list[str]:
         errors.append(
             "flows without matching strategies: " + ", ".join(extra_flows)
         )
+    if missing_worked_example_flows:
+        errors.append(
+            "strategies missing worked-example Mermaid flows: "
+            + ", ".join(missing_worked_example_flows)
+        )
+    if extra_worked_example_flows:
+        errors.append(
+            "worked-example flows without matching strategies: "
+            + ", ".join(extra_worked_example_flows)
+        )
 
     mermaid_only_pattern = re.compile(
         r"^```mermaid\s*\n.+\n```$",
         re.DOTALL,
     )
-    for letter, block in sorted(flows.items()):
-        if mermaid_only_pattern.fullmatch(block) is None:
-            errors.append(
-                f"Strategy {letter} flow must contain one Mermaid fence only"
-            )
-        elif "classDef" not in block:
-            errors.append(f"Strategy {letter} flow lacks Mermaid classDef styling")
+    flow_groups = (
+        ("flow", flows),
+        ("worked-example flow", worked_example_flows),
+    )
+    for flow_name, blocks in flow_groups:
+        for letter, block in sorted(blocks.items()):
+            if mermaid_only_pattern.fullmatch(block) is None:
+                errors.append(
+                    f"Strategy {letter} {flow_name} must contain "
+                    "one Mermaid fence only"
+                )
+            elif "classDef" not in block:
+                errors.append(
+                    f"Strategy {letter} {flow_name} lacks "
+                    "Mermaid classDef styling"
+                )
 
     return errors
 

@@ -88,6 +88,32 @@ flowchart TD
     class F finish;
 ```
 
+## Worked Example A: {{OPTIMAL_STRATEGY}} on `{{EXAMPLE_INPUT_A}}`
+
+This flow executes Strategy A with real values from one valid case.
+
+### Strategy A Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: {{EXAMPLE_INPUT_A}}"]) --> B["Initialize<br/>{{INITIAL_STATE_A}}"]
+    B --> C1{"{{CONCRETE_DECISION_A1}}"}
+    C1 -- {{ACTUAL_OUTCOME_A1}} --> D1["{{CONCRETE_UPDATE_A1}}"]
+    D1 --> C2{"{{CONCRETE_DECISION_A2}}"}
+    C2 -- {{ACTUAL_OUTCOME_A2}} --> D2["{{CONCRETE_UPDATE_A2}}"]
+    D2 --> F(["Return: {{CONCRETE_OUTPUT_A}}"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C1,C2 decision;
+    class D1,D2 keep;
+    class F finish;
+```
+
 ## Strategy B: {{ALTERNATIVE_STRATEGY}}
 
 - Core idea: {{CORE_IDEA}}
@@ -112,6 +138,32 @@ flowchart TD
     class B decision;
     class C keep;
     class D finish;
+```
+
+## Worked Example B: {{ALTERNATIVE_STRATEGY}} on `{{EXAMPLE_INPUT_B}}`
+
+This flow executes Strategy B with real values from one valid case.
+
+### Strategy B Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: {{EXAMPLE_INPUT_B}}"]) --> B["Initialize<br/>{{INITIAL_STATE_B}}"]
+    B --> C1{"{{CONCRETE_DECISION_B1}}"}
+    C1 -- {{ACTUAL_OUTCOME_B1}} --> D1["{{CONCRETE_UPDATE_B1}}"]
+    D1 --> C2{"{{CONCRETE_DECISION_B2}}"}
+    C2 -- {{ACTUAL_OUTCOME_B2}} --> D2["{{CONCRETE_UPDATE_B2}}"]
+    D2 --> F(["Return: {{CONCRETE_OUTPUT_B}}"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C1,C2 decision;
+    class D1,D2 keep;
+    class F finish;
 ```
 
 <!-- Add Strategy C and its Mermaid-only flow only when meaningful. -->

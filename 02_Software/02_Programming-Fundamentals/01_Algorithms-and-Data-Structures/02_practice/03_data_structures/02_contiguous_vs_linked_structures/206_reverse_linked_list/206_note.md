@@ -118,6 +118,50 @@ flowchart TD
     class H finish;
 ```
 
+## Worked Example A: Iterative Reversal of `[1,2,3,4,5]`
+
+This flow applies Strategy A to one real input. `head[0] = 1` means the first node conceptually; a linked list is traversed through `next` links rather than array indexes.
+
+### Strategy A Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: head = 1 → 2 → 3 → 4 → 5 → null"])
+    A --> B["Initialize<br/>previous = null<br/>current = head (node 1)"]
+    B --> C1{"current is null?"}
+
+    C1 -- No --> I1["Iteration 1<br/>next = node 2<br/>node 1.next = null<br/>previous = node 1<br/>current = node 2"]
+    I1 --> S1["Reversed: 1 → null<br/>Remaining: 2 → 3 → 4 → 5 → null"]
+    S1 --> C2{"current is null?"}
+
+    C2 -- No --> I2["Iteration 2<br/>next = node 3<br/>node 2.next = node 1<br/>previous = node 2<br/>current = node 3"]
+    I2 --> S2["Reversed: 2 → 1 → null<br/>Remaining: 3 → 4 → 5 → null"]
+    S2 --> C3{"current is null?"}
+
+    C3 -- No --> I3["Iteration 3<br/>next = node 4<br/>node 3.next = node 2<br/>previous = node 3<br/>current = node 4"]
+    I3 --> S3["Reversed: 3 → 2 → 1 → null<br/>Remaining: 4 → 5 → null"]
+    S3 --> C4{"current is null?"}
+
+    C4 -- No --> I4["Iteration 4<br/>next = node 5<br/>node 4.next = node 3<br/>previous = node 4<br/>current = node 5"]
+    I4 --> S4["Reversed: 4 → 3 → 2 → 1 → null<br/>Remaining: 5 → null"]
+    S4 --> C5{"current is null?"}
+
+    C5 -- No --> I5["Iteration 5<br/>next = null<br/>node 5.next = node 4<br/>previous = node 5<br/>current = null"]
+    I5 --> S5["Reversed: 5 → 4 → 3 → 2 → 1 → null<br/>Remaining: empty"]
+    S5 --> C6{"current is null?"}
+    C6 -- Yes --> H(["Return previous: node 5<br/>Output: 5 → 4 → 3 → 2 → 1 → null"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C1,C2,C3,C4,C5,C6 decision;
+    class I1,I2,I3,I4,I5,S1,S2,S3,S4,S5 keep;
+    class H finish;
+```
+
 ## Strategy B: Recursive Suffix Reversal
 
 - Core idea: Recursively reverse the suffix beginning at `head->next`, then attach `head` after that reversed suffix.
@@ -167,6 +211,55 @@ flowchart TD
     class C,G finish;
 ```
 
+## Worked Example B: Recursive Reversal of `[1,2,3,4,5]`
+
+This flow applies Strategy B to the same real input. Calls first descend to node `5`; rewiring happens only while the recursion unwinds. Every frame returns the same `newHead`, node `5`.
+
+### Strategy B Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: head = 1 → 2 → 3 → 4 → 5 → null"])
+
+    subgraph DESCENT["Recursion descent"]
+        R1["Call reverse(node 1)"] --> C1{"node 1 is a base case?"}
+        C1 -- No --> R2["Call reverse(node 2)"]
+        R2 --> C2{"node 2 is a base case?"}
+        C2 -- No --> R3["Call reverse(node 3)"]
+        R3 --> C3{"node 3 is a base case?"}
+        C3 -- No --> R4["Call reverse(node 4)"]
+        R4 --> C4{"node 4 is a base case?"}
+        C4 -- No --> R5["Call reverse(node 5)"]
+        R5 --> C5{"node 5 is a base case?"}
+    end
+
+    subgraph UNWIND["Recursion unwind"]
+        B(["Yes: return node 5<br/>newHead = node 5"])
+        U4["Frame: head = node 4<br/>node 5.next = node 4<br/>node 4.next = null<br/>List: 5 → 4 → null<br/>return node 5"]
+        U3["Frame: head = node 3<br/>node 4.next = node 3<br/>node 3.next = null<br/>List: 5 → 4 → 3 → null<br/>return node 5"]
+        U2["Frame: head = node 2<br/>node 3.next = node 2<br/>node 2.next = null<br/>List: 5 → 4 → 3 → 2 → null<br/>return node 5"]
+        U1["Frame: head = node 1<br/>node 2.next = node 1<br/>node 1.next = null<br/>List: 5 → 4 → 3 → 2 → 1 → null<br/>return node 5"]
+        H(["Output: newHead = node 5<br/>5 → 4 → 3 → 2 → 1 → null"])
+
+        B --> U4 --> U3 --> U2 --> U1 --> H
+    end
+
+    A --> R1
+    C5 -- Yes --> B
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef recurse fill:#e0f2fe,stroke:#0891b2,color:#164e63,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class C1,C2,C3,C4,C5 decision;
+    class R1,R2,R3,R4,R5 recurse;
+    class U4,U3,U2,U1 keep;
+    class B,H finish;
+```
+
 ## Pointer-State Transition
 
 For a local chain `previous <- current -> next`, one iteration performs:
@@ -175,12 +268,36 @@ For a local chain `previous <- current -> next`, one iteration performs:
 2. Change the link to `previous <- current`.
 3. Move both traversal pointers one position forward in the original order.
 
-| State | `previous` | `current` | `next` |
-|-------|------------|-----------|--------|
-| Before update | Reversed prefix head | Node being processed | Not yet saved |
-| After saving | Reversed prefix head | Node being processed | Original successor |
-| After rewiring | New reversed prefix tailward link | Node being processed | Preserved suffix head |
-| After advancing | New reversed prefix head | Preserved suffix head | Recomputed next iteration |
+### Concrete Trace for `head = [1,2,3,4,5]`
+
+`head[0] = 1` means the first node conceptually; unlike an array, a linked list is followed through `next` links.
+
+Initial state:
+
+```text
+previous = null
+current  = head (node 1)
+next     = not saved yet
+
+previous: null
+current:  1 -> 2 -> 3 -> 4 -> 5 -> null
+```
+
+| Iteration | `previous` at loop start | `current` at loop start | Saved `next = current->next` | Link after `current->next = previous` | After advancing: `(previous, current)` |
+|----------:|--------------------------|-------------------------|--------------------------------------|-------------------------------------------|------------------------------------------|
+| 1 | `null` | node `1` | node `2` | `1 -> null` | `(node 1, node 2)` |
+| 2 | `1 -> null` | node `2` | node `3` | `2 -> 1 -> null` | `(node 2, node 3)` |
+| 3 | `2 -> 1 -> null` | node `3` | node `4` | `3 -> 2 -> 1 -> null` | `(node 3, node 4)` |
+| 4 | `3 -> 2 -> 1 -> null` | node `4` | node `5` | `4 -> 3 -> 2 -> 1 -> null` | `(node 4, node 5)` |
+| 5 | `4 -> 3 -> 2 -> 1 -> null` | node `5` | `null` | `5 -> 4 -> 3 -> 2 -> 1 -> null` | `(node 5, null)` |
+
+After iteration 5, `current` is null, so the loop stops and returns `previous`:
+
+```text
+previous = node 5
+current  = null
+output   = 5 -> 4 -> 3 -> 2 -> 1 -> null
+```
 
 ## Common Failure Points (all languages)
 

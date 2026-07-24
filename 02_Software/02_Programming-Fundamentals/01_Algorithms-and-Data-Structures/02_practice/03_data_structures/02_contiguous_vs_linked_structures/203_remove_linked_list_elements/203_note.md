@@ -134,6 +134,41 @@ flowchart TD
     class D finish;
 ```
 
+## Worked Example A: Dummy Node on `[1,2,6,3,4,5,6]`
+
+This flow removes both matching nodes while keeping `current` at the predecessor after each bypass.
+
+### Strategy A Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: 1 → 2 → 6 → 3 → 4 → 5 → 6, val = 6"])
+    A --> B["dummy.next = node 1<br/>current = dummy"]
+    B --> K1["Inspect node 1: keep<br/>current = node 1"]
+    K1 --> K2["Inspect node 2: keep<br/>current = node 2"]
+    K2 --> C1{"Next value is 6?"}
+    C1 -- Yes --> R1["Bypass first node 6<br/>List: 1 → 2 → 3 → 4 → 5 → 6<br/>current stays node 2"]
+    R1 --> K3["Inspect node 3: keep<br/>current = node 3"]
+    K3 --> K4["Inspect node 4: keep<br/>current = node 4"]
+    K4 --> K5["Inspect node 5: keep<br/>current = node 5"]
+    K5 --> C2{"Next value is 6?"}
+    C2 -- Yes --> R2["Bypass tail node 6<br/>List: 1 → 2 → 3 → 4 → 5<br/>current stays node 5"]
+    R2 --> C3{"current.next is null?"}
+    C3 -- Yes --> F(["Return dummy.next<br/>Output: 1 → 2 → 3 → 4 → 5"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C1,C2,C3 decision;
+    class R1,R2 remove;
+    class K1,K2,K3,K4,K5 keep;
+    class F finish;
+```
+
 ## Strategy B: Update Head First, Then Traverse
 
 - Remove matching nodes from the beginning before processing the rest.
@@ -200,6 +235,48 @@ flowchart TD
     class X,Y finish;
 ```
 
+## Worked Example B: Update Head First on `[6,6,6,1,2]`
+
+This flow uses `val = 6` to demonstrate repeated head removal before normal traversal begins.
+
+### Strategy B Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: 6 → 6 → 6 → 1 → 2, val = 6"])
+
+    subgraph P1["Phase 1: remove matching heads"]
+        H1["head = first node 6<br/>Move head to second node 6"]
+        H2["head = second node 6<br/>Move head to third node 6"]
+        H3["head = third node 6<br/>Move head to node 1"]
+        C1{"head value is 6?"}
+        H1 --> H2 --> H3 --> C1
+    end
+
+    subgraph P2["Phase 2: traverse remaining list"]
+        B["No: current = head = node 1"]
+        K["Inspect node 2: keep<br/>current = node 2"]
+        C2{"current.next is null?"}
+        B --> K --> C2
+    end
+
+    A --> H1
+    C1 -- No --> B
+    C2 -- Yes --> F(["Return head<br/>Output: 1 → 2"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class C1,C2 decision;
+    class H1,H2,H3 remove;
+    class B,K keep;
+    class F finish;
+```
+
 ## Strategy C: Recursive Filtering
 
 - Solve the smaller list first, then decide whether to keep the current node.
@@ -258,6 +335,51 @@ flowchart TD
     class G remove;
     class H keep;
     class I finish;
+```
+
+## Worked Example C: Recursive Filtering on `[1,2,6,3]`
+
+This flow uses `val = 6`; calls descend to null, then each returning frame reconnects or skips its node.
+
+### Strategy C Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: 1 → 2 → 6 → 3 → null, val = 6"])
+
+    subgraph DOWN["Recursive descent"]
+        D1["removeElements(node 1)"]
+        D2["removeElements(node 2)"]
+        D3["removeElements(node 6)"]
+        D4["removeElements(node 3)"]
+        D5["removeElements(null)"]
+        D1 --> D2 --> D3 --> D4 --> D5
+    end
+
+    subgraph UP["Recursion unwind"]
+        B(["Base case: return null"])
+        U3["head = node 3<br/>head.next = null<br/>3 ≠ 6: return node 3<br/>Result: 3"]
+        U6["head = node 6<br/>head.next = node 3<br/>6 = 6: return head.next<br/>Result: 3"]
+        U2["head = node 2<br/>head.next = node 3<br/>2 ≠ 6: return node 2<br/>Result: 2 → 3"]
+        U1["head = node 1<br/>head.next = node 2<br/>1 ≠ 6: return node 1<br/>Result: 1 → 2 → 3"]
+        F(["Output: 1 → 2 → 3"])
+        B --> U3 --> U6 --> U2 --> U1 --> F
+    end
+
+    A --> D1
+    D5 --> B
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef recurse fill:#e0f2fe,stroke:#0891b2,color:#164e63,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class D1,D2,D3,D4,D5 recurse;
+    class U6 remove;
+    class U3,U2,U1 keep;
+    class B,F finish;
 ```
 
 ## Common Failure Points (all languages)

@@ -1,6 +1,6 @@
 ---
 name: leetcode-notes
-description: Create, update, review, or standardize Cornell-style LeetCode notes for algorithm and data-structure exercises. Use when work involves `*_note.md` files, adding a LeetCode problem description, documenting solution strategies and complexity, building edge-case tables or checklists, or adding vivid Mermaid strategy flows. Do not trigger for code-only solution or test changes unless notes are also requested.
+description: Create, update, review, or standardize Cornell-style LeetCode notes for algorithm and data-structure exercises. Use when work involves `*_note.md` files, adding a LeetCode problem description, documenting solution strategies and complexity, building edge-case tables or checklists, or adding paired generic and concrete worked-example Mermaid flows. Do not trigger for code-only solution or test changes unless notes are also requested.
 ---
 
 # LeetCode Notes
@@ -12,7 +12,7 @@ Create accurate, consistent learning notes from local LeetCode source material.
 1. Inspect requested problem directory.
 2. Read local `.c`, `.cpp`, and existing `*_note.md` files before writing.
 3. Read [note-requirements.md](references/note-requirements.md) completely.
-4. Read [mermaid-style.md](references/mermaid-style.md) when creating or changing flows.
+4. Read [mermaid-style.md](references/mermaid-style.md) when creating or changing generic or worked-example flows.
 5. For new notes, copy [cornell-note-template.md](assets/cornell-note-template.md), replace placeholders, and remove unused optional sections.
 6. Preserve existing user content unless requested change replaces it.
 7. Modify note files only. Do not change solutions or tests unless explicitly requested.
@@ -36,7 +36,7 @@ Create accurate, consistent learning notes from local LeetCode source material.
 ## Resource Routing
 
 - **Always read:** `references/note-requirements.md`.
-- **Read for Mermaid work:** `references/mermaid-style.md`.
+- **Read for Mermaid work:** `references/mermaid-style.md`, including its paired generic/worked-example rules.
 - **Use for new notes:** `assets/cornell-note-template.md`.
 - **Run after edits:** `scripts/validate_notes.py`.
 

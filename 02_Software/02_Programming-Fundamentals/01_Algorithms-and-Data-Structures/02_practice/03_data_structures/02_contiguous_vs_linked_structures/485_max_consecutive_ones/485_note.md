@@ -93,6 +93,64 @@ The longest sequence consists of the two adjacent `1`s in the middle.
 	- `max_seen` always holds the longest sequence seen so far.
 	- `current` always reflects the length of the ongoing sequence.
 
+### Strategy A Flow
+
+```mermaid
+flowchart TD
+    A(["Start with nums"]) --> B["current = 0<br/>max_seen = 0<br/>i = 0"]
+    B --> C{"i < n?"}
+    C -- No --> H(["Return max_seen"])
+    C -- Yes --> D{"nums[i] equals 1?"}
+    D -- Yes --> E["Increment current<br/>max_seen = max(max_seen, current)"]
+    D -- No --> F["Reset current = 0"]
+    E --> G["Increment i"]
+    F --> G
+    G --> C
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class C,D decision;
+    class F remove;
+    class B,E,G keep;
+    class H finish;
+```
+
+## Worked Example A: Counter with Reset on `[1,1,0,1,1,1]`
+
+This flow updates the maximum as each `1` extends the current run.
+
+### Strategy A Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: nums = [1,1,0,1,1,1]"]) --> B["current = 0<br/>max_seen = 0"]
+    B --> D0["i = 0, value = 1<br/>current = 1<br/>max_seen = 1"]
+    D0 --> D1["i = 1, value = 1<br/>current = 2<br/>max_seen = 2"]
+    D1 --> D2["i = 2, value = 0<br/>current = 0<br/>max_seen = 2"]
+    D2 --> D3["i = 3, value = 1<br/>current = 1<br/>max_seen = 2"]
+    D3 --> D4["i = 4, value = 1<br/>current = 2<br/>max_seen = 2"]
+    D4 --> D5["i = 5, value = 1<br/>current = 3<br/>max_seen = 3"]
+    D5 --> C{"i = 6; 6 < 6?"}
+    C -- No --> F(["Return 3"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C decision;
+    class D2 remove;
+    class D0,D1,D3,D4,D5 keep;
+    class F finish;
+```
+
 ## Strategy B: Update Max Only After Reset
 
 - Defer `max_seen` update until after seeing a 0.
@@ -108,13 +166,73 @@ The longest sequence consists of the two adjacent `1`s in the middle.
 	- Requires extra comparison after loop (easy to forget).
 	- Slightly more code.
 
+### Strategy B Flow
+
+```mermaid
+flowchart TD
+    A(["Start with nums"]) --> B["current = 0<br/>max_seen = 0<br/>i = 0"]
+    B --> C{"i < n?"}
+    C -- No --> G["max_seen = max(max_seen, current)"]
+    C -- Yes --> D{"nums[i] equals 1?"}
+    D -- Yes --> E["Increment current"]
+    D -- No --> F["max_seen = max(max_seen, current)<br/>Reset current = 0"]
+    E --> H["Increment i"]
+    F --> H
+    H --> C
+    G --> I(["Return max_seen"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class C,D decision;
+    class F remove;
+    class B,E,G,H keep;
+    class I finish;
+```
+
+## Worked Example B: Deferred Maximum Update on `[1,1,0,1,1,1]`
+
+This flow records completed runs at zeros and performs the required final comparison after the loop.
+
+### Strategy B Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: nums = [1,1,0,1,1,1]"]) --> B["current = 0<br/>max_seen = 0"]
+    B --> D0["i = 0, value = 1<br/>current = 1"]
+    D0 --> D1["i = 1, value = 1<br/>current = 2"]
+    D1 --> D2["i = 2, value = 0<br/>max_seen = max(0,2) = 2<br/>current = 0"]
+    D2 --> D3["i = 3, value = 1<br/>current = 1"]
+    D3 --> D4["i = 4, value = 1<br/>current = 2"]
+    D4 --> D5["i = 5, value = 1<br/>current = 3"]
+    D5 --> C{"End of array?"}
+    C -- Yes --> G["max_seen = max(2,3) = 3"]
+    G --> F(["Return 3"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C decision;
+    class D2 remove;
+    class D0,D1,D3,D4,D5,G keep;
+    class F finish;
+```
+
 ## Strategy C: State Machine Approach (Formal)
 
 - Model as finite state machine with two states:
 	- **State 0**: Just saw a zero (or start).
 	- **State 1**: Inside a sequence of ones.
 - Transitions:
-	- State 0 + see 1 → move to State 1, reset counter.
+	- State 0 + see 1 → move to State 1 and set the current run length to `1`.
 	- State 1 + see 1 → stay in State 1, increment counter.
 	- State 1 + see 0 → move to State 0, update max.
 - Why useful:
@@ -122,6 +240,66 @@ The longest sequence consists of the two adjacent `1`s in the middle.
 	- Clear separation of concerns.
 - Trade-off:
 	- Overkill for simple problem but good mental exercise.
+
+### Strategy C Flow
+
+```mermaid
+flowchart TD
+    A(["Start with nums"]) --> B["state = OUTSIDE<br/>current = 0<br/>max_seen = 0<br/>i = 0"]
+    B --> C{"i < n?"}
+    C -- No --> G["max_seen = max(max_seen, current)"]
+    C -- Yes --> D{"nums[i] equals 1?"}
+    D -- Yes --> E["state = INSIDE<br/>Increment current"]
+    D -- No --> F["max_seen = max(max_seen, current)<br/>state = OUTSIDE<br/>current = 0"]
+    E --> H["Increment i"]
+    F --> H
+    H --> C
+    G --> I(["Return max_seen"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A start;
+    class C,D decision;
+    class F remove;
+    class B,E,G,H keep;
+    class I finish;
+```
+
+## Worked Example C: State Machine on `[1,0,1,1,0,1]`
+
+This flow makes every transition between `OUTSIDE` and `INSIDE` explicit.
+
+### Strategy C Worked Example Flow
+
+```mermaid
+flowchart TD
+    A(["Input: nums = [1,0,1,1,0,1]"]) --> B["state = OUTSIDE<br/>current = 0<br/>max_seen = 0"]
+    B --> D0["i = 0, value = 1<br/>state: OUTSIDE → INSIDE<br/>current = 1"]
+    D0 --> D1["i = 1, value = 0<br/>max_seen = 1<br/>state: INSIDE → OUTSIDE<br/>current = 0"]
+    D1 --> D2["i = 2, value = 1<br/>state: OUTSIDE → INSIDE<br/>current = 1"]
+    D2 --> D3["i = 3, value = 1<br/>state stays INSIDE<br/>current = 2"]
+    D3 --> D4["i = 4, value = 0<br/>max_seen = 2<br/>state: INSIDE → OUTSIDE<br/>current = 0"]
+    D4 --> D5["i = 5, value = 1<br/>state: OUTSIDE → INSIDE<br/>current = 1"]
+    D5 --> C{"End of array?"}
+    C -- Yes --> G["max_seen = max(2,1) = 2"]
+    G --> F(["Return 2"])
+
+    classDef start fill:#dbeafe,stroke:#2563eb,color:#1e3a8a,stroke-width:2px;
+    classDef decision fill:#fef3c7,stroke:#d97706,color:#78350f,stroke-width:2px;
+    classDef remove fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-width:2px;
+    classDef keep fill:#dcfce7,stroke:#16a34a,color:#14532d,stroke-width:2px;
+    classDef finish fill:#ede9fe,stroke:#7c3aed,color:#4c1d95,stroke-width:2px;
+
+    class A,B start;
+    class C decision;
+    class D1,D4 remove;
+    class D0,D2,D3,D5,G keep;
+    class F finish;
+```
 
 ## Common Failure Points (all languages)
 
