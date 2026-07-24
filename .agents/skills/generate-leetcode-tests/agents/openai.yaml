@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate LeetCode Tests"
+  short_description: "Create robust runnable LeetCode test cases"
+  default_prompt: "Use $generate-leetcode-tests to add comprehensive test cases to this LeetCode solution."
