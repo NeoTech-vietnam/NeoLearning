@@ -1,0 +1,4 @@
+interface:
+  display_name: "LeetCode Notes"
+  short_description: "Create structured LeetCode Cornell notes"
+  default_prompt: "Use $leetcode-notes to create or update a LeetCode Cornell note with vivid Mermaid flows."

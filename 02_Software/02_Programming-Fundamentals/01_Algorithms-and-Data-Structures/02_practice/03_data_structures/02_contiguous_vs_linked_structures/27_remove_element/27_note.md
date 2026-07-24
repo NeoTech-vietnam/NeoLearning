@@ -10,6 +10,46 @@
 
 ---
 
+### Problem Description
+
+Given an integer array `nums` and an integer `val`, remove every occurrence of `val` from `nums` in-place and return the number of elements that remain.
+
+Let `k` be the number of elements not equal to `val`. After the operation, the first `k` positions of `nums` must contain those retained elements. Their order may change, and values stored after index `k - 1` do not matter.
+
+#### Example 1
+
+```text
+Input:  nums = [3,2,2,3], val = 3
+Output: k = 2, nums = [2,2,_,_]
+```
+
+The first two positions contain the two retained values. The remaining positions are ignored.
+
+#### Example 2
+
+```text
+Input:  nums = [0,1,2,2,3,0,4,2], val = 2
+Output: k = 5, nums = [0,1,4,0,3,_,_,_]
+```
+
+The first five positions contain `0`, `0`, `1`, `3`, and `4` in any order.
+
+#### Constraints
+
+- `0 <= nums.length <= 100`
+- `0 <= nums[i] <= 50`
+- `0 <= val <= 100`
+
+#### Function Contract
+
+- **Input:** A mutable integer array and the value to remove.
+- **Output:** The count `k` of retained elements.
+- **Mutation:** Store all retained elements within the first `k` positions.
+- **Ordering:** The relative order of retained elements does not need to be preserved.
+- **Ignored region:** Elements at positions `k` and beyond are irrelevant.
+
+---
+
 ### Cue Column (Questions, Keywords, or Prompts)
 
 - What pattern does this problem use?

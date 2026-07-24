@@ -25,15 +25,14 @@ nums[i] is either 0 or 1.
 int findMaxConsecutiveOnes(int* nums, int numsSize) {
     int result = 0;
     int max_result = 0;
-    for (int i = 0; i < numsSize; i++)
-    {
-        if(nums[i] == 1)
-        {
-            result += 1;
-            max_result = (max_result > result) ? max_result : result;
+    for(int i = 0; i < numsSize; i++){
+        if(nums[i] == 1){
+            result++;
+            max_result = (result > max_result) ? result : max_result;
         }
-        else
+        else{
             result = 0;
+        }
     }
     return max_result;
 }

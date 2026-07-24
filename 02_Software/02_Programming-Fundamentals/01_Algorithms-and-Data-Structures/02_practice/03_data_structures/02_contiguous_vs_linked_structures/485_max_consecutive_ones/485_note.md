@@ -10,6 +10,44 @@
 
 ---
 
+### Problem Description
+
+Given a binary array `nums`, return the maximum number of consecutive `1`s in the array.
+
+Only adjacent `1`s belong to the same sequence. A `0` ends the current sequence, so the answer is the greatest sequence length found anywhere in the array.
+
+#### Example 1
+
+```text
+Input:  nums = [1,1,0,1,1,1]
+Output: 3
+```
+
+The array contains sequences of two and three consecutive `1`s, so the maximum is `3`.
+
+#### Example 2
+
+```text
+Input:  nums = [1,0,1,1,0,1]
+Output: 2
+```
+
+The longest sequence consists of the two adjacent `1`s in the middle.
+
+#### Constraints
+
+- `1 <= nums.length <= 10^5`
+- Every element of `nums` is either `0` or `1`.
+
+#### Function Contract
+
+- **Input:** A non-empty binary array.
+- **Output:** The length of its longest contiguous sequence of `1`s.
+- **Mutation:** The input array does not need to be modified.
+- **Contiguity:** Sequences separated by a `0` must be counted independently.
+
+---
+
 ### Cue Column (Questions, Keywords, or Prompts)
 
 - What pattern does this problem recognize?

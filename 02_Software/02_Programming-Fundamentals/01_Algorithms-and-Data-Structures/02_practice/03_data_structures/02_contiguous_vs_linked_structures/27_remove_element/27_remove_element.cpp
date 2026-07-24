@@ -64,9 +64,9 @@ class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
         int left = 0;
-        for (int right = 0; right < nums.size(); right++) {
-            if (nums[right] != val) {
-                nums[left] = nums[right];
+        for(int right = 0; right < static_cast<int>(nums.size()); right++){
+            if(nums.at(right) != val) {
+                nums.at(left) = nums.at(right);
                 left++;
             }
         }
