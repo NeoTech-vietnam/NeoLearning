@@ -24,12 +24,19 @@ Create focused tests from local problem statements, constraints, implementations
    - Boundary positions, ordering, repetitions, duplicates, signs, and value limits when applicable.
    - Mutation, ownership, node identity, output length, or structural invariants required by the contract.
    - Maximum-size input when useful and practical.
-10. Print each case's name, input, actual output, and PASS/FAIL result when using a standalone harness. Include expected output on failure when it improves diagnosis.
-11. Bound traversal and truncate large displays with an omitted-count marker. Tests must not hang on cycles or malformed output.
-12. Compile and run with the strictest locally available warnings. Compilation is mandatory gate. If changed file does not compile in its own language, task is not done.
-13. Use a relevant sanitizer when supported; if sandbox limitations block one sanitizer, use a safe fallback and report it.
-14. Keep failing tests when they correctly expose an incomplete or incorrect solution. Do not weaken tests to make a solution pass.
-15. Report changed files, commands run, pass count, and any solution-caused failures.
+10. In a standalone harness, print every case using this exact structure; test name may appear before it:
+   ```text
+   Input: nums = [3,1,2,4]
+   Output: [2,4,3,1]
+   Passed
+   ```
+   Print `Failed` when validation fails. Do not substitute `PASS`, `FAIL`, `Result`, or alternate labels. Adapt input variable name from `nums` only when function signature uses a different input name. Include expected output only for uniquely defined outputs or useful failure diagnosis.
+11. Assert behavior, not merely printed values. For problems allowing multiple valid outputs, verify invariants and input preservation rather than comparing one fixed expected output.
+12. Bound traversal and truncate large displays with an omitted-count marker. Tests must not hang on cycles or malformed output.
+13. Compile and run with the strictest locally available warnings. Compilation is mandatory gate. If changed file does not compile in its own language, task is not done.
+14. Use a relevant sanitizer when supported; if sandbox limitations block one sanitizer, use a safe fallback and report it.
+15. Keep failing tests when they correctly expose an incomplete or incorrect solution. Do not weaken tests to make a solution pass.
+16. Report changed files, commands run, pass count, and any solution-caused failures.
 
 ## Scope Rules
 
