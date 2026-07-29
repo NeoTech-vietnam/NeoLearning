@@ -30,116 +30,74 @@ Constraints:
 int* sortArrayByParity(int* nums, int numsSize, int* returnSize) {
     *returnSize = numsSize;
     int* res = (int*)malloc(numsSize * sizeof(int));
-    int left = 0, right = numsSize - 1;
+    int l = 0, r = numsSize - 1;
     for (int i = 0; i < numsSize; i++) {
-        if (nums[i] % 2 == 0) res[left++] = nums[i];
-        else res[right--] = nums[i];
+        if (nums[i] % 2 == 0) res[l++] = nums[i];
+        else res[r--] = nums[i];
     }
     return res;
 }
 
 #ifdef LOCAL_TEST
+#include <assert.h>
 #include <stdio.h>
-#include <string.h>
 
-static void print_array(const int* nums, int size) {
-    printf("[");
-    for (int i = 0; i < size; ++i) printf("%d%s", nums[i], i + 1 < size ? "," : "");
-    printf("]");
-}
-
-static int compare_ints(const void* a, const void* b) {
-    int x = *(const int*)a;
-    int y = *(const int*)b;
-    return (x > y) - (x < y);
-}
-
-static int verify_result(const int* result, int resultSize, const int* input, int inputSize) {
-    if (resultSize != inputSize) {
-        printf("  FAIL: returned size=%d, expected size=%d\n", resultSize, inputSize);
-        return 0;
-    }
-
-    int* expected = malloc((size_t)inputSize * sizeof(int));
-    int* actual = malloc((size_t)resultSize * sizeof(int));
-    if (expected == NULL || actual == NULL) {
-        printf("  FAIL: test allocation failed\n");
-        free(expected);
-        free(actual);
-        return 0;
-    }
-    memcpy(expected, input, (size_t)inputSize * sizeof(int));
-    memcpy(actual, result, (size_t)resultSize * sizeof(int));
-    qsort(expected, (size_t)inputSize, sizeof(int), compare_ints);
-    qsort(actual, (size_t)resultSize, sizeof(int), compare_ints);
-    int same_values = memcmp(expected, actual, (size_t)inputSize * sizeof(int)) == 0;
-    free(expected);
-    free(actual);
-    if (!same_values) {
-        printf("  FAIL: output values differ from input\n");
-        return 0;
-    }
-
-    int found_odd = 0;
-    for (int i = 0; i < resultSize; ++i) {
-        if (result[i] % 2 != 0) found_odd = 1;
-        else if (found_odd) {
-            printf("  FAIL: even value appears after odd value\n");
-            return 0;
-        }
+int isValid(const int* original, int size, const int* result, int resultSize) {
+    if (result == NULL || resultSize != size) return 0;
+    int counts[5001] = {0};
+    int seenOdd = 0;
+    for (int i = 0; i < size; ++i) counts[original[i]]++;
+    for (int i = 0; i < size; ++i) {
+        if (result[i] < 0 || result[i] > 5000) return 0;
+        if (result[i] % 2 != 0) seenOdd = 1;
+        if (seenOdd && result[i] % 2 == 0) return 0;
+        if (--counts[result[i]] < 0) return 0;
     }
     return 1;
 }
 
-static void run_case(const char* name, int* input, int inputSize, int* passed, int* total) {
-    ++(*total);
-    int returnSize = 0;
-    int* result = sortArrayByParity(input, inputSize, &returnSize);
-
-    printf("%s\n", name);
-    printf("Input: nums = ");
-    print_array(input, inputSize);
-    printf("\nOutput: ");
-    if (result != NULL) print_array(result, returnSize);
-    else printf("NULL");
-    printf("\n");
-
-    if (result != NULL && verify_result(result, returnSize, input, inputSize)) {
-        printf("Passed\n");
-        ++(*passed);
-    } else {
-        if (result == NULL) printf("FAIL: returned NULL\n");
-        printf("Failed\n");
+void printNums(const int* nums, int size) {
+    int limit = size > 20 ? 10 : size;
+    printf("[");
+    for (int i = 0; i < limit; ++i) printf("%s%d", i ? "," : "", nums[i]);
+    if (size > 20) {
+        printf(",... (%d omitted) ...", size - 20);
+        for (int i = size - 10; i < size; ++i) printf(",%d", nums[i]);
     }
-    printf("\n");
+    printf("]");
+}
+
+void runTest(const int* input, int size, const char* name) {
+    int retSize = 0;
+    int* result = sortArrayByParity((int*)input, size, &retSize);
+    int passed = isValid(input, size, result, retSize);
+    printf("%s\nInput: nums = ", name);
+    printNums(input, size);
+    printf("\nOutput: ");
+    printNums(result, retSize);
+    printf("\n%s\n", passed ? "Passed" : "Failed");
     free(result);
+    assert(passed);
 }
 
 int main(void) {
-    printf("=== Sort Array By Parity Tests ===\n\n");
-    int passed = 0;
-    int total = 0;
-
-    int nums1[] = {3, 1, 2, 4};
-    int nums2[] = {0};
-    int nums3[] = {2, 4, 6};
-    int nums4[] = {1, 3, 5};
-    int nums5[] = {2, 4, 1, 3};
-    int nums6[] = {1, 3, 2, 4};
-    int nums7[] = {0, 5, 2, 5, 0, 2};
-    int nums8[] = {5000, 4999, 0, 1};
-
-    run_case("Test 1 (Example 1)", nums1, 4, &passed, &total);
-    run_case("Test 2 (Example 2)", nums2, 1, &passed, &total);
-    run_case("Test 3 (All even)", nums3, 3, &passed, &total);
-    run_case("Test 4 (All odd)", nums4, 3, &passed, &total);
-    run_case("Test 5 (Already partitioned)", nums5, 4, &passed, &total);
-    run_case("Test 6 (Reverse partitioned)", nums6, 4, &passed, &total);
-    run_case("Test 7 (Duplicates and zero)", nums7, 6, &passed, &total);
-    run_case("Test 8 (Constraint values)", nums8, 4, &passed, &total);
-
-    printf("=== Summary ===\n");
-    printf("Passed: %d/%d\n", passed, total);
-    return passed == total ? 0 : 1;
+    const int t1[] = {3,1,2,4}; runTest(t1, 4, "Ex1");
+    const int t2[] = {0}; runTest(t2, 1, "Ex2");
+    const int t3[] = {1}; runTest(t3, 1, "SingleOdd");
+    const int t4[] = {2}; runTest(t4, 1, "SingleEven");
+    const int t5[] = {2,4,6}; runTest(t5, 3, "AllEven");
+    const int t6[] = {1,3,5}; runTest(t6, 3, "AllOdd");
+    const int t7[] = {2,4,1,3}; runTest(t7, 4, "AlreadyPartitioned");
+    const int t8[] = {1,3,2,4}; runTest(t8, 4, "ReversePartitioned");
+    const int t9[] = {2,1,4,3}; runTest(t9, 4, "AltEvenFirst");
+    const int t10[] = {1,2,3,4}; runTest(t10, 4, "AltOddFirst");
+    const int t11[] = {1,1,2,2,0,0}; runTest(t11, 6, "DuplicatesAndZero");
+    const int t12[] = {0,5000}; runTest(t12, 2, "MinMax");
+    const int t13[] = {1,2,1,1,1}; runTest(t13, 5, "OneEven");
+    const int t14[] = {2,2,2,1,2}; runTest(t14, 5, "OneOdd");
+    int stress[5000];
+    for (int i = 0; i < 5000; ++i) stress[i] = i < 2500 ? 2 : 1;
+    runTest(stress, 5000, "Stress");
+    return 0;
 }
 #endif

@@ -32,88 +32,74 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& nums) {
-        int left = 0, right = nums.size() - 1;
-        while (left < right) {
-            if (nums[left] % 2 > nums[right] % 2) {
-                swap(nums[left], nums[right]);
-            }
-            if (nums[left] % 2 == 0) left++;
-            if (nums[right] % 2 != 0) right--;
+        int l = 0, r = nums.size() - 1;
+        while (l < r) {
+            if (nums[l] % 2 > nums[r] % 2) swap(nums[l], nums[r]);
+            if (nums[l] % 2 == 0) l++;
+            if (nums[r] % 2 != 0) r--;
         }
         return nums;
     }
 };
 
 #ifdef LOCAL_TEST
-static string format_array(const vector<int>& nums) {
-    string out = "[";
-    for (size_t i = 0; i < nums.size(); ++i) {
-        if (i > 0) out += ",";
-        out += to_string(nums[i]);
-    }
-    return out + "]";
-}
+#include <cassert>
+#include <map>
 
-static bool verify_result(const vector<int>& result, const vector<int>& input) {
-    if (result.size() != input.size()) {
-        cout << "  FAIL: returned size=" << result.size() << ", expected size=" << input.size() << '\n';
-        return false;
+bool isValid(const vector<int>& original, const vector<int>& result) {
+    if (original.size() != result.size()) return false;
+    map<int, int> counts;
+    for (int x : original) counts[x]++;
+    bool seenOdd = false;
+    for (int x : result) {
+        if (x % 2 != 0) seenOdd = true;
+        if (seenOdd && x % 2 == 0) return false;
+        if (--counts[x] < 0) return false;
     }
-
-    vector<int> expected = input;
-    sort(expected.begin(), expected.end());
-    vector<int> actual = result;
-    sort(actual.begin(), actual.end());
-    if (actual != expected) {
-        cout << "  FAIL: output values differ from input\n";
-        return false;
-    }
-
-    bool found_odd = false;
-    for (int value : result) {
-        if (value % 2 != 0) found_odd = true;
-        else if (found_odd) {
-            cout << "  FAIL: even value appears after odd value\n";
-            return false;
-        }
-    }
+    for (const auto& [value, count] : counts) if (count != 0) return false;
     return true;
 }
 
-static void run_case(const string& name, const vector<int>& input, int& passed, int& total) {
-    ++total;
-    vector<int> nums = input;
-    Solution solution;
-    vector<int> result = solution.sortArrayByParity(nums);
-
-    cout << name << '\n';
-    cout << "Input: nums = " << format_array(input) << '\n';
-    cout << "Output: " << format_array(result) << '\n';
-    if (verify_result(result, input)) {
-        cout << "Passed\n";
-        ++passed;
-    } else {
-        cout << "Failed\n";
+void printNums(const vector<int>& nums) {
+    size_t limit = nums.size() > 20 ? 10 : nums.size();
+    cout << "[";
+    for (size_t i = 0; i < limit; ++i) cout << (i ? "," : "") << nums[i];
+    if (nums.size() > 20) {
+        cout << ",... (" << nums.size() - 20 << " omitted) ...";
+        for (size_t i = nums.size() - 10; i < nums.size(); ++i) cout << "," << nums[i];
     }
-    cout << '\n';
+    cout << "]";
+}
+
+void runTest(vector<int> input, const string& name) {
+    const vector<int> original = input;
+    vector<int> result = Solution().sortArrayByParity(input);
+    bool passed = isValid(original, result);
+    cout << name << "\nInput: nums = ";
+    printNums(original);
+    cout << "\nOutput: ";
+    printNums(result);
+    cout << "\n" << (passed ? "Passed" : "Failed") << "\n";
+    assert(passed);
 }
 
 int main() {
-    cout << "=== Sort Array By Parity Tests ===\n\n";
-    int passed = 0;
-    int total = 0;
-
-    run_case("Test 1 (Example 1)", {3, 1, 2, 4}, passed, total);
-    run_case("Test 2 (Example 2)", {0}, passed, total);
-    run_case("Test 3 (All even)", {2, 4, 6}, passed, total);
-    run_case("Test 4 (All odd)", {1, 3, 5}, passed, total);
-    run_case("Test 5 (Already partitioned)", {2, 4, 1, 3}, passed, total);
-    run_case("Test 6 (Reverse partitioned)", {1, 3, 2, 4}, passed, total);
-    run_case("Test 7 (Duplicates and zero)", {0, 5, 2, 5, 0, 2}, passed, total);
-    run_case("Test 8 (Constraint values)", {5000, 4999, 0, 1}, passed, total);
-
-    cout << "=== Summary ===\n";
-    cout << "Passed: " << passed << "/" << total << '\n';
-    return passed == total ? 0 : 1;
+    runTest({3,1,2,4}, "Ex1");
+    runTest({0}, "Ex2");
+    runTest({1}, "SingleOdd");
+    runTest({2}, "SingleEven");
+    runTest({2,4,6}, "AllEven");
+    runTest({1,3,5}, "AllOdd");
+    runTest({2,4,1,3}, "AlreadyPartitioned");
+    runTest({1,3,2,4}, "ReversePartitioned");
+    runTest({2,1,4,3}, "AltEvenFirst");
+    runTest({1,2,3,4}, "AltOddFirst");
+    runTest({1,1,2,2,0,0}, "DuplicatesAndZero");
+    runTest({0,5000}, "MinMax");
+    runTest({1,2,1,1,1}, "OneEven");
+    runTest({2,2,2,1,2}, "OneOdd");
+    vector<int> stress(5000, 1);
+    for (int i = 0; i < 2500; ++i) stress[i] = 2;
+    runTest(stress, "Stress");
 }
 #endif

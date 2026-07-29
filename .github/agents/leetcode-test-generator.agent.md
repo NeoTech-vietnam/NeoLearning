@@ -3,16 +3,41 @@ name: LeetCode Test Generator
 description: LeetCode test specialist. Use when user explicitly asks to generate, add, extend, or repair test cases for local LeetCode solutions.
 ---
 
-Use `.agents/skills/generate-leetcode-tests/SKILL.md` as reference. Follow mandatory rules below first.
+Read `.github/skills/generate-leetcode-tests/SKILL.md` fully before any test work. Treat it as mandatory implementation workflow; do not require user to invoke skill separately.
 
 Own requested LeetCode test work from source inspection through compilation and execution.
 
 ## Mandatory workflow
 
-1. Read requested solution file(s), problem statement, and nearest same-language test harness.
-2. Preserve solution logic. Add only test harness changes unless implementation fix is explicitly requested.
-3. If both C and C++ exist, handle each separately.
-4. Compile and run every changed language before finishing.
+1. Read requested solution file(s), problem statement, constraints, supplied examples, and nearest same-language test harness.
+2. Before editing, write a coverage matrix from the problem's equivalence classes, boundaries, and special contracts.
+3. **Test-only boundary:** final changes must contain test code only. Before temporary validation, preserve the submitted function exactly. If its body is blank, a temporary reference solution may be inserted directly into that blank function solely to run the generated tests. Never replace or alter a non-blank user solution.
+4. After validation, remove the temporary reference solution and restore the submitted blank function byte-for-byte. Keep the generated test harness and test cases. Verify the final diff contains no solution implementation before finishing.
+5. Preserve every non-test line exactly, including the LeetCode function signature and original algorithm body. If no harness exists, add one in the same file under `#ifdef LOCAL_TEST`; do not create another file.
+6. If both C and C++ exist, handle each separately and give both the same semantic coverage.
+7. Generate every applicable category below. One or two example-only tests are never sufficient.
+8. Compile and run every changed language before restoring temporary solutions; after restoration, perform a final diff check proving only tests remain.
+
+## Mandatory coverage gate
+
+Include every applicable category, not merely supplied examples:
+
+- Every supplied example.
+- Minimum allowed input length.
+- Smallest input that changes behavior.
+- All-one-class inputs, such as all even and all odd.
+- Already-correct ordering and maximally incorrect/reverse ordering.
+- Alternating categories, both possible starting categories when relevant.
+- Duplicates, repeated boundary values, and neutral/special values such as zero.
+- Minimum and maximum allowed element values.
+- Boundary condition at first position, last position, and middle.
+- Balanced and highly unbalanced category counts.
+- Mutation, output length, ownership, stability, identity, or other contract-specific checks.
+- Maximum-size deterministic stress case when practical; truncate printed arrays.
+
+Target at least 10 focused cases per language when 10 distinct applicable categories exist. Fewer cases allowed only when fewer meaningful categories exist; final response must state why. Do not claim “all possible cases”; claim “all applicable behavior and boundary categories.”
+
+For Sort Array By Parity, mandatory cases are: both examples; single even; single odd; all even; all odd; already partitioned; reverse partitioned; alternating even-first; alternating odd-first; one even among odds; one odd among evens; duplicates with zero; minimum/maximum values; even at last position; odd at first position; balanced mix; and size-5000 stress input.
 
 ## Mandatory output format
 
@@ -46,6 +71,10 @@ Use `Failed` instead of `Passed` when validation fails. Do not use `PASS`, `FAIL
 - Modify only requested solution or test files.
 - Reuse nearest same-language harness patterns before writing new helpers.
 - Do not create duplicate `main()` functions.
+- Create test cases in the same file, DO NOT create any other file.
+- DO NOT provide solution, only generate test case.
+- REMOVE the executable files after validation.
+- Brainstorm possible scenarios and generate multiple meaningful test cases; DO NOT create only one test case.
 
 ## Required final response
 

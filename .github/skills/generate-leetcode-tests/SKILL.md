@@ -1,57 +1,51 @@
 ---
 name: generate-leetcode-tests
-description: Generate, add, extend, or repair runnable test cases for local LeetCode solution files and problem directories. Use only when the user explicitly asks for tests, test cases, a test harness, edge-case coverage, or test output for a LeetCode problem. Supports the target language and local repository conventions. Do not trigger for solution-only, explanation-only, review-only, or note-only requests.
+description: Generate, add, extend, or repair runnable LeetCode test cases. Use when explicitly asked for tests, a harness, edge-case coverage, or test output. Optimize for minimal file reads, minimal diff, and strict verification.
 ---
 
 # Generate LeetCode Tests
 
-Create focused tests from local problem statements, constraints, implementations, and nearby repository conventions.
+Create deterministic, runnable tests from local problem statement, constraints, signature, implementation, and existing harness conventions.
 
-## Workflow
+## Cheap-Agent Contract
 
-1. Resolve the requested problem directory and exact target file or files.
-2. Read every requested solution file, the local problem statement, existing tests, and the nearest comparable test harness.
-3. Treat local examples, constraints, function signatures, mutation rules, and judge behavior as primary truth. Report material conflicts instead of guessing.
-4. Preserve solution logic. Modify it only when the user also asks for implementation or fixes.
-5. Add tests inside the requested source file unless the user requests separate tests or the repository clearly requires them.
-6. Reuse an existing `main`, test framework, helper style, or build convention. Never create duplicate entry points.
-7. Generate deterministic cases covering relevant categories:
-   - Every supplied example.
-   - Empty or null input when allowed.
-   - Minimum-size and smallest behavior-changing inputs.
-   - Boundary positions, ordering, repetitions, duplicates, signs, and value limits when applicable.
-   - Mutation, ownership, node identity, output length, or structural invariants required by the contract.
-   - Maximum-size input when useful and practical.
-8. Print each case's name, input, actual output, and PASS/FAIL result when using a standalone harness. Include expected output on failure when it improves diagnosis.
-9. Bound traversal and truncate large displays with an omitted-count marker. Tests must not hang on cycles or malformed output.
-10. Compile and run with the strictest locally available warnings. Use a relevant sanitizer when supported; if sandbox limitations block one sanitizer, use a safe fallback and report it.
-11. Keep failing tests when they correctly expose an incomplete or incorrect solution. Do not weaken tests to make a solution pass.
-12. Report changed files, commands run, pass count, and any solution-caused failures.
+1. Read only requested target files and attached problem statement. Scan nearby files only if convention is unclear.
+2. Build coverage matrix in memory; create no planning files.
+3. **Test-only final boundary:** preserve the submitted function byte-for-byte before validation. When its body is blank, a temporary reference solution may be inserted directly into that blank function solely to compile and validate generated tests. Never replace, fix, refactor, or alter a non-blank user solution.
+4. Compile and run tests with the temporary reference solution, then remove it and restore the original blank function byte-for-byte. Final files must contain test code only. Verify the final diff has no temporary solution, solution scaffolding, placeholder algorithm, or changed non-test line.
+5. Add or edit the same-file harness under `#ifdef LOCAL_TEST`. Reuse existing `main`; never add duplicate entry points or create another file.
+6. Use one language-correct local harness per requested language.
+7. Compile and run each changed language once with strict warnings before restoring temporary solutions. Use sanitizer only for ownership/memory risk or suspected defect. After restoration, run `git diff --check` and inspect the final diff.
+8. Report files, exact validation commands, pass counts, and confirmation that temporary solutions were removed. Do not paste large output.
 
-## Scope Rules
+Do not install packages, add frameworks, create separate test directories, delegate, or enumerate every finite input when equivalence classes cover behavior.
 
-- When the user names one file, modify only that file.
-- When the user names a directory, cover its solution variants only when the request clearly includes the directory as a whole.
-- Do not edit notes, unrelated solutions, build files, or sibling languages outside requested scope.
-- Do not replace user-written tests; extend or adapt them carefully.
-- If a solution is incomplete, create a syntactically valid harness when possible, validate compilation separately, and state that runtime tests await implementation.
-- Follow local judge compatibility. If nearby files guard local test code, use the same guard and compile flag.
+## Test Requirements
 
-## Test Quality
+- Cover examples, minimum input, homogeneous classes, already-correct and reverse arrangements, alternating arrangements, boundary positions, exceptional one-element cases, duplicates, zero/special values, min/max values, balanced and unbalanced distributions, required mutation/ownership/output-length invariants, and maximum-size stress when practical.
+- For Sort Array By Parity include both examples, single even/odd, all even/odd, already/reverse partitioned, alternating orders, one even among odds, one odd among evens, duplicates with zero, min/max, first/middle/last parity positions, balanced mix, and 5000-element stress.
+- Preserve mutable input before solution call. Print preserved input, never mutated argument.
+- Validate complete contract: output length, order/structure invariant, and exact element multiset. Never validate only category counts.
+- Store validation result. Print exactly `Passed` only when valid, otherwise `Failed`; assert validation result.
+- Use exact standalone format:
+  ```text
+  Input: nums = [3,1,2,4]
+  Output: [2,4,3,1]
+  Passed
+  ```
+- Bound large output with first/last values and exact omitted count. Same bounded printer for input/output.
+- Keep C strict: pointers, C headers, allocation/size checks, bounds checks before fixed-array indexing.
+- Keep C++ explicit: required headers, references/STL only where signature requires.
+- Avoid unseeded randomness, timing assertions, network, platform-dependent output, and expected-output copies of the algorithm.
 
-- Assert behavior, not merely printed values.
-- Avoid tests whose expected result duplicates the algorithm under test.
-- For mutable structures, retain independent evidence of original elements or nodes.
-- For linked lists, verify values, exact length, null termination, node reuse when required, and absence of extra nodes or cycles.
-- For arrays or strings, verify returned length and relevant mutated regions, including judge-ignored regions only when the contract defines them.
-- For trees or graphs, serialize with bounded traversal and track visited nodes when cycles are possible.
-- Free test-owned memory independently of mutated structure links.
-- Avoid unseeded randomness, network access, timing assertions, and platform-dependent output.
+## Scope and Verification
 
-## Verification
-
-- C: prefer `gcc -std=c11 -Wall -Wextra -Werror -pedantic`.
-- C++: prefer `g++ -std=c++17 -Wall -Wextra -Werror -pedantic`.
-- Use the repository's configured compiler, test runner, or language version when present.
-- Add `-fsanitize=address,undefined` when supported. If LeakSanitizer is incompatible with the environment, retry with UBSan or another available safe check.
-- Run `git diff --check` on changed tracked files and inspect new files for whitespace errors.
+- If one file named, edit only it. If directory named, edit variants only when clearly requested.
+- Follow local `LOCAL_TEST` guard and compiler convention.
+- C: `gcc -std=c11 -Wall -Wextra -Werror -pedantic`.
+- C++: `g++ -std=c++17 -Wall -Wextra -Werror -pedantic`.
+- Run `git diff --check` on changed tracked files.
+- Keep correctly failing tests; never weaken validation to make solution pass.
+- Create test cases in the same file, DO NOT create any other file.
+- DO NOT provide solution, only generate test case.
+- Brainstorm possible scenarios and generate multiple meaningful test cases; DO NOT create only one test case.

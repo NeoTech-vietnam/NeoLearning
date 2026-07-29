@@ -1,4 +1,4 @@
 interface:
   display_name: "Generate LeetCode Tests"
-  short_description: "Create robust runnable LeetCode test cases"
-  default_prompt: "Use $generate-leetcode-tests to add comprehensive test cases to this LeetCode solution."
+  short_description: "Create lean, strict LeetCode test harnesses"
+  default_prompt: "Read .github/skills/generate-leetcode-tests/SKILL.md fully and follow it as mandatory implementation workflow. Do not require separate skill invocation. Complete requested LeetCode test work through strict compilation and execution."
