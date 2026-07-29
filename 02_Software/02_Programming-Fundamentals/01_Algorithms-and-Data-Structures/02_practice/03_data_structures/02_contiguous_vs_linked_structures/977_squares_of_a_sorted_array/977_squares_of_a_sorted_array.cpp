@@ -27,15 +27,31 @@ could you find an O(n) solution using a different approach?
 
 */
 
-#ifdef LOCAL_TEST
 #include <vector>
+
 using namespace std;
-#endif
 
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-        
+        vector<int> result(nums.size());
+        int left = 0;
+        int right = static_cast<int>(nums.size()) - 1;
+
+        for (int write = right; write >= 0; --write) {
+            int leftSquare = nums[left] * nums[left];
+            int rightSquare = nums[right] * nums[right];
+
+            if (leftSquare > rightSquare) {
+                result[write] = leftSquare;
+                ++left;
+            } else {
+                result[write] = rightSquare;
+                --right;
+            }
+        }
+
+        return result;
     }
 };
 
