@@ -38,19 +38,18 @@ public:
         int left = 0;
         int right = static_cast<int>(nums.size()) - 1;
 
-        for (int write = right; write >= 0; --write) {
-            int leftSquare = nums[left] * nums[left];
-            int rightSquare = nums[right] * nums[right];
-
-            if (leftSquare > rightSquare) {
+        for (int write = right; write >= 0; --write){
+            int leftSquare = nums.at(left) * nums.at(left);
+            int rightSquare = nums.at(right) * nums.at(right); 
+            if(leftSquare > rightSquare){
                 result[write] = leftSquare;
                 ++left;
-            } else {
+            }
+            else {
                 result[write] = rightSquare;
                 --right;
             }
         }
-
         return result;
     }
 };
