@@ -38,11 +38,26 @@ Constraints:
     The tests are generated such that there is exactly one solution.
 
 */
+#include <vector>
+using namespace std;
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        
+        int left = 0;
+        int right = static_cast<int>(numbers.size()) - 1;
+        while(left < right) {
+            int sum = numbers.at(left) + numbers.at(right);
+            if(sum == target){
+                return {left + 1, right + 1};
+            }
+            if(sum < target) {
+                ++left;
+            } else {
+                --right;
+            }
+        }
+        return {};
     }
 };
 
