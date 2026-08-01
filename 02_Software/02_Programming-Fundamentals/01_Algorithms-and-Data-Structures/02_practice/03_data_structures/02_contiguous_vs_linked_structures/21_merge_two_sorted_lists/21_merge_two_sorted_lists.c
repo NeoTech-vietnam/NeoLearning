@@ -49,17 +49,15 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
         if(list1->val <= list2->val) {
             current->next = list1;
             list1 = list1->next;
-        }
-        else {
+        } else {
             current->next = list2;
             list2 = list2->next;
         }
-        current = current->next;
+        // current = current->next;
     }
-    if(list1 != NULL) {
+    if(list1 != NULL){
         current->next = list1;
-    }
-    else {
+    } else {
         current->next = list2;
     }
     return dummy.next;

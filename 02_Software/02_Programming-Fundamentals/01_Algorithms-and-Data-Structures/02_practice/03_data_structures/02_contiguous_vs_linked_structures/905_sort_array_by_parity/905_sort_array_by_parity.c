@@ -76,9 +76,7 @@ void runTest(const int* input, int size, const char* name) {
     printf("\nOutput: ");
     printNums(result, retSize);
     printf("\n%s\n", passed ? "Passed" : "Failed");
-    free(result);
-    assert(passed);
-}
+    free(result);    assert(passed);}
 
 int main(void) {
     const int t1[] = {3,1,2,4}; runTest(t1, 4, "Ex1");

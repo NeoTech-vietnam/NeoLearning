@@ -78,6 +78,7 @@ static void run_case(const string& name, vector<int> nums, const vector<int>& ex
     solution.moveZeroes(nums);
 
     cout << name << '\n';
+    cout << "  Input: " << format_prefix(nums, numsSize) << '\n';
     cout << "  Output: " << format_prefix(nums, numsSize) << '\n';
     if (verify_result(nums, numsSize, expected)) {
         cout << "  PASS\n";

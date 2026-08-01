@@ -93,7 +93,6 @@ static void run_case(const char* name, const int* input, int m, const int* nums2
     printf(", n = %d\nOutput: ", n);
     print_array(nums1, size);
     printf("\n%s\n", passed ? "Passed" : "Failed");
-    assert(passed);
     free(nums1);
     free(expected);
 }

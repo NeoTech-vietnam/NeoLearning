@@ -78,9 +78,7 @@ static void runTest(vector<int> input, const vector<int>& expected, const string
     printNums(original);
     cout << "\nOutput: ";
     printNums(result);
-    cout << "\n" << (passed ? "Passed" : "Failed") << "\n";
-    assert(passed);
-}
+    cout << "\n" << (passed ? "Passed" : "Failed") << "\n";    assert(passed);}
 
 int main() {
     runTest({-4,-1,0,3,10}, {0,1,9,16,100}, "Example1");
