@@ -68,12 +68,13 @@ using namespace std;
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        if (nums.empty()) return 0;
-
-        int k = 1;
-        for (int i = 1; i < static_cast<int>(nums.size()); ++i) {
-            if (nums[i] != nums[i - 1]) {
-                nums[k++] = nums[i];
+        if(nums.size() == 0) return 0;
+        int k = 1; /* First element is unique, no need to check */
+        /* Check for the iterative inside the nums array */
+        for(int i = 1; i < static_cast<int>(nums.size()); i++){
+            /* check for the duplication */
+            if(nums.at(i) != nums.at(i - 1)) {
+                nums.at(k++) = nums.at(i);
             }
         }
         return k;

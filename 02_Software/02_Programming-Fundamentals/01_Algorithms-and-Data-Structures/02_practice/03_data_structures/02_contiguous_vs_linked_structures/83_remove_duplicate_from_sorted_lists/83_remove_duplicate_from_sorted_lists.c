@@ -29,17 +29,18 @@ struct ListNode { int val; struct ListNode *next; };
  *     struct ListNode *next;
  * };
  */
-struct ListNode* deleteDuplicates(struct ListNode* head) {
-    struct ListNode *current = head;
 
-    while (current != NULL && current->next != NULL) {
-        if (current->val == current->next->val) {
+typedef struct ListNode ListNode;
+
+struct ListNode* deleteDuplicates(struct ListNode* head) {
+    ListNode* current = head;
+    while(current != NULL && current->next != NULL) {
+        if(current->val == current->next->val){
             current->next = current->next->next;
         } else {
             current = current->next;
         }
     }
-
     return head;
 }
 static struct ListNode *make(const int *a, size_t n, struct ListNode ***owned)

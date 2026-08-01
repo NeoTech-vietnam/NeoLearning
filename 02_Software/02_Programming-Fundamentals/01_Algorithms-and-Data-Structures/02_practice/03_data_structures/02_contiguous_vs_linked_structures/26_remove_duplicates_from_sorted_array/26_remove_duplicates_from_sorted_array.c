@@ -60,11 +60,10 @@ Time: O(n), Space: O(1)
 */
 
 int removeDuplicates(int* nums, int numsSize) {
-    if (numsSize == 0) return 0;
-    
-    int k = 1;  // First element always unique
-    for (int i = 1; i < numsSize; i++) {
-        if (nums[i] != nums[i - 1]) {
+    if(numsSize == 0) return 0;
+    int k = 1; // the element 0 is always a unique value, no nee to check
+    for(int i = 1; i < numsSize; i++) {
+        if(nums[i] != nums[i-1]){
             nums[k++] = nums[i];
         }
     }
