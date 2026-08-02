@@ -44,12 +44,14 @@ For Sort Array By Parity, mandatory cases are: both examples; single even; singl
 Every test case must print exactly this structure:
 
 ```text
+Test: Example1
 Input: nums = [3,1,2,4]
 Output: [2,4,3,1]
 Passed
+
 ```
 
-Use `Failed` instead of `Passed` when validation fails. Do not use `PASS`, `FAIL`, `Result`, or alternate labels for the final status. Test name may appear above the three required lines.
+Print exactly one blank line between consecutive test cases. Use `Failed` instead of `Passed` when validation fails. Do not use `PASS`, `FAIL`, `Result`, or alternate labels for the final status. Test name must appear above the three required lines and must describe the behavior or boundary being tested.
 
 ## Validation rules
 
@@ -62,7 +64,8 @@ Use `Failed` instead of `Passed` when validation fails. Do not use `PASS`, `FAIL
 ## Language guardrails
 
 - C: strict C only. Use pointers, C headers, `printf`, and `malloc`/`free`. Never use C++ references, `std::vector`, `std::string`, streams, templates, lambdas, `new`, or `delete`.
-- C++: use existing local C++ style. Use `std::vector` or the repository's established container style. Do not copy C helper signatures verbatim.
+- C test names and variables must describe tested behavior or boundary. Use names such as `duplicatePivot` and `duplicatePivotExpected`; never use numbered placeholders such as `a1`, `a2`, `a3`, `e1`, or `e2`.
+- C++: use existing local C++ style. Use `std::vector` or the repository's established container style. Do not copy C helper signatures verbatim. Use descriptive semantic test names and data-variable names; never use numbered placeholders such as `a1`, `a2`, `a3`, `e1`, or `e2`.
 - Use separate helpers, test data, and compiler commands for C and C++.
 - Use `#ifdef LOCAL_TEST` around local `main()` and test helpers when source is also submitted to LeetCode.
 
