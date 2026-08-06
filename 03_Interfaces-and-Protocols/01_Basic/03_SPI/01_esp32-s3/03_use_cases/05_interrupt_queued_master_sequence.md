@@ -19,19 +19,19 @@
 ```mermaid
 sequenceDiagram
     participant A as Application task
-    participant Q as Device queues/bus lock
-    participant I as spi_intr
-    participant H as HAL/GDMA
-    A->>Q: spi_device_queue_trans
-    Q->>Q: validate, create private descriptor, request background service
-    Q-->>I: enable/schedule interrupt
-    I->>I: finish previous transaction and post callback
-    I->>Q: return previous descriptor
-    I->>Q: select acquiring device and pop next descriptor
-    I->>H: setup device/transaction/DMA; pre callback; start
-    H-->>I: TRANS_DONE
-    A->>Q: spi_device_get_trans_result
-    Q-->>A: public descriptor; destroy bounce state
+    participant Q as Device queue and bus lock
+    participant I as SPI interrupt handler
+    participant H as HAL and GDMA
+    A->>Q: Queue transaction
+    Q->>Q: Validate and create private descriptor
+    Q-->>I: Schedule interrupt
+    I->>I: Finish previous transaction and post callback
+    I->>Q: Return previous descriptor
+    I->>Q: Select device and pop next descriptor
+    I->>H: Configure device, transaction, and DMA
+    H-->>I: Transfer complete
+    A->>Q: Get transaction result
+    Q-->>A: Return public descriptor and release bounce state
 ```
 
 The bus lock prevents devices from interleaving atomic hardware transactions. ISR work includes callbacks, device setup when ownership changes, DMA preparation, `spi_new_trans()`, completion checking, `spi_post_trans()`, and selection of the next queued item. Queue APIs may block in task context; ISR code may not.

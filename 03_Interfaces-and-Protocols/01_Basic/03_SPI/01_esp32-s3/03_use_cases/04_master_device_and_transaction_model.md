@@ -26,11 +26,11 @@ sequenceDiagram
     participant Driver
     participant HAL
     participant LL
-    App->>Driver: queue/transmit(handle, transaction)
-    Driver->>Driver: check_trans_valid + setup_priv_desc
-    Driver->>HAL: setup_device + setup_trans
-    HAL->>LL: clock, mode, CS, phases, lengths, line widths
-    LL->>LL: write FIFO or enable DMA; set SPI_USR
+    App->>Driver: Queue transaction
+    Driver->>Driver: Validate transaction and create private descriptor
+    Driver->>HAL: Configure device and transaction
+    HAL->>LL: Set clock, mode, CS, phases, and line widths
+    LL->>LL: Load FIFO or enable DMA, then start transfer
 ```
 
 The private descriptor preserves the public transaction pointer while adding bounce buffers and DMA metadata. Result collection copies RX bounce data back and destroys only private state.

@@ -19,17 +19,17 @@
 ```mermaid
 sequenceDiagram
     participant S as Slave task
-    participant D as Slave driver/ISR
-    participant H as HAL/GDMA
+    participant D as Slave driver and ISR
+    participant H as HAL and GDMA
     participant M as External master
-    S->>D: spi_slave_queue_trans(max length, buffers)
-    D->>H: prepare private descriptor and arm hardware
-    D-->>M: optional ready GPIO asserted by application
-    M->>H: assert CS and clock data
-    H-->>D: slave done + received bit length
-    D->>D: post callback; return descriptor; arm next
-    S->>D: spi_slave_get_trans_result
-    D-->>S: descriptor with trans_len
+    S->>D: Queue transaction
+    D->>H: Prepare private descriptor and arm hardware
+    D-->>M: Signal readiness through optional GPIO
+    M->>H: Assert CS and clock data
+    H-->>D: Report completion and received bit length
+    D->>D: Run callback, return descriptor, and arm next
+    S->>D: Get transaction result
+    D-->>S: Return descriptor with actual length
 ```
 
 Queue before signaling ready. Size RX/TX for the largest permitted peer transaction. `trans_len` reports the actual bounded result; if the peer clocks more than capacity, only the configured portion is safe.
