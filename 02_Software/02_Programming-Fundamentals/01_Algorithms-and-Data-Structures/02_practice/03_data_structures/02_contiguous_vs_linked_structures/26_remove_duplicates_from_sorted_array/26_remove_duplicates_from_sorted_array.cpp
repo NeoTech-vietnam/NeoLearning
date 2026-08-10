@@ -43,7 +43,7 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 
 Constraints:
 
-    1 <= nums.length <= 3 * 104
+    1 <= nums.length <= 3 * 10^4
     -100 <= nums[i] <= 100
     nums is sorted in non-decreasing order.
 */
@@ -73,9 +73,8 @@ public:
         /* Check for the iterative inside the nums array */
         for(int i = 1; i < static_cast<int>(nums.size()); i++){
             /* check for the duplication */
-            if(nums.at(i) != nums.at(i - 1)) {
+            if(nums.at(i) != nums.at(i - 1))
                 nums.at(k++) = nums.at(i);
-            }
         }
         return k;
     }
