@@ -1,0 +1,4 @@
+interface:
+  display_name: "Generate ESP-IDF Peripheral Notes"
+  short_description: "Build cross-linked TRM and ESP-IDF notes"
+  default_prompt: "Use $generate-esp-idf-peripheral-notes to generate cross-layer Cornell notes for the current ESP-IDF peripheral branch."

@@ -12,9 +12,9 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- What problems is MCPWM designed to solve on ESP32-S3?
+- Which hardware submodules participate in waveform generation and measurement?
+- Which ESP32-S3 capabilities are unavailable even though common ESP-IDF headers declare them?
 
 ---
 
@@ -32,7 +32,7 @@ The MCPWM peripheral is a versatile PWM generator, which contains various submod
 
 The main submodules are listed in the following diagram:
 
-![alt text](image.png)
+![MCPWM submodule and signal overview](image.png)
 
 - **MCPWM Timer**: The time base of the final PWM signal. It also determines the event timing of other submodules.
 - **MCPWM Operator**: The key module that is responsible for generating the PWM waveforms. It consists of other submodules, like comparator, PWM generator, dead time, and carrier modulator.
@@ -52,6 +52,12 @@ The main submodules are listed in the following diagram:
 - [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
 - [Complete MCPWM Application Sequences](../03_use_cases/13_complete_application_sequences.md)
 
+#### ESP32-S3 capability boundary
+
+ESP32-S3 has two independent MCPWM groups, each with three timers, three operators, six generator outputs, three fault inputs, three synchronization inputs, and one capture timer with three channels. ESP-IDF `v6.0.1` does not enable MCPWM ETM, event-comparator, or sleep-retention support for this target; declarations guarded for other targets are not usable here.
+
+Official guide: [ESP-IDF v6.0.1 MCPWM Programming Guide](https://docs.espressif.com/projects/esp-idf/en/v6.0.1/esp32s3/api-reference/peripherals/mcpwm.html). Hardware provenance: TRM Chapter 36, PDF pp. 1326–1414; begin with [TRM overview](../01_technical_reference_manual/01_overview_and_features.md).
+
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+MCPWM separates time bases, waveform policy, protection, synchronization, and capture into owned resources. Build applications through public handles, keep parent resources alive until their children are deleted, and check ESP32-S3 capability macros before using target-gated APIs.

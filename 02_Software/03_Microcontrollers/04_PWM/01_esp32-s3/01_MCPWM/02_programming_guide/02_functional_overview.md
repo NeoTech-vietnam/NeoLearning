@@ -12,9 +12,9 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- In what order should the MCPWM guide topics be learned and configured?
+- Which operations are control-plane setup and which execute at run time or in an ISR?
+- Where are clock, concurrency, and target-capability constraints documented?
 
 ---
 
@@ -52,9 +52,9 @@ Description of the MCPWM functionality is divided into the following sections:
 
 **Resolution Configuration** - describes the resolution configuration rules for the MCPWM submodule.
 
-**IRAM Safe** - describes tips on how to make the RMT interrupt work better along with a disabled cache.
+**IRAM Safe** - describes how MCPWM interrupt handlers and callback dependencies can continue while flash cache is disabled.
 
-**Thread Safety **- lists which APIs are guaranteed to be thread-safe by the driver.
+**Thread Safety** - lists which APIs are guaranteed to be thread-safe by the driver.
 
 **Kconfig Options** - lists the supported Kconfig options that can bring different effects to the driver.
 
@@ -65,6 +65,17 @@ Description of the MCPWM functionality is divided into the following sections:
 - [MCPWM Resource Relationships and Software Layers](../03_use_cases/01_overview_and_resource_relationships.md)
 - [MCPWM Lifecycle and Common API Flow](../03_use_cases/02_mcpwm_lifecycle_and_common_api_flow.md)
 
+#### Recommended reading and configuration order
+
+1. Allocate the timer and operator, then connect them.
+2. Allocate comparators and generators below the operator.
+3. Configure compare values and generator actions while resources are disabled.
+4. Register callbacks before enabling resources, then enable and start the timer.
+5. Add dead time, carrier, synchronization, fault/brake, or capture only where the application needs them.
+6. Stop and disable resources before deleting children and then parents.
+
+The corresponding ownership/state sequence is diagrammed in [MCPWM lifecycle](../03_use_cases/02_mcpwm_lifecycle_and_common_api_flow.md); register behavior is grounded in [TRM submodules](../01_technical_reference_manual/02_submodules.md).
+
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+Treat MCPWM configuration as an ownership graph plus a state machine. Configure callbacks and event actions before enable/start, keep ISR code cache-safe when required, and delete resources in reverse dependency order.
