@@ -1,4 +1,9 @@
 scripts/*
+<<<<<<< HEAD
 *build
 *.exe
 .nimbalyst-generated
+=======
+.vscode
+*build
+>>>>>>> origin/feature/network-fundamentals
