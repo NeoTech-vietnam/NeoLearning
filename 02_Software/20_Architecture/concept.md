@@ -1,0 +1,2 @@
+- Autosar --> Follow theo sequence
+- FSP     --> Follow theo coding style và api structure
