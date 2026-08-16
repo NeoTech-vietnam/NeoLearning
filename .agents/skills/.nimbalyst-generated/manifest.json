@@ -1,0 +1,129 @@
+{
+  "entries": [
+    {
+      "id": "workspace-claude-skill:project:skill:cavecrew",
+      "name": "cavecrew",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman",
+      "name": "caveman",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman-commit",
+      "name": "caveman-commit",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman-compress",
+      "name": "caveman-compress",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman-help",
+      "name": "caveman-help",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman-review",
+      "name": "caveman-review",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "workspace-claude-skill:project:skill:caveman-stats",
+      "name": "caveman-stats",
+      "sourceType": "workspace-claude-skill"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.automations:command:automations:automation",
+      "name": "automations-automation",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.datamodellm:skill:datamodellm:datamodellm",
+      "name": "datamodellm-datamodellm",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.datamodellm:command:datamodellm:datamodel",
+      "name": "datamodellm-datamodel",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.developer:skill:developer:git-commit",
+      "name": "developer-git-commit",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.excalidraw:skill:excalidraw:excalidraw",
+      "name": "excalidraw-excalidraw",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.extension-dev-kit:skill:extension-dev-kit:extension-development",
+      "name": "extension-dev-kit-extension-development",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.extension-dev-kit:command:extension-dev-kit:new-extension",
+      "name": "extension-dev-kit-new-extension",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.feedback:skill:feedback:feedback-intake",
+      "name": "feedback-feedback-intake",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.feedback:command:feedback:bug-report",
+      "name": "feedback-bug-report",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.feedback:command:feedback:feature-request",
+      "name": "feedback-feature-request",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.mockuplm:skill:mockuplm:mockuplm",
+      "name": "mockuplm-mockuplm",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.mockuplm:command:mockuplm:mockup",
+      "name": "mockuplm-mockup",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:skill:planning:planning",
+      "name": "planning-planning",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:command:planning:design",
+      "name": "planning-design",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:command:planning:implement",
+      "name": "planning-implement",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:command:planning:launch-new-session",
+      "name": "planning-launch-new-session",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:command:planning:session-cleanup",
+      "name": "planning-session-cleanup",
+      "sourceType": "legacy-claude-plugin"
+    },
+    {
+      "id": "legacy-claude-plugin:com.nimbalyst.planning:command:planning:track",
+      "name": "planning-track",
+      "sourceType": "legacy-claude-plugin"
+    }
+  ]
+}

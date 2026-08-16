@@ -1,0 +1,49 @@
+{
+  "generated_on": "2026-07-20",
+  "learning_branch": "feature/spi",
+  "target": "esp32s3",
+  "peripheral": "spi",
+  "scope": ["gpspi-master", "gpspi-slave", "gpspi-slave-hd"],
+  "trm": {
+    "title": "ESP32-S3 Technical Reference Manual",
+    "version": "1.8",
+    "chapter": 30,
+    "pages": [1106, 1184],
+    "sha256": "4484bf8a69035ec42a731c58c64ada6fbd1f1618c5559409f134d9ea083f444f"
+  },
+  "esp_idf": {
+    "ref": "v6.0.1",
+    "commit": "8c19b156084a0753687347cca1f5355782893533",
+    "guide_sources": ["spi_features.rst", "spi_master.rst", "spi_slave.rst", "spi_slave_hd.rst"],
+    "components": ["esp_driver_spi", "esp_hal_gpspi", "soc/esp32s3"],
+    "source_roots": [
+      "components/esp_driver_spi/include/driver",
+      "components/esp_driver_spi/include/esp_private",
+      "components/esp_driver_spi/src/gpspi",
+      "components/esp_hal_gpspi",
+      "components/soc/esp32s3/register/soc/spi_reg.h",
+      "components/soc/esp32s3/register/soc/spi_struct.h",
+      "examples/peripherals/spi_master",
+      "examples/peripherals/spi_slave",
+      "examples/peripherals/spi_slave_hd",
+      "components/esp_driver_spi/test_apps"
+    ]
+  },
+  "extractors": {
+    "markitdown": "0.1.6",
+    "pdftotext": "24.02.0"
+  },
+  "collections": {
+    "01_technical_reference_manual": 15,
+    "02_programming_guide": 10,
+    "03_use_cases": 15
+  },
+  "symbol_coverage": {
+    "semantic_symbols_discovered": 484,
+    "semantic_symbols_missing_from_15_spi_apis": 0,
+    "spi_dev_non_reserved_logical_fields_cataloged": 170,
+    "spi_reg_definitions": 1030,
+    "spi_reg_definition_policy": "register addresses and logical fields are documented; per-field _V/_M/_S and reserved-bit aliases are classified as mechanical encodings",
+    "legacy_dma_policy": "spi_dma and spi_dma_ll symbols guarded by !SOC_GDMA_SUPPORTED are inventoried but classified outside the ESP32-S3 execution path"
+  }
+}

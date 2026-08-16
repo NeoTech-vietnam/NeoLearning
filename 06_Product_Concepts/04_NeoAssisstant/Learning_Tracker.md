@@ -31,18 +31,18 @@
 
 ## 2. FreeRTOS & System Fundamentals
 
-| # | Topic | Level | Status | Notes |
-|---|-------|:-----:|:------:|-------|
-| 1 | Tasks, priorities, preemptive scheduling | **L4** | ☐ | Foundation of every firmware task |
-| 2 | Queues, semaphores, mutexes, event groups | **L4** | ☐ | IPC between tasks (Audio↔AI↔UI) |
-| 3 | DMA — I2S / SPI descriptors, double buffering | **L4** | ☐ | Required for audio + display latency |
-| 4 | Interrupts & ISR-safe APIs (`xQueueSendFromISR`, …) | **L3** | ☐ | Touch, GPIO, timer ISR |
-| 5 | Timers — hardware timers, `esp_timer`, RTC | **L3** | ☐ | LVGL tick, sensor sampling period |
-| 6 | Watchdog — `esp_task_wdt`, task subscription | **L3** | ☐ | Required by MonitorTask |
-| 7 | Memory — `heap_caps_malloc`, PSRAM, stack sizing, watermark | **L4** | ☐ | Directly tied to 8 MB PSRAM budget |
-| 8 | Power management — light/deep sleep, wake stubs, wake-on-voice | **L3** | ☐ | Hit <100 µA deep-sleep target |
-| 9 | Clock management — CPU freq scaling, peripheral clocks | **L2** | ☐ | Battery + performance trade-offs |
-| 10 | OTA — dual-partition, rollback, TLS-verified download | **L3** | ☐ | Phase 1 review-gate requirement |
+| #   | Topic                                                          | Level  | Status | Notes                                |
+| --- | -------------------------------------------------------------- | :----: | :----: | ------------------------------------ |
+| 1   | Tasks, priorities, preemptive scheduling                       | **L4** |   ☐    | Foundation of every firmware task    |
+| 2   | Queues, semaphores, mutexes, event groups                      | **L4** |   ☐    | IPC between tasks (Audio↔AI↔UI)      |
+| 3   | DMA — I2S / SPI descriptors, double buffering                  | **L4** |   ☐    | Required for audio + display latency |
+| 4   | Interrupts & ISR-safe APIs (`xQueueSendFromISR`, …)            | **L3** |   ☐    | Touch, GPIO, timer ISR               |
+| 5   | Timers — hardware timers, `esp_timer`, RTC                     | **L3** |   ☐    | LVGL tick, sensor sampling period    |
+| 6   | Watchdog — `esp_task_wdt`, task subscription                   | **L3** |   ☐    | Required by MonitorTask              |
+| 7   | Memory — `heap_caps_malloc`, PSRAM, stack sizing, watermark    | **L4** |   ☐    | Directly tied to 8 MB PSRAM budget   |
+| 8   | Power management — light/deep sleep, wake stubs, wake-on-voice | **L3** |   ☐    | Hit <100 µA deep-sleep target        |
+| 9   | Clock management — CPU freq scaling, peripheral clocks         | **L2** |   ☐    | Battery + performance trade-offs     |
+| 10  | OTA — dual-partition, rollback, TLS-verified download          | **L3** |   ☐    | Phase 1 review-gate requirement      |
 
 ---
 
