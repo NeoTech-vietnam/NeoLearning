@@ -1,0 +1,4 @@
+interface:
+  display_name: "LeetCode Notes"
+  short_description: "Build Cornell notes with paired Mermaid flows"
+  default_prompt: "Use $leetcode-notes to create or update a Cornell note with generic and concrete worked-example Mermaid flows for every strategy."
