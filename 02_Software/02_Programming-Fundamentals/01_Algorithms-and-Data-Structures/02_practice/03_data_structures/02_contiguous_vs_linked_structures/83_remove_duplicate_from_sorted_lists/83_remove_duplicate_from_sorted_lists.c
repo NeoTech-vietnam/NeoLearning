@@ -20,7 +20,10 @@ The list is guaranteed to be sorted in ascending order.
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode { int val; struct ListNode *next; };
+typedef struct ListNode {
+    int val;
+    struct ListNode *next;
+} ListNode;
 
 /**
  * Definition for singly-linked list.
@@ -29,8 +32,6 @@ struct ListNode { int val; struct ListNode *next; };
  *     struct ListNode *next;
  * };
  */
-
-typedef struct ListNode ListNode;
 
 struct ListNode* deleteDuplicates(struct ListNode* head) {
     ListNode* current = head;
