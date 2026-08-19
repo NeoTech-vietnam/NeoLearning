@@ -25,12 +25,10 @@ The number of nodes in the list is in the range [0, 10^4].
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode {
+typedef struct ListNode {
     int val;
     struct ListNode *next;
-};
-
-typedef struct ListNode ListNode;
+} ListNode;
 
 struct ListNode* removeElements(struct ListNode* head, int val) {
     ListNode dummyHead = {0, head};
