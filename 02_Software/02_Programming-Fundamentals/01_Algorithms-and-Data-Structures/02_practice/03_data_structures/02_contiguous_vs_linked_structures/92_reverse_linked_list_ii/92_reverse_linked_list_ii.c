@@ -36,7 +36,10 @@ typedef struct ListNode {
 } ListNode;
 
 struct ListNode* reverseBetween(struct ListNode* head, int left, int right) {
-    struct ListNode dummy = {0, head};
+    struct ListNode dummy = {
+        .val = 0,
+        .next = head,
+    };
     struct ListNode *before = &dummy;
 
     for (int position = 1; position < left; ++position) {
