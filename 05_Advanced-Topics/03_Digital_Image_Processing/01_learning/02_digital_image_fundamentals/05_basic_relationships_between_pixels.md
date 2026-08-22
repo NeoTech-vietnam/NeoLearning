@@ -41,6 +41,13 @@ Here's a discussion of what the sources say about basic relationships between pi
         *   **4-adjacency**: Two pixels `p` and `q` (with values from `V`) are 4-adjacent if `q` is in the set of `p`'s 4-neighbors, $N_4(p)$.
         *   **8-adjacency**: Two pixels `p` and `q` (with values from `V`) are 8-adjacent if `q` is in the set of `p`'s 8-neighbors, $N_8(p)$.
         *   **m-adjacency (mixed adjacency)**: This is a more complex definition, stating `p` and `q` are m-adjacent if `q` is in $N_4(p)$, OR `q` is in $N_D(p)$ AND the set $N_4(p) \cap N_4(q)$ has no pixels whose values are from `V`.
+
+#### Extracted source figure: adjacency ambiguity
+
+![Two small binary pixel grids comparing 8-adjacency with m-adjacency](../../02_assets/02_digital_image_fundamentals/05_basic_relationships_between_pixels/figure_2_25_adjacency.jpg)
+
+*Figure 2.25. Source: Gonzalez and Woods, Section 2.5, printed p. 72 (PDF p. 95). Extracted from the locally supplied textbook PDF for study reference.*
+
     *   **Paths and Connectivity**:
         *   A **(digital) path (or curve)** from pixel `p` to pixel `q` is a sequence of distinct pixels where consecutive pixels are adjacent (e.g., 4-paths, 8-paths, or m-paths). The length of the path is `n` if there are `n` pixels in the sequence. If the start and end pixels are the same, it's a **closed path**.
         *   **Connected**: Two pixels `p` and `q` in a subset `S` of pixels are connected if a path exists between them consisting entirely of pixels in `S`.
@@ -67,4 +74,6 @@ These fundamental concepts regarding pixel relationships are the "basic building
 
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+Neighborhood and adjacency rules determine digital connectivity. Connected pixels form components and regions; boundary pixels touch the complement. Euclidean, city-block, and chessboard metrics impose different neighborhood geometries and path lengths.
+
+**Source:** Section 2.5, printed pp. 68–72 (PDF pp. 91–95).

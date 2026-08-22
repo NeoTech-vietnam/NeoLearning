@@ -8,15 +8,16 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- Which stages produce images, and which produce attributes?
+- How do enhancement and restoration differ?
+- Why are segmentation and feature description difficult?
+- How does the knowledge base guide the processing pipeline?
 
 ---
 
 ### Notes Section (Main Notes)
 
-The "Fundamental Steps in Digital Image Processing" are a core component of Chapter 1, which serves as an **The "Fundamental Steps in Digital Image Processing" are a core component of Chapter 1, which serves as an **introduction to the field of digital image processing**. This chapter aims to define the scope of image processing, provide historical context, highlight key application areas, discuss principal approaches, and outline the components of a typical image processing system. The "Fundamental Steps" specifically detail the **methodologies that can be applied to images for various purposes**, thereby providing a foundational understanding of how digital images are manipulated and processed, which is crucial for the rest of the book.
+The "Fundamental Steps in Digital Image Processing" are a core component of Chapter 1, which serves as an **introduction to the field of digital image processing**. This chapter aims to define the scope of image processing, provide historical context, highlight key application areas, discuss principal approaches, and outline the components of a typical image processing system. The "Fundamental Steps" specifically detail the **methodologies that can be applied to images for various purposes**, thereby providing a foundational understanding of how digital images are manipulated and processed, which is crucial for the rest of the book.
 
 The methodologies within these fundamental steps are broadly categorized into two types:
 1.  **Methods whose input and output are images**. These often relate to low-level processing tasks.
@@ -39,8 +40,16 @@ An overarching element in this framework is the **Knowledge Base**. Knowledge ab
 
 It's important to note that **not every process is applied to every image**, nor are all these modules necessarily required in every application. For instance, image enhancement for human visual interpretation might not require other stages, but as the complexity of an image processing task increases, so does the number of processes needed. The results of image processing can be viewed at the output of any stage.
 
+#### Extracted source figure: fundamental processing steps
+
+![Block diagram of fundamental digital image processing steps, showing image-producing stages, attribute-producing stages, and knowledge-base feedback](../../02_assets/01_introduction/04_fundamental_steps_in_digital_image_processing/figure_1_23_fundamental_steps.jpg)
+
+*Figure 1.23. Source: Gonzalez and Woods, Section 1.4, printed p. 26 (PDF p. 49). Rendered and cropped from the locally supplied textbook PDF because the diagram is vector page content; retained for study reference.*
+
 ---
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+A typical pipeline acquires and improves images, partitions them into objects, represents their shape or region, extracts descriptors, then recognizes objects. Applications use only the required stages. Domain knowledge coordinates and constrains the pipeline.
+
+**Source:** Section 1.4, printed pp. 25–28 (PDF pp. 48–51).

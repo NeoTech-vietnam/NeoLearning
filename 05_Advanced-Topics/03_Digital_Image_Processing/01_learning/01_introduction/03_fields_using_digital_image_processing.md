@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- Which electromagnetic bands produce useful images?
+- How does wavelength constrain observable detail?
+- Which applications use gamma rays, X-rays, radar, or radio waves?
+- Which imaging modalities do not use electromagnetic radiation?
 
 ---
 
@@ -52,8 +53,18 @@ The breadth of DIP applications is effectively illustrated by categorizing image
     *   **Synthetic (Computer-Generated) Images**:
         *   **Modeling and Visualization**: Includes fractals for artistic or mathematical formulations and 3-D modeling for visualization systems (e.g., flight simulators), medical training, criminal forensics, and special effects.
 
+#### Extracted source figure: Crab Pulsar across the spectrum
+
+| Gamma ray | X-ray | Optical | Infrared | Radio |
+| --- | --- | --- | --- | --- |
+| ![Crab Pulsar in the gamma-ray band](../../02_assets/01_introduction/03_fields_using_digital_image_processing/figure_1_18_gamma.jpg) | ![Crab Pulsar in the X-ray band](../../02_assets/01_introduction/03_fields_using_digital_image_processing/figure_1_18_x_ray.jpg) | ![Crab Pulsar in the optical band](../../02_assets/01_introduction/03_fields_using_digital_image_processing/figure_1_18_optical.jpg) | ![Crab Pulsar in the infrared band](../../02_assets/01_introduction/03_fields_using_digital_image_processing/figure_1_18_infrared.jpg) | ![Crab Pulsar in the radio band](../../02_assets/01_introduction/03_fields_using_digital_image_processing/figure_1_18_radio.jpg) |
+
+*Figure 1.18. Source: Gonzalez and Woods, Section 1.3, printed p. 21 (PDF p. 44). Native image panels extracted from the locally supplied textbook PDF for study reference.*
+
 ---
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+Digital imaging spans the electromagnetic spectrum and also uses acoustic energy, electron beams, and synthetic models. Different sources expose different physical properties, enabling medicine, astronomy, remote sensing, inspection, security, and visualization.
+
+**Source:** Section 1.3, printed pp. 7–25 (PDF pp. 30–48).

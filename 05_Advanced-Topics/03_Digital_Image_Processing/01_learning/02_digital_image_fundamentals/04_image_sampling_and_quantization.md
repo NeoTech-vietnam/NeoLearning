@@ -11,9 +11,10 @@
 ---
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- What is the difference between sampling and quantization?
+- How do spatial and intensity resolution affect image quality?
+- How many bits store an $M\times N$ image with $k$ bits per pixel?
+- When should nearest-neighbor, bilinear, or bicubic interpolation be used?
 
 ---
 
@@ -66,6 +67,17 @@ The digitization process necessitates decisions on the image's dimensions (M, N)
 Varying the spatial resolution (N) and intensity resolution (k) can significantly impact perceived image quality:
 
 *   **Reducing Spatial Resolution:** As spatial resolution (e.g., dpi) decreases, images show visible degradation, particularly in fine details. For example, reducing an image from 1250 dpi to 72 dpi can lead to significant degradation across most features.
+
+#### Extracted source figure: reduced spatial resolution
+
+| 1250 dpi | 300 dpi |
+| --- | --- |
+| ![High-resolution chronometer image sampled at 1250 dpi](../../02_assets/02_digital_image_fundamentals/04_image_sampling_and_quantization/figure_2_20_1250_dpi.jpg) | ![Chronometer image sampled at 300 dpi](../../02_assets/02_digital_image_fundamentals/04_image_sampling_and_quantization/figure_2_20_300_dpi.jpg) |
+| 150 dpi | 72 dpi |
+| ![Chronometer image sampled at 150 dpi with visible detail loss](../../02_assets/02_digital_image_fundamentals/04_image_sampling_and_quantization/figure_2_20_150_dpi.jpg) | ![Chronometer image sampled at 72 dpi with severe pixelation](../../02_assets/02_digital_image_fundamentals/04_image_sampling_and_quantization/figure_2_20_72_dpi.jpg) |
+
+*Figure 2.20. Source: Gonzalez and Woods, Section 2.4, printed p. 61 (PDF p. 84). Native image panels extracted from the locally supplied textbook PDF for study reference.*
+
 *   **Reducing Intensity Levels:** Decreasing the number of intensity levels (while keeping the number of samples constant) can lead to **false contouring**. This effect, characterized by "ridge-like structures" resembling topographic contours, is particularly noticeable in images with 16 or fewer uniformly spaced intensity levels, especially in regions with smooth, subtle intensity variations.
 *   **Interaction of Spatial and Intensity Resolution (N and k):** Early studies, such as those by Huang , used "isopreference curves" to quantify the subjective effects of simultaneously varying N and k. These studies showed that for images with high detail (e.g., a crowded scene), only a few intensity levels might be needed, as perceived quality could be nearly independent of 'k' within a certain range. Interestingly, a decrease in 'k' can sometimes **increase apparent contrast**, which humans might perceive as improved quality. A rough guideline suggests that $256 \times 256$ pixel images with 64 intensity levels, printed on a $5 \times 5$ cm format, can be reasonably free of objectionable sampling artifacts.
 
@@ -87,4 +99,6 @@ In summary, Image Sampling & Quantization are the cornerstones of digital image 
 
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+Sampling discretizes image coordinates; quantization discretizes intensity. Spatial resolution controls visible detail, while intensity resolution controls tonal precision. Interpolation estimates values on a new sampling grid, trading speed against smoothness and fidelity.
+
+**Source:** Section 2.4, printed pp. 52–68 (PDF pp. 75–91).

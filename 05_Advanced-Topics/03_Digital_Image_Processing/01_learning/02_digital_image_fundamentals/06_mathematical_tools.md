@@ -6,14 +6,15 @@
 
 ---
 
-<p align="center"><strong><em>"DO NOT JUST TALK ABOUT IT � SHOW IT"</em></strong></p>
+<p align="center"><strong><em>"DO NOT JUST TALK ABOUT IT — SHOW IT"</em></strong></p>
 
 ---
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- [Insert question or keyword]
-- [Insert question or keyword]
-- [Insert question or keyword]
+- How do array operations differ from matrix operations?
+- What conditions make an image operator linear?
+- Which arithmetic, logical, spatial, and probabilistic tools recur later?
+- Why transform an image into another domain?
 
 ---
 
@@ -44,6 +45,18 @@ Here's a discussion of the specific mathematical tools introduced:
     *   **Multiplication and Division** are applied for operations such as **shading correction** and **masking (Region of Interest - ROI)**.
     *   Practical implementations for 8-bit images often involve scaling to manage pixel values that might exceed the 0-255 range after an operation.
 
+#### Extracted source figure: noise reduction by averaging
+
+| Noisy image | Average of 5 |
+| --- | --- |
+| ![Galaxy pair corrupted by additive Gaussian noise](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_noisy.jpg) | ![Galaxy pair after averaging five noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_5.jpg) |
+| Average of 10 | Average of 20 |
+| ![Galaxy pair after averaging ten noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_10.jpg) | ![Galaxy pair after averaging twenty noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_20.jpg) |
+| Average of 50 | Average of 100 |
+| ![Galaxy pair after averaging fifty noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_50.jpg) | ![Galaxy pair after averaging one hundred noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_100.jpg) |
+
+*Figure 2.26. Source: Gonzalez and Woods, Section 2.6, printed p. 76 (PDF p. 99). Native image panels extracted from the locally supplied textbook PDF for study reference.*
+
 *   **Set and Logical Operations**
     *   These operations are grounded in **set theory**, especially relevant for **binary images**, where pixels are categorized as foreground or background. Basic set operations like union, intersection, and complement correspond to OR, AND, and NOT logical operations for binary images.
     *   For **gray-scale images**, these operations are defined as maximum, minimum, and differences between corresponding pixel pairs, making them array operations.
@@ -53,8 +66,7 @@ Here's a discussion of the specific mathematical tools introduced:
     *   These directly manipulate image pixels and are categorized into:
         *   **Single-pixel operations**: Adjust individual pixel values based on their intensity, like creating an image negative.
         *   **Neighborhood operations**: Determine an output pixel's value based on an operation involving pixels within its defined neighborhood in the input image. These are fundamental to many image enhancement, restoration, morphology, and segmentation techniques. They are efficient due to their speed and ease of hardware/firmware implementation.
-        *   **Geometric spatial transformations**: Modify the spatial relationships of pixels (e.g., scaling, rotation, translation, shearing). This involves two steps: transforming coordinates and then performing **intensity interpolation** to assign values to the new pixel locations (e.g., nearest63].
-        *   **Geometric spatial transformations**: Modify the spatial relationships of pixels (e.g., scaling, rotation, translation, shearing). This involves two steps: transforming coordinates and then performing **intensity interpolation** to assign values to the new pixel locations (e.g., nearest neighbor, bilinear, bicubic interpolation). A key application is **image registration**, aligning images for comparison or combination.
+        *   **Geometric spatial transformations**: Modify spatial relationships through scaling, rotation, translation, or shearing. Coordinate transformation locates output samples; nearest-neighbor, bilinear, or bicubic interpolation assigns intensities. **Image registration** uses these operations to align images.
 
 *   **Vector and Matrix Operations**
     *   These are crucial for **multispectral imaging**, where each pixel (e.g., in a color image) can be represented as a vector (e.g., RGB components).
@@ -76,4 +88,6 @@ In essence, Section 2.6 provides a comprehensive "roadmap" of the mathematical l
 
 ### Summary Section (Summary of Notes)
 
-[Insert a brief summary of the key ideas and takeaways]
+Digital image processing combines element-wise arrays, matrix and vector algebra, linear and nonlinear operators, arithmetic and set operations, spatial neighborhoods, transforms, and probability. Choosing the right representation often turns a difficult operation into a simple one.
+
+**Source:** Section 2.6, printed pp. 72–98 (PDF pp. 95–121).

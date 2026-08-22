@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- How is a digital image represented mathematically?
+- What distinguishes low-, mid-, and high-level processing?
+- What are sampling, quantization, spatial resolution, and intensity resolution?
+- Which two application goals motivate digital image processing?
 
 ---
 
@@ -60,4 +61,6 @@ This layered understanding of image processing activities effectively places the
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+Digital image processing uses computers to improve images for people or extract information for machines. A digital image is a finite grid of sampled coordinates and quantized intensities. The field spans image-to-image enhancement through segmentation, description, and individual-object recognition.
+
+**Source:** Section 1.1, printed pp. 1–3 (PDF pp. 24–26).

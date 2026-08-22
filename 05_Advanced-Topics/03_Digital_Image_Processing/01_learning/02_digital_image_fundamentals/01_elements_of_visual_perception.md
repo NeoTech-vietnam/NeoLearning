@@ -1,6 +1,6 @@
 # Cornell Notes
 
-## Topic: Eleemtns of Visual Perception
+## Topic: Elements of Visual Perception
 
 ## Date: 29/05/2026
 
@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- How do rods, cones, and the fovea affect vision?
+- How does the eye focus an image on the retina?
+- Why is brightness perception approximately logarithmic?
+- What cause Mach bands, simultaneous contrast, and false contouring?
 
 ---
 
@@ -44,6 +45,32 @@ The discussion on visual perception covers:
         *   **Simultaneous contrast** illustrates that a region's perceived brightness is influenced by its surrounding background, making identical intensities appear different against varying backgrounds.
         *   **Optical illusions** demonstrate the eye's tendency to fill in missing information or misinterpret geometrical properties.
 
+#### Extracted source figure: human eye
+
+![Grayscale cross-sectional image of the human eye](../../02_assets/02_digital_image_fundamentals/01_elements_of_visual_perception/figure_2_1_human_eye.jpg)
+
+*Source: Gonzalez and Woods, Section 2.1, printed p. 36 (PDF p. 59). Extracted from the locally supplied textbook PDF for study reference.*
+
+#### Original visual: human visual pathway
+
+This conceptual redraw shows how optical structures focus light and how retinal receptors convert it into signals. It summarizes Section 2.1 and supplements the extracted source figure.
+
+```mermaid
+flowchart LR
+    L[Incident light] --> C[Cornea]
+    C --> P[Pupil]
+    I[Iris] -->|controls opening| P
+    P --> N[Lens]
+    B[Ciliary body] -->|changes focal length| N
+    N --> R[Retina]
+    R --> RC{Receptors}
+    RC -->|color and fine detail| CO[Cones / fovea]
+    RC -->|low-light sensitivity| RO[Rods]
+    CO --> O[Optic nerve]
+    RO --> O
+    O --> BR[Visual perception]
+```
+
 In the larger context of Chapter 2, "Digital Image Fundamentals," the section on "Elements of Visual Perception" establishes a foundational understanding of the capabilities and limitations of human vision. This knowledge is critical for subsequent discussions on various aspects of digital imaging. For example, it helps to understand:
 *   The nature of light and the electromagnetic spectrum (Section 2.2), as light is what the human eye senses.
 *   Image sensing and acquisition (Section 2.3), by outlining how natural vision works as a comparison for artificial systems.
@@ -54,4 +81,6 @@ In the larger context of Chapter 2, "Digital Image Fundamentals," the section on
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+The retina converts focused light into neural signals using rods and cones. Human vision adapts across a huge intensity range but discriminates far fewer levels at one adaptation state. Context and local contrast strongly influence perceived brightness.
+
+**Source:** Section 2.1, printed pp. 36–43 (PDF pp. 59–66).

@@ -12,17 +12,16 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- How does a sensor convert scene energy into image data?
+- How do single sensors, line sensors, and arrays acquire 2-D images?
+- What do illumination and reflectance represent?
+- Why are sampling and quantization required after sensing?
 
 ---
 
 ### Notes Section (Main Notes)
 
 In the context of **Digital Image Fundamentals (Chapter 2)**, **Image Sensing and Acquisition (Section 2.3)** is presented as the foundational step in converting real-world information into a digital image format. This chapter lays out the basic concepts necessary for understanding how digital images are created and processed.
-
-The primary objective of image sensing and acquisition is to **generate digital images from sensed data** as the foundational step in converting real-world information into a digital image format. This chapter lays out the basic concepts necessary for understanding how digital images are created and processed.
 
 The primary objective of image sensing and acquisition is to **generate digital images from sensed data**. This process typically involves two main elements: an **illumination source** and the **interaction of energy from that source with the scene elements** being imaged. This interaction can be through reflection or absorption of energy. For instance, light reflecting from a surface or X-rays transmitting through a patient's body are examples of these interactions. In some cases, the reflected or transmitted energy is focused onto a **photoconverter** (like a phosphor screen) that converts the energy into visible light.
 
@@ -57,9 +56,15 @@ The textbook outlines three principal sensor arrangements for image acquisition:
     *   CCD sensors offer broad sensing properties and can integrate input light signals over long periods for low-noise images.
     *   The process involves an imaging system (e.g., optical lens) that collects and focuses energy onto the sensor array, which then produces outputs that are converted to an analog signal and finally digitized into a digital image.
 
+#### Extracted source figure: digital image acquisition
+
+![Four-stage example showing illumination, a scene, focused sensor input, and the resulting digital image](../../02_assets/02_digital_image_fundamentals/03_image_sensing_and_acquisition/figure_2_15_acquisition_example.jpg)
+
+*Figure 2.15. Source: Gonzalez and Woods, Section 2.3, printed p. 49 (PDF p. 72). Extracted from the locally supplied textbook PDF for study reference.*
+
 A **simple image formation model** describes an image, $f(x, y)$, as a 2-D function where $x$ and $y$ are spatial coordinates and the amplitude represents intensity or gray level. This function is a **positive scalar quantity** related to radiated energy. An image can be characterized by two components: **illumination $i(x, y)$** (amount of source illumination) and **reflectance $r(x, y)$** (amount of illumination reflected by objects), which combine as a product:
 
-$f(x, y) = i(x, y) * r(x, y)$
+$$f(x,y)=i(x,y)r(x,y)$$
 
 The model ensures $f(x,y)$ is non-zero and finite. When dealing with transmissivity instead of reflectivity, the model remains conceptually similar.
 
@@ -69,4 +74,6 @@ Finally, the output of most sensors is a **continuous voltage waveform**. To cre
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+Image acquisition converts scene energy into electrical measurements using a single sensor, a line, or a 2-D array. The formation model separates illumination from reflectance. Sampling coordinates and quantizing amplitudes convert continuous sensor output into pixels.
+
+**Source:** Section 2.3, printed pp. 46–52 (PDF pp. 69–75).

@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- Which components acquire, process, store, display, and transmit images?
+- Why is specialized front-end hardware useful?
+- What are short-term, online, and archival storage?
+- Where does software fit in a general-purpose imaging system?
 
 ---
 
@@ -19,8 +20,6 @@
 The discussion of **Components of an Image Processing System** serves as a vital part of **Chapter 1: Introduction** in the study of digital image processing. This initial chapter aims to provide a comprehensive overview, defining the field's scope, its historical origins, key application areas, principal approaches, and, critically, the constituent elements of a typical image processing system. Understanding these components is foundational to grasping how digital images are acquired, processed, and utilized in various applications.
 
 The field of digital image processing involves processing digital images using a digital computer. Historically, progress in this area has been closely tied to advancements in digital computers and supporting technologies like data storage, display, and transmission. The continuous decline in the price-to-performance ratio of computers and the expansion of networking (such as the World Wide Web and Internet) have created significant opportunities for the growth of digital image processing.
-
-A typical general-purpose image processing system like data storage, display, and transmission. The continuous decline in the price-to-performance ratio of computers and the expansion of networking (such as the World Wide Web and Internet) have created significant opportunities for the growth of digital image processing.
 
 A typical general-purpose image processing system comprises several key components:
 
@@ -55,8 +54,16 @@ A typical general-purpose image processing system comprises several key componen
 
 The evolution of image processing systems has seen a trend towards **miniaturization and the blending of general-purpose small computers with specialized image processing hardware**, even as large-scale systems continue to be used for massive applications like satellite image processing. Viewing results can occur at any stage of the processing pipeline, indicating the modular and iterative nature of digital image processing.
 
+#### Extracted source figure: image processing system components
+
+![General-purpose image processing system linking sensing, specialized hardware, a computer, software, storage, display, hardcopy, and networking](../../02_assets/01_introduction/05_components_of_an_image_processing_system/figure_1_24_system_components.jpg)
+
+*Figure 1.24. Source: Gonzalez and Woods, Section 1.5, printed p. 29 (PDF p. 52). Rendered and cropped from the locally supplied textbook PDF because the diagram is vector page content; retained for study reference.*
+
 ---
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+A general-purpose system combines sensing and digitization, specialized processing hardware, a computer, modular software, storage, displays, hardcopy devices, and networking. Component choices follow throughput, capacity, latency, and application requirements.
+
+**Source:** Section 1.5, printed pp. 28–31 (PDF pp. 51–54).

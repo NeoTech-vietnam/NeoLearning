@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- How are wavelength, frequency, and photon energy related?
+- Which wavelengths form the visible spectrum?
+- How do radiance, luminance, and brightness differ?
+- Why must imaging wavelength match the scale of the target detail?
 
 ---
 
@@ -30,6 +31,12 @@ Here's a detailed discussion based on the provided information:
     *   Wavelength and frequency are related by the expression $\lambda\nu = c$, where $c$ is the speed of light ($2.998 \times 10^8$ m/s).
     *   The energy of various components is given by $E = h\nu$, where $h$ is Planck's constant. This means **higher-frequency (shorter wavelength) electromagnetic phenomena carry more energy per photon**.
 *   Common units: wavelength in meters (or microns ($\mu$m = $10^{-6}$ m) and nanometers (nm = $10^{-9}$ m)), frequency in Hertz (Hz), and energy in electron-volts.
+
+#### Extracted source figure: electromagnetic spectrum
+
+![Electromagnetic spectrum arranged by wavelength, frequency, and photon energy, with the visible band enlarged](../../02_assets/02_digital_image_fundamentals/02_light_and_the_electromagnetic_spectrum/figure_2_10_electromagnetic_spectrum.jpg)
+
+*Figure 2.10. Source: Gonzalez and Woods, Section 2.2, printed p. 44 (PDF p. 67). Extracted from the locally supplied textbook PDF for study reference.*
 
 **2. Visible Light – A Small Portion of the Spectrum**
 *   **Light** is a specific type of electromagnetic radiation that the human eye can sense.
@@ -76,4 +83,6 @@ This detailed understanding of light and the electromagnetic spectrum (Section 2
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+Electromagnetic radiation may be modeled as waves or photons, with $\lambda\nu=c$ and $E=h\nu$. Visible light occupies only a narrow spectral band. Sensor response, wavelength, illumination, and reflectance determine what an imaging system can observe.
+
+**Source:** Section 2.2, printed pp. 43–46 (PDF pp. 66–69).

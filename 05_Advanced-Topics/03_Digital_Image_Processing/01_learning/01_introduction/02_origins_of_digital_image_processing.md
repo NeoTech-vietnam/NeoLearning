@@ -8,9 +8,10 @@
 
 ### Cue Column (Questions, Keywords, or Prompts)
 
-- First question or keyword
-- Second question or keyword
-- Third question or keyword
+- Why is the Bartlane system a precursor rather than modern image processing?
+- Which computer developments enabled digital image processing?
+- Why were the space program and medical imaging major catalysts?
+- How did Ranger 7 and CT demonstrate the field's value?
 
 ---
 
@@ -54,8 +55,16 @@ From the 1960s to the present, DIP has grown vigorously, expanding into diverse 
 
 The **continuing decline in the ratio of computer price to performance and the expansion of networking and communication bandwidth via the World Wide Web and the Internet** have created "unprecedented opportunities for continued growth" of digital image processing. Today, there is "almost no area of technical endeavor that is not impacted in some way by digital image processing".
 
+#### Extracted source figure: Ranger 7 lunar image
+
+![First close-range lunar image returned by the Ranger 7 spacecraft](../../02_assets/01_introduction/02_origins_of_digital_image_processing/figure_1_4_ranger_7_moon.jpg)
+
+*Figure 1.4. Source: Gonzalez and Woods, Section 1.2, printed p. 5 (PDF p. 28). Native image extracted from the locally supplied textbook PDF for study reference.*
+
 ---
 
 ### Summary Section (Summary of Notes)
 
-Brief summary of key ideas and takeaways
+Early cable-picture systems established digital transmission and reconstruction, but modern digital image processing required programmable computers. Computing, storage, sensors, space exploration, and CT drove the field from the 1960s onward.
+
+**Source:** Section 1.2, printed pp. 3–7 (PDF pp. 26–30).
