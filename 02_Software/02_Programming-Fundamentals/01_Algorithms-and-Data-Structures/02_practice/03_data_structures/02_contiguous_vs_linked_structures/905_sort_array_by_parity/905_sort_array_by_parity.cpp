@@ -32,6 +32,8 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& nums) {
+
+        /* STL method
         int l = 0, r = nums.size() - 1;
         while (l < r) {
             if (nums[l] % 2 > nums[r] % 2) swap(nums[l], nums[r]);
@@ -39,6 +41,15 @@ public:
             if (nums[r] % 2 != 0) r--;
         }
         return nums;
+        */
+        vector<int> result = nums;
+        int l = 0, r = static_cast<int>(nums.size()) - 1;
+        for (int i = 0; i < static_cast<int>(nums.size()); i++) {
+            if (nums[i] % 2 == 0) result[l++] = nums[i];
+            else result[r--] = nums[i];
+        }
+        return result;
+
     }
 };
 
