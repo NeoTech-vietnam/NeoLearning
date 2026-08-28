@@ -4,7 +4,8 @@ This file preserves the implementation strategy that connects the 12 textbook ch
 
 - Theory notes: [Learning index](01_learning/README.md)
 - Textbook coverage: [Chapter manifest](chapter_manifest.md)
-- Firmware lab: [Chapter 1 demo project](../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
+- Chapter 1 firmware: [Camera pipeline](../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
+- Chapter 2 firmware: [Sampling and quantization](../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/02_sampling_quantization/README.md)
 
 ## Strategy
 
@@ -22,7 +23,7 @@ Extend one project chapter by chapter. Keep acquisition, Wi-Fi, HTTP, dashboard,
 | Chapter | Learning target | ESP32-S3 camera example | Intended result | Status |
 |---:|---|---|---|---|
 | 1 | Image-processing system and pipeline | Capture VGA JPEG, buffer in PSRAM, serve `/capture` and `/stream`, report `/metrics` | Explain every component from light to browser | Implemented; build passed |
-| 2 | Sensing, sampling, quantization, pixels | Capture the same scene at several frame sizes; convert a small frame to grayscale; reduce intensity from 8 bits to 4/2 bits; inspect neighbors and distances | Resolution/bit-depth comparison with timing and memory data | Planned |
+| 2 | Sensing, sampling, quantization, pixels | Capture the same scene at several frame sizes; convert a small frame to grayscale; reduce intensity from 8 bits to 4/2 bits; inspect neighbors and distances | Resolution/bit-depth comparison with timing and memory data | In progress; QVGA grayscale and 8/4/2-bit quantization build passed |
 | 3 | Intensity transforms and spatial filters | Add negative, log/gamma, contrast stretch, histogram, equalization, box blur, median, Laplacian, Sobel, and unsharp modes | Side-by-side original/processed images and histograms | Planned |
 | 4 | Frequency-domain filtering | Compute a 1-D DFT for a selected row first; then a small power-of-two 2-D ROI; demonstrate low-pass/high-pass effects | Magnitude spectrum plus filtered ROI | Planned |
 | 5 | Restoration | Inject Gaussian-like, salt-and-pepper, and periodic noise; compare mean, median, notch, inverse-limit, and simplified Wiener restoration | Quantitative before/after error and visual comparison | Planned |
@@ -90,12 +91,13 @@ For every implemented mode, record only applicable values:
 - Capture/stream counters and timing.
 - ESP-IDF v6.0.1 build passed with `espressif/esp32-camera` and `esp_timer`.
 
-### Before Chapter 2
+### Chapter 2 in progress
 
-- Validate on physical XIAO ESP32-S3 Sense hardware.
-- Run the Chapter 1 experiment table and save observations.
-- Normalize expected `ECONNRESET` behavior when an MJPEG client closes abruptly; frame-buffer return must remain guaranteed.
-- Confirm `failures` stays zero and the board does not reboot after repeated stream disconnects.
+- Separate `02_sampling_quantization` project created; Chapter 1 remains isolated.
+- VGA JPEG baseline preserved through `/capture` and `/stream`.
+- `/quantize?bits=8|4|2` returns 320×240 grayscale PGM.
+- ESP-IDF v6.0.1 build passed.
+- Physical comparison, multiple sensor frame sizes, pixel-neighbor relations, timing, and memory measurements remain pending.
 
 ## Completion checklist
 
