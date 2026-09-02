@@ -10,7 +10,7 @@ Source: Rafael C. Gonzalez and Richard E. Woods, *Digital Image Processing*, 3rd
 |---:|---|---:|---|---|---|---|
 | 1 | Introduction | 1–31 | `01_learning/01_introduction/` | Complete | Complete | Implemented; physical verification pending |
 | 2 | Digital Image Fundamentals | 35–98 | `01_learning/02_digital_image_fundamentals/` | Complete | Complete | Implemented subset; physical verification pending |
-| 3 | Intensity Transformations and Spatial Filtering | 104–192 | `01_learning/03_intensity_transformations_and_spatial_filtering/` | Complete | Not started | Planned |
+| 3 | Intensity Transformations and Spatial Filtering | 104–192 | `01_learning/03_intensity_transformations_and_spatial_filtering/` | Complete | Complete | Not implemented; add only with a validated ESP32-S3 use case |
 | 4 | Filtering in the Frequency Domain | 199–303 | `01_learning/04_filtering_in_the_frequency_domain/` | Complete | Not started | Planned |
 | 5 | Image Restoration and Reconstruction | 311–387 | `01_learning/05_image_restoration_and_reconstruction/` | Complete | Not started | Planned |
 | 6 | Color Image Processing | 394–455 | `01_learning/06_color_image_processing/` | Complete | Not started | Planned |
@@ -156,11 +156,12 @@ Every note must remain an original study aid, not a replacement copy of the text
 
 Selective source figures require descriptive alt text, figure number, printed page, and PDF page attribution. Prefer native extraction; use a page crop only when vector content requires it. Do not reproduce decorative, redundant, or unnecessary material. Printed page 1 is PDF page 24, so add 23 to convert a printed page to its PDF page.
 
-## Chapter 1–2 enrichment checklist
+## Chapter 1–3 enrichment checklist
 
 | Chapter | Outcomes | Intuition before math | Worked examples | Useful visuals | Self-checks | ESP32 lab links |
 |---:|---|---|---|---|---|---|
 | 1 | Complete | Complete | Complete | Complete | Complete | Complete |
 | 2 | Complete | Complete | Complete | Complete | Complete | Complete |
+| 3 | Complete | Complete | Complete | Complete | Complete | Not applicable |
 
-Every Chapter 1–2 note was reviewed against its textbook section and the note contract. Hardware status remains separate; successful compilation does not claim physical-board verification.
+Every Chapter 1–3 note was reviewed against its textbook section and the note contract. Chapter 3 uses selective source figures only where comparisons materially aid learning. Hardware status remains separate; successful compilation does not claim physical-board verification.
