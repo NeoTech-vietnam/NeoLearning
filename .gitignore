@@ -2,3 +2,4 @@ scripts/*
 *build
 *.exe
 .nimbalyst-generated
+*.exe
