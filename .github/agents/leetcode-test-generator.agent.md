@@ -41,10 +41,12 @@ For Sort Array By Parity, mandatory cases are: both examples; single even; singl
 
 ## Mandatory output format
 
-Every test case must print exactly this structure:
+Match the local presentation style used by `283_move_zeroes.c`: descriptive
+numbered tests are allowed, followed by input, actual output, final status, and
+one blank line. Use this normalized structure for newly generated harnesses:
 
 ```text
-Test: Example1
+Test: Example 1
 Input: nums = [3,1,2,4]
 Output: [2,4,3,1]
 Passed
@@ -52,6 +54,18 @@ Passed
 ```
 
 Print exactly one blank line between consecutive test cases. Use `Failed` instead of `Passed` when validation fails. Do not use `PASS`, `FAIL`, `Result`, or alternate labels for the final status. Test name must appear above the three required lines and must describe the behavior or boundary being tested.
+
+After all cases, print the `283_move_zeroes.c`-style summary:
+
+```text
+=== Summary ===
+Passed: 10/10
+```
+
+Adapt the input label to the function signature. Preserve immutable original
+input before invoking a mutating function, then print that preserved input.
+Print no diagnostic text on successful cases. Failure diagnostics may follow
+the required `Failed` status.
 
 ## Validation rules
 
