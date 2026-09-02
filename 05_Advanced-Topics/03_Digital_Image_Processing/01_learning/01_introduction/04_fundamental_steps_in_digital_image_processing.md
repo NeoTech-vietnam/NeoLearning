@@ -46,6 +46,46 @@ It's important to note that **not every process is applied to every image**, nor
 
 *Figure 1.23. Source: Gonzalez and Woods, Section 1.4, printed p. 26 (PDF p. 49). Rendered and cropped from the locally supplied textbook PDF because the diagram is vector page content; retained for study reference.*
 
+#### How to read the diagram
+
+1. **Start at acquisition:** a sensor or stored source supplies the first digital image.
+2. **Follow image-producing stages:** enhancement, restoration, color processing, wavelets, compression, and morphology usually transform one image representation into another.
+3. **Notice the transition:** segmentation divides the image into meaningful regions or objects.
+4. **Follow attribute-producing stages:** representation and description convert regions into boundaries, areas, textures, or feature vectors; recognition assigns labels.
+5. **Read the knowledge-base links as feedback:** expected sizes, positions, classes, or defects can tune earlier decisions. They are not a mandatory linear stage.
+6. **Do not treat every box as required:** choose only stages needed by the application.
+
+### Learning checkpoint
+
+**Outcomes:** Explain each processing stage; separate enhancement from restoration; select the minimum pipeline for an application.
+
+**Prerequisite:** [What is DIP?](01_what_is_digital_image_processing.md)
+
+```mermaid
+flowchart LR
+    A[ESP32 camera acquisition] --> B[Correction or enhancement]
+    B --> C[Segmentation]
+    C --> D[Representation and descriptors]
+    D --> E[Object label]
+    K[Domain knowledge] -. constrains .-> B
+    K -. guides .-> C
+    K -. interprets .-> E
+```
+
+Acquisition may include simple preprocessing such as scaling. Enhancement improves suitability for a purpose, usually judged subjectively. Restoration estimates an undegraded image using an explicit degradation model and criterion; it cannot guarantee recovery of the original. Wavelets represent images at multiple scales. Compression reduces storage or transmission cost. Stage boundaries are useful, not absolute; morphology may output an image or attributes.
+
+**Original design example:** Barcode reading needs acquisition, correction, segmentation, line/pattern description, and recognition. Display-only contrast improvement may stop after enhancement.
+
+**Common mistakes:** Every application does not require every stage. Enhancement and restoration are not synonyms. A knowledge base can be rules, expected geometry, thresholds, or reference data—not only machine-learning data.
+
+**Self-check:** Choose the minimum stages for barcode reading and for brightening a dark preview. Where does each pipeline stop producing images?
+
+**Activity:** Design a three-stage colored-marker detector. State each stage’s input and output.
+
+**ESP32-S3 connection:** [Chapter 1 camera pipeline lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
+
+**Previous/next:** [Application fields](03_fields_using_digital_image_processing.md) · [System components](05_components_of_an_image_processing_system.md)
+
 ---
 
 ### Summary Section (Summary of Notes)

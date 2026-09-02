@@ -46,11 +46,13 @@ A typical general-purpose image processing system comprises several key componen
 *   **Image Displays**
     Modern systems predominantly use **color (preferably flat screen) TV monitors**. These monitors are driven by image and graphics display cards that are an integral part of the computer system. Commercial display cards typically meet most display requirements, though some specialized applications may necessitate stereo displays, such as head-mounted goggles with small embedded screens.
 
-*   **Network**
-    Although not always explicitly listed as a standalone "component" in all diagrams, the presence of a network is implied in modern image processing systems. The widespread adoption of the **World Wide Web and the Internet**, and their expanded communication bandwidth, have been significant drivers in the growth and distribution of digital image processing applications.
+*   **Hardcopy**
+    Printers and other permanent-output devices preserve images or reports outside the active computer system.
 
-*   **Knowledge Base**
-    This component, while not a physical piece of hardware, is crucial for guiding the entire image processing operation. A **knowledge base** contains information about a problem domain and dictates how different processing modules interact. This knowledge can be simple, such as defining regions of interest to limit search areas, or highly complex, involving inter-related lists of defects for inspection problems or vast databases of high-resolution images for change detection. In system diagrams, double-headed arrows often depict the interaction between the knowledge base and processing modules, signifying its guiding role.
+*   **Network**
+    Figure 1.24 explicitly includes networking for image transfer, remote access, and distributed processing. Required bandwidth depends on frame size, frame rate, compression, and protocol overhead.
+
+A **knowledge base** guides processing methods in Section 1.4, but it is not one of the physical system components shown in Figure 1.24.
 
 The evolution of image processing systems has seen a trend towards **miniaturization and the blending of general-purpose small computers with specialized image processing hardware**, even as large-scale systems continue to be used for massive applications like satellite image processing. Viewing results can occur at any stage of the processing pipeline, indicating the modular and iterative nature of digital image processing.
 
@@ -59,6 +61,42 @@ The evolution of image processing systems has seen a trend towards **miniaturiza
 ![General-purpose image processing system linking sensing, specialized hardware, a computer, software, storage, display, hardcopy, and networking](../../02_assets/01_introduction/05_components_of_an_image_processing_system/figure_1_24_system_components.jpg)
 
 *Figure 1.24. Source: Gonzalez and Woods, Section 1.5, printed p. 29 (PDF p. 52). Rendered and cropped from the locally supplied textbook PDF because the diagram is vector page content; retained for study reference.*
+
+#### How to read the system image
+
+- **Sensor plus digitizer:** converts scene energy into samples. Some modern sensors integrate both functions.
+- **Specialized hardware:** handles high-rate or regular work such as acquisition, DMA, filtering, or codec acceleration.
+- **Computer plus software:** controls the pipeline and runs flexible algorithms.
+- **Storage tiers:** short-term frame buffers need speed; archival storage needs capacity.
+- **Display/hardcopy/network:** consume or transport results; any can become the throughput bottleneck.
+- **ESP32-S3 mapping:** OV2640 = sensor; camera peripheral/DMA = specialized hardware; CPU = computer; firmware = software; PSRAM/flash = storage; Wi-Fi/browser = network/display.
+
+### Learning checkpoint
+
+**Outcomes:** Identify system components; calculate frame memory and throughput; locate a bottleneck.
+
+**Prerequisite:** Bits, bytes, rates, and [fundamental steps](04_fundamental_steps_in_digital_image_processing.md).
+
+| Quantity | Typical unit |
+|---|---|
+| Frame size | bytes or MiB |
+| Pixel throughput | pixels/s |
+| Transfer bandwidth | bytes/s or bits/s |
+| Processing delay | ms/frame |
+
+**Original example:** A $320\times240$ RGB565 frame stores $320\times240\times2=153{,}600$ bytes. At 30 fps, raw payload is $4{,}608{,}000$ bytes/s before buffering and protocol overhead. Two frame buffers require $307{,}200$ bytes.
+
+The source’s whole-image parallel ALU is an architecture example, not a modern requirement. $1024^2$ 8-bit pixels equal $1{,}048{,}576$ bytes: 1 MiB, approximately 1.05 MB.
+
+**Common mistakes:** A sensor is not necessarily the digitizer. Compute speed alone does not determine frame rate. Buffers, bus bandwidth, compression, and network backpressure matter.
+
+**Self-check:** Given sensor output 20 fps, processing 40 ms/frame, and network capacity 12 fps, what limits sustained delivery?
+
+**Activity:** Budget camera frame buffers, intermediate buffers, and network throughput for one ESP32-S3 mode.
+
+**ESP32-S3 mapping:** OV2640 sensor → camera peripheral/DMA → PSRAM frame buffers → CPU/JPEG handling → HTTP network/display or storage.
+
+**Previous/lab:** [Fundamental steps](04_fundamental_steps_in_digital_image_processing.md) · [Chapter 1 lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
 
 ---
 

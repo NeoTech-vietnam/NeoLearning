@@ -6,20 +6,24 @@ Source: Rafael C. Gonzalez and Richard E. Woods, *Digital Image Processing*, 3rd
 
 ## Coverage
 
-| Chapter | Topic | Printed pages | Notes directory | Status |
-|---:|---|---:|---|---|
-| 1 | Introduction | 1–31 | `01_learning/01_introduction/` | Complete |
-| 2 | Digital Image Fundamentals | 35–98 | `01_learning/02_digital_image_fundamentals/` | Complete |
-| 3 | Intensity Transformations and Spatial Filtering | 104–192 | `01_learning/03_intensity_transformations_and_spatial_filtering/` | Complete |
-| 4 | Filtering in the Frequency Domain | 199–303 | `01_learning/04_filtering_in_the_frequency_domain/` | Complete |
-| 5 | Image Restoration and Reconstruction | 311–387 | `01_learning/05_image_restoration_and_reconstruction/` | Complete |
-| 6 | Color Image Processing | 394–455 | `01_learning/06_color_image_processing/` | Complete |
-| 7 | Wavelets and Multiresolution Processing | 461–520 | `01_learning/07_wavelets_and_multiresolution_processing/` | Complete |
-| 8 | Image Compression | 525–621 | `01_learning/08_image_compression/` | Complete |
-| 9 | Morphological Image Processing | 627–679 | `01_learning/09_morphological_image_processing/` | Complete |
-| 10 | Image Segmentation | 689–785 | `01_learning/10_image_segmentation/` | Complete |
-| 11 | Representation and Description | 795–856 | `01_learning/11_representation_and_description/` | Complete |
-| 12 | Object Recognition | 861–906 | `01_learning/12_object_recognition/` | Complete |
+| Chapter | Topic | Printed pages | Notes directory | Outline | Learning enrichment | Hardware lab |
+|---:|---|---:|---|---|---|---|
+| 1 | Introduction | 1–31 | `01_learning/01_introduction/` | Complete | Complete | Implemented; physical verification pending |
+| 2 | Digital Image Fundamentals | 35–98 | `01_learning/02_digital_image_fundamentals/` | Complete | Complete | Implemented subset; physical verification pending |
+| 3 | Intensity Transformations and Spatial Filtering | 104–192 | `01_learning/03_intensity_transformations_and_spatial_filtering/` | Complete | Not started | Planned |
+| 4 | Filtering in the Frequency Domain | 199–303 | `01_learning/04_filtering_in_the_frequency_domain/` | Complete | Not started | Planned |
+| 5 | Image Restoration and Reconstruction | 311–387 | `01_learning/05_image_restoration_and_reconstruction/` | Complete | Not started | Planned |
+| 6 | Color Image Processing | 394–455 | `01_learning/06_color_image_processing/` | Complete | Not started | Planned |
+| 7 | Wavelets and Multiresolution Processing | 461–520 | `01_learning/07_wavelets_and_multiresolution_processing/` | Complete | Not started | Planned |
+| 8 | Image Compression | 525–621 | `01_learning/08_image_compression/` | Complete | Not started | Planned |
+| 9 | Morphological Image Processing | 627–679 | `01_learning/09_morphological_image_processing/` | Complete | Not started | Planned |
+| 10 | Image Segmentation | 689–785 | `01_learning/10_image_segmentation/` | Complete | Not started | Planned |
+| 11 | Representation and Description | 795–856 | `01_learning/11_representation_and_description/` | Complete | Not started | Planned |
+| 12 | Object Recognition | 861–906 | `01_learning/12_object_recognition/` | Complete | Not started | Planned |
+
+- **Outline complete:** every textbook section has a concise note and source range.
+- **Learning enrichment:** intuition, symbols, worked examples, visuals, mistakes, self-checks, and practice are present where useful.
+- **Hardware lab:** firmware exists separately from evidence collected on a physical board.
 
 ## Section map
 
@@ -140,14 +144,23 @@ Source: Rafael C. Gonzalez and Richard E. Woods, *Digital Image Processing*, 3rd
 
 ## Note contract
 
-Every section note contains:
+Every note must remain an original study aid, not a replacement copy of the textbook. Include only sections that improve learning:
 
-1. Topic and exact source range using printed and PDF pages.
-2. Cue questions.
-3. Concise, original explanations rather than reproduced textbook prose.
-4. KaTeX equations where needed.
-5. One original worked example or Mermaid flow where useful.
-6. Selective source figures only when they materially improve study value; every embedded figure requires descriptive alt text plus exact figure number, printed page, and PDF page attribution.
-7. Summary and links to adjacent notes.
+1. Topic, learning outcomes, prerequisites, and exact printed/PDF source range.
+2. Cue questions and intuition before formal equations.
+3. Key terms plus symbol, unit, assumption, and valid-range explanations.
+4. One original numerical example or Mermaid flow for substantial concepts.
+5. A useful visual when words alone are insufficient.
+6. Common mistakes, a short self-check, and one practical activity.
+7. Summary, ESP32-S3 connection where applicable, and adjacent-note links.
 
-For source figures, prefer native image extraction from the locally supplied textbook PDF. Use a rendered page crop only when native extraction cannot preserve the useful figure. Keep figures limited to fair study reference; do not reproduce decorative, redundant, or unnecessary material. Printed page 1 is PDF page 24, so add 23 to convert a printed page to its PDF page.
+Selective source figures require descriptive alt text, figure number, printed page, and PDF page attribution. Prefer native extraction; use a page crop only when vector content requires it. Do not reproduce decorative, redundant, or unnecessary material. Printed page 1 is PDF page 24, so add 23 to convert a printed page to its PDF page.
+
+## Chapter 1–2 enrichment checklist
+
+| Chapter | Outcomes | Intuition before math | Worked examples | Useful visuals | Self-checks | ESP32 lab links |
+|---:|---|---|---|---|---|---|
+| 1 | Complete | Complete | Complete | Complete | Complete | Complete |
+| 2 | Complete | Complete | Complete | Complete | Complete | Complete |
+
+Every Chapter 1–2 note was reviewed against its textbook section and the note contract. Hardware status remains separate; successful compilation does not claim physical-board verification.

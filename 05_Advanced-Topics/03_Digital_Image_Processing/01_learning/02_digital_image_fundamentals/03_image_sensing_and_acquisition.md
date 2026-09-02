@@ -37,6 +37,20 @@ The sensing process transforms incoming energy into a voltage waveform using a p
 
 The textbook outlines three principal sensor arrangements for image acquisition:
 
+#### Extracted source figure: sensor arrangements
+
+![Three acquisition arrangements: single sensor, line sensor, and two-dimensional sensor array](../../02_assets/02_digital_image_fundamentals/03_image_sensing_and_acquisition/figure_2_12_sensor_arrangements.jpg)
+
+*Figure 2.12. Source: Gonzalez and Woods, Section 2.3, printed p. 47 (PDF p. 70). Vector/composite page content rendered and cropped from the locally supplied textbook PDF for study reference.*
+
+#### How to read the arrangements
+
+- **Single sensor:** one detector produces one spatial sample at a time; two-axis relative motion builds a 2-D image.
+- **Line sensor:** many detectors capture one row simultaneously; perpendicular motion supplies the second dimension.
+- **Array sensor:** a 2-D detector grid receives the complete projected image without scene scanning.
+- **Common chain:** incident energy → sensing material → voltage response → sampling/quantization.
+- **Do not infer:** an array needs no readout scan; rows and columns still require electronic transfer.
+
 1.  **Image Acquisition Using a Single Sensor**:
     *   Consists of a single sensing element, such as a photodiode, which produces an output voltage proportional to light intensity.
     *   A filter can be used in front of the sensor to improve selectivity (e.g., a green filter for green light).
@@ -49,9 +63,17 @@ The textbook outlines three principal sensor arrangements for image acquisition:
     *   This arrangement is common in **most flatbed scanners** and airborne imaging applications.
     *   **Circular sensor strips** are utilized in computed tomography (CT) scanners, where a ring of detectors and an X-ray source rotate around an object to produce cross-sectional images. Other modalities like magnetic resonance imaging (MRI) and positron emission tomography (PET) conceptually use similar approaches.
 
+![Linear strip using perpendicular motion and circular detector strip using a rotating X-ray source](../../02_assets/02_digital_image_fundamentals/03_image_sensing_and_acquisition/figure_2_14_line_and_circular_sensors.jpg)
+
+*Figure 2.14. Source: Gonzalez and Woods, Section 2.3, printed p. 49 (PDF p. 72). Vector/composite page content rendered and cropped from the locally supplied textbook PDF for study reference.*
+
+- **Linear case:** strip position supplies one coordinate; object/platform motion supplies the other.
+- **Circular case:** source and detector geometry collect projections from multiple angles; reconstruction computes a slice.
+- **Do not infer:** the circular detector directly photographs internal anatomy.
+
 3.  **Image Acquisition Using Sensor Arrays**:
     *   In this setup, individual sensors are arranged in a **2-D array**.
-    *   This is the **predominant arrangement in digital cameras** (e.g., CCD arrays).
+    *   This is the **predominant arrangement in digital cameras (e.g., CCD arrays)**.
     *   A key advantage is that a **complete image can be acquired by focusing the energy pattern directly onto the array surface, eliminating the need for motion**.
     *   CCD sensors offer broad sensing properties and can integrate input light signals over long periods for low-noise images.
     *   The process involves an imaging system (e.g., optical lens) that collects and focuses energy onto the sensor array, which then produces outputs that are converted to an analog signal and finally digitized into a digital image.
@@ -62,13 +84,50 @@ The textbook outlines three principal sensor arrangements for image acquisition:
 
 *Figure 2.15. Source: Gonzalez and Woods, Section 2.3, printed p. 49 (PDF p. 72). Extracted from the locally supplied textbook PDF for study reference.*
 
-A **simple image formation model** describes an image, $f(x, y)$, as a 2-D function where $x$ and $y$ are spatial coordinates and the amplitude represents intensity or gray level. This function is a **positive scalar quantity** related to radiated energy. An image can be characterized by two components: **illumination $i(x, y)$** (amount of source illumination) and **reflectance $r(x, y)$** (amount of illumination reflected by objects), which combine as a product:
+#### Read the acquisition image from left to right
 
-$$f(x,y)=i(x,y)r(x,y)$$
+1. **Energy source:** illumination supplies photons or another probing signal.
+2. **Scene interaction:** objects reflect, emit, transmit, or scatter different amounts.
+3. **Optics/sensor:** geometry focuses the spatial energy pattern onto sensing elements.
+4. **Electrical response:** each element converts received energy into a measurable signal.
+5. **Digital image:** sampling assigns locations; quantization assigns finite values.
 
-The model ensures $f(x,y)$ is non-zero and finite. When dealing with transmissivity instead of reflectivity, the model remains conceptually similar.
+A dark output pixel can result from weak illumination, low reflectance, lens shading, low exposure, sensor response, or digital mapping. One pixel value alone cannot identify which cause dominated.
 
-Finally, the output of most sensors is a **continuous voltage waveform**. To create a true digital image, this continuous data must be converted into digital form through two subsequent processes: **sampling** (digitizing coordinate values) and **quantization** (digitizing amplitude values). The sensor arrangement dictates the sampling method. The quality of the digital image is largely determined by the number of samples and discrete intensity levels used in these processes.
+A **simple reflective image formation model** separates illumination $i(x,y)$ from surface reflectance $r(x,y)$:
+
+$$f(x,y)=i(x,y)r(x,y),\qquad 0<i(x,y)<\infty,\qquad 0\le r(x,y)\le1$$
+
+Thus $L_{\min}\le f(x,y)\le L_{\max}$ for a particular system and scene. Endpoints model total absorption or reflection; practical calibrated ranges may differ. For transmission imaging, replace reflectance with an appropriate transmissivity/attenuation model. Raw $f$ may represent voltage, digital counts, radiance-related measurements, or reconstructed coefficients—not universally a calibrated gray level.
+
+Finally, sensor physics and readout electronics produce electrical measurements. Sampling discretizes position/time; quantization maps amplitudes to discrete values. Array sensors still require row/column readout even though the scene need not move.
+
+### Learning checkpoint
+
+**Outcomes:** Compare single, line, and array sensing; trace energy to a frame buffer; apply the illumination–reflectance model with stated assumptions.
+
+**Prerequisite:** [Light and spectrum](02_light_and_the_electromagnetic_spectrum.md)
+
+```mermaid
+flowchart LR
+    S[Scene energy] --> O[Optics]
+    O --> A[Sensor array]
+    A --> R[Analog/readout electronics]
+    R --> Q[Sampling and quantization]
+    Q --> D[DMA/frame buffer]
+```
+
+**Original example:** If the simplified model uses $i=800$ relative illumination units and $r=0.25$, then $f=200$ response units. These are proportional model values unless calibrated physical units are supplied.
+
+Longer exposure may improve photon statistics, but motion, saturation, dark current, read noise, and thermal effects impose limits. CT requires reconstruction from projection measurements; rotation alone does not create the slice.
+
+**Common mistakes:** Sensor samples are not automatically calibrated intensity. More exposure is not always better. A 2-D array removes scene scanning, not electronic readout.
+
+**Self-check:** Choose single, line, or array sensing for a drum scanner, push-broom satellite, and camera. Which model term changes when a lamp brightens?
+
+**Activity:** Trace OV2640 sensor output through camera readout, DMA, PSRAM, JPEG handling, and HTTP delivery.
+
+**Previous/next:** [Light and spectrum](02_light_and_the_electromagnetic_spectrum.md) · [Sampling and quantization](04_image_sampling_and_quantization.md) · [Chapter 1 lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
 
 ---
 

@@ -48,27 +48,55 @@ Here's a discussion of what the sources say about basic relationships between pi
 
 *Figure 2.25. Source: Gonzalez and Woods, Section 2.5, printed p. 72 (PDF p. 95). Extracted from the locally supplied textbook PDF for study reference.*
 
+#### How the image resolves diagonal ambiguity
+
+- Treat only pixels whose values belong to $V$ as candidate foreground pixels.
+- Under **8-adjacency**, a diagonal neighbor connects immediately. This can create multiple valid paths through a small cluster.
+- Under **m-adjacency**, a diagonal connection is allowed only when the two pixels have no common 4-neighbor in $V$.
+- Therefore m-adjacency keeps useful diagonal connections but removes the redundant diagonal shortcut when a 4-connected route already exists.
+- Trace the marked pixels one step at a time; count edges between pixels, not pixels themselves, to obtain path length.
+
     *   **Paths and Connectivity**:
-        *   A **(digital) path (or curve)** from pixel `p` to pixel `q` is a sequence of distinct pixels where consecutive pixels are adjacent (e.g., 4-paths, 8-paths, or m-paths). The length of the path is `n` if there are `n` pixels in the sequence. If the start and end pixels are the same, it's a **closed path**.
+        *   A **digital path** from pixel `p` to pixel `q` is a sequence $(p_0,p_1,\ldots,p_n)$ whose consecutive pixels are adjacent. It contains $n+1$ pixels and has length $n$ adjacency steps. If $p_0=p_n$, it is a **closed path**.
         *   **Connected**: Two pixels `p` and `q` in a subset `S` of pixels are connected if a path exists between them consisting entirely of pixels in `S`.
         *   **Connected component**: For any pixel `p` in `S`, the set of pixels connected to `p` within `S` forms a connected component. If `S` has only one connected component, it's a **connected set**.
     *   **Regions and Boundaries**:
         *   A **region** `R` of an image is defined as a connected set of pixels.
         *   Two regions $R_i$ and $R_j$ are **adjacent** if their union forms a connected set. The type of adjacency (4- or 8-adjacency) must be specified for this definition to be meaningful.
-        *   The **boundary (border or contour)** of a region `R` is the set of points in `R` that are adjacent to points in the complement of `R` (i.e., pixels in `R` with at least one background neighbor). Adjacency between points in a region and its background is typically defined using **8-connectivity**.
-        *   A distinction is made between **edges** and **boundaries**: Boundaries are a "global" concept forming a closed path, while edges are "local" concepts based on intensity-level discontinuities at a point. Edges can be linked to form boundaries, especially in binary images where they often correspond.
+        *   The **inner boundary** of a region `R` contains points in `R` adjacent to its complement. Image-border handling and the chosen foreground/background connectivities must be explicit; inconsistent choices can create topology paradoxes.
+        *   **Edges** are local intensity discontinuities; **boundaries** describe region separation. A raw inner-boundary set need not itself form one closed digital path under every adjacency convention, so contour-following algorithms define their connectivity carefully.
 
 *   **Distance Measures (Section 2.5.3)**
-    *   A **distance function (metric)** `D` between pixels `p`, `q`, and `z` must satisfy three properties:
-        *   `D(p, q) ≥ 0` (`D(p, q) = 0` if `p = q`)
-        *   `D(p, q) = D(q, p)`
-        *   `D(p, z) ≤ D(p, q) + D(q, z)`
+    *   A **distance function (metric)** `D` between pixels `p`, `q`, and `z` must satisfy:
+        *   $D(p,q)\ge0$ and $D(p,q)=0$ **if and only if** $p=q$
+        *   $D(p,q)=D(q,p)$
+        *   $D(p,z)\le D(p,q)+D(q,z)$
     *   **Euclidean distance ($D_e$)**: The most common distance, defined as $\sqrt{(x-s)^2 + (y-t)^2}$ for pixels `p(x, y)` and `q(s, t)`. Pixels within a certain Euclidean distance from a point form a disk.
     *   **D4 distance (city-block distance)**: Defined as $|x-s| + |y-t|$. Pixels within a certain D4 distance form a diamond shape. Pixels with a D4 distance of 1 from `(x, y)` are its **4-neighbors**.
     *   **D8 distance (chessboard distance)**: Defined as $\max(|x-s|, |y-t|)$. Pixels within a certain D8 distance form a square shape. Pixels with a D8 distance of 1 from `(x, y)` are its **8-neighbors**.
     *   The concept of m-path distance is also mentioned, where the "length" of the path depends on m-adjacency.
 
-These fundamental concepts regarding pixel relationships are the "basic building blocks for processing techniques based on pixel neighborhoods". They are extensively applied in various image processing tasks, including image enhancement and restoration (Chapters 3 and 5), image morphology (Chapter 9), and image segmentation (Chapter 10).
+### Learning checkpoint
+
+**Outcomes:** Construct neighborhoods; apply value-set-dependent adjacency; find components; compare distance metrics.
+
+**Prerequisite:** Sets, coordinates, and [sampling notation](04_image_sampling_and_quantization.md).
+
+Adjacency requires both pixel values to belong to the selected set $V$. Mixed adjacency admits a diagonal pair only when their shared 4-neighbors contain no value from $V$. Border pixels require bounds checks or an explicitly padded background. $D_m$ is the shortest valid m-path length and therefore depends on $V$ and surrounding pixels.
+
+**Original distance example:** For $p=(1,2)$ and $q=(4,6)$, $D_e=5$, $D_4=7$, and $D_8=4$.
+
+**Original m-adjacency example:** In `[[1,1],[0,1]]` with $V=\{1\}$, the two diagonal `1` pixels are not m-adjacent because a shared 4-neighbor is also `1`; a 4-path already connects them.
+
+**Common mistakes:** Neighborhood is geometric; adjacency additionally tests values in $V$. Diagonal pixels are not always m-adjacent. Edge and boundary are not synonyms.
+
+**Self-check:** On a $3\times3$ binary grid, count components under 4- and 8-adjacency. Why might foreground use 8-connectivity while background uses 4-connectivity?
+
+**Activity:** Hand-label components, then implement flood fill on the same tiny grid and compare labels.
+
+**ESP32-S3 connection:** Thresholded camera pixels can be grouped into connected components before extracting object size and position.
+
+**Previous/next:** [Sampling and quantization](04_image_sampling_and_quantization.md) · [Mathematical tools](06_mathematical_tools.md)
 
 ---
 

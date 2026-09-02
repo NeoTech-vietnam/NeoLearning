@@ -4,6 +4,23 @@ Source: Rafael C. Gonzalez and Richard E. Woods, *Digital Image Processing*, 3rd
 
 Use this index for sequential study or direct lookup. Each note condenses one book section into cues, explanations, equations/examples where useful, and a summary.
 
+## How to study Chapters 1–2
+
+Use one short evidence loop instead of reading all notes passively:
+
+1. **Read:** study one section; rewrite its core idea in your own words.
+2. **Predict:** state what should change in the image, byte count, latency, or memory before running firmware.
+3. **Build:** use only authored files; ignore `build-esp32s3/`, generated `sdkconfig`, and downloaded `managed_components/` while learning the algorithm.
+4. **Measure:** keep camera position and lighting fixed; record observed values separately from expected trends.
+5. **Explain:** connect the observation to the sensor, representation, processing, buffering, or transport stage responsible.
+
+| Theory | Lab | Evidence |
+|---|---|---|
+| Chapter 1: system stages and components | [Camera pipeline lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md) | Trace one frame; compare JPEG sizes across controlled scenes. |
+| Chapter 2: sensing, sampling, quantization, pixels | [Sampling and quantization lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/02_sampling_quantization/README.md) | Compare VGA/QVGA and 8/4/2-bit outputs; explain detail loss and contouring. |
+
+Project-wide progress and resource constraints: [ESP32-S3 camera learning plan](../ESP32S3_CAMERA_LEARNING_PLAN.md).
+
 ## Chapter 1 — Introduction
 
 | Section | Source | Use |

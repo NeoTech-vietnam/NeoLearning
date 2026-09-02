@@ -29,6 +29,19 @@ Before the advent of digital computers, there were efforts to transmit and repro
 *   **Improved Reproduction**: Initially, systems used five distinct levels of gray, increasing to 15 levels by 1929. Techniques evolved to use photographic reproduction from perforated tapes and film plates developed via modulated light beams for better quality (e.g., Figure 1.2 and Figure 1.3).
 *   While these examples involved digital images, they lacked the computational element, thus not fitting the definition of modern DIP.
 
+#### Extracted source figure: Bartlane coded image
+
+![Bartlane cable-picture reproduction made from coded printing characters](../../02_assets/01_introduction/02_origins_of_digital_image_processing/figure_1_1_bartlane_coded_image.jpg)
+
+*Figure 1.1. Source: Gonzalez and Woods, Section 1.2, printed p. 3 (PDF p. 26). Native raster extracted from the locally supplied textbook PDF for study reference.*
+
+#### How to read this image
+
+- **Inspect:** the visible character pattern, coarse tone steps, and loss of smooth detail.
+- **Encoding idea:** printing symbols approximate local brightness; they are not individual modern square pixels.
+- **Why it matters:** the system demonstrated coded image transmission before programmable computer processing.
+- **Do not infer:** digital transmission alone makes this modern DIP; decoding and printing were specialized communication operations.
+
 #### The Crucial Role of Digital Computers
 The actual birth of modern digital image processing is **intimately tied to the development of the digital computer**. Digital images demand significant storage and computational power, meaning progress in DIP has been **dependent on advancements in digital computers and supporting technologies** like data storage, display, and transmission.
 
@@ -53,13 +66,46 @@ From the 1960s to the present, DIP has grown vigorously, expanding into diverse 
 *   **Physics**: Enhancing images of experiments in areas like high-energy plasmas and electron microscopy.
 *   **Machine Perception**: Extracting information for automated tasks such as character recognition, industrial inspection, military reconnaissance, fingerprint processing, and screening X-rays and blood samples.
 
-The **continuing decline in the ratio of computer price to performance and the expansion of networking and communication bandwidth via the World Wide Web and the Internet** have created "unprecedented opportunities for continued growth" of digital image processing. Today, there is "almost no area of technical endeavor that is not impacted in some way by digital image processing".
+Falling compute and storage costs plus expanding communication bandwidth accelerated the spread of digital image processing into science, medicine, industry, and consumer devices.
 
 #### Extracted source figure: Ranger 7 lunar image
 
 ![First close-range lunar image returned by the Ranger 7 spacecraft](../../02_assets/01_introduction/02_origins_of_digital_image_processing/figure_1_4_ranger_7_moon.jpg)
 
 *Figure 1.4. Source: Gonzalez and Woods, Section 1.2, printed p. 5 (PDF p. 28). Native image extracted from the locally supplied textbook PDF for study reference.*
+
+#### How to read this image
+
+- **Look for:** crater rims, shadows, smooth plains, and changing sharpness across the frame.
+- **What the pixels mean:** brightness mainly records reflected sunlight, modified by surface orientation, camera response, transmission, and later correction.
+- **Why it matters:** Ranger data demonstrated that computer correction could make remotely acquired images more useful for scientific interpretation.
+- **Do not infer:** a bright patch is not automatically a different material; illumination angle and slope can produce the same effect.
+
+### Learning checkpoint
+
+**Outcomes:** Separate digital transmission from computer processing; identify the technologies and applications that enabled modern DIP.
+
+**Prerequisite:** [What is DIP?](01_what_is_digital_image_processing.md)
+
+```mermaid
+flowchart LR
+    A[1920s Bartlane coded transmission] --> B[1940s stored-program computers]
+    B --> C[1964 Ranger 7 correction]
+    C --> D[1970s CT reconstruction]
+    D --> E[Embedded and networked imaging]
+```
+
+**Original example:** Fifteen gray levels require $\lceil\log_2 15\rceil=4$ bits/sample. Coding those samples for cable transmission is not DIP by itself; correcting geometric distortion with a computer is.
+
+**Common mistakes:** Digital image transmission does not necessarily process an image. CT reconstructs slices from projections; it does not directly photograph internal slices. Ranger 7 is a major historical milestone, not proof of one universally unique “first.”
+
+**Self-check:** Why is Bartlane a precursor? Name three technologies required before large digital images became practical.
+
+**Activity:** Build a five-event timeline; annotate each event as sensing, coding, processing, storage, or display.
+
+**ESP32-S3 connection:** One board now combines programmable compute, frame storage, networking, and camera control—capabilities once distributed across large systems.
+
+**Previous/next:** [What is DIP?](01_what_is_digital_image_processing.md) · [Application fields](03_fields_using_digital_image_processing.md)
 
 ---
 

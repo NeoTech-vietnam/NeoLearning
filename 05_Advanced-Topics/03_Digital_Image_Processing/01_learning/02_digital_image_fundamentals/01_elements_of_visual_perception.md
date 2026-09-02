@@ -11,7 +11,7 @@
 - How do rods, cones, and the fovea affect vision?
 - How does the eye focus an image on the retina?
 - Why is brightness perception approximately logarithmic?
-- What cause Mach bands, simultaneous contrast, and false contouring?
+- What causes Mach bands, simultaneous contrast, and false contouring?
 
 ---
 
@@ -38,18 +38,44 @@ The discussion on visual perception covers:
     *   The human visual system can adapt to an enormous range of light intensities, roughly $10^{10}$.
     *   **Subjective brightness** (intensity perceived by the human visual system) is a logarithmic function of the light intensity incident on the eye.
     *   This wide range is managed through **brightness adaptation**, where the eye changes its overall sensitivity.
-    *   The total range of distinct intensity levels the eye can discriminate *simultaneously* is relatively small (one to two dozen) for a given adaptation level. However, as the eye roams, the adaptation level changes, allowing for a much broader overall intensity discrimination.
-    *   Using fewer than approximately two dozen intensity levels in monochrome images can lead to visible **false contouring**.
+    *   Under a fixed background/adaptation condition, the eye discriminates only a limited number of incremental intensity changes. As gaze and adaptation change, the usable overall range becomes much broader.
+    *   Coarse quantization can produce **false contouring**, especially in smooth gradients. Visibility depends on quantizer spacing, display, noise, and viewing conditions; there is no universal level-count threshold.
     *   The visual system exhibits phenomena where perceived brightness is not solely dependent on actual intensity:
         *   **Mach bands** show that the visual system tends to undershoot or overshoot around boundaries of different intensities, creating scalloped brightness patterns.
         *   **Simultaneous contrast** illustrates that a region's perceived brightness is influenced by its surrounding background, making identical intensities appear different against varying backgrounds.
         *   **Optical illusions** demonstrate the eye's tendency to fill in missing information or misinterpret geometrical properties.
 
+#### Extracted source figure: simultaneous contrast
+
+| Dark surround | Mid-gray surround | Light surround |
+| --- | --- | --- |
+| ![Identical inner gray square on a dark background](../../02_assets/02_digital_image_fundamentals/01_elements_of_visual_perception/figure_2_8a_contrast_dark_background.jpg) | ![Identical inner gray square on a medium background](../../02_assets/02_digital_image_fundamentals/01_elements_of_visual_perception/figure_2_8b_contrast_mid_background.jpg) | ![Identical inner gray square on a light background](../../02_assets/02_digital_image_fundamentals/01_elements_of_visual_perception/figure_2_8c_contrast_light_background.jpg) |
+
+*Figure 2.8. Source: Gonzalez and Woods, Section 2.1, printed p. 42 (PDF p. 65). Native raster panels extracted from the locally supplied textbook PDF for study reference.*
+
+#### How to read the illusion
+
+- **Hold constant:** each inner square has the same measured intensity.
+- **Change:** only the surrounding background becomes lighter.
+- **Observe:** the unchanged center appears progressively darker because perception judges local contrast.
+- **Verify:** sample the center pixels with software; perception changes while stored center values remain equal.
+- **Do not infer:** perceived brightness is a direct measurement of pixel intensity.
+
 #### Extracted source figure: human eye
 
 ![Grayscale cross-sectional image of the human eye](../../02_assets/02_digital_image_fundamentals/01_elements_of_visual_perception/figure_2_1_human_eye.jpg)
 
-*Source: Gonzalez and Woods, Section 2.1, printed p. 36 (PDF p. 59). Extracted from the locally supplied textbook PDF for study reference.*
+*Figure 2.1. Source: Gonzalez and Woods, Section 2.1, printed p. 36 (PDF p. 59). Extracted from the locally supplied textbook PDF for study reference.*
+
+#### What each visible structure does
+
+- **Cornea:** supplies much of the eye’s fixed optical power and begins focusing incoming light.
+- **Iris/pupil:** controls aperture size, trading light intake against optical effects such as depth of field.
+- **Lens/ciliary body:** changes optical power for near or far focus.
+- **Retina:** curved receptor surface where an inverted optical image forms.
+- **Fovea:** small cone-dense retinal area used for highest-detail vision.
+- **Optic disk:** exit point of nerve fibers; it has no receptors and creates the physiological blind spot.
+- **Optic nerve:** carries encoded neural signals, not a raw pixel array, toward the brain.
 
 #### Original visual: human visual pathway
 
@@ -71,11 +97,31 @@ flowchart LR
     O --> BR[Visual perception]
 ```
 
-In the larger context of Chapter 2, "Digital Image Fundamentals," the section on "Elements of Visual Perception" establishes a foundational understanding of the capabilities and limitations of human vision. This knowledge is critical for subsequent discussions on various aspects of digital imaging. For example, it helps to understand:
-*   The nature of light and the electromagnetic spectrum (Section 2.2), as light is what the human eye senses.
-*   Image sensing and acquisition (Section 2.3), by outlining how natural vision works as a comparison for artificial systems.
-*   Image sampling and quantization (Section 2.4), particularly informing choices related to intensity resolution to avoid artifacts like false contouring, based on the eye's discrimination capabilities.
-*   The basic mathematical tools introduced later (Section 2.6), as these tools are often applied to image properties that ultimately aim to optimize visual perception or extract information for machine perception.
+### Learning checkpoint
+
+**Outcomes:** Explain retinal image formation, compare rods and cones, distinguish adaptation from discrimination, and recognize context-dependent brightness effects.
+
+**Prerequisite:** Ratios, logarithms, and similar triangles.
+
+The retina contains roughly 6–7 million cones and 75–150 million rods. Cones support photopic vision, color, and fine detail, especially in the fovea. Rods support sensitive scotopic vision but do not provide color discrimination. The lens-to-retina distance is about 17 mm; accommodation changes lens shape and focal length, roughly within 14–17 mm.
+
+The Weber ratio models threshold discrimination:
+
+$$\frac{\Delta I_c}{I}$$
+
+Here $I$ is background intensity and $\Delta I_c$ is the increment detected about half the time. Smaller ratios indicate finer discrimination.
+
+**Original example:** A 2 m object viewed from 20 m forms an approximate retinal image $h=17\text{ mm}\times2/20=1.7$ mm high using similar triangles.
+
+**Common mistakes:** Rods do not detect color. The fovea is cone-dense, not rod-dense. Perceived brightness is not identical to measured intensity.
+
+**Self-check:** Why can two equal gray patches look different? What does a smaller Weber ratio mean? Which receptors dominate dim-light vision?
+
+**Activity:** Place identical gray patches on black and white backgrounds; predict, then compare perceived brightness.
+
+**ESP32-S3 connection:** Camera exposure/noise and display contrast affect what a person sees; quantized values alone do not predict perceived quality.
+
+**Next:** [Light and the electromagnetic spectrum](02_light_and_the_electromagnetic_spectrum.md)
 
 ---
 

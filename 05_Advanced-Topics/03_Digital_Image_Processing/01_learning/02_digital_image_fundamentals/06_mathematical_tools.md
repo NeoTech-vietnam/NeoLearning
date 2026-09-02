@@ -42,7 +42,7 @@ Here's a discussion of the specific mathematical tools introduced:
     *   These are array operations (pixel-by-pixel) including addition, subtraction, multiplication, and division.
     *   **Addition (averaging)** is commonly used for **noise reduction**, such as averaging multiple noisy images.
     *   **Subtraction** is effective for **enhancing differences** between images, useful for tasks like change detection (e.g., in digital subtraction angiography) or medical imaging.
-    *   **Multiplication and Division** are applied for operations such as **shading correction** and **masking (Region of Interest - ROI)**.
+    *   **Multiplication** applies masks or gains; **division** commonly performs shading/flat-field correction. Division requires explicit zero handling.
     *   Practical implementations for 8-bit images often involve scaling to manage pixel values that might exceed the 0-255 range after an operation.
 
 #### Extracted source figure: noise reduction by averaging
@@ -56,6 +56,30 @@ Here's a discussion of the specific mathematical tools introduced:
 | ![Galaxy pair after averaging fifty noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_50.jpg) | ![Galaxy pair after averaging one hundred noisy images](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_26_average_100.jpg) |
 
 *Figure 2.26. Source: Gonzalez and Woods, Section 2.6, printed p. 76 (PDF p. 99). Native image panels extracted from the locally supplied textbook PDF for study reference.*
+
+#### What averaging changes
+
+- Compare flat background regions first: random bright/dark fluctuations become progressively weaker as the number $K$ of averaged frames increases.
+- Compare galaxy shape next: stable scene structure reinforces because it occurs at the same registered coordinates in every frame.
+- Improvement is rapid initially, then shows diminishing visual returns because noise standard deviation falls as $1/\sqrt K$, not $1/K$.
+- The sequence assumes aligned images plus independent, zero-mean noise. Camera movement, object motion, fixed-pattern noise, or exposure drift violates those assumptions and may blur or bias the result.
+- Averaging 100 images uses ten times as many frames as averaging 10, but reduces standard deviation only by an additional factor of $\sqrt{10}\approx3.16$.
+
+#### Extracted source figure: least-significant-bit difference
+
+| Original infrared image | Least-significant bit cleared | Scaled difference |
+| --- | --- | --- |
+| ![Original infrared image of Washington DC](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_27a_infrared_image.jpg) | ![Infrared image after clearing each pixel's least-significant bit](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_27b_lsb_cleared.jpg) | ![Difference image scaled to reveal changed pixels](../../02_assets/02_digital_image_fundamentals/06_mathematical_tools/figure_2_27c_scaled_difference.jpg) |
+
+*Figure 2.27. Source: Gonzalez and Woods, Section 2.6.3, printed p. 77 (PDF p. 100). Native raster panels extracted from the locally supplied textbook PDF for study reference.*
+
+#### How to read the subtraction example
+
+- Clearing the least-significant bit changes each pixel by only $0$ or $1$ count.
+- The first two panels therefore look nearly identical at normal display scale.
+- Their raw difference contains only tiny values; display scaling expands those values to $[0,255]$ so their spatial pattern becomes visible.
+- The bright difference panel does **not** mean a large radiometric error; it visualizes amplified one-count changes.
+- Use signed or wider arithmetic when subtraction may produce negative values.
 
 *   **Set and Logical Operations**
     *   These operations are grounded in **set theory**, especially relevant for **binary images**, where pixels are categorized as foreground or background. Basic set operations like union, intersection, and complement correspond to OR, AND, and NOT logical operations for binary images.
@@ -82,7 +106,57 @@ Here's a discussion of the specific mathematical tools introduced:
     *   Concepts of **probability** (e.g., the likelihood of an intensity level, estimated from normalized histograms) and **statistical characteristics** (mean, variance) are used for image analysis.
     *   Probability is central to algorithms for intensity transformations, image restoration, segmentation, texture description, and object recognition. More advanced concepts like stochastic image processing and random fields are also noted as extending this area.
 
-In essence, Section 2.6 provides a comprehensive "roadmap" of the mathematical language and foundational operations required for digital image processing. By introducing these tools early in Chapter 2, alongside discussions on human visual perception (Section 2.1), light and the electromagnetic spectrum (Section 2.2), image sensing and acquisition (Section 2.3), sampling and quantization (Section 2.4), and basic pixel relationships (Section 2.5), the book ensures that readers understand the theoretical underpinnings before delving into more complex applications in subsequent chapters. This prepares the reader to understand how images, once captured and digitized, can be manipulated and analyzed using a rigorous mathematical framework.
+### Essential equations and assumptions
+
+Element-wise arithmetic for equal-sized images:
+
+$$s=f+g,\quad d=f-g,\quad p=f\odot g,\quad v=f\oslash g$$
+
+Use wider signed intermediates for subtraction; define division-by-zero behavior. A linear operator satisfies
+
+$$H[af+bg]=aH[f]+bH[g].$$
+
+For $K$ registered observations $g_i=f+n_i$ with independent zero-mean noise of variance $\sigma_n^2$:
+
+$$\bar g=\frac1K\sum_{i=1}^{K}g_i,\qquad
+\operatorname{Var}(\bar g)=\frac{\sigma_n^2}{K},\qquad
+\sigma_{\bar g}=\frac{\sigma_n}{\sqrt K}.$$
+
+A rectangular mean filter illustrates a neighborhood operation:
+
+$$g(x,y)=\frac1{mn}\sum_{(r,c)\in S_{xy}}f(r,c).$$
+
+Its result depends on border policy. Geometric processing first maps coordinates, then interpolates intensities; inverse mapping avoids unfilled output holes. For an RGB vector $\mathbf z=[R,G,B]^T$:
+
+$$D(\mathbf z,\mathbf a)=\sqrt{(\mathbf z-\mathbf a)^T(\mathbf z-\mathbf a)}.$$
+
+For histogram counts $n_k$:
+
+$$p(z_k)=\frac{n_k}{MN},\quad
+\mu=\sum_k z_kp(z_k),\quad
+\sigma^2=\sum_k(z_k-\mu)^2p(z_k).$$
+
+Variance has squared intensity units; standard deviation has intensity units. Min–max display scaling changes absolute measurements:
+
+$$f_s=K\frac{f-\min(f)}{\max(f)-\min(f)}.$$
+
+### Learning checkpoint
+
+**Outcomes:** Distinguish array/matrix operations; test linearity; apply arithmetic, neighborhoods, geometry, vectors, transforms, and probability with assumptions.
+
+**Prerequisite:** Algebra, matrices, sums, probability, and [pixel relationships](05_basic_relationships_between_pixels.md).
+
+**Original $2\times2$ example:** For $f=\begin{bmatrix}0&2\\2&4\end{bmatrix}$, the mean is 2 and population variance is 2. With ROI mask $m=\begin{bmatrix}0&1\\1&0\end{bmatrix}$, $f\odot m=\begin{bmatrix}0&2\\2&0\end{bmatrix}$. This is element-wise multiplication, not matrix multiplication.
+
+**Common mistakes:** Unsigned subtraction loses negative differences. Averaging unregistered frames blurs motion. Forward mapping can leave holes. Median filtering and thresholding are nonlinear. Variance does not use the original intensity unit.
+
+**Self-check:** Classify mean filter, median filter, threshold, and affine warp as linear/nonlinear and local/global. Why must a four-frame 8-bit sum use more than 8 bits?
+
+**Activity:** Average four aligned grayscale frames using at least a 10-bit accumulator; verify the maximum sum $4\times255=1020$ cannot overflow.
+
+**ESP32-S3 connection:** Integer arithmetic, buffer width, border policy, and PSRAM traffic determine whether textbook operations fit real-time firmware.
+
+**Previous/index:** [Pixel relationships](05_basic_relationships_between_pixels.md) · [Learning index](../README.md)
 
 ---
 

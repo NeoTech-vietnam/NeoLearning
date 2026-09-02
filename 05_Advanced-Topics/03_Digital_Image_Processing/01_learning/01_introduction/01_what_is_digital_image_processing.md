@@ -39,8 +39,8 @@ To elaborate on the field and its operations, the sources define several key ter
 *   **Spatial Domain**: This is the **section of the real plane spanned by the coordinates of an image**, with $x$ and $y$ referred to as spatial variables or spatial coordinates. Image processing methods in this domain involve **direct manipulation of pixels in an image**.
 *   **Sampling**: The process of **digitizing the coordinate values** of a continuous image.
 *   **Quantization**: The process of **digitizing the amplitude (intensity) values** of a continuous image.
-*   **Dynamic Range**: This establishes the **lowest and highest intensity levels that a system can represent** and that an image can have, bounded by saturation (upper limit) and noise (lower limit).
-*   **Image Contrast**: Defined as the **difference in intensity between the highest and lowest intensity levels in an image**. High contrast indicates an appreciable number of pixels with a high dynamic range.
+*   **Dynamic Range**: The ratio between the largest and smallest useful signal levels an imaging system can measure, bounded by saturation and noise.
+*   **Image Contrast**: A difference or ratio between image intensities. Contrast belongs to an image or region; individual pixels do not have dynamic range.
 *   **Spatial Resolution**: A measure of the **smallest discernible detail in an image**. It can be quantified as line pairs per unit distance or dots (pixels) per unit distance.
 *   **Intensity Resolution**: Refers to the **smallest discernible change in intensity level**. It is commonly expressed by the number of bits used to quantize intensity (e.g., an 8-bit image has 8 bits of intensity resolution).
 *   **Filter**: The term "filter" is borrowed from frequency domain processing, where it means **accepting (passing) or rejecting certain frequency components**. In the spatial domain, "spatial filters" (also known as spatial masks, kernels, templates, and windows) achieve similar smoothing or sharpening by directly manipulating image pixels.
@@ -55,7 +55,46 @@ The relationship between digital image processing, image analysis, and computer 
 *   **Mid-level processing**: This includes tasks like **segmentation** (partitioning an image into regions or objects), **description of those objects** for computer processing, and **classification (recognition) of individual objects**. For these processes, **inputs are generally images, but outputs are attributes extracted from those images** (e.g., edges, contours, or the identity of individual objects). Importantly, the book explicitly states that **digital image processing, as defined, extends to these mid-level tasks, including the recognition of individual objects**. This is supported by chapters covering morphological processing, segmentation, representation and description, and object recognition.
 *   **High-level processing**: This involves more complex tasks such as "**making sense' of an ensemble of recognized objects**, performing **cognitive functions associated with vision**, and **emulating human intelligence**, which falls under the domain of artificial intelligence (AI). The authors indicate that **going "past this point" (object recognition) requires concepts from machine intelligence that are beyond the scope** of their book. The ultimate goal of computer vision is to fully emulate human vision, including learning and making inferences.
 
-This layered understanding of image processing activities effectively places the book's coverage of **digital image processing** squarely within low- and mid-level operations, providing a robust theoretical and practical foundation up to object recognition, while acknowledging the more advanced, cognitive aspirations of computer vision.
+This layered understanding places the book's coverage mainly within low- and mid-level operations through individual-object recognition. The levels describe typical input/output relationships, not rigid boundaries.
+
+### Learning checkpoint
+
+**Outcomes:** Define an image, digital image, and pixel; state the two goals of DIP; distinguish typical low-, mid-, and high-level tasks.
+
+**Prerequisite:** Basic functions and two-dimensional coordinates.
+
+| Symbol | Meaning | Unit/range |
+|---|---|---|
+| $f(x,y)$ | Image value at spatial location $(x,y)$ | Application-dependent |
+| $x,y$ | Spatial coordinates | Length before sampling; integer indices after sampling |
+
+**Original example — document reader:** Denoising maps an image to an image (low level). Character segmentation maps an image to regions (mid level). Character recognition maps descriptors to labels (mid level). Interpreting the sentence requires broader scene/language understanding (high level).
+
+#### Visual: how representation changes by processing level
+
+```mermaid
+flowchart LR
+    A[Camera pixels] -->|denoise / resize| B[Improved pixels]
+    B -->|segment| C[Character regions]
+    C -->|describe| D[Shape features]
+    D -->|recognize| E[Character labels]
+    E -->|interpret context| F[Sentence meaning]
+```
+
+- **Image representation:** the first two boxes contain dense pixel grids.
+- **Region representation:** segmentation groups selected pixels into candidate objects.
+- **Feature representation:** descriptors compress each region into measurements useful for comparison.
+- **Symbolic representation:** recognition produces labels; interpretation combines labels with context and knowledge.
+
+**Common mistakes:** DIP is not restricted to image-in/image-out operations. Object recognition is not automatically full scene understanding. A stored pixel value is not always a calibrated physical intensity.
+
+**Self-check:** Classify contrast enhancement, edge extraction, object recognition, and explaining a scene. Why can boundaries between levels remain application-dependent?
+
+**Activity:** Classify five phone-camera operations by input, output, purpose, and processing level.
+
+**ESP32-S3 connection:** Camera capture and JPEG conversion are low-level operations; later thresholding and connected-component extraction produce attributes.
+
+**Next:** [Origins](02_origins_of_digital_image_processing.md) · [Fundamental steps](04_fundamental_steps_in_digital_image_processing.md) · [Chapter 1 lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/01_demo_project/README.md)
 
 ---
 

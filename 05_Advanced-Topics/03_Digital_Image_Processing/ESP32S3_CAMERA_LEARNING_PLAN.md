@@ -95,7 +95,8 @@ For every implemented mode, record only applicable values:
 
 - Separate `02_sampling_quantization` project created; Chapter 1 remains isolated.
 - VGA JPEG baseline preserved through `/capture` and `/stream`.
-- `/quantize?bits=8|4|2` returns 320×240 grayscale PGM.
+- `/quantize?bits=8|4|2` decodes VGA JPEG at half scale, quantizes a 320×240 grayscale buffer, then returns browser-viewable JPEG.
+- The pre-encode grayscale buffer has exactly 256, 16, or 4 possible values; lossy JPEG can alter decoded output values.
 - ESP-IDF v6.0.1 build passed.
 - Physical comparison, multiple sensor frame sizes, pixel-neighbor relations, timing, and memory measurements remain pending.
 

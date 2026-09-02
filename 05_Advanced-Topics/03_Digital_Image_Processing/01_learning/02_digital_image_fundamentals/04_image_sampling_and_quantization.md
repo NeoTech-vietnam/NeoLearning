@@ -40,14 +40,29 @@ To transform this continuous sensed data into a digital image, two essential pro
 1.  **Sampling (Digitizing Coordinate Values):** This involves digitizing the spatial coordinates (x, y) of the image. Conceptually, it means taking equally spaced samples along a continuous image.
 2.  **Quantization (Digitizing Amplitude Values):** This involves digitizing the amplitude (intensity) values of these samples. The continuous intensity levels are mapped to a discrete set of values. The accuracy of this process is notably affected by the noise content of the sampled signal.
 
+#### Extracted source figure: projected and digitized image
+
+![Grayscale face after spatial sampling and intensity quantization](../../02_assets/02_digital_image_fundamentals/04_image_sampling_and_quantization/figure_2_17_sampled_image.jpg)
+
+*Figure 2.17(b). Source: Gonzalez and Woods, Section 2.4, printed p. 54 (PDF p. 77). Native raster panel extracted from the locally supplied textbook PDF for study reference.*
+
+#### What this panel represents
+
+- The sensor-array projection is continuous in the textbook model before digitization.
+- **Sampling** chooses discrete row/column locations.
+- **Quantization** assigns one finite intensity value at each chosen location.
+- Individual cells become visible only when enlarged sufficiently; display scaling does not change the original sample count.
+- **Do not infer:** digitization preserves all spatial and tonal information from the continuous scene.
+
 ### Representing Digital Images
 
 A digital image, after sampling and quantization, is formally represented as a **two-dimensional function, $f(x, y)$, where x and y are discrete spatial coordinates, and the amplitude (value) of $f$ at any pair of coordinates $(x, y)$ is the intensity or gray level**. When x, y, and the intensity values are all finite and discrete, it is called a **digital image**. The individual elements of a digital image are most commonly referred to as **pixels** (or picture elements, image elements, pels).
 
 *   **Spatial Domain:** The real plane section spanned by the coordinates of an image is known as the **spatial domain**, with x and y as spatial variables.
 *   **Structure:** A digital image can be viewed as a 2-D array or matrix, containing M rows and N columns of discrete coordinates.
-*   **Origin Convention:** By convention, the **origin of a digital image is at the top left**, with the positive x-axis extending downward and the positive y-axis extending to the right. This aligns with common matrix notation and display device scanning patterns.
-*   **Formal Definition:** More formally, a digital image is a function where coordinates $(x,y)$ are integers (from set Z) and the intensity value is initially a real number (from set R). If intensity levels are also integers (which is typically the case), then both coordinates and amplitude values are integers.
+*   **Origin Convention:** In this textbook, the origin is top-left, $x$ denotes the row increasing downward, and $y$ denotes the column increasing rightward. This differs from Cartesian plots and many graphics APIs, where $x$ is horizontal. In code, $(r,c)$ avoids ambiguity.
+*   **Valid indices:** $x\in\{0,\ldots,M-1\}$ and $y\in\{0,\ldots,N-1\}$, with matrix element $a_{ij}=f(i,j)$.
+*   **Formal Definition:** More formally, a digital image is a function whose coordinates and stored amplitudes come from finite discrete sets.
 
 ### Intensity Levels and Resolution
 
@@ -78,6 +93,14 @@ Varying the spatial resolution (N) and intensity resolution (k) can significantl
 
 *Figure 2.20. Source: Gonzalez and Woods, Section 2.4, printed p. 61 (PDF p. 84). Native image panels extracted from the locally supplied textbook PDF for study reference.*
 
+#### What changes across the four images
+
+- **Held conceptually constant:** scene content and tonal-level capability.
+- **Changed:** spatial sampling density—the number of samples representing the same physical extent.
+- **Inspect first:** numerals, thin hands, tick marks, and curved edges. Fine structures merge or disappear before large regions become unrecognizable.
+- **At low sampling density:** block boundaries and stair-step edges become obvious; missing fine detail cannot be recreated by later interpolation.
+- **Do not confuse:** this comparison changes spatial resolution, not the number of gray levels. Intensity quantization produces tonal banding/false contours instead of primarily blocky geometry.
+
 *   **Reducing Intensity Levels:** Decreasing the number of intensity levels (while keeping the number of samples constant) can lead to **false contouring**. This effect, characterized by "ridge-like structures" resembling topographic contours, is particularly noticeable in images with 16 or fewer uniformly spaced intensity levels, especially in regions with smooth, subtle intensity variations.
 *   **Interaction of Spatial and Intensity Resolution (N and k):** Early studies, such as those by Huang , used "isopreference curves" to quantify the subjective effects of simultaneously varying N and k. These studies showed that for images with high detail (e.g., a crowded scene), only a few intensity levels might be needed, as perceived quality could be nearly independent of 'k' within a certain range. Interestingly, a decrease in 'k' can sometimes **increase apparent contrast**, which humans might perceive as improved quality. A rough guideline suggests that $256 \times 256$ pixel images with 64 intensity levels, printed on a $5 \times 5$ cm format, can be reasonably free of objectionable sampling artifacts.
 
@@ -91,9 +114,36 @@ Interpolation is a crucial process that closely relates to sampling and quantiza
     *   **Nearest Neighbor Interpolation:** Assigns the value of the closest known pixel to the new location. It is computationally simple but can result in "blocky" artifacts, especially when enlarging images.
     *   **Bilinear Interpolation:** Computes a weighted average of the four nearest known pixels. It generally produces smoother results than nearest neighbor interpolation.
     *   **Bicubic Interpolation:** Uses 16 nearest pixels to estimate the new value through a more complex polynomial function. It yields even smoother results and better preserves fine details compared to bilinear, often being preferred for general-purpose image processing due to good results and reasonable computational efficiency.
-*   **Relation to Aliasing:** Interpolation is critical in addressing **aliasing**, which can arise during resampling (e.g., shrinking an image). Blurring an image slightly before shrinking (anti-aliasing) can reduce aliasing artifacts. Similarly, proper interpolation methods help in reconstructing images from sampled data, mitigating issues like "jaggies" (stair-step effects on lines).
+*   **Relation to Aliasing:** Interpolation estimates values on a new grid but cannot by itself prevent aliasing. Downsampling requires an appropriate low-pass prefilter before samples are discarded. Reconstruction quality then depends on the interpolation method.
 
-In summary, Image Sampling & Quantization are the cornerstones of digital image creation, dictating the spatial and intensity fidelity of an image. These processes, along with interpolation, are fundamental to understanding how digital images are formed, stored, and manipulated, and their principles are revisited and built upon in various subsequent chapters concerning topics like the Fourier transform, image compression, and geometric transformations.
+### Learning checkpoint
+
+**Outcomes:** Separate sampling from quantization; calculate levels/storage; use unambiguous indices; explain resampling and aliasing.
+
+**Prerequisite:** Binary numbers, arrays, and [image acquisition](03_image_sensing_and_acquisition.md).
+
+| Symbol | Meaning | Assumption/range |
+|---|---|---|
+| $M,N$ | Rows, columns | Positive integers |
+| $k$ | Bits per sample | Positive integer |
+| $L$ | Number of levels | Often $2^k$, not mandatory |
+| $b$ | Storage | $MNk$ bits for unpacked grayscale |
+
+Uniform integer quantization commonly adopts levels $0,\ldots,L-1$. Dynamic range is a ratio between useful extrema; contrast is an intensity difference or ratio. Pixel count, optical resolution, sampling density, and display DPI are related but distinct.
+
+**Original storage example:** One $320\times240$ RGB565 frame requires $320\times240\times2=153{,}600$ bytes. Ten uncompressed frames require $1{,}536{,}000$ bytes.
+
+**Original bilinear example:** For a $2\times2$ patch $\begin{bmatrix}0&100\\200&255\end{bmatrix}$, the center estimate is the equal-weight average $138.75$, rounded according to output rules. Bilinear interpolation has form $v(x,y)=a+bx+cy+dxy$ inside one cell; bicubic uses a $4\times4$ neighborhood and may overshoot.
+
+**Common mistakes:** Do not swap row and column. Bits are not bytes. Resizing creates estimates, not new measured detail. Quantization error is not sensor noise.
+
+**Self-check:** How many levels use 4 bits? What are valid indices for a $3\times5$ image? Why prefilter before shrinking?
+
+**Activity:** Quantize `[0, 63, 64, 127, 128, 191, 192, 255]` to 2 significant bits; calculate each error and inspect transitions.
+
+**ESP32-S3 connection:** [Sampling and quantization lab](../../../../Examples/ESP32/FreeRTOS/05_Advanced-Topics/03_Digital_Image_Processing/02_sampling_quantization/README.md)
+
+**Previous/next:** [Image acquisition](03_image_sensing_and_acquisition.md) · [Pixel relationships](05_basic_relationships_between_pixels.md)
 
 ---
 

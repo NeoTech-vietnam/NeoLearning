@@ -29,14 +29,22 @@ Here's a detailed discussion based on the provided information:
 *   Bands of the EM spectrum are not distinct but transition smoothly from one to the other.
 *   The electromagnetic spectrum can be expressed in terms of **wavelength ($\lambda$)**, **frequency ($\nu$)**, or **energy (E)**.
     *   Wavelength and frequency are related by the expression $\lambda\nu = c$, where $c$ is the speed of light ($2.998 \times 10^8$ m/s).
-    *   The energy of various components is given by $E = h\nu$, where $h$ is Planck's constant. This means **higher-frequency (shorter wavelength) electromagnetic phenomena carry more energy per photon**.
-*   Common units: wavelength in meters (or microns ($\mu$m = $10^{-6}$ m) and nanometers (nm = $10^{-9}$ m)), frequency in Hertz (Hz), and energy in electron-volts.
+    *   Photon energy is $E=h\nu=hc/\lambda$, where $h\approx6.626\times10^{-34}\ \mathrm{J\,s}$. Thus **higher-frequency (shorter-wavelength) radiation carries more energy per photon**.
+*   Common units: wavelength in meters, micrometers ($\mu$m), or nanometers (nm); frequency in hertz (Hz); energy in joules (J) or electron-volts (eV).
 
 #### Extracted source figure: electromagnetic spectrum
 
 ![Electromagnetic spectrum arranged by wavelength, frequency, and photon energy, with the visible band enlarged](../../02_assets/02_digital_image_fundamentals/02_light_and_the_electromagnetic_spectrum/figure_2_10_electromagnetic_spectrum.jpg)
 
 *Figure 2.10. Source: Gonzalez and Woods, Section 2.2, printed p. 44 (PDF p. 67). Extracted from the locally supplied textbook PDF for study reference.*
+
+#### How to read the spectrum
+
+- Moving toward **shorter wavelength** means moving toward **higher frequency** because $\lambda\nu=c$.
+- Higher frequency also means **higher energy per photon** because $E=h\nu$.
+- Band borders are approximate; the spectrum is continuous.
+- The enlarged visible strip is tiny compared with the entire spectrum. Violet lies at the shorter-wavelength/higher-energy end; red lies at the longer-wavelength/lower-energy end.
+- An imaging band states what energy reaches the detector. It does not by itself state whether that energy was reflected, emitted, transmitted, or reconstructed.
 
 **2. Visible Light – A Small Portion of the Spectrum**
 *   **Light** is a specific type of electromagnetic radiation that the human eye can sense.
@@ -50,9 +58,9 @@ Here's a detailed discussion based on the provided information:
 *   **Monochromatic (or achromatic) light** is void of color, and its only attribute is its **intensity** or amount. This intensity is perceived as varying from black to grays to white, and the term **gray level** is commonly used to denote monochromatic intensity. The range from black to white is called the **gray scale**, and monochromatic images are often referred to as **gray-scale images**.
 *   **Chromatic (color) light** spans from approximately 0.43 to 0.79 $\mu$m.
 *   Three basic quantities describe a chromatic light source:
-    *   **Radiance**: The total amount of energy flowing from the light source, typically measured in watts (W).
-    *   **Luminance**: A measure of the amount of energy an observer *perceives* from a light source, measured in lumens (lm). For example, infrared light can have high radiance but nearly zero luminance for a human observer.
-    *   **Brightness**: A **subjective descriptor** of light perception that is practically impossible to measure. It embodies the achromatic notion of intensity and is a key factor in describing color sensation.
+    *   **Radiometric quantities** describe physical radiant energy. Radiant flux uses watts; radiance normally uses $\mathrm{W\,m^{-2}\,sr^{-1}}$.
+    *   **Photometric quantities** weight radiation by human visual sensitivity. Luminous flux uses lumens; luminance uses $\mathrm{cd\,m^{-2}}$.
+    *   **Brightness** is a subjective perceptual attribute, not interchangeable with radiance or luminance.
 
 **4. Other Bands of the EM Spectrum and Their Applications**
 *   **Gamma rays**: Used in nuclear medicine, astronomical observations, and imaging radiation in nuclear environments.
@@ -71,13 +79,33 @@ Here's a detailed discussion based on the provided information:
 **6. Wavelength and Object Visibility**
 *   A crucial principle is that **the wavelength of an electromagnetic wave required to "see" an object must be of the same size as or smaller than the object**. This physical limitation, along with sensor material properties, dictates the capabilities of imaging sensors. For instance, studying molecules with diameters around $10^{-10}$ m requires sources in the far ultraviolet or soft X-ray regions.
 
-**Context within Chapter 2: Digital Image Fundamentals**
-This detailed understanding of light and the electromagnetic spectrum (Section 2.2) is foundational for Digital Image Fundamentals because:
-*   It directly informs **Section 2.1: Elements of Visual Perception** by explaining the physical nature of the "light" that the human eye (and its rods and cones) senses and processes, and how human vision perceives different wavelengths as color.
-*   It is critical for **Section 2.3: Image Sensing and Acquisition** by defining the various energy sources and their characteristics that physical devices are designed to detect and convert into digital signals. The choice of sensor (e.g., CCD arrays) is determined by the specific band of the EM spectrum being imaged.
-*   It influences decisions in **Section 2.4: Image Sampling and Quantization**, particularly regarding the intensity resolution. The perception of gray levels and colors by the human visual system, as discussed, is a key consideration in preventing artifacts like false contouring when quantizing image data.
-*   It underpins the **Image Formation Model** (Section 2.3.4), where images are characterized by illumination (often from an EM source) and reflectance properties of objects. This model is used later for techniques like homomorphic filtering in Chapter 4.
-*   This knowledge is essential for understanding **later chapters**, such as Color Image Processing (Chapter 6), which delves deeper into color models and how humans perceive color, and Filtering in the Frequency Domain (Chapter 4), where concepts like white noise relate to constant Fourier spectra, analogous to white light containing all visible frequencies.
+### Learning checkpoint
+
+**Outcomes:** Relate wavelength, frequency, and photon energy; distinguish radiometric, photometric, and perceptual quantities; explain why source and sensor spectra matter.
+
+**Prerequisite:** Scientific notation and unit conversion.
+
+| Symbol | Meaning | SI unit |
+|---|---|---|
+| $\lambda$ | Wavelength | m |
+| $\nu$ | Frequency | Hz |
+| $c$ | Vacuum light speed | m/s |
+| $h$ | Planck constant | J·s |
+| $E$ | Photon energy | J |
+
+Strictly, *monochromatic* means one wavelength or a narrow band; *achromatic* means without perceived hue. Introductory imaging texts sometimes use them loosely together. Resolution depends on wavelength plus aperture, geometry, contrast, sensor response, reconstruction, and noise. Near-IR often records reflection; thermal IR commonly records emission affected by temperature and emissivity.
+
+**Original example:** For $\nu=500$ THz, $\lambda=c/\nu\approx600$ nm and $E=h\nu\approx3.31\times10^{-19}$ J, about 2.07 eV.
+
+**Common mistakes:** Higher frequency does not mean faster propagation in vacuum. Not every IR image measures temperature. Radiance, luminance, and brightness are different quantities.
+
+**Self-check:** Convert 500 nm to frequency. Which carries more photon energy: red or blue light? Why can a hot object and a reflective object both appear bright in different IR systems?
+
+**Activity:** View an IR remote LED through a camera only if the camera can detect near-IR. Never stare into high-power or unknown emitters.
+
+**ESP32-S3 connection:** OV2640 response, illumination spectrum, and IR-cut filtering determine measured pixel values before firmware processing begins.
+
+**Previous/next:** [Visual perception](01_elements_of_visual_perception.md) · [Sensing and acquisition](03_image_sensing_and_acquisition.md)
 
 ---
 
