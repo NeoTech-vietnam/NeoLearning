@@ -66,6 +66,49 @@ Difficulty of storing information
 
 #### Digital Signal Processing
 
+Represent signsl by a sequence of numbers
+- Sampling or analog-to-digital conversions
+
+Perform processing on these numbers with a digital processors
+- Digital signal processing
+
+Reconstruct analog signal from processed numbers
+- Reconstruction or digital-to-analog conversion
+
+![alt text](image-2.png)
+
+Analog input - analog output
+- Digital recording of music
+
+Analog input - digital output
+- Touch tone phone dialing
+
+Digital input - analog output
+- Text to speech
+
+Digital input - digital output
+- Compression of a file on computer
+
+#### Pros and Cons of Digital Signal Processing?
+
+Pros:
+- Accuracy can be controlled by choosing word length
+- Repeatable
+- Sensitivity to electrical noise is minimal
+- Dynamic range can be controlled using floating point numbers
+- Flexibility can be achieved with software implementations
+- Non-linear and time varying operations are easier to implement
+- Digital storage is cheap
+- Digital information can be encrypted for security
+- Price/performance and reduced time-to-market
+
+Cons:
+- Sampling causes loss of information
+- A/D and D/A requires mixed-signal hardware
+- Limited speed of processors
+- **Quantization** and round-off errors
+
+
 ---
 
 ### Summary Section (Summary of Notes)
