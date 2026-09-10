@@ -1,45 +1,45 @@
-# Nhánh và tích hợp thay đổi
+# Branches and integrating changes
 
-## Dành cho ai?
+## Who is this for?
 
-Người cần làm việc song song với nhóm, chuẩn bị một thay đổi để review, hoặc xử lý khác biệt giữa hai nhánh.
+People working in parallel with a team, preparing a change for review, or handling differences between two branches.
 
-## Vì sao dùng nhánh?
+## Why use branches?
 
-Nhánh cho phép cô lập một tính năng, bản sửa lỗi hoặc thử nghiệm khỏi nhánh mặc định. Nó là con trỏ tới lịch sử, không phải một bản sao đầy đủ của dự án. Trước khi tạo nhánh, xác nhận nhánh cơ sở đang đúng và working tree sạch hoặc các thay đổi đang được hiểu rõ.
+A branch isolates a feature, bug fix, or experiment from the default branch. It is a pointer into history, not a full copy of the project. Before creating a branch, confirm that the base branch is correct and that the working tree is clean or its changes are understood.
 
-Tên nhánh nên ngắn, mô tả mục đích, và tuân theo quy ước dự án, chẳng hạn tiền tố `feature/`, `fix/` hoặc mã công việc nếu nhóm sử dụng chúng. Không đưa secret hoặc dữ liệu nhạy cảm vào tên nhánh vì tên này có thể được xuất bản lên remote.
+Branch names should be short, describe their purpose, and follow project conventions, such as `feature/`, `fix/`, or a work-item identifier if the team uses one. Do not put secrets or sensitive data in a branch name because that name may be published to a remote.
 
-## Quy trình cộng tác đề xuất
+## Recommended collaboration flow
 
-1. Cập nhật hiểu biết về nhánh cơ sở bằng cách fetch và xem các thay đổi trước khi tích hợp.
-2. Tạo nhánh công việc từ nhánh cơ sở đã được nhóm chấp nhận.
-3. Tạo các commit nhỏ, tập trung; đẩy nhánh công việc để sao lưu và cộng tác.
-4. Mở pull request để so sánh nhánh công việc với nhánh đích.
-5. Chỉ tích hợp sau khi yêu cầu review, kiểm tra tự động và chính sách bảo vệ nhánh được thỏa mãn.
+1. Update your understanding of the base branch by fetching and reviewing changes before integrating.
+2. Create a work branch from the team-approved base branch.
+3. Create small, focused commits; push the work branch to back it up and collaborate.
+4. Open a pull request to compare the work branch with the target branch.
+5. Integrate only after review requirements, automated checks, and branch-protection policies are satisfied.
 
-## Merge và rebase
+## Merge and rebase
 
-**Merge** kết hợp hai lịch sử và có thể tạo merge commit. Đây thường là lựa chọn an toàn cho lịch sử đã chia sẻ vì không thay đổi các commit hiện có.
+**Merge** combines two histories and can create a merge commit. It is usually the safe choice for shared history because it does not change existing commits.
 
-**Rebase** phát lại commit lên một base mới, nên tạo mã định danh commit mới. Rebase hữu ích khi chuẩn bị nhánh cá nhân gọn gàng, nhưng không nên tự ý dùng trên commit mà người khác có thể đã dựa vào. Trao đổi với nhóm trước khi rebase một nhánh đã chia sẻ.
+**Rebase** replays commits on a new base and therefore creates new commit identifiers. Rebase is useful for preparing a tidy personal branch, but it should not be used unilaterally on commits that other people may depend on. Talk with the team before rebasing a shared branch.
 
-## Xung đột
+## Conflicts
 
-Xung đột xuất hiện khi Git không thể tự quyết định cách kết hợp thay đổi. Cách xử lý an toàn là:
+A conflict occurs when Git cannot decide how to combine changes automatically. A safe resolution process is:
 
-1. Đọc thông báo của Git và xác định tất cả tệp có xung đột.
-2. Hiểu ý định của cả hai phía, không chỉ chọn một phía để “hết lỗi”.
-3. Sửa tệp, kiểm tra lại phần đánh dấu xung đột và chạy kiểm tra phù hợp của dự án.
-4. Xem diff cuối cùng trước khi đánh dấu là đã giải quyết và tạo commit tích hợp.
+1. Read Git’s message and identify every conflicted file.
+2. Understand the intent of both sides; do not simply pick one side to make the error disappear.
+3. Edit the file, inspect the conflict markers, and run the project’s relevant checks.
+4. Review the final diff before marking the conflict resolved and creating the integration commit.
 
-Nếu không hiểu ý định của một thay đổi, dừng lại và hỏi tác giả hoặc maintainer. Không xóa marker xung đột một cách máy móc.
+If you do not understand a change’s intent, stop and ask its author or a maintainer. Do not remove conflict markers mechanically.
 
-## Nhánh bảo vệ
+## Protected branches
 
-Trên GitHub, nhánh bảo vệ có thể yêu cầu review, kiểm tra trạng thái, code-owner approval hoặc commit đã ký trước khi merge. Các quy tắc này thuộc repository; tài liệu Git local không thể thay thế chúng. Kiểm tra yêu cầu hiển thị trên pull request thay vì giả định bạn có quyền push hoặc merge.
+On GitHub, protected branches can require reviews, status checks, code-owner approval, or signed commits before merging. These rules belong to the repository; local Git documentation cannot replace them. Check the requirements shown on the pull request instead of assuming that you can push or merge.
 
-## Nguồn chính thức
+## Official documentation
 
 - [Pro Git: Branches in a Nutshell](https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell)
 - [`git-switch` reference](https://git-scm.com/docs/git-switch)

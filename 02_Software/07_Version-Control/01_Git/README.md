@@ -1,33 +1,33 @@
 # Git
 
-Git là hệ thống quản lý phiên bản phân tán. Mỗi repository lưu lịch sử thay đổi cục bộ; remote như GitHub giúp chia sẻ lịch sử đó với nhóm. Git và GitHub là hai khái niệm liên quan nhưng không thay thế cho nhau.
+Git is a distributed version control system. Each repository stores its history locally; a remote such as GitHub lets a team share that history. Git and GitHub are related concepts, but neither replaces the other.
 
-## Lộ trình đọc
+## Reading path
 
-1. [Nền tảng và thiết lập](01_Fundamentals-and-Setup.md) — hiểu mô hình Git và cấu hình danh tính.
-2. [Quy trình thay đổi hằng ngày](02_Daily-Change-Workflow.md) — kiểm tra, chọn phần thay đổi và tạo commit.
-3. [Nhánh và tích hợp](03_Branches-and-Integration.md) — tách công việc, hợp nhất và xử lý xung đột.
-4. [Remote và cộng tác GitHub](04_Remotes-and-GitHub-Collaboration.md) — đồng bộ an toàn và mở pull request.
+1. [Foundations and setup](01_Fundamentals-and-Setup.md) — understand Git’s model and configure your identity.
+2. [Daily change workflow](02_Daily-Change-Workflow.md) — inspect changes, select what to include, and create commits.
+3. [Branches and integration](03_Branches-and-Integration.md) — isolate work, integrate it, and resolve conflicts.
+4. [Remotes and GitHub collaboration](04_Remotes-and-GitHub-Collaboration.md) — synchronize safely and open pull requests.
 
-## Mục tiêu học tập
+## Learning objectives
 
-- Phân biệt working tree, staging area (index), commit, branch và remote.
-- Đọc trạng thái và khác biệt trước khi thay đổi lịch sử hoặc đồng bộ với remote.
-- Cộng tác bằng nhánh nhỏ và pull request thay vì làm việc trực tiếp trên nhánh bảo vệ.
+- Distinguish the working tree, staging area (index), commit, branch, and remote.
+- Read status and differences before changing history or synchronizing with a remote.
+- Collaborate through small branches and pull requests instead of working directly on protected branches.
 
-## Nguyên tắc an toàn
+## Safety principles
 
-- Luôn bắt đầu bằng `git status`; kiểm tra diff trước khi stage, commit, pull hoặc push.
-- Dùng `git add -- <đường-dẫn>` để chỉ stage các tệp đã xem xét.
-- Không dùng force push, không viết lại lịch sử đã chia sẻ, và không xóa thay đổi chưa sao lưu nếu chưa hiểu hậu quả.
-- Lệnh có thể đổi cấu hình, working tree hoặc remote được ghi rõ phạm vi. Thay giá trị trong dấu `<…>` bằng giá trị của bạn.
+- Always begin with `git status`; review the diff before staging, committing, pulling, or pushing.
+- Use `git add -- <path>` to stage only files you have reviewed.
+- Do not force-push, rewrite shared history, or discard unsaved changes unless you understand the consequences.
+- Commands that can change configuration, the working tree, or a remote state their scope. Replace values in `<…>` with your own values.
 
-## Giới hạn của bộ tài liệu này
+## Scope of this documentation set
 
-Đây là tài liệu khái niệm và quy trình. Bài lab, repository mẫu và ví dụ thực thi được để ở phạm vi triển khai sau.
+This set covers concepts and workflows. Labs, sample repositories, and executable examples are deferred to a later implementation scope.
 
-## Tài liệu chính thức
+## Official documentation
 
-- [Git Reference](https://git-scm.com/docs) — danh mục lệnh và tài liệu tham chiếu của Git.
-- [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git) — giải thích mô hình dữ liệu và tư duy Git.
-- [GitHub Docs: Set up Git](https://docs.github.com/en/get-started/git-basics/set-up-git) — thiết lập Git và xác thực với GitHub.
+- [Git Reference](https://git-scm.com/docs) — Git’s command index and reference documentation.
+- [Pro Git: What is Git?](https://git-scm.com/book/en/v2/Getting-Started-What-is-Git) — Git’s data model and mental model.
+- [GitHub Docs: Set up Git](https://docs.github.com/en/get-started/git-basics/set-up-git) — Git setup and GitHub authentication.

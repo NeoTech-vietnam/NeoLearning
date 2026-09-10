@@ -1,48 +1,48 @@
-# Quy trình thay đổi hằng ngày
+# Daily change workflow
 
-## Dành cho ai?
+## Who is this for?
 
-Người đã có một repository local và cần biến thay đổi đã xem xét thành các commit nhỏ, rõ ràng, dễ review.
+People who already have a local repository and need to turn reviewed changes into small, clear, reviewable commits.
 
-## Vòng lặp an toàn
+## A safe loop
 
-1. **Nhận biết bối cảnh** — ở đúng repository và đúng nhánh; chạy `git status`.
-2. **Xem xét thay đổi** — dùng `git diff` cho phần chưa stage, hoặc `git diff --staged` cho phần đã chọn.
-3. **Chọn có chủ đích** — stage từng đường dẫn đã xem xét, không mặc định stage toàn bộ workspace.
-4. **Ghi nhận** — tạo một commit mô tả một ý thay đổi hoàn chỉnh.
-5. **Xác minh** — xem lại trạng thái và lịch sử ngắn trước khi chia sẻ.
+1. **Establish context** — be in the correct repository and branch; run `git status`.
+2. **Review changes** — use `git diff` for unstaged changes or `git diff --staged` for selected changes.
+3. **Select deliberately** — stage each reviewed path; do not automatically stage the entire workspace.
+4. **Record** — create a commit that describes one complete change.
+5. **Verify** — review status and recent history before sharing.
 
-## Lệnh tham khảo
+## Reference commands
 
 ```sh
 git status
 git diff
-git add -- <đường-dẫn-đã-xem-xét>
+git add -- <reviewed-path>
 git diff --staged
-git commit -m "<mô tả ngắn ở thể mệnh lệnh>"
+git commit -m "<short imperative description>"
 git log --oneline -n 5
 ```
 
-`git status`, `git diff` và `git log` chỉ đọc dữ liệu. `git add` thay đổi staging area; `git commit` tạo lịch sử local mới. Hãy dùng `--` trước đường dẫn để Git phân biệt đường dẫn với tên branch hoặc revision.
+`git status`, `git diff`, and `git log` only read data. `git add` changes the staging area; `git commit` creates new local history. Use `--` before a path so Git can distinguish it from a branch or revision name.
 
-## Đặt commit dễ hiểu
+## Writing clear commits
 
-Một commit tốt có một mục đích, đủ nhỏ để review và có thông điệp nói rõ thay đổi đang làm gì. Tránh trộn định dạng lại tệp, đổi tên lớn và sửa chức năng không liên quan trong cùng commit. Nếu có giới hạn hoặc lý do không hiển nhiên, ghi chúng trong phần nội dung commit hoặc pull request.
+A good commit has one purpose, is small enough to review, and has a message that states what the change does. Avoid mixing formatting-only changes, broad renames, and unrelated functional changes in one commit. If there are non-obvious constraints or reasons, record them in the commit body or pull request.
 
-## `.gitignore` không phải cơ chế bảo mật
+## `.gitignore` is not a security mechanism
 
-`.gitignore` nói với Git các tệp **chưa được theo dõi** nào nên bỏ qua. Nó không tự xóa tệp đã được commit, không bảo vệ secret đã xuất hiện trong lịch sử, và không thay thế việc quản lý bí mật. Kiểm tra nội dung trước khi stage; không commit khóa riêng, token hoặc thông tin đăng nhập.
+`.gitignore` tells Git which **untracked** files to ignore. It does not automatically remove a file that has already been committed, protect a secret that has appeared in history, or replace secret management. Inspect content before staging; never commit a private key, token, or credential.
 
-## Sửa sai: dừng và kiểm tra trước
+## Correcting mistakes: stop and inspect first
 
-- Stage nhầm: xem `git diff --staged` trước khi tạo commit; có thể bỏ stage mà không xóa nội dung working tree bằng `git restore --staged -- <đường-dẫn>`.
-- Sửa nhầm tệp: sao chép nội dung cần giữ ở nơi an toàn trước khi dùng bất kỳ lệnh restore nào.
-- Đã tạo commit local nhưng chưa chia sẻ: kiểm tra diff và lịch sử, rồi trao đổi với người hướng dẫn hoặc maintainer trước khi viết lại lịch sử.
-- Đã push: ưu tiên một commit mới để sửa; đừng tự ý force push vào nhánh dùng chung.
+- Staged the wrong content: inspect `git diff --staged` before committing; you can unstage without deleting working-tree content using `git restore --staged -- <path>`.
+- Edited the wrong file: copy content you need to keep somewhere safe before using any restore command.
+- Created a local commit that has not been shared: inspect the diff and history, then speak with a mentor or maintainer before rewriting history.
+- Already pushed: prefer a new corrective commit; do not force-push to a shared branch without explicit approval.
 
-`git restore` có thể bỏ thay đổi khi dùng trên working tree. Đọc kỹ phạm vi lệnh và chỉ chạy sau khi đã xác nhận nội dung cần giữ đã được bảo toàn.
+`git restore` can discard changes when used on the working tree. Read the command scope carefully and run it only after confirming that content you need has been preserved.
 
-## Nguồn chính thức
+## Official documentation
 
 - [`git-status` reference](https://git-scm.com/docs/git-status)
 - [`git-diff` reference](https://git-scm.com/docs/git-diff)

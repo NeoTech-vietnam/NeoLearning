@@ -1,70 +1,70 @@
-# Nền tảng và thiết lập Git
+# Git foundations and setup
 
-## Dành cho ai?
+## Who is this for?
 
-Người mới dùng Git hoặc người cần thiết lập một máy phát triển mới. Mục tiêu là hiểu nơi Git lưu thay đổi trước khi chạy các lệnh có tác động.
+People new to Git or setting up a new development machine. The goal is to understand where Git stores changes before running commands that have an effect.
 
-## Mô hình tối thiểu
+## The minimum model
 
-- **Working tree** là các tệp bạn đang sửa trên máy.
-- **Staging area / index** là tập thay đổi được chọn cho commit kế tiếp.
-- **Commit** là một mốc lịch sử bất biến, có tác giả, thời điểm và liên kết tới commit trước.
-- **Branch** là tên trỏ tới một dòng lịch sử; tạo nhánh không sao chép toàn bộ dự án.
-- **Remote** là tên ngắn cho một repository khác, thường là GitHub.
+- The **working tree** is the set of files you are editing on your machine.
+- The **staging area / index** is the set of changes selected for the next commit.
+- A **commit** is an immutable history checkpoint with an author, timestamp, and link to a preceding commit.
+- A **branch** is a name that points to a line of history; creating one does not copy the whole project.
+- A **remote** is a short name for another repository, often on GitHub.
 
-Git có cấu trúc local-first: bạn có thể xem lịch sử và tạo commit khi không có mạng. Chỉ khi fetch, pull hoặc push thì Git mới trao đổi với remote.
+Git is local-first: you can inspect history and create commits without a network connection. Git communicates with a remote only for operations such as fetch, pull, or push.
 
-## Cài đặt và xác nhận
+## Install and verify
 
-Cài phiên bản Git hiện hành theo hệ điều hành từ [trang tải Git](https://git-scm.com/downloads). Sau đó, kiểm tra công cụ đã có mặt:
+Install the current Git version for your operating system from the [Git downloads page](https://git-scm.com/downloads). Then verify that the tool is available:
 
 ```sh
 git --version
 ```
 
-Lệnh trên chỉ đọc thông tin; không thay đổi repository hay cấu hình.
+This command only reads information; it does not change a repository or configuration.
 
-## Danh tính commit và phạm vi cấu hình
+## Commit identity and configuration scope
 
-Mỗi commit lưu tên và email tác giả. Git đọc cấu hình theo ba phạm vi, trong đó phạm vi cụ thể hơn ghi đè phạm vi rộng hơn:
+Every commit records its author’s name and email address. Git reads configuration at three scopes, with the more specific scope overriding the broader one:
 
-1. **System**: áp dụng cho mọi người dùng trên máy; cần quyền quản trị để thay đổi.
-2. **Global**: áp dụng cho một người dùng trên máy.
-3. **Local**: chỉ áp dụng cho repository hiện tại.
+1. **System**: applies to every user on the machine; changing it requires administrator privileges.
+2. **Global**: applies to one user on the machine.
+3. **Local**: applies only to the current repository.
 
-Kiểm tra trước khi sửa cấu hình:
+Check values before changing configuration:
 
 ```sh
 git config --global --get user.name
 git config --global --get user.email
 ```
 
-Khi giá trị hiện có chưa đúng, đặt danh tính global bằng thông tin bạn được phép công khai trong lịch sử dự án:
+If the current values are not correct, set your global identity with information you are allowed to publish in project history:
 
 ```sh
-git config --global user.name "<Tên hiển thị>"
+git config --global user.name "<display name>"
 git config --global user.email "<email@example.com>"
 ```
 
-Hai lệnh cuối thay đổi cấu hình **global** của người dùng hiện tại, không thay đổi repository. Với một repository cần danh tính khác, bỏ `--global` sau khi đã vào đúng repository; khi đó cấu hình chỉ có hiệu lực tại repository đó.
+The last two commands change the current user’s **global** configuration, not a repository. For a repository that needs a different identity, omit `--global` after entering the correct repository; the configuration then applies only to that repository.
 
-## Tên nhánh khởi tạo
+## Initial branch name
 
-Khi tạo repository mới, hãy tuân theo quy ước của tổ chức. Git hỗ trợ đặt tên nhánh khởi tạo mặc định qua `init.defaultBranch`; nhiều dịch vụ, trong đó có GitHub cho repository mới, dùng `main` làm mặc định. Không đổi tên nhánh mặc định của repository dùng chung nếu chưa có sự thống nhất của nhóm.
+When creating a repository, follow your organization’s convention. Git supports setting the default initial branch name through `init.defaultBranch`; many services, including GitHub for new repositories, use `main` by default. Do not rename the default branch of a shared repository unless the team agrees.
 
-## Trợ giúp và kiểm tra
+## Help and inspection
 
-Các thao tác đọc an toàn, hữu ích khi chưa chắc chắn:
+These safe read operations are useful when you are unsure:
 
 ```sh
-git help <lệnh>
+git help <command>
 git status
-git config --show-origin --get <khóa-cấu-hình>
+git config --show-origin --get <configuration-key>
 ```
 
-`git status` cần được chạy trong working tree của một repository. `--show-origin` cho biết tệp cấu hình nào cung cấp giá trị cuối cùng, giúp tránh sửa nhầm phạm vi.
+`git status` must run in a repository’s working tree. `--show-origin` identifies the configuration file that provides the final value, helping you avoid changing the wrong scope.
 
-## Nguồn chính thức
+## Official documentation
 
 - [Pro Git: First-Time Git Setup](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup)
 - [`git-config` reference](https://git-scm.com/docs/git-config)
