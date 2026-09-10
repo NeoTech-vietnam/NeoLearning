@@ -62,7 +62,8 @@ The word *Mechatronics* was probably first created by a Japanese engineer, Tetsu
 While *mechatronics* and *industrial automation* are two fields that share certain similarities, they have many distinct differences as well.
 
 The solution of tasks to design mechatronic systems is performed on the mechanical as well as on the digital-electronic side.
-- Interrelations during the design and construction of mechatronic systems.
+
+Interrelations during the design and construction of mechatronic systems.
 
 ![Comparison of conventional and integrated mechatronic design procedures](images/p06-conventional-and-mechatronic-design.png)
 
