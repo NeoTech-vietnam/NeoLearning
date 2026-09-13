@@ -42,11 +42,11 @@ Analog signal processing examples
 
 #### Limitations of Analog Signal Processing?
 
-Accuracy limitations due to
+Accuracy limitations due to:
 - Component tolerances
 - Undesired nonlinearities
 
-Limited repeatability due to
+Limited repeatability due to:
 - Tolerances
 - Changes in environmental conditions
   - Temperature
@@ -66,7 +66,7 @@ Difficulty of storing information
 
 #### Digital Signal Processing
 
-Represent signsl by a sequence of numbers
+Represent signal by a sequence of numbers
 - Sampling or analog-to-digital conversions
 
 Perform processing on these numbers with a digital processors
@@ -77,16 +77,16 @@ Reconstruct analog signal from processed numbers
 
 ![alt text](image-2.png)
 
-Analog input - analog output
+**Analog input - analog output**
 - Digital recording of music
 
-Analog input - digital output
+**Analog input - digital output**
 - Touch tone phone dialing
 
-Digital input - analog output
+**Digital input - analog output**
 - Text to speech
 
-Digital input - digital output
+**Digital input - digital output**
 - Compression of a file on computer
 
 #### Pros and Cons of Digital Signal Processing?
@@ -106,7 +106,7 @@ Cons:
 - Sampling causes loss of information
 - A/D and D/A requires mixed-signal hardware
 - Limited speed of processors
-- **Quantization** and round-off errors
+- Quantization and round-off errors
 
 
 ---
