@@ -200,7 +200,7 @@ For example:
 
 This typically makes the product smaller, reduces wiring, and can improve reliability.
 
-### Integration by Information Processing (Software Integration)
+#### Integration by Information Processing (Software Integration)
 
 The bottom diagram adds integration through information processing. The physical chain still exists, but the microcomputer now uses:
 - Hardware
@@ -230,12 +230,62 @@ A modern mechatronic product usually uses both hardware and software integration
 
 *Source: Chapter 1 PDF, page 11.*
 
-### Integrated Supervision and Fault Diagnosis
+In the first figure, read from the bottom upward. Imagine a motor driving a conveyor belt:
 
+| Level           | What it does                                                                      | Conveyor example                                                           |
+| --------------- | --------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| **Process**     | Performs the physical work and produces measurable results                        | The motor turns the belt; sensors measure speed and current                |
+| **Control**     | Calculates immediate commands to make the process follow a target                 | Adjusts motor drive voltage to maintain the requested speed                |
+| **Supervision** | Monitors operating conditions and coordinates or overrides control when necessary | Detects excessive current and slows or stops a potentially jammed conveyor |
+| **Management**  | Selects broader operating goals and coordinates activities                        | Sets production throughput and decides when the conveyor should run        |
+
+Here, “management” and “supervision” describe functions; they do not necessarily mean people.
+
+The symbols identify the signals moving through this hierarchy:
+
+| Symbol | Meaning                                                   | Example                               |
+| ------ | --------------------------------------------------------- | ------------------------------------- |
+| \(r\)  | **Reference:** what you want the process to achieve       | Desired motor speed: 1,500 rpm        |
+| \(y\)  | **Measured variable:** what the process is actually doing | Measured motor speed: 1,420 rpm       |
+| \(u\)  | **Manipulated variable:** what the controller can change  | Commanded motor voltage               |
+| \(v\)  | **Input information used by feedforward control**         | A measured or estimated incoming load |
+
+Feedback control uses the difference between \(r\) and \(y\) to correct operation. Feedforward control uses available input information to anticipate the required action—for example, increasing torque when a heavier load is expected.
+
+Measurements travel upward so control, supervision, and management can all use them. Decisions travel downward to influence the process. The small circles represent points where signal contributions combine.
+
+The second figure explains how those functions get their intelligence. It has three main parts:
+- Integration of components: the physical foundation—microcomputer, actuator, process, and sensors.
+- Online information processing: calculations performed while the machine operates.
+- Knowledge base: models, objectives, and methods that support those calculations.
+
+“Online” here means during operation; it does not require an internet connection.
+
+The knowledge-base terms mean:
+
+| Term                            | Meaning                                                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **Mathematical process models** | Equations describing how the machine responds—for example, how motor torque changes speed               |
+| **Identification**              | Using measurements to estimate the model or its parameters, such as friction or inertia                 |
+| **State observer**              | Using a model and available measurements to estimate internal quantities that are not measured directly |
+| **Performance criteria**        | Definitions of good operation: speed accuracy, low energy consumption, acceptable temperature, etc.     |
+| **Design methods**              | Techniques for choosing control, supervision, and optimization algorithms                               |
+
+The two-way arrows show that knowledge guides operation, while operating measurements can refine estimates and models.
+
+For the conveyor, the same speed and current measurements might support speed regulation, jam detection, and load estimation. That reuse and coordination of information is the software integration these figures illustrate.
+
+#### Integrated Supervision and Fault Diagnosis
+
+With the increasing number of automatic functions (autonomy) including electronic components, sensors, and actuators, increasing complexity, and increasing demands on reliability and safety, integrated supervision with fault diagnosis becomes increasingly important.
+
+Fault detection is a significant natural feature of an intelligent mechatronic system.
 
 ![Integrated supervision, fault detection, and fault diagnosis](images/p12-fault-detection-and-diagnosis.png)
 
 *Source: Chapter 1 PDF, page 12.*
+
+
 
 ---
 
