@@ -21,7 +21,13 @@
 
 ### Design Procedures for Mechatronic Systems
 
+The design of mechatronic systems requires systematic development and use of modern software design tools.
+
+Mechatronic design is also an iterative procedure.
+
 ![Iterative design procedure for mechatronic systems](images/p15-mechatronic-design-procedure.png)
+
+### `V` development scheme for mechatronic systems
 
 *Source: Chapter 1 PDF, page 15.*
 

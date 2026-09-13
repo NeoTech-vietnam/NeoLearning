@@ -20,6 +20,14 @@ Cues
 
 ### Advanced Sensors and Actuators
 
+- Micro-Electro-Mechanical Systems (MEMS)
+- Tactile / Touch Sensors
+- Flexible / Stretchable Sensors
+- Wearable Health Sensors
+- Soft Actuators
+- Piezoelectric Actuators
+- Bio-Inspired Actuators
+
 ![Evolution and examples of sensors and actuators](images/p19-sensor-and-actuator-evolution.png)
 
 *Source: Chapter 1 PDF, page 19.*
@@ -28,7 +36,11 @@ Cues
 
 *Source: Chapter 1 PDF, page 19.*
 
-### Internet of Things (IoT)
+**Advanced Sensors and Actuators:** These are key components in modern mechatronic systems, enabling precise measurement and control. Advanced sensors gather accurate real-time data, while actuators convert this data into actions, enhancing system efficiency and performance across industries.
+
+### Cloud-based structures for Internet of Things (IoT)
+
+**Cloud-based structures for Internet of Things (IoT):** These are scalable, flexible platforms that allow IoT devices to collect, store, and process data in real-time via cloud computing. By leveraging the cloud, IoT systems can achieve enhanced connectivity, data analytics, and remote control, enabling smarter and more efficient applications across various industries.
 
 ![Connected devices and applications in the Internet of Things](images/p20-iot-connected-applications.png)
 
@@ -39,6 +51,10 @@ Cues
 *Source: Chapter 1 PDF, page 20.*
 
 ### Cyber-Physical Systems (CPS)
+
+A Cyber-Physical System (CPS) is a system that intergrates physical and computational components to monitor and control the physical processes seamlessly.
+
+In other words, A cyber-physical system is a collection of computing devices communicating with one another and interacting with the physical world via sensors and actuators in a feedback loop.
 
 ![Layered cyber-physical system connecting physical devices and computational models](images/p21-cyber-physical-system.png)
 
