@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="3840" height="2160" viewBox="0 0 3840 2160" role="img" aria-labelledby="title description">
+  <title id="title">NeoLearning Embedded World base artwork</title>
+  <desc id="description">An original text-free fantasy atlas with one continent divided into six naturally shaped countries.</desc>
+  <defs>
+    <filter id="paper-grain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.09" numOctaves="3" seed="19" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feBlend in="SourceGraphic" in2="mono" mode="soft-light"/>
+    </filter>
+    <filter id="ink-rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="41" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <radialGradient id="paper" cx="50%" cy="43%" r="73%">
+      <stop offset="0" stop-color="#efe3c1"/>
+      <stop offset="0.66" stop-color="#e4d1a4"/>
+      <stop offset="1" stop-color="#b79a68"/>
+    </radialGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ea69c"/>
+      <stop offset="1" stop-color="#617e78"/>
+    </linearGradient>
+    <pattern id="waves" width="120" height="54" patternUnits="userSpaceOnUse">
+      <path d="M5 30 Q30 12 55 30 T105 30" fill="none" stroke="#473b2a" stroke-width="4" opacity=".16"/>
+    </pattern>
+    <clipPath id="land-clip">
+      <path d="M1260 340 C1500 275 1850 250 2200 300 C2440 280 2730 300 3010 390 C3240 470 3390 600 3460 770 C3510 900 3510 1080 3450 1250 C3520 1390 3450 1530 3300 1620 C3100 1740 2770 1800 2360 1800 C2160 1870 1800 1880 1550 1800 C1460 1820 1370 1830 1240 1830 C950 1840 700 1780 520 1640 C380 1530 330 1380 380 1260 C320 1215 285 1160 300 1080 C330 900 410 750 500 610 C570 500 690 425 850 360 C990 300 1120 310 1260 340 Z M3530 850 C3600 810 3670 835 3690 900 C3660 960 3590 970 3535 930 Z M3570 1080 C3650 1030 3730 1070 3720 1140 C3670 1190 3600 1180 3550 1130 Z M3450 1590 C3510 1550 3570 1580 3560 1640 C3520 1680 3470 1670 3435 1630 Z"/>
+    </clipPath>
+    <g id="mountain" fill="none" stroke="#2c2a22" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M0 72 L42 4 L82 72 M34 16 L48 34 L60 25 M46 72 L96 20 L136 72 M88 30 L100 43 L112 35" stroke-width="8"/>
+      <path d="M8 78 Q44 86 78 76 T132 78" stroke-width="4" opacity=".55"/>
+    </g>
+    <g id="tree" fill="none" stroke="#394532" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M30 3 L5 42 H18 L2 66 H25 V88 M30 3 L55 42 H42 L58 66 H35 V88" stroke-width="6"/>
+    </g>
+    <g id="town" fill="#e8d8ae" stroke="#473b2a" stroke-linejoin="round">
+      <path d="M4 54 V28 L25 12 L45 28 V54 Z M25 12 V0 L38 10" stroke-width="5"/>
+      <path d="M18 54 V38 H31 V54" fill="none" stroke-width="4"/>
+    </g>
+    <g id="outpost" fill="#473b2a">
+      <circle cx="10" cy="10" r="8"/><circle cx="30" cy="10" r="5"/><path d="M10 18 V38 M30 15 V34" stroke="#473b2a" stroke-width="4"/>
+    </g>
+  </defs>
+
+  <g inkscape:groupmode="layer" inkscape:label="00_paper" id="paper-layer">
+    <rect width="3840" height="2160" fill="url(#paper)" filter="url(#paper-grain)"/>
+    <path d="M0 95 Q960 35 1920 92 T3840 70 M0 2050 Q960 2110 1920 2055 T3840 2080" fill="none" stroke="#6f5839" stroke-width="16" opacity=".18"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="01_sea" id="sea-layer">
+    <rect x="95" y="90" width="3650" height="1980" rx="72" fill="url(#sea)" opacity=".88"/>
+    <rect x="110" y="105" width="3620" height="1950" rx="62" fill="url(#waves)" opacity=".7"/>
+    <path d="M165 250 Q630 170 1040 225 M2740 1930 Q3230 2010 3650 1870 M170 1740 Q410 1840 690 1850" fill="none" stroke="#e8d8ae" stroke-width="10" opacity=".22"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="02_continent_base" id="continent-layer">
+    <path d="M1260 340 C1500 275 1850 250 2200 300 C2440 280 2730 300 3010 390 C3240 470 3390 600 3460 770 C3510 900 3510 1080 3450 1250 C3520 1390 3450 1530 3300 1620 C3100 1740 2770 1800 2360 1800 C2160 1870 1800 1880 1550 1800 C1460 1820 1370 1830 1240 1830 C950 1840 700 1780 520 1640 C380 1530 330 1380 380 1260 C320 1215 285 1160 300 1080 C330 900 410 750 500 610 C570 500 690 425 850 360 C990 300 1120 310 1260 340 Z M3530 850 C3600 810 3670 835 3690 900 C3660 960 3590 970 3535 930 Z M3570 1080 C3650 1030 3730 1070 3720 1140 C3670 1190 3600 1180 3550 1130 Z M3450 1590 C3510 1550 3570 1580 3560 1640 C3520 1680 3470 1670 3435 1630 Z" fill="#e8d8ae" stroke="#2c2a22" stroke-width="24" filter="url(#ink-rough)"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="03_country_washes" id="country-washes" clip-path="url(#land-clip)" opacity=".68">
+    <path id="country-01" d="M1260 340 C1120 310 990 300 850 360 C690 425 570 500 500 610 C410 750 330 900 300 1080 C285 1160 320 1215 380 1260 Q650 1200 900 1290 Q1120 1340 1350 1400 Q1430 1210 1400 1070 Q1330 920 1380 760 Q1420 570 1260 340 Z" fill="#8a765b"/>
+    <path id="country-02" d="M1260 340 C1500 275 1850 250 2200 300 Q2240 500 2250 590 Q2350 690 2480 760 Q2500 980 2400 1200 Q2280 1350 2150 1480 Q1900 1540 1700 1500 Q1510 1450 1350 1400 Q1430 1210 1400 1070 Q1330 920 1380 760 Q1420 570 1260 340 Z" fill="#83956a"/>
+    <path id="country-03" d="M2480 760 Q2860 900 3050 1100 Q3260 1190 3450 1250 C3520 1390 3450 1530 3300 1620 C3100 1740 2770 1800 2360 1800 Q2240 1640 2150 1480 Q2280 1350 2400 1200 Q2500 980 2480 760 Z M3530 850 C3600 810 3670 835 3690 900 C3660 960 3590 970 3535 930 Z M3570 1080 C3650 1030 3730 1070 3720 1140 C3670 1190 3600 1180 3550 1130 Z M3450 1590 C3510 1550 3570 1580 3560 1640 C3520 1680 3470 1670 3435 1630 Z" fill="#8e9f91"/>
+    <path id="country-04" d="M380 1260 C330 1380 380 1530 520 1640 C700 1780 950 1840 1240 1830 C1370 1830 1460 1820 1550 1800 Q1580 1650 1700 1500 Q1510 1450 1350 1400 Q1120 1340 900 1290 Q650 1200 380 1260 Z" fill="#a78a72"/>
+    <path id="country-05" d="M2200 300 C2440 280 2730 300 3010 390 C3240 470 3390 600 3460 770 C3510 900 3510 1080 3450 1250 Q3260 1190 3050 1100 Q2860 900 2480 760 Q2350 690 2250 590 Q2240 500 2200 300 Z" fill="#777d82"/>
+    <path id="country-06" d="M1700 1500 Q1900 1540 2150 1480 Q2240 1640 2360 1800 C2160 1870 1800 1880 1550 1800 Q1580 1650 1700 1500 Z" fill="#a87659"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="04_mountains" id="mountains" clip-path="url(#land-clip)" opacity=".82">
+    <use xlink:href="#mountain" transform="translate(520 530) scale(1.4)"/><use xlink:href="#mountain" transform="translate(670 450) scale(1.15)"/>
+    <use xlink:href="#mountain" transform="translate(800 530) scale(1.25)"/><use xlink:href="#mountain" transform="translate(930 620) scale(1.05)"/>
+    <use xlink:href="#mountain" transform="translate(1060 720) scale(1.2)"/><use xlink:href="#mountain" transform="translate(1180 850) scale(.95)"/>
+    <use xlink:href="#mountain" transform="translate(2320 380) scale(1.1)"/><use xlink:href="#mountain" transform="translate(2480 390) scale(1.3)"/>
+    <use xlink:href="#mountain" transform="translate(2650 450) scale(1.15)"/><use xlink:href="#mountain" transform="translate(2810 520) scale(1.35)"/>
+    <use xlink:href="#mountain" transform="translate(2980 610) scale(1.1)"/><use xlink:href="#mountain" transform="translate(3120 720) scale(.95)"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="05_rivers_lakes" id="waterways" clip-path="url(#land-clip)" fill="none" stroke="#547b79" stroke-linecap="round">
+    <path d="M1050 760 C1180 850 1200 980 1350 1050 C1510 1120 1650 1270 1700 1495" stroke-width="18"/>
+    <path d="M2600 520 C2550 680 2600 830 2490 980 C2380 1130 2260 1280 2150 1480" stroke-width="20"/>
+    <path d="M2850 690 C2920 820 2920 970 3050 1100 C3180 1230 3280 1390 3300 1610" stroke-width="14"/>
+    <path d="M1560 650 C1700 720 1810 840 1860 990 C1910 1130 1900 1320 2010 1500" stroke-width="13"/>
+    <ellipse cx="2100" cy="900" rx="105" ry="54" fill="#698e88" stroke="#473b2a" stroke-width="8"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="06_forests" id="forests" clip-path="url(#land-clip)" opacity=".78">
+    <g transform="translate(920 1050)"><use xlink:href="#tree"/><use xlink:href="#tree" x="55" y="25"/><use xlink:href="#tree" x="110" y="-10"/><use xlink:href="#tree" x="165" y="32"/></g>
+    <g transform="translate(1450 520)"><use xlink:href="#tree"/><use xlink:href="#tree" x="58" y="18"/><use xlink:href="#tree" x="116" y="-8"/><use xlink:href="#tree" x="174" y="28"/><use xlink:href="#tree" x="232" y="5"/></g>
+    <g transform="translate(1850 1120)"><use xlink:href="#tree"/><use xlink:href="#tree" x="62" y="25"/><use xlink:href="#tree" x="124" y="-6"/><use xlink:href="#tree" x="186" y="30"/></g>
+    <g transform="translate(2740 1180)"><use xlink:href="#tree"/><use xlink:href="#tree" x="58" y="20"/><use xlink:href="#tree" x="116" y="-12"/><use xlink:href="#tree" x="174" y="22"/><use xlink:href="#tree" x="232" y="-2"/></g>
+    <g transform="translate(690 1450)"><use xlink:href="#tree"/><use xlink:href="#tree" x="62" y="20"/><use xlink:href="#tree" x="124" y="-8"/></g>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="07_roads_bridges" id="roads" clip-path="url(#land-clip)" fill="none" stroke="#6f5839" stroke-linecap="round" stroke-dasharray="18 16" opacity=".72">
+    <path d="M720 930 C1080 1040 1380 1160 1760 1160 C2150 1160 2460 1100 2860 1250 C3070 1330 3200 1420 3300 1500" stroke-width="12"/>
+    <path d="M930 1510 C1230 1450 1480 1460 1770 1580 C1940 1660 2070 1660 2220 1580 C2450 1460 2700 1360 3010 1320" stroke-width="11"/>
+    <path d="M1760 1160 C1840 940 2020 760 2290 650 C2500 560 2760 610 3000 780" stroke-width="10"/>
+    <path d="M1760 1160 C1700 1320 1740 1470 1900 1650" stroke-width="13"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="08_settlements_landmarks" id="settlements" clip-path="url(#land-clip)" opacity=".9">
+    <use xlink:href="#town" transform="translate(700 870) scale(1.2)"/><use xlink:href="#town" transform="translate(1040 1130) scale(.9)"/>
+    <use xlink:href="#town" transform="translate(1740 1100) scale(1.5)"/><use xlink:href="#town" transform="translate(2050 720) scale(1.05)"/>
+    <use xlink:href="#town" transform="translate(2860 1190) scale(1.2)"/><use xlink:href="#town" transform="translate(3190 1420) scale(.9)"/>
+    <use xlink:href="#town" transform="translate(900 1510) scale(1.05)"/><use xlink:href="#town" transform="translate(1880 1630) scale(1.35)"/>
+    <use xlink:href="#town" transform="translate(2820 650) scale(.8)"/>
+    <use xlink:href="#outpost" transform="translate(570 1050)"/><use xlink:href="#outpost" transform="translate(2400 1340)"/><use xlink:href="#outpost" transform="translate(3300 1040)"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="09_coastline_borders" id="borders" fill="none" stroke="#473b2a" filter="url(#ink-rough)">
+    <path d="M1260 340 C1500 275 1850 250 2200 300 C2440 280 2730 300 3010 390 C3240 470 3390 600 3460 770 C3510 900 3510 1080 3450 1250 C3520 1390 3450 1530 3300 1620 C3100 1740 2770 1800 2360 1800 C2160 1870 1800 1880 1550 1800 C1460 1820 1370 1830 1240 1830 C950 1840 700 1780 520 1640 C380 1530 330 1380 380 1260 C320 1215 285 1160 300 1080 C330 900 410 750 500 610 C570 500 690 425 850 360 C990 300 1120 310 1260 340 Z" stroke="#2c2a22" stroke-width="22"/>
+    <path d="M1260 340 Q1420 570 1380 760 Q1330 920 1400 1070 Q1430 1210 1350 1400 M380 1260 Q650 1200 900 1290 Q1120 1340 1350 1400 M1350 1400 Q1510 1450 1700 1500 M1700 1500 Q1900 1540 2150 1480 M1550 1800 Q1580 1650 1700 1500 M2150 1480 Q2240 1640 2360 1800 M2200 300 Q2240 500 2250 590 Q2350 690 2480 760 M2480 760 Q2500 980 2400 1200 Q2280 1350 2150 1480 M2480 760 Q2860 900 3050 1100 Q3260 1190 3450 1250" stroke-width="10" stroke-dasharray="20 14" opacity=".78"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="10_compass_decoration" id="decoration" transform="translate(430 1710)" fill="none" stroke="#473b2a" opacity=".62">
+    <circle cx="0" cy="0" r="105" stroke-width="8"/><path d="M0 -130 L24 -22 L0 0 L-24 -22 Z M130 0 L22 24 L0 0 L22 -24 Z M0 130 L-24 22 L0 0 L24 22 Z M-130 0 L-22 -24 L0 0 L-22 24 Z" stroke-width="7"/>
+    <circle cx="0" cy="0" r="18" fill="#473b2a"/>
+  </g>
+
+  <g inkscape:groupmode="layer" inkscape:label="11_texture_grading" id="grading" pointer-events="none">
+    <rect x="95" y="90" width="3650" height="1980" rx="72" fill="none" stroke="#473b2a" stroke-width="14" opacity=".34"/>
+    <rect x="125" y="120" width="3590" height="1920" rx="52" fill="none" stroke="#e8d8ae" stroke-width="6" opacity=".3"/>
+  </g>
+</svg>

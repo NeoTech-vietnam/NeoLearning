@@ -1,0 +1,14 @@
+{
+  "route": "/#/design-system",
+  "browser": { "reducedMotion": "reduce", "deviceScaleFactor": 1, "colorScheme": "light" },
+  "artDependencies": [
+    "assets/maps/embedded-world-base.webp",
+    "assets/maps/embedded-world-country-mask.svg",
+    "assets/maps/embedded-world-label-anchors.json"
+  ],
+  "captures": [
+    { "name": "design-system-1440x900", "viewport": { "width": 1440, "height": 900 }, "target": "tests/visual/screenshots/design-system-1440x900.png" },
+    { "name": "design-system-1280x800", "viewport": { "width": 1280, "height": 800 }, "target": "tests/visual/screenshots/design-system-1280x800.png" },
+    { "name": "design-system-1024x768", "viewport": { "width": 1024, "height": 768 }, "target": "tests/visual/screenshots/design-system-1024x768.png" }
+  ]
+}

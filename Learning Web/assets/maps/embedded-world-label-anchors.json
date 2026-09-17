@@ -1,0 +1,8 @@
+{
+  "country-01": { "label": { "x": 0.235, "y": 0.43 }, "capital": { "x": 0.195, "y": 0.43 }, "focus": { "x": 0.235, "y": 0.45 }, "recommendedLabelWidth": 0.16 },
+  "country-02": { "label": { "x": 0.49, "y": 0.48 }, "capital": { "x": 0.465, "y": 0.53 }, "focus": { "x": 0.49, "y": 0.48 }, "recommendedLabelWidth": 0.19 },
+  "country-03": { "label": { "x": 0.78, "y": 0.61 }, "capital": { "x": 0.755, "y": 0.58 }, "focus": { "x": 0.79, "y": 0.62 }, "recommendedLabelWidth": 0.17 },
+  "country-04": { "label": { "x": 0.25, "y": 0.72 }, "capital": { "x": 0.235, "y": 0.715 }, "focus": { "x": 0.25, "y": 0.72 }, "recommendedLabelWidth": 0.15 },
+  "country-05": { "label": { "x": 0.72, "y": 0.36 }, "capital": { "x": 0.735, "y": 0.325 }, "focus": { "x": 0.72, "y": 0.36 }, "recommendedLabelWidth": 0.16 },
+  "country-06": { "label": { "x": 0.505, "y": 0.79 }, "capital": { "x": 0.495, "y": 0.77 }, "focus": { "x": 0.505, "y": 0.79 }, "recommendedLabelWidth": 0.14 }
+}

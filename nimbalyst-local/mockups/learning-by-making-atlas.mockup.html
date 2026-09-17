@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeoLearning — Learning by Making</title>
+  <style>
+    :root {
+      --bg: #07100e;
+      --panel: rgba(12, 28, 24, .92);
+      --panel-2: #102d26;
+      --line: rgba(183, 220, 190, .14);
+      --text: #eef7ef;
+      --muted: #8fa79b;
+      --lime: #c8ff63;
+      --mint: #63efb1;
+      --amber: #ffbf69;
+      --blue: #73b9ff;
+      --purple: #c99bff;
+      --danger: #ff8277;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 62% 40%, rgba(59, 140, 104, .16), transparent 34%),
+        radial-gradient(circle at 18% 92%, rgba(117, 184, 255, .08), transparent 26%),
+        var(--bg);
+    }
+
+    button { font: inherit; }
+    .app { display: grid; grid-template-columns: 236px minmax(560px, 1fr) 342px; height: 100vh; }
+    .sidebar, .quest-panel { background: var(--panel); backdrop-filter: blur(18px); }
+    .sidebar { border-right: 1px solid var(--line); padding: 25px 18px; display: flex; flex-direction: column; }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 0 10px 28px; }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+      color: #07100e; background: var(--lime); box-shadow: 0 0 26px rgba(200,255,99,.28); font-weight: 900;
+    }
+    .brand strong { display: block; font-size: 15px; letter-spacing: -.2px; }
+    .brand small { color: var(--muted); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; }
+    .section-label { color: #60776c; font-size: 10px; letter-spacing: 1.7px; text-transform: uppercase; padding: 0 11px; margin: 12px 0 8px; }
+    .nav { display: grid; gap: 4px; }
+    .nav button {
+      width: 100%; border: 0; color: var(--muted); background: transparent; border-radius: 11px;
+      padding: 11px 12px; display: flex; gap: 11px; align-items: center; cursor: pointer; text-align: left;
+    }
+    .nav button:hover, .nav button.active { color: var(--text); background: rgba(190, 247, 196, .08); }
+    .nav button.active { box-shadow: inset 3px 0 var(--lime); }
+    .nav-icon { width: 19px; text-align: center; opacity: .9; }
+    .nav .count { margin-left: auto; color: #0b1713; background: var(--lime); border-radius: 99px; padding: 2px 7px; font-size: 10px; font-weight: 800; }
+    .profile { margin-top: auto; border: 1px solid var(--line); border-radius: 15px; padding: 13px; background: rgba(255,255,255,.025); }
+    .profile-head { display: flex; align-items: center; gap: 9px; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg, var(--mint), var(--blue)); color: #0a1814; font-weight: 900; }
+    .profile strong { font-size: 12px; }
+    .profile small { display: block; color: var(--muted); font-size: 10px; margin-top: 2px; }
+    .xp { height: 5px; border-radius: 9px; background: #1b352d; margin-top: 11px; overflow: hidden; }
+    .xp span { display: block; width: 68%; height: 100%; background: linear-gradient(90deg, var(--mint), var(--lime)); }
+
+    main { min-width: 0; display: grid; grid-template-rows: 80px 1fr 118px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 28px; border-bottom: 1px solid var(--line); }
+    .eyebrow { color: var(--mint); font-size: 10px; letter-spacing: 1.8px; text-transform: uppercase; font-weight: 800; }
+    h1 { margin: 4px 0 0; font-size: 22px; letter-spacing: -.6px; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .search { width: 210px; border: 1px solid var(--line); background: rgba(255,255,255,.035); padding: 10px 13px; border-radius: 11px; color: var(--text); outline: none; }
+    .search:focus { border-color: rgba(200,255,99,.5); }
+    .icon-btn { width: 38px; height: 38px; border-radius: 11px; border: 1px solid var(--line); color: var(--text); background: rgba(255,255,255,.035); cursor: pointer; }
+
+    .world { position: relative; overflow: hidden; min-height: 0; }
+    .world::before {
+      content: ""; position: absolute; inset: 0; opacity: .38;
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 42px 42px; mask-image: radial-gradient(circle at center, #000, transparent 78%);
+    }
+    .map-head { position: absolute; top: 19px; left: 27px; z-index: 4; display: flex; align-items: center; gap: 8px; }
+    .view-toggle { display: flex; padding: 3px; background: #0e211c; border: 1px solid var(--line); border-radius: 10px; }
+    .view-toggle button { border: 0; background: transparent; color: var(--muted); font-size: 11px; padding: 7px 11px; border-radius: 7px; cursor: pointer; }
+    .view-toggle button.active { color: #08110f; background: var(--lime); font-weight: 800; }
+    .legend { color: var(--muted); font-size: 10px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 10px; background: rgba(8,18,15,.8); }
+    .legend i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); margin-right: 5px; box-shadow: 0 0 8px var(--lime); }
+
+    .route-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .route { fill: none; stroke: rgba(200,255,99,.72); stroke-width: 2.2; stroke-dasharray: 6 7; filter: drop-shadow(0 0 5px rgba(200,255,99,.45)); }
+    .route-dim { fill: none; stroke: rgba(143,167,155,.18); stroke-width: 1.2; stroke-dasharray: 3 7; }
+
+    .land {
+      position: absolute; z-index: 2; width: 145px; min-height: 78px; padding: 13px 14px; border-radius: 48% 52% 45% 55% / 55% 42% 58% 45%;
+      border: 1px solid color-mix(in srgb, var(--land) 45%, transparent); color: var(--text); text-align: left;
+      background: radial-gradient(circle at 38% 25%, color-mix(in srgb, var(--land) 27%, #10231d), #0d201b 70%);
+      box-shadow: 0 12px 36px rgba(0,0,0,.34), inset 0 0 24px rgba(255,255,255,.025); cursor: pointer; transition: .2s ease;
+    }
+    .land:hover, .land.active { transform: translateY(-4px) scale(1.025); border-color: var(--land); box-shadow: 0 0 0 3px color-mix(in srgb, var(--land) 12%, transparent), 0 16px 42px rgba(0,0,0,.42); }
+    .land .symbol { font-size: 18px; }
+    .land strong { display: block; font-size: 12px; margin-top: 5px; }
+    .land small { color: var(--muted); font-size: 9px; }
+    .land .visited { position: absolute; top: 8px; right: 11px; width: 8px; height: 8px; border-radius: 50%; background: var(--land); box-shadow: 0 0 9px var(--land); }
+    .electronics { --land: var(--amber); left: 6%; top: 31%; }
+    .mcu { --land: var(--blue); left: 31%; top: 17%; }
+    .rtos { --land: var(--mint); left: 56%; top: 36%; }
+    .protocols { --land: var(--purple); left: 25%; top: 61%; }
+    .testing { --land: var(--danger); left: 52%; top: 68%; }
+    .product { --land: var(--lime); left: 75%; top: 56%; width: 154px; }
+    .quest-node { position: absolute; z-index: 3; width: 25px; height: 25px; border-radius: 50%; display: grid; place-items: center; background: var(--lime); color: #0a1411; border: 3px solid #173226; font-size: 9px; font-weight: 900; box-shadow: 0 0 17px rgba(200,255,99,.46); }
+    .n1 { left: 20%; top: 43%; } .n2 { left: 43%; top: 29%; } .n3 { left: 67%; top: 47%; } .n4 { left: 65%; top: 73%; } .n5 { left: 84%; top: 64%; }
+    .map-note { position: absolute; right: 24px; top: 22px; width: 184px; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--line); background: rgba(8,18,15,.88); z-index: 4; }
+    .map-note small { color: var(--muted); font-size: 9px; text-transform: uppercase; letter-spacing: 1.3px; }
+    .map-note strong { display: block; margin-top: 4px; font-size: 11px; }
+
+    .knowledge-strip { border-top: 1px solid var(--line); padding: 17px 27px; display: flex; align-items: center; gap: 18px; overflow: hidden; }
+    .knowledge-intro { width: 135px; flex: 0 0 auto; }
+    .knowledge-intro strong { display: block; font-size: 12px; }
+    .knowledge-intro small { color: var(--muted); font-size: 9px; }
+    .cards { display: flex; flex: 1; gap: 9px; min-width: 0; overflow: hidden; }
+    .knowledge-card { min-width: 0; flex: 1 1 0; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.025); padding: 11px; cursor: pointer; }
+    .knowledge-card:hover { border-color: rgba(200,255,99,.35); }
+    .knowledge-card .tag { font-size: 8px; color: var(--mint); text-transform: uppercase; letter-spacing: 1px; }
+    .knowledge-card strong { display: block; font-size: 10px; line-height: 1.25; margin: 5px 0; }
+    .knowledge-card small { color: var(--muted); font-size: 8px; }
+
+    .quest-panel { border-left: 1px solid var(--line); padding: 24px 22px; overflow-y: auto; }
+    .panel-top { display: flex; justify-content: space-between; align-items: center; }
+    .status { color: var(--lime); border: 1px solid rgba(200,255,99,.28); border-radius: 99px; padding: 5px 9px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; }
+    .menu { background: none; border: 0; color: var(--muted); cursor: pointer; font-size: 18px; }
+    .quest-title { margin: 19px 0 5px; font-size: 23px; letter-spacing: -.7px; line-height: 1.12; }
+    .quest-sub { color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .quest-meta { display: flex; gap: 7px; margin: 13px 0 20px; }
+    .chip { border-radius: 7px; padding: 6px 8px; background: rgba(255,255,255,.045); color: #b9cabf; font-size: 9px; }
+    .progress-title { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 7px; }
+    .progress-title span:last-child { color: var(--lime); }
+    .progress { height: 7px; background: #1c352e; border-radius: 9px; overflow: hidden; }
+    .progress span { display: block; height: 100%; width: 62%; background: linear-gradient(90deg, var(--mint), var(--lime)); border-radius: inherit; }
+    .panel-section { margin-top: 24px; }
+    .panel-section h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #708b7e; margin: 0 0 12px; }
+    .milestones { display: grid; gap: 5px; }
+    .milestone { display: grid; grid-template-columns: 24px 1fr auto; gap: 9px; align-items: center; padding: 9px 7px; border-radius: 10px; }
+    .milestone:hover { background: rgba(255,255,255,.03); }
+    .check { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; border: 1px solid #315146; color: #527466; font-size: 9px; }
+    .done .check { color: #0c1a16; background: var(--lime); border-color: var(--lime); }
+    .current .check { color: var(--lime); border-color: var(--lime); box-shadow: 0 0 12px rgba(200,255,99,.2); }
+    .milestone strong { display: block; font-size: 10px; }
+    .milestone small { color: var(--muted); font-size: 8px; }
+    .milestone .kind { color: #617a6f; font-size: 8px; }
+    .evidence { border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+    .evidence-row { display: flex; align-items: center; gap: 10px; padding: 10px 11px; border-bottom: 1px solid var(--line); font-size: 9px; }
+    .evidence-row:last-child { border-bottom: 0; }
+    .evidence-row span:first-child { color: var(--mint); }
+    .evidence-row b { margin-left: auto; color: var(--muted); font-weight: 500; }
+    .continue { width: 100%; margin-top: 20px; border: 0; border-radius: 11px; padding: 12px; background: var(--lime); color: #0a1511; font-weight: 850; font-size: 11px; cursor: pointer; box-shadow: 0 8px 24px rgba(200,255,99,.13); }
+    .continue:hover { filter: brightness(1.06); }
+    .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px); z-index: 20; opacity: 0; pointer-events: none; padding: 10px 14px; background: #efffd1; color: #0c1914; border-radius: 9px; font-size: 11px; font-weight: 700; transition: .25s ease; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 1100px) {
+      .app { grid-template-columns: 72px 1fr 310px; }
+      .sidebar { padding: 22px 10px; }
+      .brand { padding: 0 8px 28px; }
+      .brand div:last-child, .section-label, .nav button span:not(.nav-icon):not(.count), .profile strong, .profile small, .xp { display: none; }
+      .nav button { justify-content: center; }
+      .profile { padding: 8px; display: grid; place-items: center; }
+      .land { width: 125px; }
+    }
+    @media (max-width: 820px) {
+      body { overflow: auto; }
+      .app { height: auto; min-height: 100vh; grid-template-columns: 62px 1fr; }
+      .quest-panel { grid-column: 2; border-left: 0; border-top: 1px solid var(--line); }
+      main { min-height: 720px; }
+      .search { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">N</div>
+        <div><strong>NeoLearning</strong><small>Make · Learn · Master</small></div>
+      </div>
+      <div class="section-label">Explore</div>
+      <nav class="nav">
+        <button class="active"><span class="nav-icon">◎</span><span>World Atlas</span></button>
+        <button><span class="nav-icon">⚑</span><span>Quest Board</span><span class="count">4</span></button>
+        <button><span class="nav-icon">◇</span><span>Knowledge Tree</span></button>
+        <button><span class="nav-icon">⌁</span><span>Journey Logs</span></button>
+      </nav>
+      <div class="section-label">Workshop</div>
+      <nav class="nav">
+        <button><span class="nav-icon">⌘</span><span>Lab Bench</span></button>
+        <button><span class="nav-icon">✓</span><span>Test Reports</span></button>
+        <button><span class="nav-icon">⬡</span><span>Artifacts</span></button>
+      </nav>
+      <div class="profile">
+        <div class="profile-head"><div class="avatar">HT</div><div><strong>Hieu Tran</strong><small>Level 2 · Pathfinder</small></div></div>
+        <div class="xp"><span></span></div>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><div class="eyebrow">Learning by Making</div><h1>Embedded World Atlas</h1></div>
+        <div class="top-actions"><input class="search" placeholder="Search a land, skill, or quest…"><button class="icon-btn">⌕</button><button class="icon-btn">◉</button></div>
+      </header>
+
+      <section class="world">
+        <div class="map-head">
+          <div class="view-toggle"><button class="active" data-view="atlas">Atlas</button><button data-view="route">Quest route</button></div>
+          <div class="legend"><i></i> Active journey · 5 lands</div>
+        </div>
+        <div class="map-note"><small>Current route</small><strong>Environmental Sentinel v1</strong></div>
+
+        <svg class="route-lines" viewBox="0 0 900 560" preserveAspectRatio="none">
+          <path class="route-dim" d="M105 215 C245 390, 365 95, 530 245 S770 405, 850 235"/>
+          <path class="route-dim" d="M140 405 C260 290, 405 455, 625 250"/>
+          <path class="route" d="M165 245 C255 220, 315 145, 395 165 S500 250, 595 265 S620 395, 700 405 S760 355, 800 350"/>
+        </svg>
+
+        <button class="land electronics active" data-title="Electronics Coast" data-desc="Signals, sensors, power, and the physical behavior beneath every line of firmware."><span class="visited"></span><span class="symbol">ϟ</span><strong>Electronics Coast</strong><small>18 topics · 7 visited</small></button>
+        <button class="land mcu" data-title="MCU Highlands" data-desc="Registers, interrupts, timers, DMA, memory maps, and the silicon that executes your design."><span class="visited"></span><span class="symbol">▣</span><strong>MCU Highlands</strong><small>24 topics · 11 visited</small></button>
+        <button class="land rtos" data-title="RTOS Archipelago" data-desc="Tasks, queues, scheduling, synchronization, timing, and resource ownership."><span class="visited"></span><span class="symbol">≋</span><strong>RTOS Archipelago</strong><small>16 topics · 8 visited</small></button>
+        <button class="land protocols" data-title="Protocol Passage" data-desc="I²C, SPI, UART, CAN and the contracts that let components communicate safely."><span class="visited"></span><span class="symbol">⌁</span><strong>Protocol Passage</strong><small>20 topics · 9 visited</small></button>
+        <button class="land testing" data-title="Verification Ridge" data-desc="Unit tests, HIL, instrumentation, fault injection, and evidence that the system really works."><span class="visited"></span><span class="symbol">✓</span><strong>Verification Ridge</strong><small>12 topics · 4 visited</small></button>
+        <button class="land product" data-title="Product Frontier" data-desc="PCB, CAD, integration, reliability, and the final crossing from prototype to product."><span class="visited"></span><span class="symbol">⬡</span><strong>Product Frontier</strong><small>14 topics · 2 visited</small></button>
+
+        <div class="quest-node n1">1</div><div class="quest-node n2">2</div><div class="quest-node n3">3</div><div class="quest-node n4">4</div><div class="quest-node n5">5</div>
+      </section>
+
+      <section class="knowledge-strip">
+        <div class="knowledge-intro"><strong>Knowledge pack</strong><small>Referenced by this quest</small></div>
+        <div class="cards">
+          <div class="knowledge-card"><span class="tag">Protocol</span><strong>I²C bus essentials</strong><small>Addressing · ACK · timing</small></div>
+          <div class="knowledge-card"><span class="tag">Firmware</span><strong>Interrupt-safe drivers</strong><small>ISR · queues · ownership</small></div>
+          <div class="knowledge-card"><span class="tag">RTOS</span><strong>Task & queue design</strong><small>Latency · depth · priority</small></div>
+          <div class="knowledge-card"><span class="tag">Testing</span><strong>Hardware-in-the-loop</strong><small>Fixtures · metrics · faults</small></div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="quest-panel">
+      <div class="panel-top"><span class="status">Active quest</span><button class="menu">•••</button></div>
+      <h2 class="quest-title">Environmental<br>Sentinel v1</h2>
+      <p class="quest-sub">Build a battery-powered sensor node that measures the environment, logs data, and survives injected faults.</p>
+      <div class="quest-meta"><span class="chip">Level 2</span><span class="chip">ESP32-S3</span><span class="chip">5 lands</span><span class="chip">~14h</span></div>
+      <div class="progress-title"><span>Journey progress</span><span>62%</span></div><div class="progress"><span></span></div>
+
+      <section class="panel-section">
+        <h3>Journey milestones</h3>
+        <div class="milestones">
+          <div class="milestone done"><span class="check">✓</span><span><strong>Define the real problem</strong><small>Requirements & acceptance criteria</small></span><span class="kind">LOG</span></div>
+          <div class="milestone done"><span class="check">✓</span><span><strong>Explore the knowledge route</strong><small>I²C · power · RTOS · testing</small></span><span class="kind">MAP</span></div>
+          <div class="milestone done"><span class="check">✓</span><span><strong>Design system architecture</strong><small>Blocks · contracts · budgets</small></span><span class="kind">DESIGN</span></div>
+          <div class="milestone current"><span class="check">4</span><span><strong>Build the working slice</strong><small>Sensor → queue → storage</small></span><span class="kind">BUILD</span></div>
+          <div class="milestone"><span class="check">5</span><span><strong>Verify with evidence</strong><small>Unit · HIL · fault injection</small></span><span class="kind">TEST</span></div>
+          <div class="milestone"><span class="check">6</span><span><strong>Package the prototype</strong><small>PCB · enclosure · BOM</small></span><span class="kind">MAKE</span></div>
+        </div>
+      </section>
+
+      <section class="panel-section">
+        <h3>Evidence collected</h3>
+        <div class="evidence">
+          <div class="evidence-row"><span>●</span> Architecture diagram <b>reviewed</b></div>
+          <div class="evidence-row"><span>●</span> Sensor driver tests <b>12 / 12</b></div>
+          <div class="evidence-row"><span>○</span> 24-hour endurance run <b>pending</b></div>
+        </div>
+      </section>
+      <button class="continue" id="continueQuest">Continue current milestone →</button>
+    </aside>
+  </div>
+  <div class="toast" id="toast">Workshop opened · Build the working slice</div>
+
+  <script>
+    const lands = document.querySelectorAll('.land');
+    const noteLabel = document.querySelector('.map-note small');
+    const noteTitle = document.querySelector('.map-note strong');
+    lands.forEach(land => land.addEventListener('click', () => {
+      lands.forEach(item => item.classList.remove('active'));
+      land.classList.add('active');
+      noteLabel.textContent = 'Knowledge region';
+      noteTitle.textContent = land.dataset.title;
+      document.querySelector('.quest-sub').textContent = land.dataset.desc;
+    }));
+
+    document.querySelectorAll('.view-toggle button').forEach(button => button.addEventListener('click', () => {
+      document.querySelectorAll('.view-toggle button').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      const routeVisible = button.dataset.view === 'route';
+      document.querySelector('.route').style.strokeWidth = routeVisible ? '4' : '2.2';
+      document.querySelectorAll('.quest-node').forEach(node => node.style.transform = routeVisible ? 'scale(1.18)' : 'scale(1)');
+      noteLabel.textContent = routeVisible ? 'Quest route selected' : 'Current route';
+      noteTitle.textContent = 'Environmental Sentinel v1';
+    }));
+
+    const toast = document.getElementById('toast');
+    document.getElementById('continueQuest').addEventListener('click', () => {
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    });
+
+    document.querySelectorAll('.knowledge-card, .nav button, .icon-btn').forEach(item => item.addEventListener('click', () => {
+      toast.textContent = 'Prototype interaction · destination linked';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1600);
+    }));
+  </script>
+</body>
+</html>
