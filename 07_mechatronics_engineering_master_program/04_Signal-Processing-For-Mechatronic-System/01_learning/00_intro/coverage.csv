@@ -1,0 +1,409 @@
+lecture_pdf_page,source_heading_hint,topic,topic_file,status,source_image
+1,What is a signal?,01,01_intro.md,created,images/lecture/lecture-p001.png
+2,Discrete-time Signals and Systems,01,01_intro.md,created,images/lecture/lecture-p002.png
+3,-1,01,01_intro.md,created,images/lecture/lecture-p003.png
+4,Signals,01,01_intro.md,created,images/lecture/lecture-p004.png
+5,Signal Processing,01,01_intro.md,created,images/lecture/lecture-p005.png
+6,Limitations of Analog Signal Processing?,01,01_intro.md,created,images/lecture/lecture-p006.png
+7,Limitations of Analog Signal Processing,01,01_intro.md,created,images/lecture/lecture-p007.png
+8,Digital Signal Processing,01,01_intro.md,created,images/lecture/lecture-p008.png
+9,Pros and Cons of Digital Signal Processing?,01,01_intro.md,created,images/lecture/lecture-p009.png
+10,Pros and Cons of Digital Signal Processing,01,01_intro.md,created,images/lecture/lecture-p010.png
+11,"Analog, digital, mixed signal",01,01_intro.md,created,images/lecture/lecture-p011.png
+12,Digital Signal Processing,01,01_intro.md,created,images/lecture/lecture-p012.png
+13,Sampling and reconstruction,01,01_intro.md,created,images/lecture/lecture-p013.png
+14,Sample and hold (S/H)circuit,01,01_intro.md,created,images/lecture/lecture-p014.png
+15,Periodic (Uniform) Sampling,01,01_intro.md,created,images/lecture/lecture-p015.png
+16,Periodic Sampling,01,01_intro.md,created,images/lecture/lecture-p016.png
+17,A/D converter,01,01_intro.md,created,images/lecture/lecture-p017.png
+18,A/D converter,01,01_intro.md,created,images/lecture/lecture-p018.png
+19,Quantization noise,01,01_intro.md,created,images/lecture/lecture-p019.png
+20,D/A convertion,01,01_intro.md,created,images/lecture/lecture-p020.png
+21,D/A convertion,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p021.png
+22,Reconstruction,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p022.png
+23,Reconstruction,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p023.png
+24,Reconstruction,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p024.png
+25,Reconstruction,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p025.png
+26,Representation of Sampling,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p026.png
+27,Unit Sample Sequence,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p027.png
+28,Impulse Function,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p028.png
+29,Definition of Impulse Function,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p029.png
+30,Graphical Representation,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p030.png
+31,Sampling Operation,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p031.png
+32,Unit Step Sequence,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p032.png
+33,Exponential Sequence,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p033.png
+34,Geometric Series,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p034.png
+35,Sinusoidal Sequence,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p035.png
+36,"Sequence as a sum of scaled, delayed",02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p036.png
+37,Sequence Operations,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p037.png
+38,Systems,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p038.png
+39,Systems,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p039.png
+40,System Characteristics,02,02_reconstruction_and_sequences.md,created,images/lecture/lecture-p040.png
+41,Discrete-Time Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p041.png
+42,Linearity,03,03_discrete_time_systems.md,created,images/lecture/lecture-p042.png
+43,Linear Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p043.png
+44,Time (Shift) Invariance,03,03_discrete_time_systems.md,created,images/lecture/lecture-p044.png
+45,Time-Invariant Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p045.png
+46,Impulse Response,03,03_discrete_time_systems.md,created,images/lecture/lecture-p046.png
+47,Linear Shift-Invariant Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p047.png
+48,Causality,03,03_discrete_time_systems.md,created,images/lecture/lecture-p048.png
+49,Causal System,03,03_discrete_time_systems.md,created,images/lecture/lecture-p049.png
+50,Stability,03,03_discrete_time_systems.md,created,images/lecture/lecture-p050.png
+51,Stable System,03,03_discrete_time_systems.md,created,images/lecture/lecture-p051.png
+52,Memory (State),03,03_discrete_time_systems.md,created,images/lecture/lecture-p052.png
+53,Memoryless System,03,03_discrete_time_systems.md,created,images/lecture/lecture-p053.png
+54,Invertible System,03,03_discrete_time_systems.md,created,images/lecture/lecture-p054.png
+55,Passive and Lossless Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p055.png
+56,Examples of Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p056.png
+57,Impulse Response of LTI Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p057.png
+58,Impulse Response for Examples,03,03_discrete_time_systems.md,created,images/lecture/lecture-p058.png
+59,Stability Condition for LTI Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p059.png
+60,Stable and Causal LTI Systems,03,03_discrete_time_systems.md,created,images/lecture/lecture-p060.png
+61,Difference Equations,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p061.png
+62,Accumulator Example,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p062.png
+63,Total Solution Calculation,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p063.png
+64,Homogeneous Solution,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p064.png
+65,Particular Solution,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p065.png
+66,General Form of Particular Solution,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p066.png
+67,Example (1/3),04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p067.png
+68,Example (2/3),04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p068.png
+69,Example (3/3),04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p069.png
+70,Initial-Rest Conditions,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p070.png
+71,"Zero-input, Zero-state Response",04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p071.png
+72,Example (1/2),04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p072.png
+73,Mitra Example (2/2),04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p073.png
+74,Impulse Response,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p074.png
+75,Example,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p075.png
+76,DSP Applications,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p076.png
+77,[visual page],04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p077.png
+78,Image enhancement,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p078.png
+79,More Examples of Applications,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p079.png
+80,Reasons for Using DSP,04,04_difference_equations_and_applications.md,created,images/lecture/lecture-p080.png
+81,[visual page],05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p081.png
+82,System Analysis,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p082.png
+83,Frequency Response,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p083.png
+84,Ideal lowpass filter-example,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p084.png
+85,Non causal to causal,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p085.png
+86,Phase distortion and delay,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p086.png
+87,Phase delay,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p087.png
+88,Phase delay,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p088.png
+89,Group delay,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p089.png
+90,Group delay,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p090.png
+91,The Z-Transform,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p091.png
+92,Z-Transform Definition,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p092.png
+93,For                 the z-transform reduces to the Fourier transform,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p093.png
+94,Convergence of the z-Transform,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p094.png
+95,Unit Circle in Complex Z-Plane,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p095.png
+96,Region of Convergence (ROC),05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p096.png
+97,Region of Convergence,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p097.png
+98,Laurent Series,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p098.png
+99,Properties of the ROC,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p099.png
+100,Properties of ROC Shown Graphically,05,05_frequency_response_and_z_transform.md,created,images/lecture/lecture-p100.png
+101,Example: Right-Sided Sequence,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p101.png
+102,Example: Left-Sided Sequence,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p102.png
+103,Example: Sum of Two Exponential,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p103.png
+104,Example: Two-Sided Sequence,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p104.png
+105,Example: Finite Length Sequence,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p105.png
+106,Z-transforms with the same pole-zero locations,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p106.png
+107,Common Z-Transform Pairs,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p107.png
+108,Z-Transform Properties (1/2),06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p108.png
+109,Z-Transform Properties (2/2,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p109.png
+110,Inverse z-Transform,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p110.png
+111,Example: Second-Order Z-Transform,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p111.png
+112,Partial Fraction Expansion,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p112.png
+113,Example,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p113.png
+114,Power Series Expansion,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p114.png
+115,Example,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p115.png
+116,Contour Integration,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p116.png
+117,Residue Calculation,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p117.png
+118,Quick Review of LTI Systems,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p118.png
+119,Phase Distortion and Delay,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p119.png
+120,System Functions for Difference Equations,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p120.png
+121,System Function,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p121.png
+122,Stability and Causality,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p122.png
+123,Example,06,06_inverse_z_transform_and_system_functions.md,created,images/lecture/lecture-p123.png
+124,Structures for Discrete-Time Systems,07,07_iir_filter_structures.md,created,images/lecture/lecture-p124.png
+125,Introduction,07,07_iir_filter_structures.md,created,images/lecture/lecture-p125.png
+126,Block Diagram Representation of Linear Constant-coefficient,07,07_iir_filter_structures.md,created,images/lecture/lecture-p126.png
+127,Block Diagram Representation of Linear Constant-coefficient,07,07_iir_filter_structures.md,created,images/lecture/lecture-p127.png
+128,Block diagram representation for a general Nth-order,07,07_iir_filter_structures.md,created,images/lecture/lecture-p128.png
+129,Block diagram representation for a general Nth-order,07,07_iir_filter_structures.md,created,images/lecture/lecture-p129.png
+130,Combination of delay units (in case N = M),07,07_iir_filter_structures.md,created,images/lecture/lecture-p130.png
+131,Block Diagram Representation of Linear Constant-,07,07_iir_filter_structures.md,created,images/lecture/lecture-p131.png
+132,Signal Flow Graph Representation of Linear Constant-,07,07_iir_filter_structures.md,created,images/lecture/lecture-p132.png
+133,Basic Structures for IIR Systems,07,07_iir_filter_structures.md,created,images/lecture/lecture-p133.png
+134,Basic Structures for IIR Systems,07,07_iir_filter_structures.md,created,images/lecture/lecture-p134.png
+135,Direct Form I (M = N),07,07_iir_filter_structures.md,created,images/lecture/lecture-p135.png
+136,Direct Form II (M = N),07,07_iir_filter_structures.md,created,images/lecture/lecture-p136.png
+137,Direct Form II,07,07_iir_filter_structures.md,created,images/lecture/lecture-p137.png
+138,+,07,07_iir_filter_structures.md,created,images/lecture/lecture-p138.png
+139,x[n],07,07_iir_filter_structures.md,created,images/lecture/lecture-p139.png
+140,Basic Structures for IIR Systems 2,07,07_iir_filter_structures.md,created,images/lecture/lecture-p140.png
+141,z-1 z-1,07,07_iir_filter_structures.md,created,images/lecture/lecture-p141.png
+142,Basic Structures for IIR Systems 3,07,07_iir_filter_structures.md,created,images/lecture/lecture-p142.png
+143,z-1,07,07_iir_filter_structures.md,created,images/lecture/lecture-p143.png
+144,125.075.01,07,07_iir_filter_structures.md,created,images/lecture/lecture-p144.png
+145,Transposed Forms,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p145.png
+146,b0,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p146.png
+147,a1,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p147.png
+148,Basic Network Structures for FIR Systems,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p148.png
+149,Direct Form,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p149.png
+150,Direct Form (Tapped Delay Line or Transversal Filter),08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p150.png
+151,Transposed Form of FIR Network,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p151.png
+152,Cascade Form Structure of a FIR System,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p152.png
+153,Structures for Linear-Phase FIR Systems,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p153.png
+154,Direct form structure for an FIR linear-phase when M is even.,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p154.png
+155,Lattice Structures,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p155.png
+156,Lattice Structures 2,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p156.png
+157,Reflection coefficients or PARCOR coefficients structure,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p157.png
+158,A recurrence formula for computing A(z) = H(z) = Y(z)/X(z) can be,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p158.png
+159,Example:,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p159.png
+160,z-1,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p160.png
+161,All-Pole Lattice,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p161.png
+162,Basic all-pole lattice structures,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p162.png
+163,ei[n]                                             ei-1[n],08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p163.png
+164,Lattice Systems with Poles and Zeros,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p164.png
+165,Example of lattice IIR filter with poles and zeros,08,08_fir_transposed_and_lattice_structures.md,created,images/lecture/lecture-p165.png
+166,UNIT-2,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p166.png
+167,Fourier representation of signals,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p167.png
+168,Fourier representation of signals,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p168.png
+169,Fourier representation of signals,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p169.png
+170,Discrete complex exponentials,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p170.png
+171,Discrete Fourier Series,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p171.png
+172,Discrete Fourier Series Pair,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p172.png
+173,Fourier series for discrete-time periodic,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p173.png
+174,Discrete-time Fourier series,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p174.png
+175,Fourier representation of aperiodic,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p175.png
+176,Discrete-time Fourier transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p176.png
+177,Discrete Fourier Transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p177.png
+178,Discrete Fourier Transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p178.png
+179,Discrete Fourier Transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p179.png
+180,Discrete Fourier Transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p180.png
+181,Discrete Fourier Transform,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p181.png
+182,Summary of properties,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p182.png
+183,DFT Pair & Properties,09,09_fourier_series_dtft_and_dft.md,created,images/lecture/lecture-p183.png
+184,Circular convolution,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p184.png
+185,Modulo Indices and Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p185.png
+186,Overlap During Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p186.png
+187,Periodic repetition: N=4,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p187.png
+188,Periodic repetition: N=4,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p188.png
+189,Modulo Indices and the Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p189.png
+190,Modulo Indices and the Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p190.png
+191,Modulo Indices and the Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p191.png
+192,Modulo Indices and the Periodic,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p192.png
+193,Circular convolution,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p193.png
+194,Circular convolution,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p194.png
+195,Circular convolution-another,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p195.png
+196,Using DFT for Linear,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p196.png
+197,Using DFT for Linear Convolution,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p197.png
+198,Using DFT for Linear Convolution,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p198.png
+199,Using DFT for Linear,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p199.png
+200,Using DFT for Linear,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p200.png
+201,Using DFT for cicular,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p201.png
+202,Using DFT for cicular,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p202.png
+203,Using DFT for cicular,10,10_circular_and_linear_convolution.md,created,images/lecture/lecture-p203.png
+204,Filtering of Long Data Sequences,11,11_block_convolution.md,planned,
+205,Filtering of Long Data Sequences,11,11_block_convolution.md,planned,
+206,Over-lap Add,11,11_block_convolution.md,planned,
+207,Over-lap Add,11,11_block_convolution.md,planned,
+208,Over-lap Add,11,11_block_convolution.md,planned,
+209,Over-lap Add,11,11_block_convolution.md,planned,
+210,Over-lap Add,11,11_block_convolution.md,planned,
+211,Over-lap Add,11,11_block_convolution.md,planned,
+212,Over-lap Add,11,11_block_convolution.md,planned,
+213,Over-lap save,11,11_block_convolution.md,planned,
+214,Over-lap save,11,11_block_convolution.md,planned,
+215,Over-lap save,11,11_block_convolution.md,planned,
+216,Over-lap save input segment stage,11,11_block_convolution.md,planned,
+217,Over-lap save input segment stage,11,11_block_convolution.md,planned,
+218,Over-lap save input segment stage,11,11_block_convolution.md,planned,
+219,Over-lap save filtering stage,11,11_block_convolution.md,planned,
+220,Over-lap save output blocks,11,11_block_convolution.md,planned,
+221,Over-lap save output blocks,11,11_block_convolution.md,planned,
+222,Over-lap save output blocks,11,11_block_convolution.md,planned,
+223,Over-lap save,11,11_block_convolution.md,planned,
+224,Over-lap save,11,11_block_convolution.md,planned,
+225,"Relationships between CTFT,",12,12_fft_algorithms.md,planned,
+226,"Relationships between CTFT,",12,12_fft_algorithms.md,planned,
+227,"Relationships between CTFT, DTFT,",12,12_fft_algorithms.md,planned,
+228,Fast Fourier Transform,12,12_fft_algorithms.md,planned,
+229,Discrete Fourier Transform,12,12_fft_algorithms.md,planned,
+230,Direct computation of DFT,12,12_fft_algorithms.md,planned,
+231,Direct computation of DFT,12,12_fft_algorithms.md,planned,
+232,[visual page],12,12_fft_algorithms.md,planned,
+233,FFT,12,12_fft_algorithms.md,planned,
+234,Decimation-In-Time FFT Algorithms,12,12_fft_algorithms.md,planned,
+235,Decimation In Time,12,12_fft_algorithms.md,planned,
+236,Decimation In Time Cont’d,12,12_fft_algorithms.md,planned,
+237,Decimation-In-Time FFT Algorithm,12,12_fft_algorithms.md,planned,
+238,Butterfly Computation,12,12_fft_algorithms.md,planned,
+239,In-Place Computation,12,12_fft_algorithms.md,planned,
+240,Decimation-In-Frequency FFT Algorithm,12,12_fft_algorithms.md,planned,
+241,Decimation-In-Frequency FFT Algorithm,12,12_fft_algorithms.md,planned,
+242,UNIT-3,13,13_filter_specifications.md,planned,
+243,Filter Design Techniques,13,13_filter_specifications.md,planned,
+244,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+245,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+246,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+247,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+248,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+249,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+250,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+251,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+252,Digital Filter Specifications,13,13_filter_specifications.md,planned,
+253,IIR Digital Filter Design,13,13_filter_specifications.md,planned,
+254,IIR Digital Filter Design,13,13_filter_specifications.md,planned,
+255,IIR Digital Filter Design,13,13_filter_specifications.md,planned,
+256,IIR Digital Filter Design,13,13_filter_specifications.md,planned,
+257,Specification for effective frequency response of a continuous-time lowpass,13,13_filter_specifications.md,planned,
+258,Design of Discrete-Time IIR Filters,13,13_filter_specifications.md,planned,
+259,Reasons of Design of Discrete-Time IIR Filters from,13,13_filter_specifications.md,planned,
+260,Characteristics of Commonly Used Analog Filters,13,13_filter_specifications.md,planned,
+261,Butterworth Filter,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+262,Butterworth Lowpass Filters,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+263,Frequency response of lowpass Butterworth filters,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+264,Chebyshev Filters,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+265,Chebyshev Filters,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+266,Frequency response of,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+267,N = log10[( 1 - d2,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+268,Determination of the pole locations,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+269,Approximation of Derivative Method,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+270,"• Hence, the system function for the digital IIR filter obtained as a result of the",14,14_analog_prototypes_and_impulse_invariance.md,planned,
+271,Example: Approximation of derivative method,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+272,Filter Design by Impulse Invariance,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+273,Impulse Invariance of System Functions,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+274,Impulse Invariant Algorithm,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+275,Example: Impulse invariant method,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+276,Frequency response,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+277,,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+278,Example,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+279,Example Cont’d,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+280,Example Cont’d,14,14_analog_prototypes_and_impulse_invariance.md,planned,
+281,Filter Design by Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+282,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+283,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+284,Example,15,15_bilinear_and_spectral_transformations.md,planned,
+285,Example Cont’d• Solve N and c,15,15_bilinear_and_spectral_transformations.md,planned,
+286,Example Cont’d,15,15_bilinear_and_spectral_transformations.md,planned,
+287,IIR Digital Filter: The bilinear,15,15_bilinear_and_spectral_transformations.md,planned,
+288,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+289,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+290,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+291,Bilinear Transformation,15,15_bilinear_and_spectral_transformations.md,planned,
+292,Spectral Transformations,15,15_bilinear_and_spectral_transformations.md,planned,
+293,Spectral Transformations,15,15_bilinear_and_spectral_transformations.md,planned,
+294,Spectral Transformations,15,15_bilinear_and_spectral_transformations.md,planned,
+295,Lowpass-to-Lowpass,15,15_bilinear_and_spectral_transformations.md,planned,
+296,Lowpass-to-Lowpass,15,15_bilinear_and_spectral_transformations.md,planned,
+297,Lowpass-to-Lowpass,15,15_bilinear_and_spectral_transformations.md,planned,
+298,Lowpass-to-Lowpass,15,15_bilinear_and_spectral_transformations.md,planned,
+299,Lowpass-to-Highpass,15,15_bilinear_and_spectral_transformations.md,planned,
+300,Lowpass-to-Highpass,15,15_bilinear_and_spectral_transformations.md,planned,
+301,Lowpass-to-Highpass,15,15_bilinear_and_spectral_transformations.md,planned,
+302,Lowpass-to-Highpass,15,15_bilinear_and_spectral_transformations.md,planned,
+303,Lowpass-to-Bandpass,15,15_bilinear_and_spectral_transformations.md,planned,
+304,Lowpass-to-Bandpass,15,15_bilinear_and_spectral_transformations.md,planned,
+305,Lowpass-to-Bandpass,15,15_bilinear_and_spectral_transformations.md,planned,
+306,Lowpass-to-Bandstop,15,15_bilinear_and_spectral_transformations.md,planned,
+307,Lowpass-to-Bandstop,15,15_bilinear_and_spectral_transformations.md,planned,
+308,UNIT-4,16,16_fir_selection_and_linear_phase.md,planned,
+309,• The transfer function H(z) meeting the,16,16_fir_selection_and_linear_phase.md,planned,
+310,Selection of Filter Type,16,16_fir_selection_and_linear_phase.md,planned,
+311,Selection of Filter Type,16,16_fir_selection_and_linear_phase.md,planned,
+312,FIR Filter Design,16,16_fir_selection_and_linear_phase.md,planned,
+313,FIR Design,16,16_fir_selection_and_linear_phase.md,planned,
+314,Finite Impulse Response Filters,16,16_fir_selection_and_linear_phase.md,planned,
+315,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+316,Linear Phase,16,16_fir_selection_and_linear_phase.md,planned,
+317,Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+318,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+319,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+320,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+321,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+322,FIR: Linear phase,16,16_fir_selection_and_linear_phase.md,planned,
+323,Summary of Properties,16,16_fir_selection_and_linear_phase.md,planned,
+324,Design of FIR filters: Windows,17,17_fir_design_methods.md,planned,
+325,Design of FIR filters: Windows,17,17_fir_design_methods.md,planned,
+326,Properties of Windows,17,17_fir_design_methods.md,planned,
+327,Windowing distortion,17,17_fir_design_methods.md,planned,
+328,Windows,17,17_fir_design_methods.md,planned,
+329,Rectangular Window,17,17_fir_design_methods.md,planned,
+330,Bartlett (Triangular) Window,17,17_fir_design_methods.md,planned,
+331,Hanning Window,17,17_fir_design_methods.md,planned,
+332,Hamming Window,17,17_fir_design_methods.md,planned,
+333,Blackman Window,17,17_fir_design_methods.md,planned,
+334,Kaiser Window Filter Design Method,17,17_fir_design_methods.md,planned,
+335,Comparison of windows,17,17_fir_design_methods.md,planned,
+336,Kaiser window,17,17_fir_design_methods.md,planned,
+337,Example,17,17_fir_design_methods.md,planned,
+338,Frequency Sampling Method,17,17_fir_design_methods.md,planned,
+339,FIR Digital Filter Order Estimation,17,17_fir_design_methods.md,planned,
+340,UNIT-5,18,18_multirate_processing.md,planned,
+341,Single vs Multirate Processing,18,18_multirate_processing.md,planned,
+342,Basic Multirate operations: Decimation,18,18_multirate_processing.md,planned,
+343,M-fold Decimator,18,18_multirate_processing.md,planned,
+344,Sampling Rate Reduction by an Integer Factor:,18,18_multirate_processing.md,planned,
+345,Frequency Domain Representation of Downsampling,18,18_multirate_processing.md,planned,
+346,Frequency Domain Representation of Downsampling,18,18_multirate_processing.md,planned,
+347,Aliasing,18,18_multirate_processing.md,planned,
+348,Frequency Domain Representation of Downsampling w/ Prefilter,18,18_multirate_processing.md,planned,
+349,Decimation filter,18,18_multirate_processing.md,planned,
+350,L-fold Interpolator,18,18_multirate_processing.md,planned,
+351,Increasing the Sampling Rate by an Integer Factor:,18,18_multirate_processing.md,planned,
+352,Frequency Domain Representation of Expander,18,18_multirate_processing.md,planned,
+353,Input-output relation on the Spectrum,18,18_multirate_processing.md,planned,
+354,Periodicity and spectrum images,18,18_multirate_processing.md,planned,
+355,Frequency Domain Representation of Interpolator,18,18_multirate_processing.md,planned,
+356,Interpolation filters,18,18_multirate_processing.md,planned,
+357,Fractional sampling rate convertor,18,18_multirate_processing.md,planned,
+358,Fractional sampling rate convertor,18,18_multirate_processing.md,planned,
+359,Lowpass filter,18,18_multirate_processing.md,planned,
+360,Time Domain,18,18_multirate_processing.md,planned,
+361,Sampling of bandpass signals,19,19_sampling_applications_and_quantization.md,planned,
+362,Sampling of bandpass signals,19,19_sampling_applications_and_quantization.md,planned,
+363,Over sampling -ADC,19,19_sampling_applications_and_quantization.md,planned,
+364,[visual page],19,19_sampling_applications_and_quantization.md,planned,
+365,[visual page],19,19_sampling_applications_and_quantization.md,planned,
+366,[visual page],19,19_sampling_applications_and_quantization.md,planned,
+367,Sub band coding,19,19_sampling_applications_and_quantization.md,planned,
+368,Sub band coding,19,19_sampling_applications_and_quantization.md,planned,
+369,Digital filter banks,19,19_sampling_applications_and_quantization.md,planned,
+370,Finite Word length Effects,19,19_sampling_applications_and_quantization.md,planned,
+371,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+372,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+373,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+374,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+375,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+376,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+377,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+378,"Limit-cycles; ""Effective Pole""",19,19_sampling_applications_and_quantization.md,planned,
+379,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+380,Finite Wordlength Effects,19,19_sampling_applications_and_quantization.md,planned,
+381,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+382,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+383,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+384,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+385,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+386,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+387,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+388,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+389,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+390,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+391,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+392,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+393,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+394,Finite Wordlength Effects,20,20_roundoff_noise_and_limit_cycle_models.md,planned,
+395,Finite Precision Numerical,21,21_finite_precision_filter_implementation.md,planned,
+396,Quantization in Implementing Systems,21,21_finite_precision_filter_implementation.md,planned,
+397,Effects of Coefficient Quantization in IIR Systems,21,21_finite_precision_filter_implementation.md,planned,
+398,Effects on Roots,21,21_finite_precision_filter_implementation.md,planned,
+399,Poles of Quantized Second-Order Sections,21,21_finite_precision_filter_implementation.md,planned,
+400,Coupled-Form Implementation of Complex-Conjugate Pair,21,21_finite_precision_filter_implementation.md,planned,
+401,Effects of Coefficient Quantization in FIR Systems,21,21_finite_precision_filter_implementation.md,planned,
+402,Round-Off Noise in Digital Filters,21,21_finite_precision_filter_implementation.md,planned,
+403,Analysis of Quantization Error,21,21_finite_precision_filter_implementation.md,planned,
+404,Round-Off Noise in a First-Order System,21,21_finite_precision_filter_implementation.md,planned,
+405,Zero-Input Limit Cycles in Fixed-Point Realization of IIR Filters,21,21_finite_precision_filter_implementation.md,planned,
+406,Example Cont’d,21,21_finite_precision_filter_implementation.md,planned,
+407,Example: Limit Cycles due to Overflow,21,21_finite_precision_filter_implementation.md,planned,
+408,Avoiding Limit Cycles,21,21_finite_precision_filter_implementation.md,planned,

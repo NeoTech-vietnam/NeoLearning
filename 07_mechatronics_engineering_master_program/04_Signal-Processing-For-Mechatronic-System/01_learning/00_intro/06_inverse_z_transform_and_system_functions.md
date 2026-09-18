@@ -1,0 +1,293 @@
+# Cornell Notes 06: Z-transform pairs, inversion, system functions and ROC examples
+
+[All topics](./README.md) | [Previous](./05_frequency_response_and_z_transform.md) | [Next](./07_iir_filter_structures.md)
+
+**Lecture:** [PDF pages 101-123](../../03_resources/01_lectures/00_Intro.pdf#page=101) (23 pages). **Updated:** 2026-09-14.
+
+**Source convention:** PDF page numbers are one-based viewer pages. Each original slide is reproduced beneath its written note to preserve the complete source content. “Clarification” marks explanatory additions or corrections; “Lyons supplement” marks textbook enrichment.
+
+## Cue Column
+
+| Cue / retrieval question | Study target |
+| --- | --- |
+| Can the same rational expression represent two sequences? | Right/left-sided exponential pairs with different ROCs. |
+| How is an inverse selected after partial fractions? | Use each pole's side relative to the ROC. |
+| What does a power of $z$ encode? | A signed shift of the unit sample. |
+| What changes at a repeated pole? | Higher powers in partial fractions and polynomial factors in time. |
+| How do you obtain $H(z)$ from a recurrence? | Transform input/output terms under zero-state operation. |
+| Can a stable system have a pole outside the unit circle? | Yes if noncausal; causality adds a separate ROC constraint. |
+
+## Notes Section: essential transform pairs
+
+For nonzero $a$,
+
+$$
+a^nu[n]\ \longleftrightarrow\ \frac1{1-az^{-1}},\quad |z|>|a|,
+$$
+
+$$
+-a^nu[-n-1]\ \longleftrightarrow\ \frac1{1-az^{-1}},\quad |z|<|a|.
+$$
+
+Choose the ROC before assigning the inverse. For a normalized causal recurrence,
+
+$$
+H(z)=\frac{Y(z)}{X(z)}=\frac{\sum_{m=0}^M b_mz^{-m}}{1+\sum_{k=1}^N a_kz^{-k}}.
+$$
+
+This is the zero-state system function; nonzero initial conditions produce additional terms in a unilateral-transform calculation.
+
+## Notes Section: page-by-page lecture coverage
+
+### PDF page 101 - Right-sided exponential
+
+For $x[n]=a^nu[n]$, sum the geometric series $\sum_{n=0}^{\infty}(az^{-1})^n$. It equals $1/(1-az^{-1})$ when $|az^{-1}|<1$, or $|z|>|a|$. The ROC is exterior to the pole. For $a\ne0$, writing $z/(z-a)$ reveals a zero at the origin, though the defining sequence and ROC must still accompany the expression.
+
+![Original lecture PDF page 101: Right-sided exponential](./images/lecture/lecture-p101.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 101](../../03_resources/01_lectures/00_Intro.pdf#page=101).*
+
+### PDF page 102 - Left-sided exponential
+
+For $x[n]=-a^nu[-n-1]$, change the negative summation index to obtain a geometric series in $z/a$. The same expression $1/(1-az^{-1})$ now converges for $|z|<|a|$. Its samples occupy $n\le-1$ and include the minus sign. Algebra alone cannot distinguish this sequence from page 101.
+
+![Original lecture PDF page 102: Left-sided exponential](./images/lecture/lecture-p102.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 102](../../03_resources/01_lectures/00_Intro.pdf#page=102).*
+
+### PDF page 103 - Sum of two right-sided exponentials
+
+For $x[n]=(1/2)^nu[n]+(-1/3)^nu[n]$,
+
+$$
+X(z)=\frac1{1-\tfrac12z^{-1}}+\frac1{1+\tfrac13z^{-1}}
+=\frac{2z(z-1/12)}{(z-1/2)(z+1/3)}.
+$$
+
+The ROC is the intersection $|z|>1/2$. Poles are $1/2,-1/3$ and zeros are $0,1/12$. The unit circle is included; this particular sequence is absolutely summable.
+
+![Original lecture PDF page 103: Sum of two right-sided exponentials](./images/lecture/lecture-p103.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 103](../../03_resources/01_lectures/00_Intro.pdf#page=103).*
+
+### PDF page 104 - Two-sided sequence and annular ROC
+
+The expression on page 103 also represents $x[n]=(-1/3)^nu[n]-(1/2)^nu[-n-1]$ when $1/3<|z|<1/2$. One pole contributes a right-sided sequence, the other a left-sided sequence. Their convergence regions intersect in an annulus. The unit circle is excluded, and the left tail grows in magnitude as $n\to-\infty$.
+
+![Original lecture PDF page 104: Two-sided sequence and annular ROC](./images/lecture/lecture-p104.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 104](../../03_resources/01_lectures/00_Intro.pdf#page=104).*
+
+### PDF page 105 - Finite exponential sequence
+
+For $x[n]=a^n$ on $0\le n\le N-1$ and zero elsewhere,
+
+$$
+X(z)=\sum_{n=0}^{N-1}(az^{-1})^n=\frac{1-a^Nz^{-N}}{1-az^{-1}}.
+$$
+
+The finite polynomial in $z^{-1}$ shows that $z=a$ is a removable cancellation, not a genuine pole. For nonzero $a$ and $N>1$, the ROC excludes zero. The slide illustrates the zero pattern for $N=16$. At the canceled point the finite sum supplies the limit value $N$.
+
+![Original lecture PDF page 105: Finite exponential sequence](./images/lecture/lecture-p105.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 105](../../03_resources/01_lectures/00_Intro.pdf#page=105).*
+
+### PDF page 106 - One pole-zero pattern, several ROCs
+
+The gallery shows a common rational function with right-sided, left-sided and two different two-sided inverses. Choose an exterior, interior or gap between pole radii; a ROC cannot cross a genuine pole. This picture is a reminder to state support or stability/causality conditions when asking for an inverse.
+
+![Original lecture PDF page 106: One pole-zero pattern, several ROCs](./images/lecture/lecture-p106.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 106](../../03_resources/01_lectures/00_Intro.pdf#page=106).*
+
+### PDF page 107 - Transform-pair table
+
+Besides the right/left exponential pairs, the table contains $\delta[n]\leftrightarrow1$, $\delta[n-m]\leftrightarrow z^{-m}$, step/left-step pairs, and $na^nu[n]\leftrightarrow az^{-1}/(1-az^{-1})^2$ outside the pole. The left-sided counterpart is $-na^nu[-n-1]$ inside it.
+
+For causal sinusoids, denominators are $1-2\cos\omega_0z^{-1}+z^{-2}$; cosine numerator is $1-\cos\omega_0z^{-1}$ and sine numerator is $\sin\omega_0z^{-1}$. ROC is $|z|>1$. With an envelope $r^n$, replace each $z^{-1}$ factor by $rz^{-1}$ and use $|z|>r$ for $r>0$. **Source correction:** the damped sine/cosine rows omit the time-domain factor $r^n$ although their transforms include $r$. The finite exponential pair is the one on page 105.
+
+![Original lecture PDF page 107: Transform-pair table](./images/lecture/lecture-p107.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 107](../../03_resources/01_lectures/00_Intro.pdf#page=107).*
+
+### PDF page 108 - Linearity, shifts, exponential multiplication and differentiation
+
+The properties are $ax_1+bx_2\leftrightarrow aX_1+bX_2$; $x[n-n_0]\leftrightarrow z^{-n_0}X(z)$; $z_0^nx[n]\leftrightarrow X(z/z_0)$ for $z_0\ne0$; and $nx[n]\leftrightarrow-z\,dX/dz$. Linearity guarantees at least the intersection of ROCs if nonempty; cancellation may enlarge it. A shift can change inclusion of zero/infinity. Exponential multiplication scales the ROC radii by $|z_0|$.
+
+![Original lecture PDF page 108: Linearity, shifts, exponential multiplication and differentiation](./images/lecture/lecture-p108.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 108](../../03_resources/01_lectures/00_Intro.pdf#page=108).*
+
+### PDF page 109 - Conjugation, reversal, convolution and initial value
+
+Conjugation gives $x^*[n]\leftrightarrow X^*(z^*)$. Pure reversal gives $x[-n]\leftrightarrow X(1/z)$; the slide actually displays **conjugate reversal**, $x^*[-n]\leftrightarrow X^*(1/z^*)$. Reversal reciprocates the radial bounds. Convolution becomes multiplication, with an ROC containing the intersection when defined. For a causal sequence, $x[0]=\lim_{z\to\infty}X(z)$; do not apply this initial-value formula to a general two-sided sequence.
+
+![Original lecture PDF page 109: Conjugation, reversal, convolution and initial value](./images/lecture/lecture-p109.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 109](../../03_resources/01_lectures/00_Intro.pdf#page=109).*
+
+### PDF page 110 - Inversion by inspection and partial fractions
+
+Factor a rational transform into zeros and poles, then express simple-pole terms as $A_k/(1-d_kz^{-1})$. For distinct nonzero simple poles, $A_k=[(1-d_kz^{-1})X(z)]_{z=d_k}$ after any polynomial part has been separated. Invert each term using its ROC. Repeated poles and improper rational forms need the extensions on page 112.
+
+![Original lecture PDF page 110: Inversion by inspection and partial fractions](./images/lecture/lecture-p110.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 110](../../03_resources/01_lectures/00_Intro.pdf#page=110).*
+
+### PDF page 111 - Second-order inverse example
+
+For $X(z)=1/[(1-\tfrac14z^{-1})(1-\tfrac12z^{-1})]$ with $|z|>1/2$, the partial fractions are $-1/(1-\tfrac14z^{-1})+2/(1-\tfrac12z^{-1})$. Therefore $x[n]=[-(1/4)^n+2(1/2)^n]u[n]$. Check $x[0]=1$ and the initial-value theorem before computing more samples.
+
+![Original lecture PDF page 111: Second-order inverse example](./images/lecture/lecture-p111.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 111](../../03_resources/01_lectures/00_Intro.pdf#page=111).*
+
+### PDF page 112 - Polynomial parts and repeated poles
+
+Use long division when numerator degree exceeds denominator degree in the chosen polynomial variable. A polynomial part $\sum_r B_rz^{-r}$ gives shifted impulses. A pole of multiplicity $s$ contributes $\sum_{m=1}^s C_m/(1-dz^{-1})^m$ plus other pole terms. Coefficients can be found by differentiation after introducing $w=z^{-1}$, as in the slide, or by equating polynomial coefficients. The derivative must be taken in the variable used for the expansion; do not mix $z$- and $w$-residue formulas.
+
+![Original lecture PDF page 112: Polynomial parts and repeated poles](./images/lecture/lecture-p112.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 112](../../03_resources/01_lectures/00_Intro.pdf#page=112).*
+
+### PDF page 113 - Example with a direct term and a missing coefficient
+
+For $X(z)=(1+z^{-1})^2/[(1-\tfrac12z^{-1})(1-z^{-1})]$, $|z|>1$, long division and partial fractions give
+
+$$
+X(z)=2-\frac9{1-\tfrac12z^{-1}}+\frac8{1-z^{-1}},\qquad
+x[n]=2\delta[n]-9(1/2)^nu[n]+8u[n].
+$$
+
+**Source correction:** the final time-domain line drops the factor 9. Keep it: $x[0]=2-9+8=1$, matching $\lim X(z)$. The uncanceled pole at 1 also means the causal sequence is not absolutely summable.
+
+![Original lecture PDF page 113: Example with a direct term and a missing coefficient](./images/lecture/lecture-p113.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 113](../../03_resources/01_lectures/00_Intro.pdf#page=113).*
+
+### PDF page 114 - Finite Laurent expansion and coefficient correction
+
+Expand $X(z)=z^2(1-\tfrac12z^{-1})(1-z^{-2})=z^2-\tfrac12z-1+\tfrac12z^{-1}$. Read coefficients directly:
+
+$$
+x[n]=\delta[n+2]-\tfrac12\delta[n+1]-\delta[n]+\tfrac12\delta[n-1].
+$$
+
+**Source correction:** the slide gives $2\delta[n+2]$, but the coefficient of $z^2$ is 1. Its finite two-sided support excludes zero and infinity from the extended-plane ROC.
+
+![Original lecture PDF page 114: Finite Laurent expansion and coefficient correction](./images/lecture/lecture-p114.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 114](../../03_resources/01_lectures/00_Intro.pdf#page=114).*
+
+### PDF page 115 - Logarithmic power-series example
+
+Use the Taylor expansion $\log(1+v)=\sum_{n=1}^{\infty}(-1)^{n+1}v^n/n$ for $|v|<1$. With $v=az^{-1}$, $X(z)=\log(1+az^{-1})$ gives $x[n]=(-1)^{n+1}a^n/n$ for $n\ge1$ and zero for $n\le0$, with $|z|>|a|$. Here “log” is the natural logarithm on the branch defined by this convergent series.
+
+![Original lecture PDF page 115: Logarithmic power-series example](./images/lecture/lecture-p115.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 115](../../03_resources/01_lectures/00_Intro.pdf#page=115).*
+
+### PDF page 116 - Inverse transform by contour integration
+
+The integral of $z^{-k}/(2\pi j)$ around a counterclockwise contour enclosing zero is 1 when $k=1$ and 0 otherwise. Inserting the Laurent series selects its $z^{-1}$ coefficient. Equivalently, $x[n]$ is the sum of residues of $X(z)z^{n-1}$ inside the contour, whose path lies in the ROC. The factor $z^{n-1}$ can introduce poles at zero, so inspect the whole integrand.
+
+![Original lecture PDF page 116: Inverse transform by contour integration](./images/lecture/lecture-p116.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 116](../../03_resources/01_lectures/00_Intro.pdf#page=116).*
+
+### PDF page 117 - Residue formula and derivative order
+
+If $F(z)=X(z)z^{n-1}=\psi(z)/(z-d_0)^s$ with $\psi$ analytic at $d_0$, then
+
+$$
+\operatorname{Res}_{z=d_0}F(z)=\frac{\psi^{(s-1)}(d_0)}{(s-1)!}.
+$$
+
+**Source correction:** the slide shows $\psi^{(0)}$ even while allowing a pole of general order $s$. Evaluation without differentiation is sufficient only for a simple pole, $s=1$.
+
+![Original lecture PDF page 117: Residue formula and derivative order](./images/lecture/lecture-p117.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 117](../../03_resources/01_lectures/00_Intro.pdf#page=117).*
+
+### PDF page 118 - LTI review across domains
+
+Convolution $y=x*h$ becomes $Y(z)=X(z)H(z)$ and, when the unit-circle transforms exist, $Y(e^{j\omega})=X(e^{j\omega})H(e^{j\omega})$. Magnitudes multiply and phases add. The magnitude of $H$ is the gain at each frequency; its phase is the corresponding phase change.
+
+![Original lecture PDF page 118: LTI review across domains](./images/lecture/lecture-p118.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 118](../../03_resources/01_lectures/00_Intro.pdf#page=118).*
+
+### PDF page 119 - Delay as an acceptable phase response
+
+An ideal integer delay has $h[n]=\delta[n-n_d]$ and $H(e^{j\omega})=e^{-j\omega n_d}$. The magnitude is 1 and phase is linear, preserving shape apart from latency. Ideal zero-phase low/high-pass filters are useful targets but are generally noncausal. An exact ideal low-pass remains noncausal even after finite delay, as topic 05 established.
+
+![Original lecture PDF page 119: Delay as an acceptable phase response](./images/lecture/lecture-p119.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 119](../../03_resources/01_lectures/00_Intro.pdf#page=119).*
+
+### PDF page 120 - Transforming difference equations
+
+Transform each delayed sequence to a power of $z^{-1}$ times its transform. Collecting the output polynomial and input polynomial gives $A(z)Y(z)=B(z)X(z)$, hence $H=B/A$. This describes the chosen zero-state LTI mapping; initial-state effects must be included separately when solving an initialized problem.
+
+![Original lecture PDF page 120: Transforming difference equations](./images/lecture/lecture-p120.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 120](../../03_resources/01_lectures/00_Intro.pdf#page=120).*
+
+### PDF page 121 - Factored system function and a sign inconsistency
+
+The slide's example begins with $H(z)=(1+z^{-1})^2/[(1-\tfrac12z^{-1})(1+\tfrac34z^{-1})]$. Expanding this **factored expression** gives denominator $1+\tfrac14z^{-1}-\tfrac38z^{-2}$, so its recurrence is
+
+$$
+y[n]+\tfrac14y[n-1]-\tfrac38y[n-2]=x[n]+2x[n-1]+x[n-2].
+$$
+
+**Source correction:** the slide's expanded denominator and recurrence use $+3/8$, inconsistent with the factored form. Both versions are visible in the source; the corrected line above follows the factored form. It has poles $1/2,-3/4$ and a double zero at $-1$.
+
+![Original lecture PDF page 121: Factored system function and a sign inconsistency](./images/lecture/lecture-p121.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 121](../../03_resources/01_lectures/00_Intro.pdf#page=121).*
+
+### PDF page 122 - Combining causality and stability
+
+A rational system function needs an ROC. Causality selects an exterior ROC for the causal realization; BIBO stability requires the unit circle. Therefore a causal rational LTI system is BIBO stable exactly when all its uncanceled poles are strictly inside the unit circle, with the proper causal form and no hidden unstable internal modes assumed. Transfer-function pole cancellation alone does not establish internal stability of an arbitrary realization.
+
+![Original lecture PDF page 122: Combining causality and stability](./images/lecture/lecture-p122.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 122](../../03_resources/01_lectures/00_Intro.pdf#page=122).*
+
+### PDF page 123 - Three ROCs for one recurrence
+
+For $y[n]-\tfrac52y[n-1]+y[n-2]=x[n]$, $H(z)=1/[(1-\tfrac12z^{-1})(1-2z^{-1})]$. The exterior ROC $|z|>2$ gives a causal unstable system; $1/2<|z|<2$ gives a stable noncausal two-sided system; $|z|<1/2$ gives an anticausal unstable system. No ROC makes this system both causal and stable. Partial fractions, $-\tfrac13/(1-\tfrac12z^{-1})+\tfrac43/(1-2z^{-1})$, let you recover each impulse response.
+
+![Original lecture PDF page 123: Three ROCs for one recurrence](./images/lecture/lecture-p123.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 123](../../03_resources/01_lectures/00_Intro.pdf#page=123).*
+
+## Lyons supplement: poles as time-domain modes
+
+Read [§§6.3-6.5, printed pp. 270-288 / PDF pp. 295-313](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=295). A causal pole's radius controls exponential decay/growth; its angle controls oscillation frequency. Conjugate pole pairs allow real-valued oscillatory responses. The lecture extends this causal intuition with bilateral ROCs and explicit inverse-transform methods.
+
+![Lyons Figure 6-15: pole locations and corresponding causal impulse responses](./images/textbook/lyons-fig-6-15-p298.png)
+
+*Extracted figure crop: Figure 6-15, printed p. 273 / PDF p. 298. These causal examples must not be generalized to arbitrary ROCs.*
+
+## Worked example: the stable inverse on an annulus
+
+For the lecture's last example with $1/2<|z|<2$,
+
+$$
+h[n]=-\tfrac13(1/2)^nu[n]-\tfrac43 2^nu[-n-1].
+$$
+
+Both tails decay toward their respective infinities, and $\sum|h[n]|=\tfrac13\cdot2+\tfrac43\cdot1=2$. It is BIBO stable but noncausal. Choosing $|z|>2$ changes the second term to $+\tfrac432^nu[n]$, making the causal inverse grow.
+
+## Retrieval practice and answer key
+
+1. What is the inverse of $z^3$? **$\delta[n+3]$.**
+2. Does $1/(1-2z^{-1})$ uniquely specify $x[n]$? **No; state its ROC.**
+3. What must be differentiated at a triple pole in the residue formula? **$\psi$ twice**, then divide by $2!$.
+4. Which error is caught by checking $x[0]$ on page 113? **The missing factor 9.**
+
+## Summary Section
+
+Transform pairs and algebra work only when their support and ROC are retained. Inversion can use inspection, partial fractions, Laurent coefficients or residues. A system's recurrence, poles, zeros and ROC jointly determine its causal/stable interpretation; checking early samples catches many transcription errors.

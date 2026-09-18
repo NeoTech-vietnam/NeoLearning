@@ -1,0 +1,248 @@
+# Cornell Notes 10: Modulo indexing, circular convolution and DFT-based linear convolution
+
+[All topics](./README.md) | [Previous](./09_fourier_series_dtft_and_dft.md)
+
+**Lecture:** [PDF pages 184-203](../../03_resources/01_lectures/00_Intro.pdf#page=184) (20 pages). **Updated:** 2026-09-14.
+
+**Source convention:** PDF page numbers are one-based viewer pages. Each original slide is reproduced beneath its written note to preserve the complete source content. “Clarification” marks explanatory additions or corrections; “Lyons supplement” marks textbook enrichment.
+
+## Cue Column
+
+| Cue / retrieval question | Study target |
+| --- | --- |
+| What does a negative index modulo $N$ mean? | Select the nonnegative representative in $0,\ldots,N-1$. |
+| What happens when repeated sequence copies overlap? | Their values add, causing time-domain aliasing. |
+| What does multiplying two DFTs calculate? | Circular convolution at the chosen transform length. |
+| When does it equal linear convolution? | Sufficient zero padding: $N\ge L+M-1$. |
+| What does a circulant matrix represent? | All circular shifts used to form convolution outputs. |
+| Why do long records require block processing? | Finite memory/latency and efficient FFT sizes. |
+
+## Notes Section: the two convolutions
+
+For finite sequences of lengths $L$ and $M$ beginning at zero, linear convolution is
+
+$$
+y_L[n]=\sum_kx[k]h[n-k],\qquad 0\le n\le L+M-2.
+$$
+
+For $N$-sample arrays, circular convolution is
+
+$$
+y_C[n]=\sum_{k=0}^{N-1}x[k]h[(n-k)\bmod N],\qquad0\le n<N.
+$$
+
+Their relationship is periodic summation:
+
+$$
+y_C[n]=\sum_{\ell=-\infty}^{\infty}y_L[n-\ell N].
+$$
+
+The DFT product/IDFT computes $y_C$. Zero-pad both inputs to **the same $N\ge L+M-1$** to prevent overlap and recover $y_L$ in the first $L+M-1$ samples.
+
+## Notes Section: page-by-page lecture coverage
+
+### PDF page 184 - Finite-support signals before circular convolution
+
+The stem plots illustrate signals supported in a length-$N$ window, with $N=10$ in the examples. Some samples within that window can be zero; support length here describes the containing index interval. Circular processing identifies the end of this window with the beginning rather than assuming samples outside it stay zero forever.
+
+![Original lecture PDF page 184: Finite-support signals before circular convolution](./images/lecture/lecture-p184.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 184](../../03_resources/01_lectures/00_Intro.pdf#page=184).*
+
+### PDF page 185 - Modulo indices, including negatives
+
+Define $(n)_N=n\bmod N$ as the remainder in $0,\ldots,N-1$. For $N=4$, the sequence for $n=-4,-3,\ldots,8$ is $0,1,2,3,0,1,2,3,0,1,2,3,0$. The examples $5/4=1+1/4$ and $-2/4=-1+2/4$ explain why $(-2)\bmod4=2$. Some programming-language remainder operators need adjustment for negative inputs.
+
+![Original lecture PDF page 185: Modulo indices, including negatives](./images/lecture/lecture-p185.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 185](../../03_resources/01_lectures/00_Intro.pdf#page=185).*
+
+### PDF page 186 - Periodization by summing copies
+
+Create $x_p[n]=\sum_{\ell=-\infty}^{\infty}x[n-\ell N]$. This repeats the original aperiodic sequence every $N$ samples. Crucially, periodization is a **sum** of copies; when they overlap, their values add. It is not always equivalent to merely displaying the original sequence repeatedly without summation.
+
+![Original lecture PDF page 186: Periodization by summing copies](./images/lecture/lecture-p186.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 186](../../03_resources/01_lectures/00_Intro.pdf#page=186).*
+
+### PDF page 187 - No overlap when support fits one period
+
+The $N=4$ example uses $x=[2,1,0,1]$ over indices 0-3. Shifted copies do not overlap outside their assigned four-sample intervals. The periodic sequence repeats the original block exactly. The diagram explicitly marks the unshifted copy and copies displaced by $\pm N$ and $\pm2N$.
+
+![Original lecture PDF page 187: No overlap when support fits one period](./images/lecture/lecture-p187.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 187](../../03_resources/01_lectures/00_Intro.pdf#page=187).*
+
+### PDF page 188 - Overlap when the source exceeds the period
+
+The example repeats a six-sample all-ones sequence with period 4. Copies overlap because length 6 exceeds 4; one period of the sum is $[2,2,1,1]$. The repeated sum therefore differs from the first four original values. This is time-domain aliasing, analogous in structure to overlapping spectral replicas in sampling.
+
+![Original lecture PDF page 188: Overlap when the source exceeds the period](./images/lecture/lecture-p188.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 188](../../03_resources/01_lectures/00_Intro.pdf#page=188).*
+
+### PDF page 189 - When modulo lookup equals periodization
+
+If $x[n]$ is zero outside $0\le n<N$, then $x[(n)_N]=x_p[n]$. Each modulo class selects exactly one original sample, so no copy overlaps another nonzero sample in that class. Without the support assumption, simple lookup in the first block would discard contributions that periodic summation should add.
+
+![Original lecture PDF page 189: When modulo lookup equals periodization](./images/lecture/lecture-p189.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 189](../../03_resources/01_lectures/00_Intro.pdf#page=189).*
+
+### PDF page 190 - Selecting the fundamental block
+
+The picture highlights indices 0-3 of the sequence $[2,1,0,1]$. These values form one complete period for modulo indexing. Selecting the fundamental block is a storage convention; the mathematical periodic extension is available at all integer indices through that stored block.
+
+![Original lecture PDF page 190: Selecting the fundamental block](./images/lecture/lecture-p190.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 190](../../03_resources/01_lectures/00_Intro.pdf#page=190).*
+
+### PDF page 191 - Circular index picture
+
+Place the four samples around a circle, with index 0 at the marked origin. Indices $0,4,8,\ldots$ and $-4,-8,\ldots$ refer to the same sample; similarly for the other three classes. The circle shows why stepping past index 3 returns to index 0.
+
+![Original lecture PDF page 191: Circular index picture](./images/lecture/lecture-p191.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 191](../../03_resources/01_lectures/00_Intro.pdf#page=191).*
+
+### PDF page 192 - From the circular representation back to a periodic sequence
+
+Unroll the four-position circle to obtain an infinite repetition $\widetilde x[n]=x_p[n]$. The same four values can be viewed as a stored vector, a circular indexing structure, or one period of an infinite sequence. Specify which representation is meant when discussing values outside $0\le n<N$.
+
+![Original lecture PDF page 192: From the circular representation back to a periodic sequence](./images/lecture/lecture-p192.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 192](../../03_resources/01_lectures/00_Intro.pdf#page=192).*
+
+### PDF page 193 - Circular convolution through one periodized input
+
+Periodize $x_2$ with period $N$ and linearly convolve the finite $x_1$ with that periodic sequence. On indices $0,\ldots,N-1$, the result is $\sum_{k=0}^{N-1}x_1[k]x_2[(n-k)_N]$. Commutativity permits the roles to be exchanged. **Source clarification:** the page says the result is zero outside this interval; that applies to storing/zero-extending one output block. The natural modulo-defined convolution is periodic, not zero outside the block.
+
+![Original lecture PDF page 193: Circular convolution through one periodized input](./images/lecture/lecture-p193.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 193](../../03_resources/01_lectures/00_Intro.pdf#page=193).*
+
+### PDF page 194 - Modulo lookup and the periodic-input formula agree
+
+The equation replaces $x_2[(n-k)_N]$ by $x_{2p}[n-k]$. This is valid under the finite-block support assumption from page 189. The summation over the finite first sequence then matches ordinary convolution with the periodic second sequence.
+
+![Original lecture PDF page 194: Modulo lookup and the periodic-input formula agree](./images/lecture/lecture-p194.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 194](../../03_resources/01_lectures/00_Intro.pdf#page=194).*
+
+### PDF page 195 - Circular convolution by folding a linear result
+
+First compute the full linear convolution $x_L[n]$. Then sum its shifts by multiples of $N$ and retain one period. Values at indices with the same remainder modulo $N$ add into the same output slot. This alternative interpretation is often the fastest way to understand a wraparound error in DFT filtering.
+
+![Original lecture PDF page 195: Circular convolution by folding a linear result](./images/lecture/lecture-p195.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 195](../../03_resources/01_lectures/00_Intro.pdf#page=195).*
+
+### PDF page 196 - Criterion for recovering linear convolution
+
+The circular result is the periodic sum of the linear result. Recovery is straightforward when repeated copies do not overlap: the nonzero output must fit inside one period with its origin tracked. For inputs starting at zero, $N\ge L+M-1$ is the standard sufficient length condition. Choosing only $N\ge\max(L,M)$ is generally insufficient.
+
+![Original lecture PDF page 196: Criterion for recovering linear convolution](./images/lecture/lecture-p196.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 196](../../03_resources/01_lectures/00_Intro.pdf#page=196).*
+
+### PDF page 197 - Derivation using the DTFT and zero padding
+
+Linear convolution has length at most $L+M-1$ and DTFT $Y(e^{j\omega})=X(e^{j\omega})H(e^{j\omega})$. Sample this product at $N$ DFT frequencies. The IDFT equals the true finite linear result when $N\ge L+M-1$, because no periodic copies overlap. Input transforms are DFTs of zero-padded arrays of common length $N$.
+
+![Original lecture PDF page 197: Derivation using the DTFT and zero padding](./images/lecture/lecture-p197.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 197](../../03_resources/01_lectures/00_Intro.pdf#page=197).*
+
+### PDF page 198 - DFT filtering block diagram
+
+At the minimum length $N=L+M-1$, append $M-1$ zeros to $x$ and $L-1$ zeros to $h$, transform both, multiply bin-by-bin, and inverse transform. For a larger $N$, append $N-L$ and $N-M$ zeros instead. The efficiency crossover against direct convolution depends on hardware/software and filter length; the slide does not establish one universal threshold.
+
+![Original lecture PDF page 198: DFT filtering block diagram](./images/lecture/lecture-p198.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 198](../../03_resources/01_lectures/00_Intro.pdf#page=198).*
+
+### PDF page 199 - Four-step computation recipe
+
+Choose $N\ge L+M-1$, pad both arrays to $N$, compute $X[k]$ and $H[k]$, form $Y[k]=X[k]H[k]$, and compute the $N$-point IDFT. Keep the first $L+M-1$ samples. Complex inputs or coefficients produce complex outputs; do not discard the imaginary component unless the mathematical output is real and only rounding residuals remain.
+
+![Original lecture PDF page 199: Four-step computation recipe](./images/lecture/lecture-p199.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 199](../../03_resources/01_lectures/00_Intro.pdf#page=199).*
+
+### PDF page 200 - Visual non-overlap condition
+
+The illustration shows the output support exactly fitting the repetition interval. Consequently, the unshifted copy can be recovered from one circular block. The plot uses the same repeated-stem visual language as page 187 to show why sufficient padding changes circular computation into the desired linear result.
+
+![Original lecture PDF page 200: Visual non-overlap condition](./images/lecture/lecture-p200.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 200](../../03_resources/01_lectures/00_Intro.pdf#page=200).*
+
+### PDF page 201 - DFT computation for a fixed circular block
+
+For an $N$-sample input block $x_m$ and an $M$-tap filter, pad $h$ to $N$ and use the same DFT-product-IDFT recipe. The result is an $N$-point circular output $y_{C,m}$. **Clarification:** the page's $N=L+M-1$ can describe a valid block-filtering choice with only $L=N-M+1$ new samples; an arbitrary $N$-sample block convolved linearly with an $M$-tap filter still has up to $N+M-1$ samples. Do not silently call that unpadded circular result the full linear output.
+
+![Original lecture PDF page 201: DFT computation for a fixed circular block](./images/lecture/lecture-p201.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 201](../../03_resources/01_lectures/00_Intro.pdf#page=201).*
+
+### PDF page 202 - Four-point circulant matrix
+
+For $N=4$, circular convolution can be written
+
+$$
+\begin{bmatrix}y_0\\y_1\\y_2\\y_3\end{bmatrix}
+=\begin{bmatrix}
+x_0&x_3&x_2&x_1\\
+x_1&x_0&x_3&x_2\\
+x_2&x_1&x_0&x_3\\
+x_3&x_2&x_1&x_0
+\end{bmatrix}
+\begin{bmatrix}h_0\\h_1\\h_2\\h_3\end{bmatrix}.
+$$
+
+Each column is a circular shift of $x$. This is a circulant matrix; its repeated shift structure is what the DFT diagonalizes, turning convolution into componentwise multiplication.
+
+![Original lecture PDF page 202: Four-point circulant matrix](./images/lecture/lecture-p202.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 202](../../03_resources/01_lectures/00_Intro.pdf#page=202).*
+
+### PDF page 203 - Wraparound corruption and the usable tail
+
+When the linear result exceeds $N$, its tail folds onto the beginning of the output block. The figure marks the corrupted early samples and the unchanged later samples. For a causal length-$M$ FIR and an $N$-sample input block with $M\le N$, only the first $M-1$ positions receive the wrapped tail; indices $M-1,\ldots,N-1$ agree with that block's linear convolution. Correct processing of a long stream also requires carrying the preceding input context, which motivates overlap-save in topic 11.
+
+![Original lecture PDF page 203: Wraparound corruption and the usable tail](./images/lecture/lecture-p203.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 203](../../03_resources/01_lectures/00_Intro.pdf#page=203).*
+
+## Lyons supplement: fast convolution and implementation choices
+
+Read [§13.10, printed pp. 716-722 / PDF pp. 741-747](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=741) and [§5.9, printed pp. 214-225 / PDF pp. 239-250](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=239). Lyons explains why FFT-based filtering can reduce computation for long filters/records and why finite buffers motivate overlap-save and overlap-add. The exact speed advantage must be measured for the target hardware and block size.
+
+![Lyons Figure 13-27: FFT convolution flow and indicative computational workloads](./images/textbook/lyons-fig-13-27-p742.png)
+
+*Extracted figure crop: Figure 13-27, printed p. 717 / PDF p. 742. The workload curves are the book's illustrative comparison, not a benchmark of your device.*
+
+**Normalization clarification:** with the forward DFT unnormalized and IDFT scaled by $1/N$, `IDFT(DFT(x) × DFT(h))` already equals circular convolution; no extra factor $N$ is required. Lyons' discussion on PDF p. 747 warns about implementation gain. For the mathematical convention in these notes, verify the actual transform routine's scaling rather than inferring a universal extra gain from raw bin amplitudes.
+
+## Worked example: see the aliasing numerically
+
+**Author-created example.** Let $x=[1,2,3]$ and $h=[1,1,1]$, both starting at zero. Direct linear convolution is
+
+$$
+y_L=[1,3,6,5,3],\qquad L+M-1=5.
+$$
+
+With $N=4$, the sample at index 4 wraps to index 0, giving $y_C=[1+3,3,6,5]=[4,3,6,5]$. With $N=8$, padded DFT multiplication gives $[1,3,6,5,3,0,0,0]$ up to numerical roundoff. Keep the first five samples. Padding creates room for the result; it does not add measured information.
+
+For a second check, periodize six ones at $N=4$: indices 0 and 4 add, indices 1 and 5 add, producing $[2,2,1,1]$, exactly the overlap pattern on page 188.
+
+## Retrieval practice and answer key
+
+1. What is $(-1)\bmod4$ under circular indexing? **3.**
+2. What minimum transform length is sufficient for lengths 80 and 21? **100.** A larger efficient FFT length is also valid.
+3. Does frequency-domain multiplication require another $1/N$ after a conventionally normalized IDFT? **No.**
+4. Which samples are potentially wrapped for a length-5 FIR and a 16-sample circular block? **Indices 0-3**; retaining the correct stream output additionally requires block overlap/context.
+
+## Summary Section
+
+Circular convolution uses modulo indexing and equals a periodically folded linear result. DFT multiplication computes that circular operation. Zero-padding to at least the full linear-output length prevents wraparound; for long streams, overlap-add or overlap-save handles block boundaries while retaining the required samples.

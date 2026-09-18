@@ -1,0 +1,268 @@
+# Cornell Notes 08: Transposition, FIR structures, linear phase and lattice networks
+
+[All topics](./README.md) | [Previous](./07_iir_filter_structures.md) | [Next](./09_fourier_series_dtft_and_dft.md)
+
+**Lecture:** [PDF pages 145-165](../../03_resources/01_lectures/00_Intro.pdf#page=145) (21 pages). **Updated:** 2026-09-14.
+
+**Source convention:** PDF page numbers are one-based viewer pages. Each original slide is reproduced beneath its written note to preserve the complete source content. “Clarification” marks explanatory additions or corrections; “Lyons supplement” marks textbook enrichment.
+
+## Cue Column
+
+| Cue / retrieval question | Study target |
+| --- | --- |
+| What changes when a graph is transposed? | Arrow direction, input/output roles, adders and branch points. |
+| Why are FIR coefficients also impulse-response samples? | The convolution equation. |
+| How does symmetry save multipliers? | Pair input samples before applying their shared coefficient. |
+| What are the four linear-phase FIR types? | Symmetry and order parity. |
+| What does a lattice stage compute? | Forward and backward prediction-error combinations. |
+| How do reflection coefficients relate to a polynomial? | Step-up and step-down recursions with a fixed sign convention. |
+
+## Notes Section: FIR and lattice equations
+
+An order-$M$ FIR filter has $M+1$ taps:
+
+$$
+H(z)=\sum_{k=0}^{M}h[k]z^{-k},\qquad y[n]=\sum_{k=0}^{M}h[k]x[n-k].
+$$
+
+For a real linear-phase FIR, $h[M-k]=h[k]$ (symmetric) or $h[M-k]=-h[k]$ (antisymmetric). The group delay is $M/2$ samples on intervals where the phase is defined, including a possible half-sample delay for odd order.
+
+The lecture uses $A_i(z)=1-\sum_{m=1}^{i}a_m^{(i)}z^{-m}$ and reflection coefficient $k_i=a_i^{(i)}$. With real coefficients,
+
+$$
+a_m^{(i)}=a_m^{(i-1)}-k_i a_{i-m}^{(i-1)},\qquad
+a_m^{(i-1)}=\frac{a_m^{(i)}+k_i a_{i-m}^{(i)}}{1-k_i^2}.
+$$
+
+The backward formula requires $1-k_i^2\ne0$. Complex lattice conventions require conjugation and are not interchangeable with these real-coefficient equations.
+
+## Notes Section: page-by-page lecture coverage
+
+### PDF page 145 - Transposition theorem
+
+Reverse every branch direction, retain branch gains, and exchange input/output. Addition and fan-out exchange roles. For a scalar linear signal-flow network under the appropriate zero-state assumptions, the transfer function is preserved. Transposition is a graph transformation, not the operation $z\mapsto z^{-1}$ and not time reversal of the filter.
+
+![Original lecture PDF page 145: Transposition theorem](./images/lecture/lecture-p145.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 145](../../03_resources/01_lectures/00_Intro.pdf#page=145).*
+
+### PDF page 146 - Transposing direct form I
+
+The paired diagrams show the direct-form network and its transposed version. Compare where each $b_k$ and feedback gain $a_k$ enters. Delay elements remain delay elements, but the stored state variables change. Equivalent transfer functions do not mean that a nonzero old state can be copied directly into the new diagram.
+
+![Original lecture PDF page 146: Transposing direct form I](./images/lecture/lecture-p146.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 146](../../03_resources/01_lectures/00_Intro.pdf#page=146).*
+
+### PDF page 147 - Transposing direct form II
+
+The illustrations transpose the shared-delay implementation. The input fans out toward several multiplier paths, and state accumulates partial contributions. It retains the minimal delay count for the stated order while changing intermediate arithmetic. This form is widely useful for implementation, but finite-precision performance must be evaluated for the actual coefficients and arithmetic.
+
+![Original lecture PDF page 147: Transposing direct form II](./images/lecture/lecture-p147.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 147](../../03_resources/01_lectures/00_Intro.pdf#page=147).*
+
+### PDF page 148 - FIR structure families
+
+The lecture introduces direct/tapped-delay-line/transversal form, transposed form and cascade form. Factor the FIR polynomial into real first- or second-order factors. An order-$M$ polynomial uses $\lceil M/2\rceil$ sections when pairing roots; if $M$ is odd, one second-order coefficient can be zero to represent a first-order factor.
+
+![Original lecture PDF page 148: FIR structure families](./images/lecture/lecture-p148.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 148](../../03_resources/01_lectures/00_Intro.pdf#page=148).*
+
+### PDF page 149 - Direct FIR equation
+
+The output is $\sum_{k=0}^{M}b_kx[n-k]$, so $h[k]=b_k$ on $0\le k\le M$ and zero elsewhere. Its transfer function has zeros set by the polynomial and possible poles at the origin from delay powers; “all-zero” is the conventional FIR description. Every finite-valued FIR impulse response is absolutely summable.
+
+![Original lecture PDF page 149: Direct FIR equation](./images/lecture/lecture-p149.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 149](../../03_resources/01_lectures/00_Intro.pdf#page=149).*
+
+### PDF page 150 - Tapped delay-line diagrams
+
+Each tap selects a different delayed input, multiplies by $h[k]$, and contributes to the output sum. The two displayed layouts compute the same convolution. Count $M$ stored delays and $M+1$ coefficients; confusing order with tap count creates off-by-one errors in both memory allocation and group-delay calculations.
+
+![Original lecture PDF page 150: Tapped delay-line diagrams](./images/lecture/lecture-p150.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 150](../../03_resources/01_lectures/00_Intro.pdf#page=150).*
+
+### PDF page 151 - Transposed FIR network
+
+Distribute the current input to coefficient multipliers and delay partial sums as they move toward the output. The coefficient ordering in the drawing differs visually from the direct form; verify the resulting impulse response rather than reversing coefficients by intuition. An impulse must still produce $h[0],h[1],\ldots,h[M]$ in that order.
+
+![Original lecture PDF page 151: Transposed FIR network](./images/lecture/lecture-p151.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 151](../../03_resources/01_lectures/00_Intro.pdf#page=151).*
+
+### PDF page 152 - Cascade FIR network
+
+Each second-order section contributes $b_{0k}+b_{1k}z^{-1}+b_{2k}z^{-2}$. Connecting them in series multiplies polynomials, so the overall impulse response is the convolution of their coefficient sequences. Pair complex conjugate zeros for real section coefficients.
+
+![Original lecture PDF page 152: Cascade FIR network](./images/lecture/lecture-p152.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 152](../../03_resources/01_lectures/00_Intro.pdf#page=152).*
+
+### PDF page 153 - Four linear-phase FIR types and folded equations
+
+For symmetric $h$, pair samples with a sum; for antisymmetric $h$, use a difference. The four types use **order $M$**, not tap count:
+
+| Type | Order | Symmetry | Paired output |
+| --- | --- | --- | --- |
+| I | Even | Symmetric | $\sum_{k=0}^{M/2-1}h[k](x[n-k]+x[n-M+k])+h[M/2]x[n-M/2]$ |
+| II | Odd | Symmetric | $\sum_{k=0}^{(M-1)/2}h[k](x[n-k]+x[n-M+k])$ |
+| III | Even | Antisymmetric | $\sum_{k=0}^{M/2-1}h[k](x[n-k]-x[n-M+k])$ |
+| IV | Odd | Antisymmetric | $\sum_{k=0}^{(M-1)/2}h[k](x[n-k]-x[n-M+k])$ |
+
+For Type III the center coefficient must be zero. These formulas explain the multiplier saving rather than merely labeling the types.
+
+![Original lecture PDF page 153: Four linear-phase FIR types and folded equations](./images/lecture/lecture-p153.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 153](../../03_resources/01_lectures/00_Intro.pdf#page=153).*
+
+### PDF page 154 - Folded FIR diagrams
+
+The two diagrams implement symmetric FIRs with even and odd order by adding samples from opposite ends of the delay line before multiplication. Even order leaves one unpaired center sample; odd order does not. The amount of sample history remains necessary even though fewer distinct multipliers are used.
+
+![Original lecture PDF page 154: Folded FIR diagrams](./images/lecture/lecture-p154.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 154](../../03_resources/01_lectures/00_Intro.pdf#page=154).*
+
+### PDF page 155 - Other routes to structures
+
+Lattices arise from autoregressive signal modeling. Wave digital filters arise from structures analogous to analog networks. State-variable representations and linear transformations provide another construction route. These are separate design viewpoints; the following pages develop the lattice route specifically, not a full wave-digital-filter design method.
+
+![Original lecture PDF page 155: Other routes to structures](./images/lecture/lecture-p155.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 155](../../03_resources/01_lectures/00_Intro.pdf#page=155).*
+
+### PDF page 156 - FIR lattice and reflection coefficients
+
+The $k_i$ parameters are called reflection or PARCOR (partial correlation) coefficients. In modeling they can be estimated from data; here they specify a polynomial $H(z)=A(z)=1-\sum_{m=1}^{N}a_mz^{-m}$. Recursion between intermediate-order polynomials converts between direct coefficients and lattice coefficients.
+
+![Original lecture PDF page 156: FIR lattice and reflection coefficients](./images/lecture/lecture-p156.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 156](../../03_resources/01_lectures/00_Intro.pdf#page=156).*
+
+### PDF page 157 - Forward and backward lattice recursions
+
+Initialize $e_0[n]=\widetilde e_0[n]=x[n]$. For stages $i=1,\ldots,N$,
+
+$$
+e_i[n]=e_{i-1}[n]-k_i\widetilde e_{i-1}[n-1],\qquad
+\widetilde e_i[n]=-k_ie_{i-1}[n]+\widetilde e_{i-1}[n-1].
+$$
+
+The output is $e_N[n]$. Both cross branches have gain $-k_i$ in this FIR convention. Delay the backward signal exactly as indicated; omitting its delay changes the polynomial.
+
+![Original lecture PDF page 157: Forward and backward lattice recursions](./images/lecture/lecture-p157.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 157](../../03_resources/01_lectures/00_Intro.pdf#page=157).*
+
+### PDF page 158 - Step-up and step-down polynomial recursion
+
+For $A_i(z)=E_i(z)/E_0(z)$, the newest direct coefficient is $a_i^{(i)}=k_i$. Update earlier coefficients with $a_m^{(i)}=a_m^{(i-1)}-k_i a_{i-m}^{(i-1)}$ for $1\le m<i$. The reverse recursion divides $a_m^{(i)}+k_i a_{i-m}^{(i)}$ by $1-k_i^2$. Use a copy of the previous coefficient vector so one update does not overwrite a value still needed by another.
+
+![Original lecture PDF page 158: Step-up and step-down polynomial recursion](./images/lecture/lecture-p158.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 158](../../03_resources/01_lectures/00_Intro.pdf#page=158).*
+
+### PDF page 159 - Numerical lattice example
+
+The polynomial is $A(z)=(1-0.8jz^{-1})(1+0.8jz^{-1})(1-0.9z^{-1})=1-0.9z^{-1}+0.64z^{-2}-0.576z^{-3}$. In the lecture's minus-sign convention, $a^{(3)}=[0.9,-0.64,0.576]$. Step down:
+
+- $k_3=0.576$.
+- $a_1^{(2)}=(0.9+0.576(-0.64))/(1-0.576^2)\approx0.79518245$.
+- $a_2^{(2)}=(-0.64+0.576(0.9))/(1-0.576^2)\approx-0.18197491=k_2$.
+- $k_1=a_1^{(1)}=a_1^{(2)}/(1-k_2)\approx0.67275747$.
+
+The rounded diagram values should not replace the full values during an exact equivalence check.
+
+![Original lecture PDF page 159: Numerical lattice example](./images/lecture/lecture-p159.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 159](../../03_resources/01_lectures/00_Intro.pdf#page=159).*
+
+### PDF page 160 - Direct and lattice FIR drawings
+
+The direct diagram uses coefficients $1,-0.9,0.64,-0.576$; the lattice uses cross gains approximately $-0.6728,+0.182,-0.576$. These are different coefficient sets describing the same polynomial through different structures. Check a unit impulse: the output must be the four direct coefficients followed by zeros, up to the effect of rounded parameters.
+
+![Original lecture PDF page 160: Direct and lattice FIR drawings](./images/lecture/lecture-p160.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 160](../../03_resources/01_lectures/00_Intro.pdf#page=160).*
+
+### PDF page 161 - All-pole lattice
+
+Invert the FIR prediction polynomial to obtain $H(z)=1/A(z)$. The forward relation is solved backward through the stages, $e_{i-1}[n]=e_i[n]+k_i\widetilde e_{i-1}[n-1]$, with the corresponding backward relation retained. Input is at the $N$th end and output at the zero-order end. In this real, nondegenerate lattice convention, a causal all-pole filter is stable when every $|k_i|<1$, equivalent to roots of $A$ strictly inside the unit circle.
+
+![Original lecture PDF page 161: All-pole lattice](./images/lecture/lecture-p161.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 161](../../03_resources/01_lectures/00_Intro.pdf#page=161).*
+
+### PDF page 162 - Three all-pole lattice forms
+
+The slide names the three-multiplier form; a four-multiplier normalized form; and the four-multiplier Kelly-Lochbaum form, originating as an acoustic tube model for speech synthesis. Their scaling factors change the numerator gain: normalized stages produce a product of $\cos\theta_i$, while the displayed Kelly-Lochbaum version has a product of $(1+k_i)$. Preserve those factors when comparing transfer functions with $1/A(z)$.
+
+![Original lecture PDF page 162: Three all-pole lattice forms](./images/lecture/lecture-p162.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 162](../../03_resources/01_lectures/00_Intro.pdf#page=162).*
+
+### PDF page 163 - Stage gains for the lattice variants
+
+The three drawings show gain pairs $\pm k_i$ with an additional $(1-k_i^2)$ factor; normalized gains $\pm\sin\theta_i$ with $\cos\theta_i$; and Kelly-Lochbaum gains $\pm k_i$ with $(1+k_i)$ and $(1-k_i)$. They alter internal scaling while maintaining the intended pole structure. The exact interconnection and gain normalization are part of the definition, not optional decorations.
+
+![Original lecture PDF page 163: Stage gains for the lattice variants](./images/lecture/lecture-p163.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 163](../../03_resources/01_lectures/00_Intro.pdf#page=163).*
+
+### PDF page 164 - Pole-zero lattice-ladder network
+
+Add weighted taps $c_i$ from the all-pole lattice's backward outputs to create a general numerator. The slide gives
+
+$$
+H(z)=\frac{\sum_{i=0}^{N}c_i z^{-i}A_i(z^{-1})}{A(z)}=\frac{B(z)}{A(z)},\qquad
+b_m=c_m-\sum_{i=m+1}^{N}c_i a_{i-m}^{(i)}.
+$$
+
+For a real polynomial the reversal shown needs no conjugation. Solve the triangular coefficient equations from high order downward to obtain ladder weights. Reflection coefficients control the denominator; ladder weights control the numerator.
+
+![Original lecture PDF page 164: Pole-zero lattice-ladder network](./images/lecture/lecture-p164.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 164](../../03_resources/01_lectures/00_Intro.pdf#page=164).*
+
+### PDF page 165 - Pole-zero example in direct and lattice form
+
+The direct diagram uses denominator $1-0.9z^{-1}+0.64z^{-2}-0.576z^{-3}$ and numerator $1+3z^{-1}+3z^{-2}+z^{-3}=(1+z^{-1})^3$. Both unlabeled outer feedforward branches have unit gain; overlooking the bottom branch would lose the cubic term.
+
+The ladder equations give $c_3=1$, $c_2=3+0.9=3.9$, $c_1=3+3.9a_1^{(2)}-0.64\approx5.4612$, and $c_0=1+c_1k_1+c_2k_2+0.576\approx4.5404$. These agree with the lattice diagram's rounded labels. Its unlabeled leftmost ladder tap is $c_3=1$.
+
+![Original lecture PDF page 165: Pole-zero example in direct and lattice form](./images/lecture/lecture-p165.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 165](../../03_resources/01_lectures/00_Intro.pdf#page=165).*
+
+## Lyons supplement: exploit symmetry before multiplying
+
+Read [§13.7, printed pp. 702-703 / PDF pp. 727-728](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=727). Lyons shows the same sample-pairing economy as lecture pages 153-154: an odd tap count leaves one central multiply, and an even tap count consists entirely of pairs. [§6.6, PDF pp. 314-316](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=314) supports the transposition discussion. The detailed lattice/PARCOR recursions above are sourced to the lecture; these textbook sections do not replace them.
+
+![Lyons Figure 13-16: ordinary and folded symmetric FIR structures](./images/textbook/lyons-fig-13-16-p728.png)
+
+*Extracted figure crop: Figure 13-16, printed p. 703 / PDF p. 728.*
+
+## Worked example: five taps, three multiplications
+
+**Author-created example.** Let $h=[1,2,3,2,1]/9$. Then
+
+$$
+y[n]=\frac{x[n]+x[n-4]}9+\frac{2(x[n-1]+x[n-3])}9+\frac{x[n-2]}3.
+$$
+
+This Type I FIR has order 4, five taps, unity DC gain and group delay 2 samples. It needs three coefficient multiplications per sample after pairing. For an impulse input the output is still exactly $[1,2,3,2,1]/9$; folding changes the computation, not the response.
+
+## Retrieval practice and answer key
+
+1. What must the middle coefficient of an odd-length antisymmetric FIR be? **Zero.**
+2. Is transposition the same as reversing the coefficient array? **No.**
+3. What happens if $|k_i|=1$ during step-down? **The formula's denominator is zero; the nondegenerate recursion fails.**
+4. Are the FIR lattice's $k_i$ equal to all its direct coefficients? **Only the newest coefficient at each order is $k_i$; the other coefficients are recursively related.**
+
+## Summary Section
+
+Transposition and FIR folding preserve the transfer function while changing arithmetic organization. Lattices encode a polynomial with reflection coefficients and can be inverted into all-pole networks; ladder taps add numerator zeros. Maintain one coefficient-sign convention, include normalization gains, and verify numerical examples by reconstructing their polynomial or impulse response.

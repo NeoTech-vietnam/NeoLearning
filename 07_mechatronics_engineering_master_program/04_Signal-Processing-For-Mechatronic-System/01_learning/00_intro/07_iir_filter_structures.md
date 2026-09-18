@@ -1,0 +1,254 @@
+# Cornell Notes 07: Block diagrams, direct-form, cascade and parallel IIR structures
+
+[All topics](./README.md) | [Previous](./06_inverse_z_transform_and_system_functions.md) | [Next](./08_fir_transposed_and_lattice_structures.md)
+
+**Lecture:** [PDF pages 124-144](../../03_resources/01_lectures/00_Intro.pdf#page=124) (21 pages). **Updated:** 2026-09-14.
+
+**Source convention:** PDF page numbers are one-based viewer pages. Each original slide is reproduced beneath its written note to preserve the complete source content. “Clarification” marks explanatory additions or corrections; “Lyons supplement” marks textbook enrichment.
+
+## Cue Column
+
+| Cue / retrieval question | Study target |
+| --- | --- |
+| How do equations become signal-flow diagrams? | Adders, multipliers and unit delays. |
+| What distinguishes direct forms I and II? | Separate input/output histories versus shared internal state. |
+| What does canonical mean here? | Minimum delay count for the stated realization. |
+| How do cascade and parallel structures differ? | Products versus sums of transfer functions. |
+| Where do feedback signs come from? | The chosen denominator convention. |
+| Can algebraically equivalent structures behave differently? | Finite precision and internal dynamic range. |
+
+## Notes Section: one consistent sign convention
+
+This part of the lecture often uses feedback gains $a_k$ **with their signs already included**:
+
+$$
+y[n]=\sum_{k=1}^{N}a_k y[n-k]+\sum_{k=0}^{M}b_kx[n-k],\qquad
+H(z)=\frac{\sum_{k=0}^{M}b_kz^{-k}}{1-\sum_{k=1}^{N}a_kz^{-k}}.
+$$
+
+For direct form II, define
+
+$$
+w[n]=x[n]+\sum_{k=1}^{N}a_kw[n-k],\qquad
+y[n]=\sum_{k=0}^{M}b_kw[n-k].
+$$
+
+Direct form I normally uses $M+N$ delay elements; direct form II shares them and uses $\max(M,N)$, before possible order reduction by exact cancellations. Saving delay elements does not automatically minimize numerical error.
+
+## Notes Section: page-by-page lecture coverage
+
+### PDF page 124 - Structure roadmap
+
+The section covers block diagrams of constant-coefficient recurrences, signal-flow graphs, basic IIR structures, transposition, FIR networks and lattices. This topic handles direct/cascade/parallel IIR realizations; topic 08 continues with the remaining structures.
+
+![Original lecture PDF page 124: Structure roadmap](./images/lecture/lecture-p124.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 124](../../03_resources/01_lectures/00_Intro.pdf#page=124).*
+
+### PDF page 125 - A first-order recursive realization
+
+For $H(z)=(b_0+b_1z^{-1})/(1-az^{-1})$, $|z|>|a|$, the impulse response is $b_0a^nu[n]+b_1a^{n-1}u[n-1]$. The recurrence is $y[n]=ay[n-1]+b_0x[n]+b_1x[n-1]$. Direct convolution with its generally infinite impulse response cannot be performed as a finite full-history sum at each indefinitely advancing sample; the recurrence gives finite work and state. Degenerate cancellations can reduce it to FIR, so “IIR” assumes an uncanceled feedback pole.
+
+![Original lecture PDF page 125: A first-order recursive realization](./images/lecture/lecture-p125.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 125](../../03_resources/01_lectures/00_Intro.pdf#page=125).*
+
+### PDF page 126 - Primitive block operations
+
+An adder forms $x_1[n]+x_2[n]$; a constant-gain block forms $ax[n]$; a delay $z^{-1}$ outputs $x[n-1]$. Connecting branches copies a signal to multiple destinations without changing its value. These primitives represent the arithmetic and storage of a discrete-time implementation.
+
+![Original lecture PDF page 126: Primitive block operations](./images/lecture/lecture-p126.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 126](../../03_resources/01_lectures/00_Intro.pdf#page=126).*
+
+### PDF page 127 - Factor into numerator and denominator subsystems
+
+Write $H=H_1H_2$, where one subsystem is all-pole and the other FIR. Cascade order can be exchanged for scalar LTI zero-state systems in exact arithmetic. The intermediate sequences $v[n]$ and $w[n]$ need not be equal after reordering; only the external input/output relation is equal. This distinction matters for internal overflow and initial states.
+
+![Original lecture PDF page 127: Factor into numerator and denominator subsystems](./images/lecture/lecture-p127.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 127](../../03_resources/01_lectures/00_Intro.pdf#page=127).*
+
+### PDF page 128 - Direct form I
+
+The diagram stores delayed inputs for the feedforward sum and delayed outputs for the feedback sum. Read each branch coefficient against the equation, then count the two delay chains. For general orders $M,N$, it requires $M+N$ delays. The present output becomes part of the output history for the next sample, not an undelayed algebraic feedback loop.
+
+![Original lecture PDF page 128: Direct form I](./images/lecture/lecture-p128.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 128](../../03_resources/01_lectures/00_Intro.pdf#page=128).*
+
+### PDF page 129 - Rearranged direct form II before merging delays
+
+Move the all-pole section before the all-zero section. Both chains now carry delayed versions of the same internal sequence $w[n]$, making their states mergeable. The unmerged drawing is the step that explains where the memory reduction comes from.
+
+![Original lecture PDF page 129: Rearranged direct form II before merging delays](./images/lecture/lecture-p129.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 129](../../03_resources/01_lectures/00_Intro.pdf#page=129).*
+
+### PDF page 130 - Shared delay line
+
+For $M=N$, combine the two copies of $w[n-1],\ldots,w[n-N]$ into one line. The left branches compute the recursion for $w[n]$ and the right branches compute the output. For unequal orders pad absent coefficients with zeros and store up to $\max(M,N)$ delays.
+
+![Original lecture PDF page 130: Shared delay line](./images/lecture/lecture-p130.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 130](../../03_resources/01_lectures/00_Intro.pdf#page=130).*
+
+### PDF page 131 - Canonical realization
+
+The lecture calls a realization with the minimum number of delay elements canonic/canonical. Direct form I follows the original input/output recurrence; direct form II rearranges the sections to share state. **Qualification:** if numerator and denominator contain canceling factors, reduce the transfer function before claiming a globally minimal state order.
+
+![Original lecture PDF page 131: Canonical realization](./images/lecture/lecture-p131.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 131](../../03_resources/01_lectures/00_Intro.pdf#page=131).*
+
+### PDF page 132 - Signal-flow graph notation
+
+A node can add incoming signals, split a signal, or serve as source/sink. Directed branches carry gains or delay factors. The example combines branches $a,b,c,d,e$ and delays; its equations are obtained by assigning a variable to each node and summing weighted incoming values. Path direction matters; graph proximity alone does not establish a connection.
+
+![Original lecture PDF page 132: Signal-flow graph notation](./images/lecture/lecture-p132.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 132](../../03_resources/01_lectures/00_Intro.pdf#page=132).*
+
+### PDF page 133 - IIR structure families
+
+The three basic realizations are direct forms, cascade form and parallel form. Feedback explains the recursive computation that can sustain an infinite impulse response. Structure selection changes storage, intermediate values and error propagation while preserving the same exact-arithmetic zero-state transfer function.
+
+![Original lecture PDF page 133: IIR structure families](./images/lecture/lecture-p133.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 133](../../03_resources/01_lectures/00_Intro.pdf#page=133).*
+
+### PDF page 134 - Direct-form equations
+
+The displayed recurrence is $y[n]-\sum_{k=1}^Na_ky[n-k]=\sum_{k=0}^Mb_kx[n-k]$, matching denominator $1-\sum a_kz^{-k}$. **Sign checkpoint:** these $a_k$ are the negative of denominator coefficients in the “$1+\sum a_kz^{-k}$” notation from topic 04. Converting between conventions is essential before copying coefficients into a diagram or software routine.
+
+![Original lecture PDF page 134: Direct-form equations](./images/lecture/lecture-p134.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 134](../../03_resources/01_lectures/00_Intro.pdf#page=134).*
+
+### PDF page 135 - Direct form I for equal orders
+
+The illustrated $M=N$ case has separate histories for input and output and sums their weighted contributions. Use it to locate each feedforward coefficient $b_k$ and feedback gain $a_k$. In an implementation, all required old samples must remain available until the present output has been computed.
+
+![Original lecture PDF page 135: Direct form I for equal orders](./images/lecture/lecture-p135.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 135](../../03_resources/01_lectures/00_Intro.pdf#page=135).*
+
+### PDF page 136 - Direct form II for equal orders
+
+The equal-order DF-II drawing shares the internal delay line. The internal sample $w[n]$ can have a much larger amplitude than either input or output, even if the overall frequency response is modest. This is why counting fewer delay registers is only one part of choosing a realization.
+
+![Original lecture PDF page 136: Direct form II for equal orders](./images/lecture/lecture-p136.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 136](../../03_resources/01_lectures/00_Intro.pdf#page=136).*
+
+### PDF page 137 - Direct form II detail
+
+This additional drawing develops the same recursive internal state and feedforward output combination. Trace a unit impulse through the delays to verify coefficient placement rather than trusting the visual orientation of the diagram. Equivalent drawings can reverse left/right placement without changing the equations.
+
+![Original lecture PDF page 137: Direct form II detail](./images/lecture/lecture-p137.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 137](../../03_resources/01_lectures/00_Intro.pdf#page=137).*
+
+### PDF page 138 - Second-order direct-form example
+
+The example is
+
+$$
+H(z)=\frac{1+2z^{-1}+z^{-2}}{1-0.75z^{-1}+0.125z^{-2}}.
+$$
+
+Thus the signed feedback gains are $0.75,-0.125$ and feedforward coefficients $1,2,1$. Direct form I needs four delays; direct form II needs two. The corresponding output recurrence is $y[n]=0.75y[n-1]-0.125y[n-2]+x[n]+2x[n-1]+x[n-2]$.
+
+![Original lecture PDF page 138: Second-order direct-form example](./images/lecture/lecture-p138.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 138](../../03_resources/01_lectures/00_Intro.pdf#page=138).*
+
+### PDF page 139 - Equivalent signal-flow graphs
+
+The two graphs implement the second-order example using different node arrangements. Check the sign of the $-0.125$ branch, the coefficient 2 on the middle feedforward term, and the unit outer feedforward terms. Different internal nodes represent different stored variables; do not transfer state vectors between forms by simply copying their numerical values.
+
+![Original lecture PDF page 139: Equivalent signal-flow graphs](./images/lecture/lecture-p139.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 139](../../03_resources/01_lectures/00_Intro.pdf#page=139).*
+
+### PDF page 140 - Cascade of first/second-order sections
+
+Factor real-coefficient numerator/denominator polynomials into real first-order factors and conjugate second-order factors. Pair conjugate roots to keep coefficients real. A section has form $(b_{0k}+b_{1k}z^{-1}+b_{2k}z^{-2})/(1-a_{1k}z^{-1}-a_{2k}z^{-2})$. The total response is the product of section responses. For equal numerator/denominator order $N$, there are $\lceil N/2\rceil$ sections; in general account for the larger order and zero-pad missing coefficients.
+
+![Original lecture PDF page 140: Cascade of first/second-order sections](./images/lecture/lecture-p140.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 140](../../03_resources/01_lectures/00_Intro.pdf#page=140).*
+
+### PDF page 141 - Cascade example and alternative ordering
+
+Factor the example as
+
+$$
+H(z)=\frac{(1+z^{-1})(1+z^{-1})}{(1-0.5z^{-1})(1-0.25z^{-1})}.
+$$
+
+The drawings exchange the $0.5$ and $0.25$ first-order sections and also show a general cascade of three biquads. External responses agree in exact zero-state arithmetic, while intermediate signals differ. Overall gain can be distributed among stages to manage their ranges.
+
+![Original lecture PDF page 141: Cascade example and alternative ordering](./images/lecture/lecture-p141.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 141](../../03_resources/01_lectures/00_Intro.pdf#page=141).*
+
+### PDF page 142 - Parallel form from partial fractions
+
+Decompose $H(z)$ into a polynomial/direct FIR part plus a sum of first- or second-order rational branches. Complex conjugate residues/poles combine into real second-order sections. Numerator degree at least denominator degree can create a direct/polynomial part; when no such part exists omit it. All branches receive the same input and their outputs are summed.
+
+![Original lecture PDF page 142: Parallel form from partial fractions](./images/lecture/lecture-p142.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 142](../../03_resources/01_lectures/00_Intro.pdf#page=142).*
+
+### PDF page 143 - Sixth-order parallel network
+
+The diagram shows three second-order branches and a direct path $C_0$, summed into $y[n]$. Each branch has its own state pair and coefficients. For the displayed $M=N=6$ example, the direct term is expected from equal-degree division. Do not cascade these branches: parallel means adding their outputs, not multiplying transfer functions.
+
+![Original lecture PDF page 143: Sixth-order parallel network](./images/lecture/lecture-p143.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 143](../../03_resources/01_lectures/00_Intro.pdf#page=143).*
+
+### PDF page 144 - Parallel example and coefficient check
+
+The same second-order transfer function can be written
+
+$$
+H(z)=8+\frac{-7+8z^{-1}}{1-0.75z^{-1}+0.125z^{-2}}
+=8+\frac{18}{1-0.5z^{-1}}-\frac{25}{1-0.25z^{-1}}.
+$$
+
+The page draws both the second-order residual branch and two first-order branches. At $z\to\infty$, $8+18-25=1$, agreeing with $h[0]$ and the direct-form numerator coefficient. This quick check catches misplaced signs and direct terms.
+
+![Original lecture PDF page 144: Parallel example and coefficient check](./images/lecture/lecture-p144.png)
+
+*Original slide, including all figures and annotations: [lecture PDF p. 144](../../03_resources/01_lectures/00_Intro.pdf#page=144).*
+
+## Lyons supplement: arithmetic changes the design choice
+
+Read [§§6.6-6.9, printed pp. 289-302 / PDF pp. 314-327](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=314). Lyons compares direct and transposed structures, then explains finite-word-length pitfalls and gain scaling. Algebraic equality does not imply identical roundoff noise or overflow behavior. Low-order cascade sections make high-order designs easier to control numerically, but still require coefficient precision and internal-range checks.
+
+![Lyons Figure 6-22: four equivalent second-order IIR structures](./images/textbook/lyons-fig-6-22-p315.png)
+
+*Extracted figure crop: Figure 6-22, printed p. 290 / PDF p. 315. Feedback-sign notation follows Lyons' own diagram; compare equations before transferring coefficients.*
+
+## Worked example: check three realizations
+
+For the lecture example, apply $x[n]=\delta[n]$ with zero prior state. The recurrence produces
+
+$$
+h[0]=1,\quad h[1]=2.75,\quad h[2]=2.9375,\quad h[3]=1.859375.
+$$
+
+The parallel form yields $h[n]=8\delta[n]+18(0.5)^nu[n]-25(0.25)^nu[n]$, reproducing those values. The cascade of the two first-order sections reproduces them as well. This verifies the structure algebra using an input that characterizes an LTI system.
+
+## Retrieval practice and answer key
+
+1. How many delays do DF-I and DF-II use for $M=N=2$? **Four and two.**
+2. What are the signed feedback gains for denominator $1+0.2z^{-1}-0.3z^{-2}$? **$-0.2$ and $+0.3$.**
+3. How do parallel transfer functions combine? **By addition.**
+4. Why can exchanging cascade sections affect finite-precision behavior? **It changes internal signal ranges and where errors are injected.**
+
+## Summary Section
+
+Realizations turn a transfer function into arithmetic and state. Direct form II shares delays; cascade form factors the transfer function; parallel form uses partial fractions. Their exact input/output equivalence must be distinguished from their internal-state and finite-precision behavior.

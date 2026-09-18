@@ -1,0 +1,1602 @@
+{
+  "lecture_source": "../../03_resources/01_lectures/00_Intro.pdf",
+  "textbook_source": "../../03_resources/03-Understanding-Digital-Signal-Processing.pdf",
+  "sources": {
+    "lecture": {
+      "sha256": "de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea",
+      "path": "03_resources/01_lectures/00_Intro.pdf"
+    },
+    "textbook": {
+      "sha256": "f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057",
+      "path": "03_resources/03-Understanding-Digital-Signal-Processing.pdf"
+    }
+  },
+  "images": [
+    {
+      "file": "images/textbook/lyons-fig-1-1-p028.png",
+      "source": "textbook",
+      "pdf_page": 28,
+      "printed_page": 3,
+      "figure": "1-1",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.67
+      ],
+      "sha256": "b99ca8f51d4a7042a1f9aa370bcd106594461272a12b87551971a66550d21091"
+    },
+    {
+      "file": "images/textbook/lyons-fig-2-1-p059.png",
+      "source": "textbook",
+      "pdf_page": 59,
+      "printed_page": 34,
+      "figure": "2-1",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.49,
+        0.97,
+        0.915
+      ],
+      "sha256": "ce071757d6b9d3f24b942ae94f4be51ae256d8cf2d9f9c77c284750039843fb0"
+    },
+    {
+      "file": "images/textbook/lyons-fig-2-4-p064.png",
+      "source": "textbook",
+      "pdf_page": 64,
+      "printed_page": 39,
+      "figure": "2-4",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.595
+      ],
+      "sha256": "31f350988c0924c022e18d60b111d1a8a20c05496852d2e2d7196e0f826e3ae4"
+    },
+    {
+      "file": "images/textbook/lyons-fig-1-11-p044.png",
+      "source": "textbook",
+      "pdf_page": 44,
+      "printed_page": 19,
+      "figure": "1-11",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.63,
+        0.97,
+        0.92
+      ],
+      "sha256": "6493b171bfc9d5e8270df2654d75664c827aec04c7b38524c1a2e0e50fbc9b2c"
+    },
+    {
+      "file": "images/textbook/lyons-fig-6-2-p280.png",
+      "source": "textbook",
+      "pdf_page": 280,
+      "printed_page": 255,
+      "figure": "6-2",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.625
+      ],
+      "sha256": "3525bb5eb08b39155eba56107ba6e8b40ca2e8acc83906bdf33734081472ff92"
+    },
+    {
+      "file": "images/textbook/lyons-fig-5-35-p236.png",
+      "source": "textbook",
+      "pdf_page": 236,
+      "printed_page": 211,
+      "figure": "5-35",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.7
+      ],
+      "sha256": "2fdd1c7ad4e9e063fb0cd25130520593f55e352cc322120570f01962ab7f16f6"
+    },
+    {
+      "file": "images/textbook/lyons-fig-6-15-p298.png",
+      "source": "textbook",
+      "pdf_page": 298,
+      "printed_page": 273,
+      "figure": "6-15",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.27,
+        0.97,
+        0.935
+      ],
+      "sha256": "71b60179992eb38d199a52c054a70acadb43afe619ad9490bb6bf19f7e4af1a4"
+    },
+    {
+      "file": "images/textbook/lyons-fig-6-22-p315.png",
+      "source": "textbook",
+      "pdf_page": 315,
+      "printed_page": 290,
+      "figure": "6-22",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.59
+      ],
+      "sha256": "e9031d308d2111a7eaa2fc93b82f399e287e73af9f34c1add1627af8e33ac24e"
+    },
+    {
+      "file": "images/textbook/lyons-fig-13-16-p728.png",
+      "source": "textbook",
+      "pdf_page": 728,
+      "printed_page": 703,
+      "figure": "13-16",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.81
+      ],
+      "sha256": "a3e45adbfc6b4ee679c6178c022d82fbbe348ecfeb3ef17bbceae5d0e255c716"
+    },
+    {
+      "file": "images/textbook/lyons-fig-3-2-p090.png",
+      "source": "textbook",
+      "pdf_page": 90,
+      "printed_page": 65,
+      "figure": "3-2",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.84
+      ],
+      "sha256": "0db1e25a3f75b49121ee58cbf27586aa14cbfc0e605c1fb8b644181225bf0b1a"
+    },
+    {
+      "file": "images/textbook/lyons-fig-13-27-p742.png",
+      "source": "textbook",
+      "pdf_page": 742,
+      "printed_page": 717,
+      "figure": "13-27",
+      "method": "crop from 144 dpi source-page render",
+      "crop_normalized": [
+        0.1,
+        0.075,
+        0.97,
+        0.625
+      ],
+      "sha256": "bdd4f3d3e370620272e3d6b725ad4083a16d635fbc3fd4480c854d8ed4f48474"
+    },
+    {
+      "file": "images/lecture/lecture-p001.png",
+      "source": "lecture",
+      "pdf_page": 1,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c2690d2e8670051e302e71f611616b9a1fb68e07afac71852a3d59ef77914937"
+    },
+    {
+      "file": "images/lecture/lecture-p002.png",
+      "source": "lecture",
+      "pdf_page": 2,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "ba6be9142bfb1cc838d1de8300c2a25eb8eeed84d40c4261dd01fe9fff50ed12"
+    },
+    {
+      "file": "images/lecture/lecture-p003.png",
+      "source": "lecture",
+      "pdf_page": 3,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f514d2f48fc38f443eced0a3e63216cde2117e5e9d7d736ef417293418b10bd9"
+    },
+    {
+      "file": "images/lecture/lecture-p004.png",
+      "source": "lecture",
+      "pdf_page": 4,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d19f6d09113dda30878c2a6538c32b13c8cd154631550ce06f3e44c22017de23"
+    },
+    {
+      "file": "images/lecture/lecture-p005.png",
+      "source": "lecture",
+      "pdf_page": 5,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "cbabf9ebd5e79168606f262ac36d64fcf7a82a1aaca389b85ae32446deb42f35"
+    },
+    {
+      "file": "images/lecture/lecture-p006.png",
+      "source": "lecture",
+      "pdf_page": 6,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c270ef94a13c37880c603a30e0fab56665b4443ab7cdb80c825c6e3481948ba3"
+    },
+    {
+      "file": "images/lecture/lecture-p007.png",
+      "source": "lecture",
+      "pdf_page": 7,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e1838381284f7177835c1029130022d052ae77d6466bc6f08490df76ade54264"
+    },
+    {
+      "file": "images/lecture/lecture-p008.png",
+      "source": "lecture",
+      "pdf_page": 8,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "4248c38d71a107935a2fc368d3bd2abc29a6887224205eefe4c1fb0e4d2da06f"
+    },
+    {
+      "file": "images/lecture/lecture-p009.png",
+      "source": "lecture",
+      "pdf_page": 9,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "932371365120883ee01e605de0e40c64b9b90ec3854452fcbd81ae602e3fa163"
+    },
+    {
+      "file": "images/lecture/lecture-p010.png",
+      "source": "lecture",
+      "pdf_page": 10,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a885d8dc8e915c2024cdc90decf3a942ce3ffbaa9ac4d942b308fe703039ab86"
+    },
+    {
+      "file": "images/lecture/lecture-p011.png",
+      "source": "lecture",
+      "pdf_page": 11,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "82927c99a4db512ddecb4d01ce69b6792d44787b6bb35d8b9cfb608d2f03eb7c"
+    },
+    {
+      "file": "images/lecture/lecture-p012.png",
+      "source": "lecture",
+      "pdf_page": 12,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d6340d4315602f7d0358d515df05d01df8d06293ca4dcc7b5188afe08640e44d"
+    },
+    {
+      "file": "images/lecture/lecture-p013.png",
+      "source": "lecture",
+      "pdf_page": 13,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6e1b5148a710a088d5bb1c2a590a82cc7622bf4439652cd77573aaf32c2b18bb"
+    },
+    {
+      "file": "images/lecture/lecture-p014.png",
+      "source": "lecture",
+      "pdf_page": 14,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d308df6f96d2db0fff866e954b3a97fcb8e9d6c0b59a05af63bead5840fc46cd"
+    },
+    {
+      "file": "images/lecture/lecture-p015.png",
+      "source": "lecture",
+      "pdf_page": 15,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "710107a60833419d5fe0d5186e11693c45e4156199fa3c0aa5ed246b1421badb"
+    },
+    {
+      "file": "images/lecture/lecture-p016.png",
+      "source": "lecture",
+      "pdf_page": 16,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "99008b4faed5e0eae2265f23be53498d57b71ef3cb91e7a9bd88b7f913faf6b4"
+    },
+    {
+      "file": "images/lecture/lecture-p017.png",
+      "source": "lecture",
+      "pdf_page": 17,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "25d95405aca6ceba55eb614cee5a69379843c42634ff17c9cc9b6bd4c58ae486"
+    },
+    {
+      "file": "images/lecture/lecture-p018.png",
+      "source": "lecture",
+      "pdf_page": 18,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6249def12336dd7113fc3dfeab54387abef04a618f99eb229cbef1fae80585fe"
+    },
+    {
+      "file": "images/lecture/lecture-p019.png",
+      "source": "lecture",
+      "pdf_page": 19,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "10370e260dce5ab571ded8b877a5aa8dbe3af42ef2a5a0dd9f3bbff4110e2428"
+    },
+    {
+      "file": "images/lecture/lecture-p020.png",
+      "source": "lecture",
+      "pdf_page": 20,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f60c2b34a12011bdf696953b9c82c923514f2387dbd1143f15b85e8581d4e2f5"
+    },
+    {
+      "file": "images/lecture/lecture-p021.png",
+      "source": "lecture",
+      "pdf_page": 21,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7732d2f14ba629ff17ffb2fbf249317aa8827e1570bd5a95897b53928a0c9e80"
+    },
+    {
+      "file": "images/lecture/lecture-p022.png",
+      "source": "lecture",
+      "pdf_page": 22,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f1040d858b5aea7dc381f90063d7a8d5a2a9cf9105ea78f47a8c932f1de0107c"
+    },
+    {
+      "file": "images/lecture/lecture-p023.png",
+      "source": "lecture",
+      "pdf_page": 23,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "ea46564bb88ddd0a3ed3a4ff768b06d965c97f8bd284238139b8256256200501"
+    },
+    {
+      "file": "images/lecture/lecture-p024.png",
+      "source": "lecture",
+      "pdf_page": 24,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "3bbff9bfb07bfff003b33791bf6adcb9a7c7f43e683d9d30ccbdc7ffb914dcc9"
+    },
+    {
+      "file": "images/lecture/lecture-p025.png",
+      "source": "lecture",
+      "pdf_page": 25,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d63ae3cb9749ba7d057daac0a9a3bb6f68686f61c90242f3e6dcf011d86bbc9d"
+    },
+    {
+      "file": "images/lecture/lecture-p026.png",
+      "source": "lecture",
+      "pdf_page": 26,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7d6bfe5021e857f296f80f0602db47d496dc814afcb2321d824a4f5e934cb769"
+    },
+    {
+      "file": "images/lecture/lecture-p027.png",
+      "source": "lecture",
+      "pdf_page": 27,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f34a1c4bca61315f31748ec6ffd2d22ede509d4778995086daf86c8dbed1316d"
+    },
+    {
+      "file": "images/lecture/lecture-p028.png",
+      "source": "lecture",
+      "pdf_page": 28,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c7778fccb08f0a430d7405f3466a87ad277b4a984444fb1996857820580d9120"
+    },
+    {
+      "file": "images/lecture/lecture-p029.png",
+      "source": "lecture",
+      "pdf_page": 29,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5e474c42bbabee110b53c799bce81672a2169eeca16858526584eefc19b21f9f"
+    },
+    {
+      "file": "images/lecture/lecture-p030.png",
+      "source": "lecture",
+      "pdf_page": 30,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "83e6c334a9698f7c84fb42177e34497ce3aeed19f7d4f2345f326ccfa5ad8357"
+    },
+    {
+      "file": "images/lecture/lecture-p031.png",
+      "source": "lecture",
+      "pdf_page": 31,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f7f44e9e4fcbaa6d80760d7d978d868dbef4d31d32263713786b9e4f81a515f4"
+    },
+    {
+      "file": "images/lecture/lecture-p032.png",
+      "source": "lecture",
+      "pdf_page": 32,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0fae712dcf1b00da18af8f2fcc73b6f91bdae53a79e40e56069948bf1f913051"
+    },
+    {
+      "file": "images/lecture/lecture-p033.png",
+      "source": "lecture",
+      "pdf_page": 33,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "70263b4854c20ba350e7ae994a97865c00cfbcd5dcad00028fb1b4278fe3f46b"
+    },
+    {
+      "file": "images/lecture/lecture-p034.png",
+      "source": "lecture",
+      "pdf_page": 34,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "86476e8bcd2c1d439389573cb3abdd4c108b7e746b3ed8e80c20cc61a1997955"
+    },
+    {
+      "file": "images/lecture/lecture-p035.png",
+      "source": "lecture",
+      "pdf_page": 35,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "774cc91846157cc999014ad52e11926d30e2ae62788a782b9f8eaf8fd3860c30"
+    },
+    {
+      "file": "images/lecture/lecture-p036.png",
+      "source": "lecture",
+      "pdf_page": 36,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "23dea3cd1ba30541e68668ad4c7b42289622863dfbb0568775d19ea271e18a9b"
+    },
+    {
+      "file": "images/lecture/lecture-p037.png",
+      "source": "lecture",
+      "pdf_page": 37,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8ed9e7a053d169b0efd3d68a5d546dc255a70a11f45380061dc5b63fd5b03847"
+    },
+    {
+      "file": "images/lecture/lecture-p038.png",
+      "source": "lecture",
+      "pdf_page": 38,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0c4e25a27f07c97074c68a5b4e0e1933c047d229ca5b4ef158fb6f0d54d349d3"
+    },
+    {
+      "file": "images/lecture/lecture-p039.png",
+      "source": "lecture",
+      "pdf_page": 39,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e7e2b8c1bb78d951310a38d1c19df4f56b3fe01d9bb47593a9caf7050212ad84"
+    },
+    {
+      "file": "images/lecture/lecture-p040.png",
+      "source": "lecture",
+      "pdf_page": 40,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b144852a124166df03adcadaec58fd8bbbed0e4a2fac3e424fac90fd99954d1d"
+    },
+    {
+      "file": "images/lecture/lecture-p041.png",
+      "source": "lecture",
+      "pdf_page": 41,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "04949476edd9fd85482f53ccc778f0626d6fae2b31a9be9a8329999f3eccf665"
+    },
+    {
+      "file": "images/lecture/lecture-p042.png",
+      "source": "lecture",
+      "pdf_page": 42,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2ef597ddb809b29bf1b34b707a59ea34411eb01c3c7871d1a838db2003e9b09c"
+    },
+    {
+      "file": "images/lecture/lecture-p043.png",
+      "source": "lecture",
+      "pdf_page": 43,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "083a57e0b71e534a321f75f155a1deb9bb80240e5939206640a9557b7ab87407"
+    },
+    {
+      "file": "images/lecture/lecture-p044.png",
+      "source": "lecture",
+      "pdf_page": 44,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5fec5bb1c99111a5105a6a0f36dfdcb448fd45fa8c48b0f86c5a5242cc67d871"
+    },
+    {
+      "file": "images/lecture/lecture-p045.png",
+      "source": "lecture",
+      "pdf_page": 45,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8215e1ca8c2168fc9d3016087e73fc6fd86740c21c5beaa3ede0553a774092a0"
+    },
+    {
+      "file": "images/lecture/lecture-p046.png",
+      "source": "lecture",
+      "pdf_page": 46,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "1f2f9dd6c543e45a94bf7e92c6a978cdfa5208df3bf6606afb2d238ca5062a49"
+    },
+    {
+      "file": "images/lecture/lecture-p047.png",
+      "source": "lecture",
+      "pdf_page": 47,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "74d246e9af65dd07506f9be7c3e7a6e6c0e97668436877a485f9b01c82fe88e8"
+    },
+    {
+      "file": "images/lecture/lecture-p048.png",
+      "source": "lecture",
+      "pdf_page": 48,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "1c83f6557bf3a72c3a958d3a95f889ef47cbfe60531702fd237854beffe7e2dd"
+    },
+    {
+      "file": "images/lecture/lecture-p049.png",
+      "source": "lecture",
+      "pdf_page": 49,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "18da898e12c9ce4c96ebb8710ae4339ee3c18fba0b54a2917426764002e4d71e"
+    },
+    {
+      "file": "images/lecture/lecture-p050.png",
+      "source": "lecture",
+      "pdf_page": 50,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d8c690950eda71f4c696b5d771b06482b4e2ca9cce5d13313d7a928acda10648"
+    },
+    {
+      "file": "images/lecture/lecture-p051.png",
+      "source": "lecture",
+      "pdf_page": 51,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d113b9584e3b975b65d0a0727a8aeaec692dce876751c0275a783817960397ee"
+    },
+    {
+      "file": "images/lecture/lecture-p052.png",
+      "source": "lecture",
+      "pdf_page": 52,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a4f5babd35bd913ccee6399557b8d7c85afc7423a3e083e9cfea521a289ef0e1"
+    },
+    {
+      "file": "images/lecture/lecture-p053.png",
+      "source": "lecture",
+      "pdf_page": 53,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f5a562344e3cc8aecbd89d6c864b8363729da7fcec72ca960cdf6041e79ab614"
+    },
+    {
+      "file": "images/lecture/lecture-p054.png",
+      "source": "lecture",
+      "pdf_page": 54,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b4b76a8954e9f30f48d4446fd73c397d391b1b688c014aabbdfaf377d71ab7a0"
+    },
+    {
+      "file": "images/lecture/lecture-p055.png",
+      "source": "lecture",
+      "pdf_page": 55,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e62a37b7b37fb09baf820c184641179caa96668171cb19d197ba9b78eebe6d2d"
+    },
+    {
+      "file": "images/lecture/lecture-p056.png",
+      "source": "lecture",
+      "pdf_page": 56,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "3d244fc235166f3da722077566638d95759136a23e15008cf91b27a042dd2bca"
+    },
+    {
+      "file": "images/lecture/lecture-p057.png",
+      "source": "lecture",
+      "pdf_page": 57,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5b3487f291874d245c239e4e1ee6a694ab3a4f3a968c462e092a3ee949b5bc41"
+    },
+    {
+      "file": "images/lecture/lecture-p058.png",
+      "source": "lecture",
+      "pdf_page": 58,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "84f3999d921054a1c3a51f7000291be67939bf8d083358fad9a702077579060c"
+    },
+    {
+      "file": "images/lecture/lecture-p059.png",
+      "source": "lecture",
+      "pdf_page": 59,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "85a21afbccee6af3f654ddb40b0cdaff976d471618adc7a1ec0f71bd9681b7ee"
+    },
+    {
+      "file": "images/lecture/lecture-p060.png",
+      "source": "lecture",
+      "pdf_page": 60,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a6ffb1fea9ff52001e9b350cc786aa41ed783bab5dd862b6df2804021700eb2f"
+    },
+    {
+      "file": "images/lecture/lecture-p061.png",
+      "source": "lecture",
+      "pdf_page": 61,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6eefa75dc3847c2982dcef088ad26ae132a7f6f2bd17cd4a5f7c31b2c5c72b73"
+    },
+    {
+      "file": "images/lecture/lecture-p062.png",
+      "source": "lecture",
+      "pdf_page": 62,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d919a81c81c69d1b894217f9a06ae6f671a7920f7936c8f2f62cdd4168bb8ce1"
+    },
+    {
+      "file": "images/lecture/lecture-p063.png",
+      "source": "lecture",
+      "pdf_page": 63,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8293366059c7c68465fad61e7ea85a39fa548c975bedfdf9db9017b9175f03e8"
+    },
+    {
+      "file": "images/lecture/lecture-p064.png",
+      "source": "lecture",
+      "pdf_page": 64,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e6c4c711c677355d2cdf1577e682d6ad0940de59a9984d01874a9e11380bc9e0"
+    },
+    {
+      "file": "images/lecture/lecture-p065.png",
+      "source": "lecture",
+      "pdf_page": 65,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0c3e6684b2c76e43087958100735e4880ba08dfdcc9aac9f6cb224a2bcbca7a4"
+    },
+    {
+      "file": "images/lecture/lecture-p066.png",
+      "source": "lecture",
+      "pdf_page": 66,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c292bafbfc7081ff33a7acd8cc6f4d639c1d8a51dfae8e32f159429c37108ede"
+    },
+    {
+      "file": "images/lecture/lecture-p067.png",
+      "source": "lecture",
+      "pdf_page": 67,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "29509150e7ae7194e7db5e5aac9d489516f2ed87d1e184ce7b4062a8664a496c"
+    },
+    {
+      "file": "images/lecture/lecture-p068.png",
+      "source": "lecture",
+      "pdf_page": 68,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "dba545020162c5ba281716334d346e781f1e9ed34b2f79bc1788886b7a5fb631"
+    },
+    {
+      "file": "images/lecture/lecture-p069.png",
+      "source": "lecture",
+      "pdf_page": 69,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0c2bbe8173e9ee887b1ebafb84d420995723d52bd4af6fbb8e91fed12529f8e1"
+    },
+    {
+      "file": "images/lecture/lecture-p070.png",
+      "source": "lecture",
+      "pdf_page": 70,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "426eaa2b24b9a83cb2a15a818aa06412fd24065ef9f7648b2c4f2decaccacba3"
+    },
+    {
+      "file": "images/lecture/lecture-p071.png",
+      "source": "lecture",
+      "pdf_page": 71,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "78fcf7ff329a2f0b66ade6043171ffcbb4c821892e852dc87bf6388452b96e65"
+    },
+    {
+      "file": "images/lecture/lecture-p072.png",
+      "source": "lecture",
+      "pdf_page": 72,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "eb741f327676868da34412860f8aaeeb03b4512eda5a7bf2aad2513c993097fa"
+    },
+    {
+      "file": "images/lecture/lecture-p073.png",
+      "source": "lecture",
+      "pdf_page": 73,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f594f80cbd2e9853ee35b32d37878a6e34e72bc92ac7daf786f9ea8dae315da1"
+    },
+    {
+      "file": "images/lecture/lecture-p074.png",
+      "source": "lecture",
+      "pdf_page": 74,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e0044789ca8a5d0a9ea416210ac296340a3553fae7df908cbf3e647c25461e69"
+    },
+    {
+      "file": "images/lecture/lecture-p075.png",
+      "source": "lecture",
+      "pdf_page": 75,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "47be1f79d9b91d6c58deffe8f28d5f59f87dea2ab5cefd197c1e98ceb848276c"
+    },
+    {
+      "file": "images/lecture/lecture-p076.png",
+      "source": "lecture",
+      "pdf_page": 76,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a846046950bb318277dd6a2aeaa8c56e26f9af36139eb1923766b041d9adf208"
+    },
+    {
+      "file": "images/lecture/lecture-p077.png",
+      "source": "lecture",
+      "pdf_page": 77,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0f8d647941e9ebec75495401d6e852f67c1b0f3f5fdfb8a748165a4a97786b41"
+    },
+    {
+      "file": "images/lecture/lecture-p078.png",
+      "source": "lecture",
+      "pdf_page": 78,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "9eea86d07d69b397bfed20efa3fd3ea5b9dd9df622080e58125a8f066b163752"
+    },
+    {
+      "file": "images/lecture/lecture-p079.png",
+      "source": "lecture",
+      "pdf_page": 79,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2430f6a1554fa7f86838a764caae5697bf22d47724144b4b24e1f624fcee1775"
+    },
+    {
+      "file": "images/lecture/lecture-p080.png",
+      "source": "lecture",
+      "pdf_page": 80,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b07558253951792837f2bcc5cb05eb133c90d0a88abd947c14fc0a065a111ba1"
+    },
+    {
+      "file": "images/lecture/lecture-p081.png",
+      "source": "lecture",
+      "pdf_page": 81,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c1b7e6a91ec3287ada22ddc5564ed0ff1705891b8a3fe907943e19c06cda516f"
+    },
+    {
+      "file": "images/lecture/lecture-p082.png",
+      "source": "lecture",
+      "pdf_page": 82,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "9479a0d5dad145c1ba3b93fd987054d4d1eed7e9d6fa20f3fa00ac5ea41be268"
+    },
+    {
+      "file": "images/lecture/lecture-p083.png",
+      "source": "lecture",
+      "pdf_page": 83,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e424d468e0cf185ff0c45eaa2d4efe7e69ebe3561171a412d031eb27e3f472ef"
+    },
+    {
+      "file": "images/lecture/lecture-p084.png",
+      "source": "lecture",
+      "pdf_page": 84,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "1ab09759caa0f47b5e100a46c54f5aeda6be7d6e01850683657dbb4299db2afd"
+    },
+    {
+      "file": "images/lecture/lecture-p085.png",
+      "source": "lecture",
+      "pdf_page": 85,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c969b7fe0de379b9a3aed6a65310c91f63ae5babdfce0ab2a82559499ee77b78"
+    },
+    {
+      "file": "images/lecture/lecture-p086.png",
+      "source": "lecture",
+      "pdf_page": 86,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "98fa5f665fa150b622d97d534676e66d1ab343ad0ba99943ac34257666961077"
+    },
+    {
+      "file": "images/lecture/lecture-p087.png",
+      "source": "lecture",
+      "pdf_page": 87,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "bbb748534a8f87a69168e996772d3e1f0c798df89ec88069c9126320e7c73e73"
+    },
+    {
+      "file": "images/lecture/lecture-p088.png",
+      "source": "lecture",
+      "pdf_page": 88,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2bfedb7e8cc91c32c35389cf9c526ec0479a32cd49357b391688c84407cdfed3"
+    },
+    {
+      "file": "images/lecture/lecture-p089.png",
+      "source": "lecture",
+      "pdf_page": 89,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "950b835110f8b9d80aa85d1942d4e40c2db823e9633277691251045cac7e0715"
+    },
+    {
+      "file": "images/lecture/lecture-p090.png",
+      "source": "lecture",
+      "pdf_page": 90,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "967e2e9b98aba5d960cf79f9ff99eedc94fb34baf939102a712d4859e7732748"
+    },
+    {
+      "file": "images/lecture/lecture-p091.png",
+      "source": "lecture",
+      "pdf_page": 91,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "af62564f5f7d9b05f3030541b9e2e3e79952e697f1a41a69b6ff5008709a68ee"
+    },
+    {
+      "file": "images/lecture/lecture-p092.png",
+      "source": "lecture",
+      "pdf_page": 92,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b02fb979047b6c1c5c2744f6b274c55ed1bc6a2865ee11bcdc1b1d86ac037856"
+    },
+    {
+      "file": "images/lecture/lecture-p093.png",
+      "source": "lecture",
+      "pdf_page": 93,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "067471990e4a73a2451be67151ec611fbb729b0b2fb286a928f569cd7cb3ac6d"
+    },
+    {
+      "file": "images/lecture/lecture-p094.png",
+      "source": "lecture",
+      "pdf_page": 94,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e35a7c89c63da2633c2af9a3926e52f5080f6c9391d4a9a2c90f46fde7d525e5"
+    },
+    {
+      "file": "images/lecture/lecture-p095.png",
+      "source": "lecture",
+      "pdf_page": 95,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c457f2ce72b311d5205379713f5366e3f68f995c77935dd108220f6d22930fea"
+    },
+    {
+      "file": "images/lecture/lecture-p096.png",
+      "source": "lecture",
+      "pdf_page": 96,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "931ea6ba7e28b74a6d84e92e105e8d35d7704270091cbcc7699ab49c9bbc3ae4"
+    },
+    {
+      "file": "images/lecture/lecture-p097.png",
+      "source": "lecture",
+      "pdf_page": 97,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5c14007bda79abd2adb393ff362e635b4149ea90c23b7be1806e1cbcf17b4395"
+    },
+    {
+      "file": "images/lecture/lecture-p098.png",
+      "source": "lecture",
+      "pdf_page": 98,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a0618d2e9e580d6eeb275eab903f3d371d296bf4a91f959b73f2c687eaefad5d"
+    },
+    {
+      "file": "images/lecture/lecture-p099.png",
+      "source": "lecture",
+      "pdf_page": 99,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "103fa46a2b7f7dc306ad43b2c8d91cea9245c7f3e16e1c3054dea455138afec9"
+    },
+    {
+      "file": "images/lecture/lecture-p100.png",
+      "source": "lecture",
+      "pdf_page": 100,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c6b439dc7cf99e3111008d30b6e463ff1adc86425e4c0d8cb0093515b256b4a4"
+    },
+    {
+      "file": "images/lecture/lecture-p101.png",
+      "source": "lecture",
+      "pdf_page": 101,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "acdba89039bde92a771798963bede133a4fe8bc5757ed803a5490418e3be5e02"
+    },
+    {
+      "file": "images/lecture/lecture-p102.png",
+      "source": "lecture",
+      "pdf_page": 102,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b55e841d3ff0f3f7087dcd776b3ad2aea3b045dc5e40b6a3a55fa23834f99070"
+    },
+    {
+      "file": "images/lecture/lecture-p103.png",
+      "source": "lecture",
+      "pdf_page": 103,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a9e9e7d3e3092bb7ae127c545d8cf31e3038396b33b461b6d2dab685cb8d5a9d"
+    },
+    {
+      "file": "images/lecture/lecture-p104.png",
+      "source": "lecture",
+      "pdf_page": 104,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8f4570e6e6c6d9e481908cda9af718009bc3bed218465c8daf5e4973b5c0fe89"
+    },
+    {
+      "file": "images/lecture/lecture-p105.png",
+      "source": "lecture",
+      "pdf_page": 105,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5183a9b4c5007d6b4211640178a87939716d11dd371f6db712269a6a89e109ac"
+    },
+    {
+      "file": "images/lecture/lecture-p106.png",
+      "source": "lecture",
+      "pdf_page": 106,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "419eb5adafe9a226c10510d17b0c00b9f0fbbf0a39b4f03cbb18fada8ebce4cf"
+    },
+    {
+      "file": "images/lecture/lecture-p107.png",
+      "source": "lecture",
+      "pdf_page": 107,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d6743de097c5d281992d04d2ad6fb4e42b6421e4e61dac073ab7e4a86f465d3a"
+    },
+    {
+      "file": "images/lecture/lecture-p108.png",
+      "source": "lecture",
+      "pdf_page": 108,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "4c9b5de06b755ad61055103e1a3ed92794ac7cb02875dae44138db2d1163d530"
+    },
+    {
+      "file": "images/lecture/lecture-p109.png",
+      "source": "lecture",
+      "pdf_page": 109,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5dff76a9c8747c1a34f1db0e6b7481b339be18ed3c83cfcf50a5371c4f89e375"
+    },
+    {
+      "file": "images/lecture/lecture-p110.png",
+      "source": "lecture",
+      "pdf_page": 110,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "88ee27da75f4a99b678daa3f97b0f36e8b17054e048aa1aff6fb4b34d58926bc"
+    },
+    {
+      "file": "images/lecture/lecture-p111.png",
+      "source": "lecture",
+      "pdf_page": 111,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "38c8a046e5dffd6f060a36e37d55b38988e80106aed74e34443ea34161676916"
+    },
+    {
+      "file": "images/lecture/lecture-p112.png",
+      "source": "lecture",
+      "pdf_page": 112,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "9b4cad13682cd1d0911d9367f573dacbe54f367efe61422ca8f1a74b8abbf4be"
+    },
+    {
+      "file": "images/lecture/lecture-p113.png",
+      "source": "lecture",
+      "pdf_page": 113,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f9f91d05c0a35c5e670902a6cd82a5b49d20d26f8e23661a780afb23cee4dca1"
+    },
+    {
+      "file": "images/lecture/lecture-p114.png",
+      "source": "lecture",
+      "pdf_page": 114,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c66b67ebf3a7377fbbcb8c48207aa24ab0ab79188ca9794e94297f586540d97d"
+    },
+    {
+      "file": "images/lecture/lecture-p115.png",
+      "source": "lecture",
+      "pdf_page": 115,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "bba5471fe755a605f3e04176a340fa5f46e0dee24c4de800c6ab844d374473e5"
+    },
+    {
+      "file": "images/lecture/lecture-p116.png",
+      "source": "lecture",
+      "pdf_page": 116,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "14285d34abecd3279e0c49c9a9b2582b9dce58499c3dca31b2af290ca02248fd"
+    },
+    {
+      "file": "images/lecture/lecture-p117.png",
+      "source": "lecture",
+      "pdf_page": 117,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2a7d145e4b866ddfbfc9e2c47f31d8cabdd721736c3d5d674d80e9e3fb50f2c7"
+    },
+    {
+      "file": "images/lecture/lecture-p118.png",
+      "source": "lecture",
+      "pdf_page": 118,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f3d62394120cfe09d3882ddbee0c9933056ab5e22039857a1ca3808acde330b5"
+    },
+    {
+      "file": "images/lecture/lecture-p119.png",
+      "source": "lecture",
+      "pdf_page": 119,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f43ed6d88b30e6b0c5d043ab9d88d501f30ffe659c7018ec33d906efff39b828"
+    },
+    {
+      "file": "images/lecture/lecture-p120.png",
+      "source": "lecture",
+      "pdf_page": 120,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7cfa2dc7740b6827b3f88d26455b083813c131eb21398a2aa9197a3c10800d8f"
+    },
+    {
+      "file": "images/lecture/lecture-p121.png",
+      "source": "lecture",
+      "pdf_page": 121,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "3c0519707f18a9c2f4d9589370e5156cd75f982918e315292654601a336b90ea"
+    },
+    {
+      "file": "images/lecture/lecture-p122.png",
+      "source": "lecture",
+      "pdf_page": 122,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "012d493dd38f3d8df3343fdc9cc237851a5c649493f7bc1d3fc2ae233f282a1a"
+    },
+    {
+      "file": "images/lecture/lecture-p123.png",
+      "source": "lecture",
+      "pdf_page": 123,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e964df1a3db42a67ad15a36fcaa5bebddc67f411b9a1d7fbe9e3ae9c5032f490"
+    },
+    {
+      "file": "images/lecture/lecture-p124.png",
+      "source": "lecture",
+      "pdf_page": 124,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "5968465030c7394d6d2cd964e3415a825d7c09db0052f0422d24379cf6ca6b89"
+    },
+    {
+      "file": "images/lecture/lecture-p125.png",
+      "source": "lecture",
+      "pdf_page": 125,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "15db8a71d9bf4ac720c5311ca72d3af0201f3dd5df656fbe1d41f224d4ed7db5"
+    },
+    {
+      "file": "images/lecture/lecture-p126.png",
+      "source": "lecture",
+      "pdf_page": 126,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c714a81df7d0f80ba79661ee441b296e7b278ef304eb7379d572f39360e5ff21"
+    },
+    {
+      "file": "images/lecture/lecture-p127.png",
+      "source": "lecture",
+      "pdf_page": 127,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "fbf05a1a4e44916c5f412b498942f3f0367b45030ebe6dc6a357117d7af5d454"
+    },
+    {
+      "file": "images/lecture/lecture-p128.png",
+      "source": "lecture",
+      "pdf_page": 128,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "bc2bee2e9bb89ddb6604f4e993ed36e90229b91633f2943f72796a6c8b80c50a"
+    },
+    {
+      "file": "images/lecture/lecture-p129.png",
+      "source": "lecture",
+      "pdf_page": 129,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "19228720ec6b0b9a084c1c026d689c3ad3c4fc44cbd6163df04d967ff3d18fa0"
+    },
+    {
+      "file": "images/lecture/lecture-p130.png",
+      "source": "lecture",
+      "pdf_page": 130,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "765efff2e3f6dbf1193e5223a161bef7247e5ad5008a8e3625bf3e268a21b895"
+    },
+    {
+      "file": "images/lecture/lecture-p131.png",
+      "source": "lecture",
+      "pdf_page": 131,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0bbfd3458d652c2b4f09616ae2c12b42a555e7915199db5f59101349fe7baa87"
+    },
+    {
+      "file": "images/lecture/lecture-p132.png",
+      "source": "lecture",
+      "pdf_page": 132,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "abd5333e64571c8beb41597b074b4742b752af192da2bff141f07d0bcb69662d"
+    },
+    {
+      "file": "images/lecture/lecture-p133.png",
+      "source": "lecture",
+      "pdf_page": 133,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f8c6ef7360e826631c5e0134d1849d43e58141ff8fd6611ffed8a64a8d34e73f"
+    },
+    {
+      "file": "images/lecture/lecture-p134.png",
+      "source": "lecture",
+      "pdf_page": 134,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d7d2030a8a49b28fe8a9f0b9b63a7d8b62ba7eae024540e353031c286094e38d"
+    },
+    {
+      "file": "images/lecture/lecture-p135.png",
+      "source": "lecture",
+      "pdf_page": 135,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "abe3d33f44052666e54084cefe5fc7da8d4a30cecbf1d86fc62d9b98ccb02bea"
+    },
+    {
+      "file": "images/lecture/lecture-p136.png",
+      "source": "lecture",
+      "pdf_page": 136,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d8730be4b3273fd6301c0d90d7caaee630fe608ba5b4128bac3e31887289b756"
+    },
+    {
+      "file": "images/lecture/lecture-p137.png",
+      "source": "lecture",
+      "pdf_page": 137,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b951f784568ecbc357f680c89d34e90a914688c1f53a7f26dad2ff81c4caccb0"
+    },
+    {
+      "file": "images/lecture/lecture-p138.png",
+      "source": "lecture",
+      "pdf_page": 138,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6c58b673a082c4eb5deb39f2195c00cff58121f24b4608c063b8ad7d2e1ffcd0"
+    },
+    {
+      "file": "images/lecture/lecture-p139.png",
+      "source": "lecture",
+      "pdf_page": 139,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "123b2e7a434ab581b0232ac7600166b8ce097efb691462e47e4343b0168edcef"
+    },
+    {
+      "file": "images/lecture/lecture-p140.png",
+      "source": "lecture",
+      "pdf_page": 140,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b583ff1e0fdb8c6705cb841d5a6b1c96682c1d378d1e348cf84933a302e79b8b"
+    },
+    {
+      "file": "images/lecture/lecture-p141.png",
+      "source": "lecture",
+      "pdf_page": 141,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "fe3f4474a48b8000f3858c583860f8c7b2dfa299ff7d28cd5d2578e082ccdb70"
+    },
+    {
+      "file": "images/lecture/lecture-p142.png",
+      "source": "lecture",
+      "pdf_page": 142,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a6b6cf4b6d61319e265db83b4ed39c93959de3bcf43afabb61ae78928540351f"
+    },
+    {
+      "file": "images/lecture/lecture-p143.png",
+      "source": "lecture",
+      "pdf_page": 143,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "78a8bc0fdfdfb308e743ec91b14732ea36f07e6da81f08dec7b5dffd39d0cba3"
+    },
+    {
+      "file": "images/lecture/lecture-p144.png",
+      "source": "lecture",
+      "pdf_page": 144,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "ba647402bc48365ddf194fc7a72205fccc4bf4d1b0a16e4bf3d914d978219051"
+    },
+    {
+      "file": "images/lecture/lecture-p145.png",
+      "source": "lecture",
+      "pdf_page": 145,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "4ddeacd8dbc9be883f22aadbad74d8e35a6ce6009dd2e61619ca5ef1bebb1015"
+    },
+    {
+      "file": "images/lecture/lecture-p146.png",
+      "source": "lecture",
+      "pdf_page": 146,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "fbfa0583aee47f413a381d9340074172f0945d63d58e5e6d33e6b0855b2ae20c"
+    },
+    {
+      "file": "images/lecture/lecture-p147.png",
+      "source": "lecture",
+      "pdf_page": 147,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "908eaff34750d05dd4eaa6cfcc50f13dc8a4fc38fed9dbb9de802183d451fbd7"
+    },
+    {
+      "file": "images/lecture/lecture-p148.png",
+      "source": "lecture",
+      "pdf_page": 148,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c5ededfeff0225ad76ef62bacf40151f159238eaf215d7c73a4918c447125260"
+    },
+    {
+      "file": "images/lecture/lecture-p149.png",
+      "source": "lecture",
+      "pdf_page": 149,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "cf554f700e86b39aee2cc8f4b2beeeebf0e8afe13e744559b51e37447c34b595"
+    },
+    {
+      "file": "images/lecture/lecture-p150.png",
+      "source": "lecture",
+      "pdf_page": 150,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8298906cb73c3f4b9a33a4e936cc58f4cd8b68bda0f870e8c8ecf04e15679f65"
+    },
+    {
+      "file": "images/lecture/lecture-p151.png",
+      "source": "lecture",
+      "pdf_page": 151,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a642aa3a7e6103ebe4c34fb43e5f9c40115d2e00e5df62e459016f7b692d830b"
+    },
+    {
+      "file": "images/lecture/lecture-p152.png",
+      "source": "lecture",
+      "pdf_page": 152,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "8529f1c87b98c47dea27966e7503ccb3fe8ad3796242b9e9b501d4de6ec77648"
+    },
+    {
+      "file": "images/lecture/lecture-p153.png",
+      "source": "lecture",
+      "pdf_page": 153,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "57342aa325ae429ddd17bc6a6addc3ccb1001069a3ee156446e9125adcd361b2"
+    },
+    {
+      "file": "images/lecture/lecture-p154.png",
+      "source": "lecture",
+      "pdf_page": 154,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "e090637061bf199e379751cc7480cd93d6dcecaf6c897b6b8a19b8ebb441526a"
+    },
+    {
+      "file": "images/lecture/lecture-p155.png",
+      "source": "lecture",
+      "pdf_page": 155,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "608f50ebca79e39cce89b298471f38da2c623804b196feb593b75ca3f292a904"
+    },
+    {
+      "file": "images/lecture/lecture-p156.png",
+      "source": "lecture",
+      "pdf_page": 156,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "53ef2b23c7c5a831953cc858b39d3264c6f97ebd73387d4eb9cb737578577400"
+    },
+    {
+      "file": "images/lecture/lecture-p157.png",
+      "source": "lecture",
+      "pdf_page": 157,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "4a12c1b37271f907e2d6059b13ea9c3ef623478eac7f588fa6f42854d77e39ce"
+    },
+    {
+      "file": "images/lecture/lecture-p158.png",
+      "source": "lecture",
+      "pdf_page": 158,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "536308ef88a3375210aab3dd97a6376b2697668886a3013d482af227fa8ce4ae"
+    },
+    {
+      "file": "images/lecture/lecture-p159.png",
+      "source": "lecture",
+      "pdf_page": 159,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "b728d93bf02f40d7b9ccbd8dab873ec46710a1b1d47ff36ddfa16a69c5b290f9"
+    },
+    {
+      "file": "images/lecture/lecture-p160.png",
+      "source": "lecture",
+      "pdf_page": 160,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "86e250804d03ab8080ded9fa2627b87735aa8d0df1f6b9995b3295ca0ec87615"
+    },
+    {
+      "file": "images/lecture/lecture-p161.png",
+      "source": "lecture",
+      "pdf_page": 161,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "16dab586adabbff5108436e6a563c3382474082b354ae97c52f82176b2df94d7"
+    },
+    {
+      "file": "images/lecture/lecture-p162.png",
+      "source": "lecture",
+      "pdf_page": 162,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2fd6fca29417ddabb88ef247a8705d6d1ebdd61f6a9ffbeb51312997fcacaec7"
+    },
+    {
+      "file": "images/lecture/lecture-p163.png",
+      "source": "lecture",
+      "pdf_page": 163,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7bfb59c5081d7c99de299c3cdd6cf94feac6ed537b9e6ca6eb2530b7df50174a"
+    },
+    {
+      "file": "images/lecture/lecture-p164.png",
+      "source": "lecture",
+      "pdf_page": 164,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "2b96801071400bfa3aa71f9b5ed5b8f2380f212159ca35f566f12c7f93470bd4"
+    },
+    {
+      "file": "images/lecture/lecture-p165.png",
+      "source": "lecture",
+      "pdf_page": 165,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "81bb6c26bf39bcbed6843b81bae44b8e864344d4009bab284de5ad2ed8016528"
+    },
+    {
+      "file": "images/lecture/lecture-p166.png",
+      "source": "lecture",
+      "pdf_page": 166,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d16038b34834f16ad2f74dd28b72f85be9089d2cfee43a0924b3c0703e3c9301"
+    },
+    {
+      "file": "images/lecture/lecture-p167.png",
+      "source": "lecture",
+      "pdf_page": 167,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f4a70f8b5485c1c0ad1daad85b21d8e1c99afa75c2d87f4b8099219ba9ab88c1"
+    },
+    {
+      "file": "images/lecture/lecture-p168.png",
+      "source": "lecture",
+      "pdf_page": 168,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7c679f8e0bd8525d21541ca80c54aa3e5b5d20be0663821dd60296f36db3a27a"
+    },
+    {
+      "file": "images/lecture/lecture-p169.png",
+      "source": "lecture",
+      "pdf_page": 169,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "9d6d87ff85f89f1952cf729b502b30e4d349d86cfeea004847d892e0cc18e2cb"
+    },
+    {
+      "file": "images/lecture/lecture-p170.png",
+      "source": "lecture",
+      "pdf_page": 170,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "08b304a2f2c92ee110187eed3a1fe6e0a6948ff2cd14a62239fe836ac1337ab5"
+    },
+    {
+      "file": "images/lecture/lecture-p171.png",
+      "source": "lecture",
+      "pdf_page": 171,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "7736544d66105060fa2ba697fcce98b80a57e095df0b39397cedc87c914b4007"
+    },
+    {
+      "file": "images/lecture/lecture-p172.png",
+      "source": "lecture",
+      "pdf_page": 172,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "1090743a36add6a99e2dba2524b094419fe22319ae2f26adc1a7b1e01d2f151a"
+    },
+    {
+      "file": "images/lecture/lecture-p173.png",
+      "source": "lecture",
+      "pdf_page": 173,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "536d4da04a7604736e6255fe1b5fd19d089a45e918c06f9273f90b6351e6e08e"
+    },
+    {
+      "file": "images/lecture/lecture-p174.png",
+      "source": "lecture",
+      "pdf_page": 174,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a8dbff36ee2d4187ec09eee90c78a5570180086f8eef37e093372dac33c9aa06"
+    },
+    {
+      "file": "images/lecture/lecture-p175.png",
+      "source": "lecture",
+      "pdf_page": 175,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "86301b542b0a0043176c11efde8fee53013c4d6b95674a7233641667b5c6fed8"
+    },
+    {
+      "file": "images/lecture/lecture-p176.png",
+      "source": "lecture",
+      "pdf_page": 176,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "47a0150ed9d28d7847ebfaf108f9e0c456e3d8c2def1ba2a62f90dfb28049bab"
+    },
+    {
+      "file": "images/lecture/lecture-p177.png",
+      "source": "lecture",
+      "pdf_page": 177,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "4338990f43202e2e157179f34bcc0c217f13603a81dd4038e000777010e71751"
+    },
+    {
+      "file": "images/lecture/lecture-p178.png",
+      "source": "lecture",
+      "pdf_page": 178,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "3af6509c9a1a6f664ebc5e128c42b73641864430612d5b8f921b9d69579df262"
+    },
+    {
+      "file": "images/lecture/lecture-p179.png",
+      "source": "lecture",
+      "pdf_page": 179,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "386aff228a0663f4419feb5e99ce53dc92ab9c48837958bc4c7f88cb4e93e4ac"
+    },
+    {
+      "file": "images/lecture/lecture-p180.png",
+      "source": "lecture",
+      "pdf_page": 180,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "309440c2fa6cdb536a12aa66733f80c1106814e92a583f09711aeb59df428b98"
+    },
+    {
+      "file": "images/lecture/lecture-p181.png",
+      "source": "lecture",
+      "pdf_page": 181,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "3cefa20f5dcae2572fe566f0b30c2ecc5209e00ad55c58f3556cda9227468733"
+    },
+    {
+      "file": "images/lecture/lecture-p182.png",
+      "source": "lecture",
+      "pdf_page": 182,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "40f98c130f3924245b76652962648e8b2378740eaba115c6e5dfc737ceee21ca"
+    },
+    {
+      "file": "images/lecture/lecture-p183.png",
+      "source": "lecture",
+      "pdf_page": 183,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c688e1c4eba90187db995c4adade4b1f101fd60e10b6f732e5751431fa5c429f"
+    },
+    {
+      "file": "images/lecture/lecture-p184.png",
+      "source": "lecture",
+      "pdf_page": 184,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0dbe12f05ed24cd3234f5c1cc6390c0146ce8b9e4147d2ec942d635b7a9b6d37"
+    },
+    {
+      "file": "images/lecture/lecture-p185.png",
+      "source": "lecture",
+      "pdf_page": 185,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "99599580feeaa0acb4623a4b13f4b604336f24d5ab2a16198fbf1bfc494a98b6"
+    },
+    {
+      "file": "images/lecture/lecture-p186.png",
+      "source": "lecture",
+      "pdf_page": 186,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "702291b4f510c8e139e9fe1db9e0cccf58785e5e72981bde0f98f68917811ffc"
+    },
+    {
+      "file": "images/lecture/lecture-p187.png",
+      "source": "lecture",
+      "pdf_page": 187,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0d0b8e8f78d7ce3a5237a3d0cfa0645bec6bc409bddb18e227933c573c16f4e4"
+    },
+    {
+      "file": "images/lecture/lecture-p188.png",
+      "source": "lecture",
+      "pdf_page": 188,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "013cabfcb70fc6854bb729b41039317b54171e45d9b149978abf7522ea45089d"
+    },
+    {
+      "file": "images/lecture/lecture-p189.png",
+      "source": "lecture",
+      "pdf_page": 189,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "bd5eb1d3bf2aa0b168ad0c2b8ac661450ff0b276592104a0f6f4a94425acc867"
+    },
+    {
+      "file": "images/lecture/lecture-p190.png",
+      "source": "lecture",
+      "pdf_page": 190,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f0704238fef11c127ff310cd0ce84ad40b945777368ad197c690564fab2bdec7"
+    },
+    {
+      "file": "images/lecture/lecture-p191.png",
+      "source": "lecture",
+      "pdf_page": 191,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "164c03dc2f9d3ed3e2c396c29548831d65bc2725c268b1d49f00a41d1f6446d5"
+    },
+    {
+      "file": "images/lecture/lecture-p192.png",
+      "source": "lecture",
+      "pdf_page": 192,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "72dc8ec49274dc428c3c132cc37b5356e07a1507c7520856edaec27f96402211"
+    },
+    {
+      "file": "images/lecture/lecture-p193.png",
+      "source": "lecture",
+      "pdf_page": 193,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6b351846764a377afb7fbe6fe20ce1738d24ae55c5b7439ed548d16aaea0249d"
+    },
+    {
+      "file": "images/lecture/lecture-p194.png",
+      "source": "lecture",
+      "pdf_page": 194,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "6b9b6c299736ec8d821ded1ce7dc4328ffc572778e0d5430f9f52470d4998e98"
+    },
+    {
+      "file": "images/lecture/lecture-p195.png",
+      "source": "lecture",
+      "pdf_page": 195,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "c83f5e7f3cca334e4db24a3f62b73a87e5d903438d6ed994a5e64183e0bef27b"
+    },
+    {
+      "file": "images/lecture/lecture-p196.png",
+      "source": "lecture",
+      "pdf_page": 196,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "d8cf95ff4b6cfde86a953bf460a36389a12dd56fb80f252eca99ae10e4dcc0d5"
+    },
+    {
+      "file": "images/lecture/lecture-p197.png",
+      "source": "lecture",
+      "pdf_page": 197,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "801ae2d0a0f06c723e10dcefc86a6f53b5eb1279eec41d36b4560c5412132f28"
+    },
+    {
+      "file": "images/lecture/lecture-p198.png",
+      "source": "lecture",
+      "pdf_page": 198,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "fab8f53ed527e1c21d59a380b268cba164314329a7525ed4882fa1b1750a05b1"
+    },
+    {
+      "file": "images/lecture/lecture-p199.png",
+      "source": "lecture",
+      "pdf_page": 199,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f452d26b975d500c9fa907c5092860db2b963b335163f30b134f13e099741c00"
+    },
+    {
+      "file": "images/lecture/lecture-p200.png",
+      "source": "lecture",
+      "pdf_page": 200,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "0d3ec7d70ad45eb566206f888ee22d66f3332fd28a70c113e08556e397955178"
+    },
+    {
+      "file": "images/lecture/lecture-p201.png",
+      "source": "lecture",
+      "pdf_page": 201,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "f5185cabf4d981fae7f27771e65b3b373662d116333f7c147e52b12a338d9152"
+    },
+    {
+      "file": "images/lecture/lecture-p202.png",
+      "source": "lecture",
+      "pdf_page": 202,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "43027303f72317682620795f25df6dc12879be6202d859104e1faa63e611743f"
+    },
+    {
+      "file": "images/lecture/lecture-p203.png",
+      "source": "lecture",
+      "pdf_page": 203,
+      "method": "complete original slide rendered at 144 dpi; includes vector and raster content",
+      "sha256": "a8d7b1d705d8c70026492fbb9746d2e5720ca9cbb221239f7e1b7007b14d2352"
+    }
+  ]
+}

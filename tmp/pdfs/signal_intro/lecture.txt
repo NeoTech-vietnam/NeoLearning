@@ -1,0 +1,9027 @@
+=== PDF PAGE 1 ===
+What is a signal? 
+Examples of signal
+Analog vs Discrete vs Digital
+2
+
+=== PDF PAGE 2 ===
+Discrete-time Signals and Systems
+• Continuous-time signals are defined over a
+continuum of times and thus are represented by a
+continuous independent variable.
+• Discrete-time signals are defined at discrete times
+and thus the independent variable has discrete
+values.
+• Analog signals are those for which both time and
+amplitude are continuous.
+• Digital signals are those for which both time and
+amplitude are discrete.
+21
+
+=== PDF PAGE 3 ===
+1
+-1
+Analog vs. Digital
+• The amplitude of a digital signal takes values from a 
+discrete set
+• The amplitude of an analog signal can take any real or complex value at each 
+time/sample
+22
+
+=== PDF PAGE 4 ===
+Signals
+• Continuous-time signals are functions of a real argument
+x(t) where t can take any real value
+x(t) may be 0 for a given range of values of t
+• Discrete-time signals are functions of an argument that 
+takes values from a discrete set
+x[n] where n  {...-3,-2,-1,0,1,2,3...}
+Integer index n instead of time t for discrete-time systems
+• x may be an array of values (multi channel signal) 
+• Values for x may be real or complex
+20
+
+=== PDF PAGE 5 ===
+3
+Signal Processing
+• Humans are the most advanced signal processors
+– speech and pattern recognition, speech synthesis,…
+• We encounter many types of signals in various
+applications
+– Electrical signals: voltage, current, magnetic and electric fields,…
+– Mechanical signals: velocity, force, displacement,…
+– Acoustic signals: sound, vibration,…
+– Other signals: pressure, temperature,…
+• Most real-world signals are analog
+– They are continuous in time and amplitude
+– Convert to voltage or currents using sensors and transducers
+• Analog circuits process these signals using
+– Resistors, Capacitors, Inductors, Amplifiers,…
+• Analog signal processing examples
+– Audio processing in FM radios
+– Video processing in traditional TV sets
+
+=== PDF PAGE 6 ===
+Limitations of Analog Signal Processing?
+
+=== PDF PAGE 7 ===
+4
+Limitations of Analog Signal Processing
+• Accuracy limitations due to
+– Component tolerances
+– Undesired nonlinearities
+• Limited repeatability due to
+– Tolerances
+– Changes in environmental conditions
+• Temperature
+• Vibration
+• Sensitivity to electrical noise
+• Limited dynamic range for voltage and currents
+• Inflexibility to changes
+• Difficulty of implementing certain operations
+– Nonlinear operations
+– Time-varying operations
+• Difficulty of storing information
+
+=== PDF PAGE 8 ===
+5
+Digital Signal Processing
+• Represent signals by a sequence of numbers
+– Sampling or analog-to-digital conversions
+• Perform processing on these numbers with a digital processor
+– Digital signal processing
+• Reconstruct analog signal from processed numbers
+– Reconstruction or digital-to-analog conversion
+A/D DSP D/Aanalog
+signal
+analog
+signal
+digital 
+signal
+digital 
+signal
+• Analog input – analog output
+– Digital recording of music
+• Analog input – digital output
+– Touch tone phone dialing
+• Digital input – analog output
+– Text to speech
+• Digital input – digital output
+– Compression of a file on computer
+
+=== PDF PAGE 9 ===
+Pros and Cons of Digital Signal Processing?
+
+=== PDF PAGE 10 ===
+6
+Pros and Cons of Digital Signal Processing
+• Pros
+– Accuracy can be controlled by choosing word length
+– Repeatable
+– Sensitivity to electrical noise is minimal
+– Dynamic range can be controlled using floating point numbers
+– Flexibility can be achieved with software implementations
+– Non-linear and time-varying operations are easier to implement
+– Digital storage is cheap
+– Digital information can be encrypted for security
+– Price/performance and reduced time-to-market
+• Cons
+– Sampling causes loss of information
+– A/D and D/A requires mixed-signal hardware
+– Limited speed of processors
+– Quantization and round-off errors
+
+=== PDF PAGE 11 ===
+Analog, digital, mixed signal 
+processing
+7
+
+
+=== PDF PAGE 12 ===
+Digital Signal Processing
+8
+
+
+=== PDF PAGE 13 ===
+Sampling and reconstruction
+9
+
+
+=== PDF PAGE 14 ===
+Sample and hold (S/H)circuit
+10
+
+
+=== PDF PAGE 15 ===
+23
+Periodic (Uniform) Sampling
+• Sampling is a continuous to discrete-time conversion
+• Most common sampling is periodic
+• T is the sampling period in second
+• fs = 1/T is the sampling frequency in Hz
+• Sampling frequency in radian-per-second s=2fs rad/sec
+• Use [.] for discrete-time and (.) for continuous time signals
+• This is the ideal case not the practical but close enough
+– In practice it is implement with an analog-to-digital converters
+– We get digital signals that are quantized in amplitude and time
+     nnTxnx c
+-3 -2 2 3 4-1 10
+
+=== PDF PAGE 16 ===
+24
+Periodic Sampling
+• Sampling is, in general, not reversible
+• Given a sampled signal one could fit infinite continuous signals
+through the samples
+0-1 20 40 60 80 100
+-0.5
+0
+0.5
+1
+• Fundamental issue in digital signal processing
+– If we loose information during sampling we cannot recover it
+• Under certain conditions an analog signal can be sampled without
+loss so that it can be reconstructed perfectly
+
+=== PDF PAGE 17 ===
+A/D converter
+11
+
+
+=== PDF PAGE 18 ===
+A/D converter
+12
+
+
+=== PDF PAGE 19 ===
+Quantization noise
+13
+
+
+=== PDF PAGE 20 ===
+D/A convertion
+14
+
+
+=== PDF PAGE 21 ===
+D/A convertion
+15
+
+
+=== PDF PAGE 22 ===
+Reconstruction 
+16
+
+
+=== PDF PAGE 23 ===
+Reconstruction 
+17
+
+
+=== PDF PAGE 24 ===
+Reconstruction 
+18
+
+
+=== PDF PAGE 25 ===
+Reconstruction 
+19
+
+
+=== PDF PAGE 26 ===
+25
+Representation of Sampling
+• Mathematically convenient to represent in two stages
+– Impulse train modulator
+– Conversion of impulse train to a sequence
+Convert impulse 
+train to discrete-
+time sequence
+xc(t) x[n]=xc(nT)x
+s(t)
+-3T-2T 2T3T4T-T T0
+s(t)xc(t)
+t
+x[n]
+-3 -2 2 3 4-1 10
+n
+
+=== PDF PAGE 27 ===
+Unit Sample Sequence
+d[n] = 0,  n  0
+= 1,  n = 0.
+The unit sample sequence plays the same role for discrete-time sequences and 
+systems that the unit impulse (Dirac delta function) does for continuous-time 
+signals and systems.
+n
+… …1
+0
+26
+
+=== PDF PAGE 28 ===
+Impulse Function
+The impulse function, also known as Dirac’s delta function, is used to 
+represented quantities that are highly localized in space.  Examples include 
+point optical sources and electrical charges.
+The impulse function can be visualized as a narrow spike having infinite 
+height and zero width, such that its area is equal to unity.
+27
+
+=== PDF PAGE 29 ===
+Definition of Impulse Function
+00 ,0)δ( xxxx 
+The impulse function may be defined from its basic properties.
+Where f(x) is any complex-valued function of x. If f(x) is discontinuous at the 
+point x0, the value of f(x0) is taken as the average of the limiting values as x
+approaches x0 from above and below.
+20100 ),()δ()(
+2
+1
+xxxxfdxxxxf
+x
+x
+
+This property is called the sifting property.
+28
+
+=== PDF PAGE 30 ===
+Graphical Representation
+1
+0x
+)δ( 0xx 
+On graphs we will represent d(x-x0) as a spike of unit 
+height located at the point x0.
+29
+
+=== PDF PAGE 31 ===
+Sampling Operation
+f(x0)
+0x
+)δ()( 0xxxf 
+The delta function samples the function f(x).
+The function f(x) d(x-x0) is graphed as a spike of  height f(x0) located at the point x0. 
+30
+
+=== PDF PAGE 32 ===
+Unit Step Sequence
+u[n] = 1, n  0
+= 0,  n < 0.
+ ]2[]1[][][ nnnnu ddd
+
+
+
+
+0
+][][
+k
+knnu d
+
+
+
+n
+k
+knu ][][ d
+or
+]1[][][  nunund
+Conversely, the impulse sequence can be expressed 
+as the first backward difference of the unit step 
+sequence:
+n
+… …1
+0
+31
+
+=== PDF PAGE 33 ===
+Exponential Sequence
+x[n] = A a n
+][][ nuAnx
+n
+a
+If we want an exponential sequence that is 
+zero for n < 0, we can write this as:
+0 n
+…
+…
+32
+
+=== PDF PAGE 34 ===
+Geometric Series
+A one-sided exponential sequence of the form
+a
+a
+
+
+
+ 1
+1
+0n
+n
+a n , for n ≥ 0 and a an arbitrary constant
+is called a geometric series.  The series converges for |a| < 1, and its sum converges 
+to 
+The sum of a finite number N of terms is
+a
+aa
+
+
+
+
+
+ 1
+1
+1
+0
+NN
+n
+n
+A general form can also be written:
+a
+aaa
+
+
+
+
+
+ 1
+1212
+1
+NNN
+Nn
+n
+33
+
+=== PDF PAGE 35 ===
+Sinusoidal Sequence
+)cos(][   nAnx o
+0 n
+…
+…
+34
+
+=== PDF PAGE 36 ===
+Sequence as a sum of scaled, delayed 
+impulses
+a-3
+a1
+a2
+a7
+-2 0 4-4 6 n
+]7δ[]2δ[]1δ[]3δ[][ 7213   nananananp
+35
+
+=== PDF PAGE 37 ===
+Sequence Operations
+• The product and sum of two sequences are defined as the sample-by-
+sample product and sum, respectively.
+• Multiplication of a sequence by a number is defined as multiplication 
+of each sample value by this number.
+• A sequence y[n] is said to be a delayed or shifted version of a sequence 
+x[n] if
+y[n] = x[n – nd]
+where nd is an integer.
+• Combination of Basic Sequences
+Ex 1 x[n] = Ka n,  n  0,
+= 0, n < 0,
+or x[n] = Ka n u[n].
+36
+
+=== PDF PAGE 38 ===
+Systems
+37
+
+=== PDF PAGE 39 ===
+Systems
+A discrete-time system is a transformation that maps an 
+input sequence x[n] into an output sequence y[n].
+System Characteristics
+1. Linear vs. non-linear
+2. Causal vs. non-causal
+3. Time invariant 
+T{}
+x[n] y[n]
+38
+
+=== PDF PAGE 40 ===
+System Characteristics
+T{}
+x[n] y[n]
+1. Linear vs. non-linear
+2. Time invariant  vs. time variant
+3. Causal vs. non-causal
+4. Stable vs. unstable
+5. Memoryless vs. state-sensitive
+6. Invertible vs. non-invertible
+39
+
+=== PDF PAGE 41 ===
+40
+Discrete-Time Systems
+• Discrete-Time Sequence is a mathematical operation that maps a given 
+input sequence x[n] into an output sequence y[n]
+• Example Discrete-Time Systems
+– Moving (Running) Average
+– Maximum 
+– Ideal Delay System
+]}n[x{T]n[y 
+T{.}x[n] y[n]
+]3n[x]2n[x]1n[x]n[x]n[y 
+ ]2n[x],1n[x],n[xm ax]n[y 
+]nn[x]n[y o
+
+=== PDF PAGE 42 ===
+Linearity
+A linear system is one that obeys the principle of 
+superposition,
+where the output of a linear combination of inputs is the 
+same linear combination applied to the individual outputs. 
+This result means that a complicated system can be 
+decomposed into a linear combination of elementary 
+functions whose transformation is known, and then taking 
+the same linear combination of the results. Linearity also 
+implies that the behavior of the system is independent of 
+the magnitude of the input. 
+  ][][][][ 22112211 nyanyanxanxaT 
+41
+
+=== PDF PAGE 43 ===
+42
+Linear Systems
+• Linear System: A system is linear if and only if
+• Examples
+– Ideal Delay System
+   
+    (scaling)   ]n[xaT]n[axT
+and
+y)(additivit   ]n[xT]n[xT]}n[x]n[x{T 2121
+
+
+]nn[x]n[y o
+ 
+ 
+  ]nn[ax]n[xaT
+]nn[ax]n[axT
+]nn[x]nn[x]n[xT]}n[x{T
+]nn[x]nn[x]}n[x]n[x{T
+o1
+o1
+o2o112
+o2o121
+
+
+
+
+
+=== PDF PAGE 44 ===
+Time (Shift) Invariance
+A system is said to be shift invariant if the only effect caused by 
+a shift in the position of the input is an equal shift in the position 
+of the output, that is 
+The magnitude and shape of the output are unchanged, only the 
+location of the output is changed. 
+  ][][ 00 nnynnxT 
+43
+
+=== PDF PAGE 45 ===
+44
+Time-Invariant Systems
+• Time-Invariant (shift-invariant) Systems
+– A time shift at the input causes corresponding time-shift at output
+• Example
+– Square
+• Counter Example
+– Compressor System
+ ]nn[xT]nn[y]}n[x{T]n[y oo 
+ 
+2
+]n[x]n[y 
+   
+   
+2
+oo
+2
+o1
+]nn[xn-ny          gives output the Delay
+]nn[xny      is output the input the Delay
+
+
+]Mn[x]n[y 
+ 
+    oo
+o1
+nnMxn-ny          gives output the Delay
+]nMn[xny      is output the input the Delay
+
+
+
+=== PDF PAGE 46 ===
+Impulse Response
+When the input to a system is a single impulse, the output is called 
+the impulse response. Let h[n] be the impulse response, given by 
+  ][][ nhnT d
+A general sequence f [x] can be represented as a linear combination 
+of impulses, since
+
+
+
+ duuxufxxfxf )()()()()( dd
+
+
+
+
+k
+knkfnnfnf ][][][][][ dd
+45
+
+=== PDF PAGE 47 ===
+Linear Shift-Invariant Systems
+Suppose that T{} is a linear, shift-invariant system with  h[n] as its  
+impulse response.
+   
+
+
+
+
+
+
+
+
+
+
+
+
+kk
+knTksknksTnsT ][][][][][ dd
+This very important result says that the output of any linear, shift-
+invariant system is given by the convolution of the input with the 
+impulse response of the system. 
+Then, using the principle of superposition, 
+and finally after invoking shift-invariance
+    
+
+
+
+
+
+kk
+knhksknTksnsT ][][][][][ d
+  ][][][ nhnsnsT 
+46
+
+=== PDF PAGE 48 ===
+Causality
+A system is causal if, for every choice of n0, the output 
+sequence at the index n = n0 depends only on the input 
+sequence values for n  0.
+All physical time-based systems are causal because they are 
+unable to look into the future and anticipate a signal value 
+that will occur later.
+47
+
+=== PDF PAGE 49 ===
+48
+Causal System
+• Causality
+– A system is causal it’s output is a function of only the current and 
+previous samples
+• Examples
+– Backward Difference
+• Counter Example
+– Forward Difference
+]n[x]1n[x]n[y 
+]1n[x]n[x]n[y 
+
+=== PDF PAGE 50 ===
+Stability
+A system is stable in the bounded-input, bounded-output 
+(BIBO) sense if and only it every bounded input produces a 
+bounded output sequence.
+The input x[n] is bounded if there exists a fixed positive finite 
+value Bx such that
+ xBnx ][
+for all n
+Stability requires that for any possible input sequence there exist 
+a fixed positive value By such that
+ yBny ][
+49
+
+=== PDF PAGE 51 ===
+50
+Stable System
+• Stability (in the sense of bounded-input bounded-output BIBO)
+– A system is stable if and only if every bounded input produces a bounded 
+output
+• Example
+– Square
+• Counter Example
+– Log
+ yx B]n[y B]n[x
+ 
+2
+]n[x]n[y 
+
+
+2
+x
+x
+B]n[y  by bounded is output
+ B]n[x by bounded is input if
+ ]n[xlog]n[y 10
+       
+
+nxlog0y 0nxfor  bounded not output
+ B]n[x by bounded is input if even
+10
+x
+
+=== PDF PAGE 52 ===
+Memory (State)
+A system is referred to as memoryless if the output y[n] at every 
+value of n depends only on the input x[n] at the same value of n.
+If the system has no memory, it is called a static system. Otherwise 
+it is a dynamic system.
+51
+
+=== PDF PAGE 53 ===
+52
+Memoryless System
+• Memoryless System
+– A system is memoryless if the output y[n] at every value of n depends 
+only on the input x[n] at the same value of n
+• Example Memoryless Systems
+– Square
+– Sign
+• Counter Example
+– Ideal Delay System
+ 
+2
+]n[x]n[y 
+ ]n[xsign]n[y 
+]nn[x]n[y o
+
+=== PDF PAGE 54 ===
+Invertible System
+A system is invertible if for each output sequence we can find a 
+unique input sequence.  If two or more input sequences produce 
+the same output sequence, the system is not invertible.
+53
+
+=== PDF PAGE 55 ===
+Passive and Lossless Systems
+A system is said to be passive if, for every finite energy input 
+sequence x[n], the output sequence has at most the same energy:
+ 
+
+
+
+ nn
+nxny
+22
+][][
+If the above inequality is satisfied with an equal sign for every 
+input signal, the system is said to be lossless.
+54
+
+=== PDF PAGE 56 ===
+Examples of Systems
+][][ dnnxny 
+Ideal Delay System
+
+
+
+
+
+2
+1
+][
+1
+1
+][
+12
+M
+Mk
+knx
+MM
+ny
+Moving Average System
+2
+][][ nxny 
+
+
+
+n
+k
+kxny ][][
+Memoryless non-linear System
+Accumulator System
+][][ Mnxny 
+]1[][][  nxnxny
+where M is a 
+positive integerCompressor System
+Backward Difference System
+55
+
+=== PDF PAGE 57 ===
+Impulse Response of LTI Systems
+Find the impulse response by computing the response to d[n].
+Systems whose impulse responses have only a finite number of 
+nonzero samples are called finite-duration impulse response
+(FIR) systems. 
+Systems whose impulse responses are of infinite duration are  
+called infinite-duration impulse response (IIR) systems.
+If  h[n] = 0 for n < 0, the system is causal.
+56
+
+=== PDF PAGE 58 ===
+Impulse Response for Examples
+]δ[][ dnnny 
+Ideal Delay System
+
+
+
+ 
+
+otherwise          ,0
+    ,
+1
+1
+][
+21
+12
+Mn-M
+MMny
+Moving Average System
+
+
+
+
+
+ 
+ 0     ,0
+0     ,1
+]δ[][
+n
+n
+kny
+n
+k
+Accumulator System
+]1δ[]δ[][  nnny
+Backward Difference System
+Find the impulse response by computing the response to d[n]
+][][ nuny 
+FIR
+FIR
+FIR
+IIR
+57
+
+=== PDF PAGE 59 ===
+Stability Condition for LTI Systems
+An LTI system is BIBO stable if and only if its impulse response 
+is absolutely summable, that is
+ 
+
+k
+khS ][
+58
+
+=== PDF PAGE 60 ===
+59
+Stable and Causal LTI Systems
+• An LTI system is (BIBO) stable if and only if 
+– Impulse response is absolute summable
+– Let’s write the output of the system as
+– If the input is bounded 
+– Then the output is bounded by
+– The output is bounded if the absolute sum is finite
+• An LTI system is causal if and only if
+  
+
+k
+kh
+         
+
+
+
+
+
+kk
+knxkhknxkhny
+xB]n[x 
+   
+
+
+
+k
+x khBny
+  0kfor   0kh 
+
+=== PDF PAGE 61 ===
+Difference Equations
+  
+N M
+mk mnxbknya
+0 0
+][][
+An important subclass of LTI systems are defined by 
+an Nth-order linear constant-coefficient difference equation:
+Often the leading coefficient a0 = 1. Then the output y[n] can be 
+computed recursively from
+ 
+ 
+
+N
+k
+M
+m
+mk mnxbknyany
+1 0
+][][][
+A causal LTI system of this form can be simulated in 
+MATLAB using the function filter
+y = filter(a,b,x);
+60
+
+=== PDF PAGE 62 ===
+Accumulator Example
+
+
+
+n
+k
+kxny ][][
+Accumulator System
+];1[][][][][][
+1
+ 
+
+
+nynxkxnxkxny
+n
+k
+n
+k
+1
+1
+1
+1
+0
+0
+
+
+
+a
+a
+b
++
+one sample
+delay
+x[n] y[n]
+positive feedback system
+61
+
+=== PDF PAGE 63 ===
+Total Solution Calculation
+ 
+ 
+
+N
+k
+M
+m
+mk mnxbknya
+0 0
+][][
+
+
+
+N
+k
+hk knya
+0
+0][
+The output sequence y[n] consists of a homogeneous solution yh[n] and a 
+particular solution yp[n].
+][][][ nynyny ph 
+where the homogenous solution yh[n] is obtained from the homogeneous equation:
+62
+
+=== PDF PAGE 64 ===
+Homogeneous Solution
+  0][
+1
+10
+0
+
+
+
+
+ N
+NNNn
+N
+k
+kn
+kh aaaany 
+The general solution is then a sequence yh[n]
+Assume that the homogeneous solution is of the form
+n
+h ny ][
+then
+
+N
+n
+mmh Any
+1
+][ 
+
+
+
+N
+k
+hk knya
+0
+0][
+Given the homogeneous equation:
+defines an Nth order characteristic polynomial with roots 1, 2 … N
+(if the roots are all distinct) The coefficients Am may be found from the 
+initial conditions. 63
+
+=== PDF PAGE 65 ===
+Particular Solution
+ 
+ 
+
+N
+k
+M
+m
+mk mnxbknya
+0 0
+][][
+][][][ nynyny ph 
+The particular solution is required to satisfy the difference equation for a specific 
+input signal x[n],  n ≥ 0.
+To find the particular solution we assume for the solution yp[n] a form that depends 
+on the form of the specific input signal x[n].
+64
+
+=== PDF PAGE 66 ===
+General Form of Particular Solution
+Input Signal
+x[n]
+Particular Solution
+yp[n]
+A (constant) K
+AMn KMn
+AnM K0nM+K1nM-1+…+KM
+AnnM An(K0nM+K1nM-1+…+KM)
+
+
+
+
+
+
+)sin(
+)cos(
+nA
+nA
+o
+o
+
+
+)sin()cos( 21 nKnK oo  
+65
+
+=== PDF PAGE 67 ===
+Example (1/3)
+n
+h ny ][
+0]2[6]1[][  nynyny
+Determine the homogeneous solution for
+  066
+2221
+
+
+
+nnnn
+Substitute
+   
+nnnn
+h AAAAny 23][ 212211  
+   023
+2
+
+
+
+n
+Homogeneous solution is then
+66
+
+=== PDF PAGE 68 ===
+Example (2/3)
+][8][ nunx 
+][]2[6]1[][ nxnynyny 
+Determine the particular solution for
+][ ny p
+86  
+The particular solution has the form
+with and y[-1] = 1 and y[-2] = -1
+which is satisfied by  = -2
+67
+
+=== PDF PAGE 69 ===
+Example (3/3)
+][8][ nunx 
+][]2[6]1[][ nxnynyny 
+Determine the total solution for
+8.4
+8.1
+2
+1
+
+
+A
+A
+12
+4
+1
+9
+1
+]3[
+12
+2
+1
+3
+1
+]1[
+21
+21
+
+
+AAy
+AAy
+The total solution has the form
+with and y[-1] = 1 and y[-2] = -1
+then
+    223][][][ 21 
+nn
+ph AAnynyny
+    228.438.1][ 
+nn
+ny
+68
+
+=== PDF PAGE 70 ===
+Initial-Rest Conditions
+The output for a given input is not uniquely specified. 
+Auxiliary information or conditions are required.
+Linearity, time invariance, and causality of the system will 
+depend on the auxiliary conditions. If an additional condition is 
+that the system is initially at rest (called initial-rest conditions), 
+then the system will be linear, time invariant, and causal.
+69
+
+=== PDF PAGE 71 ===
+Zero-input, Zero-state Response
+An alternate approach for determining the total solution y[n] of a difference equation 
+is by computing its zero-input response yzi[n], and zero-state response yzs[n].  Then 
+the total solution is given by y[n] = yzi[n] + yzs[n]. 
+The zero-input response is obtained by setting the input x[n] = 0 and satisfying the 
+initial conditions.  The zero-state response is obtained by applying the specified input 
+with all initial conditions set to zero.
+70
+
+=== PDF PAGE 72 ===
+Example (1/2)
+Zero-input response:
+0]2[6]1[][  nynyny
+   
+nnnn
+h AAAAny 23][ 212211  
+1367]1[6]0[)2()3(]1[
+761]2[6]1[]0[
+21
+21
+
+
+yyAAy
+yyAAy
+zi
+zi
+6.1
+5
+8
+4.5
+5
+27
+2
+1
+
+
+A
+A
+1]2[
+1]1[
+
+
+y
+y
+Zero-state response:
+][8][ nunx 
+][]2[6]1[][ nxnynyny 
+with
+088]0[]1[2)2()3(]1[
+8]0[2]0[
+21
+21
+
+
+yxAAy
+xAAy
+zs
+zs
+4.6
+5
+32
+6.3
+5
+18
+2
+1
+
+
+A
+A
+71
+
+=== PDF PAGE 73 ===
+Mitra Example (2/2)
+Zero-input response:
+][][][ nynyny zszi 
+Zero-state response:
+nn
+zi ny )2(6.1)3(4.5][ 
+2)2(4.6)3(6.3][ 
+nn
+zs ny
+2)2(8.4)3(8.1][ 
+nn
+ny
+Total solution is
+This is the same as before
+72
+
+=== PDF PAGE 74 ===
+Impulse Response
+The impulse response h[n] of a causal system is the output 
+observed with input x[n] = d[n].
+For such a system, x[n] = 0 for n >0, so the particular solution is 
+zero, yp[n]=0. Thus the impulse response can be generated from the 
+homogeneous solution by determining the coefficients Am to satisfy 
+the zero initial conditions (for a causal system).
+73
+
+=== PDF PAGE 75 ===
+Example 
+][]2[6]1[][ nxnynyny 
+Determine the impulse response for
+   
+nn
+AAnh 23][ 21 
+The impulse response is obtained from the homogenous solution:
+For n=0
+]0[]2[6]1[]0[ xyyy 
+1]0δ[]0[ h
+For n=1
+]1[]1[6]0[]1[ xyyy 
+0]1δ[]0[]1[  hh
+121  AA
+    023 2121  AAAA
+5
+2
+,
+5
+3
+21  AA
+   
+nn
+nh 2
+5
+2
+3
+5
+3
+][ 
+0n
+74
+
+=== PDF PAGE 76 ===
+DSP Applications
+• Image Processing
+– Pattern recognition
+– Robotic vision
+– Image enhancement
+– Facsimile
+– Satellite weather map
+– Animation
+• Instrumentation/Control
+– Spectrum analysis
+– Position and rate control
+– Noise reduction
+– Data compression
+• Speech/audio
+– Speech recognition/synthesis
+– Text to speech
+– Digital audio
+– equalization
+• Military
+– Secure communication
+– Radar processing
+– Sonar processing
+– Missile guidance
+• Telecommunications
+– Echo cancellation
+– Adaptive equalization
+– ADPCM transcoders
+– Spread spectrum
+– Video conferencing
+– Data communication
+• Biomedical
+– Patient monitoring
+– Scanners
+– EEG brain mappers
+– ECG analysis
+– X-ray storage/enhancement
+75
+
+=== PDF PAGE 77 ===
+76
+
+
+=== PDF PAGE 78 ===
+Image enhancement 
+77
+
+
+=== PDF PAGE 79 ===
+More Examples of Applications
+• Sound Recording 
+Applications
+– Compressors and Limiters
+– Expanders and Noise Gates
+– Equalizers and Filters
+– Noise Reduction Systems
+– Delay and Reverberation 
+Systems
+– Special Effect Circuits
+• Speech Processing
+– Speech Recognition
+– Speech Communication
+• Telephone Dialing 
+Applications
+• FM Stereo Applications
+• Electronic Music 
+Synthesis
+– Subtractive Synthesis
+– Additive Synthesis
+• Echo Cancellation in 
+Telephone Networks
+• Interference Cancellation 
+in Wireless 
+Telecommunication
+78
+
+=== PDF PAGE 80 ===
+Reasons for Using DSP
+• Signals and data of many types are 
+increasingly stored in digital 
+computers, and transmitted in 
+digital form from place to place. In 
+many cases it makes sense to 
+process them digitally as well.
+• Digital processing is inherently 
+stable and reliable. It also offers 
+certain technical possibilities not 
+available with analog methods.
+• Rapid advances in IC design and 
+manufacture are producing ever 
+more powerful DSP devices at 
+decreasing cost.
+• Flexibility in reconfiguring
+• Better control of accuracy 
+requirement
+• Easily transportable and possible 
+offline processing
+• Cheaper hardware in some case
+• In many case DSP is used to 
+process a number of signals 
+simultaneously. This may be done 
+by interlacing samples (technique 
+known as TDM) obtained from the 
+various signal channels.
+• Limitation in speed & Requirement 
+in larger bandwidth
+79
+
+=== PDF PAGE 81 ===
+80
+
+
+=== PDF PAGE 82 ===
+System Analysis
+81
+
+
+=== PDF PAGE 83 ===
+Frequency Response
+82
+
+
+=== PDF PAGE 84 ===
+Ideal lowpass filter-example
+83
+
+
+=== PDF PAGE 85 ===
+Non causal to causal
+84
+
+
+=== PDF PAGE 86 ===
+Phase distortion and delay
+85
+
+
+=== PDF PAGE 87 ===
+Phase delay
+86
+
+
+=== PDF PAGE 88 ===
+Phase delay
+87
+
+
+=== PDF PAGE 89 ===
+Group delay
+88
+
+
+=== PDF PAGE 90 ===
+Group delay
+89
+
+
+=== PDF PAGE 91 ===
+The Z-Transform
+90
+
+=== PDF PAGE 92 ===
+Z-Transform Definition
+
+
+
+
+
+n
+n
+zXznxnxZ )(][]}[{
+
+
+
+C
+n
+dzzzX
+j
+nx
+1
+)(
+2
+1
+][
+
+-Counterpart of the Laplace transform for discrete-time signals
+-Generalization of the Fourier Transform
+-Fourier Transform does not exist for all signals
+The z-transform of a sequence x[n] is defined as
+The inverse z-transform is given by
+This expression denotes a closed contour integral taken counterclockwise 
+about the origin and in the region of convergence (ROC). It incorporates the 
+Cauchy integral theorem from the theory of complex variables.  This result is 
+not given directly in Oppenheim, but may be found in Proakis.
+91
+
+=== PDF PAGE 93 ===
+For                 the z-transform reduces to the Fourier transform
+Relationship to Fourier Transform
+
+
+
+
+
+n
+n
+znxzX ][)(
+The z-transform of a sequence x[n] is defined as
+  
+
+
+
+
+n
+njj
+enxeX
+
+][
+The Fourier transform of a sequence x[n] is defined as
+j
+ez 
+This domain is a circle of unit radius in the complex plane, that is 
+|z| = 1.
+92
+
+=== PDF PAGE 94 ===
+93
+Convergence of the z-Transform
+• DTFT does not always converge
+– Infinite sum not always finite if x[n] no absolute summable
+– Example: x[n] = anu[n] for |a|>1 does not have a DTFT
+• Complex variable z can be written as r ej so the z-transform
+• DTFT of x[n] multiplied with exponential sequence r -n
+– For certain choices of r the sum maybe made finite
+        
+
+
+
+
+
+
+
+n
+njn
+n
+njj
+e r nxer nxreX
+   
+nj
+n
+j
+e nxeX
+
+
+
+
+
+  
+
+n
+n-
+ r nx
+
+=== PDF PAGE 95 ===
+Unit Circle in Complex Z-Plane
+Unit Circle
+
+1
+z-plane
+Im
+Re
+j
+ez
+
+
+94
+-The z-transform is a function of the complex z variable
+-Convenient to describe on the complex z-plane
+-If we plot z=ej for =0 to 2 we get the unit circle
+
+=== PDF PAGE 96 ===
+Region of Convergence (ROC)
+If some value of z, say, z = z1, is in the ROC, then all values of z on the circle defined 
+by |z| = |z1| will also be in the ROC.  So, the ROC will consist of a ring in the z-plane 
+centered about the origin. Its outer boundary will be a circle (or the ROC may extend 
+outward to infinity), and its inner boundary will be a circle (or it may extend inward 
+to include the origin).
+
+
+
+
+
+n
+znx ][
+For any given sequence, the set of value of z for which the z-transform converges 
+is called the region of convergence, ROC.  The criterion for convergence is that 
+the z-transform be absolutely summable:
+95
+
+=== PDF PAGE 97 ===
+Region of Convergence
+z-plane
+Im
+Re
+r2
+r1
+The region of convergence (ROC) as a ring in the z-plane.  For specific cases, the inner boundary 
+can extend inward to the origin, and the ROC becomes a disk.  In other cases, the outer boundary 
+can extend outward to infinity. 96
+
+=== PDF PAGE 98 ===
+Laurent Series
+
+
+
+
+
+n
+n
+znxzX ][)(
+A power series of this form is a Laurent series. A Laurent series, and therefore 
+a z-transform, represents an analytic function at every point within the region 
+of convergence. This means that the z-transform and all its derivatives must be 
+continuous functions of z within the region of convergence.
+)(
+)(
+)(
+zQ
+zP
+zX 
+Among the most useful z-transforms are those for which X(z) is a rational 
+function inside the region of convergence, for example where P(z) and Q(z) 
+are polynomials.  The values of z for which X(z) are zero are the zeros of X(z) 
+and the values for which X(z) is infinite are the poles of X(z). 
+97
+
+=== PDF PAGE 99 ===
+Properties of the ROC
+1. The ROC is a ring or disk in the z-plane centered at the origin
+ LR rzr0
+2. The Fourier transform of x[n] converges absolutely if and only if the ROC of the z-
+transform of x[n] includes the unit circle.
+3. The ROC cannot contain any poles.
+4. If x[n] is a finite-duration sequence, then the ROC is the entire z-plane except possibly 
+z=0 or z=.
+5. If x[n] is a right-handed sequence (zero for n < N1 < ), the ROC extends outward from 
+the outermost (largest magnitude) finite pole in X(z) to (and possibly including infinity).
+6. If x[n] is a left-handed sequence (zero for n > N2 > - ), the ROC extends inward from 
+the innermost (smallest magnitude) nonzero pole in X(z) to (and possibly including) zero.
+7. A two-sided sequence is an infinite-duration sequence that is neither right-sided or left-
+sided.  If x[n] is a two-sided sequence, the ROC will consist of a ring in the z-plane, 
+bounded on the interior and exterior by a pole and , consistent with property 3, not 
+containing any poles.
+8. The ROC must be a connected region.
+98
+
+=== PDF PAGE 100 ===
+Properties of ROC Shown Graphically
+Finite-Duration Signals
+Infinite-Duration Signals
+Causal
+Anticausal
+Two-sided
+Causal
+Anticausal
+Two-sided
+Entire z-plane
+Except z = 0
+Entire z-plane
+Except z = infinity
+Entire z-plane
+Except z = 0 and z = 
+|z| < r1
+|z| > r2
+r2 < |z| < r1
+99
+
+=== PDF PAGE 101 ===
+Example: Right-Sided Sequence
+
+
+
+
+
+n
+n
+znxzX ][)(
+][][ nuanx
+n
+
+1
+1
+
+
+az
+  1
+0
+1
+1
+1
+)( 
+
+
+
+
+  az
+azzX
+n
+n
+az 
+ROC
+or
+100
+
+=== PDF PAGE 102 ===
+Example: Left-Sided Sequence
+
+
+
+
+
+n
+n
+znxzX ][)(
+]1[][  nuanx
+n
+1n
+11
+1
+1
+1
+1
+1 
+
+
+
+
+azza
+nonzero for 
+   
+
+
+
+
+
+
+
+0
+1
+1
+1
+1)(
+n
+n
+n
+n
+zaazzX
+az 
+1
+1
+
+
+za
+ROC
+or
+101
+
+=== PDF PAGE 103 ===
+Example: Sum of Two Exponential 
+Sequences
+
+
+
+
+
+n
+n
+znxzX ][)(
+][
+3
+1
+][
+2
+1
+][ nununx
+nn
+
+
+
+
+
+ 
+
+
+
+
+
+  
+ 
+  3
+1
+2
+1
+12
+1
+1
+3
+11
+2
+1
+1
+2
+11
+3
+1 2
+11
+2
+)(
+
+
+
+
+
+ 
+
+zz
+zz
+zz
+zz
+zX
+1
+3
+11
+2
+1 1
+1
+1
+1
+)( 
+
+
+
+
+zz
+zX
+12
+1 z
+ROC
+2
+1z
+13
+1  z and
+Poles at ½ and -1/3, zeros at 0 and 1/12 102
+
+=== PDF PAGE 104 ===
+Example: Two-Sided Sequence
+]1[
+2
+1
+][
+3
+1
+][ 
+
+
+
+
+
+
+
+
+
+  nununx
+n
+2
+1
+3
+1
+ z
+ROC
+1
+3
+11
+1
+][
+3
+1
+
+
+
+
+
+
+
+ 
+z
+nu
+n
+3
+1
+z
+1
+2
+11
+1
+]1[
+2
+1
+
+
+
+
+
+
+
+
+z
+nu
+n
+2
+1
+z
+ 
+  3
+1
+2
+1
+12
+12
+)(
+
+
+
+zz
+zz
+zX
+103
+
+=== PDF PAGE 105 ===
+Example: Finite Length Sequence
+
+
+
+
+
+n
+n
+znxzX ][)(
+
+
+
+
+0
+][
+n
+a
+nx
+a
+   
+1
+11
+0
+1
+1
+1
+)( 
+
+
+
+
+
+  az
+az
+azzX
+NN
+n
+n
+0z
+ROC and
+10  Nn
+otherwise
+The sum is finite, so
+Pole-zero plot for N = 16
+104
+
+=== PDF PAGE 106 ===
+Z-transforms with the same pole-zero locations 
+illustrating the different possibilities for the ROC.  
+Each ROC corresponds to a different sequence.
+c) A left-sided sequence
+d) A two-sided sequence
+ e) A two-sided sequence
+b) A right-sided sequence
+105
+
+=== PDF PAGE 107 ===
+Common Z-Transform Pairs
+*All z except 0 (if m > 0) or  (if m<0)
+][ nd
+][nu
+1
+1
+1
+
+ z
+1
+1
+1
+
+ az
+1
+ 
+21
+1
+1
+
+
+ az
+az
+m
+z
+
+1
+1
+1
+
+ z
+1
+1
+1
+
+ az
+ 
+21
+1
+1
+
+
+ az
+az
+][ nua
+n
+]1[  nua
+n
+][ mn d
+][ nuna
+n
+]1[  nuna
+n
+az  All z
+1z
+az 
+az 
+az 
+]1[  nu
+1z
+Sequence Transform ROC
+*
+21
+0
+1
+0
+]cos2[1
+][cos1
+
+
+
+
+zz
+z
+
+
+1
+1
+1
+
+
+
+
+az
+za
+NN
+21
+0
+1
+0
+]cos2[1
+][sin
+
+
+ zz
+z
+
+
+221
+0
+1
+0
+]cos2[1
+]cos[1
+
+
+
+
+zrzr
+zr
+
+
+221
+0
+1
+0
+]cos2[1
+]sin[
+
+
+ zrzr
+zr
+
+
+][][cos 0 nun
+otherwise   ,0
+10,  Nna
+n
+1z
+1z
+rz 
+rz 
+0z
+Sequence Transform ROC
+][][sin 0 nun
+][][cos 0 nun
+][][sin 0 nun
+106
+
+=== PDF PAGE 108 ===
+Z-Transform Properties (1/2)
+3.4.1 Linearity
+)()(][][ 2121 zbXzaXnbxnax
+Z
+ 
+21 xx RR 
+ROC contains
+3.4.2 Time Shifting
+)(][
+0
+0 zXznnx
+nZ 
+ 
+ROC = Rx (except for possible addition 
+or deletion of 0 or )
+3.4.3 Multiplication by an Exponential Sequence
+
+
+
+
+
+
+ 
+0
+0 ][
+z
+z
+Xnxz
+Zn
+xRz 0ROC 
+3.4.4 Differentiation of X(z)
+dz
+zdX
+znnx
+Z )(
+][  
+xRROC
+107
+
+=== PDF PAGE 109 ===
+Z-Transform Properties (2/2
+3.4.5 Conjugation of a Complex Sequence
+)(][
+**
+zXnx
+Z
+ 
+
+3.4.6 Time Reversal
+
+
+
+
+
+  *
+** 1
+][
+z
+Xnx
+Z
+3.4.7 Convolution of Sequences
+)()(][][ 2121 zXzXnxnx
+Z
+ 
+3.4.8 Initial-Value Theorem
+)(lim]0[ zXx
+z 
+
+xR
+1
+ROC 
+xRROC
+21 xx RR 
+ROC contains
+provided that x[n] is zero for n < 0, i.e. that x[n] is causal.108
+
+=== PDF PAGE 110 ===
+Inverse z-Transform
+Method of inspection – recognize certain transform pairs.
+Partial Fraction Expansion
+
+
+
+
+
+
+ N
+k
+k
+k
+M
+k
+k
+k
+za
+zb
+zX
+0
+0
+)(
+Factor to
+ 
+ 
+
+
+
+
+
+
+
+ N
+k
+k
+M
+k
+k
+zd
+zc
+a
+b
+zX
+1
+1
+1
+1
+0
+0
+1
+1
+)(
+
+
+
+
+
+N
+k k
+k
+zd
+A
+zX
+0
+1
+1
+)(
+ 
+kdzkk zXzdA
+
+
+ )(1
+1
+where
+109
+
+=== PDF PAGE 111 ===
+Example: Second-Order Z-Transform
+1
+2
+1
+2
+1
+4
+1
+1
+11
+)( 
+
+
+
+
+z
+A
+z
+A
+zX
+  
+1
+2
+11
+4
+1 11
+1
+)( 
+
+
+zz
+zX
+2
+1
+z
+ 
+1
+1
+1
+1
+4
+1
+2
+11 
+
+ A
+ 
+2
+1
+1
+1
+2
+1
+4
+12 
+
+ A
+1
+2
+11
+4
+1 1
+2
+1
+1
+)( 
+
+
+
+
+
+zz
+zX
+110
+
+=== PDF PAGE 112 ===
+Partial Fraction Expansion
+If M > N
+
+
+
+
+
+
+
+
+N
+k k
+k
+NM
+r
+r
+r
+zd
+A
+zBzX
+1
+1
+0 1
+)(
+Br can be obtained by long division of numerator by denominator, stopping 
+when the remainder is of lower degree than the denominator.
+If M > N and X(z) has multiple-order poles, specifically a pole of order s at z=di
+ 
+
+
+
+
+
+
+
+
+
+
+
+s
+m
+m
+i
+m
+N
+ikk k
+k
+NM
+r
+r
+r
+zd
+C
+zd
+A
+zBzX
+1
+1
+,1
+1
+0 11
+)(
+    
+1
+1
+1
+)()!(
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+idw
+s
+ims
+ms
+ms
+i
+m wXwd
+dw
+d
+dms
+C
+111
+
+=== PDF PAGE 113 ===
+Example 
+1
+2
+1
+2
+1
+1
+0
+11
+)( 
+
+
+
+
+z
+A
+z
+A
+BzX
+ 
+  
+2
+2
+11
+2
+3
+21
+11
+2
+1
+21
+1
+21
+11
+1
+)( 
+
+
+
+
+
+
+
+
+
+zz
+zz
+zz
+z
+zX
+1z
+ 
+8
+11
+)11(
+1
+2
+1
+2
+2 
+
+
+ A
+ 
+ 
+ 
+9
+1
+3
+1
+)(1
+2
+1
+2
+1
+21
+2
+1
+1 
+
+
+
+
+ 
+
+A
+11
+2
+1 1
+8
+1
+9
+2)( 
+
+
+
+
+
+zz
+zX
+1
+2
+1
+2
+1
+1
+0
+11
+)( 
+
+
+
+
+z
+A
+z
+A
+BzX
+22
+2
+1
+2
+0 
+
+
+ 
+
+
+
+z
+z
+B
+  ][8][][2][ 2
+1 nununnx
+n
+ d
+112
+
+=== PDF PAGE 114 ===
+Power Series Expansion
+
+
+
+
+
+n
+n
+znxzX ][)(
+mZ
+zmn
+
+  ][d
+Note that
+  
+1
+2
+1
+2
+1221
+2
+12
+111)(
+
+ zzzzzzzX
+]1[][]1[]2[2][ 2
+1
+2
+1  nnnnnx dddd
+Example :
+113
+
+=== PDF PAGE 115 ===
+Example 
+ 
+1
+1log)(
+
+ azzX
+az 
+Expand in power series:
+  
+
+
+
+ 
+
+1
+1
+1 )1(
+1log
+n
+nnn
+n
+za
+az
+
+
+
+
+
+
+,0
+,)1(][
+1
+n
+a
+nx
+n
+n
+1n
+0n
+114
+
+=== PDF PAGE 116 ===
+Contour Integration
+
+
+
+
+
+
+
+1.0
+1,1
+2
+1
+k
+k
+dzz
+C
+k
+j
+ 
+
+ C inside poles at the  of residues][
+1n
+X(z)znx
+Cauchy integral theorem
+C is a counterclockwise contour that encircles the origin.
+
+
+
+C
+n
+dzzzX
+j
+nx
+1
+)(
+2
+1
+][
+
+Then one can show that
+115
+
+=== PDF PAGE 117 ===
+Residue Calculation
+     00
+1
+!1
+1
+at  )(Res d
+s
+dzzzX
+n
+
+
+
+
+ 
+ 
+s
+n
+dz
+z
+zzX
+0
+1 )(
+
+
+ 
+If X(z) is a rational function of z, we can write
+Then one can show that
+116
+
+=== PDF PAGE 118 ===
+117
+Quick Review of LTI Systems
+• LTI Systems are uniquely determined by their impulse response
+• We can write the input-output relation also in the z-domain
+• Or we can define an LTI system with its frequency response
+• H(ej) defines magnitude and phase change at each frequency
+• We can define a magnitude response
+• And a phase response
+         khkxknh kxny
+k
+ 
+
+
+     zXzHzY 
+     
+
+
+jjj
+eXeHeY
+     
+
+
+jjj
+eXeHeY
+     
+
+
+jjj
+eXeHeY
+
+=== PDF PAGE 119 ===
+118
+Phase Distortion and Delay
+• Remember the ideal delay system
+• In terms of magnitude and phase response
+• Delay distortion is generally acceptable form of distortion
+– Translates into a simple delay in time
+• Also called a linear phase response
+– Generally used as target phase response in system design
+• Ideal lowpass or highpass filters have zero phase response
+– Not implementable in practice
+     
+dnjj
+id
+DTFT
+did eeHnnnh
+
+ d
+ 
+  
+
+
+
+     neH
+1eH  
+d
+j
+id
+j
+id
+
+=== PDF PAGE 120 ===
+119
+System Functions for Difference Equations
+• Ideal systems are conceptually useful but not implementable
+• Constant-coefficient difference equations are 
+– general to represent most useful systems
+– Implementable
+– LTI and causal with zero initial conditions
+• The z-transform is useful in analyzing difference equations
+• Let’s take the z-transform of both sides
+   
+
+
+M
+0k
+k
+N
+0k
+k knxbknya
+   
+   zXzbzYza
+zXzbzYza   
+M
+0k
+k
+k
+N
+0k
+k
+k
+M
+0k
+k
+k
+N
+0k
+k
+k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== PDF PAGE 121 ===
+120
+System Function
+• Systems described as difference equations have system functions of the 
+form
+• Example
+   
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ N
+1k
+1
+k
+M
+1k
+1
+k
+0
+0
+N
+0k
+k
+k
+M
+0k
+k
+k
+zd1
+zc1
+a
+b
+za
+zb
+zX
+zY
+zH
+     
+ zX
+zY
+z
+8
+3
+z
+4
+1
+1
+zz21
+z
+4
+3
+1z
+2
+1
+1
+z1
+zH
+21
+21
+11
+21
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+
+
+
+
+
+     
+           2nx1nx2nx2ny
+8
+3
+1ny
+4
+1
+ny
+zXzz21zYz
+8
+3
+z
+4
+1
+1
+2121
+
+
+
+
+
+
+ 
+
+
+=== PDF PAGE 122 ===
+121
+Stability and Causality
+• A system function does not uniquely specify a system
+– Need to know the ROC
+• Properties of system gives clues about the ROC
+• Causal systems must be right sided 
+– ROC is outside the outermost pole
+• Stable system requires absolute summable impulse response
+– Absolute summability implies existence of DTFT
+– DTFT exists if unit circle is in the ROC
+– Therefore, stability implies that the ROC includes the unit circle
+• Causal AND stable systems have all poles inside unit circle
+– Causal hence the ROC is outside outermost pole
+– Stable hence unit circle included in ROC
+– This means outermost pole is inside unit circle 
+– Hence all poles are inside unit circle
+  
+
+k
+nh
+
+=== PDF PAGE 123 ===
+122
+Example
+• Let’s consider the following LTI system
+• System function can be written as
+• Three possibilities for ROC
+– If causal ROC1 but not stable
+– If stable ROC2 but not causal
+– If not causal neither stable ROC3
+       nx2ny1ny
+2
+5
+ny 
+ 
+ 
+11
+z21z
+2
+1
+1
+1
+zH
+
+
+
+
+
+
+ 
+
+2
+1
+z:ROC
+2z
+2
+1
+:ROC
+2z:ROC
+3
+2
+1
+
+
+
+
+=== PDF PAGE 124 ===
+Structures for Discrete-Time Systems
+• Block Diagram Representation of Linear Constant-Coefficient 
+Difference Equations
+• Signal Flow Graph Representation of Linear Constant-Coefficient 
+Difference Equations
+• Basic Structures for IIR Systems
+• Transposed Forms
+• Basic Network Structures for FIR Systems
+• Lattice Structures
+123
+
+=== PDF PAGE 125 ===
+Introduction
+• Example: The system function of a discrete-time system is
+|z| > |a|
+• Its impulse response will be
+h[n] = b0anu[n] + b1an-1u[n-1]
+• Its difference equation will be
+y[n] –ay[n-1] = b0x[n] + b1x[n-1]
+Since this system has an infinite-duration impulse response, it is not possible 
+to implement the system by discrete convolution. However, it can be rewritten 
+in a form that provides the basis for an algorithm for recursive computation.
+y[n] = ay[n-1] + b0x[n] + b1x[n-1]
+,
+1
+)( 1
+1
+10
+
+
+
+
+
+az
+zbb
+zH
+124
+
+=== PDF PAGE 126 ===
+Block Diagram Representation of Linear Constant-coefficient 
+Difference Equations
+z-1
++
+x1[n]
+x2[n]
+x1[n] + x2[n]
+x[n]     a        ax[n]
+x[n]                  x[n-1]
+Multiplication of a
+sequence by a constant
+Unit delay
+Addition of two sequences
+125
+
+=== PDF PAGE 127 ===
+Block Diagram Representation of Linear Constant-coefficient 
+Difference Equations
+)()()(
+)()()(
+1
+1
+)()()(
+)(
+)(
+1
+)(
+2
+1
+0
+1
+12
+1
+0
+zVzHzY
+zXzHzV
+zb
+za
+zHzHzH
+zX
+zY
+za
+zb
+zH
+M
+k
+k
+kN
+k
+k
+k
+N
+k
+k
+k
+M
+k
+k
+k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)()()(
+)()()(
+1
+1
+)()()(
+1
+2
+1
+0
+21
+zWzHzY
+zXzHzW
+za
+zbzHzHzH N
+k
+k
+k
+M
+k
+k
+k
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1
+2
+126
+
+=== PDF PAGE 128 ===
+Block diagram representation for a general Nth-order 
+difference equation: 
+Direct Form I
++
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
++
++
+++
++
+x[n] y[n]
+x[n-1]
+x[n-2]
+x[n-M]
+y[n-1]
+y[n-2]
+y[n-N]
+v[n]b0
+b1
+bM-1
+bM
+a1
+aN-1
+aN
+127
+
+=== PDF PAGE 129 ===
+Block diagram representation for a general Nth-order 
+difference equation: 
+Direct Form II
++
+z-1
+z-1
+z-1
++
++
+x[n] y[n]
+w[n-M]
+w[n] b0
+b1
+bM-1
+bM
+z-1
+z-1
+z-1
++
++
++
+w[n-1]
+w[n-2]
+a1
+aN-1
+aN w[n-N]
+w[n-2]
+w[n-1]
+128
+
+=== PDF PAGE 130 ===
+Combination of delay units (in case N = M)
+x[n]
+z-1
+z-1
+z-1
++
++
++
+a1
+aN-1
+aN
++
++
++
+y[n]b0
+b1
+bN-1
+bN
+w[n]
+129
+
+=== PDF PAGE 131 ===
+Block Diagram Representation of Linear Constant-
+coefficient Difference Equations 2
+• An implementation with the minimum number of delay elements is 
+commonly referred to as a canonic form implementation.
+• The direct form I is a direct realization of the difference equation 
+satisfied by the input x[n] and the output y[n], which in turn can be 
+written directly from the system function by inspection.
+• The direct form II or canonic direct form is an rearrangement of the 
+direct form I in order to combine the delay units together.
+130
+
+=== PDF PAGE 132 ===
+Signal Flow Graph Representation of Linear Constant-
+coefficient Difference Equations
+a
+z-1
+Attenuator
+Delay Unit
+Node: Adder, Separator, Source, or Sink
+a
+b
+c
+z-1
+z-1
+x[n]          d        e             y[n]
+131
+
+=== PDF PAGE 133 ===
+Basic Structures for IIR Systems
+• Direct Forms
+• Cascade Form
+• Parallel Form
+• Feedback in IIR Systems
+132
+
+=== PDF PAGE 134 ===
+Basic Structures for IIR Systems
+• Direct Forms
+
+
+ 
+
+
+
+
+ 
+
+
+
+N
+k
+k
+k
+M
+k
+k
+k
+N
+k
+M
+k
+kk
+za
+zb
+zH
+knxbknyany
+1
+0
+1 0
+1
+)(
+][][][
+133
+
+=== PDF PAGE 135 ===
+Direct Form I (M = N)
+134
+
+
+=== PDF PAGE 136 ===
+Direct Form II (M = N)
+135
+
+
+=== PDF PAGE 137 ===
+Direct Form II 
+136
+
+
+=== PDF PAGE 138 ===
++
+z-1
+z-1
+z-1
+z-1
++
+++
+y[n]
+2 0.75
+-0.125
+z-1
+z-1
++
++
+0.75
+-0.125
++
++
+2
+x[n]
+x[n] y[n]
+21
+21
+125.075.01
+21
+)( 
+
+
+
+
+zz
+zz
+zH
+137
+
+=== PDF PAGE 139 ===
+x[n]
+x[n]
+y[n]
+y[n]
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
+2
+2
+0.75
+-0.125
+0.75
+-0.125
+138
+
+=== PDF PAGE 140 ===
+Basic Structures for IIR Systems 2
+• Cascade Form
+where  M = M1+2M2 and N = N1+2N2 .
+• A modular structure that is advantageous for many types of 
+implementations is obtained by combining pairs of real factors and 
+complex conjugate pairs into second-order factors.
+where Ns is the largest integer contained in (N+1)/2.
+ 
+ 
+ 
+
+ 
+
+
+
+
+1 2
+1 2
+1 1
+111
+1 1
+111
+)1)(1()1(
+)1)(1()1(
+)( N
+k
+N
+k
+kkk
+M
+k
+M
+k
+kkk
+zdzdzc
+zhzhzg
+AzH
+
+
+
+
+
+
+
+sN
+k kk
+kkk
+zaza
+zbzbb
+zH
+1
+2
+2
+1
+1
+2
+2
+1
+10
+1
+)(
+139
+
+=== PDF PAGE 141 ===
+z-1 z-1
+0.250.5
+x[n] y[n]
+y[n]
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
+w1[n] w2[n] w3[n]y1[n] y2[n] y3[n]
+b01 b02 b03
+b12a12 a13 b13
+a22 b22 a23 b23
+a11
+a21 b21
+b11
+x[n]
+z-1
+0.5 0.25
+z-1z-1 z-1
+x[n] y[n]
+)25.01)(5.01(
+)1)(1(
+125.075.01
+21
+)( 11
+11
+21
+21
+
+
+
+
+
+
+
+
+
+
+zz
+zz
+zz
+zz
+zH
+140
+
+=== PDF PAGE 142 ===
+Basic Structures for IIR Systems 3
+• Parallel Form
+where N = N1+2N2 .  If M ณ N, then NP = M - N; otherwise, the first summation in 
+right hand side of equation above is not included.
+• Alternatively, the real poles of H(z) can be grouped in pairs :
+where NS is the largest integer contained in (N+1)/2, and if NP = M - N is 
+negative, the first sum is not present.
+  
+  
+
+
+
+
+
+
+
+
+
+PN
+k
+N
+k
+N
+k kk
+kk
+k
+kk
+k
+zdzd
+zeB
+zc
+A
+zCzH
+0 1 1
+11
+1
+1
+1 2
+)1)(1(
+)1(
+1
+)(
+ 
+ 
+
+
+
+
+
+
+P SN
+k
+N
+k kk
+kkk
+k
+zaza
+zee
+zCzH
+0 1
+2
+2
+1
+1
+1
+10
+1
+)(
+141
+
+=== PDF PAGE 143 ===
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
+x[n] y[n]
+y1[n]
+y2[n]
+y3[n]
+w1[n]
+w2[n]
+w3[n]
+a11
+a21
+b11
+a12
+a22
+b02
+b12
+a13
+a23
+b03
+b13
+b01
+C0
+Parallel form structure for
+sixth order system (M=N=6).
+142
+
+=== PDF PAGE 144 ===
+21
+1
+21
+21
+125.075.01
+87
+8
+125.075.01
+21
+)( 
+
+
+
+
+
+
+
+
+
+zz
+z
+zz
+zz
+zH
+11
+25.01
+25
+5.01
+18
+8 
+
+
+
+
+zz
+z-1
+z-1 z-1
+z-1
+8
+8
+0.75 8 18
+0.5
+0.25
+-0.125
+-7
+-25
+x[n]
+x[n]
+y[n]
+y[n]
+143
+
+=== PDF PAGE 145 ===
+Transposed Forms
+• Transposition (or flow graph reversal) of a flow graph is accomplished by 
+reversing the directions of all branches in the network while keeping the 
+branch transmittances as they were and reversing the roles of the input and 
+output so that source nodes become sink nodes and vice versa.
+x[n] x[n]
+x[n]
+y[n] y[n]
+y[n]
+a a
+a
+z-1
+z-1
+z-1
+144
+
+=== PDF PAGE 146 ===
+b0
+b1
+b2
+bN-1
+bN
+a1
+a2
+aN-1
+aN
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
+x[n] y[n]
+b0
+a1
+a2
+aN-1
+aN
+b1
+b2
+bN-1
+bN
+z-1
+z-1
+z-1
+z-1
+z-1
+z-1
+x[n] y[n]
+145
+
+=== PDF PAGE 147 ===
+a1
+a2
+aN-1
+aN
+b0
+b1
+bN-1
+bN
+b2
+z-1
+z-1
+z-1
+b1
+b2
+bN-1
+bN
+b0
+a1
+aN-1
+aN
+a2
+z-1
+z-1
+z-1
+x[n]
+x[n]
+y[n]
+y[n]
+146
+
+=== PDF PAGE 148 ===
+Basic Network Structures for FIR Systems
+• Direct Form
+– It is also referred to as a tapped delay line structure or a transversal filter
+structure.
+• Transposed Form
+• Cascade Form
+where MS is the largest integer contained in (M + 1)/2. If M is odd, one of 
+coefficients b2k will be zero.
+ 
+ 
+
+
+M
+n
+M
+k
+kkk
+n
+S
+zbzbbznhzH
+0 1
+2
+2
+1
+10 )(][)(
+147
+
+=== PDF PAGE 149 ===
+Direct Form
+• For causal FIR system, the system function has only zeros (except for 
+poles at z = 0) with the difference equation:
+y[n] = SM
+k=0 bkx[n-k]
+• It can be interpreted as the discrete convolution of x[n] with the 
+impulse response
+h[n] =  bn , n = 0, 1, …, M,
+0      , otherwise.
+148
+
+=== PDF PAGE 150 ===
+Direct Form (Tapped Delay Line or Transversal Filter)
+z-1 z-1 z-1
+y[n]
+x[n]
+h[0] h[1] h[2] h[M-1] h[M]
+b0
+b1
+b2
+bN-1
+bN
+z-1
+z-1
+z-1
+x[n] y[n]
+149
+
+=== PDF PAGE 151 ===
+Transposed Form of FIR Network
+z-1 z-1 z-1 y[n]
+x[n]
+h[M] h[M-1] h[M-2] h[2] h[1]
+z-1
+h[0]
+150
+
+=== PDF PAGE 152 ===
+Cascade Form Structure of a FIR System
+b01
+b11
+b21
+z-1
+z-1
+x[n] y[n]b02
+b12
+b22
+z-1
+z-1
+b0Ms
+b1Ms
+b2Ms
+z-1
+z-1
+151
+
+=== PDF PAGE 153 ===
+Structures for Linear-Phase FIR Systems
+• Structures for Linear Phase FIR Systems :
+– h[M-n] = h[n]                       for n =  0, 1, ..., M
+• For M is an even integer : Type I
+y[n] = Sk=0
+(M/2)-1 h[k](x[n-k] + x[n-M+k]) + h[M/2]x[n-M/2]
+• For M is an odd integer  : Type II
+y[n] = Sk=0
+(M-1)/2 h[k](x[n-k] + x[n-M+k])
+– h[M-n] = -h[n]                      for n =  0, 1, ..., M
+• For M is an even integer : Type III
+y[n] = Sk=0
+(M/2)-1 h[k](x[n-k] - x[n-M+k])
+• For M is an odd integer  : Type IV
+y[n] = Sk=0
+(M-1)/2 h[k](x[n-k] - x[n-M+k])
+152
+
+=== PDF PAGE 154 ===
+Direct form structure for an FIR linear-phase when M is even.
+Direct form structure for an FIR linear-phase when M is odd.
+z-1 z-1 z-1
+z-1 z-1 z-1
+h[0]               h[1]                 h[2]                           h[(M-3)/2]     h[(M-1)/2]
+x[n]
+y[n]
+z-1
+z-1 z-1 z-1
+z-1 z-1 z-1
+h[0]               h[1]                 h[2]                           h[(M/2)-1]     h[M/2]
+x[n]
+y[n]
+153
+
+=== PDF PAGE 155 ===
+Lattice Structures
+• Theory of autoregressive signal modeling :
+– Lattice Structure
+• Development of digital filter structures that are analogous to analog 
+filter structures :
+– Wave Digital Filters
+• Another structure development approach is based on state-variable 
+representations and linear transformations.
+154
+
+=== PDF PAGE 156 ===
+Lattice Structures 2
+• FIR Lattice
+The coefficients {ki} in the lattice structures are referred 
+to as the k-parameters, which are called reflection 
+coefficients or PARCOR coefficients.
+– When used in signal modeling, the k-parameters 
+are estimated from a data signal .
+– Given a set of k-parameters, the system function 
+can be found and therefore the impulse response : 
+by recurrence formula for computing A(z) in terms 
+of the intermediate system functions     
+
+
+
+
+
+
+ 
+
+
+N
+m
+m
+m zazA
+zX
+zY
+zH
+1
+1)(
+)(
+)(
+)(
+155
+
+=== PDF PAGE 157 ===
+Reflection coefficients or PARCOR coefficients structure
+x[n]    e0[n]              e1[n]               e2[n] eN-1[n]            eN[n]     y[n]
+e~
+0[n]             e~
+1[n]              e~
+2[n] e~
+N-1[n]         e~
+N[n]
+z-1 z-1 z-1-k1
+-k1
+-k2
+-k2 -kN
+-kN
+Signal flow graph of an FIR lattice system
+e0[n] = e~
+0[n] = x[n]
+ei[n] = ei-1[n] – kie~
+i-1[n-1],       i = 1, 2, …, N,
+e~
+i[n] = -kiei-1[n] + e~
+i-1[n-1]
+y[n] = eN[n]
+156
+
+=== PDF PAGE 158 ===
+A recurrence formula for computing A(z) = H(z) = Y(z)/X(z) can be 
+obtained in terms of intermediate system functions:
+
+
+
+
+
+
+ 
+
+
+i
+m
+mi
+m
+O
+i
+i za
+zE
+zE
+zA
+1
+)(
+1
+)(
+)(
+)(
+By recursive technique:
+ai
+(i) = ki ,                                                                   
+am
+(i) = am
+(i-1) - ki ai-m
+(i-1) ,                                                                     
+m = 1, 2, ..., (i-1)
+Or by reverse recursive technique:
+ki = ai
+(i)
+am
+(i-1) = [am
+(i) + kiai-m
+(i)]/[1 – ki
+2],  m = 1, 2, …, (i – 1)
+157
+
+=== PDF PAGE 159 ===
+Example:
+A(z) = (1-0.8jz-1)(1+0.8jz-1)(1-0.9z-1) = 1 – 0.9z-1 + 0.64z-2 – 0.576z-3.
+Then, a1
+(3) = 0.9, a2
+(3) = -0.64, and a3
+(3) = 0.576
+The k-parameter can be computed as follow:
+k3 = a3
+(3) = 0.576
+a1
+(2) = [a1
+(3) + k3a2
+(3)]/[1 – k3
+2] = 0.79518245
+a2
+(2) = [a2
+(3) + k3a1
+(3)]/[1 – k3
+2] = - 0.18197491
+k2 = a2
+(2) = - 0.18197491
+a1
+(1) = [a1
+(2) + k2a1
+(2)]/[1 – k2
+2] = 0.67275747
+k1 = a1
+(1) = 0.67275747
+158
+
+=== PDF PAGE 160 ===
+z-1
+z-1
+-0.6728
+-0.6728
++0.182
++0.182
+-0.9  0.64  -0.576
+z–1 z–1 z-1
+x[n]
+y[n]
+z-1
+-0.576
+-0.576
+x[n] y[n]
+159
+
+=== PDF PAGE 161 ===
+All-Pole Lattice
+• A lattice system with an all-pole system function H(z) = 1/A(z) can be 
+developed from the FIR lattice .
+– all roots of A(z) must be inside the unit circle: |ki| < 1, i = 1, ..., N
+eN[n] = x[n]
+Ei-1[n] = ei[n] + kie~
+i-1[n-1],       i = N, (N-1), …1,
+e~
+i[n] = -kiei-1[n] + e~
+i-1[n-1]
+y[n] = e0[n] = e~
+0[n] 
+x[n]    e0[n]              e1[n]               e2[n] eN-1[n]            eN[n]     y[n]
+e~
+N[n]            e~
+N-1[n]                    e~
+1[n]              e~
+0[n]
+z-1 z-1-kN
+kN
+-kN-2
+kN-2 k1
+-k1z-1
+z-1 -ki
+ki
+z-1
+ei[n]               ei-1[n]
+e~
+i[n]            e~
+i-1[n]
+160
+
+=== PDF PAGE 162 ===
+Basic all-pole lattice structures
+• Three-multiplier form
+• Four-multiplier, normalized form
+• Four-multiplier, Kelly-Lochbaum form : was first derived as an acoustic tube 
+model for speech synthesis.
+)(
+cos
+)(
+1
+zA
+zH
+N
+i
+i
+
+
+
+)(
+)1(
+)(
+1
+zA
+k
+zH
+N
+i
+i
+
+
+
+161
+
+=== PDF PAGE 163 ===
+ei[n]                                             ei-1[n]
+-ki ki
+e’i[n]                 (1 - ki
+2) e’i-1[n]
+ei[n]                  cos qi ei-1[n]
+-sin qi sin qi
+e’i[n]                 cos qi e’i-1[n]
+ei[n]                 (1 + ki)                  ei-1[n]
+-ki ki
+e’i[n]                 (1 - ki) e’i-1[n]
+Three-multiplier form
+Four-multiplier, normalized
+form
+Four-multiplier, Kelly-
+Lochbaum form
+162
+
+=== PDF PAGE 164 ===
+Lattice Systems with Poles and Zeros
+
+
+
+
+
+
+
+
+
+
+
+
+N
+mi
+i
+miimm
+N
+m
+m
+m
+N
+i
+i
+i
+i
+accb
+zbzB
+zA
+zB
+zA
+zAzc
+zX
+zY
+zH
+1
+)(
+0
+0
+1
+)(
+)(
+)(
+)(
+)(
+)(
+)(
+)(
+Section
+N
+Section
+N - 1
+Section
+1
+cN cN-1 cN-2 c1 c0
+x[n] = eN[n]                      eN-1[n]                    eN-2[n]                e1[n]                  e0[n]
+e’N[n]                    e’N-1[n]                     e’N-2[n]          e’1[n]                    e’0[n]
+y[n]
+163
+
+=== PDF PAGE 165 ===
+Example of lattice IIR filter with poles and zeros
+z-1 z-1
+0.576                   -0.182                   0.6728
+-0.576                    0.182                 -0.6728
+z-1
+3.9                       5.4612                   4.5404
+x[n]
+y[n]
+0.9
+-0.64
+0.576
+3
+3
+z-1
+z-1
+z-1
+x[n] y[n]
+164
+
+=== PDF PAGE 166 ===
+UNIT-2
+DFS , DFT & FFT
+165
+
+=== PDF PAGE 167 ===
+Fourier representation of signals
+166
+
+=== PDF PAGE 168 ===
+Fourier representation of signals
+167
+
+=== PDF PAGE 169 ===
+Fourier representation of signals
+168
+
+=== PDF PAGE 170 ===
+Discrete complex exponentials
+169
+
+=== PDF PAGE 171 ===
+170
+Discrete Fourier Series
+• Given a periodic sequence         with period N so that 
+• The Fourier series representation can be written as
+• The Fourier series representation of continuous-time 
+periodic signals require infinite many complex exponentials
+• Not that for discrete-time periodic signals we have
+• Due to the periodicity of the complex exponential we only 
+need N exponentials for discrete time Fourier series
+]n[x~
+]rNn[x~]n[x~ 
+   
+
+
+
+k
+knN/2j
+ekX
+~
+N
+1
+]n[x~
+        knN/2jmn2jknN/2jnmNkN/2j
+eeee
+
+
+   
+
+
+
+
+
+1N
+0k
+knN/2j
+ekX
+~
+N
+1
+]n[x~
+
+=== PDF PAGE 172 ===
+171
+Discrete Fourier Series Pair
+• A periodic sequence in terms of Fourier series coefficients
+• The Fourier series coefficients can be obtained via
+• For convenience we sometimes use
+• Analysis equation
+• Synthesis equation
+   
+
+
+
+
+
+1N
+0n
+knN/2j
+e]n[x~kX
+~
+   
+
+
+
+
+
+1N
+0k
+knN/2j
+ekX
+~
+N
+1
+]n[x~
+ N/2j
+N eW
+
+
+ 
+
+
+
+
+1N
+0k
+kn
+NWkX
+~
+N
+1
+]n[x~
+  
+
+
+
+1N
+0n
+kn
+NW]n[x~kX
+~
+
+=== PDF PAGE 173 ===
+Fourier series for discrete-time periodic 
+signals
+172
+
+=== PDF PAGE 174 ===
+Discrete-time Fourier series 
+(DTFS)
+173
+
+=== PDF PAGE 175 ===
+Fourier representation of aperiodic
+signals
+174
+
+=== PDF PAGE 176 ===
+Discrete-time Fourier transform 
+(DTFT)
+175
+
+=== PDF PAGE 177 ===
+Discrete Fourier Transform
+176
+
+=== PDF PAGE 178 ===
+Discrete Fourier Transform
+177
+
+=== PDF PAGE 179 ===
+Discrete Fourier Transform
+178
+
+=== PDF PAGE 180 ===
+Discrete Fourier Transform
+179
+
+=== PDF PAGE 181 ===
+Discrete Fourier Transform
+180
+
+=== PDF PAGE 182 ===
+Summary of properties
+181
+
+=== PDF PAGE 183 ===
+182
+DFT Pair & Properties
+• The Discrete Fourier Transform  pair
+   
+
+
+
+
+
+1N
+0n
+knN/2j
+e]n[xkX
+   
+
+
+
+
+1
+0
+/21
+][
+N
+k
+knNj
+ekX
+N
+nx
+
+
+
+=== PDF PAGE 184 ===
+Circular convolution
+183
+
+=== PDF PAGE 185 ===
+Modulo Indices and Periodic 
+Repetition
+184
+
+=== PDF PAGE 186 ===
+Overlap During Periodic 
+Repetition
+185
+
+=== PDF PAGE 187 ===
+Periodic repetition: N=4
+186
+
+=== PDF PAGE 188 ===
+Periodic repetition: N=4
+187
+
+=== PDF PAGE 189 ===
+Modulo Indices and the Periodic 
+Repetition
+188
+
+=== PDF PAGE 190 ===
+Modulo Indices and the Periodic 
+Repetition
+189
+
+=== PDF PAGE 191 ===
+Modulo Indices and the Periodic 
+Repetition
+190
+
+=== PDF PAGE 192 ===
+Modulo Indices and the Periodic 
+Repetition
+191
+
+=== PDF PAGE 193 ===
+Circular convolution
+192
+
+=== PDF PAGE 194 ===
+Circular convolution
+193
+
+=== PDF PAGE 195 ===
+Circular convolution-another 
+interpretation
+194
+
+=== PDF PAGE 196 ===
+Using DFT for Linear 
+Convolution
+195
+
+=== PDF PAGE 197 ===
+Using DFT for Linear Convolution
+196
+
+=== PDF PAGE 198 ===
+Using DFT for Linear Convolution
+197
+
+=== PDF PAGE 199 ===
+Using DFT for Linear 
+Convolution
+198
+
+=== PDF PAGE 200 ===
+Using DFT for Linear 
+Convolution
+199
+
+=== PDF PAGE 201 ===
+Using DFT for cicular 
+Convolution
+200
+
+=== PDF PAGE 202 ===
+Using DFT for cicular 
+Convolution
+201
+
+=== PDF PAGE 203 ===
+Using DFT for cicular 
+Convolution
+202
+
+=== PDF PAGE 204 ===
+Filtering of Long Data Sequences
+203
+
+=== PDF PAGE 205 ===
+Filtering of Long Data Sequences
+204
+
+=== PDF PAGE 206 ===
+Over-lap Add
+205
+
+=== PDF PAGE 207 ===
+Over-lap Add
+206
+
+=== PDF PAGE 208 ===
+Over-lap Add
+207
+
+=== PDF PAGE 209 ===
+Over-lap Add
+208
+
+=== PDF PAGE 210 ===
+Over-lap Add
+209
+
+=== PDF PAGE 211 ===
+Over-lap Add
+210
+
+=== PDF PAGE 212 ===
+Over-lap Add
+211
+
+=== PDF PAGE 213 ===
+Over-lap save
+212
+
+=== PDF PAGE 214 ===
+Over-lap save
+213
+
+=== PDF PAGE 215 ===
+Over-lap save
+214
+
+=== PDF PAGE 216 ===
+Over-lap save input segment stage
+215
+
+=== PDF PAGE 217 ===
+Over-lap save input segment stage
+216
+
+=== PDF PAGE 218 ===
+Over-lap save input segment stage
+217
+
+=== PDF PAGE 219 ===
+Over-lap save filtering stage
+218
+
+=== PDF PAGE 220 ===
+Over-lap save output blocks
+219
+
+=== PDF PAGE 221 ===
+Over-lap save output blocks
+220
+
+=== PDF PAGE 222 ===
+Over-lap save output blocks
+221
+
+=== PDF PAGE 223 ===
+Over-lap save 
+222
+
+=== PDF PAGE 224 ===
+Over-lap save 
+223
+
+=== PDF PAGE 225 ===
+Relationships between CTFT, 
+DTFT, & DFT
+224
+
+=== PDF PAGE 226 ===
+Relationships between CTFT, 
+DTFT, & DFT
+225
+
+=== PDF PAGE 227 ===
+Relationships between CTFT, DTFT, 
+& DFT
+226
+
+=== PDF PAGE 228 ===
+Fast Fourier Transform
+227
+
+=== PDF PAGE 229 ===
+228
+Discrete Fourier Transform
+• The DFT pair was given as
+• Baseline for computational complexity: 
+– Each DFT coefficient requires
+• N complex multiplications
+• N-1 complex additions
+– All N DFT coefficients require
+• N2 complex multiplications
+• N(N-1) complex additions
+• Complexity in terms of real operations
+• 4N2 real multiplications
+• 2N(N-1) real additions
+• Most fast methods are based on symmetry properties
+– Conjugate symmetry
+– Periodicity in n and k
+   
+
+
+
+
+
+1N
+0k
+knN/2j
+ekX
+N
+1
+]n[x
+   
+
+
+
+
+
+1N
+0n
+knN/2j
+e]n[xkX
+           knN/2jnkN/2jkNN/2jnNkN/2j
+eeee
+
+
+        nNkN/2jNnkN/2jknN/2j
+eee
+
+
+
+=== PDF PAGE 230 ===
+Direct computation of DFT
+229
+
+
+=== PDF PAGE 231 ===
+Direct computation of DFT
+230
+
+
+=== PDF PAGE 232 ===
+231
+
+
+=== PDF PAGE 233 ===
+232
+FFT
+
+=== PDF PAGE 234 ===
+233
+Decimation-In-Time FFT Algorithms
+• Makes use of both symmetry and periodicity
+• Consider special case of N an integer power of 2
+• Separate x[n] into two sequence of length N/2
+– Even indexed samples in the first sequence
+– Odd indexed samples in the other sequence
+• Substitute variables n=2r for n even and n=2r+1 for odd
+• G[k] and H[k] are the N/2-point DFT’s of each subsequence
+       
+
+
+
+
+
+
+
+
+
+1N
+odd n
+knN/2j
+1N
+even n
+knN/2j
+1N
+0n
+knN/2j
+e]n[xe]n[xe]n[xkX
+   
+   kHWkG      
+W]1r2[xWW]r2[x      
+W]1r2[xW]r2[xkX
+k
+N
+12/N
+0r
+rk
+2/N
+k
+N
+12/N
+0r
+rk
+2/N
+12/N
+0r
+k1r2
+N
+12/N
+0r
+rk2
+N
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== PDF PAGE 235 ===
+234
+Decimation In Time
+• 8-point DFT example using 
+decimation-in-time
+• Two N/2-point DFTs
+– 2(N/2)2 complex multiplications
+– 2(N/2)2 complex additions
+• Combining the DFT outputs
+– N complex multiplications
+– N complex additions
+• Total complexity
+– N2/2+N complex multiplications
+– N2/2+N complex additions
+– More efficient than direct DFT
+• Repeat same process 
+– Divide N/2-point DFTs into 
+– Two N/4-point DFTs
+– Combine outputs
+
+
+=== PDF PAGE 236 ===
+235
+Decimation In Time Cont’d
+• After two steps of decimation in time
+• Repeat until we’re left with two-point DFT’s
+
+
+=== PDF PAGE 237 ===
+236
+Decimation-In-Time FFT Algorithm
+• Final flow graph for 8-point decimation in time
+• Complexity:
+– Nlog2N complex multiplications and additions
+
+
+=== PDF PAGE 238 ===
+237
+Butterfly Computation
+• Flow graph constitutes of butterflies
+• We can implement each butterfly with one multiplication
+• Final complexity for decimation-in-time FFT
+– (N/2)log2N complex multiplications and additions
+
+
+=== PDF PAGE 239 ===
+238
+In-Place Computation
+• Decimation-in-time flow graphs require two sets of registers
+– Input and output for each stage
+• Note the arrangement of the input indices
+– Bit reversed indexing
+       
+       
+       
+       
+       
+       
+       
+       111x111X7x7X
+011x110X3x6X
+101x101X5x5X
+001x100X1x4X
+110x011X6x3X
+010x010X2x2X
+100x001X4x1X
+000x000X0x0X
+00
+00
+00
+00
+00
+00
+00
+00
+
+
+
+
+
+
+
+
+
+=== PDF PAGE 240 ===
+239
+Decimation-In-Frequency FFT Algorithm
+• The DFT equation
+• Split the DFT equation into even and odd frequency indexes
+• Substitute variables to get
+• Similarly for odd-numbered frequencies
+  
+
+
+
+1N
+0n
+nk
+NW]n[xkX
+  
+
+
+
+
+
+
+
+1N
+2/Nn
+r2n
+N
+12/N
+0n
+r2n
+N
+1N
+0n
+r2n
+N W]n[xW]n[xW]n[xr2X
+     
+
+
+
+
+
+
+
+
+12/N
+0n
+nr
+2/N
+12/N
+0n
+r22/Nn
+N
+12/N
+0n
+r2n
+N W]2/Nn[x]n[xW]2/Nn[xW]n[xr2X
+     
+
+
+
+
+
+12/N
+0n
+1r2n
+2/NW]2/Nn[x]n[x1r2X
+
+=== PDF PAGE 241 ===
+240
+Decimation-In-Frequency FFT Algorithm
+• Final flow graph for 8-point decimation in frequency
+
+
+=== PDF PAGE 242 ===
+UNIT-3
+IIR filters
+241
+
+=== PDF PAGE 243 ===
+Filter Design Techniques
+• Any discrete-time system that modifies certain frequencies
+• Frequency-selective filters pass only certain frequencies
+• Filter Design Steps
+– Specification
+• Problem or application specific
+– Approximation of specification with a discrete-time system
+• Our focus is to go from spec to discrete-time system 
+– Implementation
+• Realization of discrete-time systems depends on target technology
+• We already studied the use of discrete-time systems to implement a 
+continuous-time system
+– If our specifications are given in continuous time we can use 
+D/Cxc(t) yr(t)C/D H(ej)
+ nx
+ ny
+    
+
+           T/jHeH c
+j
+242
+
+=== PDF PAGE 244 ===
+Digital Filter Specifications
+• Only the magnitude approximation problem
+• Four basic types of ideal filters with magnitude responses 
+as shown below (Piecewise flat)
+243
+
+=== PDF PAGE 245 ===
+Digital Filter Specifications
+• These filters are unealisable because (one of the 
+following is sufficient)
+– their impulse responses infinitely long non-
+causal
+– Their amplitude responses cannot be equal to a 
+constant over a band of frequencies
+Another perspective that provides some 
+understanding can be obtained by looking at the 
+ideal amplitude squared.
+244
+
+=== PDF PAGE 246 ===
+Digital Filter Specifications
+• The realisable squared amplitude response transfer 
+function (and its differential) is continuous in
+• Such functions 
+– if IIR can be infinite at point but around that 
+point cannot be zero.
+– if FIR cannot be infinite anywhere.  
+• Hence previous differential of ideal response is 
+unrealisable
+
+245
+
+=== PDF PAGE 247 ===
+Digital Filter Specifications
+• For example the magnitude response  of a digital 
+lowpass filter may be given as indicated below
+246
+
+=== PDF PAGE 248 ===
+Digital Filter Specifications
+• In the passband we require 
+that         with a deviation          
+• In the stopband we require 
+that with a deviation                                      
+1)( 
+j
+eG
+0)( 
+j
+eG
+sd
+pd
+p 0
+ s
+pp
+j
+p eG dd
+
+ ,1)(1
+d
+
+ ss
+j
+eG ,)(
+247
+
+=== PDF PAGE 249 ===
+Digital Filter Specifications
+Filter specification parameters       
+• - passband edge frequency
+• - stopband edge frequency
+• - peak ripple value in the passband
+• - peak ripple value in the stopband
+p
+s
+sd
+pd
+248
+
+=== PDF PAGE 250 ===
+Digital Filter Specifications
+• Practical specifications are often given in 
+terms of loss function (in dB)
+•
+• Peak passband ripple
+dB
+• Minimum stopband attenuation
+dB
+)(log20)( 10
+
+
+j
+eGG
+)1(log20 10 pp da 
+)(log20 10 ss da 
+249
+
+=== PDF PAGE 251 ===
+Digital Filter Specifications
+• In practice, passband edge frequency         and 
+stopband edge frequency      are specified in 
+Hz
+• For digital filter design, normalized bandedge 
+frequencies need to be computed from 
+specifications in Hz using
+TF
+F
+F
+F
+p
+T
+p
+T
+p
+p 
+
+ 2
+2
+
+
+
+TF
+F
+F
+F
+s
+T
+s
+T
+s
+s  2
+2
+
+
+
+sF
+pF
+250
+
+=== PDF PAGE 252 ===
+Digital Filter Specifications
+• Example - Let             kHz,             
+kHz, and                   kHz
+• Then
+7pF
+3sF
+25TF
+ 56.0
+1025
+)107(2
+3
+3
+
+
+
+p
+ 24.0
+1025
+)103(2
+3
+3
+
+
+
+s
+251
+
+=== PDF PAGE 253 ===
+IIR Digital Filter Design
+Standard approach
+(1) Convert the digital filter specifications into 
+an analogue prototype lowpass filter 
+specifications
+(2)  Determine the analogue lowpass filter 
+transfer function
+(3) Transform              by replacing the complex 
+variable to the digital transfer function
+)( sH a
+)( zG
+)( sH a
+252
+
+=== PDF PAGE 254 ===
+IIR Digital Filter Design
+• This approach has been widely used for the 
+following reasons:
+(1)  Analogue approximation techniques are 
+highly advanced
+(2)  They usually yield closed-form 
+solutions
+(3)  Extensive tables are available for 
+analogue filter design
+(4)  Very often applications require digital 
+simulation of analogue systems
+253
+
+=== PDF PAGE 255 ===
+IIR Digital Filter Design
+• Let an analogue transfer function be
+where the subscript “a” indicates the 
+analogue domain
+• A digital transfer function derived from  this 
+is denoted as
+)(
+)(
+)(
+sD
+sP
+sH
+a
+a
+a 
+)(
+)(
+)(
+zD
+zP
+zG 
+254
+
+=== PDF PAGE 256 ===
+IIR Digital Filter Design
+• Basic idea behind the conversion of             into            
+is to apply a mapping from the  s-domain to the z-
+domain so that essential properties of the analogue 
+frequency response are preserved
+• Thus mapping function should be such that
+– Imaginary   (      )  axis in the s-plane be 
+mapped onto the unit circle of the z-plane
+– A stable analogue transfer function be mapped 
+into a stable digital transfer function
+)( sH a
+)( zG
+j
+255
+
+=== PDF PAGE 257 ===
+Specification for effective frequency response of a continuous-time lowpass 
+filter and its corresponding specifications for discrete-time system.
+dp or d1 passband ripple
+ds or d2 stopband ripple
+Wp, wp passband edge frequency
+Ws, ws stopband edge frequency
+e2 passband ripple parameter
+1 – dp = 1/1 + e2
+BW bandwidth = wu – wl
+wc 3-dB cutoff frequency
+wu, wl upper and lower 3-dB cutoff
+frequensies
+Dw  transition band = |wp – ws|
+Ap passband ripple in dB
+=  20log10(1  dp)
+As stopband attenuation in dB
+= -20log10(ds)
+256
+
+=== PDF PAGE 258 ===
+Design of Discrete-Time IIR Filters
+• From Analog (Continuous-Time) Filters
+– Approximation of Derivatives
+– Impulse Invariance
+– the Bilinear Transformation
+257
+
+=== PDF PAGE 259 ===
+Reasons of Design of Discrete-Time IIR Filters from 
+Continuous-Time Filters
+• The art of continuous-time IIR filter design is highly advanced and,
+since useful results can be achieved, it is advantageous to use the
+design procedures already developed for continuous-time filters.
+• Many useful continuous-time IIR design methods have relatively
+simple closed-form design formulas. Therefore, discrete-time IIR
+filter design methods based on such standard continuous-time design
+formulas are rather simple to carry out.
+• The standard approximation methods that work well for continuous-
+time IIR filters do not lead to simple closed-form design formulas
+when these methods are applied directly to the discrete-time IIR case.
+258
+
+=== PDF PAGE 260 ===
+Characteristics of Commonly Used Analog Filters
+• Butterworth Filter
+• Chebyshev Filter
+– Chebyshev Type I
+– Chebyshev Type II of Inverse Chebyshev Filter
+259
+
+=== PDF PAGE 261 ===
+Butterworth Filter
+• Lowpass Butterworth filters are all-pole filters characterized by the magnitude-squared 
+frequency response
+|H(W)|2 = 1/[1 + (W/Wc)2N] = 1/[1 + e2(W/Wp)2N]
+where N is the order of the filter, Wc is its – 3-dB frequency (cutoff frequency), Wp is 
+the bandpass edge frequency, and      1/(1 + e2) is the band-edge value of |H(W)|2.
+• At W = Ws (where Ws is the stopband edge frequency) we have
+1/[1 + e2(Ws/Wp)2N] = d2
+2
+and
+N = (1/2)log10[(1/d2
+2) – 1]/log10(Ws/Wc) = log10(d/e)/log10(Ws/Wp)
+where d2= 1/1 + d2
+2.
+• Thus the Butterworth filter is completely characterized by the parameters N, d2, e, and 
+the ratio Ws/Wp.
+260
+
+=== PDF PAGE 262 ===
+Butterworth Lowpass Filters
+• Passband is designed to be maximally flat
+• The magnitude-squared function is of the form
+ 
+ 
+N2
+c
+2
+c
+j/j1
+1
+jH
+
+
+ 
+ 
+N2
+c
+2
+c
+j/s1
+1
+sH
+
+
+       1-0,1,...,2Nkfor     ej1s
+1Nk2N2/j
+cc
+N2/1
+k 
+
+261
+
+=== PDF PAGE 263 ===
+Frequency response of lowpass Butterworth filters
+262
+
+=== PDF PAGE 264 ===
+Chebyshev Filters
+• The magnitude squared response of the analog lowpass Type I Chebyshev
+filter of Nth order is given by:
+|H(W)|2 = 1/[1 + e2TN
+2(W/Wp)].
+where TN(W) is the Chebyshev polynomial of order N:
+TN(W) =  cos(Ncos-1 W), |W|  1,
+=  cosh(Ncosh-1 W), |W| > 1.
+The polynomial can be derived via a recurrence relation given by
+Tr(W) =  2WTr-1(W) – Tr-2(W), r  2,
+with T0(W) = 1 and T1(W) = W.
+• The magnitude squared response of the analog lowpass Type II or inverse 
+Chebyshev filter of Nth order is given by:
+|H(W)|2 = 1/[1 + e2{TN(Ws/Wp)/ TN(Ws/W)}2].
+263
+
+=== PDF PAGE 265 ===
+Chebyshev Filters
+• Equiripple in the passband and monotonic in the stopband
+• Or equiripple in the stopband and monotonic in the passband
+       xcosNcosxV       
+/V1
+1
+jH
+1
+N
+c
+2
+N
+2
+2
+c
+
+
+
+
+264
+
+=== PDF PAGE 266 ===
+Frequency response of
+lowpass Type I Chebyshev filter
+|H(W)|2 = 1/[1 + e2TN
+2(W/Wp)]
+Frequency response of
+lowpass Type II Chebyshev filter
+|H(W)|2 = 1/[1 + e2{TN
+2(Ws/Wp)/TN
+2(Ws/W)}]
+265
+
+=== PDF PAGE 267 ===
+N = log10[( 1 - d2
+2 +  1 – d2
+2(1 + e2))/ed2]/log10[(Ws/Wp) +  (Ws/Wp)2 – 1 ]
+= [cosh-1(d/e)]/[cosh-1(Ws/Wp)]
+for both Type I and II Chebyshev filters, and where 
+d2 = 1/  1 + d2.
+• The poles of a Type I Chebyshev filter lie on an ellipse in the s-plane with major 
+axis r1 = Wp{(b2 + 1)/2b] and minor axis r1 = Wp{(b2 - 1)/2b]  where b is related to 
+e according to
+b = {[ 1 + e2 + 1]/e}1/N
+• The zeros of a Type II Chebyshev filter are located on the imaginary axis.
+266
+
+=== PDF PAGE 268 ===
+Determination of the pole locations
+for a Chebyshev filter.
+Type I: pole positions are
+xk = r2cosfk
+yk = r1sinfk
+fk = [p/2] + [(2k + 1)p/2N]
+r1 = Wp[b2 + 1]/2b
+r2 = Wp[b2 – 1]/2b
+b  = {[ 1 + e2 + 1]/e}1/N
+Type II: zero positions are
+sk = jWs/sinfk
+and pole positions are
+vk = Wsxk/ xk
+2 + yk
+2
+wk = Wsyk/ xk
+2 + yk
+2
+b  = {[1 +  1 – d2
+2 ]/d2}1/N
+k = 0, 1, …, N-1.
+267
+
+=== PDF PAGE 269 ===
+Approximation of Derivative Method
+• Approximation of derivative method is the simplest one for converting an 
+analog filter into a digital filter by approximating the differential equation by 
+an equivalent difference equation.
+– For the derivative dy(t)/dt at time t = nT, we substitute the backward difference 
+[y(nT) – y(nT – T)]/T. Thus
+where T represents the sampling period. Then, s = (1 – z-1)/T
+– The second derivative d2y(t)/dt2 is derived into second difference as follow:
+which s2 = [(1 – z-1)/T]2. So, for the kth derivative of y(t), sk = [(1 – z-1)/T]k.
+T
+nyny
+T
+TnTynTy
+dt
+tdy
+nTt
+]1[][)()()( 
+
+
+
+
+2
+]2[]1[2][)(
+T
+nynyny
+dt
+tdy
+nTt
+
+
+
+268
+
+=== PDF PAGE 270 ===
+• Hence, the system function for the digital IIR filter obtained as a result of the 
+approximation of the derivatives by finite difference is
+H(z) = Ha(s)|s=(z-1)/Tz
+• It is clear that points in the LHP of the s-plane are mapped into the 
+corresponding points inside the unit circle in the z-plane and points in the 
+RHP of the s-plane are mapped into points outside this circle.
+– Consequently, a stable analog filter is transformed into a stable digital filter due 
+to this mapping property.
+Unit circle
+z-plane
+s-plane
+s
+jW
+Approximation of Derivative Method
+269
+
+=== PDF PAGE 271 ===
+Example: Approximation of derivative method
+Convert the analog bandpass filter with system function
+Ha(s) = 1/[(s + 0.1)2 + 9]
+Into a digital IIR filter by use of the backward difference for the derivative.
+Substitute for s = (1 – z-1)/T into Ha(s) yields
+H(z) = 1/[((1 – z-1)/T) + 0.1)2 + 9]
+T can be selected to satisfied specification of designed filter. For example, if T = 0.1, 
+the poles are located at
+p1,2 = 0.91  j0.27 = 0.949exp[ j16.5o]
+2
+01.92.01
+11
+01.92.01
+)1.01(2
+01.92.01
+22
+2
+2
+1
+)( 
+
+
+
+
+
+
+
+zz
+zH
+TTTT
+T
+TT
+T
+270
+
+=== PDF PAGE 272 ===
+Filter Design by Impulse Invariance
+• Remember impulse invariance
+– Mapping a continuous-time impulse response to discrete-time
+– Mapping a continuous-time frequency response to discrete-time
+• If the continuous-time filter is bandlimited to
+• If we start from discrete-time specifications Td cancels out
+– Start with discrete-time spec in terms of 
+– Go to continuous-time =  /T and design continuous-time filter
+– Use impulse invariance to map it back to discrete-time = T 
+• Works best for bandlimited filters due to possible aliasing 
+   dcd nThTnh 
+  
+
+
+
+
+
+
+
+
+ 
+
+
+
+k dd
+c
+j
+k
+T
+2
+j
+T
+jHeH
+ 
+  
+
+
+
+
+ 
+
+
+
+    
+T
+jHeH
+T/           0jH
+d
+c
+j
+dc
+271
+
+=== PDF PAGE 273 ===
+Impulse Invariance of System Functions 
+• Develop impulse invariance relation between system functions
+• Partial fraction expansion of transfer function
+• Corresponding impulse response
+• Impulse response of discrete-time filter
+• System function
+• Pole s=sk in s-domain transform into pole at 
+  
+ 
+
+N
+1k k
+k
+c
+ss
+A
+sH
+ 
+
+
+
+
+
+ 
+
+0t0
+0teAth
+N
+1k
+ts
+k
+c
+k
+         
+
+
+N
+1k
+nTs
+kd
+N
+1k
+nTs
+kddcd nueATnueATnThTnh
+dkdk
+  
+
+
+
+
+N
+1k
+1Ts
+kd
+ze1
+AT
+zH
+dk
+dk Ts
+e
+272
+
+=== PDF PAGE 274 ===
+Impulse Invariant Algorithm
+• Step 1: define specifications of filter
+– Ripple in frequency bands
+– Critical frequencies: passband edge, stopband edge, and/or cutoff frequencies.
+– Filter band type: lowpass, highpass, bandpass, bandstop.
+• Step 2: linear transform critical frequencies as follow
+W = w/Td
+• Step 3: select filter structure type and its order: Bessel, Butterworth, Chebyshev 
+type I, Chebyshev type II or inverse Chebyshev, elliptic.
+• Step 4: convert Ha(s) to H(z) using linear transform in step 2.
+• Step 5: verify the result. If it does not meet requirement, return to step 3.
+273
+
+=== PDF PAGE 275 ===
+Example: Impulse invariant method
+Convert the analog filter with system function
+Ha(s) = [s + 0.1]/[(s + 0.1)2 + 9]
+into a digital IIR filter by means of the impulse invariance method.
+The analog filter has a zero at s = - 0.1 and a pair of complex conjugate poles at pk = - 0.1  j3. 
+Thus,
+Then
+ 
+31.031.0
+2
+1
+2
+1
+jsjs
+sH a
+
+
+
+
+  131.0
+2
+1
+131.0
+2
+1
+11
+
+
+
+
+
+zeezee
+zH TjTTjT
+274
+
+=== PDF PAGE 276 ===
+Frequency response
+of digital filter.
+Frequency response
+of analog filter.
+275
+
+=== PDF PAGE 277 ===
+
+
+Disadvantage of previous
+techniques: frequency
+warping  aliasing effect
+and error in specifications
+of designed filter (frequencies)
+So, prewarping of frequency 
+is considered.
+276
+
+=== PDF PAGE 278 ===
+Example
+• Impulse invariance applied to Butterworth
+• Since sampling rate Td cancels out we can assume Td=1
+• Map spec to continuous time 
+• Butterworth filter is monotonic so spec will be satisfied if
+• Determine N and c to satisfy these conditions
+ 
+  
+
+
+
+3.0    0.17783eH               
+2.00              1eH89125.0
+j
+j
+ 
+  
+
+3.0    0.17783jH               
+2.00              1jH89125.0
+    0.17783 3.0jH  and  89125.0 2.0jH cc 
+ 
+ 
+N2
+c
+2
+c
+j/j1
+1
+jH
+
+
+277
+
+=== PDF PAGE 279 ===
+Example Cont’d
+• Satisfy both constrains
+• Solve these equations to get
+• N must be an integer so we round it up to meet the spec
+• Poles of transfer function 
+• The transfer function
+• Mapping to z-domain
+2N2
+c
+2N2
+c 17783.0
+13.0
+1      and       
+89125.0
+12.0
+1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+70474.0     and    68858.5N c 
+       0,1,...,11kfor     ej1s
+11k212/j
+cc
+12/1
+k 
+
+ 
+21
+1
+21
+1
+21
+1
+z257.0z9972.01
+z6303.08557.1
+z3699.0z0691.11
+z1455.11428.2
+z6949.0z2971.11
+z4466.02871.0
+zH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     4945.0s3585.1s4945.0s9945.0s4945.0s364.0s
+12093.0
+sH 222
+
+
+278
+
+=== PDF PAGE 280 ===
+Example Cont’d
+279
+
+=== PDF PAGE 281 ===
+Filter Design by Bilinear Transformation
+• Get around the aliasing problem of impulse invariance
+• Map the entire s-plane onto the unit-circle in the z-plane
+– Nonlinear transformation
+– Frequency response subject to warping
+• Bilinear transformation
+• Transformed system function
+• Again Td cancels out so we can ignore it
+• We can solve the transformation for z as 
+• Maps the left-half s-plane into the inside of the unit-circle in z
+– Stable in one domain would stay in the other
+
+
+
+
+
+
+
+
+ 
+
+1
+1
+d z1
+z1
+T
+2
+s
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+1
+1
+d
+c
+z1
+z1
+T
+2
+HzH
+ 
+  2/Tj2/T1
+2/Tj2/T1
+s2/T1
+s2/T1
+z
+dd
+dd
+d
+d
+
+
+
+
+
+
+ js
+280
+
+=== PDF PAGE 282 ===
+Bilinear Transformation
+• On the unit circle the transform becomes
+• To derive the relation between  and 
+• Which yields
+
+
+
+
+
+j
+d
+d
+e
+2/Tj1
+2/Tj1
+z
+ 
+ 
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+2
+tan
+T
+j2
+2/cose2
+2/sinje2
+T
+2
+j
+e1
+e1
+T
+2
+s
+d
+2/j
+2/j
+d
+j
+j
+d
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+2
+T
+arctan2or         
+2
+tan
+T
+2 d
+d
+281
+
+=== PDF PAGE 283 ===
+Bilinear Transformation
+282
+
+=== PDF PAGE 284 ===
+Example
+• Bilinear transform applied to Butterworth
+• Apply bilinear transformation to specifications
+• We can assume Td=1 and apply the specifications to 
+• To get
+ 
+  
+
+
+
+3.0    0.17783eH               
+2.00              1eH89125.0
+j
+j
+ 
+  
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+2
+3.0
+tan
+T
+2
+    0.17783jH               
+2
+2.0
+tan
+T
+2
+0              1jH89125.0
+d
+d
+ 
+ 
+N2
+c
+2
+c
+/1
+1
+jH
+
+
+2N2
+c
+2N2
+c 17783.0
+115.0tan2
+1   and  
+89125.0
+11.0tan2
+1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+283
+
+=== PDF PAGE 285 ===
+Example Cont’d• Solve N and c
+• The resulting transfer function has the following poles
+• Resulting in
+• Applying the bilinear transform yields
+    
+6305.5
+1.0tan15.0tanlog2
+1
+89125.0
+1
+1
+17783.0
+1
+log
+N
+22
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+766.0c 
+       0,1,...,11kfor     ej1s
+11k212/j
+cc
+12/1
+k 
+
+     5871.0s4802.1s5871.0s0836.1s5871.0s3996.0s
+20238.0
+sH 222c
+
+
+   
+  
+ 
+21
+2121
+61
+z2155.0z9044.01
+1
+      
+z3583.0z0106.11z7051.0z2686.11
+z10007378.0
+zH
+
+
+
+
+
+
+
+
+284
+
+=== PDF PAGE 286 ===
+Example Cont’d
+285
+
+=== PDF PAGE 287 ===
+IIR Digital Filter: The bilinear 
+transformation
+• To obtain G(z) replace s by f(z) in H(s)
+• Start with requirements on G(z)
+G(z) Available H(s)
+Stable Stable
+Real and Rational in z Real and Rational 
+in s
+Order n Order n
+L.P. (lowpass) cutoff L.P. cutoff 
+Tc
+c
+286
+
+=== PDF PAGE 288 ===
+Bilinear Transformation
+• Mapping of s-plane into the z-plane
+287
+
+=== PDF PAGE 289 ===
+Bilinear Transformation
+• For              with unity scalar we have
+or
+)2/tan(
+1
+1 
+
+j
+e
+ej j
+j
+
+
+ 
+
+j
+ez 
+)2/tan( 
+288
+
+=== PDF PAGE 290 ===
+Bilinear Transformation
+• Mapping is highly nonlinear  
+• Complete negative imaginary axis in the s-
+plane from     to is mapped into 
+the lower half of the unit circle in the z-plane 
+from             to
+• Complete positive imaginary axis in the s-
+plane from           to is mapped into the 
+upper half of the unit circle in the z-plane 
+from           to
+
+0
+0
+
+1z
+1z
+1z
+1z
+289
+
+=== PDF PAGE 291 ===
+Bilinear Transformation
+• Nonlinear mapping introduces a distortion 
+in the frequency axis called frequency 
+warping
+• Effect of warping shown below
+290
+
+=== PDF PAGE 292 ===
+Spectral Transformations
+• To transform              a given lowpass transfer 
+function to another transfer function              
+that may be a lowpass, highpass, bandpass or 
+bandstop filter (solutions given by 
+Constantinides)
+• has been used to denote the unit delay in 
+the prototype lowpass filter             and          
+to denote the unit delay in the transformed 
+filter             to avoid confusion
+)( zG L
+)ˆ( zG D
+1
+ˆ
+
+z
+1
+z
+)( zG L
+)ˆ( zG D
+291
+
+=== PDF PAGE 293 ===
+Spectral Transformations
+• Unit circles in z- and     -planes defined by          
+,
+• Transformation from z-domain to     
+-domain given by
+• Then 
+zˆ
+zˆ
+j
+ez 
+ˆ
+ˆ
+j
+ez 
+)ˆ( zFz 
+)}ˆ({)ˆ( zFGzG LD 
+292
+
+=== PDF PAGE 294 ===
+Spectral Transformations
+• From                , thus                 , hence
+• Therefore               must be a stable allpass function
+)ˆ( zFz 
+)ˆ( zFz 
+
+
+
+
+
+
+
+1if,1
+1if,1
+1if,1
+)ˆ(
+z
+z
+z
+zF
+)ˆ(/1 zF
+1,
+ˆ
+ˆ1
+)ˆ(
+1
+1
+*
+a
+
+
+
+
+
+a
+a
+ 
+
+
+ 
+L
+z
+z
+zF
+293
+
+=== PDF PAGE 295 ===
+Lowpass-to-Lowpass 
+Spectral Transformation
+• To transform a lowpass filter            with a cutoff 
+frequency       to another lowpass filter              
+with a cutoff frequency      , the transformation is
+• On the unit circle we have
+which yields
+)( zG L
+)ˆ( zG D
+c
+cˆ
+a
+a
+z
+z
+zF
+z
+ˆ
+ˆ1
+)ˆ(
+11
+
+
+
+a
+a
+ˆ
+ˆ
+1
+j
+j
+j
+e
+ee 
+
+
+
+
+)2/ˆtan(
+1
+1)2/tan( a
+a 
+
+
+
+
+
+
+
+294
+
+=== PDF PAGE 296 ===
+Lowpass-to-Lowpass 
+Spectral Transformation
+• Solving we get
+• Example - Consider the lowpass digital filter
+which has a passband from dc to             with 
+a 0.5 dB ripple
+• Redesign the above filter to move the 
+passband edge to
+ 
+ 2/)ˆ(sin
+2/)ˆ(sin
+cc
+cc
+
+a
+
+
+
+)3917.06763.01)(2593.01(
+)1(0662.0
+)( 211
+31
+
+
+
+
+
+zzz
+z
+zG L
+25.0
+35.0
+295
+
+=== PDF PAGE 297 ===
+Lowpass-to-Lowpass 
+Spectral Transformation
+• Here
+• Hence, the desired lowpass transfer function is
+1934.0
+)3.0sin(
+)05.0sin(
+
+
+a
+1
+1
+1
+ˆ1934.01
+1934.0ˆ)()ˆ(
+
+
+
+
+
+
+z
+z
+zLD zGzG
+0 0.2 0.4 0.6 0.8 1-40
+-30
+-20
+-10
+0
+/
+Gain, dB
+G
+L
+(z) G
+D
+(z)
+296
+
+=== PDF PAGE 298 ===
+Lowpass-to-Lowpass 
+Spectral Transformation
+• The lowpass-to-lowpass transformation
+can also be used as highpass-to-highpass, 
+bandpass-to-bandpass and bandstop-to-
+bandstop transformations
+a
+a
+z
+z
+zF
+z
+ˆ
+ˆ1
+)ˆ(
+11
+297
+
+=== PDF PAGE 299 ===
+Lowpass-to-Highpass 
+Spectral Transformation
+• Desired transformation
+• The transformation parameter          is given by
+where       is the cutoff frequency of the lowpass
+filter and          is the cutoff frequency of the desired 
+highpass filter
+1
+1
+1
+ˆ1
+ˆ
+
+
+
+
+
+
+z
+z
+z
+a
+a
+ 
+ 2/)ˆ(cos
+2/)ˆ(cos
+cc
+cc
+
+a
+
+
+
+a
+c
+cˆ
+298
+
+=== PDF PAGE 300 ===
+Lowpass-to-Highpass 
+Spectral Transformation
+• Example - Transform the lowpass filter 
+• with a passband edge at            to a highpass 
+filter with a passband edge at
+• Here
+• The desired transformation is
+)3917.06763.01)(2593.01(
+)1(0662.0
+)( 211
+31
+
+
+
+
+
+zzz
+z
+zG L
+25.0
+55.0
+3468.0)15.0cos(/)4.0cos(  a
+1
+1
+1
+ˆ3468.01
+3468.0ˆ
+
+
+
+
+
+
+z
+z
+z
+299
+
+=== PDF PAGE 301 ===
+Lowpass-to-Highpass 
+Spectral Transformation
+• The desired highpass filter is
+1
+1
+1
+ˆ3468.01
+3468.0ˆ)()ˆ(
+
+
+
+
+
+
+z
+z
+zD zGzG
+  0   0.2  0.4  0.6  0.8     
+80
+60
+40
+20
+0
+Normalized frequency
+Gain, dB
+300
+
+=== PDF PAGE 302 ===
+Lowpass-to-Highpass 
+Spectral Transformation
+• The lowpass-to-highpass transformation can 
+also be used to transform a highpass filter with 
+a cutoff at         to a lowpass filter with a cutoff 
+at
+• and transform a bandpass filter with a center 
+frequency at         to a bandstop filter with a 
+center frequency at
+c
+cˆ
+oˆ
+o
+301
+
+=== PDF PAGE 303 ===
+Lowpass-to-Bandpass 
+Spectral Transformation
+• Desired transformation
+1ˆ
+1
+2
+ˆ
+1
+1
+1
+1
+ˆ
+1
+2
+ˆ
+12
+12
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+zz
+zz
+z
+
+a
+
+
+
+
+
+a
+302
+
+=== PDF PAGE 304 ===
+Lowpass-to-Bandpass 
+Spectral Transformation
+• The parameters       and      are given by
+where          is the cutoff frequency of the lowpass 
+filter, and          and         are the desired upper and 
+lower cutoff frequencies of the bandpass filter
+a
+
+  )2/tan(2/)ˆˆ(cot 12 ccc  
+ 
+ 2/)ˆˆ(cos
+2/)ˆˆ(cos
+12
+12
+cc
+cc
+
+a
+
+
+
+c
+1ˆ c
+2ˆ c
+303
+
+=== PDF PAGE 305 ===
+Lowpass-to-Bandpass 
+Spectral Transformation
+• Special Case - The transformation can be 
+simplified if
+• Then the transformation reduces to
+where                   with        denoting the 
+desired center frequency of the bandpass filter
+12 ˆˆ ccc  
+oa ˆcos
+oˆ
+1
+1
+11
+ˆ1
+ˆ
+ˆ 
+
+
+
+
+
+z
+z
+zz
+a
+a
+304
+
+=== PDF PAGE 306 ===
+Lowpass-to-Bandstop 
+Spectral Transformation
+• Desired transformation
+1ˆ
+1
+2
+ˆ
+1
+1
+1
+1
+ˆ
+1
+2
+ˆ
+12
+12
+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+zz
+zz
+z
+
+a
+
+
+
+
+
+a
+305
+
+=== PDF PAGE 307 ===
+Lowpass-to-Bandstop 
+Spectral Transformation
+• The parameters       and      are given by
+where       is the cutoff frequency of the 
+lowpass filter, and        and        are the desired 
+upper and lower cutoff frequencies of the 
+bandstop filter
+c
+a
+
+1ˆ c
+2ˆ c
+ 
+ 2/)ˆˆ(cos
+2/)ˆˆ(cos
+12
+12
+cc
+cc
+
+a
+
+
+
+  )2/tan(2/)ˆˆ(tan 12 ccc  
+306
+
+=== PDF PAGE 308 ===
+UNIT-4
+FIR Filters
+307
+
+=== PDF PAGE 309 ===
+308
+• The transfer function H(z) meeting the 
+specifications must be a causal transfer 
+function
+• For IIR real digital filter the transfer 
+function is a real rational function of       
+• H(z) must be stable and of lowest order N or 
+M for reduced computational complexity
+Selection of Filter Type
+1
+z
+N
+N
+M
+M
+zdzdzdd
+zpzpzpp
+zH 
+
+
+
+
+
+
+2
+2
+1
+10
+2
+2
+1
+10)(
+
+=== PDF PAGE 310 ===
+309
+Selection of Filter Type
+• FIR real digital filter transfer function is a 
+polynomial in           (order N) with real 
+coefficients
+• For reduced computational complexity, degree N
+of H(z) must be as small as possible
+• If a linear phase is desired then we must have:
+
+
+N
+n
+n
+znhzH
+0
+][)(
+][][ nNhnh 
+1z
+
+=== PDF PAGE 311 ===
+310
+Selection of Filter Type
+• Advantages in using an FIR filter -
+(1) Can be designed with exact linear phase
+(2)  Filter structure always stable with quantised 
+coefficients
+• Disadvantages in using an FIR filter - Order of an 
+FIR filter  is considerably higher than that of an 
+equivalent IIR filter meeting the same 
+specifications; this leads to higher computational 
+complexity for FIR
+
+=== PDF PAGE 312 ===
+FIR Filter Design
+Digital filters with finite-duration impulse response (all-zero, or FIR filters) 
+have both advantages and disadvantages compared to infinite-duration 
+impulse response (IIR) filters. 
+FIR filters have the following primary advantages:
+•They can have exactly linear phase.
+•They are always stable.
+•The design methods are generally linear. 
+•They can be realized efficiently in hardware. 
+•The filter startup transients have finite duration. 
+The primary disadvantage of FIR filters is that they often require a much 
+higher filter order than IIR filters to achieve a given level of performance. 
+Correspondingly, the delay of these filters is often much greater than for an 
+equal performance IIR filter.
+
+=== PDF PAGE 313 ===
+312
+FIR Design
+FIR Digital Filter Design
+Three commonly used approaches to FIR 
+filter design -
+(1) Windowed Fourier series approach
+(2) Frequency sampling approach
+(3) Computer-based optimization methods
+
+=== PDF PAGE 314 ===
+313
+Finite Impulse Response Filters
+• The transfer function is given by 
+• The length of Impulse Response is N
+• All poles are at           .  
+• Zeros can be placed anywhere on the z-
+plane 
+
+
+
+1
+0
+).()(
+N
+n
+n
+znhzH
+0z
+
+=== PDF PAGE 315 ===
+314
+FIR: Linear phase
+For phase linearity the FIR transfer 
+function must have zeros outside the 
+unit circle
+
+=== PDF PAGE 316 ===
+Linear Phase
+• What is linear phase?
+• Ans: The phase is a straight line in the passband of 
+the system.
+• Example: linear phase (all pass system)
+• I Group delay is given by the negative of the slope 
+of the line
+315
+
+
+=== PDF PAGE 317 ===
+Linear phase
+• linear phase (low pass system)
+• Linear characteristics only need to pertain to 
+the passband frequencies only.
+316
+
+
+=== PDF PAGE 318 ===
+317
+FIR: Linear phase
+• For Linear Phase t.f. (order N-1) 
+•
+• so that for N even: 
+)1()( nNhnh 
+
+
+
+
+
+
+ 1
+2
+12
+0
+).().()(
+N
+Nn
+n
+N
+n
+n
+znhznhzH
+ 
+
+
+
+
+
+
+12
+0
+)1(
+12
+0
+).1().(
+N
+n
+nN
+N
+n
+n
+znNhznh
+  
+
+
+
+12
+0
+)(
+N
+n
+mn
+zznh
+nNm  1
+
+=== PDF PAGE 319 ===
+318
+FIR: Linear phase
+• for N odd: 
+• I)  On                we have for N even, and 
++ve sign
+  
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+1
+2
+1
+0
+2
+1
+2
+1
+).()(
+N
+n
+N
+mn
+z
+N
+hzznhzH
+1: zC
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+ 12
+0
+2
+1
+2
+1
+cos).(2.)(
+N
+n
+N
+Tj
+Tj N
+nTnheeH 
+
+
+
+=== PDF PAGE 320 ===
+319
+FIR: Linear phase
+• II) While for –ve sign
+• [Note: antisymmetric case adds           rads to 
+phase, with discontinuity at           ] 
+• III) For N odd with +ve sign
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+ 12
+0
+2
+1
+2
+1
+sin).(2.)(
+N
+n
+N
+Tj
+Tj N
+nTnhjeeH 
+
+
+2/
+0
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+ 
+
+2
+1
+)( 2
+1
+N
+heeH
+N
+Tj
+Tj
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+2
+3
+0 2
+1
+cos).(2
+N
+n
+N
+nTnh 
+
+=== PDF PAGE 321 ===
+320
+FIR: Linear phase
+• IV) While with a –ve sign
+• [Notice that for the antisymmetric case to have 
+linear phase we require  
+The phase discontinuity is as for N even]
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+ 2
+3
+0
+2
+1
+2
+1
+sin).(.2)(
+N
+n
+N
+Tj
+Tj N
+nTnhjeeH 
+
+
+.0
+2
+1
+
+
+
+
+
+ N
+h
+
+=== PDF PAGE 322 ===
+321
+FIR: Linear phase
+• The cases most commonly used in filter 
+design are (I) and (III), for which the 
+amplitude characteristic can be written as a 
+polynomial in
+2
+cos
+T
+
+=== PDF PAGE 323 ===
+Summary of Properties
+Type I II III IV
+Order N even odd even odd
+Symmetry symmetric symmetric anti-symmetric anti-symmetric
+Period 2 4 2 4
+0 0 0 /2 /2
+F() 1 cos(/2) sin() sin(/2)
+K N/2 (N-1)/2 (N-2)/2 (N-1)/2
+H(0) arbitrary arbitrary 0 0
+H() arbitrary 0 0 arbitrary
+     
+
+
+
+K
+k
+k
+Njj
+kaFeeH
+0
+2/
+cos
+0
+
+
+
+=== PDF PAGE 324 ===
+323
+Design of FIR filters: Windows
+(i)   Start with ideal infinite duration 
+(ii)  Truncate  to finite length.  (This produces 
+unwanted ripples increasing in height near 
+discontinuity.)
+(iii) Modify to
+Weight w(n) is the window 
+ )( nh
+)().()(~ nwnhnh 
+
+=== PDF PAGE 325 ===
+324
+Design of FIR filters: Windows
+• Simplest way of designing FIR filters
+• Method is all discrete-time no continuous-time involved
+• Start with ideal frequency response
+• Choose ideal frequency response as desired response
+• Most ideal impulse responses are of infinite length
+• The easiest way to obtain a causal FIR filter from ideal is
+• More generally
+   
+
+
+
+
+n
+nj
+d
+j
+d enheH
+    
+
+ 
+
+
+
+deeH
+2
+1
+nh
+njj
+dd
+   
+
+
+ 
+
+else0
+Mn0nh
+nh
+d
+       
+
+
+ 
+
+else0
+Mn01
+nw      where     nwnhnh d
+
+=== PDF PAGE 326 ===
+325
+Properties of Windows
+• Prefer windows that concentrate around DC in frequency
+– Less smearing, closer approximation
+• Prefer window that has minimal span in time 
+– Less coefficient in designed filter, computationally efficient
+• So we want concentration in time and in frequency
+– Contradictory requirements
+• Example: Rectangular window
+ 
+    
+ 2/sin
+2/1Msin
+e
+e1
+e1
+eeW
+2/Mj
+j
+1MjM
+0n
+njj
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== PDF PAGE 327 ===
+Windowing distortion
+• increasing window length generally reduces the 
+width of the main lobe
+• peak of sidelobes is generally independent of M
+326
+
+
+=== PDF PAGE 328 ===
+327
+Windows
+Commonly used windows 
+• Rectangular 1
+• Bartlett
+• Hanning
+• Hamming
+•
+• Blackman
+•
+• Kaiser
+2
+1
+
+N
+n
+N
+n2
+1 
+
+
+
+
+
+
+N
+n2
+cos1
+
+
+
+
+
+
+N
+n2
+cos46.054.0
+
+
+
+
+
+
+
+
+
+
+
+N
+n
+N
+n  4
+cos08.0
+2
+cos5.042.0
+)(
+1
+2
+1 0
+2
+0  J
+N
+n
+J
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=== PDF PAGE 329 ===
+328
+Rectangular Window
+ 
+
+
+ 
+
+else0
+Mn01
+nw
+• Narrowest main lob
+– 4/(M+1)
+– Sharpest transitions at 
+discontinuities in frequency
+• Large side lobs
+– -13 dB
+– Large oscillation around 
+discontinuities
+• Simplest window possible
+
+=== PDF PAGE 330 ===
+329
+Bartlett (Triangular) Window
+ 
+
+
+
+
+
+
+
+
+else0
+Mn2/MM/n22
+2/Mn0M/n2
+nw
+• Medium main lob
+– 8/M
+• Side lobs
+– -25 dB
+• Hamming window 
+performs better
+• Simple equation
+
+=== PDF PAGE 331 ===
+330
+Hanning Window
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+else0
+Mn0
+M
+n2
+cos1
+2
+1
+nw
+• Medium main lob
+– 8/M
+• Side lobs
+– -31 dB
+• Hamming window performs 
+better
+• Same complexity as 
+Hamming
+
+=== PDF PAGE 332 ===
+331
+Hamming Window
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+else0
+Mn0
+M
+n2
+cos46.054.0nw
+• Medium main lob
+– 8/M
+• Good side lobs
+– -41 dB
+• Simpler than Blackman
+
+=== PDF PAGE 333 ===
+332
+Blackman Window
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+ 
+
+else0
+Mn0
+M
+n4
+cos08.0
+M
+n2
+cos5.042.0nw
+• Large main lob
+– 12/M
+• Very good side lobs
+– -57 dB
+• Complex equation
+
+=== PDF PAGE 334 ===
+333
+Kaiser Window Filter Design Method
+• Parameterized equation 
+forming a set of windows
+– Parameter to change main-lob 
+width and side-lob area trade-off
+– I0(.) represents zeroth-order 
+modified Bessel function of 1st
+kind
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+else0
+Mn0
+I
+2/M
+2/Mn
+1I
+nw
+0
+2
+0
+
+
+=== PDF PAGE 335 ===
+Comparison of windows
+334
+
+
+=== PDF PAGE 336 ===
+335
+Kaiser window
+• Kaiser window 
+β Transition 
+width  (Hz)
+Min. stop 
+attn  dB
+2.12 1.5/N 30
+4.54 2.9/N 50
+6.76 4.3/N 70
+8.96 5.7/N 90
+
+=== PDF PAGE 337 ===
+336
+Example
+• Lowpass filter of length 51 and
+2/ c
+0 0.2 0.4 0.6 0.8 1
+-100
+-50
+0
+/
+Gain, dB
+Lowpass Filter Designed Using Hann window
+0 0.2 0.4 0.6 0.8 1
+-100
+-50
+0
+/
+Gain, dB
+Lowpass Filter Designed Using Hamming window
+0 0.2 0.4 0.6 0.8 1
+-100
+-50
+0
+/
+Gain, dB
+Lowpass Filter Designed Using Blackman window
+
+=== PDF PAGE 338 ===
+337
+Frequency Sampling Method
+• In this approach we are given            and 
+need to find             
+• This is an interpolation problem and the 
+solution is given in the DFT part of the 
+course
+• It has similar problems to the windowing 
+approach
+
+
+
+
+
+ 
+1
+0 1
+2
+.1
+1
+).(
+1
+)(
+N
+k k
+N
+j
+N
+ze
+z
+kH
+N
+zH 
+)( kH
+)( zH
+
+=== PDF PAGE 339 ===
+338
+FIR Digital Filter Order Estimation
+Kaiser’s Formula:
+• ie N is inversely proportional to transition 
+band width and not on transition band 
+location
+1
+2/)(6.14
+13)(log20 10
+
+
+
+
+
+dd
+ps
+sp
+N
+
+=== PDF PAGE 340 ===
+UNIT-5
+Multirate signal processing  & 
+Finite Word length Effects
+339
+
+=== PDF PAGE 341 ===
+Single vs Multirate Processing
+340
+
+=== PDF PAGE 342 ===
+Basic Multirate operations: Decimation 
+and Interpolation
+341
+
+=== PDF PAGE 343 ===
+M-fold Decimator
+342
+
+=== PDF PAGE 344 ===
+Sampling Rate Reduction by an Integer Factor: 
+Downsampling
+• We reduce the sampling rate of a sequence by “sampling” it
+• This is accomplished with a sampling rate compressor
+• We obtain xd[n] that is identical to what we would get by 
+reconstructing the signal and resampling it with T’=MT
+• There will be no aliasing if 
+     nMTxnMxnx cd 
+N
+MT'T
+
+
+
+
+343
+
+=== PDF PAGE 345 ===
+Frequency Domain Representation of Downsampling
+• Recall the DTFT of x[n]=xc(nT)
+• The DTFT of the downsampled signal can similarly written as
+• Let’s represent the summation index as 
+• And finally
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+k
+c
+j
+T
+k2
+T
+jX
+T
+1
+eX
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+r
+c
+r
+c
+j
+d
+MT
+r2
+MT
+jX
+MT
+1
+'T
+r2
+'T
+jX
+'T
+1
+eX
+Mi0   and  k-    where     kMir 
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+1M
+0i r
+c
+j
+d
+MT
+i2
+T
+k2
+MT
+jX
+T
+1
+M
+1
+eX
+  
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+1M
+0i
+M
+i2
+M
+j
+j
+d eX
+M
+1
+eX
+344
+
+=== PDF PAGE 346 ===
+Frequency Domain Representation of Downsampling
+345
+
+=== PDF PAGE 347 ===
+Aliasing 
+346
+
+=== PDF PAGE 348 ===
+Frequency Domain Representation of Downsampling w/ Prefilter
+347
+
+=== PDF PAGE 349 ===
+Decimation filter
+348
+
+=== PDF PAGE 350 ===
+L-fold Interpolator
+349
+
+=== PDF PAGE 351 ===
+Increasing the Sampling Rate by an Integer Factor: 
+Upsampling
+• We increase the sampling rate of a sequence interpolating it
+• This is accomplished with a sampling rate expander
+• We obtain xi[n] that is identical to what we would get by 
+reconstructing the signal and resampling it with T’=T/L
+• Upsampling consists of two steps  
+– Expanding
+– Interpolating
+     L/nTxL/nxnx ci 
+       
+
+
+d
+
+
+ 
+
+k
+e kLnkx
+else0
+,...L2,L,0nL/nx
+nx
+
+350
+
+=== PDF PAGE 352 ===
+Frequency Domain Representation of Expander
+• The DTFT of xe[n] can be written as
+• The output of the expander is frequency-scaled
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d
+k
+LjLkj
+n
+nj
+k
+j
+e eXekxekLnkxeX
+351
+
+=== PDF PAGE 353 ===
+Input-output relation on the Spectrum
+352
+
+=== PDF PAGE 354 ===
+Periodicity and spectrum images
+353
+
+=== PDF PAGE 355 ===
+Frequency Domain Representation of Interpolator
+• The DTFT of the desired interpolated signals is
+• The extrapolator output is given as
+• To get interpolated signal we apply the following LPF
+354
+
+=== PDF PAGE 356 ===
+Interpolation filters
+355
+
+=== PDF PAGE 357 ===
+Fractional sampling rate convertor
+356
+
+=== PDF PAGE 358 ===
+Fractional sampling rate convertor
+357
+
+=== PDF PAGE 359 ===
+Lowpass filter
+Gain = L
+Cutoff =
+min(p/L, p/M)
+L M
+xd[n]x[n] xe[n] xo[n]
+T                      T/L                            T/L               TM/L
+L
+Lowpass filter
+Gain = L
+Cutoff = p/L
+Lowpass filter
+Gain = 1
+Cutoff = p/M
+M
+x[n] xd[n]xe[n] xi[n] xo[n]
+T                    T/L                          T/L                             T/L             TM/L
+Interpolator                                 Decimator
+• Combine decimation and interpolation for non-integer factors
+• The two low-pass filters can be combined into a single one
+Changing the Sampling Rate by Non-Integer Factor
+358
+
+=== PDF PAGE 360 ===
+Time Domain
+• xi[n] in a low-pass filtered version of x[n]
+• The low-pass filter impulse response is
+• Hence the interpolated signal is written as 
+• Note that
+• Therefore the filter output can be written as
+   
+L/n
+L/nsin
+nh i
+
+
+
+      
+ 
+
+ 
+
+
+k
+i
+L/kLn
+L/kLnsin
+kxnx
+ 
+  2L,...L,n     0nh
+10h
+i
+i
+
+
+        2L,...L,0,nfor       'nTxL/nTxL/nxnx cci 
+359
+
+=== PDF PAGE 361 ===
+Sampling of bandpass signals
+360
+
+
+=== PDF PAGE 362 ===
+Sampling of bandpass signals
+361
+
+
+=== PDF PAGE 363 ===
+Over sampling -ADC
+362
+
+=== PDF PAGE 364 ===
+363
+
+=== PDF PAGE 365 ===
+364
+
+=== PDF PAGE 366 ===
+365
+
+=== PDF PAGE 367 ===
+Sub band coding
+366
+
+=== PDF PAGE 368 ===
+Sub band coding
+367
+
+=== PDF PAGE 369 ===
+Digital filter banks
+368
+
+=== PDF PAGE 370 ===
+Finite Word length Effects
+369
+
+=== PDF PAGE 371 ===
+Finite Wordlength Effects
+• Finite register lengths and A/D converters 
+cause errors in:-
+(i) Input quantisation.
+(ii) Coefficient (or multiplier) 
+quantisation
+(iii) Products of multiplication truncated 
+or rounded due to machine length 
+370
+
+=== PDF PAGE 372 ===
+Finite Wordlength Effects
+• Quantisation
+Q
+Output
+Input
+2
+)(
+2
+,
+Q
+ke
+Q
+oi 
+)( ke i
+)( ke o
+371
+
+=== PDF PAGE 373 ===
+Finite Wordlength Effects
+• The pdf for e using rounding
+• Noise power
+or
+2
+Q
+
+2
+Q
+Q
+1
+ 
+
+2
+2
+222
+}{).(
+Q
+Q
+eEdeepe
+12
+2
+2 Q
+
+372
+
+=== PDF PAGE 374 ===
+Finite Wordlength Effects
+• Let input signal be sinusoidal of unity 
+amplitude.  Then total signal power
+• If b bits used for binary then 
+so that
+• Hence
+or dB
+2
+1
+P
+b
+Q 22
+32
+22 b
+
+b
+P
+22
+2.
+2
+3 
+
+b68.1SNR 
+373
+
+=== PDF PAGE 375 ===
+Finite Wordlength Effects
+• Consider a simple example of finite 
+precision on the coefficients a,b of second 
+order system with poles               
+• where 
+21
+1
+1
+)( 
+
+
+bzaz
+zH
+
+
+j
+e
+
+221
+..cos21
+1
+)( 
+
+
+zz
+zH
+
+2
+b
+ cos2a
+374
+
+=== PDF PAGE 376 ===
+Finite Wordlength Effects
+•
+bit pattern
+000 0 0
+001 0.125 0.354
+010 0.25 0.5
+011 0.375 0.611
+100 0.5 0.707
+101 0.625 0.791
+110 0.75 0.866
+111 0.875 0.935
+1.0 1.0 1.0
+2
+  ,cos2 
+
+375
+
+=== PDF PAGE 377 ===
+Finite Wordlength Effects
+• Finite wordlength computations
++
+INPUT OUTPU
+T
++
++
+376
+
+=== PDF PAGE 378 ===
+Limit-cycles; "Effective Pole"
+Model; Deadband 
+• Observe that for
+• instability occurs when
+• i.e.  poles are
+• (i)  either on unit circle when complex
+• (ii) or one real pole is outside unit 
+circle.
+• Instability under the "effective pole" model 
+is considered as follows 
+)1(
+1)( 2
+2
+1
+1
+
+
+
+zbzb
+zH
+12 b
+377
+
+=== PDF PAGE 379 ===
+Finite Wordlength Effects
+• In the time domain with  
+•
+• With for instability we have 
+indistinguishable from
+• Where               is quantisation
+)(
+)()( zX
+zYzH 
+)2()1()()( 21  nybnybnxny
+12 b
+ )2(2 nybQ
+)2( ny
+ Q
+378
+
+=== PDF PAGE 380 ===
+Finite Wordlength Effects
+• With rounding, therefore we have 
+are indistinguishable (for integers)
+or
+• Hence
+• With both positive and negative numbers
+5.0)2(2 nyb
+)2( ny
+)2(5.0)2(2  nynyb
+21
+5.0
+)2(
+b
+ny
+
+
+
+21
+5.0
+)2(
+b
+ny
+
+
+
+379
+
+=== PDF PAGE 381 ===
+Finite Wordlength Effects
+• The range of integers
+constitutes a set of integers that cannot be 
+individually distinguished as separate or from the 
+asymptotic system behaviour.
+• The band of integers
+is known as the "deadband".
+• In the second order system, under rounding, the 
+output assumes a cyclic set of values of the 
+deadband.  This is a limit-cycle.
+21
+5.0
+b
+
+
+
+
+
+
+
+
+
+
+
+22 1
+5.0
+   ,
+1
+5.0
+bb
+380
+
+=== PDF PAGE 382 ===
+Finite Wordlength Effects
+• Consider the transfer function
+• if poles are complex then impulse response           
+is given by
+)1(
+1)( 2
+2
+1
+1
+
+
+
+zbzb
+zG
+2211   kkkk ybybxy
+kh
+ 
+
+
+)1(sin.
+sin
+ kh
+k
+k
+381
+
+=== PDF PAGE 383 ===
+Finite Wordlength Effects
+• Where
+• If              then the response is sinusiodal 
+with frequency
+• Thus product quantisation causes instability 
+implying an "effective “ . 
+2b
+
+
+
+
+
+ 
+
+2
+11
+2cos b
+b
+12 b
+
+
+
+
+ 
+
+2cos
+1 11 b
+T
+
+12 b
+382
+
+=== PDF PAGE 384 ===
+Finite Wordlength Effects
+• Notice that with infinite precision the 
+response converges to the origin
+• With finite precision the reponse does not 
+converge to the origin but assumes 
+cyclically a set of values –the Limit Cycle
+383
+
+=== PDF PAGE 385 ===
+Finite Wordlength Effects
+• Assume            ,           ….. are not 
+correlated, random processes etc.
+Hence total output noise power 
+• Where              and
+ )(1 ke
+ )(2 ke
+
+
+ 0
+222
+0 )(
+k
+iei kh
+12
+2
+2 Q
+e 
+ 
+
+
+
+
+
+
+0
+2
+2
+2
+2
+2
+02
+2
+01
+2
+0
+sin
+)1(sin
+.
+12
+2
+.2
+k
+k
+b
+k
+
+
+b
+Q
+
+ 2
+ 
+0  ; 
+sin
+)1(sin
+.)()( 21 
+
+ k
+k
+khkh
+k
+
+
+384
+
+=== PDF PAGE 386 ===
+Finite Wordlength Effects
+• ie
+
+
+
+
+
+
+
+
+
+
+
+
+2cos21
+1
+.
+1
+1
+6
+2
+242
+22
+2
+0
+b
+385
+
+=== PDF PAGE 387 ===
+Finite Wordlength Effects
+• For FFT
+A(n)
+B(n)
+B(n+1)
+B(n+1)-
+A(n)
+B(n+1)B(n)W(n)B(n)
+A(n+1)
+)().()()1(
+)().()()1(
+nBnWnAnB
+nBnWnAnA
+
+
+W(n)
+386
+
+=== PDF PAGE 388 ===
+Finite Wordlength Effects
+• FFT
+• A VERAGE GROWTH: 1/2 BIT/PASS
+2)1()1(
+22
+ nBnA
+)(2)(
+)(2)1(
+22
+nAnA
+nAnA
+
+
+387
+
+=== PDF PAGE 389 ===
+Finite Wordlength Effects
+• FFT
+• PEAK GROWTH:  1.21..  BITS/PASS
+IMAG
+REAL
+1.0
+1.0
+-1.0
+-1.0
+....414.2)()(0.1
+)(
+)1(
+)()()()()()1(
+)()()()()()1(
+
+
+
+
+nSnC
+nA
+nA
+nSnBnCnBnAnA
+nSnBnCnBnAnA
+x
+x
+yxxx
+yxxx
+388
+
+=== PDF PAGE 390 ===
+Finite Wordlength Effects
+• Linear modelling of product quantisation 
+• Modelled as 
+x(n)
+)(~ nx
+x(n)
+q(n)
++
+)()()(~ nqnxnx 
+ Q
+389
+
+=== PDF PAGE 391 ===
+Finite Wordlength Effects
+• For rounding operations q(n) is uniform 
+distributed between       ,      and  where Q is 
+the quantisation step (i.e. in a wordlength of  
+bits with sign magnitude representation or 
+mod 2,              ).
+• A discrete-time system with quantisation at 
+the output of each multiplier may be 
+considered as a multi-input linear system
+2
+Q
+
+2
+Q
+b
+Q
+
+ 2
+390
+
+=== PDF PAGE 392 ===
+Finite Wordlength Effects
+• Then
+• where          is the impulse response of the 
+system from    the output of the multiplier  
+to y(n).
+h(n)
+)()...()...( 21 nqnqnq p
+ )( nx
+ )( ny
+ 
+
+
+   
+
+
+
+
+
+p
+rr
+rnhrqrnhrxny
+1 00
+)().()().()(
+
+
+)( nh 
+
+391
+
+=== PDF PAGE 393 ===
+Finite Wordlength Effects
+• For zero input  i.e.                     we can write
+• where       is the maximum of                
+which is not more than
+• ie
+nnx   ,0)(
+  
+
+
+
+p
+r
+rnhqny
+1 0
+)(.ˆ)(
+
+
+qˆ
+rrq ,  ,)(  
+2
+Q
+ 
+
+
+  
+
+
+
+p
+n
+rnh
+Q
+ny
+1 0
+)(.
+2
+)(
+
+
+392
+
+=== PDF PAGE 394 ===
+Finite Wordlength Effects
+• However
+• And hence
+• ie we can estimate the maximum swing at 
+the output from the system parameters and 
+quantisation level
+ 
+
+
+
+0 0
+)()(
+n n
+nhnh 
+
+
+ 0
+)(.
+2
+)(
+n
+nh
+pQ
+ny
+393
+
+=== PDF PAGE 395 ===
+Finite Precision Numerical 
+Effects
+394
+
+=== PDF PAGE 396 ===
+395
+Quantization in Implementing Systems
+• Consider the following system
+• A more realistic model would be
+• In order to analyze it we would prefer
+
+
+=== PDF PAGE 397 ===
+396
+Effects of Coefficient Quantization in IIR Systems
+• When the parameters of a rational system are quantized
+– The poles and zeros of the system function move
+• If the system structure of the system is sensitive to 
+perturbation of coefficients
+– The resulting system may no longer be stable
+– The resulting system may no longer meet the original specs
+• We need to do a detailed sensitivity analysis 
+– Quantize the coefficients and analyze frequency response
+– Compare frequency response to original response
+• We would like to have a general sense of the effect of 
+quantization
+
+=== PDF PAGE 398 ===
+397
+Effects on Roots
+• Each root is affected by quantization errors in ALL coefficient
+• Tightly clustered roots can be significantly effected
+– Narrow-bandwidth lowpass or bandpass filters can be very 
+sensitive to quantization noise
+• The larger the number of roots in a cluster the more sensitive it 
+becomes
+• This is the reason why second order cascade structures are less 
+sensitive to quantization error than higher order system
+– Each second order system is independent from each other
+ 
+
+
+
+
+
+
+
+ N
+1k
+k
+k
+M
+0k
+k
+k
+za1
+zb
+zH
+ 
+
+
+
+
+
+
+
+ N
+1k
+k
+k
+M
+0k
+k
+k
+zaˆ1
+zbˆ
+zHˆ
+Quantiza
+tion
+
+=== PDF PAGE 399 ===
+398
+Poles of Quantized Second-Order Sections
+• Consider a 2nd order system with complex-conjugate pole pair
+• The pole locations after quantization will be on the grid point 
+ 3-bits
+7-bits 
+
+=== PDF PAGE 400 ===
+399
+Coupled-Form Implementation of Complex-Conjugate Pair
+• Equivalent implementation of the 
+second order system
+• But the quantization grid this time is
+
+
+=== PDF PAGE 401 ===
+400
+Effects of Coefficient Quantization in FIR Systems
+• No poles to worry about only zeros
+• Direct form is commonly used for FIR systems
+• Suppose the coefficients are quantized 
+• Quantized system is linearly related to the quantization error
+• Again quantization noise is higher for clustered zeros
+• However, most FIR filters have spread zeros
+   
+
+
+
+M
+0n
+n
+znhzH
+       zHzHznhˆzHˆ
+M
+0n
+n
+ 
+
+
+   
+
+
+
+M
+0n
+n
+znhzH
+
+
+=== PDF PAGE 402 ===
+401
+Round-Off Noise in Digital Filters
+• Difference equations 
+implemented with finite-
+precision arithmetic are 
+non-linear systems
+• Second order direct form I 
+system
+• Model with quantization 
+effect
+• Density function error 
+terms for rounding
+
+
+=== PDF PAGE 403 ===
+402
+Analysis of Quantization Error
+• Combine all error terms to single location to get
+• The variance of e[n] in the general case is 
+• The contribution of e[n] to the output is
+• The variance of the output error term f[n] is
+     
+     nenene     
+nenene
+432
+10
+
+
+ 
+12
+2
+N1M
+B2
+2
+e
+
+
+     
+
+
+N
+1k
+k neknfanf
+   
+
+
+
+
+n
+2
+ef
+B2
+2
+f nh
+12
+2
+N1M
+   zA/1zH ef 
+
+=== PDF PAGE 404 ===
+403
+Round-Off Noise in a First-Order System
+• Suppose we want to implement the following stable system
+• The quantization error noise variance is
+• Noise variance increases as |a| gets closer to the unit circle
+• As |a| gets closer to 1 we have to use more bits to compensate for the 
+increasing error
+  1a         
+az1
+b
+zH 1 
+
+ 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 2
+B2
+0n
+n2
+B2
+n
+2
+ef
+B2
+2
+f
+a1
+1
+12
+2
+2a
+12
+2
+2nh
+12
+2
+N1M
+
+
+=== PDF PAGE 405 ===
+404
+Zero-Input Limit Cycles in Fixed-Point Realization of IIR Filters
+• For stable IIR systems the output will decay to zero when the input 
+becomes zero
+• A finite-precision implementation, however, may continue to oscillate 
+indefinitely
+• Nonlinear behaviour very difficult to analyze so we sill study by example
+• Example: Limit Cycle Behavior in First-Order Systems
+• Assume x[n] and y[n-1] 
+are implemented by 4 bit registers 
+      1a           nx1nayny 
+
+
+=== PDF PAGE 406 ===
+405
+Example Cont’d
+• Assume that a=1/2=0.100b and the input is 
+• If we calculate the output for values of n
+• A finite input caused an oscillation with period 1
+       nb111.0n
+8
+7
+nx dd
+n y[n] Q(y[n])
+0 7/8=0.111b 7/8=0.111b
+1 7/16=0.011100b 1/2=0.100b
+2 1/4=0.010000b 1/4=0.010b
+3 1/8=0.001000b 1/8=0.001b
+4 1/16=0.00010b 1/8=0.001b
+      1a           nx1nayny 
+
+=== PDF PAGE 407 ===
+406
+Example: Limit Cycles due to Overflow
+• Consider a second-order system realized by
+– Where Q() represents two’s complement rounding 
+– Word length is chosen to be 4 bits
+• Assume a1=3/4=0.110b and a2=-3/4=1.010b
+• Also assume 
+• The output at sample n=0 is
+• After rounding up we get
+• Binary carry overflows into the sign bit changing the sign
+• When repeated for n=1
+         2nyˆaQ1nyˆaQnxnyˆ 21 
+    b010.14/32yˆ  and  b110.04/31yˆ 
+ 
+0.100100b  0.100100b      
+1.010b  b010.1  0.110b  b110.00yˆ
+
+
+  -3/41.010b0.101b  0.101b0yˆ 
+  4/3110.01.010b  1.010b0yˆ 
+
+=== PDF PAGE 408 ===
+407
+Avoiding Limit Cycles
+• Desirable to get zero output for zero input: Avoid limit-cycles
+• Generally adding more bits would avoid overflow
+• Using double-length accumulators at addition points would 
+decrease likelihood of limit cycles 
+• Trade-off between limit-cycle avoidance and complexity
+• FIR systems cannot support zero-input limit cycles

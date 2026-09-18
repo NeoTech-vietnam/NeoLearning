@@ -1,11 +1,3 @@
-# Cornell Notes 01: Signals, analog/digital processing, sampling and converters
-
-[All topics](./README.md) | [Next](./02_reconstruction_and_sequences.md)
-
-**Lecture:** [PDF pages 1-20](../../03_resources/01_lectures/00_Intro.pdf#page=1) (20 pages). **Updated:** 2026-09-14.
-
-**Source convention:** PDF page numbers are one-based viewer pages. Each original slide is reproduced beneath its written note to preserve the complete source content. “Clarification” marks explanatory additions or corrections; “Lyons supplement” marks textbook enrichment.
-
 ## Cue Column
 
 | Cue / retrieval question | Study target |
@@ -47,66 +39,22 @@ $$
 
 Endpoint conventions vary between converter code maps; the nominal step above divides the full-scale span into $2^B$ intervals. Quantization error is deterministic for a given input; treating it as independent noise is an approximation.
 
-## Notes Section: page-by-page lecture coverage
-
-### PDF page 1 - Opening questions: signals and representations
-
+===PAGES===
+@@ 1|Opening questions: signals and representations
 The lecture opens with three study prompts: define a signal, give examples, and distinguish analog, discrete-time and digital signals. Use a motor-temperature trace as a physical example, a sampled array as its discrete-time representation, and ADC integer codes as its digital representation. The distinctions concern representation, not three unrelated physical phenomena.
-
-![Original lecture PDF page 1: Opening questions: signals and representations](./images/lecture/lecture-p001.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 1](../../03_resources/01_lectures/00_Intro.pdf#page=1).*
-
-### PDF page 2 - Continuous-time, discrete-time, analog and digital
-
+@@ 2|Continuous-time, discrete-time, analog and digital
 Continuous-time signals are defined for a continuum of times; discrete-time signals are defined at separated instants. In the lecture's convention, analog means continuous time and amplitude, while digital means discrete time and amplitude. An ideal discrete-time sequence does not necessarily have quantized amplitudes.
-
-![Original lecture PDF page 2: Continuous-time, discrete-time, analog and digital](./images/lecture/lecture-p002.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 2](../../03_resources/01_lectures/00_Intro.pdf#page=2).*
-
-### PDF page 3 - Amplitude values and the waveform pictures
-
+@@ 3|Amplitude values and the waveform pictures
 The two figures distinguish a continuous set of allowed amplitudes from a discrete set of amplitude levels. Mathematical signals may be real or complex; a complex signal can represent two real channels. **Clarification:** the phrase “at each time/sample” is informal here: an unquantized sequence can have continuous-valued amplitudes while still being discrete in time.
-
-![Original lecture PDF page 3: Amplitude values and the waveform pictures](./images/lecture/lecture-p003.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 3](../../03_resources/01_lectures/00_Intro.pdf#page=3).*
-
-### PDF page 4 - Notation and multichannel signals
-
+@@ 4|Notation and multichannel signals
 Use $x(t)$ with real-valued time and $x[n]$ with $n\in\mathbb Z$. A continuous-time signal may be zero over an interval without ceasing to be continuous-time. The integer $n$ is an index; recover physical time using $t=nT$. The sample value may be real, complex or a vector/array of channels.
-
-![Original lecture PDF page 4: Notation and multichannel signals](./images/lecture/lecture-p004.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 4](../../03_resources/01_lectures/00_Intro.pdf#page=4).*
-
-### PDF page 5 - Analog signal processing and examples
-
+@@ 5|Analog signal processing and examples
 The lecture motivates processing through human speech/pattern recognition and speech synthesis. Signal examples include voltage/current/electric and magnetic fields; velocity/force/displacement; sound/vibration; and pressure/temperature. Sensors and transducers convert these quantities into voltages or currents. Resistors, capacitors, inductors and amplifiers process them in analog circuits; FM radio audio and traditional television video are examples.
-
-![Original lecture PDF page 5: Analog signal processing and examples](./images/lecture/lecture-p005.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 5](../../03_resources/01_lectures/00_Intro.pdf#page=5).*
-
-### PDF page 6 - Prompt: limitations of analog processing
-
+@@ 6|Prompt: limitations of analog processing
 Before reading the next page, predict what happens when a resistor changes with temperature, an amplifier saturates, or the desired filter response changes. These illustrate accuracy, dynamic-range and reconfiguration limitations. This question-only slide is retained as an active-recall checkpoint.
-
-![Original lecture PDF page 6: Prompt: limitations of analog processing](./images/lecture/lecture-p006.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 6](../../03_resources/01_lectures/00_Intro.pdf#page=6).*
-
-### PDF page 7 - Analog limitations
-
+@@ 7|Analog limitations
 Accuracy is limited by component tolerances and undesired nonlinearities. Repeatability suffers from tolerances and environmental changes, including temperature and vibration. Other limitations are electrical noise, bounded voltage/current dynamic range, inflexible changes, difficult nonlinear or time-varying operations, and difficult information storage. These are design tradeoffs rather than a claim that every analog implementation performs poorly.
-
-![Original lecture PDF page 7: Analog limitations](./images/lecture/lecture-p007.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 7](../../03_resources/01_lectures/00_Intro.pdf#page=7).*
-
-### PDF page 8 - The ADC-DSP-DAC chain and four interface cases
-
+@@ 8|The ADC-DSP-DAC chain and four interface cases
 The basic workflow is represent a signal with numbers, process those numbers, then reconstruct an analog output when needed. The diagram is analog input → ADC → digital processing → DAC → analog output.
 
 | Input → output | Lecture example |
@@ -117,95 +65,29 @@ The basic workflow is represent a signal with numbers, process those numbers, th
 | Digital → digital | Computer-file compression |
 
 Not every application requires both converters; the interface follows the application's input and output.
-
-![Original lecture PDF page 8: The ADC-DSP-DAC chain and four interface cases](./images/lecture/lecture-p008.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 8](../../03_resources/01_lectures/00_Intro.pdf#page=8).*
-
-### PDF page 9 - Prompt: DSP advantages and disadvantages
-
+@@ 9|Prompt: DSP advantages and disadvantages
 Predict the benefit of changing a filter by updating coefficients and the cost of storing numbers with a finite word length. Then compare the prediction with page 10. This prompt separates programmable behavior from finite sampling, conversion and computation resources.
-
-![Original lecture PDF page 9: Prompt: DSP advantages and disadvantages](./images/lecture/lecture-p009.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 9](../../03_resources/01_lectures/00_Intro.pdf#page=9).*
-
-### PDF page 10 - DSP benefits and costs
-
+@@ 10|DSP benefits and costs
 Benefits listed are controllable word length/accuracy; repeatability; low sensitivity of digital representations to electrical noise; floating-point dynamic range; software flexibility; easier nonlinear and time-varying operations; cheap storage; encryption; and price/performance and development-time advantages.
 
 Costs are possible sampling information loss, mixed-signal A/D and D/A hardware, finite processor speed, and quantization/roundoff errors. **Clarification:** ideal sampling of a suitably bandlimited signal can preserve information. Digital processing also preserves noise already captured by the ADC; it is not automatically noise-free or BIBO stable.
-
-![Original lecture PDF page 10: DSP benefits and costs](./images/lecture/lecture-p010.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 10](../../03_resources/01_lectures/00_Intro.pdf#page=10).*
-
-### PDF page 11 - Analog, interface and digital domains
-
+@@ 11|Analog, interface and digital domains
 The diagram separates continuous-time signals/systems and analog electronics from discrete-time numerical processing/digital electronics. ADC and DAC blocks form the interface in opposite directions. Integrals commonly describe continuous-time processing; sums commonly describe discrete-time processing. A complete mechatronic measurement/control chain typically crosses these domains.
-
-![Original lecture PDF page 11: Analog, interface and digital domains](./images/lecture/lecture-p011.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 11](../../03_resources/01_lectures/00_Intro.pdf#page=11).*
-
-### PDF page 12 - Practical conversion chain
-
+@@ 12|Practical conversion chain
 Follow analog anti-alias filter → sample-and-hold → ADC → discrete-time system → DAC/hold → reconstruction filter. The first filter limits out-of-band content before sampling; the last suppresses DAC spectral images and may compensate hold distortion. **Source correction:** the upper diagram labels both end filters as avoiding aliasing. At the output, “anti-imaging/reconstruction” is the appropriate purpose.
-
-![Original lecture PDF page 12: Practical conversion chain](./images/lecture/lecture-p012.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 12](../../03_resources/01_lectures/00_Intro.pdf#page=12).*
-
-### PDF page 13 - Anti-aliasing and holding the input
-
+@@ 13|Anti-aliasing and holding the input
 The low-pass anti-alias filter restricts the signal near the folding frequency $f_s/2$. Even a bandlimited useful signal can be accompanied by wideband noise, which would otherwise fold into the measured band. An input that changes during conversion can corrupt a practical ADC result. The switch/capacitor S/H sketch shows acquisition while the switch tracks and charge retention during hold. A practical filter needs transition-band margin below Nyquist.
-
-![Original lecture PDF page 13: Anti-aliasing and holding the input](./images/lecture/lecture-p013.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 13](../../03_resources/01_lectures/00_Intro.pdf#page=13).*
-
-### PDF page 14 - Sample-and-hold waveform
-
+@@ 14|Sample-and-hold waveform
 The S/H circuit samples as nearly instantaneously as practical and holds the sampled voltage nearly constant until the next acquisition. Its idealized output is a staircase. With a fixed sampling clock, the overall continuous-time sampling/holding operation is linear but time-varying: an arbitrary time shift changes its alignment with the clock. A shift by an integer number of clock periods is a special case.
-
-![Original lecture PDF page 14: Sample-and-hold waveform](./images/lecture/lecture-p014.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 14](../../03_resources/01_lectures/00_Intro.pdf#page=14).*
-
-### PDF page 15 - Uniform sampling
-
+@@ 15|Uniform sampling
 Uniform sampling gives $x[n]=x_c(nT)$ for every integer $n$, with period $T$ seconds, frequency $f_s=1/T$, and angular clock frequency $\Omega_s=2\pi f_s$. The stem plot represents values only at the sampling instants. An ideal model has exact times and values; actual ADCs add finite amplitude resolution and practical timing effects.
-
-![Original lecture PDF page 15: Uniform sampling](./images/lecture/lecture-p015.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 15](../../03_resources/01_lectures/00_Intro.pdf#page=15).*
-
-### PDF page 16 - Sampling is not generally reversible
-
+@@ 16|Sampling is not generally reversible
 The same set of samples can lie on several continuous curves, illustrated by different waveforms through the same points. Without constraints the original waveform is ambiguous. Perfect reconstruction requires a suitable signal class, such as a bandlimited signal sampled sufficiently fast. For a low-pass signal with highest frequency $B$, use $f_s>2B$ as the practical strict inequality, with additional filter margin.
-
-![Original lecture PDF page 16: Sampling is not generally reversible](./images/lecture/lecture-p016.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 16](../../03_resources/01_lectures/00_Intro.pdf#page=16).*
-
-### PDF page 17 - ADC stages and quantization
-
+@@ 17|ADC stages and quantization
 The ADC model separates sampler, $B$-bit quantizer and binary coder. Sampling restricts the time instants; quantization maps continuous amplitudes onto permitted levels; coding represents those levels with bits. The lower graph compares the original curve, ideal samples and quantized samples. Discrete-time theory often ignores finite amplitudes initially; hardware cannot.
-
-![Original lecture PDF page 17: ADC stages and quantization](./images/lecture/lecture-p017.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 17](../../03_resources/01_lectures/00_Intro.pdf#page=17).*
-
-### PDF page 18 - Uniform converter codes
-
+@@ 18|Uniform converter codes
 A $B$-bit quantizer provides $2^B$ possible codes. Uniform quantization uses equal interval widths $\Delta$ and uniformly spaced reconstruction levels. Distinguish a decision threshold, where a code changes, from the reconstruction level assigned to that code. The two diagrams show a quantizer transfer characteristic, binary labels and the decision/reconstruction levels. Finite precision is the central difference from an ideal converter.
-
-![Original lecture PDF page 18: Uniform converter codes](./images/lecture/lecture-p018.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 18](../../03_resources/01_lectures/00_Intro.pdf#page=18).*
-
-### PDF page 19 - Quantization error and noise power
-
+@@ 19|Quantization error and noise power
 ADC errors include aliasing and quantization; they arise from different mechanisms. Quantization is nonlinear. With many small quantization intervals, the lecture approximates the signal locally as a straight line, giving a ramp-like error over $-\tau\le t\le\tau$:
 
 $$
@@ -213,13 +95,7 @@ e(t)=\frac{\Delta}{2\tau}t,\qquad P_Q=\frac1{2\tau}\int_{-\tau}^{\tau}e^2(t)\,dt
 $$
 
 This statistical/local-linear approximation does not cover clipping, strongly correlated errors, or all very small periodic inputs. The figure shows quantized waveform and error separately.
-
-![Original lecture PDF page 19: Quantization error and noise power](./images/lecture/lecture-p019.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 19](../../03_resources/01_lectures/00_Intro.pdf#page=19).*
-
-### PDF page 20 - Ideal and practical DAC pulses
-
+@@ 20|Ideal and practical DAC pulses
 Reconstruction forms a sum of shifted pulses: $x_r(t)=\sum_n x[n]g_r(t-nT)$. The ideal bandlimited pulse is $g_{BL}(t)=\operatorname{sinc}(t/T)$, where $\operatorname{sinc}(v)=\sin(\pi v)/(\pi v)$. A practical switch-and-hold DAC uses $g_{SH}(t)=1$ for $0\le t<T$ and zero otherwise, yielding a staircase from $x_q[n]$.
 
 $$
@@ -228,11 +104,7 @@ G_{SH}(j\Omega)=\frac{2\sin(\Omega T/2)}{\Omega}e^{-j\Omega T/2}
 $$
 
 The limiting value at $\Omega=0$ is $T$. Its non-flat amplitude response leads into topic 02.
-
-![Original lecture PDF page 20: Ideal and practical DAC pulses](./images/lecture/lecture-p020.png)
-
-*Original slide, including all figures and annotations: [lecture PDF p. 20](../../03_resources/01_lectures/00_Intro.pdf#page=20).*
-
+===END===
 ## Lyons supplement: why a sample plot must remain discrete
 
 Read [§1.1, printed pp. 2-7 / PDF pp. 27-32](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=27) and [§2.1, printed pp. 33-37 / PDF pp. 58-62](../../03_resources/03-Understanding-Digital-Signal-Processing.pdf#page=58). Lyons emphasizes that the values between sample instants are unspecified by a sequence. Connecting stems with a staircase imposes a hold operation that is not inherent in the sequence itself. This resolves the apparent conflict between an ADC stem plot and a DAC staircase.
