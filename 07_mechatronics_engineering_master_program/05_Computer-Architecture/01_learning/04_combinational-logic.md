@@ -138,6 +138,7 @@ $$
 
 ![Combination Composition Example 2](image-42.png)
 
+#### Boolean Algebra
 
 **Simple Equations**
 
@@ -175,16 +176,209 @@ $$
 
 **Boolean Equations**
 
-- Complex equations are built from the 3 basic equations
-- The order of operations (basic equations):
+- Complex equations are built from the 3 basic equations.
+- Order of operations (basic equations):
   - **NOT** has the highest precedence.
-  - **AND** comes next.
-  - **OR** has the lowest precedence.
-- A sample of boolen equation:
+  - **AND** is second, then **OR**.
+- Sample Boolean equation:
+
+  $$
+  F(A, B, C) = \overline{A}B + BC\overline{D}
+  $$
+
+- **Minterms** ($m_i$):
+  - A **product** involving **all** the inputs.
+  - Example, for $F(A, B, C)$:
+    - $ABC,\ \overline{A}BC,\ A\overline{B}C,\ \dots$ are minterms.
+    - $AB,\ AC,\ B\overline{C}$ are **not** minterms.
+
+- **Maxterms** ($M_i$):
+  - A **sum** involving **all** the inputs.
+  - Example, for $F(A, B, C)$:
+    - $A + B + C,\ \overline{A} + B + C,\ A + \overline{B} + C,\ \dots$ are maxterms.
+    - $AB,\ AC,\ B\overline{C}$ are **not** maxterms.
+
+- $i$ in $m_i$ and $M_i$ is the decimal number represented by the binary inputs.
+- Example for $F(A,B,C)$:
+  - Let $ABC=(b_3b_2b_1)_2$.
+  - $A$ is the most significant bit; $C$ is the least significant bit.
+  - Therefore:
+
+    $$
+    i=4A+2B+C
+    $$
+
+|  $A$  |  $B$  |  $C$  | Binary  |  $i$  |
+| :---: | :---: | :---: | :-----: | :---: |
+|   0   |   0   |   0   | $000_2$ |   0   |
+|   0   |   0   |   1   | $001_2$ |   1   |
+|   0   |   1   |   0   | $010_2$ |   2   |
+|   0   |   1   |   1   | $011_2$ |   3   |
+|   1   |   0   |   0   | $100_2$ |   4   |
+|   1   |   0   |   1   | $101_2$ |   5   |
+|   1   |   1   |   0   | $110_2$ |   6   |
+|   1   |   1   |   1   | $111_2$ |   7   |
+
+**Sum-of-Products form (SOP) and Product-of-Sums form (POS)**
+
+- A function can be represented by sum of minterms (SOP) or product of maxterms (POS).
+
+A Boolean function can be represented as:
+
+- A **sum of minterms**: include rows where $F=1$.
+- A **product of maxterms**: include rows where $F=0$.
+
+**Sum of Minterms**
+
+For:
 
 $$
-F(A,B,C) = A \cdot B + \overline{C} 
+F(A,B)=\overline{A}B+AB
 $$
+
+The output is `1` at indices $1$ and $3$:
+
+$$
+F(A,B)=m_1+m_3=\sum m(1,3)=\sum(1,3)
+$$
+
+|  $i$  |  $A$  |  $B$  |  $F$  |          Minterm           | Name  |
+| :---: | :---: | :---: | :---: | :------------------------: | :---: |
+|   0   |   0   |   0   |   0   | $\overline{A}\overline{B}$ | $m_0$ |
+|   1   |   0   |   1   |   1   |      $\overline{A}B$       | $m_1$ |
+|   2   |   1   |   0   |   0   |      $A\overline{B}$       | $m_2$ |
+|   3   |   1   |   1   |   1   |            $AB$            | $m_3$ |
+
+Therefore:
+
+$$
+\boxed{F(A,B)=\sum m(1,3)}
+$$
+
+**Product of Maxterms**
+
+The same function is `0` at indices $0$ and $2$:
+
+$$
+F(A,B)=(A+B)(\overline{A}+B)
+$$
+
+$$
+F(A,B)=M_0M_2=\prod M(0,2)=\prod(0,2)
+$$
+
+|  $i$  |  $A$  |  $B$  |  $F$  |           Maxterm           | Name  |
+| :---: | :---: | :---: | :---: | :-------------------------: | :---: |
+|   0   |   0   |   0   |   0   |            $A+B$            | $M_0$ |
+|   1   |   0   |   1   |   1   |      $A+\overline{B}$       | $M_1$ |
+|   2   |   1   |   0   |   0   |      $\overline{A}+B$       | $M_2$ |
+|   3   |   1   |   1   |   1   | $\overline{A}+\overline{B}$ | $M_3$ |
+
+Therefore:
+
+$$
+\boxed{F(A,B)=\prod M(0,2)}
+$$
+
+Both canonical forms describe the same function:
+
+$$
+\boxed{F(A,B)=\sum m(1,3)=\prod M(0,2)}
+$$
+
+> Minterm rule: use complemented variable for input `0` and uncomplemented variable for input `1`.
+>
+> Maxterm rule: use uncomplemented variable for input `0` and complemented variable for input `1`.
+
+- Example:
+
+![Sum-of-Products and Product-of-Sums example](image-43.png)
+
+$$
+E=\Pi(1,2,3)
+$$
+
+![Product-of-Sums example](image-44.png)
+$$
+E=\Sigma(0)
+$$
+
+- **SOP** produces a shorter equation when the output is TRUE on only a few rows of the truth table.
+- **POS** produces a shorter equation when the output is FALSE on only a few rows of the truth table.
+
+For $n$ inputs, all row indices belong to:
+
+$$
+U=\{0,1,\dots,2^n-1\}
+$$
+
+- $\sum m(\dots)$ lists rows where $F=1$.
+- $\prod M(\dots)$ lists rows where $F=0$.
+
+**1. Minterm-to-maxterm conversion**
+
+Rewrite minterm notation as maxterm notation. Replace listed indices with their complement relative to $U$.
+
+For example:
+
+$$
+F(A,B,C)
+=\sum m(3,4,5,6,7)
+=\prod M(0,1,2)
+$$
+
+**2. Maxterm-to-minterm conversion**
+
+Rewrite maxterm notation as minterm notation. Replace listed indices with their complement relative to $U$.
+
+For example:
+
+$$
+F(A,B,C)
+=\prod M(0,1,2)
+=\sum m(3,4,5,6,7)
+$$
+
+**3. Expansion of $F$ to expansion of $\overline{F}$**
+
+Complementing $F$ swaps its `1` rows and `0` rows. Use the unused indices:
+
+$$
+F(A,B,C)=\sum m(3,4,5,6,7)
+\quad\Longrightarrow\quad
+\overline{F}(A,B,C)=\sum m(0,1,2)
+$$
+
+$$
+F(A,B,C)=\prod M(0,1,2)
+\quad\Longrightarrow\quad
+\overline{F}(A,B,C)=\prod M(3,4,5,6,7)
+$$
+
+**4. Minterm expansion of $F$ to maxterm expansion of $\overline{F}$**
+
+When changing both function and notation, retain the same indices:
+
+$$
+F(A,B,C)=\sum m(3,4,5,6,7)
+\quad\Longrightarrow\quad
+\overline{F}(A,B,C)=\prod M(3,4,5,6,7)
+$$
+
+$$
+F(A,B,C)=\prod M(0,1,2)
+\quad\Longrightarrow\quad
+\overline{F}(A,B,C)=\sum m(0,1,2)
+$$
+
+**Conversion summary**
+
+| Conversion                                                                       | Indices                     |
+| -------------------------------------------------------------------------------- | --------------------------- |
+| $\sum m \leftrightarrow \prod M$ for same $F$                                    | Use complementary index set |
+| $F \leftrightarrow \overline F$ with same notation                               | Use complementary index set |
+| Change both $F \leftrightarrow \overline F$ and $\sum m \leftrightarrow \prod M$ | Keep same indices           |
+
 
 ---
 
