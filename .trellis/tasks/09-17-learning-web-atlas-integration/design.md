@@ -24,6 +24,11 @@ breadcrumb from ancestor nodes, and renders only immediate children at each
 level. Geometry knows stable country IDs and anchor positions, but country text
 comes from the API tree.
 
+Quest-route mode derives an ordered, non-deduplicated itinerary from milestone
+knowledge links. Each path is resolved against the same content tree used by
+the Atlas. The URL carries `mode=quest` and the selected quest ID; no parallel
+route store is introduced.
+
 ## Compatibility and rollback
 
 Existing `/#/design-system` and `/#/map-preview` development routes remain

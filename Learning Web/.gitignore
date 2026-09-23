@@ -4,3 +4,6 @@ dist-server/
 coverage/
 .data/
 .vite/
+test-results/
+playwright-report/
+tests/.tmp/

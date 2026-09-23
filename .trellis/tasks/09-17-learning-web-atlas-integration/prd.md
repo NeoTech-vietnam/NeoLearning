@@ -14,7 +14,10 @@ Mount existing APIs and deliver a data-driven Atlas and Quest navigation shell f
 - Keep nested country/region/topic/lesson selection in the URL so refresh restores the view.
 - Distinguish `Uncharted` content and expose loading, empty, and API-error states.
 - Render the existing Quest Board against `/api/quests` and `/api/progress`.
-- Keep the Markdown editor, full quest-route overlay, and procedural map geometry outside this increment.
+- Add an Atlas quest-route mode that resolves milestone knowledge links to
+  canonical content nodes, preserves repeated stops, and highlights traversed
+  countries.
+- Keep the Markdown editor and procedural map geometry outside this increment.
 
 ## Acceptance Criteria
 
@@ -24,6 +27,8 @@ Mount existing APIs and deliver a data-driven Atlas and Quest navigation shell f
 - [ ] Country and nested selections update breadcrumb, detail content, back navigation, and URL state.
 - [ ] A nested Atlas URL restores the same selected node after reload.
 - [ ] Quest Board loads real quest/progress data and links back to Atlas content.
+- [ ] Quest detail can open a selected quest on the Atlas; its ordered route
+  remains in URL state and unresolved landmarks are explained rather than lost.
 - [ ] Loading, empty, API-error, keyboard-focus, and reduced-motion behavior are covered.
 - [ ] Unit tests, typecheck, and production build pass.
 

@@ -1,4 +1,4 @@
-import type { ContentNode } from "../shared";
+import type { ContentNode, Quest } from "../shared";
 
 const COUNTRY_ROOTS = [
   "01_Hardware",
@@ -31,4 +31,22 @@ export function findNodeTrail(root: ContentNode, relativePath?: string): Content
 
 export function descendantCount(node: ContentNode): number {
   return node.children.reduce((count, child) => count + 1 + descendantCount(child), 0);
+}
+
+export interface QuestRouteStop {
+  key: string;
+  milestoneId: string;
+  milestoneTitle: string;
+  relativePath: string;
+  node?: ContentNode;
+}
+
+export function questRouteStops(root: ContentNode, quest: Quest): QuestRouteStop[] {
+  return quest.milestones.flatMap((milestone) => milestone.knowledgeLinks.map((relativePath, index) => ({
+    key: `${milestone.id}:${index}:${relativePath}`,
+    milestoneId: milestone.id,
+    milestoneTitle: milestone.title,
+    relativePath,
+    node: findNodeTrail(root, relativePath).at(-1)
+  }))).map((stop) => stop.node === root ? { ...stop, node: undefined } : stop);
 }

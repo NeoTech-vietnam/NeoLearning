@@ -100,7 +100,7 @@ export function expandedQuestProgress(quest: Quest, stored: QuestProgress | unde
 export class ProgressStore {
   readonly filePath: string;
 
-  constructor(filePath = path.resolve(process.cwd(), ".data/progress.json")) {
+  constructor(filePath = path.join(process.env.NEOLEARNING_DATA_ROOT ?? path.resolve(process.cwd(), ".data"), "progress.json")) {
     this.filePath = filePath;
   }
 

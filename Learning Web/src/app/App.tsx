@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import type { HealthResponse } from "../shared";
 import { AtlasPage } from "../atlas/AtlasPage";
 import { WorldMapPreview } from "../atlas/WorldMapPreview";
 import { DesignSystemPage } from "../dev/design-system/DesignSystemPage";
 import { QuestPage } from "../quests";
+import { Skeleton } from "../ui";
 import { parseHashRoute, type AppRoute } from "./routes";
 import "./app.css";
+
+const EditorPage = lazy(() => import("../editor/EditorPage").then((module) => ({ default: module.EditorPage })));
 
 export function App() {
   const [route, setRoute] = useState<AppRoute>(() => parseHashRoute(window.location.hash));
@@ -27,7 +30,10 @@ export function App() {
         <a aria-current={route.name === "quests" ? "page" : undefined} href="#/quests">Quests</a>
       </nav>
     </header>
-    {route.name === "atlas" ? <AtlasPage selectedPath={route.path} /> : route.name === "quests" ? <QuestPage /> : <HomePage />}
+    {route.name === "atlas" ? <AtlasPage mode={route.mode} questId={route.questId} selectedPath={route.path} />
+      : route.name === "quests" ? <QuestPage />
+      : route.name === "editor" ? <Suspense fallback={<main className="route-loading"><Skeleton lines={8} /></main>}><EditorPage path={route.path} /></Suspense>
+      : <HomePage />}
   </div>;
 }
 

@@ -160,8 +160,8 @@ export async function validateQuest(raw: RawQuest, repositoryRoot: string): Prom
 
 export class QuestCatalog {
   constructor(
-    readonly repositoryRoot = path.resolve(process.cwd(), ".."),
-    readonly questDirectory = path.resolve(process.cwd(), "quests")
+    readonly repositoryRoot = process.env.NEOLEARNING_REPOSITORY_ROOT ?? path.resolve(process.cwd(), ".."),
+    readonly questDirectory = process.env.NEOLEARNING_QUEST_DIRECTORY ?? path.resolve(process.cwd(), "quests")
   ) {}
 
   async list(): Promise<Quest[]> {

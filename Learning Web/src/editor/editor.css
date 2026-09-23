@@ -1,0 +1,30 @@
+.editor-page { width: min(96rem, 100%); min-height: calc(100vh - 4.5rem); margin: 0 auto; padding: var(--space-5); }
+.editor-page__header, .editor-toolbar, .editor-save-actions, .editor-modal-actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.editor-page__header h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+.editor-page__header p { margin: var(--space-1) 0; overflow-wrap: anywhere; }
+.editor-toolbar { position: sticky; z-index: var(--layer-panel); top: 5rem; margin-block: var(--space-4); padding: var(--space-3); background: color-mix(in srgb, var(--color-surface) 94%, transparent); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--elevation-1); backdrop-filter: blur(.75rem); }
+.editor-toolbar__modes { display: flex; gap: var(--space-2); }
+.markdown-preview { min-width: 0; padding: clamp(1.5rem, 4vw, 4rem); color: var(--color-ink); background: var(--color-surface); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius-lg); box-shadow: var(--elevation-1); line-height: var(--leading-body); }
+.markdown-preview > :first-child { margin-top: 0; }
+.markdown-preview pre { max-width: 100%; padding: var(--space-4); overflow: auto; color: var(--color-action-text); background: var(--color-canvas-deep); border-radius: var(--radius-md); }
+.markdown-preview code { font-family: var(--font-code); }
+.markdown-preview table { width: 100%; border-collapse: collapse; }
+.markdown-preview th, .markdown-preview td { padding: var(--space-2); border: var(--border-width) solid var(--color-border); text-align: left; }
+.markdown-preview img { max-width: 100%; }
+.editor-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.editor-source { min-width: 0; overflow: hidden; background: white; border: var(--border-width) solid var(--color-border); border-radius: var(--radius-lg); box-shadow: var(--elevation-1); }
+.editor-notice { padding: var(--space-3); border-radius: var(--radius-md); font-weight: 800; }
+.editor-notice--success { color: var(--color-action-text); background: var(--color-success); }
+.editor-notice--error { color: var(--color-action-text); background: var(--color-danger); }
+.editor-diff { overflow: hidden; background: var(--color-surface); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-lg); }
+.editor-diff header { padding: var(--space-4); }
+.editor-diff header h2, .editor-diff header p { margin: var(--space-1) 0; }
+.editor-diff pre { margin: 0; padding-block: var(--space-2); overflow: auto; color: var(--color-ink); background: var(--color-surface-raised); font: var(--text-code)/1.55 var(--font-code); }
+.editor-diff__line { display: grid; grid-template-columns: 1.5rem 3rem 3rem minmax(max-content, 1fr); min-width: fit-content; padding-inline: var(--space-3); }
+.editor-diff__line--added { background: color-mix(in srgb, var(--color-success) 20%, transparent); }
+.editor-diff__line--removed { background: color-mix(in srgb, var(--color-danger) 18%, transparent); }
+.editor-save-actions { justify-content: flex-end; margin-top: var(--space-4); }
+.editor-modal-actions { justify-content: flex-end; margin-top: var(--space-4); }
+.editor-revision { overflow-wrap: anywhere; font-family: var(--font-code); font-size: var(--text-meta); }
+@media (max-width: 64rem) { .editor-split { grid-template-columns: 1fr; } .editor-page { padding: var(--space-4); } }
+@media (max-width: 40rem) { .editor-page__header, .editor-toolbar { align-items: stretch; flex-direction: column; } .editor-toolbar__modes { display: grid; grid-template-columns: 1fr 1fr; } }

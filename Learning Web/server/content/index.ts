@@ -433,7 +433,7 @@ export function isSafeRelativePath(value: string): boolean {
 
 let processIndex: ContentIndex | undefined;
 
-export function getContentIndex(repositoryRoot = path.resolve(process.cwd(), "..")): ContentIndex {
+export function getContentIndex(repositoryRoot = process.env.NEOLEARNING_REPOSITORY_ROOT ?? path.resolve(process.cwd(), "..")): ContentIndex {
   if (!processIndex) processIndex = new ContentIndex(repositoryRoot);
   return processIndex;
 }

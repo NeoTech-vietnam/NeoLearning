@@ -7,10 +7,11 @@ const maskUrl = new URL("../../assets/maps/embedded-world-country-mask.svg", imp
 export interface WorldMapProps {
   countries: ContentNode[];
   selectedPath?: string;
+  activePaths?: string[];
   onSelect: (country: ContentNode) => void;
 }
 
-export function WorldMap({ countries, selectedPath, onSelect }: WorldMapProps) {
+export function WorldMap({ activePaths = [], countries, selectedPath, onSelect }: WorldMapProps) {
   return (
     <section aria-label="Embedded World country map" className="world-map">
       <img alt="" className="world-map__art" src={mapUrl} />
@@ -20,6 +21,7 @@ export function WorldMap({ countries, selectedPath, onSelect }: WorldMapProps) {
           return <use
             aria-label={`${String(index + 1).padStart(2, "0")} ${country.title}`}
             className="world-map__country"
+            data-route={activePaths.some((path) => path === country.relativePath || path.startsWith(`${country.relativePath}/`))}
             data-selected={country.relativePath === selectedPath}
             href={`${maskUrl}#${mapId}`}
             key={country.id}
@@ -41,6 +43,7 @@ export function WorldMap({ countries, selectedPath, onSelect }: WorldMapProps) {
         return <button
           aria-pressed={country.relativePath === selectedPath}
           className="world-map__label"
+          data-route={activePaths.some((path) => path === country.relativePath || path.startsWith(`${country.relativePath}/`))}
           data-selected={country.relativePath === selectedPath}
           key={country.id}
           onClick={() => onSelect(country)}

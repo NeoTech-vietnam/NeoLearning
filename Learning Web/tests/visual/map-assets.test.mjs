@@ -23,6 +23,9 @@ test("source and interaction mask share all six country paths exactly", async ()
   assert.deepEqual([...sourcePaths.keys()], ["country-01", "country-02", "country-03", "country-04", "country-05", "country-06"]);
   assert.deepEqual(maskPaths, sourcePaths);
   assert.match(source, /viewBox="0 0 3840 2160"/);
+  assert.match(source, /transform="translate\(-384 -216\) scale\(2\.88\)"/);
+  assert.equal((mask.match(/transform="translate\(-384 -216\) scale\(2\.88\)"/g) ?? []).length, 6);
+  assert.doesNotMatch(mask, /<path id="country-0[1-6]"[^>]* fill=/);
 });
 
 test("land mask and anchors use the shared coordinate contract", async () => {

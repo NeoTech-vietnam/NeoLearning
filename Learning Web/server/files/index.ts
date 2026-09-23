@@ -350,7 +350,7 @@ export class MarkdownFileStore {
 
 let processStore: MarkdownFileStore | undefined;
 
-export function getMarkdownFileStore(repositoryRoot = path.resolve(process.cwd(), "..")): MarkdownFileStore {
+export function getMarkdownFileStore(repositoryRoot = process.env.NEOLEARNING_REPOSITORY_ROOT ?? path.resolve(process.cwd(), "..")): MarkdownFileStore {
   if (!processStore) processStore = new MarkdownFileStore(repositoryRoot);
   return processStore;
 }

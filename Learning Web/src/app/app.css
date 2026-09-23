@@ -20,4 +20,5 @@ h1 { margin: .5rem 0; font: 600 clamp(2.5rem, 8vw, 5rem)/var(--leading-tight) va
 .health--checking { background: var(--color-surface-muted); }
 .health--ready { color: var(--color-action-text); background: var(--color-success); }
 .health--unavailable { color: var(--color-action-text); background: var(--color-danger); }
+.route-loading { width: min(76rem, 100%); min-height: calc(100vh - 4.5rem); margin: 0 auto; padding: var(--space-7); }
 @media (max-width: 40rem) { .application__bar { padding-inline: var(--space-4); } .home-page { padding: var(--space-4); } .home-page__hero { padding: var(--space-5); } }
