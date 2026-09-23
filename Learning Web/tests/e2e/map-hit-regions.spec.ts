@@ -18,5 +18,6 @@ test("keeps map artwork and the six-country hit layer aligned", async ({ page })
   )).toMatch(/^02 Software/);
 
   await page.mouse.click(x, y);
-  await expect(map.locator('.world-map__country[aria-label^="02 Software"]')).toHaveAttribute("data-selected", "true");
+  await expect(page).toHaveURL(/path=02_Software/);
+  await expect(page.getByRole("region", { name: "Software Empire territory map" })).toBeVisible();
 });

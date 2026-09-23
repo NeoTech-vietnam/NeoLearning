@@ -15,6 +15,8 @@ milestones:
     evidenceRequired: false
     knowledgeLinks:
       - 01_Hardware/lesson.md
+      - 02_Software/lesson.md
+      - 03_Interfaces-and-Protocols/lesson.md
 completionCriteria:
   - Read the fixture lesson.
 ---

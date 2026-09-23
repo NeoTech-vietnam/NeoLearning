@@ -5,7 +5,7 @@ test("opens a fixture lesson from the atlas without touching the real curriculum
   await page.getByRole("link", { name: "Atlas", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Embedded World" })).toBeVisible();
   await page.locator(".world-map__label", { hasText: "Hardware Kingdom" }).click();
-  await page.getByRole("button", { name: "Fixture Lesson" }).click();
+  await page.locator(".atlas-page__panel").getByRole("button", { name: /Fixture Lesson/ }).click();
   await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
   await expect(page.getByText("Fixture lesson")).toBeVisible();
 });

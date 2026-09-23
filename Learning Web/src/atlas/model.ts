@@ -39,6 +39,8 @@ export interface QuestRouteStop {
   milestoneTitle: string;
   relativePath: string;
   node?: ContentNode;
+  trail: ContentNode[];
+  countryPath?: string;
 }
 
 export function questRouteStops(root: ContentNode, quest: Quest): QuestRouteStop[] {
@@ -47,6 +49,53 @@ export function questRouteStops(root: ContentNode, quest: Quest): QuestRouteStop
     milestoneId: milestone.id,
     milestoneTitle: milestone.title,
     relativePath,
-    node: findNodeTrail(root, relativePath).at(-1)
-  }))).map((stop) => stop.node === root ? { ...stop, node: undefined } : stop);
+    trail: findNodeTrail(root, relativePath)
+  }))).map((stop) => {
+    const node = stop.trail.at(-1);
+    return {
+      ...stop,
+      node: node === root ? undefined : node,
+      countryPath: stop.trail.find((entry) => entry.kind === "country")?.relativePath
+    };
+  });
+}
+
+export interface TerritoryPosition {
+  path?: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export function territoryPositions(children: ContentNode[]): TerritoryPosition[] {
+  if (children.length === 0) return [];
+  const columns = Math.min(4, Math.ceil(Math.sqrt(children.length * 0.9)));
+  const rows = Math.ceil(children.length / columns);
+  const cellWidth = 100 / columns;
+  const topInset = 16;
+  const gridHeight = 78;
+  const cellHeight = gridHeight / rows;
+  return children.map((child, index) => ({
+    path: child.relativePath,
+    x: (index % columns + 0.5) * cellWidth,
+    y: topInset + (Math.floor(index / columns) + 0.5) * cellHeight,
+    width: Math.min(cellWidth * 0.9, 26),
+    height: Math.min(cellHeight * 0.84, 24)
+  }));
+}
+
+export interface ProjectedQuestStop {
+  stop: QuestRouteStop;
+  territoryPath?: string;
+}
+
+export function questStopsAtFocus(focus: ContentNode, stops: QuestRouteStop[]): ProjectedQuestStop[] {
+  return stops.flatMap((stop) => {
+    if (!stop.node) return [];
+    const focusIndex = stop.trail.findIndex((entry) => entry.id === focus.id);
+    if (focusIndex < 0) return [];
+    const territory = stop.trail[focusIndex + 1] ?? focus;
+    return [{ stop, territoryPath: territory.relativePath }];
+  });
 }

@@ -6,6 +6,7 @@ import { Badge, Button, Card, EmptyState, ErrorState, Skeleton } from "../ui";
 import { atlasHash, editorHash, type AtlasViewMode } from "../app/routes";
 import { canonicalCountries, descendantCount, findNodeTrail, questRouteStops } from "./model";
 import { WorldMap } from "./WorldMap";
+import { NestedMap } from "./NestedMap";
 import "./atlas.css";
 
 type LoadState =
@@ -57,6 +58,13 @@ function AtlasReady({ root, selectedPath, mode, questId, quests }: { root: Conte
   const viewMode: AtlasViewMode = mode === "quest" && selectedQuest ? "quest" : "explore";
   const routeStops = useMemo(() => selectedQuest ? questRouteStops(root, selectedQuest) : [], [root, selectedQuest]);
   const activePaths = viewMode === "quest" ? routeStops.map((stop) => stop.relativePath) : [];
+  const mapFocus = selected.children.length > 0 || selected.kind === "country" ? selected : trail.at(-2) ?? selected;
+  const countryIndex = countries.findIndex((country) => country.id === selectedCountry?.id);
+
+  const selectMapNode = (node: ContentNode) => {
+    if (node.kind === "lesson" && node.relativePath) window.location.hash = editorHash(node.relativePath);
+    else navigate(node);
+  };
 
   const navigate = (node?: ContentNode, nextMode = viewMode, nextQuest = selectedQuest) => {
     window.location.hash = atlasHash(node?.relativePath, {
@@ -94,7 +102,20 @@ function AtlasReady({ root, selectedPath, mode, questId, quests }: { root: Conte
     {countries.length !== 6 && <ErrorState title="Incomplete world map">Expected six canonical countries, but the content API returned {countries.length}.</ErrorState>}
 
     <div className="atlas-page__layout">
-      <div className="atlas-page__map"><WorldMap activePaths={activePaths} countries={countries} onSelect={navigate} selectedPath={selectedCountry?.relativePath} /></div>
+      <div className="atlas-page__map">{selected === root ? <WorldMap
+        activePaths={activePaths}
+        countries={countries}
+        onSelect={navigate}
+        routeStops={viewMode === "quest" ? routeStops : []}
+        selectedPath={selectedCountry?.relativePath}
+      /> : selectedCountry && countryIndex >= 0 ? <NestedMap
+        country={selectedCountry}
+        countryIndex={countryIndex}
+        focus={mapFocus}
+        onSelect={selectMapNode}
+        routeStops={viewMode === "quest" ? routeStops : []}
+        selectedPath={selected.relativePath}
+      /> : null}</div>
       <aside className="atlas-page__panel">
         {viewMode === "quest" && selectedQuest ? <QuestRoutePanel onSelect={(node) => navigate(node)} quest={selectedQuest} selectedPath={selected.relativePath} stops={routeStops} /> : <ExplorePanel navigate={navigate} selected={selected} />}
       </aside>
