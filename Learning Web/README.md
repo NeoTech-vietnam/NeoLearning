@@ -37,6 +37,43 @@ requires authentication or a cloud service.
 - Not in MVP: authentication, cloud sync, multiplayer, mobile editor, achievements,
   firmware compilation, or automatic Git commits.
 
+## Private phone preview
+
+The local app remains unauthenticated. To test the full app from a phone outside
+the LAN, build it and run a separate server bound to localhost with an exact
+Tailscale login allowlist:
+
+```bash
+npm run build
+API_HOST=127.0.0.1 API_PORT=4175 NEOLEARNING_ALLOWED_TAILSCALE_LOGIN=you@example.com npm start
+tailscale serve --bg 4175
+```
+
+Open the HTTPS URL reported by Tailscale Serve while the phone is connected to
+the same tailnet. Serve supplies `Tailscale-User-Login` after stripping
+client-supplied copies; the server rejects all page and API requests unless it
+matches the allowlist. Keep `API_HOST=127.0.0.1`: direct access to a broader
+network interface could forge that header. Do not use Tailscale Funnel for this
+write-enabled app. To stop sharing, run `tailscale serve --https=443 off` and
+stop the private preview server. First-time Serve activation may require
+approval in the Tailscale admin console. Configuring Serve can also require local
+administrator permission.
+
+If Serve cannot be configured, use the machine's Tailscale IP directly. Set a
+random password of at least 16 characters and require the exact IP-and-port
+`Host` header to prevent DNS rebinding:
+
+```bash
+npm run build
+API_HOST=<tailscale-ip> API_PORT=4176 NEOLEARNING_PREVIEW_HOST=<tailscale-ip>:4176 NEOLEARNING_PREVIEW_PASSWORD=<random-password> npm start
+```
+
+Open `http://<tailscale-ip>:4176/#/quests` while connected to the tailnet;
+the browser asks for username `neo` and the configured password. The HTTP
+address is encrypted by Tailscale's device-to-device tunnel, but browsers may
+still label it insecure because there is no HTTPS certificate. Never bind this
+server to `0.0.0.0`, forward its port on the router, or publish it with Funnel.
+
 ## Delivery waves
 
 | Wave | Tasks | Dispatch rule |

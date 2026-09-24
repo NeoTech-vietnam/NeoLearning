@@ -1,4 +1,5 @@
 import { existsSync } from "node:fs";
+import { createHash, timingSafeEqual } from "node:crypto";
 import { createServer, type Server } from "node:http";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -26,8 +27,54 @@ function apiError(status: number, code: ApiErrorResponse["error"]["code"], messa
   };
 }
 
-export function createApp(): Express {
+interface PreviewAccess {
+  tailnetLogin?: string;
+  password?: string;
+  allowedHost?: string;
+}
+
+export function createApp(access: PreviewAccess = {
+  tailnetLogin: process.env.NEOLEARNING_ALLOWED_TAILSCALE_LOGIN,
+  password: process.env.NEOLEARNING_PREVIEW_PASSWORD,
+  allowedHost: process.env.NEOLEARNING_PREVIEW_HOST
+}): Express {
   const app = express();
+
+  if (access.tailnetLogin !== undefined && access.password !== undefined) {
+    throw new Error("Choose one private preview authentication method.");
+  }
+  if (access.tailnetLogin !== undefined) {
+    const login = access.tailnetLogin.trim();
+    if (!login) throw new Error("NEOLEARNING_ALLOWED_TAILSCALE_LOGIN must not be empty.");
+    app.use((request, response, next) => {
+      if (request.get("Tailscale-User-Login") !== login) {
+        response.status(403).send("Forbidden");
+        return;
+      }
+      next();
+    });
+  }
+  if (access.password !== undefined) {
+    if (access.password.length < 16 || !access.allowedHost) {
+      throw new Error("Private preview requires a strong password and an exact allowed host.");
+    }
+    const expected = createHash("sha256").update(`neo:${access.password}`).digest();
+    app.use((request, response, next) => {
+      if (request.get("Host") !== access.allowedHost) {
+        response.status(403).send("Forbidden");
+        return;
+      }
+      const match = /^Basic ([A-Za-z0-9+/]+={0,2})$/i.exec(request.get("Authorization") ?? "");
+      const provided = match ? Buffer.from(match[1], "base64").toString("utf8") : "";
+      const actual = createHash("sha256").update(provided).digest();
+      if (!timingSafeEqual(actual, expected)) {
+        response.set("WWW-Authenticate", 'Basic realm="NeoLearning phone preview"');
+        response.status(401).send("Authentication required");
+        return;
+      }
+      next();
+    });
+  }
 
   app.get("/api/health", (_request, response) => {
     response.json({ status: "ok" } satisfies HealthResponse);
