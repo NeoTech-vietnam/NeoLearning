@@ -11,6 +11,7 @@ interface RawQuest {
   title?: unknown;
   level?: unknown;
   problem?: unknown;
+  destination?: unknown;
   regions?: unknown;
   knowledgeLinks?: unknown;
   milestones?: unknown;
@@ -114,6 +115,7 @@ function milestone(value: unknown): QuestMilestone {
     title: text(source.title, `Milestone ${id} title`)!,
     order: source.order as number,
     ...(text(source.description, `Milestone ${id} description`, false) ? { description: text(source.description, `Milestone ${id} description`, false) } : {}),
+    ...(text(source.challenge, `Milestone ${id} challenge`, false) ? { challenge: text(source.challenge, `Milestone ${id} challenge`, false) } : {}),
     required: source.required,
     ...(source.evidenceRequired === true ? { evidenceRequired: true } : {}),
     knowledgeLinks: strings(source.knowledgeLinks, `Milestone ${id} knowledgeLinks`)
@@ -151,6 +153,7 @@ export async function validateQuest(raw: RawQuest, repositoryRoot: string): Prom
     title: text(raw.title, "title")!,
     ...(text(raw.level, "level", false) ? { level: text(raw.level, "level", false) } : {}),
     ...(text(raw.problem, "problem", false) ? { problem: text(raw.problem, "problem", false) } : {}),
+    ...(text(raw.destination, "destination", false) ? { destination: text(raw.destination, "destination", false) } : {}),
     regionIds: strings(raw.regions, "regions"),
     knowledgeLinks,
     milestones,

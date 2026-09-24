@@ -37,6 +37,7 @@ export interface QuestRouteStop {
   key: string;
   milestoneId: string;
   milestoneTitle: string;
+  challenge?: string;
   relativePath: string;
   node?: ContentNode;
   trail: ContentNode[];
@@ -48,6 +49,7 @@ export function questRouteStops(root: ContentNode, quest: Quest): QuestRouteStop
     key: `${milestone.id}:${index}:${relativePath}`,
     milestoneId: milestone.id,
     milestoneTitle: milestone.title,
+    challenge: milestone.challenge,
     relativePath,
     trail: findNodeTrail(root, relativePath)
   }))).map((stop) => {

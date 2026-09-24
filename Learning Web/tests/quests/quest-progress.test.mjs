@@ -10,6 +10,8 @@ import { register } from "tsx/esm/api";
 register();
 
 const { ProgressStore, ProgressValidationError } = await import("../../server/progress/index.ts");
+const { ContentIndex } = await import("../../server/content/index.ts");
+const { canonicalCountries, questRouteStops, questStopsAtFocus } = await import("../../src/atlas/model.ts");
 const { QuestCatalog, QuestValidationError } = await import("../../server/quests/index.ts");
 const { createQuestRouter } = await import("../../server/routes/quests.ts");
 const { createProgressRouter } = await import("../../server/routes/progress.ts");
@@ -68,6 +70,72 @@ test("loads the environmental sentinel directly from Markdown frontmatter", asyn
   assert.equal(quest?.title, "Environmental Sentinel");
   assert.equal(quest?.milestones[0].id, "define-sampling-contract");
   assert.ok(quest?.knowledgeLinks.every((link) => !path.isAbsolute(link)));
+});
+
+test("maps the watchtower expedition to nine regions across three countries", async () => {
+  const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+  const root = path.resolve(project, "..");
+  const catalog = new QuestCatalog(root, path.join(project, "quests"));
+  const quests = await catalog.list();
+  const quest = quests.find((item) => item.id === "environmental-watchtower");
+  assert.ok(quest);
+  assert.ok(quests.some((item) => item.id === "environmental-sentinel"));
+  assert.equal(quest.title, "Hành trình Trạm Quan trắc");
+  assert.match(quest.destination, /truyền số đo/);
+  assert.equal(quest.milestones.length, 9);
+  assert.ok(quest.milestones.every((item) => item.required && item.challenge && item.knowledgeLinks.length === 1));
+  assert.deepEqual(quest.milestones.filter((item) => item.evidenceRequired).map((item) => item.order), [3, 6, 9]);
+
+  const tree = await new ContentIndex(root).tree();
+  const stops = questRouteStops(tree.root, quest);
+  assert.equal(stops.length, 9);
+  assert.ok(stops.every((stop) => stop.node?.kind === "region" && stop.challenge));
+  assert.deepEqual(stops.map((stop) => stop.countryPath), [
+    ...Array(3).fill("01_Hardware"),
+    ...Array(3).fill("02_Software"),
+    ...Array(3).fill("03_Interfaces-and-Protocols")
+  ]);
+  const countries = canonicalCountries(tree.root).slice(0, 3);
+  assert.deepEqual(countries.map((country) => questStopsAtFocus(country, stops).length), [3, 3, 3]);
+});
+
+test("requires evidence at watchtower checkpoints and persists its completion", async (t) => {
+  const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+  const repositoryRoot = path.resolve(project, "..");
+  const quest = await new QuestCatalog(repositoryRoot, path.join(project, "quests")).get("environmental-watchtower");
+  assert.ok(quest);
+  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "neolearning-watchtower-progress-"));
+  t.after(() => rm(temporaryRoot, { recursive: true, force: true }));
+  const progressPath = path.join(temporaryRoot, "progress.json");
+  const store = new ProgressStore(progressPath);
+  for (const milestone of quest.milestones) {
+    if (milestone.evidenceRequired) {
+      await assert.rejects(store.setMilestone(quest, milestone.id, "complete"), ProgressValidationError);
+      await store.setMilestone(quest, milestone.id, "complete", `evidence/${milestone.id}.md`);
+    } else {
+      await store.setMilestone(quest, milestone.id, "complete");
+    }
+  }
+  const reloaded = await new ProgressStore(progressPath).readQuest(quest);
+  assert.ok(reloaded.completedAt);
+  assert.equal(Object.values(reloaded.milestones).filter((item) => item.status === "complete").length, 9);
+  assert.equal(reloaded.milestones["deliver-the-reading"].evidence, "evidence/deliver-the-reading.md");
+});
+
+test("accepts optional destination and milestone challenge without changing older quests", async (t) => {
+  const { root, quests, write } = await fixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await write("Learning Web/quests/sensor-quest.md", questMarkdown()
+    .replace("problem: Read a sensor safely.", "problem: Read a sensor safely.\ndestination: A reproducible reading.")
+    .replace("    order: 1", "    order: 1\n    challenge: Capture one sensor sample."));
+  const quest = await new QuestCatalog(root, quests).get("sensor-quest");
+  assert.equal(quest?.destination, "A reproducible reading.");
+  assert.equal(quest?.milestones[0].challenge, "Capture one sensor sample.");
+  assert.equal(quest?.milestones[1].challenge, undefined);
+  await write("Learning Web/quests/sensor-quest.md", questMarkdown().replace("problem: Read a sensor safely.", "problem: Read a sensor safely.\ndestination: 42"));
+  await assert.rejects(new QuestCatalog(root, quests).list(), /destination must be a non-empty string/);
+  await write("Learning Web/quests/sensor-quest.md", questMarkdown().replace("    order: 1", "    order: 1\n    challenge: 42"));
+  await assert.rejects(new QuestCatalog(root, quests).list(), /challenge must be a non-empty string/);
 });
 
 test("rejects invalid IDs, order, and broken repository-relative knowledge links", async (t) => {

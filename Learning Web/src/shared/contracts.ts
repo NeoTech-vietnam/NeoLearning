@@ -48,6 +48,7 @@ export interface QuestMilestone {
   title: string;
   order: number;
   description?: string;
+  challenge?: string;
   required: boolean;
   evidenceRequired?: boolean;
   knowledgeLinks: string[];
@@ -58,6 +59,7 @@ export interface Quest {
   title: string;
   level?: string;
   problem?: string;
+  destination?: string;
   regionIds: string[];
   knowledgeLinks: string[];
   milestones: QuestMilestone[];

@@ -26,7 +26,7 @@ export function AtlasPage({ selectedPath, mode, questId }: AtlasPageProps) {
   useEffect(() => {
     const controller = new AbortController();
     Promise.all([
-      fetch("/api/content/tree", { signal: controller.signal }),
+      fetch("/api/content/tree?view=atlas", { signal: controller.signal }),
       fetch("/api/quests", { signal: controller.signal })
     ]).then(async ([contentResponse, questResponse]) => {
       if (!contentResponse.ok) throw new Error(`Content API returned ${contentResponse.status}.`);
@@ -144,13 +144,14 @@ function ExplorePanel({ selected, navigate }: { selected: ContentNode; navigate:
 
 function QuestRoutePanel({ quest, stops, selectedPath, onSelect }: { quest: Quest; stops: ReturnType<typeof questRouteStops>; selectedPath?: string; onSelect: (node: ContentNode) => void }) {
   return <section className="quest-route">
-    <header><p className="eyebrow">Active expedition</p><h2>{quest.title}</h2>{quest.problem && <p>{quest.problem}</p>}</header>
+    <header><p className="eyebrow">Active expedition</p><h2>{quest.title}</h2>{quest.problem && <p>{quest.problem}</p>}{quest.destination && <p className="quest-route__destination"><strong>Destination:</strong> {quest.destination}</p>}</header>
     {stops.length ? <ol className="quest-route__stops">
       {stops.map((stop, index) => <li data-current={stop.relativePath === selectedPath} data-resolved={Boolean(stop.node)} key={stop.key}>
         <span className="quest-route__number">{index + 1}</span>
         <button aria-current={stop.relativePath === selectedPath ? "step" : undefined} disabled={!stop.node} onClick={() => stop.node && onSelect(stop.node)} type="button">
           <small>{stop.milestoneTitle}</small>
           <strong>{stop.node?.title ?? stop.relativePath}</strong>
+          {stop.challenge && <span className="quest-route__challenge">{stop.challenge}</span>}
           {!stop.node && <em>Missing from current atlas</em>}
         </button>
       </li>)}

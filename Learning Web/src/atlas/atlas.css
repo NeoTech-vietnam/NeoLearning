@@ -25,6 +25,7 @@
 .quest-route { display: grid; gap: var(--space-4); }
 .quest-route header { display: grid; gap: var(--space-2); }
 .quest-route h2, .quest-route p { margin: 0; }
+.quest-route__destination { padding: var(--space-3); border-left: .25rem solid var(--color-accent); background: var(--color-surface-muted); }
 .quest-route h2 { font: 700 var(--text-country)/var(--leading-tight) var(--font-display); }
 .quest-route__stops { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: route; }
 .quest-route__stops li { position: relative; display: grid; grid-template-columns: 2.25rem 1fr; gap: var(--space-3); padding-bottom: var(--space-4); }
@@ -35,6 +36,7 @@
 .quest-route__stops button[aria-current="step"] { border-color: var(--color-accent-strong); box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--color-accent) 28%, transparent); }
 .quest-route__stops small { color: var(--color-ink-muted); font-weight: 800; }
 .quest-route__stops strong { font: 700 var(--text-region)/var(--leading-tight) var(--font-display); }
+.quest-route__challenge { color: var(--color-ink-muted); font-size: var(--text-meta); line-height: var(--leading-body); }
 .quest-route__stops em { color: var(--color-danger); font-size: var(--text-meta); }
 @media (max-width: 64rem) { .atlas-page { padding: 0; } .atlas-page__heading, .atlas-breadcrumb, .atlas-toolbar { margin-inline: var(--space-4); } .atlas-page__layout { grid-template-columns: 1fr; border-inline: 0; border-radius: 0; } .atlas-page__map .world-map { min-height: auto; } .atlas-page__panel { aspect-ratio: auto; border-top: var(--border-width) solid var(--color-border); border-left: 0; } }
 @media (max-width: 40rem) { .atlas-toolbar { align-items: stretch; flex-direction: column; } .atlas-toolbar label { min-width: 0; } }

@@ -14,6 +14,7 @@ export function QuestBoard({ quests, progressByQuest, onSelectQuest }: { quests:
       return <Card className="quest-board__card" key={quest.id}>
         <div className="quest-board__heading"><div><p className="quest-board__eyebrow">Learning by making</p><h2>{quest.title}</h2></div>{quest.level && <Badge tone="accent">{quest.level}</Badge>}</div>
         {quest.problem && <p>{quest.problem}</p>}
+        {quest.destination && <p className="quest-board__destination"><strong>Destination:</strong> {quest.destination}</p>}
         <Progress label={`${quest.title} milestones`} value={value} />
         <Button onClick={() => onSelectQuest(quest)}>View quest</Button>
       </Card>;

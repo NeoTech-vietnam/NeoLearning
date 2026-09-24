@@ -3,6 +3,7 @@ id: fixture-quest
 title: Fixture Quest
 level: beginner
 problem: Prove the fixture quest route.
+destination: A working fixture result.
 regions:
   - content:01-hardware
 knowledgeLinks:
@@ -11,6 +12,7 @@ milestones:
   - id: read-fixture
     title: Read fixture
     order: 1
+    challenge: Show that the fixture lesson can be traced on the atlas.
     required: true
     evidenceRequired: false
     knowledgeLinks:

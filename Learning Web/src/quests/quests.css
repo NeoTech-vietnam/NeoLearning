@@ -10,6 +10,8 @@
 .quest-board__heading h2, .quest-detail h1, .quest-detail h2, .quest-detail h3 { margin: 0; font-family: var(--font-display); }
 .quest-board__eyebrow { margin: 0; color: var(--color-action); font-size: var(--text-meta); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .quest-board__card > p, .quest-detail p { margin: 0; line-height: var(--leading-body); }
+.quest-board__destination, .quest-detail__destination { padding: var(--space-3); border-left: .25rem solid var(--color-accent); background: var(--color-surface-muted); }
+.quest-detail__challenge { padding: var(--space-3); border-radius: var(--radius-sm); background: var(--color-surface-muted); }
 .quest-detail { max-width: 52rem; }
 .quest-detail__checklist { display: grid; gap: var(--space-3); padding: 0; list-style: none; }
 .quest-detail__milestone { padding: var(--space-4); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius-md); background: var(--color-surface); }

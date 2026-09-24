@@ -8,6 +8,8 @@ these files in `.data/progress.json`.
 The supported YAML subset is intentionally strict: root scalars, string lists,
 and a list of scalar milestone maps. Required fields are `id`, `title`,
 `regions`, `knowledgeLinks`, `milestones`, and `completionCriteria`.
+Optional `destination` names the working outcome; each milestone may add a
+`challenge` action beside its learning description.
 
 ```yaml
 ---
@@ -15,6 +17,7 @@ id: lowercase-kebab-case
 title: Human-readable title
 level: beginner | intermediate | advanced
 problem: What the learner will solve
+destination: The working artifact or demonstrated outcome
 regions:
   - content:02-software
 knowledgeLinks:
@@ -23,7 +26,8 @@ milestones:
   - id: lowercase-kebab-case
     title: Human-readable milestone
     order: 1
-    description: Optional learner-facing guidance
+    description: Optional learning objective
+    challenge: Optional action to make or prove at this stop
     required: true
     evidenceRequired: true
     knowledgeLinks:

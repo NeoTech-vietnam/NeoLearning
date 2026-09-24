@@ -14,7 +14,7 @@ function MilestoneChecklist({ milestone, progress, onChange }: { milestone: Ques
   const [evidence, setEvidence] = useState(progress.evidence ?? "");
   const status = progress.status;
   return <li className="quest-detail__milestone">
-    <div><h3>{milestone.order}. {milestone.title}</h3>{milestone.description && <p>{milestone.description}</p>}</div>
+    <div><h3>{milestone.order}. {milestone.title}</h3>{milestone.description && <p>{milestone.description}</p>}{milestone.challenge && <p className="quest-detail__challenge"><strong>Challenge:</strong> {milestone.challenge}</p>}</div>
     <div className="quest-detail__milestone-meta"><Badge tone={status === "complete" ? "accent" : "muted"}>{status.replace("-", " ")}</Badge>{milestone.required && <span>Required</span>}</div>
     {milestone.evidenceRequired && <label>Evidence <input aria-label={`${milestone.title} evidence`} onChange={(event) => setEvidence(event.target.value)} placeholder="Artifact path or observation" value={evidence} /></label>}
     <div className="quest-detail__actions">
@@ -33,7 +33,7 @@ export function QuestDetail({ quest, progress, onBack, onMilestoneChange }: Ques
       {onBack && <Button onClick={onBack} variant="secondary">Back to quests</Button>}
       <a className="quest-detail__atlas-link" href={atlasHash(undefined, { mode: "quest", questId: quest.id })}>Trace on Atlas</a>
     </div>
-    <header><p className="quest-board__eyebrow">Quest brief</p><h1>{quest.title}</h1>{quest.problem && <p>{quest.problem}</p>}<Progress label="Milestones completed" value={Math.round((completed / quest.milestones.length) * 100)} /></header>
+    <header><p className="quest-board__eyebrow">Quest brief</p><h1>{quest.title}</h1>{quest.problem && <p>{quest.problem}</p>}{quest.destination && <p className="quest-detail__destination"><strong>Destination:</strong> {quest.destination}</p>}<Progress label="Milestones completed" value={Math.round((completed / quest.milestones.length) * 100)} /></header>
     <Card><h2>Quest knowledge</h2><ul className="quest-detail__links">{quest.knowledgeLinks.map((link) => <li key={link}><a href={atlasHash(link)}>{link}</a></li>)}</ul></Card>
     <section><h2>Milestones</h2><ol className="quest-detail__checklist">{quest.milestones.map((milestone) => <MilestoneChecklist key={milestone.id} milestone={milestone} onChange={onMilestoneChange} progress={progress.milestones[milestone.id] ?? { status: "not-started", updatedAt: "" }} />)}</ol></section>
     <Card><h2>Completion</h2><p>{allRequiredComplete ? "Required milestones and evidence are complete." : "Complete every required milestone and attach its required evidence."}</p><ul>{quest.completionCriteria.map((criterion) => <li key={criterion}>{criterion}</li>)}</ul></Card>
