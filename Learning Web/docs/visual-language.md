@@ -71,7 +71,7 @@ raster.
 1. Country boundaries use the shared paths from the country mask. Region
    boundaries are lighter, dotted, and never redraw a coastline.
 2. Trails are a gold broken line with round caps. Quest stops are gold circles
-   on the trail. Uncharted paths are neutral slate dotted lines, not a second
+   on the trail. Secondary paths are neutral slate dotted lines, not a second
    accent color.
 3. Layer order is base artwork → boundaries/trails → labels/landmarks → panels
    → tooltips → modal. Use the supplied `--layer-*` variables.

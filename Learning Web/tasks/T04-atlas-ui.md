@@ -33,8 +33,8 @@ tree and the shared visual foundations.
   expedition card, quest route, view modes, loading, empty and API error states.
 - Quest routes contain canonical content-node IDs and may cross countries,
   revisit a country, or terminate in Product Realm.
-- Render `Uncharted` nodes distinctly and explain that they exist on disk but
-  are missing from the canonical README taxonomy.
+- Render disk-only folders as ordinary selectable territories under their
+  actual parent. Example branches are excluded by the content index.
 - Keep game styling restrained: map, landmarks, route and progress are useful;
   decorative mechanics without learning value are excluded.
 - Support keyboard navigation, visible focus, semantic buttons, reduced motion,
@@ -48,12 +48,13 @@ tree and the shared visual foundations.
 - World view contains exactly the six canonical countries in numeric order.
 - Opening Software reveals its regions rather than showing them as world-level
   countries. Opening RTOS reveals its actual child topics.
-- Unindexed content is reachable through `Uncharted` without appearing canonical.
+- Disk-only curriculum folders are reachable without an intermediate
+  `Uncharted` territory.
 - The UI renders from content APIs without hard-coded curriculum prose in
   components.
 - Component tests cover landmark selection, route mode, keyboard use, loading,
   zoom transitions, breadcrumb navigation, cross-country quest routes,
-  uncharted content, empty and error states.
+  disk-only folders, empty and error states.
 
 ## Validation
 

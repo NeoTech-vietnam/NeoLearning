@@ -24,6 +24,7 @@ async function fixture() {
 
 ### [Core & Unicode](01_Hardware/01_Core/)
 - [Nested](01_Hardware/01_Core/02_Nested/)
+- [Examples](01_Hardware/01_Core/02_example/)
 - [Missing listed folder](01_Hardware/01_Missing/)
 
 ## 02 — Software
@@ -33,6 +34,8 @@ async function fixture() {
   await write("01_Hardware/01_Core/README.md");
   await write("01_Hardware/01_Core/02_Nested/lesson.md", "---\ntitle: Bài học\n---\n# Bài học\n\n## Đầu đề Unicode\n\nNeedle body text.");
   await write("01_Hardware/01_Core/02_Nested/second.md", "# Same Title\n\nAnother lesson.");
+  await write("01_Hardware/01_Core/02_example/README.md", "# Excluded example");
+  await write("01_Hardware/01_Core/03_Examples/README.md", "# Excluded examples");
   await write("01_Hardware/01_Core/03_Unexpected/04_Deep/third.md", "# Same Title\n\nDeep content.");
   await write("01_Hardware/01_Core/bad.md", "---\ntitle broken\n---\n# Broken metadata");
   await write("01_Hardware/01_Core/unclosed.md", "# Broken Markdown\n\n```c\nint main(void) {}");
@@ -48,7 +51,7 @@ function flatten(node) {
   return [node, ...node.children.flatMap(flatten)];
 }
 
-test("indexes README taxonomy and real hierarchy without losing uncharted content", async (t) => {
+test("indexes all on-disk topic folders except Example branches", async (t) => {
   const { root } = await fixture();
   t.after(() => rm(root, { recursive: true, force: true }));
   const index = new ContentIndex(root);
@@ -61,11 +64,12 @@ test("indexes README taxonomy and real hierarchy without losing uncharted conten
   assert.ok(allNodes.some((node) => node.relativePath === "01_Hardware/01_Core/README.md"));
   assert.ok(allNodes.some((node) => node.relativePath === "01_Hardware/01_Core/02_Nested/lesson.md" && node.title === "Bài học"));
   assert.equal(allNodes.filter((node) => node.title === "Same Title").length, 2);
-  assert.ok(allNodes.some((node) => node.title === "Uncharted"));
-  assert.ok(allNodes.some((node) => node.relativePath === "01_Hardware/01_Core/03_Unexpected/04_Deep" && node.kind === "unindexed"));
+  assert.ok(!allNodes.some((node) => node.title === "Uncharted" || node.unindexed));
+  assert.ok(allNodes.some((node) => node.relativePath === "01_Hardware/01_Core/03_Unexpected/04_Deep" && node.kind === "topic"));
+  assert.ok(!allNodes.some((node) => node.relativePath?.includes("example") || node.relativePath?.includes("Examples")));
   assert.ok(!allNodes.some((node) => node.relativePath?.includes("node_modules")));
   assert.ok(tree.diagnostics.some((item) => item.code === "README_LINK_MISSING" && item.relativePath === "01_Hardware/01_Missing"));
-  assert.ok(tree.diagnostics.some((item) => item.code === "UNINDEXED_PATH" && item.relativePath === "01_Hardware/01_Core/03_Unexpected"));
+  assert.ok(!tree.diagnostics.some((item) => item.code === "UNINDEXED_PATH"));
   assert.ok(tree.diagnostics.some((item) => item.code === "MALFORMED_FRONTMATTER" && item.relativePath.endsWith("bad.md")));
   assert.ok(tree.diagnostics.some((item) => item.code === "MALFORMED_MARKDOWN" && item.relativePath.endsWith("unclosed.md")));
   assert.ok(tree.diagnostics.some((item) => item.code === "MISSING_COUNTRY_TAXONOMY" && item.relativePath === "06_Product_Concepts"));
@@ -78,11 +82,14 @@ test("serves documents, caps searchable content, and refreshes after a save", as
   const document = await index.document("01_Hardware/01_Core/README.md");
   assert.equal(document?.document.content, "");
   assert.equal((await index.document("../README.md")), undefined);
+  assert.equal((await index.document("01_Hardware/01_Core/02_example/README.md")), undefined);
+  assert.equal((await index.search("Excluded example")).results.length, 0);
   assert.equal((await index.search("đầu đề unicode")).results[0].node.title, "Bài học");
 
-  await write("01_Hardware/01_Core/new.md", "# Fresh lesson\n\nnew searchable content");
+  await write("01_Hardware/01_Core/04_New/lesson.md", "# Fresh lesson\n\nnew searchable content");
   assert.equal((await index.search("fresh lesson")).results.length, 0);
-  await index.refresh();
+  const refreshed = await index.refresh();
+  assert.ok(flatten(refreshed.root).some((node) => node.relativePath === "01_Hardware/01_Core/04_New" && node.kind === "topic"));
   assert.equal((await index.search("fresh lesson")).results.length, 1);
 });
 

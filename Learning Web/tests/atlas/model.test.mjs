@@ -182,17 +182,17 @@ test("convex cell clipping keeps a concave coast's actual visible area", () => {
     }
   }
 });
-test("recursive atlas follows virtual Uncharted nodes and keeps dense, shallow regions selectable", () => {
+test("recursive atlas keeps dense disk-backed regions selectable", () => {
   const leaves = Array.from({ length: 25 }, (_, index) => node(
     "leaf-" + index, "Leaf " + index, "topic", "02_Software/Real/leaf-" + index,
     [node("note-" + index, "Note", "lesson", "02_Software/Real/leaf-" + index + "/note.md")]
   ));
-  const virtual = node("virtual", "Uncharted", "unindexed", "02_Software/__uncharted", leaves);
-  const country = node("software", "Software", "country", "02_Software", [virtual]);
+  const region = node("real", "Real", "region", "02_Software/Real", leaves);
+  const country = node("software", "Software", "country", "02_Software", [region]);
   const shallowCoast = [
     { x: 12, y: 36 }, { x: 88, y: 36 }, { x: 88, y: 66 }, { x: 12, y: 66 }
   ];
-  const dense = territoryLayoutInCountry(leaves, virtual.relativePath, shallowCoast);
+  const dense = territoryLayoutInCountry(leaves, region.relativePath, shallowCoast);
   assert.ok(dense.territories.every((territory) => territory.areaSamples > 0 && territory.polygon.length >= 3));
   assert.ok(dense.territories.some((territory) => territory.compactLabel), "crowded regions use short map markers");
   const focused = territoryLayoutAtFocus(country, leaves[17], shallowCoast);

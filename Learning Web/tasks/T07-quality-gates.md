@@ -20,7 +20,7 @@ touching the actual curriculum.
 
 - Configure Playwright against a temporary fixture repository created per suite.
 - Cover: start app, open a country, zoom through region/topic/lesson, return by
-  breadcrumb, browse Uncharted content, search, open quest, complete
+  breadcrumb, browse a disk-only topic, search, open quest, complete
   milestone, restart server and retain progress, edit Markdown, preview diff,
   save, reload and verify content.
 - Add negative journeys for traversal attempts, stale-revision conflict, invalid

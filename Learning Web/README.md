@@ -30,10 +30,12 @@ requires authentication or a cloud service.
 - Personal state: gitignored JSON under `Learning Web/.data/`.
 - MVP visual direction: `nimbalyst-local/mockups/cartographic-adventure.mockup.html`.
 - World artwork contract: `docs/world-map-art-spec.md`.
-- Taxonomy source: the hierarchy and order declared in the repository root
-  `README.md`; folder scanning supplements it but does not silently redefine it.
+- Taxonomy source: on-disk curriculum folders define the hierarchy. The root
+  `README.md` supplies preferred labels and ordering where links exist.
 - Map hierarchy: Embedded World → country (`01`–`06`) → region → topic → lesson.
-- Unindexed folders remain discoverable in an explicit `Uncharted` collection.
+- Disk-only folders appear under their real parent, not in `Uncharted`.
+  `Example`/`Examples` directory branches (including numbered names such as
+  `02_example`) are omitted from the content index for now.
 - Not in MVP: authentication, cloud sync, multiplayer, mobile editor, achievements,
   firmware compilation, or automatic Git commits.
 

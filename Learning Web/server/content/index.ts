@@ -61,6 +61,10 @@ function normalizeRelativePath(value: string): string {
   return value.replaceAll("\\", "/").replace(/^\.\//, "").replace(/\/+$/, "");
 }
 
+function isExamplePath(relativePath: string): boolean {
+  return normalizeRelativePath(relativePath).split("/").some((segment) => /(?:^|[_-])examples?$/i.test(segment));
+}
+
 function stableId(relativePath: string): string {
   const normalized = normalizeRelativePath(relativePath).toLocaleLowerCase();
   return `content:${encodeURIComponent(normalized)}`;
@@ -160,8 +164,7 @@ function parseMarkdown(content: string, relativePath: string): {
   return { body, title: frontmatterTitle ?? headings.find((heading) => heading.depth === 1)?.text, frontmatter, headings, summary, plainText, diagnostics };
 }
 
-function classifyDirectory(relativePath: string, unindexed: boolean): ContentNodeKind {
-  if (unindexed) return "unindexed";
+function classifyDirectory(relativePath: string): ContentNodeKind {
   const depth = normalizeRelativePath(relativePath).split("/").length;
   if (depth === 1) return "country";
   return depth === 2 ? "region" : "topic";
@@ -189,6 +192,7 @@ async function parseTaxonomy(repositoryRoot: string, diagnostics: ContentDiagnos
   for (const match of readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
     const relativePath = normalizeRelativePath(match[2]);
     if (!COUNTRY_ROOTS.some((country) => relativePath === country || relativePath.startsWith(`${country}/`))) continue;
+    if (isExamplePath(relativePath)) continue;
     if (path.extname(relativePath)) continue;
     if (!result.has(relativePath)) result.set(relativePath, { title: match[1].trim(), order: order++ });
   }
@@ -218,7 +222,7 @@ async function scanDirectory(absolutePath: string, relativePath: string): Promis
     if (entry.isSymbolicLink()) continue;
     const childRelativePath = normalizeRelativePath(path.posix.join(relativePath, entry.name));
     if (entry.isDirectory()) {
-      if (IGNORED_DIRECTORIES.has(entry.name)) continue;
+      if (IGNORED_DIRECTORIES.has(entry.name) || isExamplePath(childRelativePath)) continue;
       directory.directories.push(await scanDirectory(path.join(absolutePath, entry.name), childRelativePath));
     } else if (entry.isFile() && entry.name.toLocaleLowerCase().endsWith(".md")) {
       directory.files.push(childRelativePath);
@@ -274,10 +278,9 @@ export async function buildContentIndex(repositoryRoot: string): Promise<BuiltIn
   const searchableNodes: Array<{ node: ContentNode; searchText: string }> = [];
   const indexedAt = new Date().toISOString();
 
-  async function addDocument(relativePath: string, unindexed: boolean): Promise<ContentNode | undefined> {
+  async function addDocument(relativePath: string): Promise<ContentNode | undefined> {
     try {
       const indexed = await readDocument(repositoryRoot, relativePath);
-      if (unindexed) indexed.node.unindexed = true;
       documents.set(relativePath, indexed);
       diagnostics.push(...indexed.diagnostics);
       searchableNodes.push({ node: indexed.node, searchText: indexed.searchText });
@@ -288,48 +291,24 @@ export async function buildContentIndex(repositoryRoot: string): Promise<BuiltIn
     }
   }
 
-  async function buildDirectory(directory: ScannedDirectory, unindexed: boolean): Promise<ContentNode> {
+  async function buildDirectory(directory: ScannedDirectory): Promise<ContentNode> {
     const taxonomyEntry = taxonomy.get(directory.relativePath);
     const node: ContentNode = {
       id: stableId(directory.relativePath),
       title: taxonomyEntry?.title ?? humanize(path.posix.basename(directory.relativePath)),
-      kind: classifyDirectory(directory.relativePath, unindexed),
+      kind: classifyDirectory(directory.relativePath),
       relativePath: directory.relativePath,
       section: directory.relativePath.split("/")[0],
       headings: [],
-      children: [],
-      unindexed: unindexed || undefined
+      children: []
     };
     searchableNodes.push({ node, searchText: `${node.title} ${directory.relativePath}` });
 
-    const directUnindexed = sortDirectories(directory.directories, taxonomy).filter((child) => !taxonomy.has(child.relativePath));
-    for (const child of sortDirectories(directory.directories, taxonomy).filter((child) => taxonomy.has(child.relativePath))) {
-      node.children.push(await buildDirectory(child, false));
-    }
-    if (directUnindexed.length > 0) {
-      const unchartedPath = `${directory.relativePath}/__uncharted`;
-      const uncharted: ContentNode = {
-        id: stableId(unchartedPath),
-        title: "Uncharted",
-        kind: "unindexed",
-        relativePath: unchartedPath,
-        section: directory.relativePath.split("/")[0],
-        headings: [],
-        children: [],
-        unindexed: true
-      };
-      for (const child of directUnindexed) {
-        diagnostics.push({
-          code: "UNINDEXED_PATH",
-          relativePath: child.relativePath,
-          message: "Discovered on disk but absent from the root README taxonomy."
-        });
-        uncharted.children.push(await buildDirectory(child, true));
-      }
-      node.children.push(uncharted);
+    for (const child of sortDirectories(directory.directories, taxonomy)) {
+      node.children.push(await buildDirectory(child));
     }
     for (const file of directory.files.sort((left, right) => left.localeCompare(right))) {
-      const documentNode = await addDocument(file, unindexed);
+      const documentNode = await addDocument(file);
       if (documentNode) node.children.push(documentNode);
     }
     return node;
@@ -348,7 +327,7 @@ export async function buildContentIndex(repositoryRoot: string): Promise<BuiltIn
     try {
       const stat = await fs.lstat(countryPath);
       if (!stat.isDirectory() || stat.isSymbolicLink()) throw new Error("Not a readable directory");
-      world.children.push(await buildDirectory(await scanDirectory(countryPath, country), false));
+      world.children.push(await buildDirectory(await scanDirectory(countryPath, country)));
     } catch {
       diagnostics.push({
         code: "README_LINK_MISSING",
