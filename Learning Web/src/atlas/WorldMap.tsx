@@ -2,7 +2,7 @@ import type { ContentNode } from "../shared";
 import type { QuestRouteStop } from "./model";
 import anchors from "../../assets/maps/embedded-world-label-anchors.json";
 
-const mapUrl = new URL("../../assets/maps/embedded-world-source.svg", import.meta.url).href;
+const mapUrl = new URL("../../assets/maps/embedded-world-base.webp", import.meta.url).href;
 const maskUrl = new URL("../../assets/maps/embedded-world-country-mask.svg", import.meta.url).href;
 
 export interface WorldMapProps {

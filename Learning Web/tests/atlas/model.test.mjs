@@ -149,7 +149,11 @@ test("recursive atlas preserves the selected parent silhouette through two zoom 
     clipOutlineToCell(childLayout.outline, childLayout.territories[0].polygon).length);
   assert.notDeepEqual(childLayout.outline, outline);
   assert.notDeepEqual(grandchildLayout.outline, childLayout.outline);
-  assert.deepEqual(grandchildLayout, territoryLayoutAtFocus(country, basics, outline));
+  assert.strictEqual(grandchildLayout, territoryLayoutAtFocus(country, basics, outline));
+  assert.strictEqual(rootLayout, territoryLayoutAtFocus(country, country, outline));
+  assert.strictEqual(childLayout, territoryLayoutAtFocus(country, programming, outline));
+  const refreshedCountry = { ...country, children: [...country.children] };
+  assert.notStrictEqual(rootLayout, territoryLayoutAtFocus(refreshedCountry, refreshedCountry, outline));
   assert.ok([rootLayout, childLayout, grandchildLayout].every((layout) =>
     layout.territories.every((territory) => territory.areaSamples > 0)));
 });
@@ -190,6 +194,7 @@ test("recursive atlas follows virtual Uncharted nodes and keeps dense, shallow r
   ];
   const dense = territoryLayoutInCountry(leaves, virtual.relativePath, shallowCoast);
   assert.ok(dense.territories.every((territory) => territory.areaSamples > 0 && territory.polygon.length >= 3));
+  assert.ok(dense.territories.some((territory) => territory.compactLabel), "crowded regions use short map markers");
   const focused = territoryLayoutAtFocus(country, leaves[17], shallowCoast);
   assert.equal(focused.territories.length, 1);
   assert.ok(focused.outline.length >= 3);

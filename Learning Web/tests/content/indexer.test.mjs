@@ -87,17 +87,34 @@ test("serves documents, caps searchable content, and refreshes after a save", as
 });
 
 test("content routes expose the tree, document and search APIs", async (t) => {
-  const { root } = await fixture();
+  const { root, write } = await fixture();
   t.after(() => rm(root, { recursive: true, force: true }));
   const app = express();
-  app.use("/api/content", createContentRouter(new ContentIndex(root)));
+  const index = new ContentIndex(root);
+  app.use("/api/content", createContentRouter(index));
   const server = createServer(app);
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   t.after(() => new Promise((resolve) => server.close(resolve)));
   const { port } = server.address();
   const base = `http://127.0.0.1:${port}/api/content`;
 
-  assert.equal((await fetch(`${base}/tree`)).status, 200);
+  const fullResponse = await fetch(`${base}/tree`);
+  assert.equal(fullResponse.status, 200);
+  const fullTree = await fullResponse.json();
+  const atlasResponse = await fetch(`${base}/tree?view=atlas`);
+  assert.equal(atlasResponse.headers.get("content-encoding"), "gzip");
+  const atlasTree = await atlasResponse.json();
+  const collectPaths = (node) => [node.relativePath, ...node.children.flatMap(collectPaths)];
+  assert.deepEqual(collectPaths(atlasTree.root), collectPaths(fullTree.root));
+  assert.deepEqual(atlasTree.diagnostics, []);
+  assert.ok(JSON.stringify(atlasTree).length < JSON.stringify(fullTree).length);
+  const identityResponse = await fetch(`${base}/tree?view=atlas`, { headers: { "accept-encoding": "identity" } });
+  assert.equal(identityResponse.headers.get("content-encoding"), null);
+  assert.deepEqual(await identityResponse.json(), atlasTree);
+  await write("01_Hardware/01_Core/new.md", "# New route landmark");
+  await index.refresh();
+  const refreshedAtlas = await (await fetch(`${base}/tree?view=atlas`)).json();
+  assert.ok(collectPaths(refreshedAtlas.root).includes("01_Hardware/01_Core/new.md"));
   assert.equal((await fetch(`${base}/document?path=../README.md`)).status, 400);
   assert.equal((await fetch(`${base}/document?path=01_Hardware%2F01_Core%2FREADME.md`)).status, 200);
   assert.equal((await fetch(`${base}/search?q=Needle`)).status, 200);

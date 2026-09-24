@@ -9,6 +9,7 @@ export interface TerritoryPosition extends MapPoint {
   path?: string;
   polygon: MapPoint[];
   areaSamples?: number;
+  compactLabel?: boolean;
 }
 
 export interface TerritoryLayout {
@@ -114,9 +115,14 @@ function pointInPolygon(polygon: MapPoint[], point: MapPoint): boolean {
   return inside;
 }
 
+const lessonCounts = new WeakMap<ContentNode, number>();
 function lessonCount(node: ContentNode): number {
-  return (node.kind === "lesson" ? 1 : 0) +
-    node.children.reduce((count, child) => count + lessonCount(child), 0);
+  const cached = lessonCounts.get(node);
+  if (cached !== undefined) return cached;
+  const count = (node.kind === "lesson" ? 1 : 0) +
+    node.children.reduce((sum, child) => sum + lessonCount(child), 0);
+  lessonCounts.set(node, count);
+  return count;
 }
 
 // The browser and tests read the same authored country mask; no traced duplicate of its coast.
@@ -186,27 +192,40 @@ export function territoryLayoutInCountry(children: ContentNode[], seed: string, 
     samples.length * (0.35 / children.length + 0.65 * size / sizeTotal));
   const weights = children.map(() => 0);
   const bounds = [{ x: 0, y: 0 }, { x: 100, y: 0 }, { x: 100, y: 100 }, { x: 0, y: 100 }];
-  const assignSamples = () => {
-    const buckets = children.map(() => [] as MapPoint[]);
-    for (const point of samples) {
+  // Site distances never change during balancing; only the power weights do.
+  const distances = samples.map((point) => sites.map((site) =>
+    (point.x - site.x) ** 2 + (point.y - site.y) ** 2));
+  const assignCounts = () => {
+    const buckets = children.map(() => 0);
+    for (const row of distances) {
       let winner = 0;
       let best = Infinity;
       for (let index = 0; index < sites.length; index += 1) {
-        const score = (point.x - sites[index].x) ** 2 + (point.y - sites[index].y) ** 2 - weights[index];
+        const score = row[index] - weights[index];
         if (score < best) { best = score; winner = index; }
       }
-      buckets[winner].push(point);
+      buckets[winner] += 1;
     }
     return buckets;
   };
-  let assigned = assignSamples();
+  let assignedCounts = assignCounts();
   for (let iteration = 0; iteration < 80; iteration += 1) {
-    if (targets.every((target, index) => Math.abs(target - assigned[index].length) < 3)) break;
+    if (targets.every((target, index) => Math.abs(target - assignedCounts[index]) < 3)) break;
     for (let index = 0; index < weights.length; index += 1) {
-      weights[index] += 0.45 * (targets[index] - assigned[index].length);
+      weights[index] += 0.45 * (targets[index] - assignedCounts[index]);
     }
-    assigned = assignSamples();
+    assignedCounts = assignCounts();
   }
+  const assigned = children.map(() => [] as MapPoint[]);
+  distances.forEach((row, sampleIndex) => {
+    let winner = 0;
+    let best = Infinity;
+    for (let index = 0; index < sites.length; index += 1) {
+      const score = row[index] - weights[index];
+      if (score < best) { best = score; winner = index; }
+    }
+    assigned[winner].push(samples[sampleIndex]);
+  });
   const territories = children.map((child, index) => {
     const polygon = sites.reduce<MapPoint[]>((cell, other, otherIndex) =>
       otherIndex === index ? cell : clipToNearest(cell, sites[index], other, weights[index], weights[otherIndex]), bounds);
@@ -218,7 +237,10 @@ export function territoryLayoutInCountry(children: ContentNode[], seed: string, 
     const anchor = points.reduce((nearest, point) =>
       (point.x - center.x) ** 2 + (point.y - center.y) ** 2 <
       (nearest.x - center.x) ** 2 + (nearest.y - center.y) ** 2 ? point : nearest, points[0] ?? sites[index]);
-    return { path: child.relativePath, ...anchor, polygon, areaSamples: points.length };
+    const spanX = points.length ? Math.max(...points.map((point) => point.x)) - Math.min(...points.map((point) => point.x)) : 0;
+    const spanY = points.length ? Math.max(...points.map((point) => point.y)) - Math.min(...points.map((point) => point.y)) : 0;
+    return { path: child.relativePath, ...anchor, polygon, areaSamples: points.length,
+      compactLabel: children.length > 1 && (spanX < 17 || spanY < 9 || points.length < 48) };
   });
   return { outline, territories, rows };
 }
@@ -270,8 +292,16 @@ function zoomOutline(outline: MapPoint[]): MapPoint[] {
   }));
 }
 
-// Recompute each ancestor from the canonical tree so direct links, reload and back/forward agree.
+// Each outline identity owns its own hierarchy cache; a refreshed content tree has new node identities.
+const focusedLayouts = new WeakMap<MapPoint[], WeakMap<ContentNode, TerritoryLayout>>();
 export function territoryLayoutAtFocus(country: ContentNode, focus: ContentNode, countryOutline: MapPoint[]): TerritoryLayout {
+  let layouts = focusedLayouts.get(countryOutline);
+  if (!layouts) {
+    layouts = new WeakMap<ContentNode, TerritoryLayout>();
+    focusedLayouts.set(countryOutline, layouts);
+  }
+  const cachedFocus = layouts.get(focus);
+  if (cachedFocus) return cachedFocus;
   const trailTo = (node: ContentNode): ContentNode[] | undefined => {
     if (node.id === focus.id) return [node];
     for (const child of node.children) {
@@ -286,10 +316,13 @@ export function territoryLayoutAtFocus(country: ContentNode, focus: ContentNode,
   for (let index = 0; index < trail.length - 1; index += 1) {
     const current = trail[index];
     const childIndex = current.children.findIndex((child) => child.id === trail[index + 1].id);
-    const layout = territoryLayoutInCountry(current.children, current.relativePath ?? current.id, outline);
+    const layout = layouts.get(current) ?? territoryLayoutInCountry(current.children, current.relativePath ?? current.id, outline);
+    layouts.set(current, layout);
     const inherited = clipOutlineToCell(outline, layout.territories[childIndex].polygon);
     if (inherited.length < 3) throw new Error("Atlas territory has no visible land: " + trail[index + 1].id);
     outline = zoomOutline(inherited);
   }
-  return territoryLayoutInCountry(focus.children, focus.relativePath ?? focus.id, outline);
+  const layout = territoryLayoutInCountry(focus.children, focus.relativePath ?? focus.id, outline);
+  layouts.set(focus, layout);
+  return layout;
 }

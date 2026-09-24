@@ -82,3 +82,32 @@ test("drills recursively through two topic levels and restores their silhouettes
   await map.locator('[data-path="02_Software/01_Programming/01_Basics/lesson.md"]').click();
   await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
 });
+
+test("uses the compact artwork and disables map motion when requested", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/#/atlas?path=02_Software");
+  const map = page.locator(".atlas-nested-map");
+  await expect(map.locator(".atlas-nested-map__art")).toHaveAttribute("src", /\.webp$/);
+  const motion = await map.locator(".atlas-nested-map__territories").evaluate((element) =>
+    getComputedStyle(element).animationName);
+  expect(motion).toBe("none");
+});
+
+test("marks a pressed territory before changing the focused map", async ({ page }) => {
+  await page.goto("/#/atlas?path=02_Software");
+  const target = page.locator('[data-path="02_Software/01_Programming"]');
+  await expect(target).toBeVisible();
+  const highlighted = await target.evaluate((button) => new Promise<boolean>((resolve) => {
+    const observer = new MutationObserver(() => {
+      if (button.getAttribute("data-entering") === "true") {
+        observer.disconnect();
+        resolve(true);
+      }
+    });
+    observer.observe(button, { attributes: true, attributeFilter: ["data-entering"] });
+    button.click();
+    setTimeout(() => { observer.disconnect(); resolve(false); }, 200);
+  }));
+  expect(highlighted).toBe(true);
+  await expect(page).toHaveURL(/01_Programming/);
+});

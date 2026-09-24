@@ -1,5 +1,7 @@
+import { gzipSync } from "node:zlib";
 import { Router } from "express";
-import type { ApiErrorResponse } from "../../src/shared/contracts.js";
+import type { ApiErrorResponse, ContentNode } from "../../src/shared/contracts.js";
+import type { ContentTreeResponse } from "../../src/shared/content.js";
 import { ContentIndex, getContentIndex, isSafeRelativePath } from "../content/index.js";
 
 function error(code: ApiErrorResponse["error"]["code"], message: string): ApiErrorResponse {
@@ -10,12 +12,40 @@ function singleQueryValue(value: unknown): string | undefined {
   return typeof value === "string" ? value : undefined;
 }
 
+function atlasNode(node: ContentNode): ContentNode {
+  return {
+    id: node.id,
+    title: node.title,
+    kind: node.kind,
+    ...(node.relativePath ? { relativePath: node.relativePath } : {}),
+    ...(node.summary ? { summary: node.summary } : {}),
+    ...(node.unindexed ? { unindexed: true } : {}),
+    headings: [],
+    children: node.children.map(atlasNode)
+  };
+}
+
 export function createContentRouter(index: ContentIndex = getContentIndex()): Router {
   const router = Router();
+  let atlasCache: { source: ContentTreeResponse; plain: string; gzip: Buffer } | undefined;
 
-  router.get("/tree", async (_request, response, next) => {
+  router.get("/tree", async (request, response, next) => {
     try {
-      response.json(await index.tree());
+      const tree = await index.tree();
+      if (request.query.view !== "atlas") {
+        response.json(tree);
+        return;
+      }
+      if (atlasCache?.source !== tree) {
+        const plain = JSON.stringify({ root: atlasNode(tree.root), diagnostics: [], indexedAt: tree.indexedAt });
+        atlasCache = { source: tree, plain, gzip: gzipSync(plain) };
+      }
+      response.vary("Accept-Encoding");
+      if (request.acceptsEncodings("gzip")) {
+        response.set("Content-Encoding", "gzip").type("json").send(atlasCache.gzip);
+      } else {
+        response.type("json").send(atlasCache.plain);
+      }
     } catch (cause) {
       next(cause);
     }

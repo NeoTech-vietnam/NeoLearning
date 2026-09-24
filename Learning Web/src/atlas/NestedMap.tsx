@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ContentNode } from "../shared";
 import type { QuestRouteStop } from "./model";
 import { countryOutlineFromMask, questStopsAtFocus, territoryLayoutAtFocus } from "./model";
@@ -6,7 +6,7 @@ import anchors from "../../assets/maps/embedded-world-label-anchors.json";
 import countryMask from "../../assets/maps/embedded-world-country-mask.svg?raw";
 import "./nested-map.css";
 
-const mapUrl = new URL("../../assets/maps/embedded-world-source.svg", import.meta.url).href;
+const mapUrl = new URL("../../assets/maps/embedded-world-base.webp", import.meta.url).href;
 const countryOutlines = Array.from({ length: 6 }, (_, index) =>
   countryOutlineFromMask(countryMask, `country-0${index + 1}`));
 
@@ -20,6 +20,22 @@ export interface NestedMapProps {
 }
 
 export function NestedMap({ country, countryIndex, focus, selectedPath, routeStops = [], onSelect }: NestedMapProps) {
+  const [enteringPath, setEnteringPath] = useState<string>();
+  const navigationTimer = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => {
+    setEnteringPath(undefined);
+    return () => clearTimeout(navigationTimer.current);
+  }, [focus]);
+  const selectTerritory = (child: ContentNode) => {
+    clearTimeout(navigationTimer.current);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      onSelect(child);
+      return;
+    }
+    setEnteringPath(child.relativePath);
+    // Let the pressed territory paint before the next layout replaces this view.
+    navigationTimer.current = setTimeout(() => onSelect(child), 55);
+  };
   const mapId = `country-0${countryIndex + 1}` as keyof typeof anchors;
   const focusPoint = anchors[mapId].focus;
   const layout = useMemo(() => territoryLayoutAtFocus(country, focus, countryOutlines[countryIndex]),
@@ -75,7 +91,7 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
       <span>{country.title}</span><small>Territories of {focus.title}</small>
     </div>
     {routeNote && <div aria-label="Quest route continues beyond this territory" className="atlas-nested-map__route-note">{routeNote}</div>}
-    <div aria-label={`${focus.title} topics`} className="atlas-nested-map__territories" role="group">
+    <div aria-label={`${focus.title} topics`} className="atlas-nested-map__territories" key={focus.id} role="group">
       <svg className="atlas-nested-map__regions" viewBox="0 0 100 100" preserveAspectRatio="none">
         <defs><clipPath id="atlas-inherited-coast"><path d={outlinePath} /></clipPath></defs>
         <g clipPath="url(#atlas-inherited-coast)">
@@ -88,8 +104,9 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
             d={`M ${position.polygon.map((point) => `${point.x},${point.y}`).join(" L ")} Z`}
             data-route={markers.length > 0}
             data-selected={child.relativePath === selectedPath}
+            data-entering={child.relativePath === enteringPath}
             key={child.id}
-            onClick={() => onSelect(child)}
+            onClick={() => selectTerritory(child)}
           />;
         })}
         </g>
@@ -107,8 +124,12 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
           className="atlas-territory__label"
           data-path={child.relativePath}
           data-route={markers.length > 0}
+          data-compact={Boolean(position.compactLabel)}
+          data-entering={child.relativePath === enteringPath}
+          data-tooltip={child.title}
+          title={child.title}
           key={child.id}
-          onClick={() => onSelect(child)}
+          onClick={() => selectTerritory(child)}
           style={{ left: `${position.x}%`, top: `${position.y}%` }}
           type="button"
         >
