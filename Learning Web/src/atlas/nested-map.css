@@ -6,20 +6,28 @@
 .atlas-nested-map__caption { position: absolute; z-index: 3; top: var(--space-3); left: var(--space-3); display: grid; gap: .12rem; max-width: 42%; padding: var(--space-2) var(--space-3); color: var(--color-ink-strong); background: color-mix(in srgb, var(--color-surface) 90%, transparent); border: var(--border-width) solid color-mix(in srgb, var(--color-border) 66%, transparent); border-radius: var(--radius-sm); box-shadow: var(--elevation-1); font: 800 var(--text-region)/var(--leading-tight) var(--font-display); }
 .atlas-nested-map__route-note { position: absolute; z-index: 3; top: var(--space-3); right: var(--space-3); max-width: 43%; padding: var(--space-2) var(--space-3); color: var(--color-ink-strong); background: color-mix(in srgb, var(--color-surface) 90%, transparent); border: var(--border-width) solid color-mix(in srgb, var(--color-accent-strong) 48%, var(--color-border)); border-radius: var(--radius-sm); box-shadow: var(--elevation-1); font: 800 var(--text-meta)/var(--leading-tight) var(--font-body); text-align: center; }
 .atlas-nested-map__caption small { color: var(--color-ink-muted); font: 800 var(--text-meta)/1.2 var(--font-body); }
-.atlas-nested-map__roads { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.atlas-nested-map__roads polyline { fill: none; stroke: var(--color-accent-strong); stroke-width: 1.2; stroke-dasharray: 1.4 1.3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 .35rem var(--color-surface)); }
 .atlas-nested-map__territories { position: absolute; z-index: 2; inset: 0; }
-.atlas-territory { position: absolute; display: grid; align-content: center; justify-items: center; gap: .12rem; padding: .35rem .5rem; overflow: visible; color: var(--color-ink-strong); background: color-mix(in srgb, var(--color-surface) 78%, var(--color-accent) 22%); border: var(--border-strong-width) solid color-mix(in srgb, var(--color-border) 70%, var(--color-accent)); clip-path: polygon(24% 0, 76% 0, 100% 50%, 76% 100%, 24% 100%, 0 50%); cursor: pointer; text-align: center; transform: translate(-50%, -50%); transition: background var(--motion-fast) var(--ease-standard), filter var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard); }
-.atlas-territory:hover, .atlas-territory[aria-pressed="true"] { background: color-mix(in srgb, var(--color-accent) 42%, var(--color-surface)); filter: drop-shadow(0 .3rem .45rem color-mix(in srgb, var(--color-ink) 30%, transparent)); transform: translate(-50%, -50%) scale(1.045); }
-.atlas-territory:focus-visible { z-index: 4; outline: none; filter: drop-shadow(0 0 .22rem var(--color-focus)) drop-shadow(0 0 .5rem var(--color-focus)); }
-.atlas-territory strong { display: -webkit-box; max-width: 100%; overflow: hidden; color: inherit; font: 800 clamp(.58rem, .78vw, .92rem)/1.12 var(--font-display); text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.atlas-nested-map__regions, .atlas-nested-map__roads { position: absolute; inset: 0; width: 100%; height: 100%; }
+.atlas-nested-map__regions { z-index: 1; overflow: visible; }
+.atlas-nested-map[data-silhouette="inherited"] .atlas-nested-map__landscape { opacity: .32; }
+.atlas-nested-map__coast { fill: none; stroke: var(--color-ink-strong); stroke-width: 3px; vector-effect: non-scaling-stroke; pointer-events: none; filter: drop-shadow(0 2px 2px var(--color-surface)); }
+.atlas-nested-map[data-silhouette="inherited"] .atlas-territory { fill-opacity: .95; }
+.atlas-nested-map__roads { z-index: 2; overflow: visible; pointer-events: none; }
+.atlas-nested-map__roads polyline { fill: none; stroke: var(--color-accent-strong); stroke-width: 1.2; stroke-dasharray: 1.4 1.3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 .35rem var(--color-surface)); }
+.atlas-territory { fill: color-mix(in srgb, var(--color-surface) 82%, var(--color-accent) 18%); stroke: color-mix(in srgb, var(--color-border) 78%, var(--color-accent-strong)); stroke-width: 2px; vector-effect: non-scaling-stroke; cursor: pointer; transition: fill var(--motion-fast) var(--ease-standard); }
+.atlas-territory:nth-child(4n + 2) { fill: color-mix(in srgb, var(--color-surface-muted) 74%, var(--color-accent) 26%); }
+.atlas-territory:nth-child(4n + 3) { fill: color-mix(in srgb, var(--color-surface) 72%, var(--color-border) 28%); }
+.atlas-territory:nth-child(4n + 4) { fill: color-mix(in srgb, var(--color-surface-muted) 82%, var(--color-accent-strong) 18%); }
+.atlas-territory:hover, .atlas-territory[data-selected="true"] { fill: color-mix(in srgb, var(--color-accent) 48%, var(--color-surface)); stroke: var(--color-accent-strong); }
+.atlas-territory__label:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; border-radius: var(--radius-sm); }
+.atlas-territory--uncharted { fill: color-mix(in srgb, var(--color-surface-muted) 80%, var(--color-unavailable) 20%); stroke-dasharray: 5 4; }
+.atlas-territory[data-route="true"] { stroke: var(--color-accent-strong); stroke-width: 3px; }
+.atlas-territory__label { position: absolute; z-index: 3; display: grid; justify-items: center; align-content: center; gap: .1rem; width: 18%; min-height: 44px; padding: .1rem .2rem; color: var(--color-ink-strong); background: transparent; border: 0; cursor: pointer; text-align: center; text-shadow: 0 1px 3px var(--color-surface); transform: translate(-50%, -50%); }
+.atlas-territory__label strong { display: -webkit-box; max-width: 100%; overflow: hidden; font: 800 clamp(.58rem, .8vw, .88rem)/1.12 var(--font-display); text-overflow: ellipsis; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 .atlas-territory__number { color: var(--color-ink-muted); font: 900 .58rem/1 var(--font-body); letter-spacing: .08em; }
-.atlas-territory > small { color: var(--color-ink-muted); font: 800 .55rem/1 var(--font-body); text-transform: uppercase; }
-.atlas-territory__route-stops { position: absolute; top: 4%; left: 50%; display: flex; gap: .05rem; transform: translateX(-50%); }
+.atlas-territory__label small { color: var(--color-ink-muted); font: 800 .55rem/1 var(--font-body); text-transform: uppercase; }
+.atlas-territory__route-stops { display: flex; gap: .05rem; justify-content: center; }
 .atlas-territory__route-stops i { display: grid; width: 1.15rem; height: 1.15rem; place-items: center; color: var(--color-action-text); background: var(--color-accent-strong); border: 1px solid var(--color-surface); border-radius: 50%; font: 900 .62rem/1 var(--font-body); font-style: normal; }
-.atlas-territory--uncharted { background: color-mix(in srgb, var(--color-surface-muted) 75%, var(--color-unavailable) 25%); border-style: dashed; }
-.atlas-territory[data-route="true"] { box-shadow: inset 0 0 0 .12rem var(--color-accent-strong); }
-.atlas-territory[data-route="true"] .atlas-territory__number { display: none; }
 .atlas-nested-map__empty { position: absolute; right: var(--space-4); bottom: var(--space-4); margin: 0; padding: var(--space-2) var(--space-3); color: var(--color-ink); background: color-mix(in srgb, var(--color-surface) 88%, transparent); border-radius: var(--radius-sm); }
 .world-map__route-overlay { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .world-map__quest-road { fill: none; stroke: var(--color-accent-strong); stroke-width: 12; stroke-dasharray: 26 22; stroke-linecap: round; stroke-linejoin: round; opacity: .9; filter: drop-shadow(0 2px 5px var(--color-surface)); }
@@ -31,10 +39,10 @@
   .atlas-nested-map { aspect-ratio: auto; min-height: 26rem; }
   .atlas-nested-map__caption { top: var(--space-2); left: var(--space-2); max-width: 55%; padding: var(--space-1) var(--space-2); font-size: .8rem; }
   .atlas-nested-map__route-note { top: var(--space-2); right: var(--space-2); max-width: 42%; padding: var(--space-1) var(--space-2); font-size: .62rem; }
-  .atlas-territory { padding: .2rem .28rem; }
-  .atlas-territory strong { font-size: clamp(.48rem, 1.6vw, .72rem); }
-  .atlas-territory > small { display: none; }
-  .atlas-territory__number { font-size: .48rem; }
+  .atlas-territory__label { width: 19%; }
+  .atlas-territory__label strong { font-size: clamp(.5rem, 1.7vw, .72rem); }
+  .atlas-territory__label small { display: none; }
+  .atlas-territory__number { font-size: .5rem; }
   .atlas-territory__route-stops i { width: .9rem; height: .9rem; font-size: .5rem; }
 }
 @media (prefers-reduced-motion: reduce) {

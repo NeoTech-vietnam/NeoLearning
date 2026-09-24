@@ -60,30 +60,8 @@ export function questRouteStops(root: ContentNode, quest: Quest): QuestRouteStop
   });
 }
 
-export interface TerritoryPosition {
-  path?: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
-
-export function territoryPositions(children: ContentNode[]): TerritoryPosition[] {
-  if (children.length === 0) return [];
-  const columns = Math.min(4, Math.ceil(Math.sqrt(children.length * 0.9)));
-  const rows = Math.ceil(children.length / columns);
-  const cellWidth = 100 / columns;
-  const topInset = 16;
-  const gridHeight = 78;
-  const cellHeight = gridHeight / rows;
-  return children.map((child, index) => ({
-    path: child.relativePath,
-    x: (index % columns + 0.5) * cellWidth,
-    y: topInset + (Math.floor(index / columns) + 0.5) * cellHeight,
-    width: Math.min(cellWidth * 0.9, 26),
-    height: Math.min(cellHeight * 0.84, 24)
-  }));
-}
+export { countryOutlineFromMask, territoryLayout, territoryLayoutAtFocus, territoryLayoutInCountry } from "./territory-layout";
+export type { TerritoryPosition } from "./territory-layout";
 
 export interface ProjectedQuestStop {
   stop: QuestRouteStop;

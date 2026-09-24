@@ -8,4 +8,4 @@
 6. Add unit and Playwright tests for drill-down, reload/back, multi-country road, repeat/missing stops, responsive hit areas and keyboard focus.
 7. Run `npm run check` from `Learning Web`, inspect desktop/mobile views and report limitations.
 
-Risk/rollback: isolate local map from `WorldMap`; preserve all uncommitted edits. This is planning only. Await the user's approval of the latest planning summary before `task.py start` or product-code edits.
+Risk/rollback: isolate local map from `WorldMap`; preserve all uncommitted edits. The user approved implementation and the task is in progress; keep the authored world map and list navigation as rollback/fallback.

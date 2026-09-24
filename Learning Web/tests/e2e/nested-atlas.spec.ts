@@ -45,3 +45,40 @@ test("keeps territory controls usable on a phone-sized viewport and supports Ent
   await expect(page).toHaveURL(/editor/);
   await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
 });
+test("country atlas clips its territories to the authored coast", async ({ page }) => {
+  await page.goto("/#/atlas?path=02_Software");
+  const map = page.getByRole("region", { name: "Software Empire territory map" });
+  await expect(map).toHaveAttribute("data-silhouette", "inherited");
+  await expect(map.locator("clipPath#atlas-inherited-coast path")).toHaveAttribute("d", /^M .+ Z$/);
+  await expect(map.locator(".atlas-nested-map__coast")).toBeVisible();
+  await expect(map.locator(".atlas-territory")).toHaveCount(3);
+  await map.locator('[data-path="02_Software/lesson.md"]').click();
+  await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
+});
+test("drills recursively through two topic levels and restores their silhouettes", async ({ page }) => {
+  await page.goto("/#/atlas?path=02_Software");
+  const map = page.locator(".atlas-nested-map");
+  const coast = map.locator(".atlas-nested-map__coast");
+  const countryOutline = await coast.getAttribute("d");
+
+  await map.locator('[data-path="02_Software/01_Programming"]').click();
+  await expect(page).toHaveURL(/01_Programming/);
+  await expect(map.locator(".atlas-territory")).toHaveCount(2);
+  const programmingOutline = await coast.getAttribute("d");
+  expect(programmingOutline).not.toEqual(countryOutline);
+
+  await map.locator('[data-path="02_Software/01_Programming/01_Basics"]').click();
+  await expect(page).toHaveURL(/01_Basics/);
+  await expect(map.locator(".atlas-territory")).toHaveCount(1);
+  const basicsOutline = await coast.getAttribute("d");
+  expect(basicsOutline).not.toEqual(programmingOutline);
+
+  await page.reload();
+  await expect(coast).toHaveAttribute("d", basicsOutline!);
+  await page.goBack();
+  await expect(coast).toHaveAttribute("d", programmingOutline!);
+  await page.goForward();
+  await expect(coast).toHaveAttribute("d", basicsOutline!);
+  await map.locator('[data-path="02_Software/01_Programming/01_Basics/lesson.md"]').click();
+  await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
+});
