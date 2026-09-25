@@ -125,18 +125,33 @@ function lessonCount(node: ContentNode): number {
   return count;
 }
 
-// The browser and tests read the same authored country mask; no traced duplicate of its coast.
-export function countryOutlineFromMask(source: string, countryId: string): MapPoint[] {
+// Parse the authored mask once for both local and world-coordinate layouts.
+export interface CountryMaskGeometry {
+  d: string;
+  transform: string;
+  offsetX: number;
+  offsetY: number;
+  scale: number;
+  worldPoints: MapPoint[];
+}
+
+export function countryMaskGeometry(source: string, countryId: string): CountryMaskGeometry {
   const tag = source.match(new RegExp('<path\\b[^>]*\\bid="' + countryId + '"[^>]*\\/>'))?.[0];
-  const path = tag?.match(/\sd="([^"]+)"/)?.[1];
-  const transform = tag?.match(/transform="translate\((-?[\d.]+) (-?[\d.]+)\) scale\(([\d.]+)\)"/);
-  if (!path || !transform) throw new Error("Country mask is missing or uses an unsupported transform: " + countryId);
-  const offsetX = Number(transform[1]);
-  const offsetY = Number(transform[2]);
-  const scale = Number(transform[3]);
-  const worldPoints = [...path.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)]
+  const d = tag?.match(/\sd="([^"]+)"/)?.[1];
+  const transform = tag?.match(/transform="(translate\((-?[\d.]+) (-?[\d.]+)\) scale\(([\d.]+)\))"/);
+  if (!d || !transform) throw new Error("Country mask is missing or uses an unsupported transform: " + countryId);
+  const offsetX = Number(transform[2]);
+  const offsetY = Number(transform[3]);
+  const scale = Number(transform[4]);
+  const worldPoints = [...d.matchAll(/(-?[\d.]+),(-?[\d.]+)/g)]
     .map((match) => ({ x: Number(match[1]) * scale + offsetX, y: Number(match[2]) * scale + offsetY }));
   if (worldPoints.length < 3) throw new Error("Country mask has no polygon: " + countryId);
+  return { d, transform: transform[1], offsetX, offsetY, scale, worldPoints };
+}
+
+// The browser and tests read the same authored country mask; no traced duplicate of its coast.
+export function countryOutlineFromMask(source: string, countryId: string): MapPoint[] {
+  const worldPoints = countryMaskGeometry(source, countryId).worldPoints;
   const minX = Math.min(...worldPoints.map((point) => point.x));
   const maxX = Math.max(...worldPoints.map((point) => point.x));
   const minY = Math.min(...worldPoints.map((point) => point.y));

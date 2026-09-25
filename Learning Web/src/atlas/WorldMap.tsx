@@ -1,6 +1,8 @@
 import type { ContentNode } from "../shared";
 import type { QuestRouteStop } from "./model";
 import type { TerritoryState } from "./gameplay";
+import type { WorldReview } from "./world-review";
+import { WorldReviewOverlay, type ReviewInspection } from "./WorldReviewOverlay";
 import anchors from "../../assets/maps/embedded-world-label-anchors.json";
 
 const mapUrl = new URL("../../assets/maps/embedded-world-base.webp", import.meta.url).href;
@@ -13,10 +15,13 @@ export interface WorldMapProps {
   routeStops?: QuestRouteStop[];
   stateFor?: (path?: string) => TerritoryState;
   nextPath?: string;
+  review?: WorldReview;
+  inspection?: ReviewInspection;
+  onInspect?: (inspection?: ReviewInspection) => void;
   onSelect: (country: ContentNode) => void;
 }
 
-export function WorldMap({ activePaths = [], countries, routeStops = [], selectedPath, onSelect, stateFor, nextPath }: WorldMapProps) {
+export function WorldMap({ activePaths = [], countries, routeStops = [], selectedPath, onSelect, stateFor, nextPath, review, inspection, onInspect }: WorldMapProps) {
   const routePoints = routeStops.flatMap((stop, index) => {
     const countryIndex = countries.findIndex((country) => country.relativePath === stop.countryPath);
     if (countryIndex < 0) return [];
@@ -63,6 +68,7 @@ export function WorldMap({ activePaths = [], countries, routeStops = [], selecte
           />;
         })}
       </svg>
+      {review && onInspect && <WorldReviewOverlay review={review} countries={countries} onSelect={onSelect} inspection={inspection} onInspect={onInspect} />}
       {routeSegments.length > 0 && <svg aria-hidden="true" className="world-map__route-overlay" viewBox="0 0 3840 2160" preserveAspectRatio="none">
         {routeSegments.map((points, index) => <polyline className="world-map__quest-road" key={index} points={points.map((point) => `${point.x * 3840},${point.y * 2160}`).join(" ")} />)}
       </svg>}

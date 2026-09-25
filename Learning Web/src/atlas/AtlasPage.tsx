@@ -8,6 +8,9 @@ import { atlasHash, editorHash, type AtlasViewMode } from "../app/routes";
 import { activeMilestone, nextRouteStop, territoryState } from "./gameplay";
 import { canonicalCountries, descendantCount, findNodeTrail, questRouteStops, type QuestRouteStop } from "./model";
 import { WorldMap } from "./WorldMap";
+import type { ReviewInspection } from "./WorldReviewOverlay";
+import { WorldReviewPanel } from "./WorldReviewPanel";
+import { buildWorldReview } from "./world-review";
 import { NestedMap } from "./NestedMap";
 import "./atlas.css";
 
@@ -56,13 +59,15 @@ export function AtlasPage({ selectedPath, mode, questId }: AtlasPageProps) {
 function AtlasReady({ root, selectedPath, mode, questId, quests, initialLearning, progress }: { root: ContentNode; selectedPath?: string; mode?: AtlasViewMode; questId?: string; quests: Quest[]; initialLearning: AtlasLearningState; progress: Record<string, QuestProgress | undefined> }) {
   const [learning, setLearning] = useState(initialLearning);
   const [visitError, setVisitError] = useState(false);
+  const [inspection, setInspection] = useState<ReviewInspection>();
   const trail = useMemo(() => findNodeTrail(root, selectedPath), [root, selectedPath]);
   const selected = trail.at(-1) ?? root;
-  const countries = canonicalCountries(root);
+  const countries = useMemo(() => canonicalCountries(root), [root]);
   const selectedCountry = trail.find((node) => node.kind === "country");
   const invalidPath = Boolean(selectedPath && selected === root);
   const selectedQuest = quests.find((quest) => quest.id === questId) ?? quests[0];
-  const viewMode: AtlasViewMode = mode === "quest" && selectedQuest ? "quest" : "explore";
+  const viewMode: AtlasViewMode = mode === "review" && selected === root ? "review" : mode === "quest" && selectedQuest ? "quest" : "explore";
+  const review = useMemo(() => buildWorldReview(root, learning, quests, progress), [root, learning, quests, progress]);
   const routeStops = useMemo(() => selectedQuest ? questRouteStops(root, selectedQuest) : [], [root, selectedQuest]);
   const activePaths = viewMode === "quest" ? routeStops.map((stop) => stop.relativePath) : [];
   const mapFocus = selected.children.length > 0 || selected.kind === "country" ? selected : trail.at(-2) ?? selected;
@@ -70,6 +75,8 @@ function AtlasReady({ root, selectedPath, mode, questId, quests, initialLearning
   const nextStop = viewMode === "quest" && selectedQuest ? nextRouteStop(routeStops, selectedQuest, progress[selectedQuest.id], selected.relativePath) : undefined;
   const gate = viewMode === "quest" && selectedQuest ? activeMilestone(selectedQuest, progress[selectedQuest.id]) : undefined;
   const stateFor = (path?: string) => territoryState(path, learning, quests, progress);
+
+  useEffect(() => { if (viewMode !== "review") setInspection(undefined); }, [viewMode]);
 
   useEffect(() => {
     const path = selected.relativePath;
@@ -109,6 +116,7 @@ function AtlasReady({ root, selectedPath, mode, questId, quests, initialLearning
       <div className="atlas-toolbar__modes">
         <Button aria-pressed={viewMode === "explore"} onClick={() => navigate(selected, "explore")} variant={viewMode === "explore" ? "primary" : "secondary"}>Explore</Button>
         <Button aria-pressed={viewMode === "quest"} disabled={!selectedQuest} onClick={() => navigate(selected, "quest", selectedQuest)} variant={viewMode === "quest" ? "primary" : "secondary"}>Quest route</Button>
+        <Button aria-pressed={viewMode === "review"} onClick={() => navigate(root, "review")} variant={viewMode === "review" ? "primary" : "secondary"}>World Review</Button>
       </div>
       {viewMode === "quest" && selectedQuest && <label>Active quest
         <select onChange={(event) => navigate(selected, "quest", quests.find((quest) => quest.id === event.target.value))} value={selectedQuest.id}>
@@ -121,21 +129,22 @@ function AtlasReady({ root, selectedPath, mode, questId, quests, initialLearning
       {viewMode === "quest" && selectedQuest && <div><small>Next waypoint</small><strong>{nextStop?.node?.title ?? (gate ? `${gate.title} · challenge gate` : "Expedition complete")}</strong><span>{nextStop?.countryPath && nextStop.countryPath !== selectedCountry?.relativePath ? "Across the border" : nextStop ? "Follow the marked road" : gate ? "Record evidence and your journal" : "All milestones complete"}</span></div>}
       {viewMode === "quest" && gate && <Button onClick={continueJourney}>{nextStop ? "Continue journey →" : "Open challenge gate →"}</Button>}
     </section>
-    <div aria-label="Territory status legend" className="atlas-legend"><span data-state="unvisited">Unvisited</span><span data-state="visited">Visited</span><span data-state="practiced">Practiced</span><span data-state="evidenced">Evidence recorded</span><small>Parent colors show the strongest activity somewhere inside, not mastery of every child.</small></div>
+    {viewMode === "review" ? <div aria-label="World Review legend" className="atlas-legend atlas-legend--review"><span data-state="unvisited">◇ Unvisited</span><span data-state="visited">▨ Visited territory</span><span data-state="partial">• Some learning complete</span><span data-state="completed">✦ Entire territory complete</span><span data-state="parent">◆ Parent Quest milestone</span><small>Only level-1/2 borders are shown. Parent Quest markers do not complete children.</small></div> : <div aria-label="Territory status legend" className="atlas-legend"><span data-state="unvisited">Unvisited</span><span data-state="visited">Visited</span><span data-state="practiced">Practiced</span><span data-state="evidenced">Evidence recorded</span><small>Parent colors show the strongest activity somewhere inside, not mastery of every child.</small></div>}
     {visitError && <p role="status" className="atlas-page__visit-error">This visit has not been saved. Check the connection, then revisit this territory.</p>}
     {invalidPath && <ErrorState title="Landmark not found">The requested path is not part of the current atlas. Showing Embedded World instead.</ErrorState>}
     {countries.length !== 6 && <ErrorState title="Incomplete world map">Expected six canonical countries, but the content API returned {countries.length}.</ErrorState>}
     <div className="atlas-page__layout">
-      <div className="atlas-page__map">{selected === root ? <WorldMap
-        activePaths={activePaths} countries={countries} onSelect={navigate} routeStops={viewMode === "quest" ? routeStops : []}
-        selectedPath={selectedCountry?.relativePath} stateFor={stateFor} nextPath={nextStop?.relativePath}
+      <div className={"atlas-page__map" + (viewMode === "review" ? " atlas-page__map--review" : "")}>{selected === root ? <WorldMap
+        activePaths={activePaths} countries={countries} onSelect={viewMode === "review" ? (node) => navigate(node, "explore") : navigate} routeStops={viewMode === "quest" ? routeStops : []}
+        selectedPath={selectedCountry?.relativePath} stateFor={viewMode === "review" ? undefined : stateFor} nextPath={nextStop?.relativePath}
+        review={viewMode === "review" ? review : undefined} inspection={inspection} onInspect={setInspection}
       /> : selectedCountry && countryIndex >= 0 ? <NestedMap
         country={selectedCountry} countryIndex={countryIndex} focus={mapFocus} onSelect={selectMapNode}
         routeStops={viewMode === "quest" ? routeStops : []} selectedPath={selected.relativePath}
         stateFor={stateFor} nextStop={nextStop} onContinue={continueJourney}
       /> : null}</div>
       <aside className="atlas-page__panel">
-        {viewMode === "quest" && selectedQuest ? <><QuestRoutePanel onSelect={(node) => navigate(node)} quest={selectedQuest} selectedPath={selected.relativePath} stops={routeStops} nextStop={nextStop} gate={gate?.id} /><JourneyJournal quest={selectedQuest} progress={progress[selectedQuest.id]} /></> : <ExplorePanel navigate={navigate} selected={selected} />}
+        {viewMode === "review" ? <WorldReviewPanel review={review} countries={countries} selected={selected} inspection={inspection} onSelect={(node) => navigate(node, "explore")} /> : viewMode === "quest" && selectedQuest ? <><QuestRoutePanel onSelect={(node) => navigate(node)} quest={selectedQuest} selectedPath={selected.relativePath} stops={routeStops} nextStop={nextStop} gate={gate?.id} /><JourneyJournal quest={selectedQuest} progress={progress[selectedQuest.id]} /></> : <ExplorePanel navigate={navigate} selected={selected} />}
       </aside>
     </div>
   </main>;
