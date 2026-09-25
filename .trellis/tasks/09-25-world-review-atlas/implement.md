@@ -7,7 +7,7 @@
 2. Implement pure terminal-tree/progress selectors. Test path mapping,
    ancestor isolation, deduplication, missing paths, legacy completed Quest
    milestones without visits, and count invariants.
-3. Replace the temporary microcell overlay with deterministic level-1/2
+3. Replace the temporary microcell overlay with deterministic level-1/2/3
    polygons using existing territory geometry. Test one region per indexed
    folder, shared boundaries, stable layout, and country clipping.
 4. Keep Review routing and exact leaf counts; update region aggregation,
@@ -15,7 +15,7 @@
    modes.
 5. Add browser checks for switching, persistence, phone viewport, keyboard
    navigation, and reduced motion; visually inspect all six countries,
-   especially Software, with empty and mixed progress and two-level borders.
+   especially Software, with empty and mixed progress and three-level borders.
    Verify hover/focus highlight, detail text, exact-region opening, and two-tap
    touch inspection without masking country or Quest controls.
 6. Run the quality gate and fix findings before marking the task complete.

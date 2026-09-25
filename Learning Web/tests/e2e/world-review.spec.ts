@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Review mode maps fixed level-1 and level-2 borders and survives reload", async ({ page }) => {
+test("Review mode maps fixed level-1, level-2, and level-3 borders and survives reload", async ({ page }) => {
   const response = await page.request.get("/api/content/tree?view=atlas");
   const tree = await response.json();
   type TreeNode = { kind: string; relativePath?: string; children: TreeNode[] };
@@ -12,6 +12,9 @@ test("Review mode maps fixed level-1 and level-2 borders and survives reload", a
       if (region.relativePath) regionPaths.push(region.relativePath);
       for (const second of region.children.filter((child) => child.kind !== "lesson")) {
         if (second.relativePath) regionPaths.push(second.relativePath);
+        for (const third of second.children.filter((child) => child.kind !== "lesson")) {
+          if (third.relativePath) regionPaths.push(third.relativePath);
+        }
       }
     }
   }
@@ -146,4 +149,58 @@ test("mobile Review keeps map pannable and reduced motion quiet", async ({ page 
   }));
   expect(dimensions.content).toBeGreaterThan(dimensions.visible);
   await expect(page.locator(".world-map__review-region").first()).toHaveCSS("animation-name", "none");
+});
+
+const deepPatternPath = "02_Software/01_Programming/02_Patterns/01_Design-Patterns";
+
+async function injectThirdLevel(page: import("@playwright/test").Page) {
+  await page.route("**/api/content/tree?view=atlas", async (route) => {
+    const body = await (await route.fetch()).json();
+    const find = (node: any): any => node.relativePath === "02_Software/01_Programming/02_Patterns"
+      ? node : node.children?.map(find).find(Boolean);
+    const patterns = find(body.root);
+    patterns.children.push(...["01_Design-Patterns", "02_Anti-Patterns"].map((name) => ({
+      id: "test:" + name, title: name === "01_Design-Patterns" ? "Design Patterns" : "Anti Patterns",
+      kind: "topic", relativePath: patterns.relativePath + "/" + name, headings: [], children: []
+    })));
+    await route.fulfill({ json: body });
+  });
+}
+
+test("level-3 hover, focus, and opening inspect the deepest folder with parent breadcrumb", async ({ page }) => {
+  await injectThirdLevel(page);
+  await page.goto("/#/atlas?mode=review");
+  const region = page.locator(`[data-review-path="${deepPatternPath}"]`);
+  await expect(region).toHaveAttribute("data-review-level", "3");
+  const bounds = await region.boundingBox();
+  expect(bounds).not.toBeNull();
+  // The triangle's bounding-box midpoint lies exactly on its shared border.
+  await region.hover({ position: { x: bounds!.width * .75, y: bounds!.height * .5 } });
+  await expect(region).toHaveAttribute("data-review-active", "true");
+  const card = page.locator(".world-review-panel__inspect");
+  await expect(card).toContainText("Design Patterns");
+  await expect(card).toContainText("Software Empire / Programming / Patterns · Level 3");
+  await expect(page.locator('.world-map__review-boundary[data-review-active="true"]')).toHaveCount(2);
+  await region.focus();
+  await expect(card).toContainText("Design Patterns");
+  await region.press("Enter");
+  await expect(page).toHaveURL(new RegExp("path=" + deepPatternPath.replaceAll("/", "%2F"), "i"));
+});
+
+test.describe("third-level touch interaction", () => {
+  test.use({ hasTouch: true });
+  test("first tap inspects and second tap opens a level-3 region on a phone", async ({ page }) => {
+    await injectThirdLevel(page);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/#/atlas?mode=review");
+    const region = page.locator(`[data-review-path="${deepPatternPath}"]`);
+    const bounds = await region.boundingBox();
+    expect(bounds).not.toBeNull();
+    const position = { x: bounds!.width * .75, y: bounds!.height * .5 };
+    await region.tap({ position });
+    await expect(page.locator(".world-review-panel__inspect")).toContainText("Design Patterns");
+    await expect(page).toHaveURL(/mode=review/);
+    await region.tap({ position });
+    await expect(page).toHaveURL(new RegExp("path=" + deepPatternPath.replaceAll("/", "%2F"), "i"));
+  });
 });

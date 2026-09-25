@@ -20,8 +20,9 @@ Opening a document is not mastery.
   and twelve point at folders with child learning regions.
 - Terminal folders remain the counting unit. The user rejected equal-looking
   leaf microcells: this pass draws fixed contiguous boundaries for immediate
-  country child folders (level 1) and their child folders (level 2). Deeper
-  folder borders are deferred. Opening only counts as a visit; completion
+  country child folders (level 1), their child folders (level 2), and one more
+  level of folder children (level 3). Deeper folder borders are deferred.
+  Opening only counts as a visit; completion
   needs an activity or directly linked Quest milestone.
 - A completed Quest milestone linked to a parent folder gets its own marker;
   it does not complete or count any of its terminal descendants.
@@ -31,7 +32,7 @@ Opening a document is not mastery.
 1. Add a World Review view on the existing Atlas world map. Preserve the
    authored six-country coastline and existing Explore and Quest modes.
 2. Partition each country into stable level-1 folder regions and subdivide
-   each into stable level-2 folder regions where children exist. Borders must
+   through level-3 folder regions where children exist. Borders must
    meet with no intentional gaps or overlapping land and follow the authored
    country boundary. Do not draw equal-size hexes for all leaves.
 3. Aggregate terminal-folder coverage into visible regions: visited if any
@@ -51,7 +52,7 @@ Opening a document is not mastery.
    contribute to terminal-folder totals.
 8. An ancestor visit alone must not visit all descendants. Completed cells take
    precedence; count them as visited-or-completed even without a visit record.
-9. Hovering or focusing a visible level-1/2 region highlights its exact border
+9. Hovering or focusing a visible level-1/2/3 region highlights its exact border
    and reveals its name, parent context, and terminal-folder coverage. Touch
    users can inspect a region before opening it. Keep the detail card in a
    fixed place outside the map so it never obscures territory boundaries.
@@ -61,10 +62,10 @@ Opening a document is not mastery.
 - [ ] World Review is reachable from the Atlas toolbar without disrupting
       Explore or Quest navigation.
 - [ ] Every indexed country child folder has exactly one level-1 region;
-      each folder child thereof has exactly one level-2 region. Their fixed
+      each folder descendant through level 3 has exactly one region. Their fixed
       boundaries meet inside the parent and stay within the authored country.
 - [ ] Visiting a terminal folder or descendant lesson updates its visible
-      level-1/2 ancestor coverage after reload; a visit alone never completes
+      level-1/2/3 ancestor coverage after reload; a visit alone never completes
       a region.
 - [ ] Completing an activity or qualifying Quest milestone updates exact
       terminal counts and a partial-completion cue on visible ancestors; a
@@ -75,7 +76,7 @@ Opening a document is not mastery.
       changing descendant cells or completed-cell count.
 - [ ] An ancestor-only visit does not light children; a completed cell without
       a stored visit still contributes to visited-or-completed coverage.
-- [ ] Software's 20 level-1 and 63 level-2 folder boundaries remain legible
+- [ ] Software's level-1/2/3 folder boundaries remain legible
       on a phone by panning; country navigation still opens the detailed Atlas.
 - [ ] Automated unit and browser tests cover status mapping, count invariants,
       persistence, mode switching, parent-marker isolation, and reduced motion.
@@ -89,4 +90,4 @@ Opening a document is not mastery.
 - Marking a folder complete merely because it was opened.
 - Adding a manual completion button or a second source of progress truth.
 - Replacing the authored map art or changing nested-map geometry.
-- Drawing separate world-map borders for level-3+ folders in this pass.
+- Drawing separate world-map borders for level-4+ folders in this pass.

@@ -30,9 +30,10 @@
 
 - Reuse the deterministic territory partition on each country's normalized
   silhouette for folder children at depth 1, then partition each visible
-  depth-1 polygon for its folder children at depth 2. Convert polygons back
+  depth-1 polygon for its folder children at depth 2, then each visible depth-2
+  polygon for its folder children at depth 3. Convert polygons back
   to world coordinates; clip against the authored SVG country mask. Draw
-  level-1 boundaries thicker than level-2 boundaries.
+  level-1 boundaries thicker than level-2, and level-2 thicker than level-3.
 - Aggregate descendant terminal-folder counts into each region. A visited
   fill reflects any visit, with intensity based on visited share; a small
   gold mark reflects partial completion. Full gold fill requires every
@@ -40,7 +41,7 @@
 - Position separate Quest parent markers at the matching visible region or
   nearest visible ancestor; group collisions accessibly. Country selection
   enters the detailed Atlas, without hundreds of world-scale labels.
-- Defer level-3+ boundaries. The panel keeps exact terminal counts so deeper
+- Defer level-4+ boundaries. The panel keeps exact terminal counts so deeper
   coverage remains visible without pretending the coarse regions are mastery.
 - Visible region paths are pointer and keyboard targets. Hover/focus brightens
   the exact region and updates a persistent, fixed-height inspector at the top
@@ -51,8 +52,8 @@
 ## Compatibility and rollback
 
 - Existing save files remain valid; changed folder trees update denominators
-  on refresh. The two-level subdivision is an overview, not replacement nested geography
+  on refresh. The three-level subdivision is an overview, not replacement nested geography
   or a mastery score.
 - Isolate the overlay behind Review mode so it can be disabled without
-  changing Explore, Quest, or persisted progress. Risks: Software level-2 density,
+  changing Explore, Quest, or persisted progress. Risks: Software level-3 density,
   SVG hit-target layering, overlapping parent markers.

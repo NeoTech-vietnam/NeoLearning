@@ -13,7 +13,7 @@ export interface ReviewCell {
 export interface ReviewRegion {
   node: ContentNode;
   countryPath: string;
-  depth: 1 | 2;
+  depth: 1 | 2 | 3;
   counts: ReviewCounts;
   state: ReviewState;
 }
@@ -131,7 +131,7 @@ export function buildWorldReview(
     return { node, countryPath, state };
   });
   const regions: ReviewRegion[] = [];
-  const addRegion = (node: ContentNode, countryPath: string, depth: 1 | 2) => {
+  const addRegion = (node: ContentNode, countryPath: string, depth: 1 | 2 | 3) => {
     const path = node.relativePath;
     if (!path) return;
     const matching = cells.filter((cell) =>
@@ -154,6 +154,9 @@ export function buildWorldReview(
       addRegion(first, country.relativePath, 1);
       for (const second of first.children.filter((node) => node.kind !== "lesson")) {
         addRegion(second, country.relativePath, 2);
+        for (const third of second.children.filter((node) => node.kind !== "lesson")) {
+          addRegion(third, country.relativePath, 3);
+        }
       }
     }
   }

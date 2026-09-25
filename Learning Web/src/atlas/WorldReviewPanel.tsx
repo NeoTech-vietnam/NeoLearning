@@ -15,11 +15,15 @@ export function WorldReviewPanel({ review, countries, selected, inspection, onSe
 }) {
   const inspected = review.regions.find((region) => region.node.relativePath === inspection?.path);
   const country = countries.find((node) => node.relativePath === inspected?.countryPath);
-  const parentPath = inspected?.depth === 2 ? inspected.node.relativePath?.slice(0, inspected.node.relativePath.lastIndexOf("/")) : undefined;
-  const parent = parentPath ? review.regions.find((region) => region.node.relativePath === parentPath) : undefined;
+  const ancestors: string[] = [];
+  for (let path = inspected?.node.relativePath; path?.includes("/");) {
+    path = path.slice(0, path.lastIndexOf("/"));
+    const ancestor = review.regions.find((region) => region.node.relativePath === path);
+    if (ancestor) ancestors.unshift(ancestor.node.title);
+  }
   return <section aria-label="World Review coverage" className="world-review-panel">
     <div className="world-review-panel__inspect" role="status" aria-live="polite" data-review-inspect-path={inspected?.node.relativePath}>
-      <small>{inspected ? `${country?.title ?? "World"}${parent ? ` / ${parent.node.title}` : ""} · Level ${inspected.depth}` : "Territory inspector"}</small>
+      <small>{inspected ? `${country?.title ?? "World"}${ancestors.map((title) => ` / ${title}`).join("")} · Level ${inspected.depth}` : "Territory inspector"}</small>
       {inspected ? <>
         <strong>{inspected.node.title}</strong>
         <span>{inspected.counts.visited} / {inspected.counts.total} terminal folders visited or completed</span>
@@ -28,7 +32,7 @@ export function WorldReviewPanel({ review, countries, selected, inspection, onSe
       </> : <span>Hover, focus, or tap a territory to see its details here.</span>}
     </div>
     <header><p className="eyebrow">World Review</p><h2>Explore your knowledge map</h2>
-      <p>Borders show folder levels 1 and 2. Colors summarize deeper folders; a territory glows only when all its terminal folders are complete. Counts below still cover every terminal folder.</p>
+      <p>Borders show folder levels 1, 2, and 3. Colors summarize deeper folders; a territory glows only when all its terminal folders are complete. Counts below still cover every terminal folder.</p>
     </header>
     <div className="world-review-panel__total"><strong>Whole world</strong><Coverage counts={review.world} /></div>
     <div className="world-review-panel__countries">

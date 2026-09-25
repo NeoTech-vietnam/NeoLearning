@@ -69,10 +69,14 @@ export function WorldReviewOverlay({ review, countries, onSelect, inspection, on
   const positions = new Map(layouts.flatMap((layout) =>
     layout.regions.map((region) => [region.path, region] as const)));
   const markers = parentGroups(review.parents, positions);
-  const activePosition = activePath ? positions.get(activePath) : undefined;
+  const activeAncestors = new Set<string>();
+  for (let parentPath = activePath ? positions.get(activePath)?.parentPath : undefined; parentPath;) {
+    activeAncestors.add(parentPath);
+    parentPath = positions.get(parentPath)?.parentPath;
+  }
   const regionPath = (position: ReviewRegionPosition, boundary = false, interactive = true) => {
     const region = regions.get(position.path);
-    const highlighted = activePath === position.path || boundary && activePosition?.parentPath === position.path;
+    const highlighted = activePath === position.path || boundary && activeAncestors.has(position.path);
     return <path
       className={"world-map__review-region world-map__review-region--level" + position.depth + (boundary ? " world-map__review-boundary" : "")}
       d={reviewPolygonPath(position.polygon)}
@@ -142,8 +146,15 @@ export function WorldReviewOverlay({ review, countries, onSelect, inspection, on
             const secondLevel = layout.regions.filter((position) => position.depth === 2 && position.parentPath === first.path);
             return <g key={first.path}>
               {regionPath(first, false, secondLevel.length === 0)}
-              {secondLevel.map((second) => regionPath(second))}
-              {secondLevel.length ? secondLevel.map(progressMark) : progressMark(first)}
+              {secondLevel.map((second) => {
+                const thirdLevel = layout.regions.filter((position) => position.depth === 3 && position.parentPath === second.path);
+                return <g key={second.path}>
+                  {regionPath(second, false, thirdLevel.length === 0)}
+                  {thirdLevel.map((third) => regionPath(third))}
+                  {thirdLevel.length ? thirdLevel.map(progressMark) : progressMark(second)}
+                  {thirdLevel.length ? regionPath(second, true) : null}
+                </g>;
+              })}
               {regionPath(first, true)}
             </g>;
           })}
