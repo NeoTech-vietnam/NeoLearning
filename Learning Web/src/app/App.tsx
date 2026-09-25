@@ -32,7 +32,7 @@ export function App() {
       </nav>
     </header>
     {route.name === "atlas" ? <AtlasPage mode={route.mode} questId={route.questId} selectedPath={route.path} />
-      : route.name === "quests" ? <QuestPage />
+      : route.name === "quests" ? <QuestPage questId={route.questId} />
       : route.name === "editor" ? <Suspense fallback={<main className="route-loading"><Skeleton lines={8} /></main>}><EditorPage path={route.path} /></Suspense>
       : <HomePage />}
   </div>;

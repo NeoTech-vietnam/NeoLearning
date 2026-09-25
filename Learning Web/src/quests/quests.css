@@ -24,3 +24,7 @@
 .quest-detail__use-evidence { justify-self: start; min-height: var(--target-min); padding: var(--space-2) var(--space-3); color: var(--color-action-text); background: var(--color-action); border: 0; border-radius: var(--radius-sm); font: inherit; font-weight: 800; cursor: pointer; }
 .quest-detail__use-evidence:hover { background: var(--color-action-hover); }
 .quest-detail__use-evidence:focus-visible { outline: .2rem solid var(--color-focus); outline-offset: .15rem; }
+
+.quest-detail__journal { display: grid; gap: var(--space-2); min-width: 0; margin: 0; padding: var(--space-3); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); }
+.quest-detail__journal legend { font-weight: 900; }
+.quest-detail__journal textarea { width: 100%; min-height: 4.5rem; padding: var(--space-2); color: var(--color-ink); background: var(--color-surface-raised); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); font: inherit; resize: vertical; }

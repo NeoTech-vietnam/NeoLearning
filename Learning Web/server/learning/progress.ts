@@ -1,13 +1,13 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 import type {
-  ActivityDefinition, ActivityProgress, AttemptResponse, LearningProgressState,
+  ActivityDefinition, ActivityProgress, AtlasLearningState, AttemptResponse, LearningProgressState,
   LessonPlan, LessonProgress, QuestEvidenceOption, ReviewItem
 } from "../../src/shared/learning.js";
 
 export class LearningValidationError extends Error {}
 
-const EMPTY: LearningProgressState = { schemaVersion: 1, lessons: {}, updatedAt: "" };
+const EMPTY: LearningProgressState = { schemaVersion: 1, lessons: {}, atlasVisits: {}, updatedAt: "" };
 const REVIEW_DAYS = [1, 3, 7, 14, 30];
 
 export function gradeActivity(activity: ActivityDefinition, response: unknown): {
@@ -70,7 +70,7 @@ export function gradeActivity(activity: ActivityDefinition, response: unknown): 
 }
 
 function normalize(raw: unknown): LearningProgressState {
-  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return { ...EMPTY, lessons: {} };
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return { ...EMPTY, lessons: {}, atlasVisits: {} };
   const source = raw as Record<string, unknown>;
   const lessons: LearningProgressState["lessons"] = {};
   if (source.lessons && typeof source.lessons === "object" && !Array.isArray(source.lessons)) {
@@ -101,7 +101,13 @@ function normalize(raw: unknown): LearningProgressState {
       };
     }
   }
-  return { schemaVersion: 1, lessons, updatedAt: typeof source.updatedAt === "string" ? source.updatedAt : "" };
+  const atlasVisits: Record<string, string> = {};
+  if (source.atlasVisits && typeof source.atlasVisits === "object" && !Array.isArray(source.atlasVisits)) {
+    for (const [path, date] of Object.entries(source.atlasVisits)) {
+      if (typeof date === "string" && !Number.isNaN(Date.parse(date))) atlasVisits[path] = date;
+    }
+  }
+  return { schemaVersion: 1, lessons, atlasVisits, updatedAt: typeof source.updatedAt === "string" ? source.updatedAt : "" };
 }
 
 export class LearningProgressStore {
@@ -112,7 +118,7 @@ export class LearningProgressStore {
   async readState(): Promise<LearningProgressState> {
     try { return normalize(JSON.parse(await fs.readFile(this.filePath, "utf8")) as unknown); }
     catch (error) {
-      if ((error as NodeJS.ErrnoException).code === "ENOENT") return { ...EMPTY, lessons: {} };
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") return { ...EMPTY, lessons: {}, atlasVisits: {} };
       throw error;
     }
   }
@@ -140,6 +146,23 @@ export class LearningProgressStore {
     });
     this.pending = run.then(() => undefined, () => undefined);
     return run;
+  }
+
+  async atlasState(): Promise<AtlasLearningState> {
+    const state = await this.readState();
+    const practiced: Record<string, string> = {};
+    const visits = { ...state.atlasVisits };
+    for (const [lessonPath, lesson] of Object.entries(state.lessons)) {
+      if (lesson.lastOpenedAt) visits[lessonPath] ??= lesson.lastOpenedAt;
+      const completed = Object.values(lesson.activities).map((activity) => activity.completedAt).filter((date): date is string => Boolean(date)).sort();
+      if (completed.length) practiced[lessonPath] = completed[0];
+    }
+    return { visits, practiced };
+  }
+
+  async visitAtlas(relativePath: string): Promise<AtlasLearningState> {
+    await this.update((state) => { state.atlasVisits[relativePath] ??= new Date().toISOString(); });
+    return this.atlasState();
   }
 
   async visit(lessonPath: string, heading?: string): Promise<LessonProgress> {

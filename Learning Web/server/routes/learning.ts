@@ -3,9 +3,11 @@ import path from "node:path";
 import { json, Router } from "express";
 import type { ApiErrorResponse } from "../../src/shared/contracts.js";
 import type {
-  AttemptResponse, LessonResponse, QuestEvidenceOption, ReviewItem
+  AtlasLearningState, AttemptResponse, LessonResponse, QuestEvidenceOption, ReviewItem
 } from "../../src/shared/learning.js";
 import { lessonHeadings } from "../../src/shared/learning.js";
+import type { ContentNode } from "../../src/shared/contracts.js";
+import { ContentIndex, getContentIndex, isSafeRelativePath } from "../content/index.js";
 import { ActivityCatalog, getActivityCatalog, publicLesson } from "../learning/catalog.js";
 import { LearningProgressStore, LearningValidationError, getLearningProgressStore } from "../learning/progress.js";
 
@@ -19,10 +21,29 @@ function value(input: unknown): string | undefined {
 
 export function createLearningRouter(
   catalog: ActivityCatalog = getActivityCatalog(),
-  store: LearningProgressStore = getLearningProgressStore()
+  store: LearningProgressStore = getLearningProgressStore(),
+  content: ContentIndex = getContentIndex()
 ): Router {
   const router = Router();
   router.use(json({ limit: "16kb" }));
+
+  router.get("/atlas", async (_request, response, next) => {
+    try { response.json(await store.atlasState() satisfies AtlasLearningState); }
+    catch (cause) { next(cause); }
+  });
+
+  router.put("/atlas/visit", async (request, response, next) => {
+    const relativePath = value((request.body as Record<string, unknown> | undefined)?.path);
+    if (!relativePath || !isSafeRelativePath(relativePath)) {
+      response.status(400).json(error("BAD_REQUEST", "Provide a safe Atlas path.")); return;
+    }
+    try {
+      const tree = await content.tree();
+      const exists = (node: ContentNode): boolean => node.relativePath === relativePath || node.children.some(exists);
+      if (!exists(tree.root)) { response.status(404).json(error("NOT_FOUND", "Atlas territory was not found.")); return; }
+      response.json(await store.visitAtlas(relativePath) satisfies AtlasLearningState);
+    } catch (cause) { next(cause); }
+  });
 
   router.get("/lesson", async (request, response, next) => {
     const lessonPath = value(request.query.path);

@@ -56,6 +56,7 @@ export function EditorPage({ path }: { path?: string }) {
         : { lesson: null, progress: { activities: {} } };
       setDraft(file.content);
       setState({ status: "ready", file, lesson: learning.lesson, progress: learning.progress });
+      void fetch("/api/learning/atlas/visit", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ path: file.relativePath }) }).catch(() => undefined);
       setMode("read");
       setDiff(undefined);
       setConflict(undefined);

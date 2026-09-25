@@ -13,7 +13,8 @@ function requestBody(value: unknown): SetMilestoneProgressRequest | undefined {
   const body = value as Record<string, unknown>;
   if (body.status !== "not-started" && body.status !== "in-progress" && body.status !== "complete") return undefined;
   if (body.evidence !== undefined && typeof body.evidence !== "string") return undefined;
-  return { status: body.status, ...(typeof body.evidence === "string" ? { evidence: body.evidence } : {}) };
+  if (body.journal !== undefined && (!body.journal || typeof body.journal !== "object" || Array.isArray(body.journal))) return undefined;
+  return { status: body.status, ...(typeof body.evidence === "string" ? { evidence: body.evidence } : {}), ...(body.journal ? { journal: body.journal as SetMilestoneProgressRequest["journal"] } : {}) };
 }
 
 export function createProgressRouter(catalog: QuestCatalog = getQuestCatalog(), store: ProgressStore = getProgressStore()): Router {
@@ -36,7 +37,7 @@ export function createProgressRouter(catalog: QuestCatalog = getQuestCatalog(), 
     try {
       const quest = await catalog.get(request.params.questId);
       if (!quest) { response.status(404).json(error("NOT_FOUND", "Quest was not found.")); return; }
-      response.json({ progress: await store.setMilestone(quest, request.params.milestoneId, body.status, body.evidence) } satisfies SetMilestoneProgressResponse);
+      response.json({ progress: await store.setMilestone(quest, request.params.milestoneId, body.status, body.evidence, body.journal) } satisfies SetMilestoneProgressResponse);
     } catch (cause) {
       if (cause instanceof ProgressValidationError) { response.status(400).json(error("BAD_REQUEST", cause.message)); return; }
       next(cause);

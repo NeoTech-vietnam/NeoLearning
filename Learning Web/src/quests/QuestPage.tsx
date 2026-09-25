@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { AllProgressResponse, Quest, QuestListResponse, QuestMilestoneStatus, QuestProgress, SetMilestoneProgressResponse } from "../shared";
+import type { AllProgressResponse, Quest, QuestListResponse, QuestMilestoneStatus, QuestProgress, QuestJournalEntry, SetMilestoneProgressResponse } from "../shared";
 import type { QuestEvidenceOption } from "../shared/learning";
 import { ErrorState, Skeleton } from "../ui";
 import { QuestBoard } from "./QuestBoard";
@@ -10,7 +10,7 @@ type QuestPageState =
   | { status: "error"; message: string }
   | { status: "ready"; quests: Quest[]; progressByQuest: Record<string, QuestProgress | undefined> };
 
-export function QuestPage() {
+export function QuestPage({ questId }: { questId?: string }) {
   const [state, setState] = useState<QuestPageState>({ status: "loading" });
   const [selected, setSelected] = useState<Quest>();
   const [saveError, setSaveError] = useState<string>();
@@ -26,13 +26,14 @@ export function QuestPage() {
       const questPayload = await questResponse.json() as QuestListResponse;
       const progressPayload = await progressResponse.json() as AllProgressResponse;
       setState({ status: "ready", quests: questPayload.quests, progressByQuest: progressPayload.progress.quests });
+      if (questId) setSelected(questPayload.quests.find((quest) => quest.id === questId));
     }).catch((cause: unknown) => {
       if (!(cause instanceof DOMException && cause.name === "AbortError")) {
         setState({ status: "error", message: cause instanceof Error ? cause.message : "Quests could not be loaded." });
       }
     });
     return () => controller.abort();
-  }, []);
+  }, [questId]);
 
   useEffect(() => {
     if (!selected) { setEvidenceByMilestone({}); return; }
@@ -51,13 +52,13 @@ export function QuestPage() {
   if (state.status === "loading") return <main className="quest-page"><Skeleton lines={6} /></main>;
   if (state.status === "error") return <main className="quest-page"><ErrorState title="Quest board unavailable">{state.message}</ErrorState></main>;
 
-  const updateMilestone = async (quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string) => {
+  const updateMilestone = async (quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string, journal?: QuestJournalEntry) => {
     setSaveError(undefined);
     try {
       const response = await fetch(`/api/progress/${encodeURIComponent(quest.id)}/milestones/${encodeURIComponent(milestoneId)}`, {
         method: "PUT",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ status, ...(evidence?.trim() ? { evidence: evidence.trim() } : {}) })
+        body: JSON.stringify({ status, ...(evidence?.trim() ? { evidence: evidence.trim() } : {}), ...(journal ? { journal } : {}) })
       });
       if (!response.ok) throw new Error(`Progress update failed with ${response.status}.`);
       const payload = await response.json() as SetMilestoneProgressResponse;
@@ -75,8 +76,8 @@ export function QuestPage() {
       {saveError && <ErrorState title="Progress not saved">{saveError} Try again.</ErrorState>}
       <QuestDetail
         evidenceByMilestone={evidenceByMilestone}
-        onBack={() => { setSaveError(undefined); setSelected(undefined); }}
-        onMilestoneChange={(milestoneId, status, evidence) => updateMilestone(selected, milestoneId, status, evidence)}
+        onBack={() => { setSaveError(undefined); setSelected(undefined); window.location.hash = "#/quests"; }}
+        onMilestoneChange={(milestoneId, status, evidence, journal) => updateMilestone(selected, milestoneId, status, evidence, journal)}
         progress={state.progressByQuest[selected.id] ?? { milestones: {} }}
         quest={selected}
       />

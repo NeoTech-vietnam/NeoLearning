@@ -5,6 +5,7 @@ import { register } from "tsx/esm/api";
 
 register();
 
+const { activeMilestone, nextRouteStop, territoryState } = await import("../../src/atlas/gameplay.ts");
 const { atlasHash, parseHashRoute } = await import("../../src/app/routes.ts");
 const { clipOutlineToCell, territoryLayoutAtFocus } = await import("../../src/atlas/territory-layout.ts");
 const { canonicalCountries, countryOutlineFromMask, descendantCount, findNodeTrail, questRouteStops, questStopsAtFocus, territoryLayout, territoryLayoutInCountry } = await import("../../src/atlas/model.ts");
@@ -31,6 +32,7 @@ test("hash routes preserve nested atlas paths", () => {
   assert.equal(hash, "#/atlas?path=02_Software%2FRTOS%2Ftimers.md");
   assert.deepEqual(parseHashRoute(hash), { name: "atlas", path: "02_Software/RTOS/timers.md" });
   assert.deepEqual(parseHashRoute("#/quests"), { name: "quests" });
+  assert.deepEqual(parseHashRoute("#/quests?quest=sensor"), { name: "quests", questId: "sensor" });
   assert.deepEqual(parseHashRoute("#/unknown"), { name: "home" });
 });
 
@@ -198,4 +200,30 @@ test("recursive atlas keeps dense disk-backed regions selectable", () => {
   const focused = territoryLayoutAtFocus(country, leaves[17], shallowCoast);
   assert.equal(focused.territories.length, 1);
   assert.ok(focused.outline.length >= 3);
+});
+
+
+test("territory status summarizes visits, practice, and evidenced milestones without marking siblings", () => {
+  const quest = { id: "q", milestones: [{ id: "m", knowledgeLinks: [lesson.relativePath] }] };
+  const learning = { visits: { [lesson.relativePath]: "2026-09-25" }, practiced: {} };
+  assert.equal(territoryState(topic.relativePath, learning, [quest], {}), "visited");
+  assert.equal(territoryState(protocolLesson.relativePath, learning, [quest], {}), "unvisited");
+  learning.practiced[lesson.relativePath] = "2026-09-25";
+  assert.equal(territoryState(topic.relativePath, learning, [quest], {}), "practiced");
+  const progress = { q: { milestones: { m: { status: "complete", evidence: "scope.png", updatedAt: "" } } } };
+  assert.equal(territoryState(topic.relativePath, learning, [quest], progress), "evidenced");
+  assert.equal(territoryState(protocolLesson.relativePath, learning, [quest], progress), "unvisited");
+});
+
+test("next waypoint follows an incomplete milestone and sends the last stop to its gate", () => {
+  const quest = { id: "q", milestones: [{ id: "m", title: "First", knowledgeLinks: [lesson.relativePath, protocolLesson.relativePath] }, { id: "n", title: "Second", knowledgeLinks: [lesson.relativePath] }] };
+  const stops = questRouteStops(root, quest);
+  assert.equal(nextRouteStop(stops, quest, undefined)?.relativePath, lesson.relativePath);
+  assert.equal(nextRouteStop(stops, quest, undefined, lesson.relativePath)?.relativePath, protocolLesson.relativePath);
+  assert.equal(nextRouteStop(stops, quest, undefined, protocolLesson.relativePath), undefined);
+  const repeated = questRouteStops(root, { milestones: [{ id: "r", title: "Revisit", knowledgeLinks: [lesson.relativePath, lesson.relativePath, protocolLesson.relativePath] }] });
+  assert.equal(nextRouteStop(repeated, { milestones: [{ id: "r" }] }, undefined, lesson.relativePath)?.relativePath, protocolLesson.relativePath);
+  const progress = { milestones: { m: { status: "complete", updatedAt: "" } } };
+  assert.equal(activeMilestone(quest, progress)?.id, "n");
+  assert.equal(nextRouteStop(stops, quest, progress)?.milestoneId, "n");
 });

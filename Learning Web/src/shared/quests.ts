@@ -1,6 +1,7 @@
 import type {
   ProgressState,
   Quest,
+  QuestJournalEntry,
   QuestMilestoneProgress,
   QuestMilestoneStatus,
   QuestProgress
@@ -27,6 +28,7 @@ export interface SetMilestoneProgressRequest {
   status: QuestMilestoneStatus;
   /** Required when the selected milestone declares evidenceRequired. */
   evidence?: string;
+  journal?: QuestJournalEntry;
 }
 
 export interface SetMilestoneProgressResponse {
@@ -42,6 +44,7 @@ export interface QuestCompletion {
 export type {
   ProgressState,
   Quest,
+  QuestJournalEntry,
   QuestMilestoneProgress,
   QuestMilestoneStatus,
   QuestProgress

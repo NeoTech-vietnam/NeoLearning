@@ -66,9 +66,16 @@ export interface Quest {
   completionCriteria: string[];
 }
 
+export interface QuestJournalEntry {
+  tried: string;
+  result: string;
+  nextMeasurement: string;
+}
+
 export interface QuestMilestoneProgress {
   status: QuestMilestoneStatus;
   evidence?: string;
+  journal?: QuestJournalEntry;
   updatedAt: string;
 }
 

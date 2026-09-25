@@ -12,6 +12,7 @@ register();
 const { ActivityCatalog, ActivityValidationError, publicLesson } = await import("../../server/learning/catalog.ts");
 const { LearningProgressStore, LearningValidationError, gradeActivity } = await import("../../server/learning/progress.ts");
 const { createLearningRouter } = await import("../../server/routes/learning.ts");
+const { ContentIndex } = await import("../../server/content/index.ts");
 
 async function fixture(t) {
   const root = await mkdtemp(path.join(os.tmpdir(), "neo-learning-activity-"));
@@ -108,4 +109,27 @@ test("learning API serves a lesson, saves attempts, and exposes quest evidence",
     body: JSON.stringify({ lessonPath: "01_Hardware/interactive-lesson.md", activityId: "fixture-choice", response: "invented" })
   });
   assert.equal(bad.status, 400);
+});
+
+
+test("atlas visits persist, reject unknown paths, and summarize practiced lessons", async (t) => {
+  const f = await fixture(t);
+  const app = express();
+  app.use("/api/learning", createLearningRouter(f.catalog, f.store, new ContentIndex(f.repository)));
+  const server = createServer(app);
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  t.after(() => new Promise((resolve) => server.close(resolve)));
+  const base = `http://127.0.0.1:${server.address().port}/api/learning`;
+  const put = (path) => fetch(base + "/atlas/visit", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ path }) });
+  assert.equal((await put("../README.md")).status, 400);
+  assert.equal((await put("01_Hardware/missing.md")).status, 404);
+  assert.equal((await put("01_Hardware/interactive-lesson.md")).status, 200);
+  const initial = await (await fetch(base + "/atlas")).json();
+  assert.ok(initial.visits["01_Hardware/interactive-lesson.md"]);
+  assert.equal(initial.practiced["01_Hardware/interactive-lesson.md"], undefined);
+  const plan = (await f.catalog.list())[0];
+  await f.store.attempt(plan, plan.activities[0], "correct");
+  const reloaded = await (await fetch(base + "/atlas")).json();
+  assert.ok(reloaded.practiced["01_Hardware/interactive-lesson.md"]);
+  assert.ok((await new LearningProgressStore(f.store.filePath).atlasState()).visits["01_Hardware/interactive-lesson.md"]);
 });

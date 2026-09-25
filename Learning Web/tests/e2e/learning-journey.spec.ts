@@ -74,13 +74,16 @@ test("rejects path traversal through the fixture file API", async ({ request }) 
 
 test("shows a quest destination and challenge and reports a failed save", async ({ page }) => {
   await page.goto("/#/quests");
-  await expect(page.locator(".quest-board__destination")).toContainText("A working fixture result.");
-  await page.getByRole("button", { name: "View quest" }).click();
+  await expect(page.locator(".quest-board__card").filter({ hasText: "Fixture Quest" }).locator(".quest-board__destination")).toContainText("A working fixture result.");
+  await page.locator(".quest-board__card").filter({ hasText: "Fixture Quest" }).getByRole("button", { name: "View quest" }).click();
   await expect(page.locator(".quest-detail__destination")).toContainText("A working fixture result.");
   await expect(page.locator(".quest-detail__challenge")).toContainText("Show that the fixture lesson can be traced");
   await page.route("**/api/progress/fixture-quest/milestones/read-fixture", async (route) => {
     await route.fulfill({ status: 500, contentType: "application/json", body: '{"error":{"code":"INTERNAL_ERROR","message":"Temporary failure"}}' });
   });
+  await page.getByLabel("Read fixture tried").fill("I traced the lesson and ran the fixture waveform lab.");
+  await page.getByLabel("Read fixture result").fill("The simulated waveform matched the target.");
+  await page.getByLabel("Read fixture next measurement").fill("Measure the output high time with a scope on hardware.");
   await page.getByRole("button", { name: "Complete", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Progress not saved" })).toBeVisible();
   await expect(page.locator(".quest-detail__challenge")).toContainText("Show that the fixture lesson");
@@ -89,7 +92,10 @@ test("shows a quest destination and challenge and reports a failed save", async 
 
 test("completes a fixture quest and exposes persisted progress in the UI", async ({ page }) => {
   await page.goto("/#/quests");
-  await page.getByRole("button", { name: "View quest" }).click();
+  await page.locator(".quest-board__card").filter({ hasText: "Fixture Quest" }).getByRole("button", { name: "View quest" }).click();
+  await page.getByLabel("Read fixture tried").fill("I traced the lesson and ran the fixture waveform lab.");
+  await page.getByLabel("Read fixture result").fill("The simulated waveform matched the target.");
+  await page.getByLabel("Read fixture next measurement").fill("Measure the output high time with a scope on hardware.");
   await page.getByRole("button", { name: "Complete", exact: true }).click();
   await expect(page.getByText("complete", { exact: true })).toBeVisible();
 });

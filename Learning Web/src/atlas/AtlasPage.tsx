@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import type { ContentNode, Quest } from "../shared";
+import type { ContentNode, Quest, QuestProgress } from "../shared";
+import type { AtlasLearningState } from "../shared/learning";
 import type { ContentTreeResponse } from "../shared/content";
-import type { QuestListResponse } from "../shared/quests";
+import type { AllProgressResponse, QuestListResponse } from "../shared/quests";
 import { Badge, Button, Card, EmptyState, ErrorState, Skeleton } from "../ui";
 import { atlasHash, editorHash, type AtlasViewMode } from "../app/routes";
-import { canonicalCountries, descendantCount, findNodeTrail, questRouteStops } from "./model";
+import { activeMilestone, nextRouteStop, territoryState } from "./gameplay";
+import { canonicalCountries, descendantCount, findNodeTrail, questRouteStops, type QuestRouteStop } from "./model";
 import { WorldMap } from "./WorldMap";
 import { NestedMap } from "./NestedMap";
 import "./atlas.css";
@@ -12,7 +14,7 @@ import "./atlas.css";
 type LoadState =
   | { status: "loading" }
   | { status: "error"; message: string }
-  | { status: "ready"; tree: ContentTreeResponse; quests: Quest[] };
+  | { status: "ready"; tree: ContentTreeResponse; quests: Quest[]; learning: AtlasLearningState; progress: Record<string, QuestProgress | undefined> };
 
 export interface AtlasPageProps {
   selectedPath?: string;
@@ -27,13 +29,16 @@ export function AtlasPage({ selectedPath, mode, questId }: AtlasPageProps) {
     const controller = new AbortController();
     Promise.all([
       fetch("/api/content/tree?view=atlas", { signal: controller.signal }),
-      fetch("/api/quests", { signal: controller.signal })
-    ]).then(async ([contentResponse, questResponse]) => {
-      if (!contentResponse.ok) throw new Error(`Content API returned ${contentResponse.status}.`);
-      if (!questResponse.ok) throw new Error(`Quest API returned ${questResponse.status}.`);
+      fetch("/api/quests", { signal: controller.signal }),
+      fetch("/api/learning/atlas", { signal: controller.signal }),
+      fetch("/api/progress", { signal: controller.signal })
+    ]).then(async ([contentResponse, questResponse, learningResponse, progressResponse]) => {
+      if ([contentResponse, questResponse, learningResponse, progressResponse].some((response) => !response.ok)) throw new Error("Atlas or progress services are unavailable.");
       const tree = await contentResponse.json() as ContentTreeResponse;
       const questPayload = await questResponse.json() as QuestListResponse;
-      setState({ status: "ready", tree, quests: questPayload.quests });
+      const learning = await learningResponse.json() as AtlasLearningState;
+      const progressPayload = await progressResponse.json() as AllProgressResponse;
+      setState({ status: "ready", tree, quests: questPayload.quests, learning, progress: progressPayload.progress.quests });
     }).catch((cause: unknown) => {
       if (!(cause instanceof DOMException && cause.name === "AbortError")) {
         setState({ status: "error", message: cause instanceof Error ? cause.message : "Atlas data could not be loaded." });
@@ -45,10 +50,12 @@ export function AtlasPage({ selectedPath, mode, questId }: AtlasPageProps) {
   if (state.status === "loading") return <div className="atlas-page"><Skeleton lines={7} /></div>;
   if (state.status === "error") return <div className="atlas-page"><ErrorState title="Atlas unavailable">{state.message}</ErrorState></div>;
 
-  return <AtlasReady mode={mode} questId={questId} quests={state.quests} root={state.tree.root} selectedPath={selectedPath} />;
+  return <AtlasReady key={state.tree.root.id} mode={mode} questId={questId} quests={state.quests} root={state.tree.root} selectedPath={selectedPath} initialLearning={state.learning} progress={state.progress} />;
 }
 
-function AtlasReady({ root, selectedPath, mode, questId, quests }: { root: ContentNode; selectedPath?: string; mode?: AtlasViewMode; questId?: string; quests: Quest[] }) {
+function AtlasReady({ root, selectedPath, mode, questId, quests, initialLearning, progress }: { root: ContentNode; selectedPath?: string; mode?: AtlasViewMode; questId?: string; quests: Quest[]; initialLearning: AtlasLearningState; progress: Record<string, QuestProgress | undefined> }) {
+  const [learning, setLearning] = useState(initialLearning);
+  const [visitError, setVisitError] = useState(false);
   const trail = useMemo(() => findNodeTrail(root, selectedPath), [root, selectedPath]);
   const selected = trail.at(-1) ?? root;
   const countries = canonicalCountries(root);
@@ -60,32 +67,44 @@ function AtlasReady({ root, selectedPath, mode, questId, quests }: { root: Conte
   const activePaths = viewMode === "quest" ? routeStops.map((stop) => stop.relativePath) : [];
   const mapFocus = selected.children.length > 0 || selected.kind === "country" ? selected : trail.at(-2) ?? selected;
   const countryIndex = countries.findIndex((country) => country.id === selectedCountry?.id);
+  const nextStop = viewMode === "quest" && selectedQuest ? nextRouteStop(routeStops, selectedQuest, progress[selectedQuest.id], selected.relativePath) : undefined;
+  const gate = viewMode === "quest" && selectedQuest ? activeMilestone(selectedQuest, progress[selectedQuest.id]) : undefined;
+  const stateFor = (path?: string) => territoryState(path, learning, quests, progress);
+
+  useEffect(() => {
+    const path = selected.relativePath;
+    if (!path || learning.visits[path] || invalidPath) return;
+    let cancelled = false;
+    fetch("/api/learning/atlas/visit", { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify({ path }) })
+      .then(async (response) => { if (!response.ok) throw new Error("Visit could not be saved"); return response.json() as Promise<AtlasLearningState>; })
+      .then((updated) => { if (!cancelled) { setLearning(updated); setVisitError(false); } })
+      .catch(() => { if (!cancelled) setVisitError(true); });
+    return () => { cancelled = true; };
+  }, [selected.relativePath, learning.visits, invalidPath]);
 
   const selectMapNode = (node: ContentNode) => {
     if (node.kind === "lesson" && node.relativePath) window.location.hash = editorHash(node.relativePath);
     else navigate(node);
   };
-
   const navigate = (node?: ContentNode, nextMode = viewMode, nextQuest = selectedQuest) => {
     window.location.hash = atlasHash(node?.relativePath, {
       mode: nextMode,
       ...(nextMode === "quest" && nextQuest ? { questId: nextQuest.id } : {})
     });
   };
+  const continueJourney = () => { if (nextStop?.node) navigate(nextStop.node); else if (gate && selectedQuest) window.location.hash = `#/quests?${new URLSearchParams({ quest: selectedQuest.id })}`; };
 
   return <main className="atlas-page">
     <header className="atlas-page__heading">
       <div><p className="eyebrow">Cartographic learning atlas</p><h1>{selected.title}</h1></div>
       {selected !== root && <Button onClick={() => navigate(trail.at(-2))} variant="secondary">← Zoom out</Button>}
     </header>
-
     <nav aria-label="Atlas breadcrumb" className="atlas-breadcrumb">
       {trail.map((node, index) => <span key={node.id}>
         {index > 0 && <span aria-hidden="true">›</span>}
         <a aria-current={node === selected ? "page" : undefined} href={atlasHash(node.relativePath, { mode: viewMode, questId: viewMode === "quest" ? selectedQuest?.id : undefined })}>{node.title}</a>
       </span>)}
     </nav>
-
     <section aria-label="Atlas view mode" className="atlas-toolbar">
       <div className="atlas-toolbar__modes">
         <Button aria-pressed={viewMode === "explore"} onClick={() => navigate(selected, "explore")} variant={viewMode === "explore" ? "primary" : "secondary"}>Explore</Button>
@@ -97,27 +116,26 @@ function AtlasReady({ root, selectedPath, mode, questId, quests }: { root: Conte
         </select>
       </label>}
     </section>
-
+    <section aria-label="Journey compass" className="atlas-compass">
+      <div><small>Current location</small><strong>{selected.title}</strong><span>{selected === root ? "Choose a country" : `Contains ${stateFor(selected.relativePath)} activity`}</span></div>
+      {viewMode === "quest" && selectedQuest && <div><small>Next waypoint</small><strong>{nextStop?.node?.title ?? (gate ? `${gate.title} · challenge gate` : "Expedition complete")}</strong><span>{nextStop?.countryPath && nextStop.countryPath !== selectedCountry?.relativePath ? "Across the border" : nextStop ? "Follow the marked road" : gate ? "Record evidence and your journal" : "All milestones complete"}</span></div>}
+      {viewMode === "quest" && gate && <Button onClick={continueJourney}>{nextStop ? "Continue journey →" : "Open challenge gate →"}</Button>}
+    </section>
+    <div aria-label="Territory status legend" className="atlas-legend"><span data-state="unvisited">Unvisited</span><span data-state="visited">Visited</span><span data-state="practiced">Practiced</span><span data-state="evidenced">Evidence recorded</span><small>Parent colors show the strongest activity somewhere inside, not mastery of every child.</small></div>
+    {visitError && <p role="status" className="atlas-page__visit-error">This visit has not been saved. Check the connection, then revisit this territory.</p>}
     {invalidPath && <ErrorState title="Landmark not found">The requested path is not part of the current atlas. Showing Embedded World instead.</ErrorState>}
     {countries.length !== 6 && <ErrorState title="Incomplete world map">Expected six canonical countries, but the content API returned {countries.length}.</ErrorState>}
-
     <div className="atlas-page__layout">
       <div className="atlas-page__map">{selected === root ? <WorldMap
-        activePaths={activePaths}
-        countries={countries}
-        onSelect={navigate}
-        routeStops={viewMode === "quest" ? routeStops : []}
-        selectedPath={selectedCountry?.relativePath}
+        activePaths={activePaths} countries={countries} onSelect={navigate} routeStops={viewMode === "quest" ? routeStops : []}
+        selectedPath={selectedCountry?.relativePath} stateFor={stateFor} nextPath={nextStop?.relativePath}
       /> : selectedCountry && countryIndex >= 0 ? <NestedMap
-        country={selectedCountry}
-        countryIndex={countryIndex}
-        focus={mapFocus}
-        onSelect={selectMapNode}
-        routeStops={viewMode === "quest" ? routeStops : []}
-        selectedPath={selected.relativePath}
+        country={selectedCountry} countryIndex={countryIndex} focus={mapFocus} onSelect={selectMapNode}
+        routeStops={viewMode === "quest" ? routeStops : []} selectedPath={selected.relativePath}
+        stateFor={stateFor} nextStop={nextStop} onContinue={continueJourney}
       /> : null}</div>
       <aside className="atlas-page__panel">
-        {viewMode === "quest" && selectedQuest ? <QuestRoutePanel onSelect={(node) => navigate(node)} quest={selectedQuest} selectedPath={selected.relativePath} stops={routeStops} /> : <ExplorePanel navigate={navigate} selected={selected} />}
+        {viewMode === "quest" && selectedQuest ? <><QuestRoutePanel onSelect={(node) => navigate(node)} quest={selectedQuest} selectedPath={selected.relativePath} stops={routeStops} nextStop={nextStop} gate={gate?.id} /><JourneyJournal quest={selectedQuest} progress={progress[selectedQuest.id]} /></> : <ExplorePanel navigate={navigate} selected={selected} />}
       </aside>
     </div>
   </main>;
@@ -142,19 +160,30 @@ function ExplorePanel({ selected, navigate }: { selected: ContentNode; navigate:
   </>;
 }
 
-function QuestRoutePanel({ quest, stops, selectedPath, onSelect }: { quest: Quest; stops: ReturnType<typeof questRouteStops>; selectedPath?: string; onSelect: (node: ContentNode) => void }) {
+function QuestRoutePanel({ quest, stops, selectedPath, onSelect, nextStop, gate }: { quest: Quest; stops: QuestRouteStop[]; selectedPath?: string; onSelect: (node: ContentNode) => void; nextStop?: QuestRouteStop; gate?: string }) {
+  const milestone = quest.milestones.find((item) => item.id === gate);
   return <section className="quest-route">
     <header><p className="eyebrow">Active expedition</p><h2>{quest.title}</h2>{quest.problem && <p>{quest.problem}</p>}{quest.destination && <p className="quest-route__destination"><strong>Destination:</strong> {quest.destination}</p>}</header>
+    {milestone && <Card className="quest-encounter"><small>Challenge gate · {milestone.title}</small><h3>{milestone.challenge ?? milestone.description ?? "Apply what you discover along this road."}</h3><p>{milestone.evidenceRequired ? "Bring a test result or project artifact as evidence." : "Document what you tried and observed."}</p><p>{milestone.knowledgeLinks.length} knowledge landmarks on this leg.</p>{nextStop?.node ? <Button onClick={() => onSelect(nextStop.node!)}>Enter next region →</Button> : <a href={`#/quests?${new URLSearchParams({ quest: quest.id })}`}>Record evidence at this gate →</a>}</Card>}
     {stops.length ? <ol className="quest-route__stops">
-      {stops.map((stop, index) => <li data-current={stop.relativePath === selectedPath} data-resolved={Boolean(stop.node)} key={stop.key}>
+      {stops.map((stop, index) => <li data-current={stop.relativePath === selectedPath} data-next={stop.key === nextStop?.key} data-resolved={Boolean(stop.node)} key={stop.key}>
         <span className="quest-route__number">{index + 1}</span>
         <button aria-current={stop.relativePath === selectedPath ? "step" : undefined} disabled={!stop.node} onClick={() => stop.node && onSelect(stop.node)} type="button">
-          <small>{stop.milestoneTitle}</small>
-          <strong>{stop.node?.title ?? stop.relativePath}</strong>
+          <small>{stop.milestoneTitle}</small><strong>{stop.node?.title ?? stop.relativePath}</strong>
           {stop.challenge && <span className="quest-route__challenge">{stop.challenge}</span>}
           {!stop.node && <em>Missing from current atlas</em>}
         </button>
       </li>)}
     </ol> : <EmptyState title="No route stops">This quest has no knowledge landmarks yet.</EmptyState>}
+  </section>;
+}
+
+function JourneyJournal({ quest, progress }: { quest: Quest; progress?: QuestProgress }) {
+  const entries = quest.milestones.flatMap((milestone) => {
+    const recorded = progress?.milestones[milestone.id];
+    return recorded?.status === "complete" ? [{ milestone, recorded }] : [];
+  });
+  return <section aria-label="Expedition journal" className="journey-journal"><h2>Expedition journal</h2>
+    {entries.length ? <ol>{entries.map(({ milestone, recorded }) => <li key={milestone.id}><strong>{milestone.title}</strong><small>{recorded.updatedAt ? new Date(recorded.updatedAt).toLocaleDateString() : "Completed"}</small>{recorded.journal ? <><p><b>Tried:</b> {recorded.journal.tried}</p><p><b>Result:</b> {recorded.journal.result}</p><p><b>Next measurement:</b> {recorded.journal.nextMeasurement}</p></> : <p>Completed before journal notes were added.</p>}{recorded.evidence && <p><b>Evidence:</b> {recorded.evidence}</p>}</li>)}</ol> : <p>No completed gates yet. Your experiment notes will appear here.</p>}
   </section>;
 }

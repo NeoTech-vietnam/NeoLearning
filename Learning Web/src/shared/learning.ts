@@ -82,7 +82,13 @@ export interface LessonProgress {
 export interface LearningProgressState {
   schemaVersion: 1;
   lessons: Record<string, LessonProgress>;
+  atlasVisits: Record<string, string>;
   updatedAt: string;
+}
+
+export interface AtlasLearningState {
+  visits: Record<string, string>;
+  practiced: Record<string, string>;
 }
 
 export interface LessonResponse {

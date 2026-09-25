@@ -2,7 +2,7 @@ export type AppRoute =
   | { name: "home" }
   | { name: "atlas"; path?: string; mode?: AtlasViewMode; questId?: string }
   | { name: "editor"; path?: string }
-  | { name: "quests" }
+  | { name: "quests"; questId?: string }
   | { name: "map-preview" }
   | { name: "design-system" };
 
@@ -23,7 +23,10 @@ export function parseHashRoute(hash: string): AppRoute {
       ...(questId ? { questId } : {})
     };
   }
-  if (pathname === "/quests") return { name: "quests" };
+  if (pathname === "/quests") {
+    const questId = new URLSearchParams(query).get("quest")?.trim();
+    return { name: "quests", ...(questId ? { questId } : {}) };
+  }
   if (pathname === "/editor") {
     const path = new URLSearchParams(query).get("path")?.trim();
     return { name: "editor", ...(path ? { path } : {}) };

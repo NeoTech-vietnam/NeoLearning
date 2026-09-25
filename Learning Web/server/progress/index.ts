@@ -3,6 +3,7 @@ import path from "node:path";
 import type {
   ProgressState,
   Quest,
+  QuestJournalEntry,
   QuestMilestoneProgress,
   QuestMilestoneStatus,
   QuestProgress
@@ -31,6 +32,21 @@ function isStatus(value: unknown): value is QuestMilestoneStatus {
   return value === "not-started" || value === "in-progress" || value === "complete";
 }
 
+function normalizeJournal(value: unknown): QuestJournalEntry | undefined {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return undefined;
+  const entry = value as Record<string, unknown>;
+  if (!(["tried", "result", "nextMeasurement"] as const).every((key) => typeof entry[key] === "string" && (entry[key] as string).trim().length > 0)) return undefined;
+  return { tried: (entry.tried as string).trim(), result: (entry.result as string).trim(), nextMeasurement: (entry.nextMeasurement as string).trim() };
+}
+
+function validateJournal(value: QuestJournalEntry): QuestJournalEntry {
+  const journal = normalizeJournal(value);
+  if (!journal || Object.values(journal).some((text) => text.length > 2000)) {
+    throw new ProgressValidationError("Journal needs tried, result and next measurement (1–2000 characters each).");
+  }
+  return journal;
+}
+
 function normalizeProgress(value: unknown): ProgressState {
   if (!value || typeof value !== "object" || Array.isArray(value)) return { ...EMPTY_PROGRESS };
   const source = value as Record<string, unknown>;
@@ -52,9 +68,11 @@ function normalizeProgress(value: unknown): ProgressState {
           if (!rawMilestone || typeof rawMilestone !== "object" || Array.isArray(rawMilestone)) continue;
           const milestone = rawMilestone as Record<string, unknown>;
           if (!isStatus(milestone.status)) continue;
+          const journal = normalizeJournal(milestone.journal);
           milestones[milestoneId] = {
             status: milestone.status,
             ...(typeof milestone.evidence === "string" && milestone.evidence.trim() ? { evidence: milestone.evidence.trim() } : {}),
+            ...(journal ? { journal } : {}),
             updatedAt: typeof milestone.updatedAt === "string" ? milestone.updatedAt : ""
           };
         }
@@ -132,7 +150,7 @@ export class ProgressStore {
     }
   }
 
-  async setMilestone(quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string): Promise<QuestProgress> {
+  async setMilestone(quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string, journal?: QuestJournalEntry): Promise<QuestProgress> {
     const milestone = quest.milestones.find((item) => item.id === milestoneId);
     if (!milestone) throw new ProgressValidationError(`Unknown milestone: ${milestoneId}`);
     if (!isStatus(status)) throw new ProgressValidationError("Milestone status is invalid.");
@@ -141,6 +159,7 @@ export class ProgressStore {
       throw new ProgressValidationError(`Milestone ${milestone.id} requires evidence before it can be completed.`);
     }
 
+    const normalizedJournal = journal === undefined ? undefined : validateJournal(journal);
     const state = await this.readState();
     const previous = state.quests[quest.id] ?? { milestones: {} };
     const next: QuestProgress = {
@@ -148,7 +167,8 @@ export class ProgressStore {
         ...previous.milestones,
         [milestoneId]: {
           status,
-          ...(normalizedEvidence ? { evidence: normalizedEvidence } : {}),
+          ...(normalizedEvidence ? { evidence: normalizedEvidence } : previous.milestones[milestoneId]?.evidence ? { evidence: previous.milestones[milestoneId].evidence } : {}),
+          ...(normalizedJournal ? { journal: normalizedJournal } : previous.milestones[milestoneId]?.journal ? { journal: previous.milestones[milestoneId].journal } : {}),
           updatedAt: isoNow()
         }
       }

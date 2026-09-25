@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ContentNode } from "../shared";
 import type { QuestRouteStop } from "./model";
+import type { TerritoryState } from "./gameplay";
 import { countryOutlineFromMask, questStopsAtFocus, territoryLayoutAtFocus } from "./model";
 import anchors from "../../assets/maps/embedded-world-label-anchors.json";
 import countryMask from "../../assets/maps/embedded-world-country-mask.svg?raw";
@@ -16,10 +17,13 @@ export interface NestedMapProps {
   focus: ContentNode;
   selectedPath?: string;
   routeStops?: QuestRouteStop[];
+  stateFor?: (path?: string) => TerritoryState;
+  nextStop?: QuestRouteStop;
+  onContinue?: () => void;
   onSelect: (node: ContentNode) => void;
 }
 
-export function NestedMap({ country, countryIndex, focus, selectedPath, routeStops = [], onSelect }: NestedMapProps) {
+export function NestedMap({ country, countryIndex, focus, selectedPath, routeStops = [], onSelect, stateFor, nextStop, onContinue }: NestedMapProps) {
   const [enteringPath, setEnteringPath] = useState<string>();
   const navigationTimer = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => {
@@ -90,6 +94,7 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
     <div aria-hidden="true" className="atlas-nested-map__caption">
       <span>{country.title}</span><small>Territories of {focus.title}</small>
     </div>
+    {nextStop?.node && !nextStop.trail.some((node) => node.id === focus.id) && <button aria-label={`Cross border to ${nextStop.node.title}`} className="atlas-nested-map__portal" data-portal={nextStop.countryPath !== country.relativePath ? "country" : "territory"} onClick={onContinue} type="button"><small>Route portal →</small><strong>{nextStop.node.title}</strong></button>}
     {routeNote && <div aria-label="Quest route continues beyond this territory" className="atlas-nested-map__route-note">{routeNote}</div>}
     <div aria-label={`${focus.title} topics`} className="atlas-nested-map__territories" key={focus.id} role="group">
       <svg className="atlas-nested-map__regions" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -103,6 +108,8 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
             className={`atlas-territory${child.unindexed ? " atlas-territory--uncharted" : ""}`}
             d={`M ${position.polygon.map((point) => `${point.x},${point.y}`).join(" L ")} Z`}
             data-route={markers.length > 0}
+            data-learning-state={stateFor?.(child.relativePath)}
+            data-next={nextStop?.trail.some((node) => node.id === child.id)}
             data-selected={child.relativePath === selectedPath}
             data-entering={child.relativePath === enteringPath}
             key={child.id}
@@ -124,6 +131,8 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
           className="atlas-territory__label"
           data-path={child.relativePath}
           data-route={markers.length > 0}
+          data-learning-state={stateFor?.(child.relativePath)}
+          data-next={nextStop?.trail.some((node) => node.id === child.id)}
           data-compact={Boolean(position.compactLabel)}
           data-entering={child.relativePath === enteringPath}
           data-tooltip={child.title}

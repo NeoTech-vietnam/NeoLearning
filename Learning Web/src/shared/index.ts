@@ -10,6 +10,7 @@ export type {
   ProgressState,
   Quest,
   QuestMilestone,
+  QuestJournalEntry,
   QuestMilestoneProgress,
   QuestMilestoneStatus,
   QuestProgress

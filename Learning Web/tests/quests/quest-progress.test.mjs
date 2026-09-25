@@ -201,3 +201,18 @@ test("quest and progress APIs reject unknown quest and milestone IDs", async (t)
   assert.equal(valid.status, 200);
   assert.equal((await valid.json()).quests[0].id, "sensor-quest");
 });
+
+
+test("journal entries persist, validate, and leave older completion records readable", async (t) => {
+  const { root, quests } = await fixture();
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const quest = await new QuestCatalog(root, quests).get("sensor-quest");
+  assert.ok(quest);
+  const store = new ProgressStore(path.join(root, "progress.json"));
+  const journal = { tried: "Sampled ADC at 1 kHz", result: "Observed stable values", nextMeasurement: "Compare with a scope" };
+  await assert.rejects(store.setMilestone(quest, "read-signal", "complete", undefined, { ...journal, result: " " }), ProgressValidationError);
+  await store.setMilestone(quest, "read-signal", "complete", undefined, journal);
+  assert.deepEqual((await new ProgressStore(store.filePath).readQuest(quest)).milestones["read-signal"].journal, journal);
+  await store.setMilestone(quest, "read-signal", "in-progress");
+  assert.deepEqual((await store.readQuest(quest)).milestones["read-signal"].journal, journal);
+});

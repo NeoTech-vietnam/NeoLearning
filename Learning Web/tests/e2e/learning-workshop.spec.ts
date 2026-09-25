@@ -38,7 +38,7 @@ test("practices a lesson, saves the PWM lab, and offers its result to a Quest", 
   await expect(page.getByText("4/4 activities practiced")).toBeVisible();
 
   await lab.getByRole("link", { name: /Use this simulation result/ }).click();
-  await page.getByRole("button", { name: "View quest" }).click();
+  await page.locator(".quest-board__card").filter({ hasText: "Fixture Quest" }).getByRole("button", { name: "View quest" }).click();
   const suggestion = page.getByRole("button", { name: /Use completed lab: Fixture waveform lab/ });
   await expect(suggestion).toBeVisible();
   await suggestion.click();

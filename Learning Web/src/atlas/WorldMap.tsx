@@ -1,5 +1,6 @@
 import type { ContentNode } from "../shared";
 import type { QuestRouteStop } from "./model";
+import type { TerritoryState } from "./gameplay";
 import anchors from "../../assets/maps/embedded-world-label-anchors.json";
 
 const mapUrl = new URL("../../assets/maps/embedded-world-base.webp", import.meta.url).href;
@@ -10,10 +11,12 @@ export interface WorldMapProps {
   selectedPath?: string;
   activePaths?: string[];
   routeStops?: QuestRouteStop[];
+  stateFor?: (path?: string) => TerritoryState;
+  nextPath?: string;
   onSelect: (country: ContentNode) => void;
 }
 
-export function WorldMap({ activePaths = [], countries, routeStops = [], selectedPath, onSelect }: WorldMapProps) {
+export function WorldMap({ activePaths = [], countries, routeStops = [], selectedPath, onSelect, stateFor, nextPath }: WorldMapProps) {
   const routePoints = routeStops.flatMap((stop, index) => {
     const countryIndex = countries.findIndex((country) => country.relativePath === stop.countryPath);
     if (countryIndex < 0) return [];
@@ -44,6 +47,8 @@ export function WorldMap({ activePaths = [], countries, routeStops = [], selecte
             className="world-map__country"
             data-route={activePaths.some((path) => path === country.relativePath || path.startsWith(`${country.relativePath}/`))}
             data-selected={country.relativePath === selectedPath}
+            data-learning-state={stateFor?.(country.relativePath)}
+            data-next={Boolean(nextPath && (nextPath === country.relativePath || nextPath.startsWith(`${country.relativePath}/`)))}
             href={`${maskUrl}#${mapId}`}
             key={country.id}
             onClick={() => onSelect(country)}
@@ -69,6 +74,8 @@ export function WorldMap({ activePaths = [], countries, routeStops = [], selecte
           className="world-map__label"
           data-route={activePaths.some((path) => path === country.relativePath || path.startsWith(`${country.relativePath}/`))}
           data-selected={country.relativePath === selectedPath}
+          data-learning-state={stateFor?.(country.relativePath)}
+          data-next={Boolean(nextPath && (nextPath === country.relativePath || nextPath.startsWith(`${country.relativePath}/`)))}
           key={country.id}
           onClick={() => onSelect(country)}
           style={{ left: `${anchor.label.x * 100}%`, top: `${anchor.label.y * 100}%`, width: `${anchor.recommendedLabelWidth * 100}%` }}
@@ -81,6 +88,7 @@ export function WorldMap({ activePaths = [], countries, routeStops = [], selecte
       {routePoints.map(({ number, stop, x, y }) => <button
         aria-label={`Quest stop ${number}: ${stop.node?.title ?? stop.relativePath}`}
         className="world-map__quest-marker"
+        data-next={stop.key === routeStops.find((item) => item.relativePath === nextPath)?.key}
         disabled={!stop.node}
         key={stop.key}
         onClick={() => stop.node && onSelect(stop.node)}
