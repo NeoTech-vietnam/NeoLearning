@@ -8,6 +8,7 @@ import type { ApiErrorResponse, HealthResponse } from "../src/shared/contracts.j
 import { refreshContentIndex } from "./content/index.js";
 import { createContentRouter } from "./routes/content.js";
 import { createFilesRouter } from "./routes/files.js";
+import { createLearningRouter } from "./routes/learning.js";
 import { createProgressRouter } from "./routes/progress.js";
 import { createQuestRouter } from "./routes/quests.js";
 
@@ -83,6 +84,7 @@ export function createApp(access: PreviewAccess = {
   app.use("/api/files", createFilesRouter(undefined, async () => {
     await refreshContentIndex();
   }));
+  app.use("/api/learning", createLearningRouter());
   app.use("/api/quests", createQuestRouter());
   app.use("/api/progress", createProgressRouter());
   app.use(((cause, _request, response, _next) => {

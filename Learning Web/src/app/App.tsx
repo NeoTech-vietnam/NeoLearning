@@ -1,11 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import type { HealthResponse } from "../shared";
+import type { ReviewItem } from "../shared/learning";
 import { AtlasPage } from "../atlas/AtlasPage";
 import { WorldMapPreview } from "../atlas/WorldMapPreview";
 import { DesignSystemPage } from "../dev/design-system/DesignSystemPage";
 import { QuestPage } from "../quests";
 import { Skeleton } from "../ui";
-import { parseHashRoute, type AppRoute } from "./routes";
+import { editorHash, parseHashRoute, type AppRoute } from "./routes";
 import "./app.css";
 
 const EditorPage = lazy(() => import("../editor/EditorPage").then((module) => ({ default: module.EditorPage })));
@@ -41,6 +42,7 @@ type HealthState = "checking" | "ready" | "unavailable";
 
 function HomePage() {
   const [health, setHealth] = useState<HealthState>("checking");
+  const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
   useEffect(() => {
     const controller = new AbortController();
     fetch("/api/health", { signal: controller.signal })
@@ -52,12 +54,26 @@ function HomePage() {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/learning/review", { signal: controller.signal })
+      .then(async (response) => response.ok ? await response.json() as { items: ReviewItem[] } : { items: [] })
+      .then((payload) => setReviewItems(payload.items))
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, []);
+
   return <main className="home-page">
     <section className="home-page__hero">
       <p className="eyebrow">A world of embedded engineering</p>
       <h1>Learn the land.<br />Build the proof.</h1>
       <p>Explore the complete curriculum as a map, then take project quests that connect theory, architecture, implementation, and testing.</p>
       <div className="home-page__actions"><a href="#/atlas">Enter the Atlas</a><a href="#/quests">Choose a Quest</a></div>
+      {reviewItems.length > 0 && <aside className="home-page__review">
+        <strong>{reviewItems.length} review{reviewItems.length === 1 ? "" : "s"} ready</strong>
+        <span>Start with {reviewItems[0].activityTitle} in {reviewItems[0].lessonTitle}.</span>
+        <a href={editorHash(reviewItems[0].lessonPath)}>Review lesson →</a>
+      </aside>}
       <p aria-live="polite" className={`health health--${health}`}>Local API: {health}</p>
     </section>
   </main>;

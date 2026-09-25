@@ -3,6 +3,7 @@ import path from "node:path";
 
 const fixtureRoot = path.resolve(import.meta.dirname, "tests/.tmp/repository");
 const fixtureQuestDirectory = path.resolve(import.meta.dirname, "tests/.tmp/quests");
+const fixtureActivityDirectory = path.resolve(import.meta.dirname, "tests/.tmp/activities");
 const fixtureDataRoot = path.resolve(import.meta.dirname, "tests/.tmp/e2e-data");
 const clientPort = 5180;
 const apiPort = 4180;
@@ -22,6 +23,7 @@ export default defineConfig({
       API_PORT: String(apiPort),
       NEOLEARNING_REPOSITORY_ROOT: fixtureRoot,
       NEOLEARNING_QUEST_DIRECTORY: fixtureQuestDirectory,
+      NEOLEARNING_ACTIVITY_DIRECTORY: fixtureActivityDirectory,
       NEOLEARNING_DATA_ROOT: fixtureDataRoot
     }
   }

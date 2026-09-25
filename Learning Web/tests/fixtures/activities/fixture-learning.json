@@ -1,0 +1,73 @@
+{
+  "id": "fixture-learning",
+  "lessonPath": "01_Hardware/interactive-lesson.md",
+  "title": "Fixture lesson workshop",
+  "activities": [
+    {
+      "id": "fixture-choice",
+      "kind": "choice",
+      "title": "Choose the safe result",
+      "prompt": "Which answer is correct?",
+      "afterHeading": "fixture-lesson",
+      "options": [
+        {
+          "id": "wrong",
+          "label": "Wrong result"
+        },
+        {
+          "id": "correct",
+          "label": "Correct result"
+        }
+      ],
+      "answer": "correct",
+      "explanation": "The fixture says this is the correct result."
+    },
+    {
+      "id": "fixture-order",
+      "kind": "order",
+      "title": "Put steps in order",
+      "prompt": "Order the steps.",
+      "afterHeading": "fixture-lesson",
+      "items": [
+        {
+          "id": "second",
+          "label": "Second step"
+        },
+        {
+          "id": "first",
+          "label": "First step"
+        }
+      ],
+      "answer": [
+        "first",
+        "second"
+      ],
+      "explanation": "First comes before second."
+    },
+    {
+      "id": "fixture-reflection",
+      "kind": "self-check",
+      "title": "Explain the idea",
+      "prompt": "Explain this fixture in your own words.",
+      "afterHeading": "fixture-lesson",
+      "modelAnswer": "This fixture verifies that a lesson can host interactive activities."
+    },
+    {
+      "id": "fixture-lab",
+      "kind": "pwm-lab",
+      "title": "Fixture waveform lab",
+      "prompt": "Reach 1,000 Hz, 25% duty, and predict 250 µs HIGH.",
+      "afterHeading": "fixture-lesson",
+      "targetFrequencyHz": 1000,
+      "targetDutyPercent": 25,
+      "explanation": "At 1 kHz and 25% duty, HIGH lasts 250 µs."
+    }
+  ],
+  "questEvidence": [
+    {
+      "questId": "fixture-quest",
+      "milestoneId": "read-fixture",
+      "activityId": "fixture-lab"
+    }
+  ]
+}

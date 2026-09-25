@@ -20,3 +20,7 @@
 .quest-detail__links { margin: 0; padding-left: var(--space-5); line-height: var(--leading-body); }
 .quest-detail__links a { color: var(--color-action); }
 @media (max-width: 38rem) { .quest-board__heading, .quest-detail__milestone-meta { align-items: start; flex-direction: column; } }
+
+.quest-detail__use-evidence { justify-self: start; min-height: var(--target-min); padding: var(--space-2) var(--space-3); color: var(--color-action-text); background: var(--color-action); border: 0; border-radius: var(--radius-sm); font: inherit; font-weight: 800; cursor: pointer; }
+.quest-detail__use-evidence:hover { background: var(--color-action-hover); }
+.quest-detail__use-evidence:focus-visible { outline: .2rem solid var(--color-focus); outline-offset: .15rem; }

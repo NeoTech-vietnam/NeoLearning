@@ -7,7 +7,7 @@ test("opens a fixture lesson from the atlas without touching the real curriculum
   await page.locator(".world-map__label", { hasText: "Hardware Kingdom" }).click();
   await page.locator(".atlas-page__panel").getByRole("button", { name: /Fixture Lesson/ }).click();
   await expect(page.getByRole("heading", { name: "lesson.md" })).toBeVisible();
-  await expect(page.getByText("Fixture lesson")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Fixture lesson", exact: true })).toBeVisible();
 });
 
 test("reviews, saves, and reloads Markdown only inside the temporary fixture", async ({ page }) => {
@@ -81,7 +81,7 @@ test("shows a quest destination and challenge and reports a failed save", async 
   await page.route("**/api/progress/fixture-quest/milestones/read-fixture", async (route) => {
     await route.fulfill({ status: 500, contentType: "application/json", body: '{"error":{"code":"INTERNAL_ERROR","message":"Temporary failure"}}' });
   });
-  await page.getByRole("button", { name: "Complete" }).click();
+  await page.getByRole("button", { name: "Complete", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Progress not saved" })).toBeVisible();
   await expect(page.locator(".quest-detail__challenge")).toContainText("Show that the fixture lesson");
   await page.unroute("**/api/progress/fixture-quest/milestones/read-fixture");
@@ -90,6 +90,6 @@ test("shows a quest destination and challenge and reports a failed save", async 
 test("completes a fixture quest and exposes persisted progress in the UI", async ({ page }) => {
   await page.goto("/#/quests");
   await page.getByRole("button", { name: "View quest" }).click();
-  await page.locator("button:not(:disabled)", { hasText: "Complete" }).click();
+  await page.getByRole("button", { name: "Complete", exact: true }).click();
   await expect(page.getByText("complete", { exact: true })).toBeVisible();
 });

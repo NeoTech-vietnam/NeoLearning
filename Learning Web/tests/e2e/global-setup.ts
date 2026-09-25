@@ -10,6 +10,7 @@ export default async function globalSetup() {
   await Promise.all([
     cp(path.resolve(import.meta.dirname, "../fixtures/repository"), path.join(temporaryRoot, "repository"), { recursive: true }),
     cp(path.resolve(import.meta.dirname, "../fixtures/quests"), path.join(temporaryRoot, "quests"), { recursive: true }),
+    cp(path.resolve(import.meta.dirname, "../fixtures/activities"), path.join(temporaryRoot, "activities"), { recursive: true }),
     mkdir(path.join(temporaryRoot, "e2e-data"), { recursive: true })
   ]);
 }

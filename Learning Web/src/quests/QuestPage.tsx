@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { AllProgressResponse, Quest, QuestListResponse, QuestMilestoneStatus, QuestProgress, SetMilestoneProgressResponse } from "../shared";
+import type { QuestEvidenceOption } from "../shared/learning";
 import { ErrorState, Skeleton } from "../ui";
 import { QuestBoard } from "./QuestBoard";
 import { QuestDetail } from "./QuestDetail";
@@ -13,6 +14,7 @@ export function QuestPage() {
   const [state, setState] = useState<QuestPageState>({ status: "loading" });
   const [selected, setSelected] = useState<Quest>();
   const [saveError, setSaveError] = useState<string>();
+  const [evidenceByMilestone, setEvidenceByMilestone] = useState<Record<string, QuestEvidenceOption[]>>({});
 
   useEffect(() => {
     const controller = new AbortController();
@@ -31,6 +33,20 @@ export function QuestPage() {
     });
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    if (!selected) { setEvidenceByMilestone({}); return; }
+    const controller = new AbortController();
+    Promise.all(selected.milestones.map(async (milestone) => {
+      const params = new URLSearchParams({ questId: selected.id, milestoneId: milestone.id });
+      const response = await fetch(`/api/learning/evidence?${params}`, { signal: controller.signal });
+      if (!response.ok) return [milestone.id, []] as const;
+      const payload = await response.json() as { options: QuestEvidenceOption[] };
+      return [milestone.id, payload.options] as const;
+    })).then((entries) => setEvidenceByMilestone(Object.fromEntries(entries)))
+      .catch(() => { if (!controller.signal.aborted) setEvidenceByMilestone({}); });
+    return () => controller.abort();
+  }, [selected]);
 
   if (state.status === "loading") return <main className="quest-page"><Skeleton lines={6} /></main>;
   if (state.status === "error") return <main className="quest-page"><ErrorState title="Quest board unavailable">{state.message}</ErrorState></main>;
@@ -58,6 +74,7 @@ export function QuestPage() {
     {selected ? <>
       {saveError && <ErrorState title="Progress not saved">{saveError} Try again.</ErrorState>}
       <QuestDetail
+        evidenceByMilestone={evidenceByMilestone}
         onBack={() => { setSaveError(undefined); setSelected(undefined); }}
         onMilestoneChange={(milestoneId, status, evidence) => updateMilestone(selected, milestoneId, status, evidence)}
         progress={state.progressByQuest[selected.id] ?? { milestones: {} }}

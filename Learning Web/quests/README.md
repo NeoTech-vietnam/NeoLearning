@@ -41,3 +41,5 @@ Quest and milestone IDs must be unique lowercase kebab-case values. Milestone
 orders must be consecutive, beginning at one. Every knowledge link must be a
 real repository-relative path that resolves inside this repository; absolute,
 traversal, and symlink-escape paths are rejected.
+
+Completed lesson labs may be offered as *simulation* evidence for a milestone via an activity sidecar in [`../activities/`](../activities/README.md). This is an optional suggestion: the learner must choose the evidence and explicitly complete the milestone. It does not claim a physical hardware test.

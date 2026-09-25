@@ -39,6 +39,12 @@ requires authentication or a cloud service.
 - Not in MVP: authentication, cloud sync, multiplayer, mobile editor, achievements,
   firmware compilation, or automatic Git commits.
 
+## Interactive lesson pilot
+
+The PWM generator-actions note now has an interactive workshop: table of contents and resume point, quick choice/order/reflection checkpoints, a keyboard-operable PWM timing simulator, local practice history, review reminders, and an explicit handoff of simulation evidence to the `Hành trình Tín hiệu PWM` Quest. Open the lesson from the Atlas or navigate to its repository path in the editor. The Quest does **not** auto-complete when a lab succeeds.
+
+New activities live in version-controlled JSON sidecars under [`activities/`](activities/README.md), while personal progress stays in gitignored `.data/learning-progress.json`. Existing Markdown lessons without a sidecar continue to render normally. The PWM waveform is a timing model, not a firmware compiler or a substitute for measurements on a board.
+
 ## Private phone preview
 
 The local app remains unauthenticated. To test the full app from a phone outside

@@ -1,14 +1,17 @@
-import { useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import type { ApiErrorResponse } from "../shared";
 import type { FileDiffPreview, MarkdownFile } from "../shared/files";
+import type { AttemptResponse, LessonProgress, LessonResponse, PublicLessonPlan } from "../shared/learning";
 import { Badge, Button, ErrorState, Modal, Skeleton } from "../ui";
 import { DiffReview } from "./DiffReview";
 import { MarkdownPreview } from "./MarkdownPreview";
-import { MonacoEditor } from "./MonacoEditor";
+import { LessonReader } from "./LessonReader";
 import "./editor.css";
 
+const MonacoEditor = lazy(() => import("./MonacoEditor").then((module) => ({ default: module.MonacoEditor })));
+
 type EditorMode = "read" | "split" | "diff";
-type LoadState = { status: "loading" } | { status: "error"; message: string } | { status: "ready"; file: MarkdownFile };
+type LoadState = { status: "loading" } | { status: "error"; message: string } | { status: "ready"; file: MarkdownFile; lesson: PublicLessonPlan | null; progress: LessonProgress };
 type ConflictState = { message: string; currentRevision?: string };
 
 async function errorMessage(response: Response): Promise<string> {
@@ -39,18 +42,25 @@ export function EditorPage({ path }: { path?: string }) {
     setState({ status: "loading" });
     setError(undefined);
     try {
-      const response = await fetch(`/api/files/read?${new URLSearchParams({ path }).toString()}`);
+      const [response, lessonResponse] = await Promise.all([
+        fetch(`/api/files/read?${new URLSearchParams({ path }).toString()}`),
+        fetch(`/api/learning/lesson?${new URLSearchParams({ path }).toString()}`).catch(() => undefined)
+      ]);
       if (!response.ok) {
         setState({ status: "error", message: await errorMessage(response) });
         return;
       }
       const file = await response.json() as MarkdownFile;
+      const learning = lessonResponse?.ok
+        ? await lessonResponse.json() as LessonResponse
+        : { lesson: null, progress: { activities: {} } };
       setDraft(file.content);
-      setState({ status: "ready", file });
+      setState({ status: "ready", file, lesson: learning.lesson, progress: learning.progress });
       setMode("read");
       setDiff(undefined);
       setConflict(undefined);
       setNotice(undefined);
+      if (!lessonResponse?.ok) setError("Interactive activities are temporarily unavailable; you can still read this lesson.");
     } catch (cause) {
       setState({ status: "error", message: cause instanceof Error ? cause.message : "The document could not be loaded." });
     }
@@ -122,7 +132,7 @@ export function EditorPage({ path }: { path?: string }) {
       }
       if (!response.ok) { setError(await errorMessage(response)); return; }
       const file = await response.json() as MarkdownFile;
-      setState({ status: "ready", file });
+      setState({ status: "ready", file, lesson: state.lesson, progress: state.progress });
       setDraft(file.content);
       setDiff(undefined);
       setMode("read");
@@ -135,13 +145,13 @@ export function EditorPage({ path }: { path?: string }) {
   };
 
   const reloadCurrent = async () => {
-    if (!path) return;
+    if (!path || state.status !== "ready") return;
     setError(undefined);
     try {
       const response = await fetch(`/api/files/read?${new URLSearchParams({ path }).toString()}`);
       if (!response.ok) { setError(await errorMessage(response)); return; }
       const file = await response.json() as MarkdownFile;
-      setState({ status: "ready", file });
+      setState({ status: "ready", file, lesson: state.lesson, progress: state.progress });
       setDraft(file.content);
       setDiff(undefined);
       setConflict(undefined);
@@ -159,6 +169,32 @@ export function EditorPage({ path }: { path?: string }) {
     } catch {
       setError("The browser could not copy the draft. It remains open in the editor.");
     }
+  };
+
+  const attemptActivity = async (activityId: string, response: unknown): Promise<AttemptResponse> => {
+    if (state.status !== "ready" || !state.lesson) throw new Error("Interactive lesson is unavailable.");
+    const result = await fetch("/api/learning/attempt", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ lessonPath: state.lesson.lessonPath, activityId, response })
+    });
+    if (!result.ok) throw new Error(await errorMessage(result));
+    const payload = await result.json() as AttemptResponse;
+    setState((current) => current.status === "ready" ? { ...current, progress: { ...current.progress, activities: { ...current.progress.activities, ...payload.progress.activities } } } : current);
+    return payload;
+  };
+
+  const savePosition = (heading?: string) => {
+    if (state.status !== "ready" || !state.lesson) return;
+    void fetch("/api/learning/position", {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ lessonPath: state.lesson.lessonPath, ...(heading ? { heading } : {}) })
+    }).then(async (response) => {
+      if (!response.ok) return;
+      const payload = await response.json() as { progress: LessonProgress };
+      setState((current) => current.status === "ready" ? { ...current, progress: { ...current.progress, lastOpenedAt: payload.progress.lastOpenedAt, ...(heading ? { lastHeading: payload.progress.lastHeading } : {}) } } : current);
+    }).catch(() => undefined);
   };
 
   if (state.status === "loading") return <main className="editor-page"><Skeleton lines={9} /></main>;
@@ -181,9 +217,11 @@ export function EditorPage({ path }: { path?: string }) {
     {notice && <p aria-live="polite" className="editor-notice editor-notice--success">{notice}</p>}
     {error && <p aria-live="assertive" className="editor-notice editor-notice--error">{error}</p>}
 
-    {mode === "read" && <MarkdownPreview source={draft} />}
+    {mode === "read" && (state.lesson && !dirty
+      ? <LessonReader lesson={state.lesson} onAttempt={attemptActivity} onPosition={savePosition} progress={state.progress} source={draft} />
+      : <MarkdownPreview source={draft} />)}
     {mode === "split" && <div className="editor-split">
-      <section aria-label="Markdown source" className="editor-source"><MonacoEditor height="70vh" language="markdown" onChange={(value) => { setDraft(value ?? ""); setNotice(undefined); }} options={{ ariaLabel: "Markdown source editor", automaticLayout: true, minimap: { enabled: false }, wordWrap: "on", padding: { top: 16 } }} theme="vs-light" value={draft} /></section>
+      <section aria-label="Markdown source" className="editor-source"><Suspense fallback={<Skeleton lines={6} />}><MonacoEditor height="70vh" language="markdown" onChange={(value) => { setDraft(value ?? ""); setNotice(undefined); }} options={{ ariaLabel: "Markdown source editor", automaticLayout: true, minimap: { enabled: false }, wordWrap: "on", padding: { top: 16 } }} theme="vs-light" value={draft} /></Suspense></section>
       <MarkdownPreview source={draft} />
     </div>}
     {mode === "diff" && diff && <><DiffReview preview={diff} /><div className="editor-save-actions"><Button onClick={() => setMode("split")} variant="secondary">Back to draft</Button><Button disabled={saving || diff.conflicted} onClick={() => void save()}>{saving ? "Saving…" : "Confirm save"}</Button></div></>}
