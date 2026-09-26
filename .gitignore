@@ -3,3 +3,4 @@ scripts/*
 *.exe
 .nimbalyst-generated
 .trellis/
+node_modules/
