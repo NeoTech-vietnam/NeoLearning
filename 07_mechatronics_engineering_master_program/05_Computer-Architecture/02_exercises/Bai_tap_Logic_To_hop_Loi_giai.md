@@ -13,7 +13,7 @@ Tài liệu trình bày lời giải, bước biến đổi, bảng chân trị/
 - Trong sơ đồ chữ, mỗi khối có tên cổng là một cổng thật; nhãn tín hiệu trùng nhau chỉ cùng một dây. `NAND(u,v)` là $\overline{uv}$; `NOR(u,v)` là $\overline{u+v}$. `NOT`, `AND`, `OR` có nghĩa thông thường.
 - Ngoài các câu ghi rõ “2 ngõ vào”, cho phép dùng cổng nhiều ngõ vào. MUX chọn $D_i$ khi mã chọn bằng $i$.
 
-**Các điểm cần lưu ý trong đề:** Bài 2c có một tích bị lặp; Bài 9 ghi không nhất quán số ngõ ra; Bài 17 cần khả năng đảo ngõ ra để vừa 5 tích. Các điểm này được giải thích tại từng bài.
+**Các điểm cần lưu ý trong đề:** Bài 2c có một tích bị lặp; Bài 9 ghi không nhất quán số ngõ ra; Bài 17 cần khả năng đảo ngõ ra để vừa 5 tích. Các điểm này được giải thích tại từng bài.0
 
 ## Bài 1. SOP, POS, rút gọn và hiện thực cổng
 
