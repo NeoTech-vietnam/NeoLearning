@@ -7,3 +7,4 @@ scripts/*
 .vscode
 *build
 >>>>>>> origin/feature/network-fundamentals
+node_modules/
