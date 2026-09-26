@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "lessons": {},
+  "atlasVisits": {
+    "02_Software/01_Programming-Languages/02_Cpp/01_learning": "2026-09-26T04:01:44.559Z",
+    "02_Software/02_Programming-Fundamentals/03_State-Machines": "2026-09-26T04:01:50.298Z",
+    "02_Software/02_Programming-Fundamentals/03_State-Machines/README.md": "2026-09-26T04:01:52.419Z",
+    "03_Interfaces-and-Protocols": "2026-09-26T04:02:21.716Z",
+    "03_Interfaces-and-Protocols/01_Basic": "2026-09-26T04:02:28.137Z",
+    "03_Interfaces-and-Protocols/01_Basic/03_SPI": "2026-09-26T04:02:38.535Z",
+    "03_Interfaces-and-Protocols/01_Basic/03_SPI/README.md": "2026-09-26T04:02:43.178Z",
+    "03_Interfaces-and-Protocols/01_Basic/03_SPI/01_esp32-s3": "2026-09-26T04:02:48.399Z",
+    "03_Interfaces-and-Protocols/01_Basic/03_SPI/01_esp32-s3/01_technical_reference_manual": "2026-09-26T04:02:51.634Z",
+    "03_Interfaces-and-Protocols/01_Basic/03_SPI/01_esp32-s3/01_technical_reference_manual/06_gdma_controlled_transfers.md": "2026-09-26T04:02:53.429Z"
+  },
+  "updatedAt": "2026-09-26T04:02:53.461Z"
+}
