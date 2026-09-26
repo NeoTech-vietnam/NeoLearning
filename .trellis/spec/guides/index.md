@@ -24,6 +24,12 @@ These guides help you **ask the right questions before coding**.
 | [Code Reuse Thinking Guide](./code-reuse-thinking-guide.md) | Identify patterns and reduce duplication | When you notice repeated patterns |
 | [Cross-Layer Thinking Guide](./cross-layer-thinking-guide.md) | Think through data flow across layers | Features spanning multiple layers |
 
+## Product Design Specs
+
+| Spec | Purpose | When to Use |
+|------|---------|-------------|
+| [Modular AI Desk Clock: Axiomatic Design and TRIZ](../modular-ai-desk-clock/system-design/index.md) | CN→FR→DP mapping, core/host boundary, contradiction and validation rules | Desk-clock or reusable-core design decisions |
+
 ---
 
 ## Quick Reference: Thinking Triggers
