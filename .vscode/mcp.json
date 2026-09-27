@@ -3,6 +3,17 @@
 		"mcp_boilerplate": {
 			"url": "http://127.0.0.1:5500/sse",
 			"type": "http"
+		},
+		"github": {
+			"type": "http",
+			"url": "https://api.githubcopilot.com/mcp/readonly",
+			"tools": [
+				"get_file_contents",
+				"search_code"
+			],
+			"headers": {
+				"X-MCP-Toolsets": "repos"
+			}
 		}
 	},
 	"inputs": []
