@@ -6,3 +6,10 @@
 {"command": "PowerShell ConvertFrom-Json assertion on .vscode/mcp.json", "result": "Passed; retained mcp_boilerplate and verified readonly endpoint with get_file_contents/search_code allowlist."}
 {"command": "Trellis check review of the fast-path instructions", "result": "Passed; bare topic names trigger lookup, only substantive coverage takes the fast path, explicit research/update/current-source/comprehensive requests bypass it, and the original research workflow remains intact. Live VS Code invocation not verified in this session."}
 {"command": "python ./.trellis/scripts/task.py validate 09-27-copilot-research-cornell-agent", "result": "Passed after the fast-path requirements update."}
+{"file": ".trellis/tasks/09-27-copilot-research-cornell-agent/research/figures-and-image-assets.md", "reason": "Review figure capture against documented tool limits, source attribution, and asset validation."}
+{"file": ".github/agents/research-notes.agent.md", "reason": "Verify the agent routes figure selection and attribution through its skill."}
+{"file": ".github/skills/research-to-cornell-notes/SKILL.md", "reason": "Check image selection/capture runs only after the existing-note fast path."}
+{"file": ".github/skills/research-to-cornell-notes/references/cornell-note-contract.md", "reason": "Review in-Notes placement, accessible descriptions, figure captions, and citations."}
+{"file": ".github/skills/research-to-cornell-notes/references/source-quality.md", "reason": "Review reuse permission, source attribution, and figure inspection rules."}
+{"file": ".github/skills/research-to-cornell-notes/references/visual-figures.md", "reason": "Review figure capture behavior against the documented source and tool limits."}
+{"file": ".github/skills/research-to-cornell-notes/requirements.txt", "reason": "Check bounded skill-scoped imaging dependencies and version pins."}

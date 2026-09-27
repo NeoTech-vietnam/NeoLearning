@@ -19,5 +19,14 @@ Replace every template placeholder. Use the current date in `DD/MM/YYYY` format.
 - For code, cite the repository path and exact line range, for example `Examples/device/spi.c:L42-L67`; use a stable repository URL and commit/ref when public code may change.
 - For Markdown, cite its path, heading, and line range when available. For external sources, use direct links to the relevant official page, paper, or source file.
 - Keep each citation close to the claim it supports. Cite a synthesized comparison against every source used for that comparison.
+- Embed a selected figure inside the Notes Section beside the claim it explains. Use a local relative image path, descriptive alt text, and an immediately following numbered caption in the note language (for example, `Figure 1`, `Hình 1`, `Ảnh 1`, or `Figura 1`) that cites its source, for example:
+
+  ```markdown
+  ![Block diagram showing how the gateway routes authenticated and unauthenticated messages](figures/ecu-interfaces/gateway-security-path.png)
+  *Figure 1. The security module filters messages before routing; source [S2], PDF p. 18, cropped from the source page under CC BY 4.0.*
+  ```
+
+- Give every figure caption's source ID a matching entry in `#### Sources`. Use this compact provenance format: `Creator: ...; title: ...; original: [asset or PDF page](URL or local path); reuse: [license/permission and terms](license URL); changes: unchanged, cropped from PDF p. N, or other accurate modification note.` Write `not identified` when creator or title truly cannot be found. Record the actual reuse basis for the specific figure, not only the page that contains it.
+- Prefer an original local source file or a direct image asset whose specific reuse terms permit repository copying. If permission is unclear, leave the image remote-linked or draw an original cited diagram; do not embed an unlicensed copy. The local validator checks declared provenance fields and link structure, but it cannot establish legal rights, visual accuracy, or whether an image truly supports the prose.
 
 Use the language requested by the user. Keep paragraphs and examples readable as study notes; use a small diagram or table when it clarifies a process or comparison.

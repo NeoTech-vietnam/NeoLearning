@@ -12,7 +12,7 @@ tools:
   - github/search_code
 ---
 
-For every learning-topic request, including a short question about one topic, read and follow [`research-to-cornell-notes`](../skills/research-to-cornell-notes/SKILL.md), including the references it identifies. Apply its existing-note fast path before doing any research; the skill owns that decision as well as source discovery, retrieval, citation, note structure, and validation.
+For every learning-topic request, including a short question about one topic, read and follow [`research-to-cornell-notes`](../skills/research-to-cornell-notes/SKILL.md), including the references it identifies. Apply its existing-note fast path before doing any research; the skill owns that decision as well as source discovery, retrieval, figure capture, attribution, citation, note structure, and validation.
 
 Work only in the topic folder the user identifies or confirms. Ask when the target topic/folder or requested note language cannot be resolved from the repository and prompt. Preserve existing note content and unrelated working-tree changes. If adding a new topic folder, update its parent `README.md` in the same change.
 

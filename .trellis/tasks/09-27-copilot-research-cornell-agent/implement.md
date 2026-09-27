@@ -9,6 +9,8 @@
 7. Run tests and CLI smoke checks on temporary Markdown, PDF, and C/C++/Python fixtures; validate a sample Cornell note and coverage ledger.
 8. Inspect the final diff and `git status`; confirm the pre-existing `Examples` submodule modification is unchanged.
 9. Add the existing-note fast path ahead of research planning: substantive local coverage returns a concise sourced answer and path; incidental mentions or explicit research/update/comprehensive requests use the full workflow.
+10. Extend the full research path with useful source-figure discovery, note-local PDF page/crop rendering, and permitted direct HTTPS image capture; record image provenance and reuse terms.
+11. Add skill-scoped image dependencies/helper and validate local image links, descriptive alt text, figure captions, and matching source IDs with focused unit tests.
 
 ## Review gates
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import email.message
 import importlib.util
 import io
 import json
@@ -9,6 +10,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 
 SKILL_ROOT = Path(__file__).resolve().parents[1]
@@ -16,10 +18,12 @@ SCRIPTS = SKILL_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
 import retrieve_sources  # noqa: E402
+import capture_resource_image  # noqa: E402
 import validate_notes  # noqa: E402
 
 
 HAS_PYPDF = importlib.util.find_spec("pypdf") is not None
+HAS_PDFIUM_AND_PIL = all(importlib.util.find_spec(name) is not None for name in ("pypdfium2", "PIL"))
 HAS_TREE_SITTER = all(
     importlib.util.find_spec(name) is not None
     for name in ("tree_sitter", "tree_sitter_c", "tree_sitter_cpp", "tree_sitter_python")
@@ -87,6 +91,48 @@ def valid_note() -> str:
 
 Feedback uses measured error to guide the next control action.
 """
+
+
+def note_with_figure(image_path: str = "figures/closed-loop/controller-feedback.png") -> str:
+    text = valid_note().replace(
+        "#### Sources\n\n- [S1] Control primer. [Online source](https://example.org/control).",
+        "![Block diagram showing the controller using measured output to reduce tracking error]("
+        f"{image_path})\n*Figure 1. The feedback path corrects tracking error; source [S1], reused under CC BY 4.0.*\n\n"
+        "#### Sources\n\n- [S1] Creator: Control Lab; title: Feedback Loop Diagram; "
+        "original: [image asset](https://example.org/controller.png); "
+        "reuse: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); changes: unchanged.",
+    )
+    return text
+
+
+class FakeImageResponse:
+    def __init__(self, body: bytes, content_type: str = "image/png", url: str = "https://example.org/image.png") -> None:
+        self.body = body
+        self.url = url
+        self.headers = email.message.Message()
+        self.headers["Content-Type"] = content_type
+        self.headers["Content-Length"] = str(len(body))
+
+    def __enter__(self) -> FakeImageResponse:
+        return self
+
+    def __exit__(self, *_: object) -> None:
+        return None
+
+    def geturl(self) -> str:
+        return self.url
+
+    def read(self, size: int = -1) -> bytes:
+        return self.body if size < 0 else self.body[:size]
+
+
+def make_png() -> bytes:
+    from PIL import Image
+
+    buffer = io.BytesIO()
+    with Image.new("RGB", (8, 6), color=(20, 80, 160)) as image:
+        image.save(buffer, format="PNG")
+    return buffer.getvalue()
 
 
 class RetrievalTests(unittest.TestCase):
@@ -273,6 +319,188 @@ class NoteValidationTests(unittest.TestCase):
                 writer.writerow(row)
             errors = validate_notes.validate_coverage(ledger, root)
             self.assertTrue(any("must be marked unreadable" in error for error in errors))
+
+    def test_figure_requires_local_asset_descriptive_alt_caption_and_source_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            note = root / "notes.md"
+            image = root / "figures" / "closed-loop" / "controller-feedback.png"
+            image.parent.mkdir(parents=True)
+            image.write_bytes(make_png())
+            note.write_text(note_with_figure(), encoding="utf-8")
+            self.assertEqual(validate_notes.validate_note(note, root), [])
+            note.write_text(note_with_figure().replace("Figure 1.", "Hình 1."), encoding="utf-8")
+            self.assertEqual(validate_notes.validate_note(note, root), [])
+
+            invalid = note_with_figure().replace(
+                "Block diagram showing the controller using measured output to reduce tracking error",
+                "image",
+            ).replace("source [S1], reused", "source [S9], reused")
+            note.write_text(invalid, encoding="utf-8")
+            errors = validate_notes.validate_note(note, root)
+            self.assertTrue(any("descriptive alt text" in error for error in errors))
+            self.assertTrue(any("source S9 is not declared" in error for error in errors))
+
+    def test_figure_must_be_local_and_inside_notes_with_numbered_cited_caption(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            note = root / "notes.md"
+            note.write_text(
+                valid_note().replace(
+                    "### Cue Column (Questions, Keywords, or Prompts)",
+                    "### Cue Column (Questions, Keywords, or Prompts)\n\n"
+                    "![Diagram showing how a controller compares its input and output](https://example.org/figure.png)\n"
+                    "Figure 1. A caption without a source ID.",
+                ),
+                encoding="utf-8",
+            )
+            errors = validate_notes.validate_note(note, root)
+            self.assertTrue(any("inside the Notes Section" in error for error in errors))
+            self.assertTrue(any("local relative image file" in error for error in errors))
+
+    def test_figure_rejects_absolute_local_paths(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            note = root / "notes.md"
+            image = root / "figures" / "controller-feedback.png"
+            image.parent.mkdir()
+            image.write_bytes(make_png())
+            note.write_text(note_with_figure(str(image)), encoding="utf-8")
+            errors = validate_notes.validate_note(note, root)
+            self.assertTrue(any("local relative image file" in error for error in errors))
+
+    def test_figure_rejects_relative_paths_that_escape_note_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            note_dir = root / "topic"
+            note_dir.mkdir()
+            note = note_dir / "notes.md"
+            (root / "outside.png").write_bytes(make_png())
+            note.write_text(note_with_figure("../outside.png"), encoding="utf-8")
+            errors = validate_notes.validate_note(note, root)
+            self.assertTrue(any("stay inside the note directory" in error for error in errors))
+
+
+class ImageCaptureTests(unittest.TestCase):
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow is not installed")
+    def test_download_validates_direct_https_image_and_refuses_overwrite(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "feedback-loop.png"
+            data = make_png()
+            response = FakeImageResponse(data)
+            with patch.object(capture_resource_image, "_open_https_request", return_value=response):
+                result = capture_resource_image.download_image(
+                    "https://example.org/image.png", output, max_bytes=len(data)
+                )
+            self.assertEqual(Path(str(result["output"])).read_bytes(), data)
+            self.assertEqual(result["format"], "PNG")
+
+            with patch.object(
+                capture_resource_image,
+                "_open_https_request",
+                return_value=FakeImageResponse(data),
+            ):
+                with self.assertRaisesRegex(capture_resource_image.CaptureError, "refusing to overwrite"):
+                    capture_resource_image.download_image("https://example.org/image.png", output)
+            self.assertEqual(output.read_bytes(), data)
+
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow is not installed")
+    def test_download_rejects_non_https_oversized_html_and_extension_mismatch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            with self.assertRaisesRegex(capture_resource_image.CaptureError, "direct HTTPS"):
+                capture_resource_image.download_image("http://example.org/image.png", root / "image.png")
+
+            data = make_png()
+            with patch.object(
+                capture_resource_image,
+                "_open_https_request",
+                return_value=FakeImageResponse(data),
+            ):
+                with self.assertRaisesRegex(capture_resource_image.CaptureError, "exceeds"):
+                    capture_resource_image.download_image(
+                        "https://example.org/image.png", root / "oversized-capture.png", max_bytes=len(data) - 1
+                    )
+
+            html = FakeImageResponse(b"<html>not an image</html>", "text/html")
+            with patch.object(capture_resource_image, "_open_https_request", return_value=html):
+                with self.assertRaisesRegex(capture_resource_image.CaptureError, "Content-Type"):
+                    capture_resource_image.download_image(
+                        "https://example.org/page", root / "page.png"
+                    )
+
+            with patch.object(
+                capture_resource_image,
+                "_open_https_request",
+                return_value=FakeImageResponse(data),
+            ):
+                with self.assertRaisesRegex(capture_resource_image.CaptureError, "extension is .jpg"):
+                    capture_resource_image.download_image(
+                        "https://example.org/image.png", root / "image-capture-mismatch.jpg"
+                    )
+
+    def test_redirect_handler_rejects_every_non_https_hop(self) -> None:
+        handler = capture_resource_image.HttpsOnlyRedirectHandler()
+        request = capture_resource_image.urllib.request.Request("https://example.org/start")
+        with self.assertRaisesRegex(capture_resource_image.CaptureError, "redirected away from"):
+            handler.redirect_request(
+                request,
+                io.BytesIO(),
+                302,
+                "Found",
+                email.message.Message(),
+                "http://example.org/image.png",
+            )
+
+    def test_write_open_error_does_not_delete_existing_asset(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "existing.png"
+            original = b"keep this existing asset"
+            output.write_bytes(original)
+            with patch.object(Path, "open", autospec=True, side_effect=PermissionError("blocked")):
+                with self.assertRaises(PermissionError):
+                    capture_resource_image._write_new(output, b"replacement")
+            self.assertEqual(output.read_bytes(), original)
+
+    @unittest.skipUnless(importlib.util.find_spec("PIL"), "Pillow is not installed")
+    def test_download_rejects_images_over_pixel_limit_before_decode(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "pixel-limit-check.png"
+            data = make_png()
+            fake_image = MagicMock()
+            fake_image.format = "PNG"
+            fake_image.size = (capture_resource_image.MAX_IMAGE_PIXELS + 1, 1)
+            fake_context = MagicMock()
+            fake_context.__enter__.return_value = fake_image
+            with patch.object(capture_resource_image, "_open_https_request", return_value=FakeImageResponse(data)):
+                with patch("PIL.Image.open", return_value=fake_context):
+                    with self.assertRaisesRegex(capture_resource_image.CaptureError, "pixel decoding limit"):
+                        capture_resource_image.download_image("https://example.org/image.png", output)
+            self.assertFalse(output.exists())
+
+    @unittest.skipUnless(HAS_PDFIUM_AND_PIL, "pypdfium2 and Pillow are not installed")
+    def test_pdf_page_and_crop_render_to_png_with_page_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            source = root / "source.pdf"
+            make_pdf(source, ["Controller compares the measured output to the reference."])
+            output = root / "figures" / "controller-page.png"
+            result = capture_resource_image.render_pdf_page(source, 1, output, scale=1, crop=(50, 50, 200, 180))
+            self.assertEqual(result["pdf_page"], 1)
+            self.assertEqual(result["crop_pixels"], [50, 50, 200, 180])
+            from PIL import Image
+
+            with Image.open(output) as image:
+                self.assertEqual(image.size, (150, 130))
+                self.assertEqual(image.format, "PNG")
+            with self.assertRaisesRegex(capture_resource_image.CaptureError, "has 1 pages"):
+                capture_resource_image.render_pdf_page(source, 2, root / "missing.png")
+            with self.assertRaisesRegex(capture_resource_image.CaptureError, "exceed .* pixels"):
+                capture_resource_image.render_pdf_page(source, 1, root / "oversized.png", scale=8)
+            with self.assertRaisesRegex(capture_resource_image.CaptureError, "crop must fit"):
+                capture_resource_image.render_pdf_page(
+                    source, 1, root / "invalid-crop.png", scale=1, crop=(0, 0, 5000, 100)
+                )
 
 
 if __name__ == "__main__":

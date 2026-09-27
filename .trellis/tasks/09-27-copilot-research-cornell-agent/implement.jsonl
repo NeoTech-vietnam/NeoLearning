@@ -6,3 +6,5 @@
 {"file": ".github/skills/research-to-cornell-notes/references/source-quality.md", "reason": "Document primary-source preferences, citation anchors, and honest extraction coverage."}
 {"file": ".github/skills/research-to-cornell-notes/requirements.txt", "reason": "Pin skill-scoped pypdf and Tree-sitter grammar dependencies."}
 {"file": ".vscode/mcp.json", "reason": "Add official GitHub MCP read-only endpoint with only file-content and code-search tools; preserve mcp_boilerplate."}
+{"file": ".trellis/tasks/09-27-copilot-research-cornell-agent/research/figures-and-image-assets.md", "reason": "Use research findings on local figures, permissions, PDF rendering, and validation."}
+{"file": ".github/skills/research-to-cornell-notes/references/visual-figures.md", "reason": "Define the visual selection, reuse, capture, caption, and provenance contract."}

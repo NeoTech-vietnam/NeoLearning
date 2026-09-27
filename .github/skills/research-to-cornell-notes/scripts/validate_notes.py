@@ -8,7 +8,7 @@ import csv
 import re
 import sys
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Sequence
 from urllib.parse import unquote
 
@@ -35,6 +35,7 @@ REQUIRED_HEADINGS = (
 )
 HEADING = re.compile(r"^#{1,6}\s+(.+?)\s*$", re.MULTILINE)
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\((<[^>]+>|[^)\s]+)(?:\s+[^)]*)?\)")
+MARKDOWN_IMAGE = re.compile(r"!\[(?P<alt>[^\]]*)\]\((?P<target><[^>]+>|[^)\s]+)(?:\s+[^)]*)?\)")
 PLACEHOLDER = re.compile(
     r"(?i)(?:\bplaceholder\b|\bTODO\b|\bTBD\b|\bto be completed\b|"
     r"\binsert (?:text|topic|date|source|content)\b|\breplace with\b|"
@@ -46,6 +47,10 @@ FILE_ANCHOR = re.compile(
     r"\.(?:c|cc|cpp|cxx|h|hpp|hxx|py)\s*(?::|,|\s)+(?:l(?:ine)?s?\s*)?\d+)"
 )
 LINE_FRAGMENT = re.compile(r"(?i)^L\d+(?:-L?\d+)?$")
+IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp"}
+ALT_PLACEHOLDERS = {"image", "picture", "figure", "diagram", "photo", "screenshot", "alt text"}
+FIGURE_SOURCE_FIELDS = ("creator:", "title:", "original:", "reuse:", "changes:")
+FIGURE_CAPTION_PREFIX = r"(?:Figure|Fig\.?|Hình|Ảnh|Figura|Abbildung|Imagem|Image|Imagen|図|图|圖|그림)"
 
 
 def _normalize_anchor(heading: str) -> str:
@@ -107,6 +112,90 @@ def validate_links(note_path: Path, text: str) -> list[str]:
                 continue
             if not LINE_FRAGMENT.fullmatch(fragment) and fragment not in _markdown_anchors(destination_text):
                 errors.append(f"{note_path}: broken Markdown anchor {target}")
+    return errors
+
+
+def validate_figures(note_path: Path, text: str) -> list[str]:
+    """Check that embedded figures are local, described, captioned, and sourced."""
+    errors: list[str] = []
+    notes_heading = re.search(r"(?m)^### Notes Section \(Main Notes\)\s*$", text)
+    summary_heading = re.search(r"(?m)^### Summary Section \(Summary of Notes\)\s*$", text)
+    if not notes_heading or not summary_heading or summary_heading.start() <= notes_heading.end():
+        return errors
+    notes_text = text[notes_heading.end() : summary_heading.start()]
+    sources_match = re.search(r"(?im)^\s*(?:#{3,6}\s+Sources|\*\*Sources\*\*)\s*$", notes_text)
+    source_entries: dict[str, str] = {}
+    if sources_match:
+        source_text = notes_text[sources_match.end() :]
+        source_entries = {
+            source_id: entry
+            for source_id, entry in re.findall(
+                r"(?im)^\s*(?:[-*+]\s*)?\[(S\d+)\]\s+(.+)$", source_text
+            )
+        }
+
+    lines = text.splitlines()
+    for match in MARKDOWN_IMAGE.finditer(text):
+        line_number = text.count("\n", 0, match.start()) + 1
+        prefix = f"{note_path}:{line_number}"
+        if not notes_heading.end() <= match.start() < summary_heading.start():
+            errors.append(f"{prefix}: embedded figures must appear inside the Notes Section")
+
+        alt = match.group("alt").strip()
+        words = re.findall(r"[\w'-]+", alt, flags=re.UNICODE)
+        if alt.casefold() in ALT_PLACEHOLDERS or len(alt) < 12 or len(words) < 3:
+            errors.append(f"{prefix}: figure needs descriptive alt text (at least three meaningful words)")
+
+        target = match.group("target").strip()
+        if target.startswith("<") and target.endswith(">"):
+            target = target[1:-1]
+        target = unquote(target)
+        if target.startswith(("http://", "https://", "//", "data:")):
+            errors.append(f"{prefix}: embedded figures must use a local relative image file")
+        else:
+            local_target = target.partition("#")[0]
+            if Path(local_target).is_absolute() or PureWindowsPath(local_target).is_absolute():
+                errors.append(f"{prefix}: embedded figures must use a local relative image file")
+            else:
+                note_dir = note_path.resolve().parent
+                image_path = (note_dir / local_target).resolve()
+                try:
+                    image_path.relative_to(note_dir)
+                except ValueError:
+                    errors.append(f"{prefix}: embedded figure must stay inside the note directory")
+            if Path(local_target).suffix.lower() not in IMAGE_EXTENSIONS:
+                errors.append(f"{prefix}: embedded figure must use a PNG, JPEG, or WebP file")
+
+        image_line_index = line_number - 1
+        caption_line_index = image_line_index + 1
+        while caption_line_index < len(lines) and not lines[caption_line_index].strip():
+            caption_line_index += 1
+        if caption_line_index >= len(lines):
+            errors.append(f"{prefix}: figure needs an adjacent numbered caption with a source ID")
+            continue
+
+        caption = lines[caption_line_index].strip().strip("*_ ")
+        if not re.match(rf"(?i)^{FIGURE_CAPTION_PREFIX}\s+\d+[.:]\s+\S", caption):
+            errors.append(f"{prefix}: figure needs an adjacent numbered caption with a source ID")
+            continue
+        caption_sources = set(re.findall(r"\[(S\d+)\]", caption))
+        if not caption_sources:
+            errors.append(f"{note_path}:{caption_line_index + 1}: figure caption must cite a listed source ID")
+            continue
+        for source_id in sorted(caption_sources):
+            entry = source_entries.get(source_id)
+            if entry is None:
+                errors.append(f"{note_path}:{caption_line_index + 1}: figure caption source {source_id} is not declared in Sources")
+                continue
+            lowered = entry.casefold()
+            missing_fields = [field[:-1] for field in FIGURE_SOURCE_FIELDS if field not in lowered]
+            if missing_fields:
+                errors.append(
+                    f"{note_path}: figure source {source_id} must record: {', '.join(missing_fields)}"
+                )
+            if not MARKDOWN_LINK.search(entry) and not re.search(r"https?://\S+", entry):
+                errors.append(f"{note_path}: figure source {source_id} needs an original source link")
+
     return errors
 
 
@@ -258,6 +347,7 @@ def validate_note(note_path: Path, repo_root: Path, coverage_csv: Path | None = 
         if any(not (MARKDOWN_LINK.search(entry) or re.search(r"https?://\S+", entry)) for entry in source_entries):
             errors.append(f"{note_path}: each Sources entry needs a Markdown link or direct URL")
     errors.extend(validate_links(note_path, text))
+    errors.extend(validate_figures(note_path, text))
 
     if coverage_csv:
         errors.extend(validate_coverage(coverage_csv.expanduser().resolve(), repo_root))

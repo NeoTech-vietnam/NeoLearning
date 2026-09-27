@@ -1,6 +1,6 @@
 ---
 name: research-to-cornell-notes
-description: Answer single-topic learning requests from existing NeoLearning notes when covered; otherwise research embedded-systems and mechatronics topics from selected public and local sources and create or update source-grounded Cornell notes. Use for a topic name or question, curriculum research, PDF/code citations, or multi-part coverage ledgers.
+description: Answer single-topic learning requests from existing NeoLearning notes when covered; otherwise research embedded-systems and mechatronics topics from selected public and local sources and create or update source-grounded Cornell notes with useful cited figures. Use for a topic name or question, curriculum research, PDF/code citations, source figures, or multi-part coverage ledgers.
 ---
 
 # Research to Cornell Notes
@@ -40,17 +40,19 @@ Keep this decision and response model-neutral. Do not expose hidden reasoning; g
 
 5. **Synthesize with traceable claims.** Answer each research question in the outline, using retrieved evidence rather than unsupported recall. Keep a compact source ledger while researching: source ID, title, source date/version, URL or repository path, evidence anchors, and the claims it supports. Label interpretation as synthesis and distinguish it from directly stated source facts. Do not copy long passages.
 
-6. **Write or update the note.** Follow [the Cornell note contract](./references/cornell-note-contract.md) and the repository's [topic-neutral Cornell asset](../generate-esp-idf-peripheral-notes/assets/cornell-note.md). Use that asset's headings and ordering without invoking the specialized ESP-IDF workflow. Preserve useful existing content. Put claim citations such as `[S1]` and a matching `#### Sources` list inside the Notes section; the validator checks this structure. If a new topic folder is required, confirm its placement from the roadmap and update its parent `README.md`.
+6. **Select useful figures during full research.** Inspect the cited local resources and public source pages for diagrams, waveforms, charts, or component photos that materially clarify a note claim. Follow [visual figure selection and capture](./references/visual-figures.md) for reuse checks, direct-image downloads, PDF page/crop rendering, local relative paths, and provenance. This step belongs only to the full research path; never run it for the existing-note fast path. Skip decorative or redundant images, and explain when no suitable figure is available.
 
-7. **Track broad coverage.** For comprehensive multi-part sources, maintain the optional CSV ledger with `source_path,unit_id,unit_kind,unit_ref,start_line,end_line,extraction_status,documentation_status,note_path`. Distinguish `completed`, `unreadable`, and `unprocessed` documentation states. Mark only evidence actually incorporated as completed; never mark low-text PDF units completed. Preserve existing status and note mappings when refreshing the ledger. Do not create a ledger for an ordinary single-topic note unless requested.
+7. **Write or update the note.** Follow [the Cornell note contract](./references/cornell-note-contract.md) and the repository's [topic-neutral Cornell asset](../generate-esp-idf-peripheral-notes/assets/cornell-note.md). Use that asset's headings and ordering without invoking the specialized ESP-IDF workflow. Preserve useful existing content. Put claim citations such as `[S1]` and a matching `#### Sources` list inside the Notes section; place a selected figure beside the claim it illustrates. If a new topic folder is required, confirm its placement from the roadmap and update its parent `README.md`.
 
-8. **Validate before finishing.** Open each external source URL with web tools and check that it reaches the intended source; if access prevents a check, record that limitation. The validator checks local file links and Markdown anchors, not remote URL availability. Run it and repair every reported error:
+8. **Track broad coverage.** For comprehensive multi-part sources, maintain the optional CSV ledger with `source_path,unit_id,unit_kind,unit_ref,start_line,end_line,extraction_status,documentation_status,note_path`. Distinguish `completed`, `unreadable`, and `unprocessed` documentation states. Mark only evidence actually incorporated as completed; never mark low-text PDF units completed. Preserve existing status and note mappings when refreshing the ledger. Do not create a ledger for an ordinary single-topic note unless requested.
+
+9. **Validate before finishing.** Open each external source URL with web tools and check that it reaches the intended source; if access prevents a check, record that limitation. The validator checks local file links and Markdown anchors, not remote URL availability or the truth of license claims. Run it and repair every reported error:
 
    ```powershell
    python .github/skills/research-to-cornell-notes/scripts/validate_notes.py "<note.md>" --repo-root .
    ```
 
-   When a coverage ledger is part of the deliverable, also pass `--coverage-csv "<coverage.csv>"`. Confirm the note's headings, date, placeholders, links, in-Notes citations, and ledger statuses. Report changed paths, sources used, uncovered units, and the validation result.
+   When a coverage ledger is part of the deliverable, also pass `--coverage-csv "<coverage.csv>"`. Confirm the note's headings, date, placeholders, links, in-Notes citations, figure files/alt text/captions/source IDs, and ledger statuses. Report changed paths, sources used, uncovered units, and the validation result.
 
 ## Guardrails
 
