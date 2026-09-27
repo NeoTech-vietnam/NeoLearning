@@ -1,0 +1,8 @@
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Review reusable patterns, scope boundaries, and preservation of existing repository files."}
+{"file": ".trellis/tasks/09-27-copilot-research-cornell-agent/research/copilot-platform-capabilities.md", "reason": "Verify Copilot frontmatter, MCP surface choice, and research-method mapping against sources."}
+{"command": "& \"$env:TEMP\\neolearning-research-tools\\Scripts\\python.exe\" -m unittest discover -s '.github/skills/research-to-cornell-notes/tests' -v", "result": "8 tests passed with pinned pypdf and Tree-sitter dependencies; exercised sparse PDF gaps, page/line anchors, C/C++/Python syntax chunks, coverage preservation, Cornell order, source lists, links, and placeholders."}
+{"command": "git diff --check", "result": "Passed; only Git autocrlf notice for .vscode/mcp.json."}
+{"command": "python ./.trellis/scripts/task.py validate 09-27-copilot-research-cornell-agent", "result": "Passed; implement.jsonl and check.jsonl are valid."}
+{"command": "PowerShell ConvertFrom-Json assertion on .vscode/mcp.json", "result": "Passed; retained mcp_boilerplate and verified readonly endpoint with get_file_contents/search_code allowlist."}
+{"command": "Trellis check review of the fast-path instructions", "result": "Passed; bare topic names trigger lookup, only substantive coverage takes the fast path, explicit research/update/current-source/comprehensive requests bypass it, and the original research workflow remains intact. Live VS Code invocation not verified in this session."}
+{"command": "python ./.trellis/scripts/task.py validate 09-27-copilot-research-cornell-agent", "result": "Passed after the fast-path requirements update."}

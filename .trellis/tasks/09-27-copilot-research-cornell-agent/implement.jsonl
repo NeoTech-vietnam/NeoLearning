@@ -1,0 +1,8 @@
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Apply existing-code search and keep this repo-level agent additive to specialized skills."}
+{"file": ".trellis/tasks/09-27-copilot-research-cornell-agent/research/copilot-platform-capabilities.md", "reason": "Use verified Copilot, MCP, RAG-method, and Tree-sitter integration constraints."}
+{"file": ".github/agents/research-notes.agent.md", "reason": "Add the single VS Code Copilot research agent with scoped local, web, script, and read-only GitHub tools."}
+{"file": ".github/skills/research-to-cornell-notes/SKILL.md", "reason": "Define source-grounded STORM, GPT Researcher, and PaperQA2-inspired workflow and Cornell note writing."}
+{"file": ".github/skills/research-to-cornell-notes/references/cornell-note-contract.md", "reason": "Define topic-neutral Cornell order, in-Notes [S#] citations, and source references."}
+{"file": ".github/skills/research-to-cornell-notes/references/source-quality.md", "reason": "Document primary-source preferences, citation anchors, and honest extraction coverage."}
+{"file": ".github/skills/research-to-cornell-notes/requirements.txt", "reason": "Pin skill-scoped pypdf and Tree-sitter grammar dependencies."}
+{"file": ".vscode/mcp.json", "reason": "Add official GitHub MCP read-only endpoint with only file-content and code-search tools; preserve mcp_boilerplate."}
