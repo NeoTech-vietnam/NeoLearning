@@ -8,10 +8,16 @@ import { QuestPage } from "../quests";
 import { Skeleton } from "../ui";
 import { editorHash, parseHashRoute, type AppRoute } from "./routes";
 import "./app.css";
+import { ExplorerProvider, ExplorerBadge, ExplorerPanel } from "../explorer/Explorer";
+import { DiscoveryCompass } from "../atlas/DiscoveryCompass";
 
 const EditorPage = lazy(() => import("../editor/EditorPage").then((module) => ({ default: module.EditorPage })));
 
 export function App() {
+  return <ExplorerProvider><Application /></ExplorerProvider>;
+}
+
+function Application() {
   const [route, setRoute] = useState<AppRoute>(() => parseHashRoute(window.location.hash));
   useEffect(() => {
     const updateRoute = () => setRoute(parseHashRoute(window.location.hash));
@@ -26,6 +32,7 @@ export function App() {
   return <div className="application">
     <header className="application__bar">
       <a className="application__brand" href="#/">NeoLearning</a>
+      <ExplorerBadge />
       <nav aria-label="Primary navigation">
         <a aria-current={route.name === "atlas" ? "page" : undefined} href="#/atlas">Atlas</a>
         <a aria-current={route.name === "quests" ? "page" : undefined} href="#/quests">Quests</a>
@@ -75,6 +82,8 @@ function HomePage() {
         <a href={editorHash(reviewItems[0].lessonPath)}>Review lesson →</a>
       </aside>}
       <p aria-live="polite" className={`health health--${health}`}>Local API: {health}</p>
+      <ExplorerPanel />
+      <DiscoveryCompass />
     </section>
   </main>;
 }

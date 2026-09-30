@@ -2,6 +2,7 @@
 id: environmental-watchtower
 title: Hành trình Trạm Quan trắc
 level: intermediate
+ordered: true
 problem: Thiết kế một trạm quan trắc nhỏ đi từ mạch cảm biến tới firmware, kiểm thử và truyền số đo qua mạng.
 destination: Một thiết bị đo môi trường lấy mẫu định kỳ, truyền số đo qua mạng và có bằng chứng kiểm thử đầu cuối.
 regions:

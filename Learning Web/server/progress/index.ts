@@ -117,6 +117,7 @@ export function expandedQuestProgress(quest: Quest, stored: QuestProgress | unde
 
 export class ProgressStore {
   readonly filePath: string;
+  private pending: Promise<unknown> = Promise.resolve();
 
   constructor(filePath = path.join(process.env.NEOLEARNING_DATA_ROOT ?? path.resolve(process.cwd(), ".data"), "progress.json")) {
     this.filePath = filePath;
@@ -151,6 +152,12 @@ export class ProgressStore {
   }
 
   async setMilestone(quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string, journal?: QuestJournalEntry): Promise<QuestProgress> {
+    const operation = this.pending.then(() => this.updateMilestone(quest, milestoneId, status, evidence, journal));
+    this.pending = operation.then(() => undefined, () => undefined);
+    return operation;
+  }
+
+  private async updateMilestone(quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string, journal?: QuestJournalEntry): Promise<QuestProgress> {
     const milestone = quest.milestones.find((item) => item.id === milestoneId);
     if (!milestone) throw new ProgressValidationError(`Unknown milestone: ${milestoneId}`);
     if (!isStatus(status)) throw new ProgressValidationError("Milestone status is invalid.");
@@ -162,6 +169,11 @@ export class ProgressStore {
     const normalizedJournal = journal === undefined ? undefined : validateJournal(journal);
     const state = await this.readState();
     const previous = state.quests[quest.id] ?? { milestones: {} };
+    if (quest.ordered && status !== "not-started") {
+      const blocked = quest.milestones.find((item) => item.required && item.order < milestone.order &&
+        (previous.milestones[item.id]?.status !== "complete" || (item.evidenceRequired && !previous.milestones[item.id]?.evidence?.trim())));
+      if (blocked) throw new ProgressValidationError(`Finish ${blocked.title} before starting this stage.`);
+    }
     const next: QuestProgress = {
       milestones: {
         ...previous.milestones,

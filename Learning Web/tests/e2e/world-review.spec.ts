@@ -181,6 +181,9 @@ test("level-3 hover, focus, and opening inspect the deepest folder with parent b
   await expect(card).toContainText("Design Patterns");
   await expect(card).toContainText("Software Empire / Programming / Patterns · Level 3");
   await expect(page.locator('.world-map__review-boundary[data-review-active="true"]')).toHaveCount(2);
+  // Clear pointer hover before switching input modes: keyboard focus can scroll
+  // the map and leave the stationary pointer over a different polygon.
+  await page.mouse.move(0, 0);
   await region.focus();
   await expect(card).toContainText("Design Patterns");
   await region.press("Enter");

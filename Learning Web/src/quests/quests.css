@@ -28,3 +28,20 @@
 .quest-detail__journal { display: grid; gap: var(--space-2); min-width: 0; margin: 0; padding: var(--space-3); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); }
 .quest-detail__journal legend { font-weight: 900; }
 .quest-detail__journal textarea { width: 100%; min-height: 4.5rem; padding: var(--space-2); color: var(--color-ink); background: var(--color-surface-raised); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); font: inherit; resize: vertical; }
+
+.expedition-brief { display: grid; gap: 1rem; padding: 1.3rem; background: var(--color-surface); border: 1px solid var(--color-accent); border-radius: 1rem; }
+.expedition-brief__trail { display: flex; flex-wrap: wrap; gap: .6rem; }
+.expedition-brief__trail a { display: grid; place-items: center; min-width: 44px; min-height: 44px; border: 1px solid var(--color-border); border-radius: 50%; text-decoration: none; background: var(--color-surface-muted); color: var(--color-ink); font-weight: 800; }
+.expedition-brief__trail [data-checkpoint="true"] { border-radius: .5rem; border-width: 2px; }
+.expedition-brief__trail [data-complete="true"] { background: var(--color-action); color: var(--color-action-text); }
+.expedition-brief__trail [aria-current="step"] { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+.expedition-brief__controls { display: flex; justify-content: space-between; align-items: center; gap: .8rem; flex-wrap: wrap; }
+.quest-detail__milestone[data-current="true"] { border-left: .35rem solid var(--color-accent); }
+.quest-detail__milestone[data-complete="true"] { border-left: .35rem solid var(--color-action); }
+.field-clue { display: grid; gap: .8rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
+.field-clue fieldset { display: grid; gap: .6rem; border: 0; padding: 0; margin: 0; }
+.field-clue label { display: flex; align-items: center; gap: .6rem; min-height: 44px; background: var(--color-surface-muted); border-radius: .4rem; padding: .65rem; cursor: pointer; }
+.field-clue button { min-height: 44px; justify-self: start; background: var(--color-action); color: var(--color-action-text); border: 0; border-radius: .5rem; padding: .6rem 1rem; font: inherit; cursor: pointer; }
+.field-clue button:disabled { opacity: .6; cursor: default; }
+.field-clue [data-correct="true"] { border-left: .25rem solid var(--color-action); padding-left: .75rem; }
+.field-clue input:focus-visible, .field-clue button:focus-visible, .expedition-brief a:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; }

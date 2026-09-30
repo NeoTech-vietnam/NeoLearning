@@ -10,6 +10,10 @@ and a list of scalar milestone maps. Required fields are `id`, `title`,
 `regions`, `knowledgeLinks`, `milestones`, and `completionCriteria`.
 Optional `destination` names the working outcome; each milestone may add a
 `challenge` action beside its learning description.
+Optional `ordered: true` requires earlier required stages to be completed before
+starting/completing later ones. It does not lock knowledge links or the Atlas;
+omitting it preserves the existing unordered behavior. Existing progress is
+not rewritten. Evidence-required checkpoints still require explicit evidence.
 
 ```yaml
 ---
@@ -18,6 +22,7 @@ title: Human-readable title
 level: beginner | intermediate | advanced
 problem: What the learner will solve
 destination: The working artifact or demonstrated outcome
+ordered: true
 regions:
   - content:02-software
 knowledgeLinks:

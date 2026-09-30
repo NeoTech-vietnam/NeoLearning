@@ -62,6 +62,7 @@ export function QuestPage({ questId }: { questId?: string }) {
       });
       if (!response.ok) throw new Error(`Progress update failed with ${response.status}.`);
       const payload = await response.json() as SetMilestoneProgressResponse;
+      window.dispatchEvent(new Event("neolearning:progress"));
       setState((current) => current.status === "ready" ? {
         ...current,
         progressByQuest: { ...current.progressByQuest, [quest.id]: payload.progress }
@@ -75,6 +76,7 @@ export function QuestPage({ questId }: { questId?: string }) {
     {selected ? <>
       {saveError && <ErrorState title="Progress not saved">{saveError} Try again.</ErrorState>}
       <QuestDetail
+        key={selected.id}
         evidenceByMilestone={evidenceByMilestone}
         onBack={() => { setSaveError(undefined); setSelected(undefined); window.location.hash = "#/quests"; }}
         onMilestoneChange={(milestoneId, status, evidence, journal) => updateMilestone(selected, milestoneId, status, evidence, journal)}

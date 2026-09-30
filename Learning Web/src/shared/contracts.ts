@@ -60,6 +60,8 @@ export interface Quest {
   level?: string;
   problem?: string;
   destination?: string;
+  /** Required stages must be completed in order; knowledge remains freely accessible. */
+  ordered?: boolean;
   regionIds: string[];
   knowledgeLinks: string[];
   milestones: QuestMilestone[];

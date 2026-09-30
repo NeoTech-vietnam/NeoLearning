@@ -19,11 +19,13 @@ export interface NestedMapProps {
   routeStops?: QuestRouteStop[];
   stateFor?: (path?: string) => TerritoryState;
   nextStop?: QuestRouteStop;
+  completedMilestoneIds?: string[];
+  activeMilestoneId?: string;
   onContinue?: () => void;
   onSelect: (node: ContentNode) => void;
 }
 
-export function NestedMap({ country, countryIndex, focus, selectedPath, routeStops = [], onSelect, stateFor, nextStop, onContinue }: NestedMapProps) {
+export function NestedMap({ country, countryIndex, focus, selectedPath, routeStops = [], onSelect, stateFor, nextStop, onContinue, completedMilestoneIds = [], activeMilestoneId }: NestedMapProps) {
   const [enteringPath, setEnteringPath] = useState<string>();
   const navigationTimer = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => {
@@ -121,6 +123,8 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
       </svg>
       <svg aria-hidden="true" className="atlas-nested-map__roads" viewBox="0 0 100 100" preserveAspectRatio="none">
         {routeSegments.map((points, index) => <polyline key={index} points={points.join(" ")} />)}
+        {localStops.slice(1).flatMap((point, index) => point.number === localStops[index].number + 1 && completedMilestoneIds.includes(point.stop.milestoneId) && completedMilestoneIds.includes(localStops[index].stop.milestoneId)
+          ? [<line key={point.stop.key} className="quest-road-complete" x1={localStops[index].position.x} y1={localStops[index].position.y} x2={point.position.x} y2={point.position.y} />] : [])}
       </svg>
       {focus.children.map((child, index) => {
         const position = positions[index];
@@ -133,6 +137,7 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
           data-route={markers.length > 0}
           data-learning-state={stateFor?.(child.relativePath)}
           data-next={nextStop?.trail.some((node) => node.id === child.id)}
+          data-explorer={localStops.some((item) => item.territoryPath === child.relativePath && item.stop.milestoneId === activeMilestoneId)}
           data-compact={Boolean(position.compactLabel)}
           data-entering={child.relativePath === enteringPath}
           data-tooltip={child.title}
@@ -143,7 +148,7 @@ export function NestedMap({ country, countryIndex, focus, selectedPath, routeSto
           type="button"
         >
           {markers.length > 0
-            ? <span aria-hidden="true" className="atlas-territory__route-stops">{markers.map((number) => <i key={number}>{number}</i>)}</span>
+            ? <span aria-hidden="true" className="atlas-territory__route-stops">{markers.map((number) => <i data-complete={completedMilestoneIds.includes(routeStops[number - 1].milestoneId)} key={number}>{completedMilestoneIds.includes(routeStops[number - 1].milestoneId) ? "✓" : number}</i>)}<b className="quest-explorer-token">◈</b></span>
             : <span className="atlas-territory__number">{String(index + 1).padStart(2, "0")}</span>}
           <strong>{child.title}</strong>
           <small>{child.unindexed ? "Uncharted" : child.kind}</small>

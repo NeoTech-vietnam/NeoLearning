@@ -19,7 +19,7 @@ export function ActivityCard({ activity, progress, questEvidence, onAttempt }: {
   const submit = async (response: unknown) => {
     setPending(true);
     setError(undefined);
-    try { setResult(await onAttempt(activity.id, response)); }
+    try { setResult(await onAttempt(activity.id, response)); window.dispatchEvent(new Event("neolearning:progress")); }
     catch (cause) { setError(cause instanceof Error ? cause.message : "Activity could not be saved."); }
     finally { setPending(false); }
   };

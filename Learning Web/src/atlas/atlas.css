@@ -216,3 +216,12 @@
 @media (prefers-reduced-motion: reduce) {
   .world-map__review-region, .world-map__review-parent { animation: none; transition: none; }
 }
+/* Expedition states remain distinct from knowledge-coverage states. */
+.world-map__quest-marker[data-complete="true"], .atlas-territory__route-stops i[data-complete="true"] { background: #285645; color: #fff0c0; border-color: #f0c96a; }
+.quest-explorer-token { display: none; }
+[data-explorer="true"] .quest-explorer-token { display: inline-block; margin-left: .25rem; color: #ffe69d; text-shadow: 0 1px 3px #000; }
+.world-map__quest-marker[data-explorer="true"] { outline: 3px solid #fff0a8; outline-offset: 4px; box-shadow: 0 0 18px #edc45f; animation: quest-explorer-glow 2s ease-in-out infinite alternate; }
+.world-map__quest-road--complete { stroke: #f3db83; stroke-dasharray: none; filter: drop-shadow(0 0 3px #f3db83); }
+.atlas-nested-map__roads .quest-road-complete { stroke: #f3db83; stroke-width: .7; stroke-dasharray: none; }
+@keyframes quest-explorer-glow { to { box-shadow: 0 0 28px #fff0a8; } }
+@media (prefers-reduced-motion: reduce) { .world-map__quest-marker[data-explorer="true"] { animation: none; } }

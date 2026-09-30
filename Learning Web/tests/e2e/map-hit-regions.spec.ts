@@ -4,6 +4,8 @@ test("keeps map artwork and the six-country hit layer aligned", async ({ page })
   await page.goto("/#/atlas");
   const map = page.locator(".world-map");
   await expect(map.locator(".world-map__country")).toHaveCount(6);
+  // Toolbar content can grow; hit testing must use a point inside the viewport.
+  await map.scrollIntoViewIfNeeded();
 
   const box = await map.boundingBox();
   expect(box).not.toBeNull();

@@ -37,7 +37,58 @@ requires authentication or a cloud service.
   `Example`/`Examples` directory branches (including numbered names such as
   `02_example`) are omitted from the content index for now.
 - Not in MVP: authentication, cloud sync, multiplayer, mobile editor, achievements,
-  firmware compilation, or automatic Git commits.
+  firmware compilation, or automatic Git commits. Personal EXP and check-in are
+  now implemented as a post-MVP extension below.
+
+## Discovery Compass
+
+Use **Discover randomly** on Home or Atlas to spin a one-second compass and open
+a small territory in Explore mode. It selects an eligible country uniformly,
+then a terminal subfolder uniformly inside it, so the larger Software country
+does not dominate. Eligible folders have no child folders and contain at least
+one indexed document; countries, individual files and empty folders are not
+destinations. The previous result is excluded when alternatives exist; a country
+with no remaining alternatives is skipped for that spin. A singleton destination
+can repeat. The existing index still excludes Example/Examples branches.
+
+The result shows its country/folder trail and a **Read documents here** link.
+**Spin again** draws another territory; **Cancel spin** or Escape cancels before
+navigation. Leaving the page cancels too. Reduced-motion users skip animation.
+The last result is remembered for this browser session (memory fallback if
+session storage is unavailable). Rolling grants no EXP and never marks previewed
+lands visited; the existing Atlas visit mechanism records only the opened
+destination. Quest progress is unchanged even when starting from Quest/Review.
+
+## Quest Expedition and explorer camp
+
+Home shows daily check-in, a 14-day calendar, separate check-in/learning streaks,
+level/title and inspectable reward history. EXP tracks participation, **not**
+knowledge mastery; World Review remains the coverage view. No country is locked
+by level, and missed days never remove points.
+
+Rewards: check-in 5, successful lesson activity or field clue 20, milestone 50,
+evidence-required checkpoint 100, completed quest 200 EXP. Checkpoint reward
+replaces the ordinary milestone reward. Each achievement receives credit only
+once, including previously completed catalogue entries; undo/recomplete does
+not farm points. A level is 250 EXP. Titles are Newcomer, Explorer, Pathfinder
+and Maker, not certifications.
+
+Calendar days follow `NEOLEARNING_TIME_ZONE`, default `Asia/Jakarta`, calculated
+by the server. Set it before the first check-in and keep it stable; historical
+calendar stamps are not converted when changing zones. Streaks include yesterday
+until today's opportunity ends. Learning days record successful practice or
+milestone completion, not simply opening a page. Personal reward history lives
+in gitignored `.data/explorer.json`; back it up alongside both progress files.
+Achievements synchronize on app load, completed practice and quest updates.
+A malformed ledger is never silently reset. This remains a single-person,
+single-server app, not a multi-account reward platform.
+
+Quest detail now shows a stage trail, current briefing, optional focus mode,
+checkpoint rewards and destination summary. The Watchtower route has nine
+server-graded field clues. Their EXP does **not** complete a project milestone
+or prove hardware works. Markers show current/completed stages and completed
+roads glow, with reduced-motion support. Ordered quests enforce previous
+required stages on the server; Atlas browsing remains unrestricted.
 
 ## Interactive lesson pilot
 

@@ -11,6 +11,7 @@ import { createFilesRouter } from "./routes/files.js";
 import { createLearningRouter } from "./routes/learning.js";
 import { createProgressRouter } from "./routes/progress.js";
 import { createQuestRouter } from "./routes/quests.js";
+import { createExplorerRouter } from "./routes/explorer.js";
 
 export const DEFAULT_API_HOST = "127.0.0.1";
 export const DEFAULT_API_PORT = 4174;
@@ -87,6 +88,7 @@ export function createApp(access: PreviewAccess = {
   app.use("/api/learning", createLearningRouter());
   app.use("/api/quests", createQuestRouter());
   app.use("/api/progress", createProgressRouter());
+  app.use("/api/explorer", createExplorerRouter());
   app.use(((cause, _request, response, _next) => {
     console.error("NeoLearning API request failed", cause);
     response.status(500).json({

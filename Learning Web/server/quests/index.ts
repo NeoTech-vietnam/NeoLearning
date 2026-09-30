@@ -12,6 +12,7 @@ interface RawQuest {
   level?: unknown;
   problem?: unknown;
   destination?: unknown;
+  ordered?: unknown;
   regions?: unknown;
   knowledgeLinks?: unknown;
   milestones?: unknown;
@@ -134,6 +135,7 @@ async function validateKnowledgeLink(repositoryRoot: string, link: string): Prom
 }
 
 export async function validateQuest(raw: RawQuest, repositoryRoot: string): Promise<Quest> {
+  if (raw.ordered !== undefined && typeof raw.ordered !== "boolean") throw new QuestValidationError("ordered must be boolean.");
   const id = text(raw.id, "id")!;
   if (!ID_PATTERN.test(id)) throw new QuestValidationError(`Invalid quest id: ${id}`);
   const milestones = !Array.isArray(raw.milestones) ? (() => { throw new QuestValidationError("milestones must be a list."); })() : raw.milestones.map(milestone);
@@ -151,6 +153,7 @@ export async function validateQuest(raw: RawQuest, repositoryRoot: string): Prom
   return {
     id,
     title: text(raw.title, "title")!,
+    ...(raw.ordered === true ? { ordered: true } : {}),
     ...(text(raw.level, "level", false) ? { level: text(raw.level, "level", false) } : {}),
     ...(text(raw.problem, "problem", false) ? { problem: text(raw.problem, "problem", false) } : {}),
     ...(text(raw.destination, "destination", false) ? { destination: text(raw.destination, "destination", false) } : {}),
