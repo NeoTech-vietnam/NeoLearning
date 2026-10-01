@@ -136,14 +136,27 @@ export function headingSlug(text: string): string {
 export function lessonHeadings(markdown: string): LessonHeading[] {
   const body = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
   const headings: LessonHeading[] = [];
-  let fenced = false;
+  let fence: { character: string; length: number } | undefined;
+  const occurrences = new Map<string, number>();
+  const usedSlugs = new Set<string>();
   for (const [index, line] of body.split(/\r?\n/).entries()) {
-    if (/^\s*\`{3,}/.test(line)) { fenced = !fenced; continue; }
-    if (fenced) continue;
+    const marker = /^ {0,3}(`{3,}|~{3,})/.exec(line);
+    if (marker) {
+      if (!fence) fence = { character: marker[1][0], length: marker[1].length };
+      else if (marker[1][0] === fence.character && marker[1].length >= fence.length && line.slice(marker[0].length).trim() === "") fence = undefined;
+      continue;
+    }
+    if (fence) continue;
     const match = /^(#{1,6})\s+(.+?)\s*#*\s*$/.exec(line);
     if (!match) continue;
     const text = match[2].replace(/[\`*_]/g, "").trim();
-    headings.push({ line: index + 1, depth: match[1].length, text, slug: headingSlug(text) });
+    const base = headingSlug(text) || "section";
+    let occurrence = (occurrences.get(base) ?? 0) + 1;
+    let slug = occurrence === 1 ? base : `${base}-${occurrence}`;
+    while (usedSlugs.has(slug)) { occurrence++; slug = `${base}-${occurrence}`; }
+    occurrences.set(base, occurrence);
+    usedSlugs.add(slug);
+    headings.push({ line: index + 1, depth: match[1].length, text, slug });
   }
   return headings;
 }

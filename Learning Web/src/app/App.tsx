@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import type { HealthResponse } from "../shared";
 import type { ReviewItem } from "../shared/learning";
 import { AtlasPage } from "../atlas/AtlasPage";
@@ -19,6 +19,12 @@ export function App() {
 
 function Application() {
   const [route, setRoute] = useState<AppRoute>(() => parseHashRoute(window.location.hash));
+  const view = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !view.current?.animate) return;
+    const animation = view.current.animate([{ opacity: .7, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 180, easing: "ease-out" });
+    return () => animation.cancel();
+  }, [route]);
   useEffect(() => {
     const updateRoute = () => setRoute(parseHashRoute(window.location.hash));
     window.addEventListener("hashchange", updateRoute);
@@ -38,10 +44,10 @@ function Application() {
         <a aria-current={route.name === "quests" ? "page" : undefined} href="#/quests">Quests</a>
       </nav>
     </header>
-    {route.name === "atlas" ? <AtlasPage mode={route.mode} questId={route.questId} selectedPath={route.path} />
+    <div ref={view} className="journey-view">{route.name === "atlas" ? <AtlasPage mode={route.mode} questId={route.questId} selectedPath={route.path} />
       : route.name === "quests" ? <QuestPage questId={route.questId} />
       : route.name === "editor" ? <Suspense fallback={<main className="route-loading"><Skeleton lines={8} /></main>}><EditorPage path={route.path} /></Suspense>
-      : <HomePage />}
+      : <HomePage />}</div>
   </div>;
 }
 

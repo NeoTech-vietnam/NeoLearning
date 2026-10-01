@@ -69,8 +69,7 @@ test("interactive lesson works on a phone and honors reduced motion", async ({ p
   const scan = page.locator(".pwm-lab__scan");
   await expect(scan).toHaveCSS("animation-name", "none");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy();
-  await page.getByText("Lesson sections").click();
-  await expect(page.getByRole("navigation", { name: "Lesson sections" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Document sections" })).toBeVisible();
 });
 
 

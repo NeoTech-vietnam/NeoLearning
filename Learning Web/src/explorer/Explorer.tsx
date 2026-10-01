@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { ExplorerProfile } from "../shared/explorer";
 import "./explorer.css";
+import { AnimatedExp } from "./AnimatedExp";
 
 interface ExplorerContextValue {
   profile?: ExplorerProfile; error?: string; busy: boolean; announcement?: string;
@@ -50,7 +51,7 @@ export function ExplorerProvider({ children }: { children: ReactNode }) {
 function useExplorer() { const value = useContext(Context); if (!value) throw new Error("ExplorerProvider missing"); return value; }
 export function ExplorerBadge() {
   const { profile, error } = useExplorer();
-  return <a className="explorer-badge" href="#/" aria-label="Explorer profile">{profile ? `Lv ${profile.level} · ${profile.totalExp} EXP` : error ? "EXP unavailable" : "Loading EXP…"}</a>;
+  return <a className="explorer-badge" href="#/" aria-label="Explorer profile">{profile ? <>Lv {profile.level} · <AnimatedExp value={profile.totalExp} /> EXP</> : error ? "EXP unavailable" : "Loading EXP…"}</a>;
 }
 export function ExplorerPanel() {
   const { profile, error, busy, refresh } = useExplorer();

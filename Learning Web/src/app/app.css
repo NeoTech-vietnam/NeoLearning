@@ -25,3 +25,11 @@ h1 { margin: .5rem 0; font: 600 clamp(2.5rem, 8vw, 5rem)/var(--leading-tight) va
 
 .home-page__review { display: grid; gap: var(--space-2); width: min(32rem, 100%); margin-top: var(--space-5); padding: var(--space-4); color: var(--color-ink); background: var(--color-surface-raised); border-left: .35rem solid var(--color-accent); border-radius: var(--radius-md); }
 .home-page__review a { color: var(--color-action); font-weight: 800; }
+.journey-view { min-width: 0; }
+.notebook-reader details[open] > :not(summary), .activity-card__feedback--correct { animation: journey-reveal 180ms ease-out; }
+.quest-detail__milestone[data-celebrate="true"] { animation: journey-achievement 750ms ease-out; }
+@keyframes journey-reveal { from { opacity: .6; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+@keyframes journey-achievement { 40% { box-shadow: 0 0 0 5px #d2ac5570, 0 0 24px #d2ac5540; } }
+@media (prefers-reduced-motion: reduce) {
+  .notebook-reader details[open] > :not(summary), .activity-card__feedback--correct, .quest-detail__milestone[data-celebrate="true"] { animation: none; }
+}

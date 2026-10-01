@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import type { Quest, QuestMilestone, QuestMilestoneStatus, QuestProgress, QuestJournalEntry } from "../shared";
 import type { QuestEvidenceOption } from "../shared/learning";
 import { Badge, Button, Card, Progress } from "../ui";
@@ -22,7 +22,15 @@ function MilestoneChecklist({ milestone, progress, suggestions, onChange, blocke
   const [nextMeasurement, setNextMeasurement] = useState(progress.journal?.nextMeasurement ?? "");
   const journalReady = Boolean(tried.trim() && result.trim() && nextMeasurement.trim());
   const status = progress.status;
-  return <li className="quest-detail__milestone" data-current={current} data-complete={status === "complete"}>
+  const previous = useRef(status);
+  const [celebrate, setCelebrate] = useState(false);
+  useEffect(() => {
+    if (previous.current !== "complete" && status === "complete") setCelebrate(true);
+    previous.current = status;
+    const timer = setTimeout(() => setCelebrate(false), 800);
+    return () => clearTimeout(timer);
+  }, [status]);
+  return <li className="quest-detail__milestone" data-current={current} data-complete={status === "complete"} data-celebrate={celebrate}>
     <div><h3>{milestone.order}. {milestone.title}</h3>{milestone.description && <p>{milestone.description}</p>}{milestone.challenge && <p className="quest-detail__challenge"><strong>Challenge:</strong> {milestone.challenge}</p>}</div>
     <div className="quest-detail__milestone-meta"><Badge tone={status === "complete" ? "accent" : "muted"}>{status.replace("-", " ")}</Badge>{milestone.required && <span>Required</span>}</div>
     <small>{milestone.evidenceRequired ? "Evidence checkpoint" : "Trail challenge"} · +{milestone.evidenceRequired ? EXP_REWARDS.checkpoint : EXP_REWARDS.milestone} EXP once</small>

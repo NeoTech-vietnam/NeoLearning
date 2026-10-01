@@ -215,3 +215,14 @@ integration, and browser tests.
 Map area may reflect descendant count, but every country must remain selectable.
 The current cartographic mockup represents a country-level map, not the whole
 Embedded World.
+# Explorer notebook reader
+
+Read mode now offers a field-guide TOC, current-section indicator, reading-position bar and explicit Resume reading for every Markdown file. Reading position is not mastery and does not grant EXP. Focus mode, text size, page width and paper/light/night themes are browser preferences; source editing still uses the existing conflict-aware workflow.
+
+Code blocks have copy feedback, lexical colors for common embedded languages and collapse/expand for long examples. Unknown languages remain plain text; there is no new highlighting dependency. Tables scroll inside their own region, and image dialogs support Escape and return focus. Relative raster images are served through an authenticated image-only route restricted to the document's country; SVG, traversal, external symlink targets and files over 15 MB are rejected.
+
+Select a passage within one section to save a highlight and note; section bookmarks, notes and reading positions persist in `.data/notebook.json` under `NEOLEARNING_DATA_ROOT`, separate from Markdown and learning/EXP stores. Back up this file with other progress data. The existing private deployment shares one owner's notebook across devices; no multi-user account isolation is added. Reload or return to a visible tab to fetch changes from another device. Writes are serialized within one server process and atomically replaced; corrupt storage fails visibly instead of resetting.
+
+New position/highlight/bookmark anchors require the displayed source revision. After a Markdown revision changes, old annotations remain available as detached entries rather than guessing where they belong; recreate a bookmark/highlight after reviewing the changed document. Quote highlights additionally require one unique contextual match. CSS Custom Highlight support paints saved selections; browsers without it still offer quoted notebook entries and passage navigation. Unsaved drafts pause new notebook actions.
+
+Navigation/panel transitions and activity/checkpoint feedback are brief; EXP animates only toward server totals. Reduced motion disables decorative movement. No reading, highlighting or animation changes reward rules.

@@ -1,0 +1,30 @@
+{
+  "id": "explorer-notebook",
+  "name": "explorer-notebook",
+  "title": "Explorer notebook — Reader and Motion",
+  "description": "Upgrade every Markdown reader with navigation, reading controls, annotations and accessible motion.",
+  "status": "planning",
+  "dev_type": null,
+  "scope": null,
+  "package": null,
+  "priority": "P2",
+  "creator": "hieu-tran",
+  "assignee": "hieu-tran",
+  "createdAt": "2026-10-01",
+  "completedAt": null,
+  "branch": null,
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": null,
+  "pr_url": null,
+  "subtasks": [],
+  "children": [
+    "10-01-notebook-reader",
+    "10-01-notebook-notes",
+    "10-01-notebook-motion"
+  ],
+  "parent": null,
+  "relatedFiles": [],
+  "notes": "",
+  "meta": {}
+}

@@ -21,7 +21,7 @@ test("reviews, saves, and reloads Markdown only inside the temporary fixture", a
   await page.getByRole("button", { name: "Confirm save" }).click();
   await expect(page.getByText("Saved. The content index has been refreshed.")).toBeVisible();
   await page.reload();
-  await expect(page.getByText("Updated from browser")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Updated from browser", exact: true })).toBeVisible();
 });
 
 test("keeps an unsaved draft when the server revision changes", async ({ page, request }) => {

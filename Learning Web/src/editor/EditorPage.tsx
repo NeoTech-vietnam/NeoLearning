@@ -6,6 +6,7 @@ import { Badge, Button, ErrorState, Modal, Skeleton } from "../ui";
 import { DiffReview } from "./DiffReview";
 import { MarkdownPreview } from "./MarkdownPreview";
 import { LessonReader } from "./LessonReader";
+import { NotebookReader } from "./NotebookReader";
 import "./editor.css";
 
 const MonacoEditor = lazy(() => import("./MonacoEditor").then((module) => ({ default: module.MonacoEditor })));
@@ -218,12 +219,12 @@ export function EditorPage({ path }: { path?: string }) {
     {notice && <p aria-live="polite" className="editor-notice editor-notice--success">{notice}</p>}
     {error && <p aria-live="assertive" className="editor-notice editor-notice--error">{error}</p>}
 
-    {mode === "read" && (state.lesson && !dirty
+    {mode === "read" && <NotebookReader key={state.file.relativePath} path={state.file.relativePath} revision={state.file.revision} source={draft} persist={!dirty} fallbackPosition={state.progress.lastHeading}>{state.lesson && !dirty
       ? <LessonReader lesson={state.lesson} onAttempt={attemptActivity} onPosition={savePosition} progress={state.progress} source={draft} />
-      : <MarkdownPreview source={draft} />)}
+      : undefined}</NotebookReader>}
     {mode === "split" && <div className="editor-split">
       <section aria-label="Markdown source" className="editor-source"><Suspense fallback={<Skeleton lines={6} />}><MonacoEditor height="70vh" language="markdown" onChange={(value) => { setDraft(value ?? ""); setNotice(undefined); }} options={{ ariaLabel: "Markdown source editor", automaticLayout: true, minimap: { enabled: false }, wordWrap: "on", padding: { top: 16 } }} theme="vs-light" value={draft} /></Suspense></section>
-      <MarkdownPreview source={draft} />
+      <MarkdownPreview source={draft} documentPath={state.file.relativePath} />
     </div>}
     {mode === "diff" && diff && <><DiffReview preview={diff} /><div className="editor-save-actions"><Button onClick={() => setMode("split")} variant="secondary">Back to draft</Button><Button disabled={saving || diff.conflicted} onClick={() => void save()}>{saving ? "Saving…" : "Confirm save"}</Button></div></>}
 

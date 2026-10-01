@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { RichMarkdown } from "./RichMarkdown";
 import type {
   ActivityProgress, AttemptResponse, LessonHeading, LessonProgress, PublicLessonPlan
 } from "../shared/learning";
@@ -79,9 +78,9 @@ export function LessonReader({ source, lesson, progress, onAttempt, onPosition }
     </aside>
     <article className="markdown-preview lesson-reader__body">
       {blocks.map((block, index) => block.kind === "text"
-        ? <Markdown key={`text-${index}`} remarkPlugins={[remarkGfm]} skipHtml>{block.source}</Markdown>
+        ? <div className="notebook-reader__intro" key={`text-${index}`}><RichMarkdown source={block.source} documentPath={lesson.lessonPath} /></div>
         : <div className="lesson-reader__section" data-heading-slug={block.heading.slug} id={`lesson-heading-${block.heading.line}`} key={`heading-${block.heading.line}`}>
-          <Markdown remarkPlugins={[remarkGfm]} skipHtml>{block.source}</Markdown>
+          <RichMarkdown source={block.source} documentPath={lesson.lessonPath} />
           {lesson.activities.filter((activity) => activity.afterHeading === block.heading.slug).map((activity) =>
             <ActivityCard activity={activity} key={activity.id} onAttempt={onAttempt} progress={progress.activities[activity.id]} questEvidence={lesson.questEvidence} />)}
         </div>)}

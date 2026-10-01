@@ -1,12 +1,11 @@
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+import { RichMarkdown } from "./RichMarkdown";
 
 export function markdownBody(source: string): string {
   return source.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/, "");
 }
 
-export function MarkdownPreview({ source }: { source: string }) {
+export function MarkdownPreview({ source, documentPath }: { source: string; documentPath?: string }) {
   return <article className="markdown-preview">
-    <Markdown remarkPlugins={[remarkGfm]} skipHtml>{markdownBody(source)}</Markdown>
+    <RichMarkdown source={markdownBody(source)} documentPath={documentPath} />
   </article>;
 }
