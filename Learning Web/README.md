@@ -22,6 +22,8 @@ requires authentication or a cloud service.
 
 ## Fixed product decisions
 
+Long-term direction: [Product roadmap — learning loop, offline and apps](docs/product-roadmap.md). This roadmap records proposed evolution beyond the original MVP; it does not mark future features as implemented or authorize automatic development.
+
 - Runtime: local web application opened in a desktop browser.
 - Frontend: React + TypeScript + Vite.
 - Backend: small Node.js HTTP API with access restricted to the repository root.
