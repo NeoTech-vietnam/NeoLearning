@@ -2,4 +2,5 @@ scripts/*
 *build
 *.exe
 .nimbalyst-generated
+.trellis/
 node_modules/
