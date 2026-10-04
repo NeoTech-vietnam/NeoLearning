@@ -1,0 +1,42 @@
+{
+  "id": "sequential-logic-solutions",
+  "name": "sequential-logic-solutions",
+  "title": "Solve sequential logic exercises",
+  "description": "Create and verify Vietnamese Markdown solutions for all 16 exercises in the sequential logic PDF.",
+  "status": "completed",
+  "dev_type": "documentation",
+  "scope": "07_mechatronics_engineering_master_program/05_Computer-Architecture/02_exercises",
+  "package": null,
+  "priority": "P2",
+  "creator": "Nguyen Ba Vu Thach",
+  "assignee": "Nguyen Ba Vu Thach",
+  "createdAt": "2026-10-03",
+  "completedAt": "2026-10-03",
+  "branch": "feature/05-computer-architecture",
+  "base_branch": "main",
+  "worktree_path": null,
+  "commit": "866e444be2af5d2c041f6da3a98670e6ef62b5a1",
+  "pr_url": null,
+  "subtasks": [],
+  "children": [],
+  "parent": null,
+  "relatedFiles": [
+    "07_mechatronics_engineering_master_program/05_Computer-Architecture/02_exercises/Bài tập Sequential logic.pdf",
+    "07_mechatronics_engineering_master_program/05_Computer-Architecture/02_exercises/Bai_tap_Sequential_logic_Loi_giai.md"
+  ],
+  "notes": "User approved the final plan and the one-file solution commit on 2026-10-03. All 16 exercises completed; implementation and independent review PASS. Committed only the solution as 866e444. Local task archive/journal use --no-commit to respect the approved one-file Git scope.",
+  "meta": {
+    "quality_gate": "PASS",
+    "source_pages_reviewed": 6,
+    "exercise_count": 16,
+    "independent_assertions_passed": 92606,
+    "spec_review": "No software spec update: source-specific educational designs, no app/API/infra contract change.",
+    "commit_plan": {
+      "message": "update: Add sequential logic exercise solutions",
+      "files": [
+        "07_mechatronics_engineering_master_program/05_Computer-Architecture/02_exercises/Bai_tap_Sequential_logic_Loi_giai.md"
+      ],
+      "approved": true
+    }
+  }
+}
