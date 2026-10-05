@@ -1,0 +1,2437 @@
+                                                                                3.1 ■ Background            105
+
+ 3.1    Background
+3.1.1 The Basics of Intensity Transformations and Spatial Filtering
+All the image processing techniques discussed in this section are implemented
+in the spatial domain, which we know from the discussion in Section 2.4.2 is
+simply the plane containing the pixels of an image. As noted in Section 2.6.7,
+spatial domain techniques operate directly on the pixels of an image as op-
+posed, for example, to the frequency domain (the topic of Chapter 4) in which
+operations are performed on the Fourier transform of an image, rather than on
+the image itself. As you will learn in progressing through the book, some image
+processing tasks are easier or more meaningful to implement in the spatial do-
+main while others are best suited for other approaches. Generally, spatial do-
+main techniques are more efficient computationally and require less processing
+resources to implement.
+   The spatial domain processes we discuss in this chapter can be denoted by
+the expression
+                                g(x, y) = T[ f(x, y)]                          (3.1-1)
+where f(x, y) is the input image, g(x, y) is the output image, and T is an oper-
+ator on f defined over a neighborhood of point (x, y). The operator can apply
+to a single image (our principal focus in this chapter) or to a set of images, such
+                                                                                         Other neighborhood
+as performing the pixel-by-pixel sum of a sequence of images for noise reduc-            shapes, such as digital
+tion, as discussed in Section 2.6.3. Figure 3.1 shows the basic implementation           approximations to cir-
+                                                                                         cles, are used sometimes,
+of Eq. (3.1-1) on a single image. The point (x, y) shown is an arbitrary location        but rectangular shapes
+in the image, and the small region shown containing the point is a neighbor-             are by far the most
+                                                                                         prevalent because they
+hood of (x, y), as explained in Section 2.6.5. Typically, the neighborhood is rec-       are much easier to imple-
+tangular, centered on (x, y), and much smaller in size than the image.                   ment computationally.
+
+
+
+
+               Origin                                                                    FIGURE 3.1
+                                                                           y
+                                                                                         A3 * 3
+                                                                                         neighborhood
+                                                                                         about a point
+                                                          (x, y)                         (x, y) in an image
+                                                                                         in the spatial
+                                      3  3 neighborhood of (x, y)                       domain. The
+                                                                                         neighborhood is
+                                                                                         moved from pixel
+                                                                                         to pixel in the
+                                                                                         image to generate
+                                                                                         an output image.
+
+
+                            Image f
+                                                          Spatial domain
+
+                        x
+106    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                        The process that Fig. 3.1 illustrates consists of moving the origin of the neigh-
+                    borhood from pixel to pixel and applying the operator T to the pixels in the
+                    neighborhood to yield the output at that location.Thus, for any specific location
+                    (x, y), the value of the output image g at those coordinates is equal to the result
+                    of applying T to the neighborhood with origin at (x, y) in f. For example, sup-
+                    pose that the neighborhood is a square of size 3 * 3, and that operator T is de-
+                    fined as “compute the average intensity of the neighborhood.” Consider an
+                    arbitrary location in an image, say (100, 150). Assuming that the origin of the
+                    neighborhood is at its center, the result, g(100, 150), at that location is comput-
+                    ed as the sum of f(100, 150) and its 8-neighbors, divided by 9 (i.e., the average
+                    intensity of the pixels encompassed by the neighborhood). The origin of the
+                    neighborhood is then moved to the next location and the procedure is repeated
+                    to generate the next value of the output image g. Typically, the process starts at
+                    the top left of the input image and proceeds pixel by pixel in a horizontal scan,
+                    one row at a time. When the origin of the neighborhood is at the border of the
+                    image, part of the neighborhood will reside outside the image. The procedure is
+                    either to ignore the outside neighbors in the computations specified by T, or to
+                    pad the image with a border of 0s or some other specified intensity values. The
+                    thickness of the padded border depends on the size of the neighborhood. We
+                    will return to this issue in Section 3.4.1.
+                        As we discuss in detail in Section 3.4, the procedure just described is called
+                    spatial filtering, in which the neighborhood, along with a predefined operation,
+                    is called a spatial filter (also referred to as a spatial mask, kernel, template, or
+                    window). The type of operation performed in the neighborhood determines
+                    the nature of the filtering process.
+                        The smallest possible neighborhood is of size 1 * 1. In this case, g depends
+                    only on the value of f at a single point (x, y) and T in Eq. (3.1-1) becomes an
+                    intensity (also called gray-level or mapping) transformation function of the form
+                                                                  s = T(r)                                 (3.1-2)
+                    where, for simplicity in notation, s and r are variables denoting, respectively,
+                    the intensity of g and f at any point (x, y). For example, if T(r) has the form
+                    in Fig. 3.2(a), the effect of applying the transformation to every pixel of f to
+                    generate the corresponding pixels in g would be to produce an image of
+
+
+a b                                s  T(r)                               s  T(r)
+
+FIGURE 3.2
+                            s0  T (r0)
+Intensity
+                                                                           Light
+                                    Light
+
+
+
+
+transformation
+functions.                                  T(r)                                   T (r)
+(a) Contrast-
+stretching
+function.
+                                                                           Dark
+                                    Dark
+
+
+
+
+(b) Thresholding
+function.                                                             r                                r
+                                                   k r0                                    k
+                                            Dark          Light                    Dark        Light
+                                           3.2 ■ Some Basic Intensity Transformation Functions   107
+
+higher contrast than the original by darkening the intensity levels below k
+and brightening the levels above k. In this technique, sometimes called
+contrast stretching (see Section 3.2.4), values of r lower than k are com-
+pressed by the transformation function into a narrow range of s, toward
+black. The opposite is true for values of r higher than k. Observe how an in-
+tensity value r0 is mapped to obtain the corresponding value s0. In the limit-
+ing case shown in Fig. 3.2(b), T(r) produces a two-level (binary) image. A
+mapping of this form is called a thresholding function. Some fairly simple, yet
+powerful, processing approaches can be formulated with intensity transfor-
+mation functions. In this chapter, we use intensity transformations principally
+for image enhancement. In Chapter 10, we use them for image segmentation.
+Approaches whose results depend only on the intensity at a point sometimes
+are called point processing techniques, as opposed to the neighborhood pro-
+cessing techniques discussed earlier in this section.
+
+3.1.2 About the Examples in This Chapter
+Although intensity transformations and spatial filtering span a broad range of
+applications, most of the examples in this chapter are applications to image
+enhancement. Enhancement is the process of manipulating an image so that
+the result is more suitable than the original for a specific application. The
+word specific is important here because it establishes at the outset that en-
+hancement techniques are problem oriented. Thus, for example, a method
+that is quite useful for enhancing X-ray images may not be the best approach
+for enhancing satellite images taken in the infrared band of the electromag-
+netic spectrum. There is no general “theory” of image enhancement. When an
+image is processed for visual interpretation, the viewer is the ultimate judge
+of how well a particular method works. When dealing with machine percep-
+tion, a given technique is easier to quantify. For example, in an automated
+character-recognition system, the most appropriate enhancement method is
+the one that results in the best recognition rate, leaving aside other consider-
+ations such as computational requirements of one method over another.
+   Regardless of the application or method used, however, image enhancement
+is one of the most visually appealing areas of image processing. By its very na-
+ture, beginners in image processing generally find enhancement applications in-
+teresting and relatively simple to understand. Therefore, using examples from
+image enhancement to illustrate the spatial processing methods developed in
+this chapter not only saves having an extra chapter in the book dealing with
+image enhancement but, more importantly, is an effective approach for intro-
+ducing newcomers to the details of processing techniques in the spatial domain.
+As you will see as you progress through the book, the basic material developed in
+this chapter is applicable to a much broader scope than just image enhancement.
+
+ 3.2    Some Basic Intensity Transformation Functions
+Intensity transformations are among the simplest of all image processing tech-
+niques. The values of pixels, before and after processing, will be denoted by r
+and s, respectively. As indicated in the previous section, these values are related
+108     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                       by an expression of the form s = T(r), where T is a transformation that maps a
+                       pixel value r into a pixel value s. Because we are dealing with digital quantities,
+                       values of a transformation function typically are stored in a one-dimensional
+                       array and the mappings from r to s are implemented via table lookups. For an
+                       8-bit environment, a lookup table containing the values of T will have 256 entries.
+                          As an introduction to intensity transformations, consider Fig. 3.3, which
+                       shows three basic types of functions used frequently for image enhance-
+                       ment: linear (negative and identity transformations), logarithmic (log and
+                       inverse-log transformations), and power-law (nth power and nth root trans-
+                       formations). The identity function is the trivial case in which output intensi-
+                       ties are identical to input intensities. It is included in the graph only for
+                       completeness.
+
+                       3.2.1 Image Negatives
+                       The negative of an image with intensity levels in the range [0, L - 1] is ob-
+                       tained by using the negative transformation shown in Fig. 3.3, which is given by
+                       the expression
+
+                                                                                          s = L - 1 - r                                 (3.2-1)
+
+                       Reversing the intensity levels of an image in this manner produces the
+                       equivalent of a photographic negative. This type of processing is particularly
+                       suited for enhancing white or gray detail embedded in dark regions of an
+
+
+
+FIGURE 3.3 Some                                             L1
+basic intensity
+transformation                                                         Negative
+functions. All
+curves were                                                                                                 nth root
+scaled to fit in the                                        3L/4
+range shown.
+                                Output intensity level, s
+
+
+
+
+                                                                           Log
+                                                                                                                      nth power
+                                                             L/2
+
+
+
+
+                                                             L/4
+
+
+                                                                         Identity                          Inverse log
+
+
+                                                               0
+                                                                   0                L/4             L/2               3L/4        L1
+                                                                                           Input intensity level, r
+                                          3.2 ■ Some Basic Intensity Transformation Functions      109
+
+                                                                                    a b
+                                                                                    FIGURE 3.4
+                                                                                    (a) Original digital
+                                                                                    mammogram.
+                                                                                    (b) Negative
+                                                                                    image obtained
+                                                                                    using the negative
+                                                                                    transformation
+                                                                                    in Eq. (3.2-1).
+                                                                                    (Courtesy of G.E.
+                                                                                    Medical Systems.)
+
+
+
+
+image, especially when the black areas are dominant in size. Figure 3.4
+shows an example. The original image is a digital mammogram showing a
+small lesion. In spite of the fact that the visual content is the same in both
+images, note how much easier it is to analyze the breast tissue in the nega-
+tive image in this particular case.
+
+3.2.2 Log Transformations
+The general form of the log transformation in Fig. 3.3 is
+                               s = c log (1 + r)                          (3.2-2)
+where c is a constant, and it is assumed that r Ú 0. The shape of the log curve
+in Fig. 3.3 shows that this transformation maps a narrow range of low intensity
+values in the input into a wider range of output levels. The opposite is true of
+higher values of input levels. We use a transformation of this type to expand
+the values of dark pixels in an image while compressing the higher-level val-
+ues. The opposite is true of the inverse log transformation.
+    Any curve having the general shape of the log functions shown in Fig. 3.3
+would accomplish this spreading/compressing of intensity levels in an image,
+but the power-law transformations discussed in the next section are much
+more versatile for this purpose. The log function has the important character-
+istic that it compresses the dynamic range of images with large variations in
+pixel values. A classic illustration of an application in which pixel values have
+a large dynamic range is the Fourier spectrum, which will be discussed in
+Chapter 4. At the moment, we are concerned only with the image characteris-
+tics of spectra. It is not unusual to encounter spectrum values that range from 0
+to 10 6 or higher. While processing numbers such as these presents no problems
+for a computer, image display systems generally will not be able to reproduce
+110    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+a b
+FIGURE 3.5
+(a) Fourier
+spectrum.
+(b) Result of
+applying the log
+transformation in
+Eq. (3.2-2) with
+c = 1.
+
+
+
+
+                    faithfully such a wide range of intensity values. The net effect is that a signifi-
+                    cant degree of intensity detail can be lost in the display of a typical Fourier
+                    spectrum.
+                       As an illustration of log transformations, Fig. 3.5(a) shows a Fourier spec-
+                    trum with values in the range 0 to 1.5 * 106. When these values are scaled lin-
+                    early for display in an 8-bit system, the brightest pixels will dominate the
+                    display, at the expense of lower (and just as important) values of the spec-
+                    trum. The effect of this dominance is illustrated vividly by the relatively small
+                    area of the image in Fig. 3.5(a) that is not perceived as black. If, instead of dis-
+                    playing the values in this manner, we first apply Eq. (3.2-2) (with c = 1 in this
+                    case) to the spectrum values, then the range of values of the result becomes 0
+                    to 6.2, which is more manageable. Figure 3.5(b) shows the result of scaling this
+                    new range linearly and displaying the spectrum in the same 8-bit display. The
+                    wealth of detail visible in this image as compared to an unmodified display of
+                    the spectrum is evident from these pictures. Most of the Fourier spectra seen
+                    in image processing publications have been scaled in just this manner.
+
+                    3.2.3 Power-Law (Gamma) Transformations
+                    Power-law transformations have the basic form
+
+                                                           s = c rg                             (3.2-3)
+
+                    where c and g are positive constants. Sometimes Eq. (3.2-3) is written as
+                    s = c(r + e)g to account for an offset (that is, a measurable output when the
+                    input is zero). However, offsets typically are an issue of display calibration
+                    and as a result they are normally ignored in Eq. (3.2-3). Plots of s versus r for
+                    various values of g are shown in Fig. 3.6. As in the case of the log transforma-
+                    tion, power-law curves with fractional values of g map a narrow range of dark
+                    input values into a wider range of output values, with the opposite being true
+                    for higher values of input levels. Unlike the log function, however, we notice
+                                                                            3.2 ■ Some Basic Intensity Transformation Functions   111
+                                    L1                                                                             FIGURE 3.6 Plots
+                                                                                                                    of the equation
+                                               g  0.04                                                             s = crg for
+                                                                                                                    various values of
+                                                   g  0.10
+                                                                                                                    g (c = 1 in all
+                                    3L/4                  g  0.20                                                  cases). All curves
+                                                                                                                    were scaled to fit
+        Output intensity level, s
+
+
+
+
+                                                                                                                    in the range
+                                                                 g  0.40
+                                                                                                                    shown.
+                                                                      g  0.67
+                                    L/2                                     g1
+                                                                                 g  1.5
+
+                                                                                      g  2.5
+
+                                     L/4                                                     g  5.0
+
+                                                                                                 g  10.0
+
+                                                                                                       g  25.0
+
+                                       0
+                                           0               L/4              L/ 2             3L/4           L1
+                                                                  Input intensity level, r
+
+
+
+here a family of possible transformation curves obtained simply by varying g.
+As expected, we see in Fig. 3.6 that curves generated with values of g 7 1
+have exactly the opposite effect as those generated with values of g 6 1.
+Finally, we note that Eq. (3.2-3) reduces to the identity transformation when
+c = g = 1.
+   A variety of devices used for image capture, printing, and display respond
+according to a power law. By convention, the exponent in the power-law equa-
+tion is referred to as gamma [hence our use of this symbol in Eq. (3.2-3)].
+The process used to correct these power-law response phenomena is called
+gamma correction. For example, cathode ray tube (CRT) devices have an
+intensity-to-voltage response that is a power function, with exponents vary-
+ing from approximately 1.8 to 2.5. With reference to the curve for g = 2.5 in
+Fig. 3.6, we see that such display systems would tend to produce images that
+are darker than intended. This effect is illustrated in Fig. 3.7. Figure 3.7(a)
+shows a simple intensity-ramp image input into a monitor. As expected, the
+output of the monitor appears darker than the input, as Fig. 3.7(b) shows.
+Gamma correction in this case is straightforward. All we need to do is pre-
+process the input image before inputting it into the monitor by performing
+the transformation s = r1>2.5 = r0.4. The result is shown in Fig. 3.7(c). When
+input into the same monitor, this gamma-corrected input produces an out-
+put that is close in appearance to the original image, as Fig. 3.7(d) shows. A
+similar analysis would apply to other imaging devices such as scanners and
+printers. The only difference would be the device-dependent value of
+gamma (Poynton [1996]).
+112    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+a b
+c d
+FIGURE 3.7
+(a) Intensity ramp
+image. (b) Image
+as viewed on a
+simulated monitor
+with a gamma of
+2.5. (c) Gamma-
+corrected image.
+(d) Corrected
+image as viewed
+on the same                 Original image   Gamma                    Original image as viewed
+monitor. Compare                             correction               on monitor
+(d) and (a).
+
+
+
+
+                              Gamma-corrected image                  Gamma-corrected image as
+                                                                     viewed on the same monitor
+
+
+
+
+                        Gamma correction is important if displaying an image accurately on a
+                     computer screen is of concern. Images that are not corrected properly can
+                     look either bleached out, or, what is more likely, too dark. Trying to reproduce
+                     colors accurately also requires some knowledge of gamma correction because
+                     varying the value of gamma changes not only the intensity, but also the ratios
+                     of red to green to blue in a color image. Gamma correction has become in-
+                     creasingly important in the past few years, as the use of digital images for
+                     commercial purposes over the Internet has increased. It is not unusual that
+                     images created for a popular Web site will be viewed by millions of people,
+                     the majority of whom will have different monitors and/or monitor settings.
+                     Some computer systems even have partial gamma correction built in. Also,
+                     current image standards do not contain the value of gamma with which an
+                     image was created, thus complicating the issue further. Given these con-
+                     straints, a reasonable approach when storing images in a Web site is to pre-
+                     process the images with a gamma that represents an “average” of the types of
+                     monitors and computer systems that one expects in the open market at any
+                     given point in time.
+                                         3.2 ■ Some Basic Intensity Transformation Functions    113
+
+■ In addition to gamma correction, power-law transformations are useful for       EXAMPLE 3.1:
+general-purpose contrast manipulation. Figure 3.8(a) shows a magnetic reso-       Contrast
+                                                                                  enhancement
+nance image (MRI) of an upper thoracic human spine with a fracture disloca-
+                                                                                  using power-law
+tion and spinal cord impingement. The fracture is visible near the vertical       transformations.
+center of the spine, approximately one-fourth of the way down from the top of
+the picture. Because the given image is predominantly dark, an expansion of
+intensity levels is desirable. This can be accomplished with a power-law trans-
+formation with a fractional exponent. The other images shown in the figure
+were obtained by processing Fig. 3.8(a) with the power-law transformation
+
+
+
+                                                                                  a b
+                                                                                  c d
+                                                                                  FIGURE 3.8
+                                                                                  (a) Magnetic
+                                                                                  resonance
+                                                                                  image (MRI) of a
+                                                                                  fractured human
+                                                                                  spine.
+                                                                                  (b)–(d) Results of
+                                                                                  applying the
+                                                                                  transformation in
+                                                                                  Eq. (3.2-3) with
+                                                                                  c = 1 and
+                                                                                  g = 0.6, 0.4, and
+                                                                                  0.3, respectively.
+                                                                                  (Original image
+                                                                                  courtesy of Dr.
+                                                                                  David R. Pickens,
+                                                                                  Department of
+                                                                                  Radiology and
+                                                                                  Radiological
+                                                                                  Sciences,
+                                                                                  Vanderbilt
+                                                                                  University
+                                                                                  Medical Center.)
+114    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                     function of Eq. (3.2-3). The values of gamma corresponding to images (b)
+                     through (d) are 0.6, 0.4, and 0.3, respectively (the value of c was 1 in all cases).
+                     We note that, as gamma decreased from 0.6 to 0.4, more detail became visible.
+                     A further decrease of gamma to 0.3 enhanced a little more detail in the back-
+                     ground, but began to reduce contrast to the point where the image started to
+                     have a very slight “washed-out” appearance, especially in the background. By
+                     comparing all results, we see that the best enhancement in terms of contrast
+                     and discernable detail was obtained with g = 0.4. A value of g = 0.3 is an ap-
+                     proximate limit below which contrast in this particular image would be
+                     reduced to an unacceptable level.                                                 ■
+
+EXAMPLE 3.2:         ■ Figure 3.9(a) shows the opposite problem of Fig. 3.8(a). The image to be
+Another              processed now has a washed-out appearance, indicating that a compression
+illustration of
+                     of intensity levels is desirable. This can be accomplished with Eq. (3.2-3)
+power-law
+transformations.     using values of g greater than 1. The results of processing Fig. 3.9(a) with
+                     g = 3.0, 4.0, and 5.0 are shown in Figs. 3.9(b) through (d). Suitable results
+                     were obtained with gamma values of 3.0 and 4.0, the latter having a slightly
+
+
+a b
+c d
+FIGURE 3.9
+(a) Aerial image.
+(b)–(d) Results of
+applying the
+transformation in
+Eq. (3.2-3) with
+c = 1 and
+g = 3.0, 4.0, and
+5.0, respectively.
+(Original image
+for this example
+courtesy of
+NASA.)
+                                              3.2 ■ Some Basic Intensity Transformation Functions   115
+
+more appealing appearance because it has higher contrast. The result obtained
+with g = 5.0 has areas that are too dark, in which some detail is lost. The dark
+region to the left of the main road in the upper left quadrant is an example of
+such an area.                                                                  ■
+
+3.2.4 Piecewise-Linear Transformation Functions
+A complementary approach to the methods discussed in the previous three sec-
+tions is to use piecewise linear functions. The principal advantage of piecewise
+linear functions over the types of functions we have discussed thus far is that
+the form of piecewise functions can be arbitrarily complex. In fact, as you will
+see shortly, a practical implementation of some important transformations can
+be formulated only as piecewise functions. The principal disadvantage of piece-
+wise functions is that their specification requires considerably more user input.
+
+Contrast stretching
+One of the simplest piecewise linear functions is a contrast-stretching trans-
+formation. Low-contrast images can result from poor illumination, lack of dy-
+namic range in the imaging sensor, or even the wrong setting of a lens aperture
+during image acquisition. Contrast stretching is a process that expands the
+range of intensity levels in an image so that it spans the full intensity range of
+the recording medium or display device.
+   Figure 3.10(a) shows a typical transformation used for contrast stretching. The
+locations of points (r1, s1) and (r2, s2) control the shape of the transformation func-
+tion. If r1 = s1 and r2 = s2, the transformation is a linear function that produces no
+changes in intensity levels. If r1 = r2, s1 = 0 and s2 = L - 1, the transformation
+becomes a thresholding function that creates a binary image, as illustrated in
+Fig. 3.2(b). Intermediate values of (r1, s1) and (r2, s2) produce various degrees of
+spread in the intensity levels of the output image, thus affecting its contrast. In gen-
+eral, r1 … r2 and s1 … s2 is assumed so that the function is single valued and mo-
+notonically increasing. This condition preserves the order of intensity levels, thus
+preventing the creation of intensity artifacts in the processed image.
+   Figure 3.10(b) shows an 8-bit image with low contrast. Figure 3.10(c) shows
+the result of contrast stretching, obtained by setting (r1, s1) = (rmin, 0) and
+(r2, s2) = (rmax, L - 1), where rmin and rmax denote the minimum and maxi-
+mum intensity levels in the image, respectively. Thus, the transformation func-
+tion stretched the levels linearly from their original range to the full range
+[0, L - 1]. Finally, Fig. 3.10(d) shows the result of using the thresholding func-
+tion defined previously, with (r1, s1) = (m, 0) and (r2, s2) = (m, L - 1),
+where m is the mean intensity level in the image. The original image on which
+these results are based is a scanning electron microscope image of pollen, mag-
+nified approximately 700 times.
+
+Intensity-level slicing
+Highlighting a specific range of intensities in an image often is of interest.Appli-
+cations include enhancing features such as masses of water in satellite imagery
+and enhancing flaws in X-ray images. The process, often called intensity-level
+116     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+a b
+c d
+                                                         L1
+FIGURE 3.10
+
+
+
+
+                             Output intensity level, s
+Contrast stretching.                                                                   (r2, s2)
+(a) Form of                                              3L/4
+transformation
+function. (b) A
+                                                         L/ 2                          T(r)
+low-contrast image.
+(c) Result of
+contrast stretching.                                      L/4
+(d) Result of                                                               (r1, s1)
+thresholding.
+(Original image                                             0
+                                                                0    L/4     L/2       3L/4 L  1
+courtesy of Dr.
+Roger Heady,                                                        Input intensity level, r
+Research School of
+Biological Sciences,
+Australian National
+University,
+Canberra,
+Australia.)
+
+
+
+
+                         slicing, can be implemented in several ways, but most are variations of two basic
+                         themes. One approach is to display in one value (say, white) all the values in the
+                         range of interest and in another (say, black) all other intensities. This transfor-
+                         mation, shown in Fig. 3.11(a), produces a binary image. The second approach,
+                         based on the transformation in Fig. 3.11(b), brightens (or darkens) the desired
+                         range of intensities but leaves all other intensity levels in the image unchanged.
+
+a b                      L1                                                                            L1
+
+FIGURE 3.11 (a) This
+transformation
+highlights intensity
+range [A, B] and
+reduces all other
+                             s                                                                            s               T (r)
+intensities to a lower                                                                    T(r)
+level. (b) This
+transformation
+highlights range
+[A, B] and preserves
+all other intensity
+levels.                                                                                             r                               r
+                                                 0                    A           B               L1         0   A   B           L1
+                                              3.2 ■ Some Basic Intensity Transformation Functions         117
+
+■ Figure 3.12(a) is an aortic angiogram near the kidney area (see Section                  EXAMPLE 3.3:
+1.3.2 for a more detailed explanation of this image). The objective of this ex-            Intensity-level
+                                                                                           slicing.
+ample is to use intensity-level slicing to highlight the major blood vessels that
+appear brighter as a result of an injected contrast medium. Figure 3.12(b)
+shows the result of using a transformation of the form in Fig. 3.11(a), with the
+selected band near the top of the scale, because the range of interest is brighter
+than the background. The net result of this transformation is that the blood
+vessel and parts of the kidneys appear white, while all other intensities are
+black. This type of enhancement produces a binary image and is useful for
+studying the shape of the flow of the contrast medium (to detect blockages, for
+example).
+   If, on the other hand, interest lies in the actual intensity values of the region
+of interest, we can use the transformation in Fig. 3.11(b). Figure 3.12(c) shows
+the result of using such a transformation in which a band of intensities in the
+mid-gray region around the mean intensity was set to black, while all other in-
+tensities were left unchanged. Here, we see that the gray-level tonality of the
+major blood vessels and part of the kidney area were left intact. Such a result
+might be useful when interest lies in measuring the actual flow of the contrast
+medium as a function of time in a series of images.                                ■
+
+Bit-plane slicing
+Pixels are digital numbers composed of bits. For example, the intensity of each
+pixel in a 256-level gray-scale image is composed of 8 bits (i.e., one byte). In-
+stead of highlighting intensity-level ranges, we could highlight the contribution
+
+
+
+
+a b c
+FIGURE 3.12 (a) Aortic angiogram. (b) Result of using a slicing transformation of the type illustrated in Fig.
+3.11(a), with the range of intensities of interest selected in the upper end of the gray scale. (c) Result of
+using the transformation in Fig. 3.11(b), with the selected area set to black, so that grays in the area of the
+blood vessels and kidneys were preserved. (Original image courtesy of Dr. Thomas R. Gest, University of
+Michigan Medical School.)
+118     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+FIGURE 3.13                One 8-bit byte                                                  Bit plane 8
+Bit-plane                                                                                  (most significant)
+representation of
+an 8-bit image.
+
+
+                                                                                           Bit plane 1
+                                                                                           (least significant)
+
+
+
+
+                      made to total image appearance by specific bits. As Fig. 3.13 illustrates, an 8-bit
+                      image may be considered as being composed of eight 1-bit planes, with plane 1
+                      containing the lowest-order bit of all pixels in the image and plane 8 all the
+                      highest-order bits.
+                         Figure 3.14(a) shows an 8-bit gray-scale image and Figs. 3.14(b) through (i)
+                      are its eight 1-bit planes, with Fig. 3.14(b) corresponding to the lowest-order bit.
+                      Observe that the four higher-order bit planes, especially the last two, contain a
+                      significant amount of the visually significant data. The lower-order planes con-
+                      tribute to more subtle intensity details in the image. The original image has a
+                      gray border whose intensity is 194. Notice that the corresponding borders of some
+                      of the bit planes are black (0), while others are white (1). To see why, consider a
+
+
+
+
+a b c
+d e f
+g h i
+FIGURE 3.14 (a) An 8-bit gray-scale image of size 500 * 1192 pixels. (b) through (i) Bit planes 1 through 8,
+with bit plane 1 corresponding to the least significant bit. Each bit plane is a binary image.
+                                               3.2 ■ Some Basic Intensity Transformation Functions         119
+
+pixel in, say, the middle of the lower border of Fig. 3.14(a). The corresponding
+pixels in the bit planes, starting with the highest-order plane, have values 1 1 0 0
+0 0 1 0, which is the binary representation of decimal 194. The value of any pixel
+in the original image can be similarly reconstructed from its corresponding
+binary-valued pixels in the bit planes.
+   In terms of intensity transformation functions, it is not difficult to show that
+the binary image for the 8th bit plane of an 8-bit image can be obtained by
+processing the input image with a thresholding intensity transformation func-
+tion that maps all intensities between 0 and 127 to 0 and maps all levels be-
+tween 128 and 255 to 1. The binary image in Fig. 3.14(i) was obtained in just
+this manner. It is left as an exercise (Problem 3.4) to obtain the intensity trans-
+formation functions for generating the other bit planes.
+   Decomposing an image into its bit planes is useful for analyzing the rela-
+tive importance of each bit in the image, a process that aids in determining
+the adequacy of the number of bits used to quantize the image. Also, this type
+of decomposition is useful for image compression (the topic of Chapter 8), in
+which fewer than all planes are used in reconstructing an image. For example,
+Fig. 3.15(a) shows an image reconstructed using bit planes 8 and 7. The recon-
+struction is done by multiplying the pixels of the nth plane by the constant
+2n - 1. This is nothing more than converting the nth significant binary bit to
+decimal. Each plane used is multiplied by the corresponding constant, and all
+planes used are added to obtain the gray scale image. Thus, to obtain
+Fig. 3.15(a), we multiplied bit plane 8 by 128, bit plane 7 by 64, and added the
+two planes. Although the main features of the original image were restored,
+the reconstructed image appears flat, especially in the background. This is not
+surprising because two planes can produce only four distinct intensity levels.
+Adding plane 6 to the reconstruction helped the situation, as Fig. 3.15(b)
+shows. Note that the background of this image has perceptible false contour-
+ing. This effect is reduced significantly by adding the 5th plane to the recon-
+struction, as Fig. 3.15(c) illustrates. Using more planes in the reconstruction
+would not contribute significantly to the appearance of this image. Thus, we
+conclude that storing the four highest-order bit planes would allow us to re-
+construct the original image in acceptable detail. Storing these four planes in-
+stead of the original image requires 50% less storage (ignoring memory
+architecture issues).
+
+
+
+
+a b c
+FIGURE 3.15 Images reconstructed using (a) bit planes 8 and 7; (b) bit planes 8, 7, and 6; and (c) bit planes 8,
+7, 6, and 5. Compare (c) with Fig. 3.14(a).
+120       Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+
+                              3.3    Histogram Processing
+                             The histogram of a digital image with intensity levels in the range [0, L - 1]
+                             is a discrete function h(rk) = nk, where rk is the kth intensity value and nk is
+                             the number of pixels in the image with intensity rk. It is common practice to
+                             normalize a histogram by dividing each of its components by the total num-
+                             ber of pixels in the image, denoted by the product MN, where, as usual, M
+                             and N are the row and column dimensions of the image. Thus, a normalized
+                             histogram is given by p(rk) = rk >MN, for k = 0, 1, 2, Á , L - 1. Loosely
+                             speaking, p(rk) is an estimate of the probability of occurrence of intensity
+                             level rk in an image. The sum of all components of a normalized histogram is
+Consult the book Web         equal to 1.
+site for a review of basic       Histograms are the basis for numerous spatial domain processing tech-
+probability theory.
+                             niques. Histogram manipulation can be used for image enhancement, as
+                             shown in this section. In addition to providing useful image statistics, we shall
+                             see in subsequent chapters that the information inherent in histograms also is
+                             quite useful in other image processing applications, such as image compression
+                             and segmentation. Histograms are simple to calculate in software and also
+                             lend themselves to economic hardware implementations, thus making them a
+                             popular tool for real-time image processing.
+                                 As an introduction to histogram processing for intensity transformations,
+                             consider Fig. 3.16, which is the pollen image of Fig. 3.10 shown in four basic in-
+                             tensity characteristics: dark, light, low contrast, and high contrast. The right
+                             side of the figure shows the histograms corresponding to these images. The
+                             horizontal axis of each histogram plot corresponds to intensity values, rk. The
+                             vertical axis corresponds to values of h(rk) = nk or p(rk) = nk>MN if the val-
+                             ues are normalized. Thus, histograms may be viewed graphically simply as
+                             plots of h(rk) = nk versus rk or p(rk) = nk>MN versus rk.
+                                 We note in the dark image that the components of the histogram are con-
+                             centrated on the low (dark) side of the intensity scale. Similarly, the compo-
+                             nents of the histogram of the light image are biased toward the high side of
+                             the scale. An image with low contrast has a narrow histogram located typi-
+                             cally toward the middle of the intensity scale. For a monochrome image this
+                             implies a dull, washed-out gray look. Finally, we see that the components of
+                             the histogram in the high-contrast image cover a wide range of the intensity
+                             scale and, further, that the distribution of pixels is not too far from uniform,
+                             with very few vertical lines being much higher than the others. Intuitively, it
+                             is reasonable to conclude that an image whose pixels tend to occupy the entire
+                             range of possible intensity levels and, in addition, tend to be distributed uni-
+                             formly, will have an appearance of high contrast and will exhibit a large vari-
+                             ety of gray tones. The net effect will be an image that shows a great deal of
+                             gray-level detail and has high dynamic range. It will be shown shortly that it
+                             is possible to develop a transformation function that can automatically
+                             achieve this effect, based only on information available in the histogram of
+                             the input image.
+                                                              3.3 ■ Histogram Processing   121
+
+
+                                                Histogram of dark image
+
+
+
+
+                                                Histogram of light image
+
+
+
+
+                                         Histogram of low-contrast image
+
+
+
+
+                                        Histogram of high-contrast image
+
+
+
+
+FIGURE 3.16 Four basic image types: dark, light, low contrast, high
+contrast, and their corresponding histograms.
+122     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                      3.3.1 Histogram Equalization
+                      Consider for a moment continuous intensity values and let the variable r de-
+                      note the intensities of an image to be processed. As usual, we assume that r is
+                      in the range [0, L - 1], with r = 0 representing black and r = L - 1 repre-
+                      senting white. For r satisfying these conditions, we focus attention on transfor-
+                      mations (intensity mappings) of the form
+                                                        s = T(r)        0 … r … L - 1                                   (3.3-1)
+                      that produce an output intensity level s for every pixel in the input image hav-
+                      ing intensity r. We assume that:
+                      (a) T(r) is a monotonically† increasing function in the interval 0 … r … L - 1;
+                          and
+                      (b) 0 … T(r) … L - 1 for 0 … r … L - 1.
+                      In some formulations to be discussed later, we use the inverse
+                                                       r = T -1(s)        0 … s … L - 1                                 (3.3-2)
+                      in which case we change condition (a) to
+                      (a ¿ ) T(r) is a strictly monotonically increasing function in the interval
+                             0 … r … L - 1.
+                         The requirement in condition (a) that T(r) be monotonically increasing
+                      guarantees that output intensity values will never be less than corresponding
+                      input values, thus preventing artifacts created by reversals of intensity. Condi-
+                      tion (b) guarantees that the range of output intensities is the same as the
+                      input. Finally, condition (a ¿ ) guarantees that the mappings from s back to r
+                      will be one-to-one, thus preventing ambiguities. Figure 3.17(a) shows a function
+
+
+
+a b                              T(r)                                            T (r)
+FIGURE 3.17
+(a) Monotonically           L1                                               L1
+increasing
+                          Single
+function, showing         value, sk
+how multiple                                                                                 T (r)
+                                               T(r)
+values can map to
+a single value.           Single                                                 sk
+(b) Strictly              value, sq
+monotonically
+increasing                                       ...
+function. This is a
+one-to-one
+                                                                          r                                               r
+mapping, both                                                                         0              rk      L1
+ways.                                 0      Multiple Single L  1
+                                             values   value
+
+                      †
+                      Recall that a function T(r) is monotonically increasing if T(r2) Ú T(r1) for r2 7 r1. T(r) is a strictly mo-
+                      notonically increasing function if T(r2) 7 T(r1) for r2 7 r1. Similar definitions apply to monotonically
+                      decreasing functions.
+                                                                   3.3 ■ Histogram Processing   123
+
+that satisfies conditions (a) and (b). Here, we see that it is possible for multi-
+ple values to map to a single value and still satisfy these two conditions. That
+is, a monotonic transformation function performs a one-to-one or many-to-
+one mapping. This is perfectly fine when mapping from r to s. However,
+Fig. 3.17(a) presents a problem if we wanted to recover the values of r unique-
+ly from the mapped values (inverse mapping can be visualized by reversing
+the direction of the arrows). This would be possible for the inverse mapping
+of sk in Fig. 3.17(a), but the inverse mapping of sq is a range of values, which,
+of course, prevents us in general from recovering the original value of r that
+resulted in sq. As Fig. 3.17(b) shows, requiring that T(r) be strictly monotonic
+guarantees that the inverse mappings will be single valued (i.e., the mapping
+is one-to-one in both directions). This is a theoretical requirement that allows
+us to derive some important histogram processing techniques later in this
+chapter. Because in practice we deal with integer intensity values, we are
+forced to round all results to their nearest integer values. Therefore, when
+strict monotonicity is not satisfied, we address the problem of a nonunique in-
+verse transformation by looking for the closest integer matches. Example 3.8
+gives an illustration of this.
+    The intensity levels in an image may be viewed as random variables in the
+interval [0, L - 1]. A fundamental descriptor of a random variable is its prob-
+ability density function (PDF). Let pr (r) and ps (s) denote the PDFs of r and s,
+respectively, where the subscripts on p are used to indicate that pr and ps are
+different functions in general. A fundamental result from basic probability
+theory is that if pr(r) and T(r) are known, and T(r) is continuous and differen-
+tiable over the range of values of interest, then the PDF of the transformed
+(mapped) variable s can be obtained using the simple formula
+
+                               ps (s) = pr(r) `      `
+                                                  dr
+                                                                           (3.3-3)
+                                                  ds
+
+Thus, we see that the PDF of the output intensity variable, s, is determined by
+the PDF of the input intensities and the transformation function used [recall
+that r and s are related by T(r)].
+   A transformation function of particular importance in image processing has
+the form
+                                                   r
+                       s = T(r) = (L - 1)           pr (w) dw              (3.3-4)
+                                             L0
+where w is a dummy variable of integration. The right side of this equation is
+recognized as the cumulative distribution function (CDF) of random variable
+r. Because PDFs always are positive, and recalling that the integral of a func-
+tion is the area under the function, it follows that the transformation function
+of Eq. (3.3-4) satisfies condition (a) because the area under the function can-
+not decrease as r increases. When the upper limit in this equation is
+r = (L - 1), the integral evaluates to 1 (the area under a PDF curve always
+is 1), so the maximum value of s is (L - 1) and condition (b) is satisfied also.
+124   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                      To find the ps(s) corresponding to the transformation just discussed, we use
+                   Eq. (3.3-3). We know from Leibniz’s rule in basic calculus that the derivative of
+                   a definite integral with respect to its upper limit is the integrand evaluated at
+                   the limit. That is,
+
+                                            ds   dT(r)
+                                               =
+                                            dr    dr
+                                                                        r
+                                                                d
+                                                = (L - 1)         B p (w) dw R                         (3.3-5)
+                                                                dr L0 r
+
+                                                = (L - 1)pr(r)
+
+                   Substituting this result for dr> ds in Eq. (3.3-3), and keeping in mind that all
+                   probability values are positive, yields
+
+
+                                          ps (s) = pr (r) `      `
+                                                              dr
+                                                              ds
+
+
+                                                 = pr(r) `                  `
+                                                                   1
+                                                                                                       (3.3-6)
+                                                              (L - 1)pr (r)
+
+                                                       1
+                                                 =                   0 … s … L - 1
+                                                     L - 1
+                   We recognize the form of ps (s) in the last line of this equation as a uniform
+                   probability density function. Simply stated, we have demonstrated that per-
+                   forming the intensity transformation in Eq. (3.3-4) yields a random variable, s,
+                   characterized by a uniform PDF. It is important to note from this equation that
+                   T(r) depends on pr (r) but, as Eq. (3.3-6) shows, the resulting ps (s) always is
+                   uniform, independently of the form of pr(r). Figure 3.18 illustrates these
+                   concepts.
+
+                     pr (r)                                                 ps (s)
+
+                     A
+                                                      Eq. (3.3-4)
+                                                                        1
+                                                                       L1
+
+
+
+                                                        r                                                   s
+                         0                       L1                          0                      L1
+
+                     a b
+                     FIGURE 3.18 (a) An arbitrary PDF. (b) Result of applying the transformation in
+                     Eq. (3.3-4) to all intensity levels, r. The resulting intensities, s, have a uniform PDF,
+                     independently of the form of the PDF of the r’s.
+                                                                                              3.3 ■ Histogram Processing       125
+
+■ To fix ideas, consider the following simple example. Suppose that the (con-                                    EXAMPLE 3.4:
+tinuous) intensity values in an image have the PDF                                                               Illustration of
+                                                                                                                 Eqs. (3.3-4) and
+                                       2r                                                                        (3.3-6).
+                                                             for 0 … r … L - 1
+                          pr(r) = c (L - 1)2
+                                    0                        otherwise
+From Eq. (3.3-4),
+                                               r                                 r
+                                                                   2              r2
+             s = T(r) = (L - 1)                    pr (w) dw =            w dw =
+                                          L0                     L - 1 L0        L - 1
+Suppose next that we form a new image with intensities, s, obtained using
+this transformation; that is, the s values are formed by squaring the corre-
+sponding intensity values of the input image and dividing them by (L - 1).
+For example, consider an image in which L = 10, and suppose that a pixel
+in an arbitrary location (x, y) in the input image has intensity r = 3. Then
+the pixel in that location in the new image is s = T(r) = r 2>9 = 1. We can
+verify that the PDF of the intensities in the new image is uniform simply by
+substituting pr(r) into Eq. (3.3-6) and using the fact that s = r 2>(L - 1);
+that is,
+                                                                                     -1
+
+                            ps(s) = pr(r) `    ` =          `B R                          `
+                                            dr        2r      ds
+                                            ds            2   dr
+                                                   (L - 1)
+
+
+                                               `                             `
+                                                                        -1
+                                          2r       d r2
+                                     =           B       R
+                                       (L - 1)2 dr L - 1
+
+
+                                                 2 `         ` =
+                                            2r       (L - 1)       1
+                                     =
+                                         (L - 1)       2 r       L - 1
+where the last step follows from the fact that r is nonnegative and we assume
+that L 7 1. As expected, the result is a uniform PDF.                       ■
+
+   For discrete values, we deal with probabilities (histogram values) and sum-
+mations instead of probability density functions and integrals.† As mentioned
+earlier, the probability of occurrence of intensity level rk in a digital image is
+approximated by
+                                         nk
+                             pr(rk) =                   k = 0, 1, 2, Á , L - 1                       (3.3-7)
+                                         MN
+where MN is the total number of pixels in the image, nk is the number of pix-
+els that have intensity rk, and L is the number of possible intensity levels in the
+image (e.g., 256 for an 8-bit image). As noted in the beginning of this section, a
+plot of pr(rk) versus rk is commonly referred to as a histogram.
+
+†
+    The conditions of monotonicity stated earlier apply also in the discrete case. We simply restrict the val-
+    ues of the variables to be discrete.
+126    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                       The discrete form of the transformation in Eq. (3.3-4) is
+                                                                  k
+                                       sk = T(rk) = (L - 1) a pr(rj)
+                                                                  j=0
+                                                                                               (3.3-8)
+                                           (L - 1) k
+                                             MN ja
+                                         =            nj              k = 0, 1, 2, Á , L - 1
+                                                   =0
+
+                    Thus, a processed (output) image is obtained by mapping each pixel in the
+                    input image with intensity rk into a corresponding pixel with level sk in the
+                    output image, using Eq. (3.3-8). The transformation (mapping) T(rk) in this
+                    equation is called a histogram equalization or histogram linearization trans-
+                    formation. It is not difficult to show (Problem 3.10) that this transformation
+                    satisfies conditions (a) and (b) stated previously in this section.
+
+EXAMPLE 3.5:        ■ Before continuing, it will be helpful to work through a simple example.
+A simple            Suppose that a 3-bit image (L = 8) of size 64 * 64 pixels (MN = 4096) has
+illustration of
+                    the intensity distribution shown in Table 3.1, where the intensity levels are in-
+histogram
+equalization.       tegers in the range [0, L - 1] = [0, 7].
+                       The histogram of our hypothetical image is sketched in Fig. 3.19(a). Values
+                    of the histogram equalization transformation function are obtained using
+                    Eq. (3.3-8). For instance,
+                                                            0
+                                        s0 = T(r0) = 7 a pr(rj) = 7pr (r0) = 1.33
+                                                           j=0
+
+                    Similarly,
+                                                      1
+                                   s1 = T(r1) = 7 a pr (rj) = 7pr (r0) + 7pr(r1) = 3.08
+                                                     j=0
+
+                    and s2 = 4.55, s3 = 5.67, s4 = 6.23, s5 = 6.65, s6 = 6.86, s7 = 7.00. This trans-
+                    formation function has the staircase shape shown in Fig. 3.19(b).
+
+
+
+                                                                      pr(rk) = nk>MN
+TABLE 3.1
+                                              rk            nk
+Intensity
+distribution and                            r0 = 0          790            0.19
+histogram values                            r1 = 1         1023            0.25
+for a 3-bit,                                r2 = 2          850            0.21
+64 * 64 digital                             r3 = 3          656            0.16
+image.                                      r4 = 4          329            0.08
+                                            r5 = 5          245            0.06
+                                            r6 = 6          122            0.03
+                                            r7 = 7           81            0.02
+                                                                                                  3.3 ■ Histogram Processing            127
+
+    pr (rk)                                          sk                                      ps (sk)
+
+   .25                                         7.0                                          .25
+   .20                                         5.6                                          .20
+   .15                                         4.2                                          .15
+                                                                       T(r)
+   .10                                         2.8                                          .10
+   .05                                         1.4                                          .05
+                                          rk                                           rk                                          sk
+         0    1   2   3   4   5   6   7              0    1   2    3   4   5   6   7              0    1   2   3   4   5   6   7
+
+   a b c
+   FIGURE 3.19 Illustration of histogram equalization of a 3-bit (8 intensity levels) image. (a) Original
+   histogram. (b) Transformation function. (c) Equalized histogram.
+
+
+   At this point, the s values still have fractions because they were generated
+by summing probability values, so we round them to the nearest integer:
+
+                              s0 = 1.33 : 1                       s4 = 6.23 : 6
+                              s1 = 3.08 : 3                       s5 = 6.65 : 7
+                              s2 = 4.55 : 5                       s6 = 6.86 : 7
+                              s3 = 5.67 : 6                       s7 = 7.00 : 7
+
+These are the values of the equalized histogram. Observe that there are only
+five distinct intensity levels. Because r0 = 0 was mapped to s0 = 1, there are
+790 pixels in the histogram equalized image with this value (see Table 3.1).
+Also, there are in this image 1023 pixels with a value of s1 = 3 and 850 pixels
+with a value of s2 = 5. However both r3 and r4 were mapped to the same
+value, 6, so there are (656 + 329) = 985 pixels in the equalized image with this
+value. Similarly, there are (245 + 122 + 81) = 448 pixels with a value of 7 in
+the histogram equalized image. Dividing these numbers by MN = 4096 yielded
+the equalized histogram in Fig. 3.19(c).
+   Because a histogram is an approximation to a PDF, and no new allowed in-
+tensity levels are created in the process, perfectly flat histograms are rare in
+practical applications of histogram equalization. Thus, unlike its continuous
+counterpart, it cannot be proved (in general) that discrete histogram equaliza-
+tion results in a uniform histogram. However, as you will see shortly, using Eq.
+(3.3-8) has the general tendency to spread the histogram of the input image so
+that the intensity levels of the equalized image span a wider range of the in-
+tensity scale. The net result is contrast enhancement.                         ■
+
+    We discussed earlier in this section the many advantages of having intensity
+values that cover the entire gray scale. In addition to producing intensities that
+have this tendency, the method just derived has the additional advantage that
+it is fully “automatic.” In other words, given an image, the process of histogram
+equalization consists simply of implementing Eq. (3.3-8), which is based on in-
+formation that can be extracted directly from the given image, without the
+128   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                   need for further parameter specifications. We note also the simplicity of the
+                   computations required to implement the technique.
+                     The inverse transformation from s back to r is denoted by
+
+                                        rk = T-1(sk)       k = 0, 1, 2, Á , L - 1               (3.3-9)
+
+                   It can be shown (Problem 3.10) that this inverse transformation satisfies con-
+                   ditions (a¿) and (b) only if none of the levels, rk, k = 0, 1, 2, Á , L - 1, are
+                   missing from the input image, which in turn means that none of the components
+                   of the image histogram are zero. Although the inverse transformation is not
+                   used in histogram equalization, it plays a central role in the histogram-matching
+                   scheme developed in the next section.
+
+EXAMPLE 3.6:       ■ The left column in Fig. 3.20 shows the four images from Fig. 3.16, and the
+Histogram          center column shows the result of performing histogram equalization on each
+equalization.
+                   of these images. The first three results from top to bottom show significant im-
+                   provement. As expected, histogram equalization did not have much effect on
+                   the fourth image because the intensities of this image already span the full in-
+                   tensity scale. Figure 3.21 shows the transformation functions used to generate the
+                   equalized images in Fig. 3.20. These functions were generated using Eq. (3.3-8).
+                   Observe that transformation (4) has a nearly linear shape, indicating that the
+                   inputs were mapped to nearly equal outputs.
+                       The third column in Fig. 3.20 shows the histograms of the equalized images. It
+                   is of interest to note that, while all these histograms are different, the histogram-
+                   equalized images themselves are visually very similar.This is not unexpected be-
+                   cause the basic difference between the images on the left column is one of
+                   contrast, not content. In other words, because the images have the same con-
+                   tent, the increase in contrast resulting from histogram equalization was
+                   enough to render any intensity differences in the equalized images visually in-
+                   distinguishable. Given the significant contrast differences between the original
+                   images, this example illustrates the power of histogram equalization as an
+                   adaptive contrast enhancement tool.                                                 ■
+
+                   3.3.2 Histogram Matching (Specification)
+                   As indicated in the preceding discussion, histogram equalization automati-
+                   cally determines a transformation function that seeks to produce an output
+                   image that has a uniform histogram. When automatic enhancement is de-
+                   sired, this is a good approach because the results from this technique are
+                   predictable and the method is simple to implement. We show in this section
+                   that there are applications in which attempting to base enhancement on a
+                   uniform histogram is not the best approach. In particular, it is useful some-
+                   times to be able to specify the shape of the histogram that we wish the
+                   processed image to have. The method used to generate a processed image
+                   that has a specified histogram is called histogram matching or histogram
+                   specification.
+                                                                 3.3 ■ Histogram Processing   129
+
+
+
+
+FIGURE 3.20 Left column: images from Fig. 3.16. Center column: corresponding histogram-
+equalized images. Right column: histograms of the images in the center column.
+130    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+FIGURE 3.21                          255
+Transformation
+functions for
+histogram
+equalization.                        192
+Transformations
+                                                                             (4)
+(1) through (4)                                      (1)
+were obtained from                   128
+the histograms of                                                                        (2)
+the images (from
+top to bottom) in                                              (3)
+the left column of                    64
+Fig. 3.20 using
+Eq. (3.3-8).
+                                       0
+                                           0        64        128                  192         255
+
+
+                        Let us return for a moment to continuous intensities r and z (considered con-
+                     tinuous random variables), and let pr(r) and pz (z) denote their corresponding
+                     continuous probability density functions. In this notation, r and z denote the in-
+                     tensity levels of the input and output (processed) images, respectively. We can
+                     estimate pr(r) from the given input image, while pz (z) is the specified probabili-
+                     ty density function that we wish the output image to have.
+                        Let s be a random variable with the property
+                                                                         r
+                                               s = T(r) = (L - 1)    pr(w) dw                  (3.3-10)
+                                                                  L0
+                     where, as before, w is a dummy variable of integration. We recognize this expres-
+                     sion as the continuous version of histogram equalization given in Eq. (3.3-4).
+                        Suppose next that we define a random variable z with the property
+                                                                     z
+                                                G(z) = (L - 1)       pz (t) dt = s                   (3.3-11)
+                                                                 3
+                                                                 0
+
+                     where t is a dummy variable of integration. It then follows from these two
+                     equations that G(z) = T(r) and, therefore, that z must satisfy the condition
+
+                                                   z = G-1[T(r)] = G-1(s)                            (3.3-12)
+
+                     The transformation T(r) can be obtained from Eq. (3.3-10) once pr(r) has
+                     been estimated from the input image. Similarly, the transformation function
+                     G(z) can be obtained using Eq. (3.3-11) because pz(z) is given.
+                        Equations (3.3-10) through (3.3-12) show that an image whose intensity
+                     levels have a specified probability density function can be obtained from a
+                     given image by using the following procedure:
+                      1. Obtain pr(r) from the input image and use Eq. (3.3-10) to obtain the val-
+                         ues of s.
+                      2. Use the specified PDF in Eq. (3.3-11) to obtain the transformation function
+                         G(z).
+                                                                                3.3 ■ Histogram Processing   131
+
+ 3. Obtain the inverse transformation z = G-1(s); because z is obtained from
+    s, this process is a mapping from s to z, the latter being the desired values.
+ 4. Obtain the output image by first equalizing the input image using Eq.
+    (3.3-10); the pixel values in this image are the s values. For each pixel with
+    value s in the equalized image, perform the inverse mapping z = G-1(s) to
+    obtain the corresponding pixel in the output image. When all pixels have
+    been thus processed, the PDF of the output image will be equal to the
+    specified PDF.
+
+
+■ Assuming continuous intensity values, suppose that an image has the inten-                    EXAMPLE 3.7:
+sity PDF pr(r) = 2 r>(L - 1)2 for 0 … r … (L - 1) and pr(r) = 0 for other                       Histogram
+                                                                                                specification.
+values of r. Find the transformation function that will produce an image whose
+intensity PDF is pz (z) = 3z2>(L - 1)3 for 0 … z … (L - 1) and pz (z) = 0 for
+other values of z.
+   First, we find the histogram equalization transformation for the interval
+[0, L - 1]:
+                                     r                               r
+                                          2                 r2
+      s = T(r) = (L - 1)    pr(w) dw =            w dw =
+                         L0            (L - 1) L0        (L - 1)
+
+By definition, this transformation is 0 for values outside the range [0, L - 1].
+Squaring the values of the input intensities and dividing them by (L - 1)2 will
+produce an image whose intensities, s, have a uniform PDF because this is a
+histogram-equalization transformation, as discussed earlier.
+   We are interested in an image with a specified histogram, so we find next
+                               z                                z
+                                                    3                  z3
+      G(z) = (L - 1)               pz (w) dw =              w2 dw =
+                          L0                     (L - 1) L0
+                                                        2
+                                                                    (L - 1)2
+
+over the interval [0, L - 1]; this function is 0 elsewhere by definition. Finally,
+we require that G(z) = s, but G(z) = z3>(L - 1)2; so z3>(L - 1)2 = s, and
+we have
+
+                                     z = C (L - 1)2s D
+                                                         1>3
+
+
+
+So, if we multiply every histogram equalized pixel by (L - 1)2 and raise the
+product to the power 1>3, the result will be an image whose intensities, z, have
+the PDF pz(z) = 3z2>(L - 1)3 in the interval [0, L - 1], as desired.
+   Because s = r2>(L - 1) we can generate the z’s directly from the intensi-
+ties, r, of the input image:
+                                                               1/3
+
+        z = C (L - 1) s D                                            = C (L - 1)r 2 D
+                            1/3                     r2                                  1/3
+                      2
+                                   = B (L - 1)2           R
+                                                  (L - 1)
+
+Thus, squaring the value of each pixel in the original image, multiplying the re-
+sult by (L - 1), and raising the product to the power 1>3 will yield an image
+132   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                   whose intensity levels, z, have the specified PDF. We see that the intermedi-
+                   ate step of equalizing the input image can be skipped; all we need is to obtain
+                   the transformation function T(r) that maps r to s. Then, the two steps can be
+                   combined into a single transformation from r to z.                            ■
+                      As the preceding example shows, histogram specification is straightforward
+                   in principle. In practice, a common difficulty is finding meaningful analytical
+                   expressions for T(r) and G-1. Fortunately, the problem is simplified signifi-
+                   cantly when dealing with discrete quantities. The price paid is the same as for
+                   histogram equalization, where only an approximation to the desired histogram
+                   is achievable. In spite of this, however, some very useful results can be ob-
+                   tained, even with crude approximations.
+                      The discrete formulation of Eq. (3.3-10) is the histogram equalization trans-
+                   formation in Eq. (3.3-8), which we repeat here for convenience:
+                                                             k
+                                    sk = T(rk) = (L - 1) a pr (rj)
+                                                            j=0
+                                                                                              (3.3-13)
+                                                    k
+                                           (L - 1)
+                                             MN ja
+                                       =              nj      k = 0, 1, 2, Á , L - 1
+                                                   =0
+
+                   where, as before, MN is the total number of pixels in the image, nj is the num-
+                   ber of pixels that have intensity value rj, and L is the total number of possible
+                   intensity levels in the image. Similarly, given a specific value of sk, the discrete
+                   formulation of Eq. (3.3-11) involves computing the transformation function
+                                                                     q
+                                                G(zq) = (L - 1) a pz (zi)                     (3.3-14)
+                                                                    i=0
+
+                   for a value of q, so that
+
+                                                        G(zq) = sk                            (3.3-15)
+                   where pz (zi), is the ith value of the specified histogram. As before, we find the
+                   desired value zq by obtaining the inverse transformation:
+                                                        zq = G-1(sk)                          (3.3-16)
+
+                   In other words, this operation gives a value of z for each value of s; thus, it per-
+                   forms a mapping from s to z.
+                      In practice, we do not need to compute the inverse of G. Because we deal
+                   with intensity levels that are integers (e.g., 0 to 255 for an 8-bit image), it is a
+                   simple matter to compute all the possible values of G using Eq. (3.3-14) for
+                   q = 0, 1, 2, Á , L - 1. These values are scaled and rounded to their nearest
+                   integer values spanning the range [0, L - 1]. The values are stored in a table.
+                   Then, given a particular value of sk, we look for the closest match in the values
+                   stored in the table. If, for example, the 64th entry in the table is the closest to
+                   sk, then q = 63 (recall that we start counting at 0) and z63 is the best solution
+                   to Eq. (3.3-15). Thus, the given value sk would be associated with z63 (i.e., that
+                                                                     3.3 ■ Histogram Processing    133
+
+specific value of sk would map to z63). Because the zs are intensities used
+as the basis for specifying the histogram pz(z), it follows that z0 = 0,
+z1 = 1, Á , zL - 1 = L - 1, so z63 would have the intensity value 63. By re-
+peating this procedure, we would find the mapping of each value of sk to the
+value of zq that is the closest solution to Eq. (3.3-15). These mappings are the
+solution to the histogram-specification problem.
+   Recalling that the sks are the values of the histogram-equalized image, we
+may summarize the histogram-specification procedure as follows:
+
+ 1. Compute the histogram pr(r) of the given image, and use it to find the his-
+    togram equalization transformation in Eq. (3.3-13). Round the resulting
+    values, sk, to the integer range [0, L - 1].
+ 2. Compute all values of the transformation function G using the Eq. (3.3-14)
+    for q = 0, 1, 2, Á , L - 1, where pz (zi) are the values of the specified his-
+    togram. Round the values of G to integers in the range [0, L - 1]. Store
+    the values of G in a table.
+ 3. For every value of sk, k = 0, 1, 2, Á , L - 1, use the stored values of G
+    from step 2 to find the corresponding value of zq so that G(zq) is closest to
+    sk and store these mappings from s to z. When more than one value of zq
+    satisfies the given sk (i.e., the mapping is not unique), choose the smallest
+    value by convention.
+ 4. Form the histogram-specified image by first histogram-equalizing the
+    input image and then mapping every equalized pixel value, sk, of this
+    image to the corresponding value zq in the histogram-specified image
+    using the mappings found in step 3. As in the continuous case, the inter-
+    mediate step of equalizing the input image is conceptual. It can be skipped
+    by combining the two transformation functions, T and G-1, as Example 3.8
+    shows.
+
+As mentioned earlier, for G-1 to satisfy conditions (a¿) and (b), G has to be
+strictly monotonic, which, according to Eq. (3.3-14), means that none of the val-
+ues pz(zi) of the specified histogram can be zero (Problem 3.10). When working
+with discrete quantities, the fact that this condition may not be satisfied is not a
+serious implementation issue, as step 3 above indicates. The following example
+illustrates this numerically.
+
+
+■ Consider again the 64 * 64 hypothetical image from Example 3.5, whose                EXAMPLE 3.8:
+histogram is repeated in Fig. 3.22(a). It is desired to transform this histogram       A simple example
+                                                                                       of histogram
+so that it will have the values specified in the second column of Table 3.2.
+                                                                                       specification.
+Figure 3.22(b) shows a sketch of this histogram.
+   The first step in the procedure is to obtain the scaled histogram-equalized
+values, which we did in Example 3.5:
+
+                        s0 = 1 s2 = 5      s4 = 7   s6 = 7
+
+                        s1 = 3 s3 = 6      s5 = 7   s7 = 7
+134    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+a b                                pr (rk)                                              pz (zq)
+c d
+FIGURE 3.22                       .30                                                  .30
+(a) Histogram of a                .25                                                  .25
+3-bit image. (b)                  .20                                                  .20
+Specified                         .15                                                  .15
+histogram.
+(c) Transformation                .10                                                  .10
+function obtained                 .05                                                  .05
+from the specified                                                               rk                                              zq
+histogram.                              0    1    2   3    4        5   6   7                0    1   2    3     4   5   6   7
+(d) Result of
+                                   G (zq)                                               pz (zq)
+performing
+histogram
+                                   7                                                   .25
+specification.                     6
+Compare                                                                                .20
+                                   5
+(b) and (d).                       4                                                   .15
+                                   3                                                   .10
+                                   2
+                                   1                                                   .05
+                                                                                 zq                                              zq
+                                        0   1    2    3   4     5       6   7                0    1   2    3     4   5   6   7
+
+
+
+                     In the next step, we compute all the values of the transformation function, G,
+                     using Eq. (3.3-14):
+                                                                                  0
+                                                               G(z0) = 7 a pz (zj) = 0.00
+                                                                                 j=0
+
+                     Similarly,
+
+                                            G(z1) = 7 a pz (zj) = 7 C p(z0) + p(z1) D = 0.00
+                                                                1
+
+
+                                                               j=0
+
+                     and
+                                                 G(z2) = 0.00               G(z4) = 2.45              G(z6) = 5.95
+
+                                                 G(z3) = 1.05               G(z5) = 4.55              G(z7) = 7.00
+
+
+TABLE 3.2
+                                                                                Specified             Actual
+Specified and
+                                                               zq                pz (zq)              pz(zk)
+actual histograms
+(the values in the                                        z0 = 0                  0.00                    0.00
+third column are                                          z1 = 1                  0.00                    0.00
+from the                                                  z2 = 2                  0.00                    0.00
+computations                                              z3 = 3                  0.15                    0.19
+performed in the                                          z4 = 4                  0.20                    0.25
+body of Example                                           z5 = 5                  0.30                    0.21
+3.8).                                                     z6 = 6                  0.20                    0.24
+                                                          z7 = 7                  0.15                    0.11
+                                                                 3.3 ■ Histogram Processing      135
+
+As in Example 3.5, these fractional values are converted to integers in our
+valid range, [0, 7]. The results are:
+
+                G(z0) = 0.00 : 0             G(z4) = 2.45 : 2
+                G(z1) = 0.00 : 0             G(z5) = 4.55 : 5
+                G(z2) = 0.00 : 0             G(z6) = 5.95 : 6
+                G(z3) = 1.05 : 1             G(z7) = 7.00 : 7
+
+These results are summarized in Table 3.3, and the transformation function is
+sketched in Fig. 3.22(c). Observe that G is not strictly monotonic, so condition
+(a¿) is violated. Therefore, we make use of the approach outlined in step 3 of
+the algorithm to handle this situation.
+   In the third step of the procedure, we find the smallest value of zq so that
+the value G(zq) is the closest to sk. We do this for every value of sk to create
+the required mappings from s to z. For example, s0 = 1, and we see that
+G(z3) = 1, which is a perfect match in this case, so we have the correspon-
+dence s0 : z3. That is, every pixel whose value is 1 in the histogram equalized
+image would map to a pixel valued 3 (in the corresponding location) in the
+histogram-specified image. Continuing in this manner, we arrive at the map-
+pings in Table 3.4.
+   In the final step of the procedure, we use the mappings in Table 3.4 to map
+every pixel in the histogram equalized image into a corresponding pixel in the
+newly created histogram-specified image. The values of the resulting his-
+togram are listed in the third column of Table 3.2, and the histogram is
+sketched in Fig. 3.22(d). The values of pz (zq) were obtained using the same
+procedure as in Example 3.5. For instance, we see in Table 3.4 that s = 1 maps
+to z = 3, and there are 790 pixels in the histogram-equalized image with a
+value of 1. Therefore, pz (z3) = 790>4096 = 0.19.
+   Although the final result shown in Fig. 3.22(d) does not match the specified
+histogram exactly, the general trend of moving the intensities toward the high
+end of the intensity scale definitely was achieved. As mentioned earlier, ob-
+taining the histogram-equalized image as an intermediate step is useful for ex-
+plaining the procedure, but this is not necessary. Instead, we could list the
+mappings from the rs to the ss and from the ss to the zs in a three-column
+
+                                                                                   TABLE 3.3
+                                   zq      G(zq)
+                                                                                   All possible
+                                z0 = 0       0                                     values of the
+                                z1 = 1       0                                     transformation
+                                z2 = 2       0                                     function G scaled,
+                                z3 = 3       1                                     rounded, and
+                                z4 = 4       2                                     ordered with
+                                z5 = 5       5                                     respect to z.
+                                z6 = 6       6
+                                z7 = 7       7
+136    Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+TABLE 3.4
+                                                     sk                                 :         zq
+Mappings of all
+the values of sk                                      1                                 :         3
+into corresponding                                    3                                 :         4
+values of zq.                                         5                                 :         5
+                                                      6                                 :         6
+                                                      7                                 :         7
+
+
+
+
+                     table. Then, we would use those mappings to map the original pixels directly
+                     into the pixels of the histogram-specified image.                         ■
+
+
+EXAMPLE 3.9:         ■ Figure 3.23(a) shows an image of the Mars moon, Phobos, taken by NASA’s
+Comparison           Mars Global Surveyor. Figure 3.23(b) shows the histogram of Fig. 3.23(a). The
+between
+                     image is dominated by large, dark areas, resulting in a histogram characterized
+histogram
+equalization and     by a large concentration of pixels in the dark end of the gray scale. At first
+histogram            glance, one might conclude that histogram equalization would be a good ap-
+matching.            proach to enhance this image, so that details in the dark areas become more
+                     visible. It is demonstrated in the following discussion that this is not so.
+                        Figure 3.24(a) shows the histogram equalization transformation [Eq. (3.3-8)
+                     or (3.3-13)] obtained from the histogram in Fig. 3.23(b). The most relevant
+                     characteristic of this transformation function is how fast it rises from intensity
+                     level 0 to a level near 190. This is caused by the large concentration of pixels in
+                     the input histogram having levels near 0. When this transformation is applied
+                     to the levels of the input image to obtain a histogram-equalized result, the net
+                     effect is to map a very narrow interval of dark pixels into the upper end of the
+                     gray scale of the output image. Because numerous pixels in the input image
+                     have levels precisely in this interval, we would expect the result to be an image
+                     with a light, washed-out appearance. As Fig. 3.24(b) shows, this is indeed the
+
+
+a b
+FIGURE 3.23
+(a) Image of the
+Mars moon
+                                                                                       7.00
+Phobos taken by
+                                                          Number of pixels (  10 4)
+
+
+
+
+NASA’s Mars
+Global Surveyor.                                                                       5.25
+(b) Histogram.
+(Original image
+                                                                                       3.50
+courtesy of
+NASA.)
+                                                                                       1.75
+
+
+                                                                                         0
+                                                                                              0    64      128      192   255
+                                                                                                        Intensity
+                                                                               3.3 ■ Histogram Processing    137
+
+                                   255                                                         a b
+                                                                                               c
+                                   192                                                         FIGURE 3.24
+          Output intensity
+
+
+
+                                                                                               (a) Transformation
+                                                                                               function for
+                                   128                                                         histogram
+                                                                                               equalization.
+                                                                                               (b) Histogram-
+                                    64
+                                                                                               equalized image
+                                                                                               (note the washed-
+                                     0                                                         out appearance).
+                                          0   64        128        192   255                   (c) Histogram
+                                                   Input intensity                             of (b).
+                                   7.00
+      Number of pixels (  10 4)
+
+
+
+
+                                   5.25
+
+
+                                   3.50
+
+
+                                   1.75
+
+
+                                     0
+                                          0   64        128       192    255
+                                                     Intensity
+
+
+
+
+case. The histogram of this image is shown in Fig. 3.24(c). Note how all the in-
+tensity levels are biased toward the upper one-half of the gray scale.
+   Because the problem with the transformation function in Fig. 3.24(a) was
+caused by a large concentration of pixels in the original image with levels near
+0, a reasonable approach is to modify the histogram of that image so that it
+does not have this property. Figure 3.25(a) shows a manually specified function
+that preserves the general shape of the original histogram, but has a smoother
+transition of levels in the dark region of the gray scale. Sampling this function
+into 256 equally spaced discrete values produced the desired specified his-
+togram. The transformation function G(z) obtained from this histogram using
+Eq. (3.3-14) is labeled transformation (1) in Fig. 3.25(b). Similarly, the inverse
+transformation G-1(s) from Eq. (3.3-16) (obtained using the step-by-step pro-
+cedure discussed earlier) is labeled transformation (2) in Fig. 3.25(b). The en-
+hanced image in Fig. 3.25(c) was obtained by applying transformation (2) to
+the pixels of the histogram-equalized image in Fig. 3.24(b). The improvement
+of the histogram-specified image over the result obtained by histogram equal-
+ization is evident by comparing these two images. It is of interest to note that a
+rather modest change in the original histogram was all that was required to
+obtain a significant improvement in appearance. Figure 3.25(d) shows the his-
+togram of Fig. 3.25(c). The most distinguishing feature of this histogram is
+how its low end has shifted right toward the lighter region of the gray scale
+(but not excessively so), as desired.                                            ■
+138     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+a c                                                       7.00
+b
+
+
+
+
+                             Number of pixels (  10 4)
+d
+                                                          5.25
+FIGURE 3.25
+(a) Specified
+histogram.                                                3.50
+(b) Transformations.
+(c) Enhanced image
+                                                          1.75
+using mappings
+from curve (2).
+(d) Histogram of (c).                                       0
+                                                                 0         64        128       192          255
+                                                                                  Intensity
+                                                          255
+
+
+                                                          192
+                                 Output intensity
+
+
+
+
+                                                                     (1)
+                                                          128
+                                                                                                      (2)
+                                                           64
+
+
+                                                            0
+                                                                 0         64        128        192         255
+                                                                                Input intensity
+                                                          7.00
+                             Number of pixels (  104)
+
+
+
+
+                                                          5.25
+
+
+                                                          3.50
+
+
+                                                          1.75
+
+
+                                                            0
+                                                                 0         64         128      192          255
+                                                                                   Intensity
+
+
+
+
+                           Although it probably is obvious by now, we emphasize before leaving this
+                        section that histogram specification is, for the most part, a trial-and-error
+                        process. One can use guidelines learned from the problem at hand, just as we
+                        did in the preceding example. At times, there may be cases in which it is possi-
+                        ble to formulate what an “average” histogram should look like and use that as
+                        the specified histogram. In cases such as these, histogram specification be-
+                        comes a straightforward process. In general, however, there are no rules for
+                        specifying histograms, and one must resort to analysis on a case-by-case basis
+                        for any given enhancement task.
+                                                                   3.3 ■ Histogram Processing    139
+
+3.3.3 Local Histogram Processing
+The histogram processing methods discussed in the previous two sections are
+global, in the sense that pixels are modified by a transformation function
+based on the intensity distribution of an entire image. Although this global ap-
+proach is suitable for overall enhancement, there are cases in which it is neces-
+sary to enhance details over small areas in an image. The number of pixels in
+these areas may have negligible influence on the computation of a global
+transformation whose shape does not necessarily guarantee the desired local
+enhancement. The solution is to devise transformation functions based on the
+intensity distribution in a neighborhood of every pixel in the image.
+    The histogram processing techniques previously described are easily adapted
+to local enhancement. The procedure is to define a neighborhood and move
+its center from pixel to pixel. At each location, the histogram of the points in
+the neighborhood is computed and either a histogram equalization or his-
+togram specification transformation function is obtained. This function is
+then used to map the intensity of the pixel centered in the neighborhood. The
+center of the neighborhood region is then moved to an adjacent pixel location
+and the procedure is repeated. Because only one row or column of the neigh-
+borhood changes during a pixel-to-pixel translation of the neighborhood, up-
+dating the histogram obtained in the previous location with the new data
+introduced at each motion step is possible (Problem 3.12). This approach has
+obvious advantages over repeatedly computing the histogram of all pixels in
+the neighborhood region each time the region is moved one pixel location.
+Another approach used sometimes to reduce computation is to utilize
+nonoverlapping regions, but this method usually produces an undesirable
+“blocky” effect.
+
+■ Figure 3.26(a) shows an 8-bit, 512 * 512 image that at first glance appears        EXAMPLE 3.10:
+to contain five black squares on a gray background. The image is slightly noisy,     Local histogram
+                                                                                     equalization.
+but the noise is imperceptible. Figure 3.26(b) shows the result of global his-
+togram equalization. As often is the case with histogram equalization of
+smooth, noisy regions, this image shows significant enhancement of the noise.
+Aside from the noise, however, Fig. 3.26(b) does not reveal any new significant
+details from the original, other than a very faint hint that the top left and bot-
+tom right squares contain an object. Figure 3.26(c) was obtained using local
+histogram equalization with a neighborhood of size 3 * 3. Here, we see signif-
+icant detail contained within the dark squares. The intensity values of these ob-
+jects were too close to the intensity of the large squares, and their sizes were
+too small, to influence global histogram equalization significantly enough to
+show this detail.                                                               ■
+
+3.3.4 Using Histogram Statistics for Image Enhancement
+Statistics obtained directly from an image histogram can be used for image en-
+hancement. Let r denote a discrete random variable representing intensity val-
+ues in the range [0, L - 1], and let p(ri) denote the normalized histogram
+140       Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+
+
+
+       a b c
+      FIGURE 3.26 (a) Original image. (b) Result of global histogram equalization. (c) Result of local
+      histogram equalization applied to (a), using a neighborhood of size 3 * 3.
+
+
+
+                            component corresponding to value ri. As indicated previously, we may view
+                            p(ri) as an estimate of the probability that intensity ri occurs in the image from
+                            which the histogram was obtained.
+                               As we discussed in Section 2.6.8, the nth moment of r about its mean is de-
+                            fined as
+                                                                L-1
+                                                       mn(r) = a (ri - m)n p(ri)                     (3.3-17)
+                                                                 i=0
+
+We follow convention in     where m is the mean (average intensity) value of r (i.e., the average intensity
+using m for the mean
+value. Do not confuse it
+                            of the pixels in the image):
+with the same symbol                                               L-1
+used to denote the num-
+ber of rows in an m * n                                       m = a ri p(ri)                         (3.3-18)
+neighborhood, in which                                             i=0
+we also follow notational
+convention.                 The second moment is particularly important:
+                                                                L-1
+                                                       m2(r) = a (ri - m)2 p(ri)                     (3.3-19)
+                                                                 i=0
+
+                            We recognize this expression as the intensity variance, normally denoted by s2
+                            (recall that the standard deviation is the square root of the variance). Whereas
+                            the mean is a measure of average intensity, the variance (or standard devia-
+                            tion) is a measure of contrast in an image. Observe that all moments are com-
+                            puted easily using the preceding expressions once the histogram has been
+                            obtained from a given image.
+                               When working with only the mean and variance, it is common practice to es-
+                            timate them directly from the sample values, without computing the histogram.
+                            Appropriately, these estimates are called the sample mean and sample variance.
+                            They are given by the following familiar expressions from basic statistics:
+                                                               1 M-1 N-1
+                                                              MN xa  a f(x, y)
+                                                        m =                                          (3.3-20)
+                                                                  =0 y=0
+                                                                    3.3 ■ Histogram Processing           141
+
+and                                                                                   The denominator in
+                                                                                      Eq. (3.3-21) is written
+
+
+                                               C f(x, y) - m D
+                                                                                      sometimes as MN - 1
+                                 1 M-1 N-1                     2                      instead of MN. This is
+                       s2 =        a     a                                (3.3-21)    done to obtain a so-
+                                MN x = 0 y = 0                                        called unbiased estimate
+                                                                                      of the variance. Howev-
+for x = 0, 1, 2, Á , M - 1 and y = 0, 1, 2, Á , N - 1. In other words, as we          er, we are more interest-
+                                                                                      ed in Eqs. (3.3-21) and
+know, the mean intensity of an image can be obtained simply by summing the            (3.3-19) agreeing when
+values of all its pixels and dividing the sum by the total number of pixels in the    the histogram in the lat-
+                                                                                      ter equation is computed
+image.A similar interpretation applies to Eq. (3.3-21).As we illustrate in the fol-   from the same image
+lowing example, the results obtained using these two equations are identical to       used in Eq. (3.3-21). For
+                                                                                      this we require the MN
+the results obtained using Eqs. (3.3-18) and (3.3-19), provided that the histogram    term. The difference is
+used in these equations is computed from the same image used in Eqs. (3.3-20)         negligible for any image
+                                                                                      of practical size.
+and (3.3-21).
+
+■ Before proceeding, it will be useful to work through a simple numerical ex-         EXAMPLE 3.11:
+ample to fix ideas. Consider the following 2-bit image of size 5 * 5:                 Computing
+                                                                                      histogram
+                                                                                      statistics.
+                                   0   0     1   1   2
+                                   1   2     3   0   1
+                                   3   3     2   2   0
+                                   2   3     1   0   0
+                                   1   1     3   2   2
+
+
+The pixels are represented by 2 bits; therefore, L = 4 and the intensity levels
+are in the range [0, 3]. The total number of pixels is 25, so the histogram has the
+components
+                                6                   7
+                    p(r0) =        = 0.24; p(r1) =    = 0.28;
+                                25                 25
+
+                                7                   5
+                    p(r2) =        = 0.28; p(r3) =    = 0.20
+                                25                 25
+where the numerator in p(ri) is the number of pixels in the image with intensity
+level ri. We can compute the average value of the intensities in the image using
+Eq. (3.3-18):
+                            3
+                     m = a ri p(ri)
+                           i=0
+
+                        = (0)(0.24) + (1)(0.28) + (2)(0.28) + (3)(0.20)
+                        = 1.44
+Letting f(x, y) denote the preceding 5 * 5 array and using Eq. (3.3-20), we obtain
+                                        1 4 4
+                                       25 xa  a f(x, y)
+                                 m =
+                                           =0 y=0
+
+                                    = 1.44
+142   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                   As expected, the results agree. Similarly, the result for the variance is the same
+                   (1.1264) using either Eq. (3.3-19) or (3.3-21).                                  ■
+                      We consider two uses of the mean and variance for enhancement purposes.
+                   The global mean and variance are computed over an entire image and are use-
+                   ful for gross adjustments in overall intensity and contrast. A more powerful
+                   use of these parameters is in local enhancement, where the local mean and
+                   variance are used as the basis for making changes that depend on image char-
+                   acteristics in a neighborhood about each pixel in an image.
+                      Let (x, y) denote the coordinates of any pixel in a given image, and let Sxy
+                   denote a neighborhood (subimage) of specified size, centered on (x, y). The
+                   mean value of the pixels in this neighborhood is given by the expression
+                                                            L-1
+                                                   mSxy = a ri pSxy (ri)                    (3.3-22)
+                                                            i=0
+
+                   where pSxy is the histogram of the pixels in region Sxy. This histogram has L
+                   components, corresponding to the L possible intensity values in the input image.
+                   However, many of the components are 0, depending on the size of Sxy. For ex-
+                   ample, if the neighborhood is of size 3 * 3 and L = 256, only between 1 and 9
+                   of the 256 components of the histogram of the neighborhood will be nonzero.
+                   These non-zero values will correspond to the number of different intensities in
+                   Sxy (the maximum number of possible different intensities in a 3 * 3 region is 9,
+                   and the minimum is 1).
+                      The variance of the pixels in the neighborhood similarly is given by
+                                                      L-1
+                                              s2Sxy = a (ri - mSxy)2 pSxy(ri)               (3.3-23)
+                                                      i=0
+
+                   As before, the local mean is a measure of average intensity in neighborhood
+                   Sxy, and the local variance (or standard deviation) is a measure of intensity
+                   contrast in that neighborhood. Expressions analogous to (3.3-20) and (3.3-21)
+                   can be written for neighborhoods. We simply use the pixel values in the neigh-
+                   borhoods in the summations and the number of pixels in the neighborhood in
+                   the denominator.
+                      As the following example illustrates, an important aspect of image process-
+                   ing using the local mean and variance is the flexibility they afford in developing
+                   simple, yet powerful enhancement techniques based on statistical measures
+                   that have a close, predictable correspondence with image appearance.
+
+EXAMPLE 3.12:      ■ Figure 3.27(a) shows an SEM (scanning electron microscope) image of a
+Local enhance-     tungsten filament wrapped around a support. The filament in the center of
+ment using
+                   the image and its support are quite clear and easy to study. There is another
+histogram
+statistics.        filament structure on the right, dark side of the image, but it is almost imper-
+                   ceptible, and its size and other characteristics certainly are not easily discern-
+                   able. Local enhancement by contrast manipulation is an ideal approach to
+                   problems such as this, in which parts of an image may contain hidden features.
+                                                                     3.3 ■ Histogram Processing   143
+
+
+
+
+a b c
+FIGURE 3.27 (a) SEM image of a tungsten filament magnified approximately 130 *.
+(b) Result of global histogram equalization. (c) Image enhanced using local histogram
+statistics. (Original image courtesy of Mr. Michael Shaffer, Department of Geological
+Sciences, University of Oregon, Eugene.)
+
+
+
+
+   In this particular case, the problem is to enhance dark areas while leaving
+the light area as unchanged as possible because it does not require enhance-
+ment. We can use the concepts presented in this section to formulate an en-
+hancement method that can tell the difference between dark and light and, at
+the same time, is capable of enhancing only the dark areas. A measure of
+whether an area is relatively light or dark at a point (x, y) is to compare the av-
+erage local intensity, mSxy, to the average image intensity, called the global
+mean and denoted mG. This quantity is obtained with Eq. (3.3-18) or (3.3-20)
+using the entire image. Thus, we have the first element of our enhancement
+scheme: We will consider the pixel at a point (x, y) as a candidate for processing
+if mSxy … k0 mG, where k0 is a positive constant with value less than 1.0.
+   Because we are interested in enhancing areas that have low contrast, we also
+need a measure to determine whether the contrast of an area makes it a candi-
+date for enhancement. We consider the pixel at a point (x, y) as a candidate for
+enhancement if sSxy … k2sG, where sG is the global standard deviation
+obtained using Eqs. (3.3-19) or (3.3-21) and k2 is a positive constant. The value
+of this constant will be greater than 1.0 if we are interested in enhancing light
+areas and less than 1.0 for dark areas.
+   Finally, we need to restrict the lowest values of contrast we are willing to ac-
+cept; otherwise the procedure would attempt to enhance constant areas, whose
+standard deviation is zero. Thus, we also set a lower limit on the local standard
+deviation by requiring that k1sG … sSxy, with k1 6 k2. A pixel at (x, y) that
+meets all the conditions for local enhancement is processed simply by multi-
+plying it by a specified constant, E, to increase (or decrease) the value of its in-
+tensity level relative to the rest of the image. Pixels that do not meet the
+enhancement conditions are not changed.
+144   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                      We summarize the preceding approach as follows. Let f(x, y) represent the
+                   value of an image at any image coordinates (x, y), and let g(x, y) represent the
+                   corresponding enhanced value at those coordinates. Then,
+
+                                  E # f(x, y)   if mSxy … k0 mG AND k1sG … sSxy … k2sG
+                    g(x, y) = c                                                              (3.3-24)
+                                  f(x, y)       otherwise
+
+                   for x = 0, 1, 2, Á , M - 1 and y = 0, 1, 2, Á , N - 1, where, as indicated
+                   above, E, k0, k1, and k2 are specified parameters, mG is the global mean of the
+                   input image, and sG is its standard deviation. Parameters mSxy and sSxy are the
+                   local mean and standard deviation, respectively. As usual, M and N are the row
+                   and column image dimensions.
+                      Choosing the parameters in Eq. (3.3-24) generally requires a bit of experi-
+                   mentation to gain familiarity with a given image or class of images. In this
+                   case, the following values were selected: E = 4.0, k0 = 0.4, k1 = 0.02, and
+                   k2 = 0.4. The relatively low value of 4.0 for E was chosen so that, when it was
+                   multiplied by the levels in the areas being enhanced (which are dark), the re-
+                   sult would still tend toward the dark end of the scale, and thus preserve the
+                   general visual balance of the image. The value of k0 was chosen as less than
+                   half the global mean because we can see by looking at the image that the areas
+                   that require enhancement definitely are dark enough to be below half the
+                   global mean. A similar analysis led to the choice of values for k1 and k2.
+                   Choosing these constants is not difficult in general, but their choice definitely
+                   must be guided by a logical analysis of the enhancement problem at hand. Fi-
+                   nally, the size of the local area Sxy should be as small as possible in order to
+                   preserve detail and keep the computational burden as low as possible. We
+                   chose a region of size 3 * 3.
+                      As a basis for comparison, we enhanced the image using global histogram
+                   equalization. Figure 3.27(b) shows the result. The dark area was improved but
+                   details still are difficult to discern, and the light areas were changed, something
+                   we did not want to do. Figure 3.27(c) shows the result of using the local statis-
+                   tics method explained above. In comparing this image with the original in Fig.
+                   3.27(a) or the histogram equalized result in Fig. 3.27(b), we note the obvious
+                   detail that has been brought out on the right side of Fig. 3.27(c). Observe, for
+                   example, the clarity of the ridges in the dark filaments. It is noteworthy that
+                   the light-intensity areas on the left were left nearly intact, which was one of
+                   our initial objectives.                                                           ■
+
+                     3.4    Fundamentals of Spatial Filtering
+                   In this section, we introduce several basic concepts underlying the use of spa-
+                   tial filters for image processing. Spatial filtering is one of the principal tools
+                   used in this field for a broad spectrum of applications, so it is highly advisable
+                   that you develop a solid understanding of these concepts. As mentioned at the
+                   beginning of this chapter, the examples in this section deal mostly with the use
+                   of spatial filters for image enhancement. Other applications of spatial filtering
+                   are discussed in later chapters.
+                                                                             3.4 ■ Fundamentals of Spatial Filtering                      145
+
+   The name filter is borrowed from frequency domain processing, which is
+the topic of the next chapter, where “filtering” refers to accepting (passing) or
+rejecting certain frequency components. For example, a filter that passes low
+frequencies is called a lowpass filter. The net effect produced by a lowpass fil-
+ter is to blur (smooth) an image. We can accomplish a similar smoothing di-
+rectly on the image itself by using spatial filters (also called spatial masks,
+kernels, templates, and windows). In fact, as we show in Chapter 4, there is a
+one-to-one correspondence between linear spatial filters and filters in the fre-                                   See Section 2.6.2
+                                                                                                                   regarding linearity.
+quency domain. However, spatial filters offer considerably more versatility be-
+cause, as you will see later, they can be used also for nonlinear filtering,
+something we cannot do in the frequency domain.
+
+3.4.1 The Mechanics of Spatial Filtering
+In Fig. 3.1, we explained briefly that a spatial filter consists of (1) a
+neighborhood, (typically a small rectangle), and (2) a predefined operation that
+is performed on the image pixels encompassed by the neighborhood. Filtering
+creates a new pixel with coordinates equal to the coordinates of the center of
+the neighborhood, and whose value is the result of the filtering operation.† A
+processed (filtered) image is generated as the center of the filter visits each
+pixel in the input image. If the operation performed on the image pixels is lin-
+ear, then the filter is called a linear spatial filter. Otherwise, the filter is
+nonlinear. We focus attention first on linear filters and then illustrate some
+simple nonlinear filters. Section 5.3 contains a more comprehensive list of non-
+linear filters and their application.
+    Figure 3.28 illustrates the mechanics of linear spatial filtering using a 3 * 3
+neighborhood. At any point (x, y) in the image, the response, g(x, y), of the fil-
+ter is the sum of products of the filter coefficients and the image pixels encom-
+passed by the filter:
+          g(x, y) = w(-1, -1)f(x - 1, y - 1) + w(-1, 0)f(x - 1, y) + Á
+                              + w(0, 0)f(x, y) + Á + w(1, 1)f(x + 1, y + 1)
+
+Observe that the center coefficient of the filter, w(0, 0), aligns with the pixel at
+location (x, y). For a mask of size m * n, we assume that m = 2a + 1 and
+n = 2b + 1, where a and b are positive integers. This means that our focus in
+the following discussion is on filters of odd size, with the smallest being of size                                It certainly is possible to
+                                                                                                                   work with filters of even
+3 * 3. In general, linear spatial filtering of an image of size M * N with a fil-                                  size or mixed even and
+ter of size m * n is given by the expression:                                                                      odd sizes. However,
+                                                                                                                   working with odd sizes
+                                              a     b                                                              simplifies indexing and
+                             g(x, y) = a a w(s, t)f(x + s, y + t)                                                  also is more intuitive
+                                                                                                                   because the filters have
+                                           s = -a t = -b
+                                                                                                                   centers falling on integer
+                                                                                                                   values.
+where x and y are varied so that each pixel in w visits every pixel in f.
+
+
+†
+    The filtered pixel value typically is assigned to a corresponding location in a new image created to hold
+    the results of filtering. It is seldom the case that filtered pixels replace the values of the corresponding
+    location in the original image, as this would change the content of the image while filtering still is being
+    performed.
+146     Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                 Image origin
+                                                                                          y
+
+
+
+
+                                                        Filter mask
+
+
+
+
+                                Image pixels
+
+
+
+
+                                                                                  w (1, 1)      w(1, 0)      w (1, 1)
+                      Image
+
+
+                                                                                   w (0,1)        w (0,0)          w(0,1)
+                  x
+
+
+
+                                                                                   w (1,1)        w (1,0)          w(1,1)
+
+
+                                                                                              Filter coefficients
+                                    f(x  1, y  1)     f (x  1, y)   f (x  1, y  1)
+
+
+
+
+                                      f(x, y  1)          f(x, y)         f(x, y  1)
+
+
+
+
+                                    f (x  1, y  1)    f(x  1, y)    f (x  1, y  1)
+
+
+
+
+                                                    Pixels of image
+                                                    section under filter
+
+
+
+
+FIGURE 3.28 The mechanics of linear spatial filtering using a 3 * 3 filter mask. The form chosen to denote
+the coordinates of the filter mask coefficients simplifies writing expressions for linear filtering.
+
+                        3.4.2 Spatial Correlation and Convolution
+                        There are two closely related concepts that must be understood clearly when
+                        performing linear spatial filtering. One is correlation and the other is
+                        convolution. Correlation is the process of moving a filter mask over the image
+                        and computing the sum of products at each location, exactly as explained in
+                        the previous section. The mechanics of convolution are the same, except that
+                        the filter is first rotated by 180°. The best way to explain the differences be-
+                        tween the two concepts is by example. We begin with a 1-D illustration.
+                           Figure 3.29(a) shows a 1-D function, f, and a filter, w, and Fig. 3.29(b) shows
+                        the starting position to perform correlation. The first thing we note is that there
+                                                             3.4 ■ Fundamentals of Spatial Filtering              147
+
+                            Correlation                                 Convolution
+
+                 Origin  f                    w              Origin   f            w rotated 180
+         (a) 0 0 0 1 0 0 0 0              1 2 3 2 8       0 0 0 1 0 0 0 0           8 2 3 2 1           (i)
+
+         (b)           0 0 0 1 0 0 0 0                            0 0 0 1 0 0 0 0                       (j)
+               1 2 3 2 8                                  8 2 3 2 1
+                           Starting position alignment
+
+
+                           Zero padding
+
+         (c) 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0              0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 (k)
+             1 2 3 2 8                                    8 2 3 2 1
+
+         (d) 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0              0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 (l)
+               1 2 3 2 8                                    8 2 3 2 1
+                   Position after one shift
+
+         (e) 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0              0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 (m)
+                     1 2 3 2 8                                    8 2 3 2 1
+                           Position after four shifts
+
+         (f) 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0              0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 (n)
+                                       1 2 3 2 8                                8 2 3 2 1
+                        Final position
+
+                       Full correlation result                     Full convolution result
+         (g)       0 0 0 8 2 3 2 1 0 0 0 0                     0 0 0 1 2 3 2 8 0 0 0 0                 (o)
+
+
+                    Cropped correlation result                   Cropped convolution result
+        (h)             0 8 2 3 2 1 0 0                             0 1 2 3 2 8 0 0                    (p)
+
+FIGURE 3.29 Illustration of 1-D correlation and convolution of a filter with a discrete unit impulse. Note that
+correlation and convolution are functions of displacement.
+
+
+are parts of the functions that do not overlap. The solution to this problem is to
+pad f with enough 0s on either side to allow each pixel in w to visit every pixel in          Zero padding is not the
+                                                                                              only option. For example,
+f. If the filter is of size m, we need m - 1 0s on either side of f. Figure 3.29(c)           we could duplicate the
+shows a properly padded function. The first value of correlation is the sum of                value of the first and last
+                                                                                              element m - 1 times on
+products of f and w for the initial position shown in Fig. 3.29(c) (the sum of                each side of f, or mirror
+products is 0). This corresponds to a displacement x = 0. To obtain the second                the first and last m - 1
+                                                                                              elements and use the
+value of correlation, we shift w one pixel location to the right (a displacement of           mirrored values for
+x = 1) and compute the sum of products. The result again is 0. In fact, the first             padding.
+
+nonzero result is when x = 3, in which case the 8 in w overlaps the 1 in f and the
+result of correlation is 8. Proceeding in this manner, we obtain the full correlation
+result in Fig. 3.29(g). Note that it took 12 values of x (i.e., x = 0, 1, 2, Á , 11) to
+fully slide w past f so that each pixel in w visited every pixel in f. Often, we like
+to work with correlation arrays that are the same size as f, in which case we crop
+the full correlation to the size of the original function, as Fig. 3.29(h) shows.
+148        Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                                  There are two important points to note from the discussion in the preceding
+                              paragraph. First, correlation is a function of displacement of the filter. In other
+                              words, the first value of correlation corresponds to zero displacement of the
+                              filter, the second corresponds to one unit displacement, and so on. The second
+                              thing to notice is that correlating a filter w with a function that contains all 0s
+                              and a single 1 yields a result that is a copy of w, but rotated by 180°. We call a
+                              function that contains a single 1 with the rest being 0s a discrete unit impulse.
+                              So we conclude that correlation of a function with a discrete unit impulse
+                              yields a rotated version of the function at the location of the impulse.
+                                  The concept of convolution is a cornerstone of linear system theory. As you
+                              will learn in Chapter 4, a fundamental property of convolution is that convolv-
+                              ing a function with a unit impulse yields a copy of the function at the location
+                              of the impulse. We saw in the previous paragraph that correlation yields a copy
+Note that rotation by         of the function also, but rotated by 180°. Therefore, if we pre-rotate the filter
+180° is equivalent to flip-
+ping the function hori-
+                              and perform the same sliding sum of products operation, we should be able to
+zontally.                     obtain the desired result. As the right column in Fig. 3.29 shows, this indeed is
+                              the case. Thus, we see that to perform convolution all we do is rotate one func-
+                              tion by 180° and perform the same operations as in correlation. As it turns out,
+                              it makes no difference which of the two functions we rotate.
+                                  The preceding concepts extend easily to images, as Fig. 3.30 shows. For a fil-
+                              ter of size m * n, we pad the image with a minimum of m - 1 rows of 0s at
+                              the top and bottom and n - 1 columns of 0s on the left and right. In this case,
+                              m and n are equal to 3, so we pad f with two rows of 0s above and below and
+                              two columns of 0s to the left and right, as Fig. 3.30(b) shows. Figure 3.30(c)
+                              shows the initial position of the filter mask for performing correlation, and
+                              Fig. 3.30(d) shows the full correlation result. Figure 3.30(e) shows the corre-
+In 2-D, rotation by 180°      sponding cropped result. Note again that the result is rotated by 180°. For con-
+is equivalent to flipping
+the mask along one axis
+                              volution, we pre-rotate the mask as before and repeat the sliding sum of
+and then the other.           products just explained. Figures 3.30(f) through (h) show the result. You see
+                              again that convolution of a function with an impulse copies the function at the
+                              location of the impulse. It should be clear that, if the filter mask is symmetric,
+                              correlation and convolution yield the same result.
+                                  If, instead of containing a single 1, image f in Fig. 3.30 had contained a re-
+                              gion identically equal to w, the value of the correlation function (after nor-
+                              malization) would have been maximum when w was centered on that region
+                              of f. Thus, as you will see in Chapter 12, correlation can be used also to find
+                              matches between images.
+                                  Summarizing the preceding discussion in equation form, we have that the
+                              correlation of a filter w(x, y) of size m * n with an image f(x, y), denoted as
+                              w(x, y)  f(x, y), is given by the equation listed at the end of the last section,
+                              which we repeat here for convenience:
+                                                                    a      b
+                                            w(x, y)  f(x, y) = a a w(s, t)f(x + s, y + t)               (3.4-1)
+                                                                  s = -a t = -b
+
+                              This equation is evaluated for all values of the displacement variables x and y
+                              so that all elements of w visit every pixel in f, where we assume that f has been
+                              padded appropriately. As explained earlier, a = (m - 1)>2, b = (n - 1)>2,
+                              and we assume for notational convenience that m and n are odd integers.
+                                                                                3.4 ■ Fundamentals of Spatial Filtering                 149
+
+                                           Padded f                                                                  FIGURE 3.30
+                                           0 0 0 0       0 0 0 0           0                                         Correlation
+                                           0 0 0 0       0 0 0 0           0                                         (middle row) and
+                                           0 0 0 0       0 0 0 0           0                                         convolution (last
+               Origin f(x, y)              0 0 0 0       0 0 0 0           0                                         row) of a 2-D
+       0   0    0 0   0                    0 0 0 0       1 0 0 0           0                                         filter with a 2-D
+       0   0    0 0   0       w(x, y)      0 0 0 0       0 0 0 0           0                                         discrete, unit
+       0   0    1 0   0      1 2 3         0 0 0 0       0 0 0 0           0                                         impulse. The 0s
+       0   0    0 0   0      4 5 6         0 0 0 0       0 0 0 0           0                                         are shown in gray
+       0   0    0 0   0      7 8 9         0 0 0 0       0 0 0 0           0                                         to simplify visual
+                     (a)                               (b)                                                           analysis.
+            Initial position for w         Full correlation result             Cropped correlation result
+       1   2 3 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0   0 0 0 0 0
+       4   5 6 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0   0 9 8 7 0
+       7   8 9 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0   0 6 5 4 0
+       0   0 0 0 0 0 0 0 0                 0 0 0 9 8 7 0 0                 0   0 3 2 1 0
+       0   0 0 0 1 0 0 0 0                 0 0 0 6 5 4 0 0                 0   0 0 0 0 0
+       0   0 0 0 0 0 0 0 0                 0 0 0 3 2 1 0 0                 0
+       0   0 0 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0
+       0   0 0 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0
+       0   0 0 0 0 0 0 0 0                 0 0 0 0 0 0 0 0                 0
+                     (c)                               (d)                          (e)
+               Rotated w                   Full convolution result             Cropped convolution result
+       9   8    7   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0   0 0 0 0 0
+       6   5    4   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0   0 1 2 3 0
+       3   2    1   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0   0 4 5 6 0
+       0   0    0   0    0 0   0   0   0   0   0   0   1    2 3    0   0   0   0 7 8 9 0
+       0   0    0   0    1 0   0   0   0   0   0   0   4    5 6    0   0   0   0 0 0 0 0
+       0   0    0   0    0 0   0   0   0   0   0   0   7    8 9    0   0   0
+       0   0    0   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0
+       0   0    0   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0
+       0   0    0   0    0 0   0   0   0   0   0   0   0    0 0    0   0   0
+                        (f)                                (g)                      (h)
+
+
+
+
+  In a similar manner, the convolution of w(x, y) and f(x, y), denoted by                                            Often, when the mean-
+                                                                                                                     ing is clear, we denote
+w(x, y)  f(x, y),† is given by the expression                                                                       the result of correlation
+                                                                                                                     or convolution by a func-
+                                                       a     b                                                       tion g (x, y), instead of
+                        w(x, y)  f(x, y) = a a w(s, t)f(x - s, y - t)                                   (3.4-2)     writing w(x, y)  f(x, y)
+                                                   s = -a t = -b                                                     or w(x, y)  f(x, y). For
+                                                                                                                     example, see the equa-
+                                                                                                                     tion at the end of the
+where the minus signs on the right flip f (i.e., rotate it by 180°). Flipping and                                    previous section, and
+shifting f instead of w is done for notational simplicity and also to follow                                         Eq. (3.5-1).
+convention. The result is the same. As with correlation, this equation is eval-
+uated for all values of the displacement variables x and y so that every ele-
+ment of w visits every pixel in f, which we assume has been padded
+appropriately. You should expand Eq. (3.4-2) for a 3 * 3 mask and convince
+yourself that the result using this equation is identical to the example in
+Fig. 3.30. In practice, we frequently work with an algorithm that implements
+
+†
+    Because correlation and convolution are commutative, we                      have     that   w(x, y)  f(x, y)
+    = f(x, y)  w(x, y) and w(x, y)  f(x, y) = f(x, y)  w(x, y).
+150       Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                             Eq. (3.4-1). If we want to perform correlation, we input w into the algorithm;
+                             for convolution, we input w rotated by 180°. The reverse is true if an algo-
+                             rithm that implements Eq. (3.4-2) is available instead.
+                                As mentioned earlier, convolution is a cornerstone of linear system theory.
+                             As you will learn in Chapter 4, the property that the convolution of a function
+                             with a unit impulse copies the function at the location of the impulse plays a
+                             central role in a number of important derivations. We will revisit convolution
+                             in Chapter 4 in the context of the Fourier transform and the convolution the-
+                             orem. Unlike Eq. (3.4-2), however, we will be dealing with convolution of
+                             functions that are of the same size. The form of the equation is the same, but
+                             the limits of summation are different.
+                                Using correlation or convolution to perform spatial filtering is a matter of
+                             preference. In fact, because either Eq. (3.4-1) or (3.4-2) can be made to per-
+                             form the function of the other by a simple rotation of the filter, what is impor-
+                             tant is that the filter mask used in a given filtering task be specified in a way
+                             that corresponds to the intended operation. All the linear spatial filtering re-
+                             sults in this chapter are based on Eq. (3.4-1).
+                                Finally, we point out that you are likely to encounter the terms,
+                             convolution filter, convolution mask or convolution kernel in the image pro-
+                             cessing literature. As a rule, these terms are used to denote a spatial filter,
+                             and not necessarily that the filter will be used for true convolution. Similarly,
+                             “convolving a mask with an image” often is used to denote the sliding, sum-
+                             of-products process we just explained, and does not necessarily differentiate
+                             between correlation and convolution. Rather, it is used generically to denote
+                             either of the two operations. This imprecise terminology is a frequent source
+                             of confusion.
+
+
+                             3.4.3 Vector Representation of Linear Filtering
+                             When interest lies in the characteristic response, R, of a mask either for cor-
+                             relation or convolution, it is convenient sometimes to write the sum of
+                             products as
+
+                                                    R = w1 z1 + w2 z2 + Á + wmn zmn
+                                                          mn
+                                                       = a wk zk                                          (3.4-3)
+                                                          k=1
+Consult the Tutorials sec-
+tion of the book Web site                              = wTz
+for a brief review of vec-
+tors and matrices.
+                             where the ws are the coefficients of an m * n filter and the zs are the corre-
+                             sponding image intensities encompassed by the filter. If we are interested in
+                             using Eq. (3.4-3) for correlation, we use the mask as given. To use the same
+                             equation for convolution, we simply rotate the mask by 180°, as explained in
+                             the last section. It is implied that Eq. (3.4-3) holds for a particular pair of coor-
+                             dinates (x, y). You will see in the next section why this notation is convenient
+                             for explaining the characteristics of a given linear filter.
+                                                          3.4 ■ Fundamentals of Spatial Filtering   151
+
+                                                                                      FIGURE 3.31
+                               w1         w2         w3                               Another
+                                                                                      representation of
+                                                                                      a general 3 * 3
+                                                                                      filter mask.
+                               w4         w5         w6
+
+
+
+                               w7         w8         w9
+
+
+
+   As an example, Fig. 3.31 shows a general 3 * 3 mask with coefficients la-
+beled as above. In this case, Eq. (3.4-3) becomes
+                       R = w1 z1 + w2 z2 + Á + w9 z9
+                              9
+                           = a wk zk                                        (3.4-4)
+                             k=1
+                              T
+                           = w z
+where w and z are 9-dimensional vectors formed from the coefficients of the
+mask and the image intensities encompassed by the mask, respectively.
+
+3.4.4 Generating Spatial Filter Masks
+Generating an m * n linear spatial filter requires that we specify mn mask co-
+efficients. In turn, these coefficients are selected based on what the filter is
+supposed to do, keeping in mind that all we can do with linear filtering is to im-
+plement a sum of products. For example, suppose that we want to replace the
+pixels in an image by the average intensity of a 3 * 3 neighborhood centered
+on those pixels. The average value at any location (x, y) in the image is the sum
+of the nine intensity values in the 3 * 3 neighborhood centered on (x, y) di-
+vided by 9. Letting zi, i = 1, 2, Á , 9, denote these intensities, the average is
+                                          1 9
+                                          9 ia
+                                    R =         zi
+                                             =1
+
+But this is the same as Eq. (3.4-4) with coefficient values wi = 1>9. In other
+words, a linear filtering operation with a 3 * 3 mask whose coefficients are 1> 9
+implements the desired averaging. As we discuss in the next section, this oper-
+ation results in image smoothing. We discuss in the following sections a num-
+ber of other filter masks based on this basic approach.
+   In some applications, we have a continuous function of two variables, and
+the objective is to obtain a spatial filter mask based on that function. For ex-
+ample, a Gaussian function of two variables has the basic form
+                                                x2 + y2
+                                  h(x, y) = e - 2s   2
+
+
+
+
+where s is the standard deviation and, as usual, we assume that coordinates x
+and y are integers. To generate, say, a 3 * 3 filter mask from this function, we
+152   Chapter 3 ■ Intensity Transformations and Spatial Filtering
+
+                   sample it about its center. Thus, w1 = h(-1, -1), w2 = h(-1, 0), Á ,
+                   w9 = h(1, 1). An m * n filter mask is generated in a similar manner. Recall
+                   that a 2-D Gaussian function has a bell shape, and that the standard deviation
+                   controls the “tightness” of the bell.
+                      Generating a nonlinear filter requires that we specify the size of a neigh-
+                   borhood and the operation(s) to be performed on the image pixels contained
+                   in the neighborhood. For example, recalling that the max operation is nonlin-
+                   ear (see Section 2.6.2), a 5 * 5 max filter centered at an arbitrary point (x, y)
+                   of an image obtains the maximum intensity value of the 25 pixels and assigns
+                   that value to location (x, y) in the processed image. Nonlinear filters are quite
+                   powerful, and in some applications can perform functions that are beyond the
+                   capabilities of linear filters, as we show later in this chapter and in Chapter 5.
+
+                     3.5    Smoothing Spatial Filters
+                   Smoothing filters are used for blurring and for noise reduction. Blurring is
+                   used in preprocessing tasks, such as removal of small details from an image
+                   prior to (large) object extraction, and bridging of small gaps in lines or curves.
+                   Noise reduction can be accomplished by blurring with a linear filter and also
+                   by nonlinear filtering.
+                   3.5.1 Smoothing Linear Filters
+                   The output (response) of a smoothing, linear spatial filter is simply the average
+                   of the pixels contained in the neighborhood of the filter mask. These filters
+                   sometimes are called averaging filters. As mentioned in the previous section,
+                   they also are referred to a lowpass filters.
+                      The idea behind smoothing filters is straightforward. By replacing the value
+                   of every pixel in an image by the average of the intensity levels in the neigh-
+                   borhood defined by the filter mask, this process results in an image with re-
+                   duced “sharp” transitions in intensities. Because random noise typically
+                   consists of sharp transitions in intensity levels, the most obvious application of
+                   smoothing is noise reduction. However, edges (which almost always are desir-
+                   able features of an image) also are characterized by sharp intensity transitions,
+                   so averaging filters have the undesirable side effect that they blur edges. An-
+                   other application of this type of process includes the smoothing of false con-
+                   tours that result from using an insufficient number of intensity levels, as
+                   discussed in Section 2.4.3. A major use of averaging filters is in the reduction
+                   of “irrelevant” detail in an image. By “irrelevant” we mean pixel regions that
+                   are small with respect to the size of the filter mask. This latter application is il-
+                   lustrated later in this section.
+                      Figure 3.32 shows two 3 * 3 smoothing filters. Use of the first filter yields
+                   the standard average of the pixels under the mask. This can best be seen by
+                   substituting the coefficients of the mask into Eq. (3.4-4):
+                                                              1 9
+                                                              9 ia
+                                                        R =         zi
+                                                                 =1
+
+                   which is the average of the intensity levels of the pixels in the 3 * 3 neighbor-
+                   hood defined by the mask, as discussed earlier. Note that, instead of being 1>9,
+
