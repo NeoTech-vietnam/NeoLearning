@@ -1,0 +1,150 @@
+{
+  "audit_date": "2026-10-04",
+  "draft": "2_2_thuc_trang.docx",
+  "paragraph_numbering": "zero-based P indexes in extracted txt",
+  "sources": [
+    {
+      "key": "NQ57",
+      "record": "Bộ Chính trị(2024), *Nghị quyết số57-NQ/TW ngày22/12/2024 về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia*. Official fulltext: https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-quyet-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia-119241224180048642.htm",
+      "urls": [
+        "https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-quyet-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia-119241224180048642.htm"
+      ]
+    },
+    {
+      "key": "LAW93",
+      "record": "Quốc hội(2025), *Luật Khoa học, công nghệ và đổi mới sáng tạo số93/2025/QH15*,27/06/2025. Metadata https://vanban.chinhphu.vn/?docid=214603&pageid=27160 ; signed original https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/7/93qh.signed.pdf ; searchable official-hosted CôngBáo copy https://hoinongdan.dongnai.gov.vn/Lists/VanBan/Attachments/2543/93_2025_QH15_581164.pdf . The signedPDF is scanned/noextractabletext; Art9/54 confirmed in officialhostedcopy search, Art20AI also seen in legaltranscriptions; avoid unsupported extra legalinterpretation.",
+      "urls": [
+        "https://vanban.chinhphu.vn/?docid=214603&pageid=27160",
+        "https://datafiles.chinhphu.vn/cpp/files/vbpq/2025/7/93qh.signed.pdf",
+        "https://hoinongdan.dongnai.gov.vn/Lists/VanBan/Attachments/2543/93_2025_QH15_581164.pdf"
+      ]
+    },
+    {
+      "key": "NQ11",
+      "record": "Chính phủ(2026), *Nghị quyết số11/NQ-CP ngày14/01/2026 sửa đổi, bổ sung, cập nhật Nghị quyết71/NQ-CP*. OfficialCôngBáo metadata https://congbao.chinhphu.vn/van-ban-dang-cong-bao/trang-172.htm . Dynamiclisting could move; preferred implementation should fetch actualdocumentlink if using detailedprovisions.",
+      "urls": [
+        "https://congbao.chinhphu.vn/van-ban-dang-cong-bao/trang-172.htm"
+      ]
+    },
+    {
+      "key": "GII",
+      "record": "World Intellectual Property Organization(2025), *Global Innovation Index2025: Viet Nam economy profile*. https://www.wipo.int/edocs/gii-ranking/2025/vn.pdf . Entire15-pagePDF extracted and read; useactualindicator names. Researchers/R&Dunderlyingdata2021. Rankcomparisons affected bymodel anddata changes.",
+      "urls": [
+        "https://www.wipo.int/edocs/gii-ranking/2025/vn.pdf"
+      ]
+    },
+    {
+      "key": "GIIRESULTS",
+      "record": "World Intellectual Property Organization(2025), *Global Innovation Index2025: GII2025results*. https://www.wipo.int/web-publications/global-innovation-index-2025/en/gii-2025-results.html . ConfirmsASEANorder and15-yearoverperformance.",
+      "urls": [
+        "https://www.wipo.int/web-publications/global-innovation-index-2025/en/gii-2025-results.html"
+      ]
+    },
+    {
+      "key": "IP",
+      "record": "Bộ Khoa học và Công nghệ(2026), *Đảng bộ Cục Sở hữu trí tuệ tạo đột phá từ cải cách và chuyển đổi số*,10/01/2026. https://mst.gov.vn/dang-bo-cuc-so-huu-tri-tue-tao-dot-pha-tu-cai-cach-va-chuyen-doi-so-197260110220527885.htm . **Alltypes**250,916processed,83,383titles;notpatentsalone.",
+      "urls": [
+        "https://mst.gov.vn/dang-bo-cuc-so-huu-tri-tue-tao-dot-pha-tu-cai-cach-va-chuyen-doi-so-197260110220527885.htm"
+      ]
+    },
+    {
+      "key": "JICA",
+      "record": "Cơ quan Hợp tác Quốc tế Nhật Bản(2026), *JICA supports Vietnam in strengthening patent and trademark examination capacity*,20/03/2026 Vietnamese release. https://www.jica.go.jp/vietnamese/overseas/vietnam/information/press/2025/__icsFiles/afieldfile/2026/03/20/20260320JICASUPPORTSVIETNAMINSTRENGTHENINGPATENTANDTRADEMARKEXAMINATIONCAPACITYVN_1.pdf . Confirmsdomesticpatent+36%,grants+134.2%.",
+      "urls": [
+        "https://www.jica.go.jp/vietnamese/overseas/vietnam/information/press/2025/__icsFiles/afieldfile/2026/03/20/20260320JICASUPPORTSVIETNAMINSTRENGTHENINGPATENTANDTRADEMARKEXAMINATIONCAPACITYVN_1.pdf"
+      ]
+    },
+    {
+      "key": "DIGITAL",
+      "record": "Cục Thống kê(2026), *Thông cáo báo chí tỷ trọng giá trị tăng thêm của kinh tế số trongGDP,GRDPgiai đoạn2021–2025*. https://www.nso.gov.vn/tin-tuc-thong-ke/2026/01/thong-cao-bao-chi-ty-trong-gia-tri-tang-them-cua-kinh-te-so-trong-gdp-grdp-giai-doan-2021-2025/ . PublishedJanuary2026, estimates2025.",
+      "urls": [
+        "https://www.nso.gov.vn/tin-tuc-thong-ke/2026/01/thong-cao-bao-chi-ty-trong-gia-tri-tang-them-cua-kinh-te-so-trong-gdp-grdp-giai-doan-2021-2025/"
+      ]
+    },
+    {
+      "key": "ICT2025",
+      "record": "Bộ Khoa học và Công nghệ(2025), *Khối Tham mưu; Công nghiệp công nghệ số; Thông tin, tuyên truyền: Phải đi đầu làm gương, dẫn dắt đổi mới để tạo lan tỏa trong toàn BộKH&CN*,21/12/2025. https://mst.gov.vn/khoi-tham-muu-cong-nghiep-cong-nghe-so-thong-tin-tuyen-truyen-phai-di-dau-lam-guong-dan-dat-doi-moi-de-tao-lan-toa-trong-toan-bo-khcn-197251221150557731.htm .2025estimatedrevenue198bnUSD.",
+      "urls": [
+        "https://mst.gov.vn/khoi-tham-muu-cong-nghiep-cong-nghe-so-thong-tin-tuyen-truyen-phai-di-dau-lam-guong-dan-dat-doi-moi-de-tao-lan-toa-trong-toan-bo-khcn-197251221150557731.htm"
+      ]
+    },
+    {
+      "key": "ICT2026TARGET",
+      "record": "Bộ Khoa học và Công nghệ(2025), *Bộ Khoa học và Công nghệ triển khai đồng bộ các nhiệm vụ trọng tâm trên các lĩnh vực quản lý nhà nước*,31/12/2025. https://mst.gov.vn/bo-khoa-hoc-va-cong-nghe-trien-khai-dong-bo-cac-nhiem-vu-trong-tam-tren-cac-linh-vuc-quan-ly-nha-nuoc-197251231210436682.htm .2026**targets**224bnUSD,89,000enterprises.",
+      "urls": [
+        "https://mst.gov.vn/bo-khoa-hoc-va-cong-nghe-trien-khai-dong-bo-cac-nhiem-vu-trong-tam-tren-cac-linh-vuc-quan-ly-nha-nuoc-197251231210436682.htm"
+      ]
+    },
+    {
+      "key": "UN2024",
+      "record": "United Nations Department of Economic and Social Affairs(2024), *United Nations E-Government Survey2024: Technical Appendix*,Table2.3,Vietnamrow71/0.7709. https://desapublications.un.org/sites/default/files/publications/2024-09/Technical%20Appendix%20(Web%20version)%201292024.pdf . Verified parsed row at PDFzeroindex32; citeTable2.3ratherthanpageifprintedpagenumberisnotvisuallychecked.",
+      "urls": [
+        "https://desapublications.un.org/sites/default/files/publications/2024-09/Technical%20Appendix%20(Web%20version)%201292024.pdf"
+      ]
+    },
+    {
+      "key": "TRADE",
+      "record": "Cục Thống kê(2026), *Kết quả hoạt động xuất, nhập khẩu hàng hóa năm2025: Bứt phá kỷ lục và chuyển dịch mạnh mẽ sang công nghệ cao*. https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/01/ket-qua-hoat-dong-xuat-nhap-khau-hang-hoa-nam-2025-but-pha-ky-luc-va-chuyen-dich-manh-me-sang-cong-nghe-cao/ . Exportcategoryandownershipshares.",
+      "urls": [
+        "https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/01/ket-qua-hoat-dong-xuat-nhap-khau-hang-hoa-nam-2025-but-pha-ky-luc-va-chuyen-dich-manh-me-sang-cong-nghe-cao/"
+      ]
+    },
+    {
+      "key": "NSO2025",
+      "record": "Cục Thống kê(2026), *Báo cáo tình hình kinh tế–xã hội quýIV và năm2025*,05/01/2026. https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/01/bao-cao-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025/ ; officialEnglishmirror https://www.nso.gov.vn/en/data-and-statistics/2026/01/socio-economic-situation-in-the-fourth-quarter-and-2025/ ; governmentrepublication https://xaydungchinhsach.chinhphu.vn/bao-cao-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025-119260105155650719.htm .GDPpercapita5,026USD2025;4,700USD2024.",
+      "urls": [
+        "https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/01/bao-cao-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025/",
+        "https://www.nso.gov.vn/en/data-and-statistics/2026/01/socio-economic-situation-in-the-fourth-quarter-and-2025/",
+        "https://xaydungchinhsach.chinhphu.vn/bao-cao-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025-119260105155650719.htm"
+      ]
+    },
+    {
+      "key": "CHIP",
+      "record": "Báo Điện tử Chính phủ(2026), *Tổng Bí thư, Thủ tướng Chính phủ dự lễ khởi công nhà máy chế tạo chip bán dẫn đầu tiên tạiViệt Nam*,16/01/2026. https://baochinhphu.vn/tong-bi-thu-thu-tuong-chinh-phu-du-le-khoi-cong-nha-may-che-tao-chip-ban-dan-dau-tien-tai-viet-nam-10226011609570293.htm .27ha,HoaLac,2026–2030project.",
+      "urls": [
+        "https://baochinhphu.vn/tong-bi-thu-thu-tuong-chinh-phu-du-le-khoi-cong-nha-may-che-tao-chip-ban-dan-dau-tien-tai-viet-nam-10226011609570293.htm"
+      ]
+    },
+    {
+      "key": "CHIPPLAN",
+      "record": "Bộ Khoa học và Công nghệ(2026), *Viet Nam seeks to build semiconductor ecosystem*,27/01/2026. https://english.mst.gov.vn/viet-nam-seeks-to-build-semiconductor-ecosystem-197260128112652201.htm .Plannedtrialbyend2027.",
+      "urls": [
+        "https://english.mst.gov.vn/viet-nam-seeks-to-build-semiconductor-ecosystem-197260128112652201.htm"
+      ]
+    },
+    {
+      "key": "PRIORITY6",
+      "record": "Bộ Khoa học và Công nghệ(2025), *Việt Nam đặt mục tiêu trở thành Trung tâm công nghệ chiến lược ASEAN: UAV, robot tự hành là mũi nhọn*,22/11/2025. https://mst.gov.vn/viet-nam-dat-muc-tieu-tro-thanh-trung-tam-cong-nghe-chien-luoc-asean-uav-robot-tu-hanh-la-mui-nhon-197251122222233744.htm .6priorityproductgroups,selectedfrom11strategictechnologygroups.",
+      "urls": [
+        "https://mst.gov.vn/viet-nam-dat-muc-tieu-tro-thanh-trung-tam-cong-nghe-chien-luoc-asean-uav-robot-tu-hanh-la-mui-nhon-197251122222233744.htm"
+      ]
+    },
+    {
+      "key": "RD2024",
+      "record": "Cục Thông tin, Thống kê(Bộ Khoa học và Công nghệ), *Số liệu kết quả điều tra nghiên cứu khoa học và phát triển công nghệ năm2024*,uploaded03/2026. https://vista.gov.vn/vn-uploads/thong-ke-kh-cn/2026_03/so-lieu-ncpt_2024_web.pdf .Tables3.7and3.8onprintedpp5–6;data2023:83,635FTE,8.33/10,000;42,784.071bnVND,0.418%GDP. **Title/yearincovernotread**, usepublicationn.d.or2026hostingyearwithnoteuntilcoverchecked. Corroborationofficialbook *Khoa học, công nghệ và đổi mới sáng tạo Việt Nam2024*: https://vista.gov.vn/vn-uploads/science-technology/2025_09/stivn-2024-da-nen.pdf ;printedp77Table2.16spending,printedp70Table2.9headcount;FTEratioexistsinthe2024surveyextract.",
+      "urls": [
+        "https://vista.gov.vn/vn-uploads/thong-ke-kh-cn/2026_03/so-lieu-ncpt_2024_web.pdf",
+        "https://vista.gov.vn/vn-uploads/science-technology/2025_09/stivn-2024-da-nen.pdf"
+      ]
+    },
+    {
+      "key": "DISB",
+      "record": "Gia Huy/Báo Điện tử Chính phủ(2026), *Phó Thủ tướng Hồ Quốc Dũng: Trong tháng6phải cơ bản tháo gỡ vướng mắc, thúc đẩy giải ngân vốnKH&CN*,19/05/2026. https://baochinhphu.vn/pho-thu-tuong-ho-quoc-dung-trong-thang-6-phai-co-ban-thao-go-vuong-mac-thuc-day-giai-ngan-von-khcn-102260519120218004.htm .Fundingandprogressasof12/05/2026,notannualoutcome.",
+      "urls": [
+        "https://baochinhphu.vn/pho-thu-tuong-ho-quoc-dung-trong-thang-6-phai-co-ban-thao-go-vuong-mac-thuc-day-giai-ngan-von-khcn-102260519120218004.htm"
+      ]
+    }
+  ],
+  "do_not_global_replace": {
+    "8": "Ambiguous: P13 rank source vs P14 overperformance; map by paragraph."
+  },
+  "critical_replacements": {
+    "P15": "250916 all IP applications processed; not patent applications",
+    "P20": "224bnUSD and89000enterprises are2026targets; use2025estimated198bnUSD",
+    "P38": "IPreceiptsrank112;rank67isruleoflaw",
+    "P40": "2023survey833FTE/million,notcurrent780;GII2025tertiary78,STEM65",
+    "P44": "2025GDPpercapita5026USD,4700is2024",
+    "P48": "77.3% is all goods exports,not technology exports;2026groundbreaking andMaydisbursement explicit"
+  },
+  "definition_warning": "NQ57 target 12people/10000 in research/science/technology/innovation workforce; not explicitly FTEresearchers. No direct ratio comparison to833FTE/million."
+}
