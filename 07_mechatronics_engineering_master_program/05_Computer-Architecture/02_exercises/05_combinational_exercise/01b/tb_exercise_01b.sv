@@ -1,0 +1,34 @@
+module tb_exercise_01b;
+    logic a;
+    logic b;
+    logic c;
+    logic y;
+    integer vector;
+
+    exercise_01b dut (
+        .a(a),
+        .b(b),
+        .c(c),
+        .y(y)
+    );
+
+    initial begin
+        $dumpfile("build/exercise_01b.vcd");
+        $dumpvars(0, tb_exercise_01b);
+
+        for (vector = 0; vector < 8; vector = vector + 1) begin
+            {a, b, c} = vector[2:0];
+            #1;
+
+            if (y !== ((~a & ~b & ~c) | (a & b & c))) begin
+                $fatal(1, "FAIL: a=%b b=%b c=%b y=%b", a, b, c, y);
+            end
+
+            $display("a=%b b=%b c=%b -> y=%b", a, b, c, y);
+            #4;
+        end
+
+        $display("PASS: all 8 input combinations produced the expected output.");
+        $finish;
+    end
+endmodule
