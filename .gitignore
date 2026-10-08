@@ -4,3 +4,4 @@ scripts/*
 .nimbalyst-generated
 *.exe
 __pycache__/
+node_modules/
