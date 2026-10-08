@@ -3,3 +3,4 @@ scripts/*
 *.exe
 .nimbalyst-generated
 *.exe
+__pycache__/
