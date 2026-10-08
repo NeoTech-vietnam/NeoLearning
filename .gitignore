@@ -2,8 +2,7 @@ scripts/*
 *build
 *.exe
 .nimbalyst-generated
-=======
 .vscode
 *build
->>>>>>> origin/feature/network-fundamentals
 node_modules/
+**/__pycache__/
