@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "manager_enabled": true,
+  "documentation_required": true,
+  "automatic_pr": true,
+  "upstream": "VuThach3001/VeryThinker",
+  "max_discussion_rounds": 3
+}

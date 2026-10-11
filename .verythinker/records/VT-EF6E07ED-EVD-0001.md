@@ -1,0 +1,68 @@
+---
+schema_version: 1
+id: VT-EF6E07ED-EVD-0001
+type: evidence
+title: "pass: Strict builds, runtime, judge integration and Cornell validation"
+owner: verifier
+status: verified
+revision: 2
+created_at: 2026-10-11T06:31:15.866Z
+updated_at: 2026-10-11T06:31:26.858Z
+links:
+  - type: evidence-for
+    target: VT-EF6E07ED-CHK-0001
+  - type: documents
+    target: VT-EF6E07ED-TASK-0001
+data:
+  schema_version: 1
+  run_id: dc7bdb9f-199d-47d6-8ac5-7e3f38f81c36
+  task_id: VT-EF6E07ED-TASK-0001
+  check_id: VT-EF6E07ED-CHK-0001
+  check_fingerprint: 481e8f982b4cdb862d0e90dbb152de63665f721b50d91ec310f237c4e2530d0f
+  record_baseline:
+    VT-EF6E07ED-TASK-0001: 9f5892d342d6d3913a173045a8d7feb6249febaf4ab04ba9ba97673ef69b79a1
+    VT-EF6E07ED-REQ-0001: f37ce8f7d4d7fd1865cc843f1a2e7bfcb0a85e9e97fbf916cfe0ee569675bae3
+    VT-EF6E07ED-DES-0001: 0b8c5eac32f9d4b30f1eba0b8736f4c6bfdd0a35a6a0453787ffb4c816ac3476
+  record_revisions:
+    VT-EF6E07ED-DES-0001: 1
+    VT-EF6E07ED-REQ-0001: 2
+    VT-EF6E07ED-TASK-0001: 4
+  file_baseline:
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/141_linked_list_cycle/141_linked_list_cycle.c: e5cacb6a9630464207d95ac99c2ead0b91e57feef3308780386960d7d7365f9c
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/141_linked_list_cycle/141_linked_list_cycle.cpp: fc7d84a8dce67f9fbd55565125d475be7944e5256888d5f679b4cce0096883cd
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/141_linked_list_cycle/141_note.md: fa057e52ef88e0045afe231326108e70827d4729ef160495e5caee3016d3c920
+    .verythinker/verification/leetcode141.ps1: ae79ddc01a57c83b5a6f18ca82b2af8433d9447aca7858865fb881b749e965b8
+    .verythinker/verification/leetcode141-preservation.json: 4e20b216590428ab36c200d184f2faae3f9d3be2b2115fab734cee50ad7d67b3
+    .agents/skills/leetcode-notes/scripts/validate_notes.py: 052b08835e19d17fd06dc7450251926400dff960c0893ef9113cd07cf5e8b5e0
+  pack_lock_hash: 4c04d7edb65c5b52f46087849acd9e1197a67ff03723020af611466927111ce9
+  revision:
+    git_commit: 0dfbe7e2fa67d5f335908c504c4be5f64872232c
+    workspace_hash: ac1028355a8674a250dfeedccbb561a379b0dda5e67cfb61bd9ede48e2c5a0c6
+  tool_versions:
+    runner_node: v24.18.0
+    declared: {}
+  result: pass
+  exit_code: 0
+  duration_ms: 7402
+  method: automated-test
+  environment: Windows, GCC/G++ 13.1.0, C11/C++17, PowerShell 7, Python 3.11;
+    judge stubs without LOCAL_TEST
+  command:
+    - C:/Program Files/PowerShell/7/pwsh.exe
+    - -NoProfile
+    - -File
+    - .verythinker/verification/leetcode141.ps1
+  at: 2026-10-11T06:31:15.786Z
+  log_path: .verythinker/evidence/VT-EF6E07ED-EVD-0001/output.log
+  log_hash: 39f54c8d87b034e1bf76fa62a6b487667012d6ac788aa6072074287f81d6f61b
+  receipt_path: .verythinker/evidence/VT-EF6E07ED-EVD-0001/receipt.json
+  archived_at: 2026-10-11T06:31:26.766Z
+---
+# Results
+pass; exit code 0.
+
+# Evidence
+[Archived verification log](../evidence/VT-EF6E07ED-EVD-0001/output.log)
+
+# Limitations
+Evidence applies to its recorded baseline. Inspect exported logs before sharing.

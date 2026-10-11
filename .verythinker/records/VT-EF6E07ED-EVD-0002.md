@@ -1,0 +1,67 @@
+---
+schema_version: 1
+id: VT-EF6E07ED-EVD-0002
+type: evidence
+title: "pass: LeetCode344 strict builds, exhaustive reversal and docs preservation"
+owner: verifier
+status: verified
+revision: 2
+created_at: 2026-10-11T06:49:26.129Z
+updated_at: 2026-10-11T06:49:37.768Z
+links:
+  - type: evidence-for
+    target: VT-EF6E07ED-CHK-0002
+  - type: documents
+    target: VT-EF6E07ED-TASK-0002
+data:
+  schema_version: 1
+  run_id: 18abcb75-da09-4795-bafd-051ba8309ed1
+  task_id: VT-EF6E07ED-TASK-0002
+  check_id: VT-EF6E07ED-CHK-0002
+  check_fingerprint: b353ea854ffec227a726d1635d9abc75b5a98ed3a42d07fea5fc1d5e9ff7f01c
+  record_baseline:
+    VT-EF6E07ED-TASK-0002: ff1e328a74dabf837b75e86b51c0273c49e39f96d79509484023082bf16b2774
+    VT-EF6E07ED-REQ-0002: 41894c5ce599f848d101fe3e0040960d9ca934ffdb1ea3b25acf0aa2cd28537f
+    VT-EF6E07ED-DES-0002: 405301a24f17aacf9ed4694a68d06a5e5a287d1b817dcce07b8c2e53d08989ec
+  record_revisions:
+    VT-EF6E07ED-DES-0002: 1
+    VT-EF6E07ED-REQ-0002: 2
+    VT-EF6E07ED-TASK-0002: 3
+  file_baseline:
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/344_reverse_string/344_note.md: 2b72efdd92a51a763597f8077a7c6159697b66d139f95b8a787a774125888b2e
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/344_reverse_string/344_reverse_string.c: d68857919b9ef92a3f3187d61991e5c44bd37f5ea347042b0956d446dee36a23
+    02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/344_reverse_string/344_reverse_string.cpp: 703ef8dafcea9667d05651d84c0fad65ae0f6edf30b411269c4da8265bd0e497
+    .verythinker/verification/leetcode344.ps1: 4e62f1cf37112cadb1fbe784d766a8e2fa6f64bccde64fbc808eccabeb6caf15
+    .verythinker/verification/leetcode344-preservation.json: e7fdc51bab5e0860d9bf2f4f72368bc3e541028d6f9f9c802c534106dd900168
+    .agents/skills/leetcode-notes/scripts/validate_notes.py: 052b08835e19d17fd06dc7450251926400dff960c0893ef9113cd07cf5e8b5e0
+  pack_lock_hash: 4c04d7edb65c5b52f46087849acd9e1197a67ff03723020af611466927111ce9
+  revision:
+    git_commit: 0dfbe7e2fa67d5f335908c504c4be5f64872232c
+    workspace_hash: 140156e03c7dcd39143334682ca7cbe7aedec727a393218d922d21bbe3eb2b75
+  tool_versions:
+    runner_node: v24.18.0
+    declared: {}
+  result: pass
+  exit_code: 0
+  duration_ms: 8167
+  method: automated-test
+  environment: Windows; GCC/G++13.1.0; C11/C++17; PowerShell7; Python3.11
+  command:
+    - C:/Program Files/PowerShell/7/pwsh.exe
+    - -NoProfile
+    - -File
+    - .verythinker/verification/leetcode344.ps1
+  at: 2026-10-11T06:49:25.991Z
+  log_path: .verythinker/evidence/VT-EF6E07ED-EVD-0002/output.log
+  log_hash: 5b4247821200dfd24509a1a1374b0e178dca62fb8671caa019991ead3e92b0db
+  receipt_path: .verythinker/evidence/VT-EF6E07ED-EVD-0002/receipt.json
+  archived_at: 2026-10-11T06:49:37.482Z
+---
+# Results
+pass; exit code 0.
+
+# Evidence
+[Archived verification log](../evidence/VT-EF6E07ED-EVD-0002/output.log)
+
+# Limitations
+Evidence applies to its recorded baseline. Inspect exported logs before sharing.

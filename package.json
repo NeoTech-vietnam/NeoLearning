@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "verythinker": "file:../VeryThinker/artifacts/verythinker-0.1.0-alpha.2.tgz"
+  }
+}

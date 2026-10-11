@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "packs": [
+    {
+      "id": "engineering-basics",
+      "version": "0.1.0",
+      "hash": "4ee6926899c262e9bd25211fb698f4dc393cf94d663c73c7692b608cbab7e03f",
+      "path": ".verythinker/packs/engineering-basics/0.1.0",
+      "installed_at": "2026-10-11T04:40:47.457Z",
+      "source": "engineering-basics"
+    }
+  ]
+}

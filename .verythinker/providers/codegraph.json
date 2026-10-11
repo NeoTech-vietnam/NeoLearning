@@ -1,0 +1,13 @@
+{
+  "id": "codegraph",
+  "package": "@colbymchenry/codegraph",
+  "version": "1.6.2",
+  "enabled": false,
+  "status": "unverified",
+  "required_checks": [
+    "windows",
+    "cpp",
+    "freshness"
+  ],
+  "note": "Optional code-context provider. No provider is installed or enabled automatically."
+}

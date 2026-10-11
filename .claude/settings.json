@@ -1,0 +1,67 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Program Files\\nodejs\\node.exe",
+            "args": [
+              "D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js",
+              "hook",
+              "--event",
+              "session-start",
+              "--platform",
+              "claude",
+              "--project",
+              "D:\\workspace\\NeoLearning"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Program Files\\nodejs\\node.exe",
+            "args": [
+              "D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js",
+              "hook",
+              "--event",
+              "after-tool",
+              "--platform",
+              "claude",
+              "--project",
+              "D:\\workspace\\NeoLearning"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "C:\\Program Files\\nodejs\\node.exe",
+            "args": [
+              "D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js",
+              "hook",
+              "--event",
+              "stop",
+              "--platform",
+              "claude",
+              "--project",
+              "D:\\workspace\\NeoLearning"
+            ],
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

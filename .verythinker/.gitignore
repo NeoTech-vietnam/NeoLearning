@@ -1,0 +1,12 @@
+cache/
+runs/
+contributions/
+*.lock
+*.tmp
+
+# BEGIN VERYTHINKER local-data
+index.sqlite*
+cache/
+raw/
+sessions/
+# END VERYTHINKER local-data

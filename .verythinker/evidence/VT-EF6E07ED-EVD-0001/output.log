@@ -1,0 +1,28 @@
+Command: ["C:/Program Files/PowerShell/7/pwsh.exe","-NoProfile","-File",".verythinker/verification/leetcode141.ps1"]
+Exit code: 0
+Signal: null
+Error: none
+
+STDOUT
+gcc.exe (Rev6, Built by MSYS2 project) 13.1.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++.exe (Rev6, Built by MSYS2 project) 13.1.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+C: 574 cases, 0 failures (cycle status and unchanged values/links)
+C++: 574 cases, 0 failures (cycle status and unchanged values/links)
+PASS D:\workspace\NeoLearning\02_Software\02_Programming-Fundamentals\01_Algorithms-and-Data-Structures\02_practice\03_data_structures\02_contiguous_vs_linked_structures\141_linked_list_cycle\141_note.md
+PASS: 53 preexisting source, note and unrelated dirty files preserved.
+PASS: strict C/C++ runtime checks, judge interfaces, Cornell validation, three-file inventory and whitespace.
+Temporary build artifacts: C:\Users\daveb\AppData\Local\Temp\neolearning141-0f48222ba4244674a22110078003cebd
+
+STDERR
+warning: in the working copy of '.codex/config.toml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.github/copilot-instructions.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'AGENTS.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'CLAUDE.md', LF will be replaced by CRLF the next time Git touches it

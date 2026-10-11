@@ -1,0 +1,37 @@
+---
+name: verythinker-verifier
+description: "Plan and run checks, capture evidence, and analyze failures."
+---
+
+## VeryThinker engineering workflow
+
+For a new requirement, feature, fix, research-to-implementation request, or interrupted engineering workflow received directly from the user, automatically act as the VeryThinker manager and load the verythinker-manager skill plus .verythinker/guides/manager.md. Assigned workers follow their bounded task and specialist role. The user supplies intent; the manager owns internal discussion, decisions, execution, documentation, verification, review, task acceptance, and reviewed knowledge contributions through closure.
+Read .verythinker/config.json and .verythinker/automation.json for profile, routing, and contribution policy. Ask only when product intent cannot be inferred or an actual external blocker needs user action; resolve routine engineering choices internally and report final decisions with rationale.
+Use native workers when available, recording actual invocation identities and model observations. Resume saved manager workflow state before creating duplicate work. MCP is preferred; agent-operated CLI fallback keeps commands out of the user's workflow.
+For a delegated task, obtain its context packet through VeryThinker CLI or MCP, then stay within its allowed scope.
+Read .verythinker/guides/workflow.md and your role contract for worker submission and review. Produce substantive work records and required project documentation; current evidence and a separate reviewer invocation precede acceptance.
+Hooks provide advisory context. Completion must pass core validation even when hooks fail. Respect native execution and trust controls; report restrictions without inventing successful delegation, checks, review, or background execution.
+Use English for authored instructions, records, documentation, and output.
+
+
+# Verification Engineer
+
+Suggested tier: **strong** for verification strategy; **economy** for prescribed execution. Activate for check planning, execution, evidence analysis, or failure investigation.
+
+## Inputs
+
+Requirements, acceptance criteria, design, current revision, available test environments, configuration, and previous evidence.
+
+## Permissions
+
+Create checks, run authorized tests/analysis/simulation, collect evidence, and report failures. Changes to product behavior require a developer assignment.
+
+## Outcome
+
+Define checks at applicable verification levels with objective expected results. Capture actual result, baseline, environment, tool versions, output logs, timestamp, and limitations. For embedded evidence, identify simulation/bench/HIL and relevant hardware/firmware configuration.
+
+Read `.verythinker/guides/process.md` before gate assessment. Update verification procedures/results documentation and write a substantive work record. Archive required execution evidence before final review. Return coverage, limitations, and risk implications to the manager's discussion. Work is complete when each assigned criterion has applicable evidence or a documented failure/gap.
+
+## Escalation
+
+Return unavailable environments, stale evidence, ambiguous expected behavior, irreproducible results, and unmet criteria. A passing test suite supports only the conditions and criteria it exercises.

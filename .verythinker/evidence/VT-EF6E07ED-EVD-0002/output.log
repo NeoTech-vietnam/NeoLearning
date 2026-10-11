@@ -1,0 +1,25 @@
+Command: ["C:/Program Files/PowerShell/7/pwsh.exe","-NoProfile","-File",".verythinker/verification/leetcode344.ps1"]
+Exit code: 0
+Signal: null
+Error: none
+
+STDOUT
+gcc.exe (Rev6, Built by MSYS2 project) 13.1.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+g++.exe (Rev6, Built by MSYS2 project) 13.1.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+C LOCAL_TEST: 9853 cases, 0 failures
+C++ LOCAL_TEST: 9853 cases, 0 failures
+PASS D:\workspace\NeoLearning\02_Software\02_Programming-Fundamentals\01_Algorithms-and-Data-Structures\02_practice\03_data_structures\02_contiguous_vs_linked_structures\344_reverse_string\344_note.md
+PASS: 93 preexisting source, note and unrelated dirty files preserved.
+PASS: strict C/C++ LOCAL_TEST builds and executions; judge-mode exact signatures and caller smoke tests.
+PASS: Cornell validation, exact exercise inventory, whitespace, and scoped diff checks.
+Temporary build artifacts and runtime logs: C:\Users\daveb\AppData\Local\Temp\neolearning344-01f6ced3cd4e4e40a70fe082223b25cc
+
+STDERR

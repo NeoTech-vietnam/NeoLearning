@@ -22,6 +22,42 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'session-start' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "commandWindows": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'session-start' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'after-tool' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "commandWindows": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'after-tool' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'stop' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "commandWindows": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'stop' '--platform' 'codex' '--project' 'D:\\workspace\\NeoLearning'",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }

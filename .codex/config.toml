@@ -37,3 +37,9 @@ project_doc_fallback_filenames = ["AGENTS.md"]
 # (this file) takes precedence over user-level `~/.codex/config.toml`.
 [agents]
 max_depth = 1
+
+# BEGIN VERYTHINKER mcp
+[mcp_servers.verythinker]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
+# END VERYTHINKER mcp

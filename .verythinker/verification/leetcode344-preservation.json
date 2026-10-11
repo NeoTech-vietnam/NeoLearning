@@ -1,0 +1,374 @@
+[
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\141_linked_list_cycle\\141_linked_list_cycle.c",
+    "Hash": "E5CACB6A9630464207D95AC99C2EAD0B91E57FEEF3308780386960D7D7365F9C"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\141_linked_list_cycle\\141_linked_list_cycle.cpp",
+    "Hash": "FC7D84A8DCE67F9FBD55565125D475BE7944E5256888D5F679B4CCE0096883CD"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\141_linked_list_cycle\\141_note.md",
+    "Hash": "FA057E52EF88E0045AFE231326108E70827D4729EF160495E5CAEE3016D3C920"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1480_running_sum_of_1d_array\\1480_cpp_test",
+    "Hash": "CB9FC734453F554E8AC8D09B9A3B577958EA1EC44C94B17C3AA5A79E4A45BF51"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1480_running_sum_of_1d_array\\1480_note.md",
+    "Hash": "70CC3FB63D6ABAA39D1B18E6198CF5C5202990BC0A047ABC4B62432243BF5D22"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1480_running_sum_of_1d_array\\1480_running_sum_of_1d_array.c",
+    "Hash": "613A4F0CE2DF5F215BCD6AEB4D41B776CBAA2EFDDEB9B1D61CF031F300D8FE49"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1480_running_sum_of_1d_array\\1480_running_sum_of_1d_array.cpp",
+    "Hash": "A4BEBDA1E7A41F8B3A14B3C1EC9CB68F29B4A84E97772BC9F31679EC06979499"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1480_running_sum_of_1d_array\\1480_test",
+    "Hash": "A0D7BB91446777906504D20DB4BC15793DC93063597C2FD8288F894ED8A3D7E8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\167_two_sum_ii\\167_c_test",
+    "Hash": "9CA1ECE139D4461BA501AF91E34A5C920E53A1977F0166C478E36FB52F1BDC63"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\167_two_sum_ii\\167_cpp_test",
+    "Hash": "A8F7CC1ED7B493FF01608E93EE729B765F64812CAC0C20D6339E902E401B8966"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\167_two_sum_ii\\167_note.md",
+    "Hash": "ED583FC32280A1F2B2158D10B53A5CA319A6FC7B3C9AE8A9E4CF6C89584E5E00"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\167_two_sum_ii\\167_two_sum_ii.c",
+    "Hash": "31A7D13A3A704EE544375CB6F0D59E247448354BC9C7ECB729A0B868E1E1EA99"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\167_two_sum_ii\\167_two_sum_ii.cpp",
+    "Hash": "57406339E3C079B38DF3CF5CD7B44E0C21695FEE025579062B70966DD71FC319"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\1929_concatenation_of_array.c",
+    "Hash": "7B87C23B4B4B086AF9B42D755D65633404A524720E5D816D19EFF3AA38827090"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\1929_concatenation_of_array.cpp",
+    "Hash": "5E68C96C5E05FE220A406012BDE4C21253AB30BF39510F8609C410D3A1C670A8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\1929_cpp_test",
+    "Hash": "CAA1CE878C9C63ACC761421E2E7CFCF8AE59B4D7CE006C8C9DB99D99A52E4FCD"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\1929_note.md",
+    "Hash": "EC5F995147365C174A6790DA93524AF6BE0781FBB88A9543B90E09A190FA3F60"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\1929_test",
+    "Hash": "1974310B4D0B09BE0B4AD728716BC6E8F39F9D1D7475155E80681D87F773B1FD"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\1929_concatenation_of_array\\c_lange",
+    "Hash": "121BAE66080495B038AD25BEB35B57DAF287823D0457D9D27B33DE50BDCF767D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\19_remove_nth_node_from_end\\19_c_test.exe",
+    "Hash": "D3829FF1B96C5F345A7C09D5933D526966FCC86CE5B221C64D5C980DD27D059D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\19_remove_nth_node_from_end\\19_cpp_test.exe",
+    "Hash": "9648E16083839BB8391345CB3A91757CFADAE6D28DCE1AE07262E07B5D87367D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\203_remove_linked_list_elements\\203_c_test",
+    "Hash": "7D8D99BF268AD504D170ABF646D4A01B97F00061A836AF98EE5887EBF054FA5D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\203_remove_linked_list_elements\\203_cpp_test",
+    "Hash": "B6082B8578D65885EE6438EF126DC641276B1B19D8442EFE9A5F063858593276"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\203_remove_linked_list_elements\\203_note.md",
+    "Hash": "9B7808571FB856852E923C866C44C231C62EF4D0F249386221A2C6F078119CC0"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\203_remove_linked_list_elements\\203_remove_linked_list_elements.c",
+    "Hash": "07B1A7F7D1E0EC864B31FB391928F868655729DEE51506B1551D81A5765FE068"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\203_remove_linked_list_elements\\203_remove_linked_list_elements.cpp",
+    "Hash": "436D9E448721C993D1BAA664F0C0ED8BC2EEFAB91F037AB9147522FB67E21A9B"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\206_reverse_linked_list\\206_c_test",
+    "Hash": "3CF6AE27C54B0EC083B1D504A847AC61BC5AC0D16EF3450F9D7A99F46B26E1B4"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\206_reverse_linked_list\\206_note.md",
+    "Hash": "CE6B007E731C63711713FA0A0EB98ABB6B459032D0639F88075B7980F88BD7C4"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\206_reverse_linked_list\\206_reverse_linked_list.c",
+    "Hash": "89C0EAA805109D917E2E39602FDCE3057DF7BF16AFFEB5C9C0334860B318D019"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\206_reverse_linked_list\\206_reverse_linked_list.cpp",
+    "Hash": "123A7EE799D3FE2E24998548FA1DF5DA0758CDC73672D83E21CDDE18BC61C51A"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\21_merge_two_sorted_lists\\21_c_test",
+    "Hash": "645671F86143A05964DDF08DEC58B2ADD10A01B7D94DFDA228BCE6B935DC25C4"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\21_merge_two_sorted_lists\\21_cpp_test",
+    "Hash": "1949831A048ED653A6BED7E33E6D6FE0B85C1C6768EA0C0302AF8A0A744E3BA4"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\21_merge_two_sorted_lists\\21_merge_two_sorted_lists.c",
+    "Hash": "8E81E0F6B2AE20CF45D275DD919866B67384C9D0EC039A62798E877B868787FE"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\21_merge_two_sorted_lists\\21_merge_two_sorted_lists.cpp",
+    "Hash": "618C5DC54C4DEE847D9C3391FCD782AC6601F12C9BEBA9A0FA0497FF075E0B44"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\21_merge_two_sorted_lists\\21_note.md",
+    "Hash": "E5B71F34259041E92A1175BF7DCD41D67DFA36A9B125799B981975FABF5AD89D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\26_c_test",
+    "Hash": "F78B7B2EEC2FC12F4EC2DAE147791D63D553A397D9E4B18B9D0DFD779D5FC2FD"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\26_cpp_test",
+    "Hash": "1CC95BCD2ED47C6FDF8C96A9E8B208F881A44FFCA863EBA956D5B8B813119F88"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\26_note.md",
+    "Hash": "72CF47767C57F3E92A33979BBFF45D2817C725577F0EFD54ECE21643E3611630"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\26_remove_duplicates_from_sorted_array.c",
+    "Hash": "8EA3111A9E2127F047D95F334FDB5A154A9A0252C808AFCE7261522B3F886F74"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\26_remove_duplicates_from_sorted_array.cpp",
+    "Hash": "1A18D6D25CEE4AE71EA296C6A5878ED7E006C5E9CAEF36D1617D488235BBCF97"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\26_remove_duplicates_from_sorted_array\\test",
+    "Hash": "F78B7B2EEC2FC12F4EC2DAE147791D63D553A397D9E4B18B9D0DFD779D5FC2FD"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_c_test",
+    "Hash": "775B578564DAF3BA624B47F101C274F3DB0C61D06C0AAF30AE07FD6BDC6D88D8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_c_test.exe",
+    "Hash": "D650CBD25F7C3548F1381FFC0A5EF9302CCDA74530D19AB33C8DF068673815F8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_cpp_test",
+    "Hash": "9E11AB731EEDE21CBCC197E7182447779B31CEF5DB7A2CA05D7E98E63AAAF820"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_cpp_test.exe",
+    "Hash": "91DAFCF3DC466FD42873B682B81A869E3C5655973934566FB71BAACEA4F004C1"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_note.md",
+    "Hash": "3FD384339EB34BF95CBCC55F3AAEDD682108404902A495B208C125339BDFA90C"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_remove_element.c",
+    "Hash": "E10884CFD65B7AE635E4647303D3E1BB7A6C576ABF36792F890FB0E4C6568341"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\27_remove_element\\27_remove_element.cpp",
+    "Hash": "5FFF44D408CEFBD618622BEB8F34273A6CC3F863E0C8D1C4962620DC2F7021A8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\283_move_zeroes\\283_c_test.exe",
+    "Hash": "88DCC5E376EED0D8B0E8F4C176812C3DCA519953F9F569CA3313F2C5CB56CDED"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\283_move_zeroes\\283_move_zeroes_cpp",
+    "Hash": "4A847237CEA57B0CC7BF72BC3DCBE925536398D2960211219F0EC73308B8B328"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\283_move_zeroes\\283_move_zeroes.c",
+    "Hash": "6BCC3BD3C4E9F18C981748CCCFEB0C1288C589D1A28F71E7C123CA66875BE988"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\283_move_zeroes\\283_move_zeroes.cpp",
+    "Hash": "7AB954218871888A5095C39A1D215083A605BA34DAA7FEAEAE9CA1BA033373B2"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\283_move_zeroes\\283_note.md",
+    "Hash": "1C09A2DADE865BA91286BBF74897EC90D4D177A3ED7579B909E2A090CEDAC5BA"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\31_next_permulation\\31_c_test",
+    "Hash": "B65569E1AABAF5DF091DA1D54711C352C0ACBB73AA31B5A82DCCF746B2AAF5CC"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\31_next_permulation\\31_cpp_test",
+    "Hash": "8F747E91FF6F893F4E0994D52C36498EF500C15211E55FEBEF516EA952801FF6"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\31_next_permulation\\31_next_permulation.c",
+    "Hash": "D4CA9198636A40697E769CA7E308DE1AD686A03CEB0DE5DFFA04F782579E2A49"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\31_next_permulation\\31_next_permulation.cpp",
+    "Hash": "918E2933289B088983AB22FDA175AD4EAA099285F46C57FD3E959421DB29A193"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\31_next_permulation\\31_note.md",
+    "Hash": "847B7984B23C93DA94B8C7DE40CE719546C4CED16F35796ED5622F6C228630FA"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\485_max_consecutive_ones\\485_c_test",
+    "Hash": "0E6B9647FC78138195CD7FEA763BB326B066B0BA5FED7C6D18F45DE355BE7679"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\485_max_consecutive_ones\\485_cpp_test",
+    "Hash": "0ABC628E5C0362EF52C294F1D23AFA23AB6F30BC8CB52124EDCEE7DED30C32A0"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\485_max_consecutive_ones\\485_max_consecutive_ones.c",
+    "Hash": "D36BDC8C8C90C69A311316F4922AAF7501BDEF42F4D7C5A2CA073738281671D5"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\485_max_consecutive_ones\\485_max_consecutive_ones.cpp",
+    "Hash": "46FF5E1DABD7AD3EF3E123F5D702AC882728AA790E1ACDE8C703B913B96DC1A8"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\485_max_consecutive_ones\\485_note.md",
+    "Hash": "B68663EAB2FD96F7C7EFC58BE9124B0788EFEC99D2A5F17BB9548FDAD4ABF387"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\83_remove_duplicate_from_sorted_lists\\83_c_test",
+    "Hash": "B72186806659C7CCF5521C1862A831CD0C8BB7D96720C89230B53E44F2F9EF93"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\83_remove_duplicate_from_sorted_lists\\83_cpp_test",
+    "Hash": "94E7790524AB54582BD12022CE02BF7573683D1DC22EA2DF17873CCB0B8A622A"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\83_remove_duplicate_from_sorted_lists\\83_note.md",
+    "Hash": "4C980A43EDDCC03FDB20AC6A4541AB4DE97EC2F4845F4903F1B01AE3F6A38C9F"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\83_remove_duplicate_from_sorted_lists\\83_remove_duplicate_from_sorted_lists.c",
+    "Hash": "8BFE3A0A2D6F3CB75276ED7658FF7399DD0E332A244B052AD052D799474714A6"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\83_remove_duplicate_from_sorted_lists\\83_remove_duplicate_from_sorted_lists.cpp",
+    "Hash": "9837AB6B91F79BA8E6BF80917B45126C9DEEEFD600A119A076F6ABE9D97C70AF"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\876_middle_of_the_linked_list\\876_c_test",
+    "Hash": "DA3043AD2932536B1D36950EA8064D64BF8DAC3EAF0BBEE5C2EFEFD024BF50D7"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\876_middle_of_the_linked_list\\876_cpp_test",
+    "Hash": "5CE246F02AABF67251B503247AB988E715048AA08A43513C170952007E2E9B5A"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\876_middle_of_the_linked_list\\876_middle_of_the_linked_list.c",
+    "Hash": "C23094B9DB6D4775C44F1515F97DE599958C5DDA8D5EF5680D0442AF1B191372"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\876_middle_of_the_linked_list\\876_middle_of_the_linked_list.cpp",
+    "Hash": "42C384F1EB6624AA86E12393E59F6B7765C4E629D41F65F8D318499B4116C563"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\876_middle_of_the_linked_list\\876_note.md",
+    "Hash": "A68CE7BF962A7C4BCDE73F49E8B426DBCB5C5A3B30A8A385848D585B065FE2A6"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\88_merge_sorted_array\\88_c_test",
+    "Hash": "BB01BCCE03CF903F6D7AC81CEA8AC7A50EA351CEBBF6510A5A20AE77CF038EC1"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\88_merge_sorted_array\\88_c_test.exe",
+    "Hash": "35D7C6D7A59CF4FA75CFF3DD5250CFF958FEEDDE7EEBBB7A1AEC8C0E5381BBE3"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\88_merge_sorted_array\\88_cpp_test.exe",
+    "Hash": "C349EE046A1135A4C4B47077ECD6A054953311B3B9ED49F506654E72383D1630"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\88_merge_sorted_array\\88_merge_sorted_array.c",
+    "Hash": "930A470C1B4910B4BEC3444010D8B372EE7E94EE38107056901D16F8A874CF20"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\88_merge_sorted_array\\88_merge_sorted_array.cpp",
+    "Hash": "30B21FC32994E3BC4BC1FFEA8FA0540A5C4A247B1C170304B20FC6BE6753B658"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\905_sort_array_by_parity\\905_c_test",
+    "Hash": "2CBBEAE2C582BC3A39B35FDF711EEEEEAE8EBA6B58B2B6D2F07D45F090AC3954"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\905_sort_array_by_parity\\905_cpp_test",
+    "Hash": "59F31B04FC5C161C1A97C7DDC3754682BBB39DB911FF163405F71D6F87B0565A"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\905_sort_array_by_parity\\905_sort_array_by_parity.c",
+    "Hash": "F98BF2F18DC82E9CDA2BDDF0B1585A84B41F538B86F77E56999B73014D38D211"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\905_sort_array_by_parity\\905_sort_array_by_parity.cpp",
+    "Hash": "E5CB368AADBE295AFDE58D67F477AB14F3FA436251A0AE66721F8A2F847210A5"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\977_squares_of_a_sorted_array\\977_cpp_test",
+    "Hash": "92837B51487319C57BDAF8EF4168C027ABC32EDC4F197C675F2AF9D2A5FA73A9"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\977_squares_of_a_sorted_array\\977_note.md",
+    "Hash": "5499E00A164C5109EDD7ECD5AD88796660AF873C0FA2D9C747E623D231620BD6"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\977_squares_of_a_sorted_array\\977_squares_of_a_sorted_array.c",
+    "Hash": "93328F18677325325209232289D3F740F107B82BA8BB13367B815B8769D6FB48"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\02_Software\\02_Programming-Fundamentals\\01_Algorithms-and-Data-Structures\\02_practice\\03_data_structures\\02_contiguous_vs_linked_structures\\977_squares_of_a_sorted_array\\977_squares_of_a_sorted_array.cpp",
+    "Hash": "01860393853194E5B7BEB5127BDDC5F67A7C8E4E8881B1EF6A0E554406342567"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\.codex\\config.toml",
+    "Hash": "9862BAD0682A622FAFE9FD8941B75CBAAA23CDAAA81DCCBBEACE04867D650523"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\.codex\\hooks.json",
+    "Hash": "73B5C24B35C42C40BB55D232FFA6C4C49EB8A740F8D25D61DD91F99B93B65A2C"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\.github\\copilot-instructions.md",
+    "Hash": "77E162380EB6FDAF19BE17F07B713E770AC92AE1731B3760D93100B4CE9FCD09"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\AGENTS.md",
+    "Hash": "5474E0076DEF5041B3A633D0379554AFA8C17B5338242717FE40874AE7714367"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\CLAUDE.md",
+    "Hash": "2D1A70262DD9AF7F7774AA16BDF42FBE14FBF372DA048758E0E7826A5F60F5D3"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\package.json",
+    "Hash": "3C5A20ECC37EE2BD1B422809C390A5F9D235D17D7EDC2DAF1A81B0ADEEEF8F5D"
+  },
+  {
+    "Path": "D:\\workspace\\NeoLearning\\package-lock.json",
+    "Hash": "E4737786576F2467181E1E133FB0FA1AFB636242E349B8A81FD343B1B7B0EE5E"
+  }
+]
