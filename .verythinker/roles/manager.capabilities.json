@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "role": "manager",
+  "operations": [
+    "project_status",
+    "project_read",
+    "assignment_report",
+    "record_list",
+    "record_get",
+    "record_trace",
+    "verify",
+    "task_context",
+    "memory_search",
+    "manager_status",
+    "native_status",
+    "native_wait",
+    "capability_describe",
+    "recipe_list",
+    "recipe_resolve",
+    "note_validate",
+    "pack_list",
+    "pack_suggest",
+    "record_create",
+    "record_update",
+    "note_create",
+    "recipe_prepare",
+    "task_start",
+    "task_resume",
+    "task_submit",
+    "task_repair",
+    "evidence_archive",
+    "manager_begin",
+    "manager_discuss",
+    "manager_decide",
+    "manager_finish",
+    "native_dispatch",
+    "native_interrupt",
+    "native_resume",
+    "task_accept",
+    "archive_prepare",
+    "archive_publish",
+    "archive_status",
+    "archive_reassess",
+    "capability_resolve",
+    "capability_invoke",
+    "contribution_prepare",
+    "contribution_submit",
+    "archive_restore"
+  ],
+  "providers": [
+    "codegraph",
+    "context7"
+  ],
+  "required": [
+    "engineering-core",
+    "native-coordination"
+  ],
+  "optional": [
+    "code-analysis",
+    "library-documentation"
+  ],
+  "native_tools": [
+    "read",
+    "search",
+    "web",
+    "coordination"
+  ],
+  "native_enforcement": "generated declarations require observed client conformance; invocation-bound MCP gateway enforces its operations"
+}

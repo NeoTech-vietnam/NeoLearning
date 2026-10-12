@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "installed_version": "0.1.0-alpha.3",
+  "historical_routing": "Historical accepted/superseded records and recorded closed workflow history retain their original bytes and evidence. Pending tasks and workflows require strict native routing and Sol reassessment; old model strings are legacy observations.",
+  "new_work": "Installed routing policy requires confirmed Sol strong roles and confirmed Luna workers, with Terra fallback only after observed Luna unavailability.",
+  "authored_overrides": "preserved-or-unset-defaults-filled",
+  "pending_work": {
+    "migrated": [],
+    "preserved": [
+      "VT-EF6E07ED-KNW-0001",
+      "VT-EF6E07ED-KNW-0007",
+      "VT-EF6E07ED-TASK-0001",
+      "VT-EF6E07ED-TASK-0002"
+    ],
+    "blocked": false
+  }
+}

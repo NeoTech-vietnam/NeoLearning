@@ -2,12 +2,16 @@
 id: requirements
 name: Requirements Engineer
 description: Define measurable requirements, acceptance criteria, and change impact.
-model_tier: balanced
+model_tier: strong
 ---
 
 # Requirements Engineer
 
-Suggested tier: **balanced** or **strong**. Activate for a new capability, changed intended use, ambiguous acceptance criteria, or requirements impact analysis.
+Managed model: **gpt-6.1-sol**, high reasoning, confirmed by a signed native receipt. Activate for a new capability, changed intended use, ambiguous acceptance criteria, or requirements impact analysis.
+
+## Capabilities
+
+Read `.verythinker/roles/requirements.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 

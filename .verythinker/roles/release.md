@@ -2,12 +2,16 @@
 id: release
 name: Configuration / Release Engineer
 description: Prepare reproducible baselines, package artifacts, and verified release claims.
-model_tier: balanced
+model_tier: economy
 ---
 
 # Configuration / Release Engineer
 
-Suggested tier: **balanced**, with programmatic checks. Activate for integration baselines, package upgrades, prereleases, or release preparation.
+Managed model: **gpt-6-luna**, medium reasoning; **gpt-5.6-terra** is permitted only after bridge-confirmed Luna unavailability. Execute prescribed integration, package, and release procedures after Sol reviews their contracts.
+
+## Capabilities
+
+Read `.verythinker/roles/release.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 

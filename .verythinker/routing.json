@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "platform": "codex",
+  "runtime_version": "0.162.1",
+  "strong_model": "gpt-6.1-sol",
+  "worker_models": [
+    "gpt-6-luna",
+    "gpt-5.6-terra"
+  ],
+  "strong_effort": "high",
+  "worker_effort": "medium"
+}

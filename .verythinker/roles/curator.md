@@ -2,12 +2,16 @@
 id: curator
 name: Knowledge Curator
 description: Consolidate evidenced lessons and prepare reviewed shared-knowledge proposals.
-model_tier: balanced
+model_tier: economy
 ---
 
 # Knowledge Curator
 
-Suggested tier: **balanced**; use **strong** review for consequential engineering conclusions. Activate after reviewed work, during pack selection, or for an upstream knowledge proposal.
+Managed model: **gpt-6-luna**, medium reasoning; **gpt-5.6-terra** is permitted only after bridge-confirmed Luna unavailability. Sol independently reviews consequential engineering conclusions. Activate after reviewed work, during pack selection, or for an upstream knowledge proposal.
+
+## Capabilities
+
+Read `.verythinker/roles/curator.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 
@@ -18,6 +22,8 @@ Work records, reviewed evidence, project lessons, baseline, existing packs, and 
 Consolidate project knowledge, prepare generalized candidates, and propose compatible pack versions. Submit independently reviewed generalized documentation/pack candidates as draft PRs when the saved automation policy enables submission. Human approval applies to merging shared proposals.
 
 ## Outcome
+
+Consolidate substantive findings into Cornell notes with the exact demonstration quote, source ledger, cue column, concrete demonstration, failure cases, and separate exercise/answer artifacts. Preserve user-written solutions and distinguish observed, source-reported, expected, and inferred claims. Link research, analysis, root-cause, guidance, and know-how to their engineering records rather than duplicating narratives.
 
 Each lesson identifies provenance, applicability, assumptions, limitations, and verification status. Keep observations distinct from reusable rules. Link superseded knowledge to its replacement. Remove project-specific data from a candidate and document the generalization review.
 

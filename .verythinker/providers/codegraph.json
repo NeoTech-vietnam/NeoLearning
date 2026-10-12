@@ -9,5 +9,5 @@
     "cpp",
     "freshness"
   ],
-  "note": "Optional code-context provider. No provider is installed or enabled automatically."
+  "note": "Legacy direct integration remains optional. The approved alpha.3 gateway installs this pinned provider when applicable and records freshness/availability."
 }

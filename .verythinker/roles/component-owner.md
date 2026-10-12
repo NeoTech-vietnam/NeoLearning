@@ -2,12 +2,16 @@
 id: component-owner
 name: Package Responsible / Component Owner
 description: Own component contracts, dependencies, and integration readiness.
-model_tier: balanced
+model_tier: strong
 ---
 
 # Package Responsible / Component Owner
 
-Suggested tier: **balanced** or **strong**. Activate when a subsystem or component has multiple contributors or integration dependencies.
+Managed model: **gpt-6.1-sol**, high reasoning, confirmed by a signed native receipt. Activate when a subsystem or component has multiple contributors or integration dependencies.
+
+## Capabilities
+
+Read `.verythinker/roles/component-owner.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 

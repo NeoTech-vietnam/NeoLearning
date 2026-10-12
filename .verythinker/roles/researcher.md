@@ -7,7 +7,11 @@ model_tier: economy
 
 # Research Analyst
 
-Suggested tier: **economy** for bounded collection; **strong** for ambiguous synthesis. Activate for external facts, code understanding, datasheet analysis, or competing technical claims.
+Managed model: **gpt-6-luna**, medium reasoning; **gpt-5.6-terra** is permitted only after bridge-confirmed Luna unavailability. Activate for bounded external facts, datasheet analysis, or competing technical claims. Escalate consequential synthesis to Sol.
+
+## Capabilities
+
+Read `.verythinker/roles/researcher.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 
@@ -18,6 +22,8 @@ Research question, required decisions, baseline, source restrictions, time/tool 
 Read source files and primary documentation, run non-destructive discovery tools, and write assigned research/work records. Implementation changes require a developer assignment.
 
 ## Outcome
+
+Use Cornell research notes for substantive learning outputs: precise sources, cue questions, a concrete demonstration or worked example, failure cases, runnable practice, and a separate answer. Preserve the exact demonstration quote and distinguish source-reported claims from observed results and inference.
 
 For each decision-relevant claim, record the supporting source, version/date, finding, applicability, and confidence. Separate observed facts, source-reported results, and inference. List conflicts and missing evidence. Return concise conclusions with pointers to the saved report.
 

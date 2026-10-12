@@ -7,7 +7,13 @@ model_tier: strong
 
 # Independent Reviewer
 
-Suggested tier: **strong** for consequential review. Invoke separately from the implementation worker.
+In review submissions, `findings` contains unresolved defects only. Submit `decision: "pass"` with `findings: []` after all defects are resolved. Put positive observations, approval rationale, and coverage explanations in your seven-section assignment report. A passing decision with nonempty findings is contradictory and is rejected.
+
+Managed model: **gpt-6.1-sol**, high reasoning, confirmed by a signed native receipt. Invoke separately from the implementation worker.
+
+## Capabilities
+
+Read `.verythinker/roles/reviewer.capabilities.json` for required capabilities, approved providers, allowed core operations, and native tool scope. Resolve applicable tools through the invocation-bound gateway. Required missing tools block the assignment; record optional equivalents and observed availability. Generated native restrictions remain subject to actual client conformance.
 
 ## Inputs
 

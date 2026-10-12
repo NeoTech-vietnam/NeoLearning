@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "providers": [
+    {
+      "id": "codegraph",
+      "package": "@colbymchenry/codegraph",
+      "version": "1.6.2",
+      "integrity": "sha512-hODH/mGnCf3IUMs6rzktv/zbecJIKJfdZAYHZ9mqecb0G7ZkHaA8CZafDVnswANFEL1YFcG+lfAwc5SIXzUH6Q==",
+      "dependency_lock_path": ".verythinker/tool-locks/codegraph-1.6.2.json",
+      "dependency_lock_hash": "b5eefaf61c8f52a71272f90edbe4eb953e9dcb9035118058b8920661ecb2f695",
+      "installed_at": "2026-10-11T22:42:20.956Z"
+    }
+  ]
+}

@@ -9,9 +9,15 @@
     "copilot"
   ],
   "models": {
-    "economy": null,
-    "balanced": null,
-    "strong": null
+    "economy": {
+      "codex": "gpt-6-luna"
+    },
+    "balanced": {
+      "codex": "gpt-6-luna"
+    },
+    "strong": {
+      "codex": "gpt-6.1-sol"
+    }
   },
   "max_workers": 3,
   "repair_attempts": 1
