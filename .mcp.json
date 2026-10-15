@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "verythinker": {
+      "type": "stdio",
+      "command": "C:\\Program Files\\nodejs\\node.exe",
+      "args": [
+        "D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js",
+        "mcp",
+        "--project",
+        "D:\\workspace\\NeoLearning"
+      ]
+    }
+  }
+}

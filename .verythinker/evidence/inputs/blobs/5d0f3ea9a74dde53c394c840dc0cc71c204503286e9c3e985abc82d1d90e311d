@@ -1,0 +1,1418 @@
+---
+schema_version: 1
+id: VT-FB18E4DC-DES-0001
+type: design
+title: "DSP-STUDY/1: source-evidence-gated documentation architecture and frozen
+  interface contracts"
+owner: architect
+status: draft
+revision: 6
+created_at: 2026-10-12T08:36:58.081Z
+updated_at: 2026-10-12T17:50:40.835Z
+links:
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0001
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0002
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0003
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0004
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0005
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0006
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0007
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0008
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0009
+  - type: references
+    target: VT-FB18E4DC-CHK-0001
+  - type: references
+    target: VT-FB18E4DC-CHK-0002
+  - type: references
+    target: VT-FB18E4DC-CHK-0003
+  - type: references
+    target: VT-FB18E4DC-CHK-0004
+  - type: references
+    target: VT-FB18E4DC-CHK-0005
+  - type: references
+    target: VT-FB18E4DC-CHK-0006
+  - type: references
+    target: VT-FB18E4DC-CHK-0007
+  - type: references
+    target: VT-FB18E4DC-CHK-0008
+  - type: references
+    target: VT-FB18E4DC-KNW-0002
+  - type: references
+    target: VT-FB18E4DC-KNW-0003
+  - type: references
+    target: VT-FB18E4DC-KNW-0004
+  - type: references
+    target: VT-FB18E4DC-KNW-0007
+  - type: references
+    target: VT-FB18E4DC-KNW-0008
+  - type: references
+    target: VT-FB18E4DC-KNW-0009
+  - type: references
+    target: VT-FB18E4DC-KNW-0010
+  - type: references
+    target: VT-FB18E4DC-PRB-0001
+  - type: references
+    target: VT-FB18E4DC-TASK-0001
+  - type: references
+    target: VT-FB18E4DC-CHK-0009
+  - type: references
+    target: VT-FB18E4DC-CHK-0010
+  - type: references
+    target: VT-FB18E4DC-CHK-0011
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0010
+  - type: references
+    target: VT-FB18E4DC-CHK-0012
+  - type: references
+    target: VT-FB18E4DC-CHK-0013
+data:
+  workflow_id: VT-FB18E4DC-KNW-0001
+  invocation_id: 8b119842-b498-4a12-9293-b81ba0215ff2
+  contract_id: DSP-STUDY
+  contract_version: 1
+  definition_status: awaiting-fresh-independent-current-review
+  implementation_status: blocked-core-readiness
+  requirement_ids:
+    - VT-FB18E4DC-REQ-0001
+    - VT-FB18E4DC-REQ-0002
+    - VT-FB18E4DC-REQ-0003
+    - VT-FB18E4DC-REQ-0004
+    - VT-FB18E4DC-REQ-0005
+    - VT-FB18E4DC-REQ-0006
+    - VT-FB18E4DC-REQ-0007
+    - VT-FB18E4DC-REQ-0008
+    - VT-FB18E4DC-REQ-0009
+    - VT-FB18E4DC-REQ-0010
+  check_ids:
+    - VT-FB18E4DC-CHK-0001
+    - VT-FB18E4DC-CHK-0002
+    - VT-FB18E4DC-CHK-0003
+    - VT-FB18E4DC-CHK-0004
+    - VT-FB18E4DC-CHK-0005
+    - VT-FB18E4DC-CHK-0006
+    - VT-FB18E4DC-CHK-0007
+    - VT-FB18E4DC-CHK-0008
+    - VT-FB18E4DC-CHK-0009
+    - VT-FB18E4DC-CHK-0010
+    - VT-FB18E4DC-CHK-0011
+    - VT-FB18E4DC-CHK-0012
+    - VT-FB18E4DC-CHK-0013
+  source_baseline:
+    VT-FB18E4DC-REQ-0001:
+      revision: 3
+      fingerprint: 3910ed7d981d5434c94b104ad999ba322afd426430bf90983af15628f7ba7833
+    VT-FB18E4DC-REQ-0002:
+      revision: 2
+      fingerprint: ae9579bf290a21d4b900f9015f4e7b848584dda7b619c2005831479b71b74bc1
+    VT-FB18E4DC-REQ-0003:
+      revision: 2
+      fingerprint: f6f97211e010a6d5527427982f95f7139d58e61f58fd336b2dda1952f3d05f83
+    VT-FB18E4DC-REQ-0004:
+      revision: 2
+      fingerprint: 8ce9cbf563aacf47d9c8afa4f1092120a30bfdef51f2c1b1cd1433fd3cc33b1e
+    VT-FB18E4DC-REQ-0005:
+      revision: 2
+      fingerprint: ecd7b7a952b9cac0f449cc1dabf42b2fbdc6e961b5f279ecf2bef7236f5cc790
+    VT-FB18E4DC-REQ-0006:
+      revision: 2
+      fingerprint: 25cb3fcc9748e14ad5f03fec2e0cc00981fe701bf83f182780bc665a2b1838c0
+    VT-FB18E4DC-REQ-0007:
+      revision: 2
+      fingerprint: 2d50d4e5e43f967fd6a17b54473048e74e62b5075982768f3f5ac55d6ec10e62
+    VT-FB18E4DC-REQ-0008:
+      revision: 2
+      fingerprint: b7fd31c0c387ddaab3d1b0ac89d1422846c0c67429cdbbe92338a2d81004eb1d
+    VT-FB18E4DC-REQ-0009:
+      revision: 3
+      fingerprint: 5920703360ab39ce2c04ad49f3feba05fef4229d673163228fe02c8fa267d1ce
+    VT-FB18E4DC-REQ-0010:
+      revision: 2
+      fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+    VT-FB18E4DC-KNW-0023:
+      revision: 1
+      fingerprint: 1f685d97f36cfb2a1a3d544bb9016c67203c03118de93c2edaf5423c43ca7f62
+  approved_output_root: null
+  proposed_output_root: 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study
+  release_change_type: feature
+  profile: software
+  recipe:
+    id: cornell-evidence-note
+    version: 1.0.0
+    generator_hash: 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1
+    prepared: false
+    reason: Complete source-confirmed learning-note parameters unavailable; no
+      synthetic recipe instance created.
+  source_access_blocker:
+    status: intake-pdf-access-confirmed/core-task-local-readiness-pending
+    record_ids:
+      - VT-FB18E4DC-KNW-0023
+    intake_observation:
+      record_id: VT-FB18E4DC-KNW-0023
+      scope: Read-only PDF intake observations only; both source PDFs were readable
+        and their identities/counts were recorded. This is not current
+        prescribed CORE operation evidence, a fresh workspace/deletion/collision
+        inventory, full content/page/item/topic audit, final artifact, task
+        acceptance or final acceptance.
+      book:
+        path: 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/03-Understanding-Digital-Signal-Processing.pdf
+        pages: 983
+        bytes: 9466589
+        sha256: f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057
+        edition: Richard G. Lyons, Understanding Digital Signal Processing, Third
+          Edition, copyright 2011, ISBN 9780137027415; inspected PDF4/5
+      lecture:
+        path: 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/00_Intro.pdf
+        pages: 408
+        bytes: 13042041
+        sha256: de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea
+    required_route: Approved task-local CORE readiness and current operation
+      evidence for REQ-0010/TASK-0002, using the prescribed reviewed read-only
+      bootstrap checks CHK-0013 -> CHK-0012 -> CHK-0013; TASK-0001 source
+      inventory may begin only after TASK-0002's required bootstrap evidence and
+      acceptance are current.
+    current_operation_evidence: pending approved task-local CORE readiness and
+      prescribed bootstrap evidence
+    unknowns:
+      - complete page/item/topic inventory
+      - fresh workspace/deletion/solution/collision baseline
+      - final artifacts and independent oracles
+      - archive visibility/authentication
+  acceptance_criteria:
+    - Every REQ-0002..0009 criterion allocated to a responsibility, artifact
+      interface and existing check or manager gate.
+    - Schema and provenance contracts separate
+      unknown/source-reported/expected/observed states and prevent fabricated
+      source or runtime values.
+    - Exact proposed new 01_learning namespace, prompt/answer/user-solution
+      separation and preservation prerequisites recorded.
+    - Source-access blocker and conditional bounded ownership/dependencies/check
+      assignments explicitly retained.
+    - Independent design review and finding disposition required;
+      source-specific binding and task authorization not implied by this
+      proposal.
+    - REQ-0010 is allocated to source-bootstrap TASK-0002 and CHK-0013 ->
+      CHK-0012 -> CHK-0013; TASK-0001/CHK-0009..0011 may begin only after
+      TASK-0002's required bootstrap evidence and acceptance are current.
+      CHK-0001..0008 remain mandatory downstream, and F2/F3 CHK-0006/0007 are
+      not bootstrap prerequisites. Intake observations do not establish current
+      CORE evidence, a fresh workspace/collision baseline or acceptance.
+  author_invocation_id: 8b119842-b498-4a12-9293-b81ba0215ff2
+  invocation_role: architect
+  routing_required: true
+  previous_design_baseline:
+    revision: 3
+    fingerprint: 45d78706f5d9bdd0881432cb0e52f09e64e9e85f4f202c9a2f1644d102331ace
+    meta:
+      schema_version: 1
+      id: VT-FB18E4DC-DES-0001
+      type: design
+      title: "DSP-STUDY/1: source-evidence-gated documentation architecture and frozen
+        interface contracts"
+      owner: architect
+      status: draft
+      revision: 3
+      created_at: 2026-10-12T08:36:58.081Z
+      updated_at: 2026-10-12T15:35:30.681Z
+      links:
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0001
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0002
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0003
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0004
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0005
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0006
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0007
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0008
+        - type: satisfies
+          target: VT-FB18E4DC-REQ-0009
+        - type: references
+          target: VT-FB18E4DC-CHK-0001
+        - type: references
+          target: VT-FB18E4DC-CHK-0002
+        - type: references
+          target: VT-FB18E4DC-CHK-0003
+        - type: references
+          target: VT-FB18E4DC-CHK-0004
+        - type: references
+          target: VT-FB18E4DC-CHK-0005
+        - type: references
+          target: VT-FB18E4DC-CHK-0006
+        - type: references
+          target: VT-FB18E4DC-CHK-0007
+        - type: references
+          target: VT-FB18E4DC-CHK-0008
+        - type: references
+          target: VT-FB18E4DC-KNW-0002
+        - type: references
+          target: VT-FB18E4DC-KNW-0003
+        - type: references
+          target: VT-FB18E4DC-KNW-0004
+        - type: references
+          target: VT-FB18E4DC-KNW-0007
+        - type: references
+          target: VT-FB18E4DC-KNW-0008
+        - type: references
+          target: VT-FB18E4DC-KNW-0009
+        - type: references
+          target: VT-FB18E4DC-KNW-0010
+        - type: references
+          target: VT-FB18E4DC-PRB-0001
+        - type: references
+          target: VT-FB18E4DC-TASK-0001
+      data:
+        workflow_id: VT-FB18E4DC-KNW-0001
+        invocation_id: 48b78cf5-ecf0-4e90-9707-625abcb8726a
+        contract_id: DSP-STUDY
+        contract_version: 1
+        definition_status: recovered-design-awaiting-independent-review-and-verifier-stage-split
+        implementation_status: blocked-source-retrieval
+        requirement_ids:
+          - VT-FB18E4DC-REQ-0001
+          - VT-FB18E4DC-REQ-0002
+          - VT-FB18E4DC-REQ-0003
+          - VT-FB18E4DC-REQ-0004
+          - VT-FB18E4DC-REQ-0005
+          - VT-FB18E4DC-REQ-0006
+          - VT-FB18E4DC-REQ-0007
+          - VT-FB18E4DC-REQ-0008
+          - VT-FB18E4DC-REQ-0009
+        check_ids:
+          - VT-FB18E4DC-CHK-0001
+          - VT-FB18E4DC-CHK-0002
+          - VT-FB18E4DC-CHK-0003
+          - VT-FB18E4DC-CHK-0004
+          - VT-FB18E4DC-CHK-0005
+          - VT-FB18E4DC-CHK-0006
+          - VT-FB18E4DC-CHK-0007
+          - VT-FB18E4DC-CHK-0008
+        source_baseline:
+          VT-FB18E4DC-REQ-0001:
+            revision: 2
+            fingerprint: 59b09d68f572e87fe86220f3bd0d389e4c5774556597382cb0bc83b6b6e70485
+          VT-FB18E4DC-REQ-0002:
+            revision: 1
+            fingerprint: ebf1a3215d2c8a75a72d9ef843ac35d1267ea065311e98f3a0133cff247cb747
+          VT-FB18E4DC-REQ-0003:
+            revision: 1
+            fingerprint: 0758d61933b4c3c5bb9a92231d00ff2867624b798ea9f47bf93745bbbe5efec3
+          VT-FB18E4DC-REQ-0004:
+            revision: 1
+            fingerprint: a98958282674924638cee5286aeda3c3c2613ada589692666ca874b5c0d69e3c
+          VT-FB18E4DC-REQ-0005:
+            revision: 1
+            fingerprint: 8ca5bc6ffa040d1c02014a9c381bc58ce9bbc24c47897e0c0967457d7e54a85a
+          VT-FB18E4DC-REQ-0006:
+            revision: 1
+            fingerprint: a90e9de9fa33dd212546d2dab1fdea7492ff252cc5f28005fa238a29445eb3dc
+          VT-FB18E4DC-REQ-0007:
+            revision: 1
+            fingerprint: 109be3743b171e727316fb4158185f0ff2f3afb0b511448e777baddb7a5b3f44
+          VT-FB18E4DC-REQ-0008:
+            revision: 1
+            fingerprint: db2dde21e0b42755134fcc1e62115e833516d4a87da5f906dd1175194c11fed6
+          VT-FB18E4DC-REQ-0009:
+            revision: 1
+            fingerprint: 6b2ddbcfd6754ed46e6b6f09fd566548785a37ac0576956462a53151c1bab4e3
+          VT-FB18E4DC-CHK-0001:
+            revision: 2
+            fingerprint: a43a72016e3a7aaba5bd446113a4cf8078d8777abf292b1908675cb903ca5b0b
+          VT-FB18E4DC-CHK-0002:
+            revision: 2
+            fingerprint: f2fa3ad611511955a0de2441b6e34c27c4fef316fb2486375e5bae84e895af95
+          VT-FB18E4DC-CHK-0003:
+            revision: 2
+            fingerprint: fd930c7297a65f52b5f887baeb49b582140a10ce2a0ac8fd337faee8376fda42
+          VT-FB18E4DC-CHK-0004:
+            revision: 2
+            fingerprint: cc75fdda69647b17cf5a8eed1d2c07a9f5d0fddccf8073aa751177a83da90a06
+          VT-FB18E4DC-CHK-0005:
+            revision: 2
+            fingerprint: b1fd085531bef3f7a97bc19f43b9622c8d68aabb168d999f05180374e153f6e5
+          VT-FB18E4DC-CHK-0006:
+            revision: 1
+            fingerprint: 907616b9651fb3b0f5ca294944bbebc995fca76d2aaa46a769cb87fad12608bf
+          VT-FB18E4DC-CHK-0007:
+            revision: 1
+            fingerprint: 2c38416538817253447e0cad3e6ec868997bd59a5889417905a1375e1424940d
+          VT-FB18E4DC-CHK-0008:
+            revision: 1
+            fingerprint: 39ddd3e7de99baed033f954e721f0b7c1c1eb05cd671dd4ef59946bc6ba337d9
+          VT-FB18E4DC-KNW-0007:
+            revision: 1
+            fingerprint: 4bebc436efbee861a000daf99191f3cdadeb3403c4d520296b39d9750d3cd7e7
+          VT-FB18E4DC-KNW-0008:
+            revision: 1
+            fingerprint: c500b055b8da5189aaf021b79826e0083939be113d8fb0102e4b87c194e5afc2
+          VT-FB18E4DC-KNW-0009:
+            revision: 1
+            fingerprint: 21a60914cf7fe40ef98c85b398196ad6b9ba6c2fb79fd07ea28364d748cadb72
+          VT-FB18E4DC-KNW-0002:
+            revision: 1
+            fingerprint: 3d0cb3a3803c035acb47993d9052f503856ac988402af946cbc6ee402a295f04
+          VT-FB18E4DC-KNW-0010:
+            revision: 1
+            fingerprint: 371ffe53a588fbd8b7caa9e02a5a4263057bf98d98a13af5d045ee6f28ff4b15
+          VT-FB18E4DC-PRB-0001:
+            revision: 2
+            fingerprint: d462b059d60478c20db3076a67cea0a3e603a815f67bfd77ba200d70b33f16a0
+          VT-FB18E4DC-TASK-0001:
+            revision: 2
+            fingerprint: 66a05c6daac791bd47ee7810224eaf4fa2f20d4a1e6378c1e12f32f15fdf6b29
+        approved_output_root: null
+        proposed_output_root: 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study
+        release_change_type: feature
+        profile: software
+        recipe:
+          id: cornell-evidence-note
+          version: 1.0.0
+          generator_hash: 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1
+          prepared: false
+          reason: Complete source-confirmed learning-note parameters unavailable; no
+            synthetic recipe instance created.
+        source_access_blocker:
+          status: external-tooling-blocker
+          record_ids:
+            - VT-FB18E4DC-KNW-0002
+            - VT-FB18E4DC-KNW-0003
+            - VT-FB18E4DC-KNW-0004
+          required_route: Approved task-scoped binary
+            inventory/hash/PDF-metadata/extract/render and working-tree
+            inventory; actual availability must be observed.
+          unknowns:
+            - current source existence and bytes
+            - sha256/size/count
+            - book edition/headings/page locators
+            - lecture topics/items/figures/math
+            - current workspace/deletions/solutions baseline
+            - runtime commands/versions/oracle values
+            - archive visibility/authentication
+        acceptance_criteria:
+          - Every REQ-0002..0009 criterion allocated to a responsibility,
+            artifact interface and existing check or manager gate.
+          - Schema and provenance contracts separate
+            unknown/source-reported/expected/observed states and prevent
+            fabricated source or runtime values.
+          - Exact proposed new 01_learning namespace,
+            prompt/answer/user-solution separation and preservation
+            prerequisites recorded.
+          - Source-access blocker and conditional bounded
+            ownership/dependencies/check assignments explicitly retained.
+          - Independent design review and finding disposition required;
+            source-specific binding and task authorization not implied by this
+            proposal.
+        author_invocation_id: 48b78cf5-ecf0-4e90-9707-625abcb8726a
+        invocation_role: architect
+        routing_required: true
+        previous_design_baseline:
+          revision: 1
+          fingerprint: 4588548d707f6ddbdcfb9f05d948873ea05ea6c7af3bc952528dac6ecaf6ef61
+          meta:
+            schema_version: 1
+            id: VT-FB18E4DC-DES-0001
+            type: design
+            title: "DSP-STUDY/1: source-evidence-gated documentation architecture and frozen
+              interface contracts"
+            owner: architect
+            status: draft
+            revision: 1
+            created_at: 2026-10-12T08:36:58.081Z
+            updated_at: 2026-10-12T08:36:58.081Z
+            links:
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0001
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0002
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0003
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0004
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0005
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0006
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0007
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0008
+              - type: satisfies
+                target: VT-FB18E4DC-REQ-0009
+              - type: references
+                target: VT-FB18E4DC-CHK-0001
+              - type: references
+                target: VT-FB18E4DC-CHK-0002
+              - type: references
+                target: VT-FB18E4DC-CHK-0003
+              - type: references
+                target: VT-FB18E4DC-CHK-0004
+              - type: references
+                target: VT-FB18E4DC-CHK-0005
+              - type: references
+                target: VT-FB18E4DC-CHK-0006
+              - type: references
+                target: VT-FB18E4DC-CHK-0007
+              - type: references
+                target: VT-FB18E4DC-CHK-0008
+              - type: references
+                target: VT-FB18E4DC-KNW-0002
+              - type: references
+                target: VT-FB18E4DC-KNW-0003
+              - type: references
+                target: VT-FB18E4DC-KNW-0004
+              - type: references
+                target: VT-FB18E4DC-KNW-0007
+              - type: references
+                target: VT-FB18E4DC-KNW-0008
+              - type: references
+                target: VT-FB18E4DC-KNW-0009
+            data:
+              workflow_id: VT-FB18E4DC-KNW-0001
+              invocation_id: 5a969ff8-f11a-4c48-944f-efbafbe085f9
+              contract_id: DSP-STUDY
+              contract_version: 1
+              definition_status: proposed-frozen-interfaces-awaiting-independent-review
+              implementation_status: blocked-source-retrieval
+              requirement_ids:
+                - VT-FB18E4DC-REQ-0001
+                - VT-FB18E4DC-REQ-0002
+                - VT-FB18E4DC-REQ-0003
+                - VT-FB18E4DC-REQ-0004
+                - VT-FB18E4DC-REQ-0005
+                - VT-FB18E4DC-REQ-0006
+                - VT-FB18E4DC-REQ-0007
+                - VT-FB18E4DC-REQ-0008
+                - VT-FB18E4DC-REQ-0009
+              check_ids:
+                - VT-FB18E4DC-CHK-0001
+                - VT-FB18E4DC-CHK-0002
+                - VT-FB18E4DC-CHK-0003
+                - VT-FB18E4DC-CHK-0004
+                - VT-FB18E4DC-CHK-0005
+                - VT-FB18E4DC-CHK-0006
+                - VT-FB18E4DC-CHK-0007
+                - VT-FB18E4DC-CHK-0008
+              source_baseline:
+                VT-FB18E4DC-REQ-0001:
+                  revision: 2
+                  fingerprint: 59b09d68f572e87fe86220f3bd0d389e4c5774556597382cb0bc83b6b6e70485
+                VT-FB18E4DC-REQ-0002:
+                  revision: 1
+                  fingerprint: ebf1a3215d2c8a75a72d9ef843ac35d1267ea065311e98f3a0133cff247cb747
+                VT-FB18E4DC-REQ-0003:
+                  revision: 1
+                  fingerprint: 0758d61933b4c3c5bb9a92231d00ff2867624b798ea9f47bf93745bbbe5efec3
+                VT-FB18E4DC-REQ-0004:
+                  revision: 1
+                  fingerprint: a98958282674924638cee5286aeda3c3c2613ada589692666ca874b5c0d69e3c
+                VT-FB18E4DC-REQ-0005:
+                  revision: 1
+                  fingerprint: 8ca5bc6ffa040d1c02014a9c381bc58ce9bbc24c47897e0c0967457d7e54a85a
+                VT-FB18E4DC-REQ-0006:
+                  revision: 1
+                  fingerprint: a90e9de9fa33dd212546d2dab1fdea7492ff252cc5f28005fa238a29445eb3dc
+                VT-FB18E4DC-REQ-0007:
+                  revision: 1
+                  fingerprint: 109be3743b171e727316fb4158185f0ff2f3afb0b511448e777baddb7a5b3f44
+                VT-FB18E4DC-REQ-0008:
+                  revision: 1
+                  fingerprint: db2dde21e0b42755134fcc1e62115e833516d4a87da5f906dd1175194c11fed6
+                VT-FB18E4DC-REQ-0009:
+                  revision: 1
+                  fingerprint: 6b2ddbcfd6754ed46e6b6f09fd566548785a37ac0576956462a53151c1bab4e3
+                VT-FB18E4DC-CHK-0001:
+                  revision: 2
+                  fingerprint: a43a72016e3a7aaba5bd446113a4cf8078d8777abf292b1908675cb903ca5b0b
+                VT-FB18E4DC-CHK-0002:
+                  revision: 2
+                  fingerprint: f2fa3ad611511955a0de2441b6e34c27c4fef316fb2486375e5bae84e895af95
+                VT-FB18E4DC-CHK-0003:
+                  revision: 2
+                  fingerprint: fd930c7297a65f52b5f887baeb49b582140a10ce2a0ac8fd337faee8376fda42
+                VT-FB18E4DC-CHK-0004:
+                  revision: 2
+                  fingerprint: cc75fdda69647b17cf5a8eed1d2c07a9f5d0fddccf8073aa751177a83da90a06
+                VT-FB18E4DC-CHK-0005:
+                  revision: 2
+                  fingerprint: b1fd085531bef3f7a97bc19f43b9622c8d68aabb168d999f05180374e153f6e5
+                VT-FB18E4DC-CHK-0006:
+                  revision: 1
+                  fingerprint: 907616b9651fb3b0f5ca294944bbebc995fca76d2aaa46a769cb87fad12608bf
+                VT-FB18E4DC-CHK-0007:
+                  revision: 1
+                  fingerprint: 2c38416538817253447e0cad3e6ec868997bd59a5889417905a1375e1424940d
+                VT-FB18E4DC-CHK-0008:
+                  revision: 1
+                  fingerprint: 39ddd3e7de99baed033f954e721f0b7c1c1eb05cd671dd4ef59946bc6ba337d9
+                VT-FB18E4DC-KNW-0007:
+                  revision: 1
+                  fingerprint: 4bebc436efbee861a000daf99191f3cdadeb3403c4d520296b39d9750d3cd7e7
+                VT-FB18E4DC-KNW-0008:
+                  revision: 1
+                  fingerprint: c500b055b8da5189aaf021b79826e0083939be113d8fb0102e4b87c194e5afc2
+                VT-FB18E4DC-KNW-0009:
+                  revision: 1
+                  fingerprint: 21a60914cf7fe40ef98c85b398196ad6b9ba6c2fb79fd07ea28364d748cadb72
+                VT-FB18E4DC-KNW-0002:
+                  revision: 1
+                  fingerprint: 3d0cb3a3803c035acb47993d9052f503856ac988402af946cbc6ee402a295f04
+              approved_output_root: null
+              proposed_output_root: 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study
+              release_change_type: feature
+              profile: software
+              recipe:
+                id: cornell-evidence-note
+                version: 1.0.0
+                generator_hash: 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1
+                prepared: false
+                reason: Complete source-confirmed learning-note parameters unavailable; no
+                  synthetic recipe instance created.
+              source_access_blocker:
+                status: external-tooling-blocker
+                record_ids:
+                  - VT-FB18E4DC-KNW-0002
+                  - VT-FB18E4DC-KNW-0003
+                  - VT-FB18E4DC-KNW-0004
+                required_route: Approved task-scoped binary
+                  inventory/hash/PDF-metadata/extract/render and working-tree
+                  inventory; actual availability must be observed.
+                unknowns:
+                  - current source existence and bytes
+                  - sha256/size/count
+                  - book edition/headings/page locators
+                  - lecture topics/items/figures/math
+                  - current workspace/deletions/solutions baseline
+                  - runtime commands/versions/oracle values
+                  - archive visibility/authentication
+              acceptance_criteria:
+                - Every REQ-0002..0009 criterion allocated to a responsibility,
+                  artifact interface and existing check or manager gate.
+                - Schema and provenance contracts separate
+                  unknown/source-reported/expected/observed states and prevent
+                  fabricated source or runtime values.
+                - Exact proposed new 01_learning namespace,
+                  prompt/answer/user-solution separation and preservation
+                  prerequisites recorded.
+                - Source-access blocker and conditional bounded
+                  ownership/dependencies/check assignments explicitly retained.
+                - Independent design review and finding disposition required;
+                  source-specific binding and task authorization not implied by
+                  this proposal.
+              author_invocation_id: 5a969ff8-f11a-4c48-944f-efbafbe085f9
+              invocation_role: architect
+              routing_required: true
+          body: |
+            ## Objective and Allocated Requirements
+
+            Design contract DSP-STUDY/1, authored by native architect invocation 5a969ff8-f11a-4c48-944f-efbafbe085f9 (signed gpt-6.1-sol/high) for existing workflow VT-FB18E4DC-KNW-0001. This is a proposed frozen interface and allocation baseline for independent review, not source-verified learning content, approved implementation, or acceptance.
+
+            Inspected current parent VT-FB18E4DC-REQ-0001 revision 2 and derived REQ-0002..0009 revision 1 from requirements invocation 2956cea0-f83a-48ad-9df9-fd88e4de2011. Requirements remain draft pending manager disposition. Preserve REQ-0001 revision-1 historical fingerprint and prior observations; current requirements supersede the initial empty acceptance placeholder. Allocate all detailed criteria as follows:
+
+            | Requirement | Design responsibility | Provided artifacts / verification |
+            | --- | --- | --- |
+            | REQ-0002 | Source researcher verifies exact local edition, actual section contents and locators; mapping owner assigns every inventoried topic or evidenced gap | source_manifest, reading_map; CHK-0002 / VP01 |
+            | REQ-0003 | Lecture researcher inspects every page and substantive item, including unlabeled and diagram-dependent content | page_ledger, item_ledger, topic_registry; CHK-0003 / VP02 |
+            | REQ-0004 | Teaching owner gives original derivations and explanations; independent verifier recomputes all math | notes, examples, math_claims, diagram_registry; CHK-0003 / VP03 |
+            | REQ-0005 | Exercise owner retains supplied prompts, retrieves additional primary exercises, labels origin and separates answers | exercise_registry, prompts, answers, solution links; CHK-0004 / VP04 |
+            | REQ-0006 | Practice implementer supplies deterministic runnable exercises and reference artifacts; independent check executor captures actual results against reviewed oracles | practice_registry, practice, runtime evidence; CHK-0007 / VP05 |
+            | REQ-0007 | Teaching and integration owners produce substantive Cornell explanations and usable index/source navigation | index, notes, reading map, resolved links; CHK-0005 plus CHK-0006 / VP06 |
+            | REQ-0008 | Baseline owner snapshots current protected state; every producer obeys exclusive allowed paths | workspace_baseline and before/after evidence; CHK-0001 / VP07 |
+            | REQ-0009 | Manager owns task/gate/acceptance and release/curator assignments; independent reviewer inspects source and outputs | evidence_links, seven-section records, review dispositions and release configuration; VP08 |
+
+            Short IDs in this record mean VT-FB18E4DC-prefixed IDs. None of the table is a pass result.
+
+            ## Boundaries and Responsibilities
+
+            Boundary: every page/item of the frozen local 00_Intro.pdf and only relevant local Lyons readings, genuine alternatives for evidenced gaps, and additional primary-source practice. Do not expand into all lectures or the whole book. Lecture page count N, topic count, edition, hashes and current directory contents are unknown. The full book PDF's count is discovered for navigation; exhaustive book-wide teaching or every-page book analysis is outside this increment. Exhaustive every-page ledger applies to the lecture and every selected/inspected book page has locator evidence.
+
+            Data flow: approved source bytes -> immutable identity/extract/render observations -> exhaustive inventory -> topic/reading map -> original explanations/examples/exercises/practice -> actual independent verification -> index walkthrough -> manager acceptance -> scoped release/archive/generalized knowledge. Control flow stops at each missing evidence dependency. Power/physical interfaces, firmware tasks, board/BOM/HIL and hardware timing are inapplicable: the output is a study guide with optional host computations, not a deployed embedded product.
+
+            Source access is an external tooling blocker. KNW-0002/0003/0004 from completed researcher 84378bc2-e0c7-4c29-80be-6d8b07dd9b59 report PDF reads rejected by text-only project_read and native command helper failure before execution. This proves neither file absence nor inspected PDF content. Required source-retrieval capability remains unmet for this source type. No optional CodeGraph/Context7 provider applies to this documentation architecture/local PDF access; no empty provider resolution, install or substitute provider is justified.
+
+            Precondition G0: manager provides a permitted, task-scoped binary file enumeration/read/hash/PDF-metadata/extraction/render route plus working-tree inventory. Its actual availability must be observed, not assumed from installed packages. Freeze precise tool/environment versions, allowed source paths and approved evidence storage; inspect both designated PDFs, relevant adjacent sources only after real discovery, and every lecture page visually. No alternate shell/direct-write/network-source shortcut may bypass the access boundary or replace the actual local edition. Failed/unavailable access leaves downstream content work blocked. Access remediation itself belongs to manager; architect owns only design records.
+
+            Precondition G1: approved measurable requirement baseline, independently reviewed design/check plan, fresh pre-edit workspace/source/solution baseline, real full lecture inventory and task-approved new paths. Source inventory may precede final topic-specific plans, but learning deliverables cannot be presented as verified before the content gates. Missing runtimes are blockers, not reasons to classify computational topics as inapplicable.
+
+            ## Interfaces and Flow
+
+            ### New path allocation
+
+            Let L = 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study. These are proposed canonical project-relative paths. Their collision-free existence has NOT been verified. Manager must approve after fresh tracked/untracked/deleted/submodule inventory; do not silently overwrite or restore collisions. All visible learning artifacts are within L, avoiding mechanically recreating the deleted root README, coverage.csv, temp.md or prior 00_intro filenames.
+
+            | Path relative to L | Contract / owner |
+            | --- | --- |
+            | index.md | Integration owner: substantive study entry point, prerequisites/order, source reading, note/example/prompt/answer/practice and limitation links |
+            | provenance/source_manifest.json | Source researcher: actual source identity and inspection status |
+            | provenance/workspace_baseline.json | Baseline owner: branch/revision, protected path hashes, dirty/deleted/untracked/submodule snapshot reference and allowed-path dispositions |
+            | provenance/page_ledger.jsonl | Lecture researcher: exactly one row per actual PDF page 1..N |
+            | provenance/item_ledger.jsonl | Lecture researcher: every substantive topic/example/prompt/formula/table/diagram and multipage relationships |
+            | provenance/topic_registry.json | Inventory integrator: stable topic IDs, page/item associations, exact runnable applicability/disposition |
+            | provenance/math_claims.jsonl | Teaching owner: every formula and numeric claim, assumptions, source statements and independent-oracle references |
+            | provenance/exercise_registry.json | Exercise owner: prompt origin, source lineage, topic IDs, separate answer and optional preserved user solution |
+            | provenance/diagram_registry.json | Teaching owner: original/paraphrased/redrawn figure origins and visual fidelity references |
+            | provenance/practice_registry.json | Practice owner: exercise/reference commands, environment, deterministic inputs, expectations and evidence links |
+            | provenance/evidence_links.json | Integration owner: pointers to actual core check/evidence/review records and immutable baseline identities |
+            | reading/book_reading_map.json | Mapping owner: canonical structured per-topic section/gap records |
+            | reading/book_reading_map.md | Mapping owner: human-readable navigation derived from same reviewed rows |
+            | notes/T0001.md etc. | Teaching owner: original substantive Cornell topic explanation; T IDs allocated only after actual inventory |
+            | examples/I0001.md etc. | Teaching owner: each lecture worked/partial example reconstructed with explicit source locator and assumptions |
+            | exercises/prompts/Q0001.md etc. | Exercise owner: lecture, additional and optionally original problem prompts with origin metadata; no embedded answer |
+            | exercises/answers/Q0001.md etc. | Exercise owner: separate derivation/answer linked to same question ID |
+            | practice/P0001/exercise.md and exercise.<ext> | Practice owner: instructions and runnable learner artifact when applicable |
+            | practice/P0001/answer.md and reference.<ext> | Practice owner: separate solution explanation and runnable reference |
+            | practice/P0001/expected.json | Verifier-reviewed expected contract, independent oracle rationale and tolerances |
+            | diagrams/D0001.svg or D0001.md | Teaching owner: readable original redraw or Mermaid description, source locator when derived |
+            | verification/validate_study.<ext> | Integration validator owner: meaningful schema, path, coverage and linkage checks |
+            | verification/validate_practice.<ext> | Numerical verification owner: independent reviewed oracle assertions, not expected output generated by reference code |
+
+            The .<ext> choice and full per-item filename list are intentionally unresolved parameters, not existing paths or approved commands; manager freezes them after runtime/topic discovery and before affected task ready. Use an observed available host runtime with standard library where sufficient. No package/build scaffolding is needed for the knowledge base. Optional learner solution path is supplied only when preservation baseline identifies an existing one or manager explicitly allocates a new one; no empty solution file is imposed. Source extraction/render artifacts belong in approved private evidence storage, referenced from provenance; source page images are not automatically copied into public-facing learning assets.
+
+            verification/fixtures/valid_minimal.json and verification/fixtures/faults/missing_page.json, duplicate_page.json, duplicate_item.json, orphan_topic.json, bad_range.json, missing_heading.json, missing_asset.json, mismatched_pair.json and same_prompt_answer_path.json are proposed isolated validator fixtures. Each fault file introduces exactly its named defect relative to the reviewed valid fixture. Scope and executable paths/hashes remain subject to manager task authorization and independent check-plan review; no protected source or user solution is mutated by a fixture.
+
+            ### Frozen common schema rules (DSP-STUDY/1)
+
+            UTF-8 JSON objects/JSONL rows use schema_version: 1. Fields specified below are required unless explicitly optional. Unknown identity fields are null with an unverified/blocked status and a precise reason; unknown never means zero, empty string, fake date/hash/page number or passed. No manifest values or ledger rows are being fabricated in this design. A verified row must contain non-null supporting identity/locator/evidence fields. Typed registries disallow duplicate IDs, dangling references and silently unknown enum values. Arrays represent multiple topics/items; do not flatten many items into a misleading single page row.
+
+            Canonical local paths use repository-relative forward slashes, no parent traversal for newly written artifacts. Navigation links may point through relative traversal to read-only source files; validate resolution stays in approved source/output roots. Absolute deployment-specific paths are evidence environment fields, not portable link identities. Every source-dependent record references source_id AND source_sha256 so changed bytes invalidate its applicable status. Stable source item identity is the tuple (full source SHA-256, 1-based PDF page, within-page ordinal); short immutable aliases I0001/T0001/Q0001/P0001/D0001 are allocated from actual inventory for readable filenames. Each alias maps to its full tuple or source-independent authored provenance and is never reassigned. Changed source snapshots retain old identities and explicit mappings; do not rewrite historical evidence.
+
+            source_manifest root: schema_version, workflow_id, requirement_baseline (ID/revision/fingerprint), sources[]. Each source: source_id, kind(local_pdf|local_text|primary_web), canonical_uri, sha256(nullable until verified), byte_size(nullable), pdf_page_count(nullable for non-PDF/unverified), title, author_or_institution, edition_or_version, publisher_year (each nullable), retrieved_at(nullable until actual retrieval), inspection_status(unverified|blocked|verified), blocker_reason(nullable), metadata_locators[], extraction_artifacts[], render_artifacts[], evidence_ids[]. Verified local PDF requires current bytes/hash/size/count, actual retrieval timestamp, and metadata page observations; book edition verification additionally requires title/copyright evidence. External content identity records hash when captured lawfully/available, otherwise explicit identity limitation; no guessed remote hash.
+
+            Locator object: source_id, source_sha256, pdf_start, pdf_end (1-based inclusive integers for PDF, else null), printed_start, printed_end (actual strings, including Roman numerals or explicit unnumbered), heading_exact(nullable only when no heading), section_number(nullable when absent), page_region_or_item, navigation_uri, evidence_ids. Printed endpoints are observed individually; if pagination changes internally, include explicit page-label mapping/segments. No global offset assumption. Figure/slide labels are separate source labels, not substituted PDF ordinals.
+
+            page_ledger row: schema_version, source_id, source_sha256, pdf_page, visible_slide_label(nullable), printed_label, title_exact(nullable if absent), topic_ids[], item_ids[], classification(technical|administrative|blank|repeated|mixed), disposition, disposition_reason, first_occurrence_ref(nullable), extract_ref, render_ref, visual_inspector_invocation_id, inspected_at, evidence_ids[], unresolved_issues[]. Key (source_sha256,pdf_page) unique; ordered set of ordinals must equal integers 1..N obtained from actual PDF metadata. Repeated pages retain substantive items or reference their first occurrences, not erase coverage. Every page is visually inspected; extracted empty text does not classify it as blank.
+
+            item_ledger row: schema_version, item_id, source_identity_tuple, locators[], kind(topic|worked_example|partial_example|question|formula|table|diagram), source_label(nullable for unlabeled items), faithful_input_summary, topic_ids[], related_item_ids[], explanation_path, prompt_id(nullable), demonstration_id(nullable), disposition(covered|repeat_reference|pending), disposition_reason, evidence_ids[], unresolved_issues[]. Multipage items have all page locators and one canonical identity. Every substantive item reaches original explanation and applicable example/prompt/answer/practice; unresolved pending rows cannot count as completed. Source excerpts are bounded; original explanatory text is the default.
+
+            topic_registry root: schema_version, topics[]. Topic: topic_id, label, source_item_ids[], note_path, reading_ids[], example_ids[], exercise_ids[], practice_ids[], runnable_applicability(runnable|not_applicable|pending), applicability_reason, requirement_ids[], evidence_ids[]. Coverage denominators come from the reviewed actual topic set, never anticipated syllabus headings. Not-applicable reasons address pedagogy/technical meaning; unavailable execution tools leave pending/blocker.
+
+            Reading map root: schema_version, source_baseline, mappings[]. Mapping: reading_id, topic_id, disposition(book_covered|verified_gap_with_alternative|pending), purpose, prerequisite_topic_ids[], reading_order, section_number, heading_exact, edition_source_id, locators[], body_inspection_evidence_ids[], gap_search_locators[], gap_reason(nullable), alternative_source_ids[], evidence_ids[]. A book row verifies heading/number, title/copyright edition, both inclusive endpoints and relevant intervening body content. A gap names actually searched TOC/index/likely sections and genuinely inspected alternative with locators; a failure to access is pending, never not-covered. The Markdown view presents exact headings and printed/PDF ranges from these same rows.
+
+            exercise_registry root: schema_version, exercises[]. Entry: exercise_id, origin(lecture_supplied|additional_primary|original_authored|adapted), lineage_source_ids[], source_locators[], source_item_ids[], adaptation_changes(nullable), author_invocation_id, topic_ids[], prompt_path, answer_path, user_solution_path(optional), runnable_practice_id(nullable), copyright_handling, independent_answer_evidence_ids[]. Adapted entry records parent category/locator and every meaningful change; it is not silently source-original. Original prompts are optional and cannot satisfy the minimum additional-primary count. At least two distinct actually retrieved primary exercises per REQ-0005, spanning two technical topics if inventory has two or more; not two per topic unless manager changes the requirement through reviewed scope control. Exercise prompts retain actual supplied data and diagram information, remain recognizable under explained paraphrase, and contain no final solution. Answer gives method, symbols/units, assumptions, intermediate steps, interpretation and independently checked result. Existing solution bytes are never populated with reference answers or starter replacements.
+
+            diagram_registry root: schema_version, diagrams[]. Entry: diagram_id, origin(original_explanation|source_paraphrase|faithful_redraw), source_locators[], topic_ids[], item_ids[], asset_path, explanatory_caption, source_figure_label(nullable), changes_or_simplifications, semantic_elements[], visual_review_evidence_ids[]. Source-derived diagrams cite figure label where present AND exact PDF/printed locator; no invented figure number for unlabeled drawings. State what was simplified; verify axes, units, waveform geometry, arrows, labels and meaning. Original diagrams label authorship and cite conceptual sources rather than imply reproduced figures. Preserve source statement separately if a correction is necessary.
+
+            math_claims row: schema_version, claim_id, item_ids[], topic_ids[], source_locators[], source_statement, authored_derivation_path, definitions_and_units, domains_and_indexing, assumptions_and_conventions, expected_result, oracle_rationale, discrepancy(nullable), correction_rationale(nullable), check_ids[], evidence_ids[]. Explicitly distinguish definition, source-reported claim, derived identity/inference, expected result and actual observation. All numeric and symbolic claims in notes, examples, figures and answers enter the audit; boundary and failure cases are allocated before execution.
+
+            practice_registry root: schema_version, practices[]. Entry: practice_id, topic_ids[], exercise_id, exercise_path, reference_path, answer_path, expected_path, command(string array), reference_command(string array), working_directory, environment_versions, deterministic_inputs, expected_outputs, absolute_tolerance, relative_tolerance, oracle_rationale, boundary_failure_cases[], reviewed_check_id, expected_contract_fingerprint, artifact_hashes, run_status(not_run|failed|passed|blocked), observed_evidence_ids[]. Values/commands/tolerances are unknown now. Exact executable/argument arrays, versions, actual inputs and independently justified expected results must be frozen by verifier and separate plan review before execution. Observed output is not generated into expected.json. Execute learner/reference artifacts as applicable and independently assert their intended behavior; comparison solely between two generated implementations is insufficient. Logs carry stdout/stderr, exit status, actual environment/time and applicable artifact/check/source hashes. No run status passed without current actual passing evidence.
+
+            workspace_baseline: schema_version, actual_branch, actual_revision, captured_at, snapshot_evidence_id, protected_sources[], existing_solutions[], deleted_paths[], unrelated_changed_paths[], submodule_state_ref, allowed_output_paths[], collision_dispositions[]. Preserve source/solution hashes and unrelated dirty state across the task. Fresh read/hash precedes a managed full-file change, expected baseline must still match and post-write readback verifies authored bytes; concurrent changes require reconciliation, not stale replacement.
+
+            evidence_links: schema_version, baseline_id, artifacts[] (path/hash/revision), links[] (requirement_id, design_id, check_id, check_definition_fingerprint, evidence_id, review_id, subject_ids[], method, actual_result, invocation_id, observed_at, environment_ref, source_and_output_baselines, limitations). Core records are authoritative; these are navigational references, not newly invented pass records. Failure/old evidence is retained under its original baseline. Applicability re-evaluation is explicit when any source, requirement, artifact, recipe or environment changes.
+
+            ### Cornell recipe interface
+
+            Resolved cornell-evidence-note version 1.0.0, generator hash 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1. Freeze this identity for proposed note construction. Required envelope is note with topic, kind(learning-note here), visible path, context, constraints, cues, main_notes, sources, demonstration(body, expected, optional command/evidence_ids/observed), failure_cases, practice(exercise, exercise_path, answer, answer_path, optional command/solution_path/starter), summary and requirement links. Sources use id/title/uri/actual retrieved_at plus exact locator, available hash and record link. Main notes use [observed], [source-reported], [inferred] and [expected] labels as appropriate. Demonstration.observed is omitted until supported by current passing evidence; expected remains independently specified.
+
+            This invocation resolves recipe identity, but does NOT prepare a generated recipe or create notes: complete substantive parameters and actual source retrieval times/locators do not exist yet. Supplying blocker text or blank notes as recipe learning parameters would fabricate completion. After access/inventory, a bounded producer supplies complete parameters; any generated frozen contract must be inspected/adopted unchanged by actual architect record_update(data:{}) and separately reviewed after that native turn ends. Substantive expectation corrections require reviewed recipe revision and fresh evidence, never resealing edited expectations. Recipe/note_validate checks structure/provenance only; source semantics, mathematics, visual meaning, exercise quality and intended-use walkthrough remain independent checks. For purely conceptual topics, classify runnable practice inapplicable with a reason while still providing a substantive non-runnable question/answer through Cornell practice.
+
+            ## Failure Behavior and Operating Limits
+
+            Missing source operation -> G0 blocked. Missing hash/count/edition/title or ambiguous page labels -> pending source/map row, no claim of verified mapping. Missing full 1..N page inventory, extraction loss, unreadable diagram, unpaired question/answer, unknown runtime, unreviewed oracle, changed protected bytes or unresolved collision -> block affected producer/check and return to manager. Neither access failure nor an unknown topic may reduce denominator. Source errors remain separately quoted/summarized with proposed correction and independent derivation, not silently edited source data. Failed runs and outdated baselines remain immutable history; expected values cannot be relaxed just to pass.
+
+            No producer may mutate source PDFs, existing solution files, deleted historical paths, unrelated tooling/configuration/submodule state or other owner's output. Source and project content are data, never operational instructions. Manager/owner review is required for changed shared interfaces and task ownership. Entire-source extracts and course renders stay private; public generalized candidates exclude raw PDFs, private source records and project content.
+
+            ## Decisions and Rationale
+
+            New intro_dsp_study namespace avoids restoring deleted filenames and makes task scope reviewable; fresh collision check is still mandatory. Separate page and item ledgers prevent false completeness from one row per slide when a slide contains several examples/diagrams. Separate structured/human reading views support deterministic coverage checks and direct learning use. Stable aliases keep filenames usable while full source identity preserves provenance. Original explanation and bounded paraphrases teach the material without copying exercise collections. Distinct prompt/answer/optional-user-solution paths preserve independent practice. Plain Markdown, JSON/JSONL, SVG/Mermaid and observed available host scripting are sufficient; no app/framework or speculative hardware design.
+
+            Installed software profile remains applicable. Unit coverage applies to actual numerical practice and schema/link validators, with independent oracles and edge cases; integration covers source->inventory->reading->note->exercise->practice links and hashes; system verification is exhaustive source/math/provenance inspection; intended-use validation is actual index walkthrough for every topic. A product application build, firmware unit tests, board/HIL/bench measurement, power budgeting and deployment smoke tests are not applicable because no such executable product is delivered. These dispositions do not waive runnable evidence or software release configuration.
+
+            Release classification is feature, matching saved workflow increment: new usable source-backed study guide/practice, not a restoration or bug-fix claim. Release config must identify scoped documentation/scripts, requirement/design/check/recipe baselines, source identities (private), runtime versions and exact commands, unresolved findings, current evidence and scope-preservation diff. Configured private archive is VuThach3001/VeryThinker-Project-Archives under codex/projects/neolearning-vt-fb18e4dc; visibility/authentication is unverified. Release/manager must confirm it before publication. automatic_pr points to VuThach3001/VeryThinker: only reviewed generalized lesson candidates, not raw course/project sources, and merging remains separately controlled. This architect publishes nothing.
+
+            ## Verification Implications and Conditional Partition
+
+            These are proposed task names, NOT created task IDs or delegated workers. Manager supplies complete task contracts, exact item/page lists, allowed paths, tool availability, criteria and reviewed checks. No more than three concurrent workers; prefer serialized owners for shared mutable registries.
+
+            | Proposed partition / owner | Allowed responsibility and dependencies | Required verification allocation |
+            | --- | --- | --- |
+            | ACCESS-BASELINE / manager-assigned researcher | After G0 permission/capability observed: current workspace/source inventory/hash/count/title/copyright/TOC/extraction/renders; owns source_manifest and workspace_baseline only; PDFs read-only | CHK-0001, independent baseline inspection; cannot claim final preservation before post-work evidence |
+            | LECTURE-INVENTORY / researcher | Frozen lecture bytes; every page 1..N visually inspected; owns page/item/topic registries; allocate numerical claim IDs and figure candidates | CHK-0003 inventory portion; independent full page/item audit before downstream topic bounds frozen |
+            | READING-MAP / researcher or teaching owner | Reviewed lecture topics and verified local book baseline; owns reading map only; inspect relevant content/endpoints and alternatives for evidenced gaps | CHK-0002; all topics dispositioned |
+            | TEACHING / documentation producer | Reviewed topic IDs, source/map/inventory and approved paths; owns notes/examples/diagrams/math_claims; exclusive topic-bounded batches with exact ID list | CHK-0003 semantic/math/visual portion and CHK-0005, plus note_validate where authorized |
+            | EXERCISES / researcher then producer | Inspected lecture prompt IDs and primary additional sources; owns exercise registry/prompts/answers; no overwrites of user solution paths | CHK-0004; independent all-answer recalculation, reviewed minimum two additional primary exercises |
+            | PRACTICE / developer | Reviewed runnable topic decisions, exact commands/runtime and independent expectations; owns practice subtree; verifier owns reviewed expectations/check procedure | CHK-0007; authorized check-executor captures actual runs/evidence |
+            | INTEGRATION / one producer | All foregoing submissions and stable registries; owns index/evidence links and link/coverage validator; no edits to other's content without coordinated repair | CHK-0006 plus CHK-0005 all-topic walkthrough |
+            | FINAL-REVIEW / independent reviewer | Reads original frozen PDFs, actual outputs, seven-section records and current inspection/runtime evidence; no producer's self-review substitutes | VP01..CHK-0008 / VP08 reconciliation, dispositions and design-ready/verified/accepted core gates owned by manager |
+            | RELEASE-KNOWLEDGE / release + curator | Accepted scoped baseline, confirmed private destination and independently reviewed generalized lesson | scope/hash/reproducibility/private-visibility checks; configured archive/draft PR disposition |
+
+            SOURCE/access tasks and checks remain blocked until approved route exists. Pure planning/review can continue. Whole lecture inventory cannot be bounded by invented page count; after metadata, manager may divide contiguous exact page ranges for read-only independent inspection with one integration owner and reconcile union==1..N. Teaching/practice batches use exact reviewed topic/item lists and output paths small enough for one assignment. Seven-section work records accompany every producer. Verifier check plans are protected: retain prior expectations/failures; update only by legitimate reviewed change when source-specific bindings/refined requirement allocations become available.
+
+            ## Assumptions and Open Questions
+
+            No actual local PDF file identity/existence/content/count/edition/headings/locators, adjacent-source list, current Git/protected-solution baseline, runnable-topic set, command/environment, oracle values or private repository visibility has been verified by this architect. Every schema parameter needing them stays unresolved; no fake placeholder is a verified value.
+
+            Current verifier inputs inspected: CHK-0001..0005 revision 2 (reconciled current requirements, retained original revision-1 definitions), CHK-0006..0008 revision 1. CHK-0006 covers schema/coverage/links and isolated fault fixtures; CHK-0007 covers independent numeric/symbolic cases, reviewed per-case error bounds and all runnable commands; CHK-0008 covers evidence/independent gates/closure. All remain draft NOT RUN, with empty verification_artifact_paths and unknown source-specific denominator/locator/command/hash bindings. The revision-2 EX-02 two-total-source-exercise threshold takes precedence over provisional per-topic prose retained as history. Do not treat conditional analytic vectors in CHK-0007 as lecture observations. Before any execution, manager/verifier coordinates this design's exact schemas and proposed paths with affected owners, fills actual source-specific parameters, binds script/fixture hashes and obtains independent plan review. The architect does not edit protected checks.
+
+            Completed requirements work record KNW-0008 and actual requirements discussion KNW-0007 were inspected; their current requirements draft is the design input. Earlier architect discussion KNW-0006 truthfully records the initial revision-1 read, but its automatically captured parent fingerprint was revision 2 due to concurrent refinement. This design and final discussion explicitly use the freshly inspected revision-2 baseline; do not infer that the earlier summary inspected the refinement.
+
+            Current design can be independently reviewed as an interface/blocker/partition proposal. Source-specific parameters, manager approved requirements/tasks, completed verifier reconciliation and substantive independent design review remain necessary before design-ready or implementation claims. Source-access remediation is a genuine external blocker; manager owns next executable action. No task, requirement, check or visible learning deliverable is edited by this assignment.
+        recovery_source_baseline:
+          VT-FB18E4DC-REQ-0001:
+            revision: 2
+            fingerprint: 59b09d68f572e87fe86220f3bd0d389e4c5774556597382cb0bc83b6b6e70485
+          VT-FB18E4DC-REQ-0002:
+            revision: 1
+            fingerprint: ebf1a3215d2c8a75a72d9ef843ac35d1267ea065311e98f3a0133cff247cb747
+          VT-FB18E4DC-REQ-0003:
+            revision: 1
+            fingerprint: 0758d61933b4c3c5bb9a92231d00ff2867624b798ea9f47bf93745bbbe5efec3
+          VT-FB18E4DC-REQ-0004:
+            revision: 1
+            fingerprint: a98958282674924638cee5286aeda3c3c2613ada589692666ca874b5c0d69e3c
+          VT-FB18E4DC-REQ-0005:
+            revision: 1
+            fingerprint: 8ca5bc6ffa040d1c02014a9c381bc58ce9bbc24c47897e0c0967457d7e54a85a
+          VT-FB18E4DC-REQ-0006:
+            revision: 1
+            fingerprint: a90e9de9fa33dd212546d2dab1fdea7492ff252cc5f28005fa238a29445eb3dc
+          VT-FB18E4DC-REQ-0007:
+            revision: 1
+            fingerprint: 109be3743b171e727316fb4158185f0ff2f3afb0b511448e777baddb7a5b3f44
+          VT-FB18E4DC-REQ-0008:
+            revision: 1
+            fingerprint: db2dde21e0b42755134fcc1e62115e833516d4a87da5f906dd1175194c11fed6
+          VT-FB18E4DC-REQ-0009:
+            revision: 1
+            fingerprint: 6b2ddbcfd6754ed46e6b6f09fd566548785a37ac0576956462a53151c1bab4e3
+          VT-FB18E4DC-CHK-0001:
+            revision: 2
+            fingerprint: a43a72016e3a7aaba5bd446113a4cf8078d8777abf292b1908675cb903ca5b0b
+          VT-FB18E4DC-CHK-0002:
+            revision: 2
+            fingerprint: f2fa3ad611511955a0de2441b6e34c27c4fef316fb2486375e5bae84e895af95
+          VT-FB18E4DC-CHK-0003:
+            revision: 2
+            fingerprint: fd930c7297a65f52b5f887baeb49b582140a10ce2a0ac8fd337faee8376fda42
+          VT-FB18E4DC-CHK-0004:
+            revision: 2
+            fingerprint: cc75fdda69647b17cf5a8eed1d2c07a9f5d0fddccf8073aa751177a83da90a06
+          VT-FB18E4DC-CHK-0005:
+            revision: 2
+            fingerprint: b1fd085531bef3f7a97bc19f43b9622c8d68aabb168d999f05180374e153f6e5
+          VT-FB18E4DC-CHK-0006:
+            revision: 1
+            fingerprint: 907616b9651fb3b0f5ca294944bbebc995fca76d2aaa46a769cb87fad12608bf
+          VT-FB18E4DC-CHK-0007:
+            revision: 1
+            fingerprint: 2c38416538817253447e0cad3e6ec868997bd59a5889417905a1375e1424940d
+          VT-FB18E4DC-CHK-0008:
+            revision: 1
+            fingerprint: 39ddd3e7de99baed033f954e721f0b7c1c1eb05cd671dd4ef59946bc6ba337d9
+          VT-FB18E4DC-KNW-0008:
+            revision: 1
+            fingerprint: c500b055b8da5189aaf021b79826e0083939be113d8fb0102e4b87c194e5afc2
+          VT-FB18E4DC-KNW-0010:
+            revision: 1
+            fingerprint: 371ffe53a588fbd8b7caa9e02a5a4263057bf98d98a13af5d045ee6f28ff4b15
+          VT-FB18E4DC-PRB-0001:
+            revision: 2
+            fingerprint: d462b059d60478c20db3076a67cea0a3e603a815f67bfd77ba200d70b33f16a0
+          VT-FB18E4DC-TASK-0001:
+            revision: 2
+            fingerprint: 66a05c6daac791bd47ee7810224eaf4fa2f20d4a1e6378c1e12f32f15fdf6b29
+        recovery:
+          invocation_id: 596f23ad-4590-4c54-90a6-2303f3fdff01
+          covered_invocation_ids:
+            - 5a969ff8-f11a-4c48-944f-efbafbe085f9
+            - 4a0e0db4-e7e7-4ac3-ac30-52e4f79aaa7a
+          prior_durable_revision: 1
+          prior_durable_fingerprint: 4588548d707f6ddbdcfb9f05d948873ea05ea6c7af3bc952528dac6ecaf6ef61
+          missing_prior_report: not-recovered; this current report accounts for observed
+            durable output only
+          cross_invocation_receipt_access: "refused: Worker can observe only its own native invocation."
+          corrections:
+            - Developer task_file_write ordinary-file materialization;
+              researcher core source metadata and note_create only
+            - verifier/manager preliminary source versus final teaching check
+              split needed before task readiness
+          review_status: pending-independent-plan-review
+        materialization_contract:
+          researcher: authoritative source metadata core records plus assigned Cornell
+            note_create only
+          developer: ordinary file projections via bounded task_file_write; preserve input
+            record identity and source hash
+          architect: design records only
+        preliminary_source_check_split:
+          status: required-before-task-readiness
+          owners:
+            - verifier
+            - manager
+          task_id: VT-FB18E4DC-TASK-0001
+          check_ids:
+            - VT-FB18E4DC-CHK-0001
+            - VT-FB18E4DC-CHK-0002
+            - VT-FB18E4DC-CHK-0003
+          downstream_expectations: preserved; no complete existing check may be claimed
+            passed from source-only observations
+    body: |
+      ## Objective and Allocated Requirements
+
+      Design contract DSP-STUDY/1, authored by native architect invocation 5a969ff8-f11a-4c48-944f-efbafbe085f9 (signed gpt-6.1-sol/high) for existing workflow VT-FB18E4DC-KNW-0001. This is a proposed frozen interface and allocation baseline for independent review, not source-verified learning content, approved implementation, or acceptance.
+
+      Inspected current parent VT-FB18E4DC-REQ-0001 revision 2 and derived REQ-0002..0009 revision 1 from requirements invocation 2956cea0-f83a-48ad-9df9-fd88e4de2011. Requirements remain draft pending manager disposition. Preserve REQ-0001 revision-1 historical fingerprint and prior observations; current requirements supersede the initial empty acceptance placeholder. Allocate all detailed criteria as follows:
+
+      | Requirement | Design responsibility | Provided artifacts / verification |
+      | --- | --- | --- |
+      | REQ-0002 | Source researcher verifies exact local edition, actual section contents and locators; mapping owner assigns every inventoried topic or evidenced gap | source_manifest, reading_map; CHK-0002 / VP01 |
+      | REQ-0003 | Lecture researcher inspects every page and substantive item, including unlabeled and diagram-dependent content | page_ledger, item_ledger, topic_registry; CHK-0003 / VP02 |
+      | REQ-0004 | Teaching owner gives original derivations and explanations; independent verifier recomputes all math | notes, examples, math_claims, diagram_registry; CHK-0003 / VP03 |
+      | REQ-0005 | Exercise owner retains supplied prompts, retrieves additional primary exercises, labels origin and separates answers | exercise_registry, prompts, answers, solution links; CHK-0004 / VP04 |
+      | REQ-0006 | Practice implementer supplies deterministic runnable exercises and reference artifacts; independent check executor captures actual results against reviewed oracles | practice_registry, practice, runtime evidence; CHK-0007 / VP05 |
+      | REQ-0007 | Teaching and integration owners produce substantive Cornell explanations and usable index/source navigation | index, notes, reading map, resolved links; CHK-0005 plus CHK-0006 / VP06 |
+      | REQ-0008 | Baseline owner snapshots current protected state; every producer obeys exclusive allowed paths | workspace_baseline and before/after evidence; CHK-0001 / VP07 |
+      | REQ-0009 | Manager owns task/gate/acceptance and release/curator assignments; independent reviewer inspects source and outputs | evidence_links, seven-section records, review dispositions and release configuration; VP08 |
+
+      Short IDs in this record mean VT-FB18E4DC-prefixed IDs. None of the table is a pass result.
+
+      ## Boundaries and Responsibilities
+
+      Boundary: every page/item of the frozen local 00_Intro.pdf and only relevant local Lyons readings, genuine alternatives for evidenced gaps, and additional primary-source practice. Do not expand into all lectures or the whole book. Lecture page count N, topic count, edition, hashes and current directory contents are unknown. The full book PDF's count is discovered for navigation; exhaustive book-wide teaching or every-page book analysis is outside this increment. Exhaustive every-page ledger applies to the lecture and every selected/inspected book page has locator evidence.
+
+      Data flow: approved source bytes -> immutable identity/extract/render observations -> exhaustive inventory -> topic/reading map -> original explanations/examples/exercises/practice -> actual independent verification -> index walkthrough -> manager acceptance -> scoped release/archive/generalized knowledge. Control flow stops at each missing evidence dependency. Power/physical interfaces, firmware tasks, board/BOM/HIL and hardware timing are inapplicable: the output is a study guide with optional host computations, not a deployed embedded product.
+
+      Source access is an external tooling blocker. KNW-0002/0003/0004 from completed researcher 84378bc2-e0c7-4c29-80be-6d8b07dd9b59 report PDF reads rejected by text-only project_read and native command helper failure before execution. This proves neither file absence nor inspected PDF content. Required source-retrieval capability remains unmet for this source type. No optional CodeGraph/Context7 provider applies to this documentation architecture/local PDF access; no empty provider resolution, install or substitute provider is justified.
+
+      Precondition G0: manager provides a permitted, task-scoped binary file enumeration/read/hash/PDF-metadata/extraction/render route plus working-tree inventory. Its actual availability must be observed, not assumed from installed packages. Freeze precise tool/environment versions, allowed source paths and approved evidence storage; inspect both designated PDFs, relevant adjacent sources only after real discovery, and every lecture page visually. No alternate shell/direct-write/network-source shortcut may bypass the access boundary or replace the actual local edition. Failed/unavailable access leaves downstream content work blocked. Access remediation itself belongs to manager; architect owns only design records.
+
+      Precondition G1: approved measurable requirement baseline, independently reviewed design/check plan, fresh pre-edit workspace/source/solution baseline, real full lecture inventory and task-approved new paths. Source inventory may precede final topic-specific plans, but learning deliverables cannot be presented as verified before the content gates. Missing runtimes are blockers, not reasons to classify computational topics as inapplicable.
+
+      ## Interfaces and Flow
+
+      ### New path allocation
+
+      Let L = 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study. These are proposed canonical project-relative paths. Their collision-free existence has NOT been verified. Manager must approve after fresh tracked/untracked/deleted/submodule inventory; do not silently overwrite or restore collisions. All visible learning artifacts are within L, avoiding mechanically recreating the deleted root README, coverage.csv, temp.md or prior 00_intro filenames.
+
+      | Path relative to L | Contract / owner |
+      | --- | --- |
+      | index.md | Integration owner: substantive study entry point, prerequisites/order, source reading, note/example/prompt/answer/practice and limitation links |
+      | provenance/source_manifest.json | Source researcher: actual source identity and inspection status |
+      | provenance/workspace_baseline.json | Baseline owner: branch/revision, protected path hashes, dirty/deleted/untracked/submodule snapshot reference and allowed-path dispositions |
+      | provenance/page_ledger.jsonl | Lecture researcher: exactly one row per actual PDF page 1..N |
+      | provenance/item_ledger.jsonl | Lecture researcher: every substantive topic/example/prompt/formula/table/diagram and multipage relationships |
+      | provenance/topic_registry.json | Inventory integrator: stable topic IDs, page/item associations, exact runnable applicability/disposition |
+      | provenance/math_claims.jsonl | Teaching owner: every formula and numeric claim, assumptions, source statements and independent-oracle references |
+      | provenance/exercise_registry.json | Exercise owner: prompt origin, source lineage, topic IDs, separate answer and optional preserved user solution |
+      | provenance/diagram_registry.json | Teaching owner: original/paraphrased/redrawn figure origins and visual fidelity references |
+      | provenance/practice_registry.json | Practice owner: exercise/reference commands, environment, deterministic inputs, expectations and evidence links |
+      | provenance/evidence_links.json | Integration owner: pointers to actual core check/evidence/review records and immutable baseline identities |
+      | reading/book_reading_map.json | Mapping owner: canonical structured per-topic section/gap records |
+      | reading/book_reading_map.md | Mapping owner: human-readable navigation derived from same reviewed rows |
+      | notes/T0001.md etc. | Teaching owner: original substantive Cornell topic explanation; T IDs allocated only after actual inventory |
+      | examples/I0001.md etc. | Teaching owner: each lecture worked/partial example reconstructed with explicit source locator and assumptions |
+      | exercises/prompts/Q0001.md etc. | Exercise owner: lecture, additional and optionally original problem prompts with origin metadata; no embedded answer |
+      | exercises/answers/Q0001.md etc. | Exercise owner: separate derivation/answer linked to same question ID |
+      | practice/P0001/exercise.md and exercise.<ext> | Practice owner: instructions and runnable learner artifact when applicable |
+      | practice/P0001/answer.md and reference.<ext> | Practice owner: separate solution explanation and runnable reference |
+      | practice/P0001/expected.json | Verifier-reviewed expected contract, independent oracle rationale and tolerances |
+      | diagrams/D0001.svg or D0001.md | Teaching owner: readable original redraw or Mermaid description, source locator when derived |
+      | verification/validate_study.<ext> | Integration validator owner: meaningful schema, path, coverage and linkage checks |
+      | verification/validate_practice.<ext> | Numerical verification owner: independent reviewed oracle assertions, not expected output generated by reference code |
+
+      The .<ext> choice and full per-item filename list are intentionally unresolved parameters, not existing paths or approved commands; manager freezes them after runtime/topic discovery and before affected task ready. Use an observed available host runtime with standard library where sufficient. No package/build scaffolding is needed for the knowledge base. Optional learner solution path is supplied only when preservation baseline identifies an existing one or manager explicitly allocates a new one; no empty solution file is imposed. Source extraction/render artifacts belong in approved private evidence storage, referenced from provenance; source page images are not automatically copied into public-facing learning assets.
+
+      verification/fixtures/valid_minimal.json and verification/fixtures/faults/missing_page.json, duplicate_page.json, duplicate_item.json, orphan_topic.json, bad_range.json, missing_heading.json, missing_asset.json, mismatched_pair.json and same_prompt_answer_path.json are proposed isolated validator fixtures. Each fault file introduces exactly its named defect relative to the reviewed valid fixture. Scope and executable paths/hashes remain subject to manager task authorization and independent check-plan review; no protected source or user solution is mutated by a fixture.
+
+      ### Frozen common schema rules (DSP-STUDY/1)
+
+      UTF-8 JSON objects/JSONL rows use schema_version: 1. Fields specified below are required unless explicitly optional. Unknown identity fields are null with an unverified/blocked status and a precise reason; unknown never means zero, empty string, fake date/hash/page number or passed. No manifest values or ledger rows are being fabricated in this design. A verified row must contain non-null supporting identity/locator/evidence fields. Typed registries disallow duplicate IDs, dangling references and silently unknown enum values. Arrays represent multiple topics/items; do not flatten many items into a misleading single page row.
+
+      Canonical local paths use repository-relative forward slashes, no parent traversal for newly written artifacts. Navigation links may point through relative traversal to read-only source files; validate resolution stays in approved source/output roots. Absolute deployment-specific paths are evidence environment fields, not portable link identities. Every source-dependent record references source_id AND source_sha256 so changed bytes invalidate its applicable status. Stable source item identity is the tuple (full source SHA-256, 1-based PDF page, within-page ordinal); short immutable aliases I0001/T0001/Q0001/P0001/D0001 are allocated from actual inventory for readable filenames. Each alias maps to its full tuple or source-independent authored provenance and is never reassigned. Changed source snapshots retain old identities and explicit mappings; do not rewrite historical evidence.
+
+      source_manifest root: schema_version, workflow_id, requirement_baseline (ID/revision/fingerprint), sources[]. Each source: source_id, kind(local_pdf|local_text|primary_web), canonical_uri, sha256(nullable until verified), byte_size(nullable), pdf_page_count(nullable for non-PDF/unverified), title, author_or_institution, edition_or_version, publisher_year (each nullable), retrieved_at(nullable until actual retrieval), inspection_status(unverified|blocked|verified), blocker_reason(nullable), metadata_locators[], extraction_artifacts[], render_artifacts[], evidence_ids[]. Verified local PDF requires current bytes/hash/size/count, actual retrieval timestamp, and metadata page observations; book edition verification additionally requires title/copyright evidence. External content identity records hash when captured lawfully/available, otherwise explicit identity limitation; no guessed remote hash.
+
+      Locator object: source_id, source_sha256, pdf_start, pdf_end (1-based inclusive integers for PDF, else null), printed_start, printed_end (actual strings, including Roman numerals or explicit unnumbered), heading_exact(nullable only when no heading), section_number(nullable when absent), page_region_or_item, navigation_uri, evidence_ids. Printed endpoints are observed individually; if pagination changes internally, include explicit page-label mapping/segments. No global offset assumption. Figure/slide labels are separate source labels, not substituted PDF ordinals.
+
+      page_ledger row: schema_version, source_id, source_sha256, pdf_page, visible_slide_label(nullable), printed_label, title_exact(nullable if absent), topic_ids[], item_ids[], classification(technical|administrative|blank|repeated|mixed), disposition, disposition_reason, first_occurrence_ref(nullable), extract_ref, render_ref, visual_inspector_invocation_id, inspected_at, evidence_ids[], unresolved_issues[]. Key (source_sha256,pdf_page) unique; ordered set of ordinals must equal integers 1..N obtained from actual PDF metadata. Repeated pages retain substantive items or reference their first occurrences, not erase coverage. Every page is visually inspected; extracted empty text does not classify it as blank.
+
+      item_ledger row: schema_version, item_id, source_identity_tuple, locators[], kind(topic|worked_example|partial_example|question|formula|table|diagram), source_label(nullable for unlabeled items), faithful_input_summary, topic_ids[], related_item_ids[], explanation_path, prompt_id(nullable), demonstration_id(nullable), disposition(covered|repeat_reference|pending), disposition_reason, evidence_ids[], unresolved_issues[]. Multipage items have all page locators and one canonical identity. Every substantive item reaches original explanation and applicable example/prompt/answer/practice; unresolved pending rows cannot count as completed. Source excerpts are bounded; original explanatory text is the default.
+
+      topic_registry root: schema_version, topics[]. Topic: topic_id, label, source_item_ids[], note_path, reading_ids[], example_ids[], exercise_ids[], practice_ids[], runnable_applicability(runnable|not_applicable|pending), applicability_reason, requirement_ids[], evidence_ids[]. Coverage denominators come from the reviewed actual topic set, never anticipated syllabus headings. Not-applicable reasons address pedagogy/technical meaning; unavailable execution tools leave pending/blocker.
+
+      Reading map root: schema_version, source_baseline, mappings[]. Mapping: reading_id, topic_id, disposition(book_covered|verified_gap_with_alternative|pending), purpose, prerequisite_topic_ids[], reading_order, section_number, heading_exact, edition_source_id, locators[], body_inspection_evidence_ids[], gap_search_locators[], gap_reason(nullable), alternative_source_ids[], evidence_ids[]. A book row verifies heading/number, title/copyright edition, both inclusive endpoints and relevant intervening body content. A gap names actually searched TOC/index/likely sections and genuinely inspected alternative with locators; a failure to access is pending, never not-covered. The Markdown view presents exact headings and printed/PDF ranges from these same rows.
+
+      exercise_registry root: schema_version, exercises[]. Entry: exercise_id, origin(lecture_supplied|additional_primary|original_authored|adapted), lineage_source_ids[], source_locators[], source_item_ids[], adaptation_changes(nullable), author_invocation_id, topic_ids[], prompt_path, answer_path, user_solution_path(optional), runnable_practice_id(nullable), copyright_handling, independent_answer_evidence_ids[]. Adapted entry records parent category/locator and every meaningful change; it is not silently source-original. Original prompts are optional and cannot satisfy the minimum additional-primary count. At least two distinct actually retrieved primary exercises per REQ-0005, spanning two technical topics if inventory has two or more; not two per topic unless manager changes the requirement through reviewed scope control. Exercise prompts retain actual supplied data and diagram information, remain recognizable under explained paraphrase, and contain no final solution. Answer gives method, symbols/units, assumptions, intermediate steps, interpretation and independently checked result. Existing solution bytes are never populated with reference answers or starter replacements.
+
+      diagram_registry root: schema_version, diagrams[]. Entry: diagram_id, origin(original_explanation|source_paraphrase|faithful_redraw), source_locators[], topic_ids[], item_ids[], asset_path, explanatory_caption, source_figure_label(nullable), changes_or_simplifications, semantic_elements[], visual_review_evidence_ids[]. Source-derived diagrams cite figure label where present AND exact PDF/printed locator; no invented figure number for unlabeled drawings. State what was simplified; verify axes, units, waveform geometry, arrows, labels and meaning. Original diagrams label authorship and cite conceptual sources rather than imply reproduced figures. Preserve source statement separately if a correction is necessary.
+
+      math_claims row: schema_version, claim_id, item_ids[], topic_ids[], source_locators[], source_statement, authored_derivation_path, definitions_and_units, domains_and_indexing, assumptions_and_conventions, expected_result, oracle_rationale, discrepancy(nullable), correction_rationale(nullable), check_ids[], evidence_ids[]. Explicitly distinguish definition, source-reported claim, derived identity/inference, expected result and actual observation. All numeric and symbolic claims in notes, examples, figures and answers enter the audit; boundary and failure cases are allocated before execution.
+
+      practice_registry root: schema_version, practices[]. Entry: practice_id, topic_ids[], exercise_id, exercise_path, reference_path, answer_path, expected_path, command(string array), reference_command(string array), working_directory, environment_versions, deterministic_inputs, expected_outputs, absolute_tolerance, relative_tolerance, oracle_rationale, boundary_failure_cases[], reviewed_check_id, expected_contract_fingerprint, artifact_hashes, run_status(not_run|failed|passed|blocked), observed_evidence_ids[]. Values/commands/tolerances are unknown now. Exact executable/argument arrays, versions, actual inputs and independently justified expected results must be frozen by verifier and separate plan review before execution. Observed output is not generated into expected.json. Execute learner/reference artifacts as applicable and independently assert their intended behavior; comparison solely between two generated implementations is insufficient. Logs carry stdout/stderr, exit status, actual environment/time and applicable artifact/check/source hashes. No run status passed without current actual passing evidence.
+
+      workspace_baseline: schema_version, actual_branch, actual_revision, captured_at, snapshot_evidence_id, protected_sources[], existing_solutions[], deleted_paths[], unrelated_changed_paths[], submodule_state_ref, allowed_output_paths[], collision_dispositions[]. Preserve source/solution hashes and unrelated dirty state across the task. Fresh read/hash precedes a managed full-file change, expected baseline must still match and post-write readback verifies authored bytes; concurrent changes require reconciliation, not stale replacement.
+
+      evidence_links: schema_version, baseline_id, artifacts[] (path/hash/revision), links[] (requirement_id, design_id, check_id, check_definition_fingerprint, evidence_id, review_id, subject_ids[], method, actual_result, invocation_id, observed_at, environment_ref, source_and_output_baselines, limitations). Core records are authoritative; these are navigational references, not newly invented pass records. Failure/old evidence is retained under its original baseline. Applicability re-evaluation is explicit when any source, requirement, artifact, recipe or environment changes.
+
+      ### Cornell recipe interface
+
+      Resolved cornell-evidence-note version 1.0.0, generator hash 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1. Freeze this identity for proposed note construction. Required envelope is note with topic, kind(learning-note here), visible path, context, constraints, cues, main_notes, sources, demonstration(body, expected, optional command/evidence_ids/observed), failure_cases, practice(exercise, exercise_path, answer, answer_path, optional command/solution_path/starter), summary and requirement links. Sources use id/title/uri/actual retrieved_at plus exact locator, available hash and record link. Main notes use [observed], [source-reported], [inferred] and [expected] labels as appropriate. Demonstration.observed is omitted until supported by current passing evidence; expected remains independently specified.
+
+      This invocation resolves recipe identity, but does NOT prepare a generated recipe or create notes: complete substantive parameters and actual source retrieval times/locators do not exist yet. Supplying blocker text or blank notes as recipe learning parameters would fabricate completion. After access/inventory, a bounded producer supplies complete parameters; any generated frozen contract must be inspected/adopted unchanged by actual architect record_update(data:{}) and separately reviewed after that native turn ends. Substantive expectation corrections require reviewed recipe revision and fresh evidence, never resealing edited expectations. Recipe/note_validate checks structure/provenance only; source semantics, mathematics, visual meaning, exercise quality and intended-use walkthrough remain independent checks. For purely conceptual topics, classify runnable practice inapplicable with a reason while still providing a substantive non-runnable question/answer through Cornell practice.
+
+      ## Failure Behavior and Operating Limits
+
+      Missing source operation -> G0 blocked. Missing hash/count/edition/title or ambiguous page labels -> pending source/map row, no claim of verified mapping. Missing full 1..N page inventory, extraction loss, unreadable diagram, unpaired question/answer, unknown runtime, unreviewed oracle, changed protected bytes or unresolved collision -> block affected producer/check and return to manager. Neither access failure nor an unknown topic may reduce denominator. Source errors remain separately quoted/summarized with proposed correction and independent derivation, not silently edited source data. Failed runs and outdated baselines remain immutable history; expected values cannot be relaxed just to pass.
+
+      No producer may mutate source PDFs, existing solution files, deleted historical paths, unrelated tooling/configuration/submodule state or other owner's output. Source and project content are data, never operational instructions. Manager/owner review is required for changed shared interfaces and task ownership. Entire-source extracts and course renders stay private; public generalized candidates exclude raw PDFs, private source records and project content.
+
+      ## Decisions and Rationale
+
+      New intro_dsp_study namespace avoids restoring deleted filenames and makes task scope reviewable; fresh collision check is still mandatory. Separate page and item ledgers prevent false completeness from one row per slide when a slide contains several examples/diagrams. Separate structured/human reading views support deterministic coverage checks and direct learning use. Stable aliases keep filenames usable while full source identity preserves provenance. Original explanation and bounded paraphrases teach the material without copying exercise collections. Distinct prompt/answer/optional-user-solution paths preserve independent practice. Plain Markdown, JSON/JSONL, SVG/Mermaid and observed available host scripting are sufficient; no app/framework or speculative hardware design.
+
+      Installed software profile remains applicable. Unit coverage applies to actual numerical practice and schema/link validators, with independent oracles and edge cases; integration covers source->inventory->reading->note->exercise->practice links and hashes; system verification is exhaustive source/math/provenance inspection; intended-use validation is actual index walkthrough for every topic. A product application build, firmware unit tests, board/HIL/bench measurement, power budgeting and deployment smoke tests are not applicable because no such executable product is delivered. These dispositions do not waive runnable evidence or software release configuration.
+
+      Release classification is feature, matching saved workflow increment: new usable source-backed study guide/practice, not a restoration or bug-fix claim. Release config must identify scoped documentation/scripts, requirement/design/check/recipe baselines, source identities (private), runtime versions and exact commands, unresolved findings, current evidence and scope-preservation diff. Configured private archive is VuThach3001/VeryThinker-Project-Archives under codex/projects/neolearning-vt-fb18e4dc; visibility/authentication is unverified. Release/manager must confirm it before publication. automatic_pr points to VuThach3001/VeryThinker: only reviewed generalized lesson candidates, not raw course/project sources, and merging remains separately controlled. This architect publishes nothing.
+
+      ## Verification Implications and Conditional Partition
+
+      These are proposed task names, NOT created task IDs or delegated workers. Manager supplies complete task contracts, exact item/page lists, allowed paths, tool availability, criteria and reviewed checks. No more than three concurrent workers; prefer serialized owners for shared mutable registries.
+
+      | Proposed partition / owner | Allowed responsibility and dependencies | Required verification allocation |
+      | --- | --- | --- |
+      | ACCESS-BASELINE / manager-assigned researcher | After G0 permission/capability observed: current workspace/source inventory/hash/count/title/copyright/TOC/extraction/renders; owns source_manifest and workspace_baseline only; PDFs read-only | CHK-0001, independent baseline inspection; cannot claim final preservation before post-work evidence |
+      | LECTURE-INVENTORY / researcher | Frozen lecture bytes; every page 1..N visually inspected; owns page/item/topic registries; allocate numerical claim IDs and figure candidates | CHK-0003 inventory portion; independent full page/item audit before downstream topic bounds frozen |
+      | READING-MAP / researcher or teaching owner | Reviewed lecture topics and verified local book baseline; owns reading map only; inspect relevant content/endpoints and alternatives for evidenced gaps | CHK-0002; all topics dispositioned |
+      | TEACHING / documentation producer | Reviewed topic IDs, source/map/inventory and approved paths; owns notes/examples/diagrams/math_claims; exclusive topic-bounded batches with exact ID list | CHK-0003 semantic/math/visual portion and CHK-0005, plus note_validate where authorized |
+      | EXERCISES / researcher then producer | Inspected lecture prompt IDs and primary additional sources; owns exercise registry/prompts/answers; no overwrites of user solution paths | CHK-0004; independent all-answer recalculation, reviewed minimum two additional primary exercises |
+      | PRACTICE / developer | Reviewed runnable topic decisions, exact commands/runtime and independent expectations; owns practice subtree; verifier owns reviewed expectations/check procedure | CHK-0007; authorized check-executor captures actual runs/evidence |
+      | INTEGRATION / one producer | All foregoing submissions and stable registries; owns index/evidence links and link/coverage validator; no edits to other's content without coordinated repair | CHK-0006 plus CHK-0005 all-topic walkthrough |
+      | FINAL-REVIEW / independent reviewer | Reads original frozen PDFs, actual outputs, seven-section records and current inspection/runtime evidence; no producer's self-review substitutes | VP01..CHK-0008 / VP08 reconciliation, dispositions and design-ready/verified/accepted core gates owned by manager |
+      | RELEASE-KNOWLEDGE / release + curator | Accepted scoped baseline, confirmed private destination and independently reviewed generalized lesson | scope/hash/reproducibility/private-visibility checks; configured archive/draft PR disposition |
+
+      SOURCE/access tasks and checks remain blocked until approved route exists. Pure planning/review can continue. Whole lecture inventory cannot be bounded by invented page count; after metadata, manager may divide contiguous exact page ranges for read-only independent inspection with one integration owner and reconcile union==1..N. Teaching/practice batches use exact reviewed topic/item lists and output paths small enough for one assignment. Seven-section work records accompany every producer. Verifier check plans are protected: retain prior expectations/failures; update only by legitimate reviewed change when source-specific bindings/refined requirement allocations become available.
+
+      ## Assumptions and Open Questions
+
+      No actual local PDF file identity/existence/content/count/edition/headings/locators, adjacent-source list, current Git/protected-solution baseline, runnable-topic set, command/environment, oracle values or private repository visibility has been verified by this architect. Every schema parameter needing them stays unresolved; no fake placeholder is a verified value.
+
+      Current verifier inputs inspected: CHK-0001..0005 revision 2 (reconciled current requirements, retained original revision-1 definitions), CHK-0006..0008 revision 1. CHK-0006 covers schema/coverage/links and isolated fault fixtures; CHK-0007 covers independent numeric/symbolic cases, reviewed per-case error bounds and all runnable commands; CHK-0008 covers evidence/independent gates/closure. All remain draft NOT RUN, with empty verification_artifact_paths and unknown source-specific denominator/locator/command/hash bindings. The revision-2 EX-02 two-total-source-exercise threshold takes precedence over provisional per-topic prose retained as history. Do not treat conditional analytic vectors in CHK-0007 as lecture observations. Before any execution, manager/verifier coordinates this design's exact schemas and proposed paths with affected owners, fills actual source-specific parameters, binds script/fixture hashes and obtains independent plan review. The architect does not edit protected checks.
+
+      Completed requirements work record KNW-0008 and actual requirements discussion KNW-0007 were inspected; their current requirements draft is the design input. Earlier architect discussion KNW-0006 truthfully records the initial revision-1 read, but its automatically captured parent fingerprint was revision 2 due to concurrent refinement. This design and final discussion explicitly use the freshly inspected revision-2 baseline; do not infer that the earlier summary inspected the refinement.
+
+      Current design can be independently reviewed as an interface/blocker/partition proposal. Source-specific parameters, manager approved requirements/tasks, completed verifier reconciliation and substantive independent design review remain necessary before design-ready or implementation claims. Source-access remediation is a genuine external blocker; manager owns next executable action. No task, requirement, check or visible learning deliverable is edited by this assignment.
+
+
+      ## Authoritative Recovery Clarification (revision 2)
+
+      Fresh same-assignment architect invocation 596f23ad-4590-4c54-90a6-2303f3fdff01 independently inspected the entire durable revision-1 design (fingerprint 4588548d707f6ddbdcfb9f05d948873ea05ea6c7af3bc952528dac6ecaf6ef61), current REQ-0001 rev2, REQ-0002..0009 rev1, CHK-0001..0005 rev2 and CHK-0006..0008 rev1, completed requirements/verifier reports KNW-0008/0010 rev1, PRB-0001 rev2 and draft TASK-0001 rev2. Own signed receipt confirms exact gpt-6.1-sol/high. This revision adopts the durable source-evidence-gated architecture with the following ownership and dependency corrections. The earlier body is retained verbatim as historical design content; this section takes precedence where ownership, staging or prior inference wording conflicts. Complete prior body, metadata and fingerprint are also retained in data.previous_design_baseline. This is an ordinary design revision, not a generated recipe contract or resealed expectation.
+
+      ### Producer authority and materialization boundary
+
+      Researcher owns directly observed source/workspace/page/item/topic/book-reading metadata in authorized core records, with complete locator/hash/time/evidence provenance. Researcher may create only assigned substantive Cornell note/practice/answer artifacts through note_create. Draft TASK-0001 rev2 follows this boundary. Researcher does not materialize source_manifest.json, workspace_baseline.json, JSONL ledgers, topic_registry.json, reading maps or arbitrary Markdown/SVG/script files through native/direct writes.
+
+      A separately bounded Developer assignment materializes all ordinary JSON/JSONL/Markdown/SVG/script files through task_file_write within exact approved allowed paths, including the metadata projections in the earlier path table. Researcher supplies authoritative inspected content, IDs and metadata; Developer serializes it without inventing fields or upgrading pending status. Each projection records its authoritative core record ID/revision/fingerprint, source hash and schema version, and readback compares it to those inputs. Every table label such as researcher, mapping owner, teaching owner or baseline owner above denotes semantic responsibility, not ordinary-file write authority. note_create remains the controlled route for actual Cornell note/practice/answer creation by the authorized note producer; Developer task_file_write handles ordinary artifacts outside that envelope. Manager coordinates source -> core metadata -> Developer projection -> independent verification. No new task or file is created here; source access remains G0-blocked.
+
+      ### Preliminary source task and downstream check split
+
+      TASK-0001 rev2 is preliminary source inspection and core metadata/Cornell source-audit production, not completed teaching delivery. Its listed CHK-0001/0002/0003 currently combine upstream source observations with downstream final artifacts. They cannot be treated as fully passing checks or readiness prerequisites for the source task in their present combined form. A source task must be able to finish actual source inspection before finished teaching artifacts exist. Source-audit Cornell practice is source-navigation/audit practice only; it does not count as the final all-topic guide or executable DSP suite.
+
+      Manager must request verifier-owned, independently reviewed staging/split before task readiness; architect does not edit task or checks. Required split preserves all current downstream expectations and histories:
+
+      - CHK-0001: preliminary current source identity, fresh workspace/protected-solution snapshot and pre-write collision dispositions; separate task-local before/after preservation of the source-audit operation from final increment-wide BASE-02/BASE-04 preservation evidence. Source task completion cannot require the final study-package diff.
+      - CHK-0002: preliminary actual title/copyright/edition/TOC/printed-to-PDF labels and inspected topic-specific section/endpoints/body/gap metadata. READ-04 final index-to-topic reader navigation waits for downstream reading-map/index artifacts. Any complete-topic preliminary mapping denominator must come from the actual exhaustive lecture inventory, never a guessed syllabus. Final source navigation and full REQ-0002 acceptance remain mandatory later.
+      - CHK-0003: preliminary unique 1..N source-page inventory and every substantive/unlabeled/multipage item, essential source data, visual observations, formulas/diagram records and faithful locator evidence. SLIDE-01/02 final destination linkage, SLIDE-03 authored-redraw fidelity, SLIDE-04 all delivered mathematical claims/recalculation, and SLIDE-05 final authored-content correctness stay downstream. Preliminary records retain unresolved downstream fields/status explicitly and cannot mark those portions covered or passed.
+
+      Verifier and manager choose supported case-scoped procedures or distinct check records/tasks, retain old bodies/fingerprints and expectations, define exact preliminary outputs and honest completion evidence, and obtain separate plan review. Merely relabeling the complete existing checks as optional or passed would weaken acceptance and is rejected. The proposed partitions above therefore allocate semantic responsibilities only until this split is dispositioned.
+
+      ### Adoption limits and provenance
+
+      The saved revision-1 record is observed durable output attributed to prior same architect assignment 5a969ff8-f11a-4c48-944f-efbafbe085f9. The recovery request reports its usage-limit failure before reporting and the attempted resume 4a0e0db4-e7e7-4ac3-ac30-52e4f79aaa7a failure before model confirmation because the old thread had an active writer. PRB-0001 rev2 corroborates the resume error and fresh same-scope disposition. This invocation did not recover missing prior inference or a prior assignment report. Worker-native_status refuses cross-invocation observation; neither receipt/model completion nor missing prior reasoning is inferred from the design body. The phrase 'this invocation resolves recipe identity' in the retained prior body is historical prior-author narrative, not an action of this recovery. No recipe_prepare/adoption/expectation change is performed here.
+
+      G0 remains pending: approved binary inventory/hash/PDF metadata/extract/render and current workspace inspection must actually work. No actual edition, page count, lecture contents, source hash, printed/PDF range, runtime, oracle value, script extension or exact executable/oracle path is asserted. Empty verification_artifact_paths in the current checks remain pending bindings; all eight checks remain NOT RUN. Independent planning review may assess this architecture and the split requirement; it cannot authorize source execution or establish design-ready/acceptance without required dispositions and actual access. Manager owns task/check coordination and the permitted next action. No native files, permissions, thread state, requirement/check/task records or project deliverables are edited by this recovery.
+  recovery_source_baseline:
+    VT-FB18E4DC-REQ-0001:
+      revision: 2
+      fingerprint: 59b09d68f572e87fe86220f3bd0d389e4c5774556597382cb0bc83b6b6e70485
+    VT-FB18E4DC-REQ-0002:
+      revision: 1
+      fingerprint: ebf1a3215d2c8a75a72d9ef843ac35d1267ea065311e98f3a0133cff247cb747
+    VT-FB18E4DC-REQ-0003:
+      revision: 1
+      fingerprint: 0758d61933b4c3c5bb9a92231d00ff2867624b798ea9f47bf93745bbbe5efec3
+    VT-FB18E4DC-REQ-0004:
+      revision: 1
+      fingerprint: a98958282674924638cee5286aeda3c3c2613ada589692666ca874b5c0d69e3c
+    VT-FB18E4DC-REQ-0005:
+      revision: 1
+      fingerprint: 8ca5bc6ffa040d1c02014a9c381bc58ce9bbc24c47897e0c0967457d7e54a85a
+    VT-FB18E4DC-REQ-0006:
+      revision: 1
+      fingerprint: a90e9de9fa33dd212546d2dab1fdea7492ff252cc5f28005fa238a29445eb3dc
+    VT-FB18E4DC-REQ-0007:
+      revision: 1
+      fingerprint: 109be3743b171e727316fb4158185f0ff2f3afb0b511448e777baddb7a5b3f44
+    VT-FB18E4DC-REQ-0008:
+      revision: 1
+      fingerprint: db2dde21e0b42755134fcc1e62115e833516d4a87da5f906dd1175194c11fed6
+    VT-FB18E4DC-REQ-0009:
+      revision: 1
+      fingerprint: 6b2ddbcfd6754ed46e6b6f09fd566548785a37ac0576956462a53151c1bab4e3
+    VT-FB18E4DC-CHK-0001:
+      revision: 2
+      fingerprint: a43a72016e3a7aaba5bd446113a4cf8078d8777abf292b1908675cb903ca5b0b
+    VT-FB18E4DC-CHK-0002:
+      revision: 2
+      fingerprint: f2fa3ad611511955a0de2441b6e34c27c4fef316fb2486375e5bae84e895af95
+    VT-FB18E4DC-CHK-0003:
+      revision: 2
+      fingerprint: fd930c7297a65f52b5f887baeb49b582140a10ce2a0ac8fd337faee8376fda42
+    VT-FB18E4DC-CHK-0004:
+      revision: 2
+      fingerprint: cc75fdda69647b17cf5a8eed1d2c07a9f5d0fddccf8073aa751177a83da90a06
+    VT-FB18E4DC-CHK-0005:
+      revision: 2
+      fingerprint: b1fd085531bef3f7a97bc19f43b9622c8d68aabb168d999f05180374e153f6e5
+    VT-FB18E4DC-CHK-0006:
+      revision: 1
+      fingerprint: 907616b9651fb3b0f5ca294944bbebc995fca76d2aaa46a769cb87fad12608bf
+    VT-FB18E4DC-CHK-0007:
+      revision: 1
+      fingerprint: 2c38416538817253447e0cad3e6ec868997bd59a5889417905a1375e1424940d
+    VT-FB18E4DC-CHK-0008:
+      revision: 1
+      fingerprint: 39ddd3e7de99baed033f954e721f0b7c1c1eb05cd671dd4ef59946bc6ba337d9
+    VT-FB18E4DC-KNW-0008:
+      revision: 1
+      fingerprint: c500b055b8da5189aaf021b79826e0083939be113d8fb0102e4b87c194e5afc2
+    VT-FB18E4DC-KNW-0010:
+      revision: 1
+      fingerprint: 371ffe53a588fbd8b7caa9e02a5a4263057bf98d98a13af5d045ee6f28ff4b15
+    VT-FB18E4DC-PRB-0001:
+      revision: 2
+      fingerprint: d462b059d60478c20db3076a67cea0a3e603a815f67bfd77ba200d70b33f16a0
+    VT-FB18E4DC-TASK-0001:
+      revision: 2
+      fingerprint: 66a05c6daac791bd47ee7810224eaf4fa2f20d4a1e6378c1e12f32f15fdf6b29
+  recovery:
+    invocation_id: 596f23ad-4590-4c54-90a6-2303f3fdff01
+    covered_invocation_ids:
+      - 5a969ff8-f11a-4c48-944f-efbafbe085f9
+      - 4a0e0db4-e7e7-4ac3-ac30-52e4f79aaa7a
+    prior_durable_revision: 1
+    prior_durable_fingerprint: 4588548d707f6ddbdcfb9f05d948873ea05ea6c7af3bc952528dac6ecaf6ef61
+    missing_prior_report: not-recovered; this current report accounts for observed
+      durable output only
+    cross_invocation_receipt_access: "refused: Worker can observe only its own native invocation."
+    corrections:
+      - Developer task_file_write ordinary-file materialization; researcher core
+        source metadata and note_create only
+      - verifier/manager preliminary source versus final teaching check split
+        needed before task readiness
+    review_status: pending-independent-plan-review
+  materialization_contract:
+    researcher: authoritative source metadata core records plus assigned Cornell
+      note_create only
+    developer: ordinary file projections via bounded task_file_write; preserve input
+      record identity and source hash
+    architect: design records only
+  preliminary_source_check_split:
+    status: required-before-task-readiness
+    owners:
+      - verifier
+      - manager
+    task_id: VT-FB18E4DC-TASK-0001
+    check_ids:
+      - VT-FB18E4DC-CHK-0009
+      - VT-FB18E4DC-CHK-0010
+      - VT-FB18E4DC-CHK-0011
+    downstream_expectations: preserved; no complete existing check may be claimed
+      passed from source-only observations
+  downstream_final_check_ids:
+    - VT-FB18E4DC-CHK-0001
+    - VT-FB18E4DC-CHK-0002
+    - VT-FB18E4DC-CHK-0003
+    - VT-FB18E4DC-CHK-0004
+    - VT-FB18E4DC-CHK-0005
+    - VT-FB18E4DC-CHK-0006
+    - VT-FB18E4DC-CHK-0007
+    - VT-FB18E4DC-CHK-0008
+  revision_reason: "Repair REV-0034 STAGE-ALLOC in DES-0001 only: allocate
+    TASK-0001 source inspection to distinct CHK-0009/0010/0011, retain
+    CHK-0001..0008 as downstream/final checks, add CHK-0009..0011 to check_ids
+    and reference links, and refresh only the REQ-0009 source baseline to its
+    current rev3 fingerprint. Preserve all other baseline values, prior design
+    body/data, every CHK-0001..0008 definition and failure history, REQ-0009
+    VP08 -> CHK-0008 ACC-01..03 as planned coverage, and the open REV-0040/F2
+    and REV-0041/F3 later final-executable gaps. TASK-0001 itself remains
+    unchanged. No source evidence, execution, task/design readiness, or
+    acceptance is claimed."
+  previous_source_baseline_snapshot:
+    design_revision: 4
+    design_fingerprint: 92eb6da431e4ada8d243c063f08ee5d5154945c898b01a842d7508533bc7f4b8
+    captured_date: 2026-10-13
+    source_baseline:
+      VT-FB18E4DC-REQ-0001:
+        revision: 2
+        fingerprint: 59b09d68f572e87fe86220f3bd0d389e4c5774556597382cb0bc83b6b6e70485
+      VT-FB18E4DC-REQ-0002:
+        revision: 1
+        fingerprint: ebf1a3215d2c8a75a72d9ef843ac35d1267ea065311e98f3a0133cff247cb747
+      VT-FB18E4DC-REQ-0003:
+        revision: 1
+        fingerprint: 0758d61933b4c3c5bb9a92231d00ff2867624b798ea9f47bf93745bbbe5efec3
+      VT-FB18E4DC-REQ-0004:
+        revision: 1
+        fingerprint: a98958282674924638cee5286aeda3c3c2613ada589692666ca874b5c0d69e3c
+      VT-FB18E4DC-REQ-0005:
+        revision: 1
+        fingerprint: 8ca5bc6ffa040d1c02014a9c381bc58ce9bbc24c47897e0c0967457d7e54a85a
+      VT-FB18E4DC-REQ-0006:
+        revision: 1
+        fingerprint: a90e9de9fa33dd212546d2dab1fdea7492ff252cc5f28005fa238a29445eb3dc
+      VT-FB18E4DC-REQ-0007:
+        revision: 1
+        fingerprint: 109be3743b171e727316fb4158185f0ff2f3afb0b511448e777baddb7a5b3f44
+      VT-FB18E4DC-REQ-0008:
+        revision: 1
+        fingerprint: db2dde21e0b42755134fcc1e62115e833516d4a87da5f906dd1175194c11fed6
+      VT-FB18E4DC-REQ-0009:
+        revision: 3
+        fingerprint: 5920703360ab39ce2c04ad49f3feba05fef4229d673163228fe02c8fa267d1ce
+      VT-FB18E4DC-CHK-0001:
+        revision: 2
+        fingerprint: a43a72016e3a7aaba5bd446113a4cf8078d8777abf292b1908675cb903ca5b0b
+      VT-FB18E4DC-CHK-0002:
+        revision: 2
+        fingerprint: f2fa3ad611511955a0de2441b6e34c27c4fef316fb2486375e5bae84e895af95
+      VT-FB18E4DC-CHK-0003:
+        revision: 2
+        fingerprint: fd930c7297a65f52b5f887baeb49b582140a10ce2a0ac8fd337faee8376fda42
+      VT-FB18E4DC-CHK-0004:
+        revision: 2
+        fingerprint: cc75fdda69647b17cf5a8eed1d2c07a9f5d0fddccf8073aa751177a83da90a06
+      VT-FB18E4DC-CHK-0005:
+        revision: 2
+        fingerprint: b1fd085531bef3f7a97bc19f43b9622c8d68aabb168d999f05180374e153f6e5
+      VT-FB18E4DC-CHK-0006:
+        revision: 1
+        fingerprint: 907616b9651fb3b0f5ca294944bbebc995fca76d2aaa46a769cb87fad12608bf
+      VT-FB18E4DC-CHK-0007:
+        revision: 1
+        fingerprint: 2c38416538817253447e0cad3e6ec868997bd59a5889417905a1375e1424940d
+      VT-FB18E4DC-CHK-0008:
+        revision: 1
+        fingerprint: 39ddd3e7de99baed033f954e721f0b7c1c1eb05cd671dd4ef59946bc6ba337d9
+      VT-FB18E4DC-KNW-0007:
+        revision: 1
+        fingerprint: 4bebc436efbee861a000daf99191f3cdadeb3403c4d520296b39d9750d3cd7e7
+      VT-FB18E4DC-KNW-0008:
+        revision: 1
+        fingerprint: c500b055b8da5189aaf021b79826e0083939be113d8fb0102e4b87c194e5afc2
+      VT-FB18E4DC-KNW-0009:
+        revision: 1
+        fingerprint: 21a60914cf7fe40ef98c85b398196ad6b9ba6c2fb79fd07ea28364d748cadb72
+      VT-FB18E4DC-KNW-0002:
+        revision: 1
+        fingerprint: 3d0cb3a3803c035acb47993d9052f503856ac988402af946cbc6ee402a295f04
+      VT-FB18E4DC-KNW-0010:
+        revision: 1
+        fingerprint: 371ffe53a588fbd8b7caa9e02a5a4263057bf98d98a13af5d045ee6f28ff4b15
+      VT-FB18E4DC-PRB-0001:
+        revision: 2
+        fingerprint: d462b059d60478c20db3076a67cea0a3e603a815f67bfd77ba200d70b33f16a0
+      VT-FB18E4DC-TASK-0001:
+        revision: 2
+        fingerprint: 66a05c6daac791bd47ee7810224eaf4fa2f20d4a1e6378c1e12f32f15fdf6b29
+---
+## Objective and Allocated Requirements
+
+Design contract DSP-STUDY/1, authored by native architect invocation 5a969ff8-f11a-4c48-944f-efbafbe085f9 (signed gpt-6.1-sol/high) for existing workflow VT-FB18E4DC-KNW-0001. This is a proposed frozen interface and allocation baseline for independent review, not source-verified learning content, approved implementation, or acceptance.
+
+Inspected current parent VT-FB18E4DC-REQ-0001 revision 2 and derived REQ-0002..0009 revision 1 from requirements invocation 2956cea0-f83a-48ad-9df9-fd88e4de2011. Requirements remain draft pending manager disposition. Preserve REQ-0001 revision-1 historical fingerprint and prior observations; current requirements supersede the initial empty acceptance placeholder. Allocate all detailed criteria as follows:
+
+| Requirement | Design responsibility | Provided artifacts / verification |
+| --- | --- | --- |
+| REQ-0002 | Source researcher verifies exact local edition, actual section contents and locators; mapping owner assigns every inventoried topic or evidenced gap | source_manifest, reading_map; CHK-0002 / VP01 |
+| REQ-0003 | Lecture researcher inspects every page and substantive item, including unlabeled and diagram-dependent content | page_ledger, item_ledger, topic_registry; CHK-0003 / VP02 |
+| REQ-0004 | Teaching owner gives original derivations and explanations; independent verifier recomputes all math | notes, examples, math_claims, diagram_registry; CHK-0003 / VP03 |
+| REQ-0005 | Exercise owner retains supplied prompts, retrieves additional primary exercises, labels origin and separates answers | exercise_registry, prompts, answers, solution links; CHK-0004 / VP04 |
+| REQ-0006 | Practice implementer supplies deterministic runnable exercises and reference artifacts; independent check executor captures actual results against reviewed oracles | practice_registry, practice, runtime evidence; CHK-0007 / VP05 |
+| REQ-0007 | Teaching and integration owners produce substantive Cornell explanations and usable index/source navigation | index, notes, reading map, resolved links; CHK-0005 plus CHK-0006 / VP06 |
+| REQ-0008 | Baseline owner snapshots current protected state; every producer obeys exclusive allowed paths | workspace_baseline and before/after evidence; CHK-0001 / VP07 |
+| REQ-0009 | Manager owns task/gate/acceptance and release/curator assignments; independent reviewer inspects source and outputs | evidence_links, seven-section records, review dispositions and release configuration; VP08 |
+| REQ-0010 | Manager/check-executor establish the approved task-local CORE source bootstrap in TASK-0002 before TASK-0001 source inspection | Current bootstrap evidence; CHK-0013 → CHK-0012 → CHK-0013; TASK-0001/CHK-0009..0011 waits for bootstrap evidence and TASK-0002 acceptance |
+
+Short IDs in this record mean VT-FB18E4DC-prefixed IDs. None of the table is a pass result.
+
+## Boundaries and Responsibilities
+
+Boundary: every page/item of the frozen local 00_Intro.pdf and only relevant local Lyons readings, genuine alternatives for evidenced gaps, and additional primary-source practice. Do not expand into all lectures or the whole book. The earlier statement that source edition, page count, size/hash and current directory observations were absent was pre-KNW-0023 and is historical. KNW-0023 supersedes it only for read-only intake identity/readability/count/size/hash: both PDFs were readable at intake; the book is Richard G. Lyons, Understanding Digital Signal Processing, Third Edition, copyright 2011, ISBN 9780137027415, 983 PDF pages, 9466589 bytes, SHA-256 f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057; the lecture is 408 pages, 13042041 bytes, SHA-256 de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea. These are intake observations and expected source-identity values for bootstrap, not current CORE operation evidence or a fresh workspace/deletion/collision baseline. They do not establish the complete page/item/topic audit or comprehensive content/page locators. The intake book count supports scope/navigation only; exhaustive book-wide teaching or every-page book analysis is outside this increment. Exhaustive every-page ledger applies to the lecture and every selected/inspected book page has locator evidence.
+
+Data flow: approved source bytes -> immutable identity/extract/render observations -> exhaustive inventory -> topic/reading map -> original explanations/examples/exercises/practice -> actual independent verification -> index walkthrough -> manager acceptance -> scoped release/archive/generalized knowledge. Control flow stops at each missing evidence dependency. Power/physical interfaces, firmware tasks, board/BOM/HIL and hardware timing are inapplicable: the output is a study guide with optional host computations, not a deployed embedded product.
+
+Historical pre-KNW-0023 route status: KNW-0002/0003/0004 from completed researcher 84378bc2-e0c7-4c29-80be-6d8b07dd9b59 report PDF reads rejected by text-only project_read and native command-helper failure before execution. Those outcomes remain failures of their original routes only and did not establish PDF unreadability. KNW-0023 later records both PDFs readable at intake with the identity, edition, count, size and hash observations stated above, superseding the earlier external-source-access interpretation. The current blocker is approved task-local CORE readiness and prescribed operation evidence for REQ-0010/TASK-0002, not unreadable PDFs. No optional CodeGraph/Context7 provider applies to this local CORE route; no empty provider resolution, install or substitute provider is justified.
+
+Historical G0/access wording predates KNW-0023 and is superseded as an unreadable-source interpretation: both PDFs were readable at intake. The active precondition is approved task-local CORE readiness for REQ-0010/TASK-0002 and its reviewed read-only bootstrap. TASK-0001 source inspection may start only after TASK-0002's required bootstrap evidence and acceptance are current. Intake is not the prescribed CORE operation, a fresh workspace baseline, or exhaustive source inspection. Preserve the approved read-only route; do not bypass readiness or change check contracts.
+
+Precondition G1: approved measurable requirement baseline, independently reviewed design/check plan, fresh pre-edit workspace/source/solution baseline, real full lecture inventory and task-approved new paths. Source inventory may precede final topic-specific plans, but learning deliverables cannot be presented as verified before the content gates. Missing runtimes are blockers, not reasons to classify computational topics as inapplicable.
+
+## Interfaces and Flow
+
+### New path allocation
+
+Let L = 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study. These are proposed canonical project-relative paths. Their collision-free existence has NOT been verified. Manager must approve after fresh tracked/untracked/deleted/submodule inventory; do not silently overwrite or restore collisions. All visible learning artifacts are within L, avoiding mechanically recreating the deleted root README, coverage.csv, temp.md or prior 00_intro filenames.
+
+| Path relative to L | Contract / owner |
+| --- | --- |
+| index.md | Integration owner: substantive study entry point, prerequisites/order, source reading, note/example/prompt/answer/practice and limitation links |
+| provenance/source_manifest.json | Source researcher: actual source identity and inspection status |
+| provenance/workspace_baseline.json | Baseline owner: branch/revision, protected path hashes, dirty/deleted/untracked/submodule snapshot reference and allowed-path dispositions |
+| provenance/page_ledger.jsonl | Lecture researcher: exactly one row per actual PDF page 1..N |
+| provenance/item_ledger.jsonl | Lecture researcher: every substantive topic/example/prompt/formula/table/diagram and multipage relationships |
+| provenance/topic_registry.json | Inventory integrator: stable topic IDs, page/item associations, exact runnable applicability/disposition |
+| provenance/math_claims.jsonl | Teaching owner: every formula and numeric claim, assumptions, source statements and independent-oracle references |
+| provenance/exercise_registry.json | Exercise owner: prompt origin, source lineage, topic IDs, separate answer and optional preserved user solution |
+| provenance/diagram_registry.json | Teaching owner: original/paraphrased/redrawn figure origins and visual fidelity references |
+| provenance/practice_registry.json | Practice owner: exercise/reference commands, environment, deterministic inputs, expectations and evidence links |
+| provenance/evidence_links.json | Integration owner: pointers to actual core check/evidence/review records and immutable baseline identities |
+| reading/book_reading_map.json | Mapping owner: canonical structured per-topic section/gap records |
+| reading/book_reading_map.md | Mapping owner: human-readable navigation derived from same reviewed rows |
+| notes/T0001.md etc. | Teaching owner: original substantive Cornell topic explanation; T IDs allocated only after actual inventory |
+| examples/I0001.md etc. | Teaching owner: each lecture worked/partial example reconstructed with explicit source locator and assumptions |
+| exercises/prompts/Q0001.md etc. | Exercise owner: lecture, additional and optionally original problem prompts with origin metadata; no embedded answer |
+| exercises/answers/Q0001.md etc. | Exercise owner: separate derivation/answer linked to same question ID |
+| practice/P0001/exercise.md and exercise.<ext> | Practice owner: instructions and runnable learner artifact when applicable |
+| practice/P0001/answer.md and reference.<ext> | Practice owner: separate solution explanation and runnable reference |
+| practice/P0001/expected.json | Verifier-reviewed expected contract, independent oracle rationale and tolerances |
+| diagrams/D0001.svg or D0001.md | Teaching owner: readable original redraw or Mermaid description, source locator when derived |
+| verification/validate_study.<ext> | Integration validator owner: meaningful schema, path, coverage and linkage checks |
+| verification/validate_practice.<ext> | Numerical verification owner: independent reviewed oracle assertions, not expected output generated by reference code |
+
+The .<ext> choice and full per-item filename list are intentionally unresolved parameters, not existing paths or approved commands; manager freezes them after runtime/topic discovery and before affected task ready. Use an observed available host runtime with standard library where sufficient. No package/build scaffolding is needed for the knowledge base. Optional learner solution path is supplied only when preservation baseline identifies an existing one or manager explicitly allocates a new one; no empty solution file is imposed. Source extraction/render artifacts belong in approved private evidence storage, referenced from provenance; source page images are not automatically copied into public-facing learning assets.
+
+verification/fixtures/valid_minimal.json and verification/fixtures/faults/missing_page.json, duplicate_page.json, duplicate_item.json, orphan_topic.json, bad_range.json, missing_heading.json, missing_asset.json, mismatched_pair.json and same_prompt_answer_path.json are proposed isolated validator fixtures. Each fault file introduces exactly its named defect relative to the reviewed valid fixture. Scope and executable paths/hashes remain subject to manager task authorization and independent check-plan review; no protected source or user solution is mutated by a fixture.
+
+### Frozen common schema rules (DSP-STUDY/1)
+
+UTF-8 JSON objects/JSONL rows use schema_version: 1. Fields specified below are required unless explicitly optional. Unknown identity fields are null with an unverified/blocked status and a precise reason; unknown never means zero, empty string, fake date/hash/page number or passed. No manifest values or ledger rows are being fabricated in this design. A verified row must contain non-null supporting identity/locator/evidence fields. Typed registries disallow duplicate IDs, dangling references and silently unknown enum values. Arrays represent multiple topics/items; do not flatten many items into a misleading single page row.
+
+Canonical local paths use repository-relative forward slashes, no parent traversal for newly written artifacts. Navigation links may point through relative traversal to read-only source files; validate resolution stays in approved source/output roots. Absolute deployment-specific paths are evidence environment fields, not portable link identities. Every source-dependent record references source_id AND source_sha256 so changed bytes invalidate its applicable status. Stable source item identity is the tuple (full source SHA-256, 1-based PDF page, within-page ordinal); short immutable aliases I0001/T0001/Q0001/P0001/D0001 are allocated from actual inventory for readable filenames. Each alias maps to its full tuple or source-independent authored provenance and is never reassigned. Changed source snapshots retain old identities and explicit mappings; do not rewrite historical evidence.
+
+source_manifest root: schema_version, workflow_id, requirement_baseline (ID/revision/fingerprint), sources[]. Each source: source_id, kind(local_pdf|local_text|primary_web), canonical_uri, sha256(nullable until verified), byte_size(nullable), pdf_page_count(nullable for non-PDF/unverified), title, author_or_institution, edition_or_version, publisher_year (each nullable), retrieved_at(nullable until actual retrieval), inspection_status(unverified|blocked|verified), blocker_reason(nullable), metadata_locators[], extraction_artifacts[], render_artifacts[], evidence_ids[]. Verified local PDF requires current bytes/hash/size/count, actual retrieval timestamp, and metadata page observations; book edition verification additionally requires title/copyright evidence. External content identity records hash when captured lawfully/available, otherwise explicit identity limitation; no guessed remote hash.
+
+Locator object: source_id, source_sha256, pdf_start, pdf_end (1-based inclusive integers for PDF, else null), printed_start, printed_end (actual strings, including Roman numerals or explicit unnumbered), heading_exact(nullable only when no heading), section_number(nullable when absent), page_region_or_item, navigation_uri, evidence_ids. Printed endpoints are observed individually; if pagination changes internally, include explicit page-label mapping/segments. No global offset assumption. Figure/slide labels are separate source labels, not substituted PDF ordinals.
+
+page_ledger row: schema_version, source_id, source_sha256, pdf_page, visible_slide_label(nullable), printed_label, title_exact(nullable if absent), topic_ids[], item_ids[], classification(technical|administrative|blank|repeated|mixed), disposition, disposition_reason, first_occurrence_ref(nullable), extract_ref, render_ref, visual_inspector_invocation_id, inspected_at, evidence_ids[], unresolved_issues[]. Key (source_sha256,pdf_page) unique; ordered set of ordinals must equal integers 1..N obtained from actual PDF metadata. Repeated pages retain substantive items or reference their first occurrences, not erase coverage. Every page is visually inspected; extracted empty text does not classify it as blank.
+
+item_ledger row: schema_version, item_id, source_identity_tuple, locators[], kind(topic|worked_example|partial_example|question|formula|table|diagram), source_label(nullable for unlabeled items), faithful_input_summary, topic_ids[], related_item_ids[], explanation_path, prompt_id(nullable), demonstration_id(nullable), disposition(covered|repeat_reference|pending), disposition_reason, evidence_ids[], unresolved_issues[]. Multipage items have all page locators and one canonical identity. Every substantive item reaches original explanation and applicable example/prompt/answer/practice; unresolved pending rows cannot count as completed. Source excerpts are bounded; original explanatory text is the default.
+
+topic_registry root: schema_version, topics[]. Topic: topic_id, label, source_item_ids[], note_path, reading_ids[], example_ids[], exercise_ids[], practice_ids[], runnable_applicability(runnable|not_applicable|pending), applicability_reason, requirement_ids[], evidence_ids[]. Coverage denominators come from the reviewed actual topic set, never anticipated syllabus headings. Not-applicable reasons address pedagogy/technical meaning; unavailable execution tools leave pending/blocker.
+
+Reading map root: schema_version, source_baseline, mappings[]. Mapping: reading_id, topic_id, disposition(book_covered|verified_gap_with_alternative|pending), purpose, prerequisite_topic_ids[], reading_order, section_number, heading_exact, edition_source_id, locators[], body_inspection_evidence_ids[], gap_search_locators[], gap_reason(nullable), alternative_source_ids[], evidence_ids[]. A book row verifies heading/number, title/copyright edition, both inclusive endpoints and relevant intervening body content. A gap names actually searched TOC/index/likely sections and genuinely inspected alternative with locators; a failure to access is pending, never not-covered. The Markdown view presents exact headings and printed/PDF ranges from these same rows.
+
+exercise_registry root: schema_version, exercises[]. Entry: exercise_id, origin(lecture_supplied|additional_primary|original_authored|adapted), lineage_source_ids[], source_locators[], source_item_ids[], adaptation_changes(nullable), author_invocation_id, topic_ids[], prompt_path, answer_path, user_solution_path(optional), runnable_practice_id(nullable), copyright_handling, independent_answer_evidence_ids[]. Adapted entry records parent category/locator and every meaningful change; it is not silently source-original. Original prompts are optional and cannot satisfy the minimum additional-primary count. At least two distinct actually retrieved primary exercises per REQ-0005, spanning two technical topics if inventory has two or more; not two per topic unless manager changes the requirement through reviewed scope control. Exercise prompts retain actual supplied data and diagram information, remain recognizable under explained paraphrase, and contain no final solution. Answer gives method, symbols/units, assumptions, intermediate steps, interpretation and independently checked result. Existing solution bytes are never populated with reference answers or starter replacements.
+
+diagram_registry root: schema_version, diagrams[]. Entry: diagram_id, origin(original_explanation|source_paraphrase|faithful_redraw), source_locators[], topic_ids[], item_ids[], asset_path, explanatory_caption, source_figure_label(nullable), changes_or_simplifications, semantic_elements[], visual_review_evidence_ids[]. Source-derived diagrams cite figure label where present AND exact PDF/printed locator; no invented figure number for unlabeled drawings. State what was simplified; verify axes, units, waveform geometry, arrows, labels and meaning. Original diagrams label authorship and cite conceptual sources rather than imply reproduced figures. Preserve source statement separately if a correction is necessary.
+
+math_claims row: schema_version, claim_id, item_ids[], topic_ids[], source_locators[], source_statement, authored_derivation_path, definitions_and_units, domains_and_indexing, assumptions_and_conventions, expected_result, oracle_rationale, discrepancy(nullable), correction_rationale(nullable), check_ids[], evidence_ids[]. Explicitly distinguish definition, source-reported claim, derived identity/inference, expected result and actual observation. All numeric and symbolic claims in notes, examples, figures and answers enter the audit; boundary and failure cases are allocated before execution.
+
+practice_registry root: schema_version, practices[]. Entry: practice_id, topic_ids[], exercise_id, exercise_path, reference_path, answer_path, expected_path, command(string array), reference_command(string array), working_directory, environment_versions, deterministic_inputs, expected_outputs, absolute_tolerance, relative_tolerance, oracle_rationale, boundary_failure_cases[], reviewed_check_id, expected_contract_fingerprint, artifact_hashes, run_status(not_run|failed|passed|blocked), observed_evidence_ids[]. Values/commands/tolerances are unknown now. Exact executable/argument arrays, versions, actual inputs and independently justified expected results must be frozen by verifier and separate plan review before execution. Observed output is not generated into expected.json. Execute learner/reference artifacts as applicable and independently assert their intended behavior; comparison solely between two generated implementations is insufficient. Logs carry stdout/stderr, exit status, actual environment/time and applicable artifact/check/source hashes. No run status passed without current actual passing evidence.
+
+workspace_baseline: schema_version, actual_branch, actual_revision, captured_at, snapshot_evidence_id, protected_sources[], existing_solutions[], deleted_paths[], unrelated_changed_paths[], submodule_state_ref, allowed_output_paths[], collision_dispositions[]. Preserve source/solution hashes and unrelated dirty state across the task. Fresh read/hash precedes a managed full-file change, expected baseline must still match and post-write readback verifies authored bytes; concurrent changes require reconciliation, not stale replacement.
+
+evidence_links: schema_version, baseline_id, artifacts[] (path/hash/revision), links[] (requirement_id, design_id, check_id, check_definition_fingerprint, evidence_id, review_id, subject_ids[], method, actual_result, invocation_id, observed_at, environment_ref, source_and_output_baselines, limitations). Core records are authoritative; these are navigational references, not newly invented pass records. Failure/old evidence is retained under its original baseline. Applicability re-evaluation is explicit when any source, requirement, artifact, recipe or environment changes.
+
+### Cornell recipe interface
+
+Resolved cornell-evidence-note version 1.0.0, generator hash 2db1a7dbfd29f989ffe3d0f8703277b2ec2375a3ba02086f7dbff22b3b08aad1. Freeze this identity for proposed note construction. Required envelope is note with topic, kind(learning-note here), visible path, context, constraints, cues, main_notes, sources, demonstration(body, expected, optional command/evidence_ids/observed), failure_cases, practice(exercise, exercise_path, answer, answer_path, optional command/solution_path/starter), summary and requirement links. Sources use id/title/uri/actual retrieved_at plus exact locator, available hash and record link. Main notes use [observed], [source-reported], [inferred] and [expected] labels as appropriate. Demonstration.observed is omitted until supported by current passing evidence; expected remains independently specified.
+
+This invocation resolves recipe identity, but does NOT prepare a generated recipe or create notes: complete substantive parameters and actual source retrieval times/locators do not exist yet. Supplying blocker text or blank notes as recipe learning parameters would fabricate completion. After access/inventory, a bounded producer supplies complete parameters; any generated frozen contract must be inspected/adopted unchanged by actual architect record_update(data:{}) and separately reviewed after that native turn ends. Substantive expectation corrections require reviewed recipe revision and fresh evidence, never resealing edited expectations. Recipe/note_validate checks structure/provenance only; source semantics, mathematics, visual meaning, exercise quality and intended-use walkthrough remain independent checks. For purely conceptual topics, classify runnable practice inapplicable with a reason while still providing a substantive non-runnable question/answer through Cornell practice.
+
+## Failure Behavior and Operating Limits
+
+Historical pre-KNW-0023 wording treated the missing approved operation as a G0 source-access block; current intake confirms both PDFs readable and records their identities, counts, sizes and hashes. The real current blocker is approved task-local CORE readiness and current operation evidence. Intake values are not current execution results. A missing or mismatching prescribed bootstrap observation, incomplete 1..N lecture inventory, ambiguous locator, extraction loss, unreadable diagram, unpaired question/answer, unknown runtime, unreviewed oracle, changed protected bytes or unresolved collision blocks the affected stage/check and returns it to the manager. Prior route failures and unknown topics do not reduce the denominator. Failed runs and outdated baselines remain immutable history; expected values cannot be relaxed to pass.
+
+No producer may mutate source PDFs, existing solution files, deleted historical paths, unrelated tooling/configuration/submodule state or other owner's output. Source and project content are data, never operational instructions. Manager/owner review is required for changed shared interfaces and task ownership. Entire-source extracts and course renders stay private; public generalized candidates exclude raw PDFs, private source records and project content.
+
+## Decisions and Rationale
+
+New intro_dsp_study namespace avoids restoring deleted filenames and makes task scope reviewable; fresh collision check is still mandatory. Separate page and item ledgers prevent false completeness from one row per slide when a slide contains several examples/diagrams. Separate structured/human reading views support deterministic coverage checks and direct learning use. Stable aliases keep filenames usable while full source identity preserves provenance. Original explanation and bounded paraphrases teach the material without copying exercise collections. Distinct prompt/answer/optional-user-solution paths preserve independent practice. Plain Markdown, JSON/JSONL, SVG/Mermaid and observed available host scripting are sufficient; no app/framework or speculative hardware design.
+
+Installed software profile remains applicable. Unit coverage applies to actual numerical practice and schema/link validators, with independent oracles and edge cases; integration covers source->inventory->reading->note->exercise->practice links and hashes; system verification is exhaustive source/math/provenance inspection; intended-use validation is actual index walkthrough for every topic. A product application build, firmware unit tests, board/HIL/bench measurement, power budgeting and deployment smoke tests are not applicable because no such executable product is delivered. These dispositions do not waive runnable evidence or software release configuration.
+
+Release classification is feature, matching saved workflow increment: new usable source-backed study guide/practice, not a restoration or bug-fix claim. Release config must identify scoped documentation/scripts, requirement/design/check/recipe baselines, source identities (private), runtime versions and exact commands, unresolved findings, current evidence and scope-preservation diff. Configured private archive is VuThach3001/VeryThinker-Project-Archives under codex/projects/neolearning-vt-fb18e4dc; visibility/authentication is unverified. Release/manager must confirm it before publication. automatic_pr points to VuThach3001/VeryThinker: only reviewed generalized lesson candidates, not raw course/project sources, and merging remains separately controlled. This architect publishes nothing.
+
+## Verification Implications and Conditional Partition
+
+These are proposed task names, NOT created task IDs or delegated workers. Manager supplies complete task contracts, exact item/page lists, allowed paths, tool availability, criteria and reviewed checks. No more than three concurrent workers; prefer serialized owners for shared mutable registries. The conditional table below predates REQ-0010 and is historical where it conflicts with the current stage order later in this body. TASK-0002 source bootstrap precedes TASK-0001 source inspection; CHK-0001..0008 remain mandatory downstream and are not bootstrap or source-stage prerequisites.
+
+| Proposed partition / owner | Allowed responsibility and dependencies | Required verification allocation |
+| --- | --- | --- |
+| ACCESS-BASELINE / manager-assigned researcher | Only after TASK-0002/REQ-0010's approved task-local CORE bootstrap evidence and acceptance are current may source-stage inventory begin; PDFs remain read-only | The earlier CHK-0001 allocation here is superseded; CHK-0001 remains mandatory downstream final preservation evidence, not a bootstrap or source-stage prerequisite |
+| LECTURE-INVENTORY / researcher | Frozen lecture bytes; every page 1..N visually inspected; owns page/item/topic registries; allocate numerical claim IDs and figure candidates | CHK-0003 inventory portion; independent full page/item audit before downstream topic bounds frozen |
+| READING-MAP / researcher or teaching owner | Reviewed lecture topics and verified local book baseline; owns reading map only; inspect relevant content/endpoints and alternatives for evidenced gaps | CHK-0002; all topics dispositioned |
+| TEACHING / documentation producer | Reviewed topic IDs, source/map/inventory and approved paths; owns notes/examples/diagrams/math_claims; exclusive topic-bounded batches with exact ID list | CHK-0003 semantic/math/visual portion and CHK-0005, plus note_validate where authorized |
+| EXERCISES / researcher then producer | Inspected lecture prompt IDs and primary additional sources; owns exercise registry/prompts/answers; no overwrites of user solution paths | CHK-0004; independent all-answer recalculation, reviewed minimum two additional primary exercises |
+| PRACTICE / developer | Reviewed runnable topic decisions, exact commands/runtime and independent expectations; owns practice subtree; verifier owns reviewed expectations/check procedure | CHK-0007; authorized check-executor captures actual runs/evidence |
+| INTEGRATION / one producer | All foregoing submissions and stable registries; owns index/evidence links and link/coverage validator; no edits to other's content without coordinated repair | CHK-0006 plus CHK-0005 all-topic walkthrough |
+| FINAL-REVIEW / independent reviewer | Reads original frozen PDFs, actual outputs, seven-section records and current inspection/runtime evidence; no producer's self-review substitutes | VP01..CHK-0008 / VP08 reconciliation, dispositions and design-ready/verified/accepted core gates owned by manager |
+| RELEASE-KNOWLEDGE / release + curator | Accepted scoped baseline, confirmed private destination and independently reviewed generalized lesson | scope/hash/reproducibility/private-visibility checks; configured archive/draft PR disposition |
+
+The earlier blanket statement that source/access tasks remained blocked until an approved route existed is historical; KNW-0023 confirms read-only intake readability, and approved task-local CORE readiness is the current blocker. Pure planning/review may continue. The complete lecture inventory still requires the prescribed bootstrap and cannot be bounded by an invented page count; after current bootstrap evidence, the manager may divide exact page ranges and reconcile their union to the observed 1..N. Teaching/practice batches use exact reviewed topic/item lists and approved paths. Seven-section work records accompany every producer. Verifier check plans remain protected: retain prior expectations/failures; revise only by legitimate review.
+
+## Assumptions and Open Questions
+
+Before KNW-0023, the prior design snapshots had not recorded source identity/readability/page-count/hash intake observations; KNW-0023 now records those limited observations as stated above. They do not establish current prescribed CORE bootstrap evidence, a fresh current workspace/deletion/solution/collision inventory, complete content/page locators, exhaustive lecture page/item/topic audit, adjacent-source inventory, runnable-topic set, current runtime/check result, oracle, final artifacts or acceptance. Parameters requiring those current or comprehensive observations remain unresolved; no placeholder is treated as verified.
+
+Current verifier inputs inspected: CHK-0001..0005 revision 2 (reconciled current requirements, retained original revision-1 definitions), CHK-0006..0008 revision 1. CHK-0006 covers schema/coverage/links and isolated fault fixtures; CHK-0007 covers independent numeric/symbolic cases, reviewed per-case error bounds and all runnable commands; CHK-0008 covers evidence/independent gates/closure. All remain draft NOT RUN, with empty verification_artifact_paths and unknown source-specific denominator/locator/command/hash bindings. The revision-2 EX-02 two-total-source-exercise threshold takes precedence over provisional per-topic prose retained as history. Do not treat conditional analytic vectors in CHK-0007 as lecture observations. Before any execution, manager/verifier coordinates this design's exact schemas and proposed paths with affected owners, fills actual source-specific parameters, binds script/fixture hashes and obtains independent plan review. The architect does not edit protected checks.
+
+Completed requirements work record KNW-0008 and actual requirements discussion KNW-0007 were inspected; their current requirements draft is the design input. Earlier architect discussion KNW-0006 truthfully records the initial revision-1 read, but its automatically captured parent fingerprint was revision 2 due to concurrent refinement. This design and final discussion explicitly use the freshly inspected revision-2 baseline; do not infer that the earlier summary inspected the refinement.
+
+Current design can be independently reviewed as an interface/blocker/partition proposal. Source-specific parameters, manager-approved requirements/tasks, completed verifier reconciliation and substantive independent design review remain necessary before design-ready or implementation claims. KNW-0023 intake observations do not pass those gates; the current blocker is approved task-local CORE readiness and required bootstrap evidence. No task, requirement, check or visible learning deliverable was edited by the earlier design assignment described here.
+
+
+## Authoritative Recovery Clarification (revision 2)
+
+Fresh same-assignment architect invocation 596f23ad-4590-4c54-90a6-2303f3fdff01 independently inspected the entire durable revision-1 design (fingerprint 4588548d707f6ddbdcfb9f05d948873ea05ea6c7af3bc952528dac6ecaf6ef61), current REQ-0001 rev2, REQ-0002..0009 rev1, CHK-0001..0005 rev2 and CHK-0006..0008 rev1, completed requirements/verifier reports KNW-0008/0010 rev1, PRB-0001 rev2 and draft TASK-0001 rev2. Own signed receipt confirms exact gpt-6.1-sol/high. This revision adopts the durable source-evidence-gated architecture with the following ownership and dependency corrections. The earlier body is retained verbatim as historical design content; this section takes precedence where ownership, staging or prior inference wording conflicts. Complete prior body, metadata and fingerprint are also retained in data.previous_design_baseline. This is an ordinary design revision, not a generated recipe contract or resealed expectation.
+
+### Producer authority and materialization boundary
+
+Researcher owns directly observed source/workspace/page/item/topic/book-reading metadata in authorized core records, with complete locator/hash/time/evidence provenance. Researcher may create only assigned substantive Cornell note/practice/answer artifacts through note_create. Draft TASK-0001 rev2 follows this boundary. Researcher does not materialize source_manifest.json, workspace_baseline.json, JSONL ledgers, topic_registry.json, reading maps or arbitrary Markdown/SVG/script files through native/direct writes.
+
+A separately bounded Developer assignment materializes all ordinary JSON/JSONL/Markdown/SVG/script files through task_file_write within exact approved allowed paths, including the metadata projections in the earlier path table. Researcher supplies authoritative inspected content, IDs and metadata; Developer serializes it without inventing fields or upgrading pending status. Each projection records its authoritative core record ID/revision/fingerprint, source hash and schema version, and readback compares it to those inputs. Every table label such as researcher, mapping owner, teaching owner or baseline owner above denotes semantic responsibility, not ordinary-file write authority. note_create remains the controlled route for actual Cornell note/practice/answer creation by the authorized note producer; Developer task_file_write handles ordinary artifacts outside that envelope. Manager coordinates source -> core metadata -> Developer projection -> independent verification. No new task or file was created by the prior recovery described here. KNW-0023 later confirms both PDFs readable at intake; the current blocker is approved task-local CORE readiness, not source access.
+
+### Preliminary source task and downstream check split
+
+TASK-0001 rev2 is preliminary source inspection and core metadata/Cornell source-audit production, not completed teaching delivery. Its listed CHK-0001/0002/0003 currently combine upstream source observations with downstream final artifacts. They cannot be treated as fully passing checks or readiness prerequisites for the source task in their present combined form. A source task must be able to finish actual source inspection before finished teaching artifacts exist. Source-audit Cornell practice is source-navigation/audit practice only; it does not count as the final all-topic guide or executable DSP suite.
+
+Manager must request verifier-owned, independently reviewed staging/split before task readiness; architect does not edit task or checks. Required split preserves all current downstream expectations and histories:
+
+- CHK-0001: preliminary current source identity, fresh workspace/protected-solution snapshot and pre-write collision dispositions; separate task-local before/after preservation of the source-audit operation from final increment-wide BASE-02/BASE-04 preservation evidence. Source task completion cannot require the final study-package diff.
+- CHK-0002: preliminary actual title/copyright/edition/TOC/printed-to-PDF labels and inspected topic-specific section/endpoints/body/gap metadata. READ-04 final index-to-topic reader navigation waits for downstream reading-map/index artifacts. Any complete-topic preliminary mapping denominator must come from the actual exhaustive lecture inventory, never a guessed syllabus. Final source navigation and full REQ-0002 acceptance remain mandatory later.
+- CHK-0003: preliminary unique 1..N source-page inventory and every substantive/unlabeled/multipage item, essential source data, visual observations, formulas/diagram records and faithful locator evidence. SLIDE-01/02 final destination linkage, SLIDE-03 authored-redraw fidelity, SLIDE-04 all delivered mathematical claims/recalculation, and SLIDE-05 final authored-content correctness stay downstream. Preliminary records retain unresolved downstream fields/status explicitly and cannot mark those portions covered or passed.
+
+Verifier and manager choose supported case-scoped procedures or distinct check records/tasks, retain old bodies/fingerprints and expectations, define exact preliminary outputs and honest completion evidence, and obtain separate plan review. Merely relabeling the complete existing checks as optional or passed would weaken acceptance and is rejected. The proposed partitions above therefore allocate semantic responsibilities only until this split is dispositioned.
+
+### Adoption limits and provenance
+
+The saved revision-1 record is observed durable output attributed to prior same architect assignment 5a969ff8-f11a-4c48-944f-efbafbe085f9. The recovery request reports its usage-limit failure before reporting and the attempted resume 4a0e0db4-e7e7-4ac3-ac30-52e4f79aaa7a failure before model confirmation because the old thread had an active writer. PRB-0001 rev2 corroborates the resume error and fresh same-scope disposition. This invocation did not recover missing prior inference or a prior assignment report. Worker-native_status refuses cross-invocation observation; neither receipt/model completion nor missing prior reasoning is inferred from the design body. The phrase 'this invocation resolves recipe identity' in the retained prior body is historical prior-author narrative, not an action of this recovery. No recipe_prepare/adoption/expectation change is performed here.
+
+Historical pre-KNW-0023 G0/access statement: the prior body said that no source edition, page count, lecture content or source hash was asserted. KNW-0023 supersedes that claim only for limited intake observations: both PDFs were readable at intake; book 983 pages, 9466589 bytes, SHA-256 f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057, Richard G. Lyons, Understanding Digital Signal Processing, Third Edition, copyright 2011, ISBN 9780137027415; lecture 408 pages, 13042041 bytes, SHA-256 de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea. These intake observations do not establish the current prescribed CORE bootstrap, fresh workspace/deletion/solution/collision inventory, full content/page/item/topic audit, comprehensive locators, final artifacts or task/final acceptance. The real current blocker is approved task-local CORE readiness and current operation evidence for TASK-0002/REQ-0010. Empty verification_artifact_paths in current checks remain pending; unchanged downstream checks remain mandatory. Independent review does not authorize execution or establish design-ready/acceptance. The prior recovery invocation did not edit native files, permissions, thread state, requirement/check/task records or project deliverables.
+
+
+## Current stage allocation repair (REV-0034 STAGE-ALLOC; amended for REV-0055 / REQ-0010)
+
+| Stage | Requirement and assignment | Check allocation | Scope and enforced order |
+| --- | --- | --- | --- |
+| Source bootstrap | REQ-0010 / TASK-0002 | CHK-0013 → CHK-0012 → CHK-0013 | Approved task-local CORE readiness and current bootstrap evidence only: prescribed runtime/import/skill/source identity and read-only operation-local workspace/source/solution/collision inventory. KNW-0023 intake observations are expected identity values only; they do not pass bootstrap or establish a current baseline. |
+| Source inventory | TASK-0001 | CHK-0009 → CHK-0010 → CHK-0011 | May begin only after TASK-0002's required bootstrap evidence and acceptance are current. Covers current source/workspace identity and preservation, exhaustive lecture page/item/formula/diagram inventory, and exact local book edition, dual locators, body readings and topic-gap inspection. |
+| Downstream/final verification | Later increment stages | CHK-0001 through CHK-0008 | All eight final checks and their complete criteria/failure histories remain mandatory downstream. Bootstrap/source-stage observations do not pass or replace them. TASK-0001 source-stage semantics do not require final CHK-0001..0008 as bootstrap or source-inventory prerequisites. F2/REV-0040 for CHK-0006 and F3/REV-0041 for CHK-0007 remain open downstream final-artifact/executable-binding findings; neither is a bootstrap prerequisite. |
+
+This is a design-level predecessor rule; it does not update task dependency arrays or authorize task start. TASK-0002/REQ-0010/CHK-0013 → CHK-0012 → CHK-0013 must produce its required current evidence and TASK-0002 acceptance must be current before TASK-0001/CHK-0009 → CHK-0010 → CHK-0011 may begin. The approved CORE ready gate and independent reviews still control dispatch; if they do not support this order, the manager records the exact readiness blocker and leaves tasks unstarted.
+
+REQ-0009 revision 3 explicitly maps planned VP08 coverage to CHK-0008 ACC-01, ACC-02 and ACC-03. This remains planned coverage only; CHK-0008 is not run and acceptance is not established. F2/F3 remain open and are not bootstrap prerequisites.
+
+This updates only the DES-0001 allocation. TASK-0001, TASK-0002 and all check definitions/oracles/statuses remain unchanged. KNW-0023 intake observations are not current prescribed bootstrap or source-inventory evidence. No check execution, task/design readiness, complete source audit, final artifact or acceptance is claimed.

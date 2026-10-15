@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "project_id": "VT-FB18E4DC",
+  "captured_at": "2026-10-13T02:46:49.277Z",
+  "provenance": "captured-before-execution",
+  "files": {
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_Syllabus-ME4083_XLTH-cho-các-hệ-thống-cdt.pdf": {
+      "hash": "46131c8b216e5ea7c16446f4159f32b1b18c35432fe2cbeaaa59a1b55aecbb79",
+      "blob_path": ".verythinker/evidence/inputs/blobs/46131c8b216e5ea7c16446f4159f32b1b18c35432fe2cbeaaa59a1b55aecbb79",
+      "bytes": 384104
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/00_Intro.pdf": {
+      "hash": "de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea",
+      "blob_path": ".verythinker/evidence/inputs/blobs/de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea",
+      "bytes": 13042041
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/01_DS_FT_a.pdf": {
+      "hash": "32e299c8707a95a5eb5872fec4e165fc477e1cad1ea415aba6007bdf1a3fdb59",
+      "blob_path": ".verythinker/evidence/inputs/blobs/32e299c8707a95a5eb5872fec4e165fc477e1cad1ea415aba6007bdf1a3fdb59",
+      "bytes": 2253889
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/01_DS_FT_b.pdf": {
+      "hash": "c42070c179e30b929756ba9b7571a12045c1cad521bfcf86a9ea4bbd8d451577",
+      "blob_path": ".verythinker/evidence/inputs/blobs/c42070c179e30b929756ba9b7571a12045c1cad521bfcf86a9ea4bbd8d451577",
+      "bytes": 1518281
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/02_DS_LTI_Convo.pdf": {
+      "hash": "72a323287d88ebf9c5e99af878e55917f71661d59b8cb8a1804d75fcef8b282b",
+      "blob_path": ".verythinker/evidence/inputs/blobs/72a323287d88ebf9c5e99af878e55917f71661d59b8cb8a1804d75fcef8b282b",
+      "bytes": 2989888
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/03_DS_z.pdf": {
+      "hash": "7e767a903de09da6c49bda047a4a6d1eac56c680119fe006aeef6357381012ff",
+      "blob_path": ".verythinker/evidence/inputs/blobs/7e767a903de09da6c49bda047a4a6d1eac56c680119fe006aeef6357381012ff",
+      "bytes": 1457486
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/04_DS_FFT.pdf": {
+      "hash": "c87865bc4b497db0112976cab92d9c636fdc5a6a4ee0326e4140faa190dc617f",
+      "blob_path": ".verythinker/evidence/inputs/blobs/c87865bc4b497db0112976cab92d9c636fdc5a6a4ee0326e4140faa190dc617f",
+      "bytes": 1265939
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/05_DS_Filter.pdf": {
+      "hash": "38449c77416efc515524b586d0af6d0e70da3b7e4cc529deae96544159fb5534",
+      "blob_path": ".verythinker/evidence/inputs/blobs/38449c77416efc515524b586d0af6d0e70da3b7e4cc529deae96544159fb5534",
+      "bytes": 1505684
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/06_DS_Multirate.pdf": {
+      "hash": "4b3af269df315e5dc75f2a33f06d4db6cbdc7bf5ce1faa85c39592e939c09d82",
+      "blob_path": ".verythinker/evidence/inputs/blobs/4b3af269df315e5dc75f2a33f06d4db6cbdc7bf5ce1faa85c39592e939c09d82",
+      "bytes": 5070325
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/DS_OnTap.pdf": {
+      "hash": "c6bf661149d56a28eea751cf268ad927b4914e7bb2ccda68c725c23609eb3b8e",
+      "blob_path": ".verythinker/evidence/inputs/blobs/c6bf661149d56a28eea751cf268ad927b4914e7bb2ccda68c725c23609eb3b8e",
+      "bytes": 3601645
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/02-references.pdf": {
+      "hash": "e18586eb6d21b0d944cf7bba6f41f31de46343ed08a9165290f575d9d397f7f9",
+      "blob_path": ".verythinker/evidence/inputs/blobs/e18586eb6d21b0d944cf7bba6f41f31de46343ed08a9165290f575d9d397f7f9",
+      "bytes": 784630
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/03-Understanding-Digital-Signal-Processing.pdf": {
+      "hash": "f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057",
+      "blob_path": ".verythinker/evidence/inputs/blobs/f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057",
+      "bytes": 9466589
+    }
+  },
+  "records": {
+    "VT-FB18E4DC-CHK-0013": {
+      "hash": "580fe696aeafd53e2f8dd255712d935b9e5ad010f692821bf0acdbe23670d3b7",
+      "blob_path": ".verythinker/evidence/inputs/blobs/580fe696aeafd53e2f8dd255712d935b9e5ad010f692821bf0acdbe23670d3b7",
+      "bytes": 26333,
+      "path": ".verythinker/records/VT-FB18E4DC-CHK-0013.md",
+      "fingerprint": "d4d328d2f043fb687b9094bd17039921743b9d341e38f25d105b65bac7bc8a89",
+      "revision": 4
+    },
+    "VT-FB18E4DC-DES-0001": {
+      "hash": "5d0f3ea9a74dde53c394c840dc0cc71c204503286e9c3e985abc82d1d90e311d",
+      "blob_path": ".verythinker/evidence/inputs/blobs/5d0f3ea9a74dde53c394c840dc0cc71c204503286e9c3e985abc82d1d90e311d",
+      "bytes": 158031,
+      "path": ".verythinker/records/VT-FB18E4DC-DES-0001.md",
+      "fingerprint": "1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085",
+      "revision": 6
+    },
+    "VT-FB18E4DC-REQ-0001": {
+      "hash": "0467842ac58688ba5c3f184aa40a2556219adcf7b6ab7ab4e22b578bd806679a",
+      "blob_path": ".verythinker/evidence/inputs/blobs/0467842ac58688ba5c3f184aa40a2556219adcf7b6ab7ab4e22b578bd806679a",
+      "bytes": 21730,
+      "path": ".verythinker/records/VT-FB18E4DC-REQ-0001.md",
+      "fingerprint": "3910ed7d981d5434c94b104ad999ba322afd426430bf90983af15628f7ba7833",
+      "revision": 3
+    },
+    "VT-FB18E4DC-REQ-0010": {
+      "hash": "da32807823dc0c864e632f9ef6c5a3701101e2918dc5ef1b465eb8b3cb1ab6ab",
+      "blob_path": ".verythinker/evidence/inputs/blobs/da32807823dc0c864e632f9ef6c5a3701101e2918dc5ef1b465eb8b3cb1ab6ab",
+      "bytes": 14701,
+      "path": ".verythinker/records/VT-FB18E4DC-REQ-0010.md",
+      "fingerprint": "89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f",
+      "revision": 2
+    },
+    "VT-FB18E4DC-TASK-0002": {
+      "hash": "02986ee4be3167f28e5b73d97e46c14481d34137858602d9e98be3fe6cf811d7",
+      "blob_path": ".verythinker/evidence/inputs/blobs/02986ee4be3167f28e5b73d97e46c14481d34137858602d9e98be3fe6cf811d7",
+      "bytes": 12430,
+      "path": ".verythinker/records/VT-FB18E4DC-TASK-0002.md",
+      "fingerprint": "c90e64a64a6622ea5132d90b569e2ec696b1af02bced13adf76dc1b80cea809f",
+      "revision": 15
+    }
+  },
+  "context_files": {
+    ".verythinker/config.json": {
+      "hash": "8aa4bd0d88d90312e421f38821e4c3c1068a29df9d351e2e7c14ebcc3af46ede",
+      "blob_path": ".verythinker/evidence/inputs/blobs/8aa4bd0d88d90312e421f38821e4c3c1068a29df9d351e2e7c14ebcc3af46ede",
+      "bytes": 373
+    },
+    ".verythinker/native-runtime.lock.json": {
+      "hash": "4e68159b8930caaf680df2d17609cca7a241b7ea282e88a5e2d4687368bc8ce4",
+      "blob_path": ".verythinker/evidence/inputs/blobs/4e68159b8930caaf680df2d17609cca7a241b7ea282e88a5e2d4687368bc8ce4",
+      "bytes": 780
+    },
+    ".verythinker/native/keys/ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55.pem": {
+      "hash": "ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55",
+      "bytes": 113
+    },
+    ".verythinker/native/receipts/dd730282-aa88-461e-8a54-ef7741716ad4.json": {
+      "hash": "c0354bf25a61916cecbd9e3cfcd97f96f1294cc6b099e196b68a274e4fe98d78",
+      "blob_path": ".verythinker/evidence/inputs/blobs/c0354bf25a61916cecbd9e3cfcd97f96f1294cc6b099e196b68a274e4fe98d78",
+      "bytes": 5776
+    },
+    ".verythinker/native/trust.json": {
+      "hash": "576022f519714539eaaab0f9bd9c73b4f51a5efb93681acaef117dd2ecff75c9",
+      "blob_path": ".verythinker/evidence/inputs/blobs/576022f519714539eaaab0f9bd9c73b4f51a5efb93681acaef117dd2ecff75c9",
+      "bytes": 114
+    },
+    ".verythinker/pack-lock.json": {
+      "hash": "ca4b8ad30dc37ec95ba3cf435016d08f07c2580c1825340c15bf60df988defe9",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ca4b8ad30dc37ec95ba3cf435016d08f07c2580c1825340c15bf60df988defe9",
+      "bytes": 346
+    },
+    ".verythinker/packs/engineering-basics/0.1.0/README.md": {
+      "hash": "6923d5a7cf972c6515fec2b4a46cb45b5e4f9ae6a5687ad32a2bd6d0786e281d",
+      "blob_path": ".verythinker/evidence/inputs/blobs/6923d5a7cf972c6515fec2b4a46cb45b5e4f9ae6a5687ad32a2bd6d0786e281d",
+      "bytes": 1544
+    },
+    ".verythinker/packs/engineering-basics/0.1.0/pack.json": {
+      "hash": "50da08512935da917820e020c758e3cc69a2b5822d02a5219881625e28342cf4",
+      "blob_path": ".verythinker/evidence/inputs/blobs/50da08512935da917820e020c758e3cc69a2b5822d02a5219881625e28342cf4",
+      "bytes": 782
+    },
+    ".verythinker/routing.json": {
+      "hash": "6646ce06d5021e0548559cce4421b5000642fd1e61b8687ba891d90367992e01",
+      "blob_path": ".verythinker/evidence/inputs/blobs/6646ce06d5021e0548559cce4421b5000642fd1e61b8687ba891d90367992e01",
+      "bytes": 251
+    },
+    ".verythinker/tool-lock.json": {
+      "hash": "ab517f76a5cbc921d870fb2293ccd712144c4901a0a5e479142b3a2ca01f88c3",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ab517f76a5cbc921d870fb2293ccd712144c4901a0a5e479142b3a2ca01f88c3",
+      "bytes": 498
+    },
+    ".verythinker/tool-locks/codegraph-1.6.2.json": {
+      "hash": "b5eefaf61c8f52a71272f90edbe4eb953e9dcb9035118058b8920661ecb2f695",
+      "blob_path": ".verythinker/evidence/inputs/blobs/b5eefaf61c8f52a71272f90edbe4eb953e9dcb9035118058b8920661ecb2f695",
+      "bytes": 3626
+    },
+    ".verythinker/tools.json": {
+      "hash": "1a225fe4d66e6829e2b99c7cf820d488c918efd5657b74f6601f60cd0104ff1b",
+      "blob_path": ".verythinker/evidence/inputs/blobs/1a225fe4d66e6829e2b99c7cf820d488c918efd5657b74f6601f60cd0104ff1b",
+      "bytes": 136
+    }
+  },
+  "absent_context": [
+    ".verythinker/recipe-lock.json"
+  ],
+  "configuration_hashes": {
+    ".codex/config.toml": "9862bad0682a622fafe9fd8941b75cbaaa23cdaaa81dccbbeace04867d650523"
+  }
+}

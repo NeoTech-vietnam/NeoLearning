@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "project_id": "VT-FB18E4DC",
+  "captured_at": "2026-10-14T04:24:07.283Z",
+  "provenance": "captured-before-execution",
+  "files": {
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/03-Understanding-Digital-Signal-Processing.pdf": {
+      "hash": "f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057",
+      "blob_path": ".verythinker/evidence/inputs/blobs/f2ae2b5d68b8809a040de28d98ac2a614163d37e85259453a96e70791f0eb057",
+      "bytes": 9466589
+    },
+    "07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/01_lectures/00_Intro.pdf": {
+      "hash": "de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea",
+      "blob_path": ".verythinker/evidence/inputs/blobs/de60eb0ab30b67e3d59f94a426795fcdea0232809c096435dbd77e444ae1dbea",
+      "bytes": 13042041
+    }
+  },
+  "records": {
+    "VT-FB18E4DC-CHK-0012": {
+      "hash": "1c738d92b1cef5b18c7acfd41fd2b6feef4d81a9de2ce38e8f918ad50f15e9a6",
+      "blob_path": ".verythinker/evidence/inputs/blobs/1c738d92b1cef5b18c7acfd41fd2b6feef4d81a9de2ce38e8f918ad50f15e9a6",
+      "bytes": 68543,
+      "path": ".verythinker/records/VT-FB18E4DC-CHK-0012.md",
+      "fingerprint": "92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd",
+      "revision": 8
+    },
+    "VT-FB18E4DC-DES-0001": {
+      "hash": "bc95a7ccae5517f3439ad4bdd9b3d7ee3328573d32a5b2aa4b713ac7e017c544",
+      "blob_path": ".verythinker/evidence/inputs/blobs/bc95a7ccae5517f3439ad4bdd9b3d7ee3328573d32a5b2aa4b713ac7e017c544",
+      "bytes": 160618,
+      "path": ".verythinker/records/VT-FB18E4DC-DES-0001.md",
+      "fingerprint": "a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d",
+      "revision": 7
+    },
+    "VT-FB18E4DC-REQ-0001": {
+      "hash": "0467842ac58688ba5c3f184aa40a2556219adcf7b6ab7ab4e22b578bd806679a",
+      "blob_path": ".verythinker/evidence/inputs/blobs/0467842ac58688ba5c3f184aa40a2556219adcf7b6ab7ab4e22b578bd806679a",
+      "bytes": 21730,
+      "path": ".verythinker/records/VT-FB18E4DC-REQ-0001.md",
+      "fingerprint": "3910ed7d981d5434c94b104ad999ba322afd426430bf90983af15628f7ba7833",
+      "revision": 3
+    },
+    "VT-FB18E4DC-REQ-0010": {
+      "hash": "da32807823dc0c864e632f9ef6c5a3701101e2918dc5ef1b465eb8b3cb1ab6ab",
+      "blob_path": ".verythinker/evidence/inputs/blobs/da32807823dc0c864e632f9ef6c5a3701101e2918dc5ef1b465eb8b3cb1ab6ab",
+      "bytes": 14701,
+      "path": ".verythinker/records/VT-FB18E4DC-REQ-0010.md",
+      "fingerprint": "89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f",
+      "revision": 2
+    },
+    "VT-FB18E4DC-TASK-0004": {
+      "hash": "b700cbb6962e0e0411f581ee3f6b130dd3327a2a1c0e8c4dec9f9454146d2780",
+      "blob_path": ".verythinker/evidence/inputs/blobs/b700cbb6962e0e0411f581ee3f6b130dd3327a2a1c0e8c4dec9f9454146d2780",
+      "bytes": 37597,
+      "path": ".verythinker/records/VT-FB18E4DC-TASK-0004.md",
+      "fingerprint": "f5aa9378c074a2dbfae7a82ee5e68cf937f176f5f0a61fe553df9aade3a5270d",
+      "revision": 8
+    }
+  },
+  "context_files": {
+    ".verythinker/config.json": {
+      "hash": "8aa4bd0d88d90312e421f38821e4c3c1068a29df9d351e2e7c14ebcc3af46ede",
+      "blob_path": ".verythinker/evidence/inputs/blobs/8aa4bd0d88d90312e421f38821e4c3c1068a29df9d351e2e7c14ebcc3af46ede",
+      "bytes": 373
+    },
+    ".verythinker/native-runtime.lock.json": {
+      "hash": "4e68159b8930caaf680df2d17609cca7a241b7ea282e88a5e2d4687368bc8ce4",
+      "blob_path": ".verythinker/evidence/inputs/blobs/4e68159b8930caaf680df2d17609cca7a241b7ea282e88a5e2d4687368bc8ce4",
+      "bytes": 780
+    },
+    ".verythinker/native/keys/ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55.pem": {
+      "hash": "ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55",
+      "bytes": 113
+    },
+    ".verythinker/native/receipts/78ba19c1-f34c-408c-a882-145675696c5e.json": {
+      "hash": "f07c32eb024dd3d41f9abc34a098209f7e6e545ad5bb1169f79ff05a339d51ad",
+      "blob_path": ".verythinker/evidence/inputs/blobs/f07c32eb024dd3d41f9abc34a098209f7e6e545ad5bb1169f79ff05a339d51ad",
+      "bytes": 4279
+    },
+    ".verythinker/native/trust.json": {
+      "hash": "576022f519714539eaaab0f9bd9c73b4f51a5efb93681acaef117dd2ecff75c9",
+      "blob_path": ".verythinker/evidence/inputs/blobs/576022f519714539eaaab0f9bd9c73b4f51a5efb93681acaef117dd2ecff75c9",
+      "bytes": 114
+    },
+    ".verythinker/pack-lock.json": {
+      "hash": "ca4b8ad30dc37ec95ba3cf435016d08f07c2580c1825340c15bf60df988defe9",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ca4b8ad30dc37ec95ba3cf435016d08f07c2580c1825340c15bf60df988defe9",
+      "bytes": 346
+    },
+    ".verythinker/packs/engineering-basics/0.1.0/README.md": {
+      "hash": "6923d5a7cf972c6515fec2b4a46cb45b5e4f9ae6a5687ad32a2bd6d0786e281d",
+      "blob_path": ".verythinker/evidence/inputs/blobs/6923d5a7cf972c6515fec2b4a46cb45b5e4f9ae6a5687ad32a2bd6d0786e281d",
+      "bytes": 1544
+    },
+    ".verythinker/packs/engineering-basics/0.1.0/pack.json": {
+      "hash": "50da08512935da917820e020c758e3cc69a2b5822d02a5219881625e28342cf4",
+      "blob_path": ".verythinker/evidence/inputs/blobs/50da08512935da917820e020c758e3cc69a2b5822d02a5219881625e28342cf4",
+      "bytes": 782
+    },
+    ".verythinker/routing.json": {
+      "hash": "6646ce06d5021e0548559cce4421b5000642fd1e61b8687ba891d90367992e01",
+      "blob_path": ".verythinker/evidence/inputs/blobs/6646ce06d5021e0548559cce4421b5000642fd1e61b8687ba891d90367992e01",
+      "bytes": 251
+    },
+    ".verythinker/tool-lock.json": {
+      "hash": "ab517f76a5cbc921d870fb2293ccd712144c4901a0a5e479142b3a2ca01f88c3",
+      "blob_path": ".verythinker/evidence/inputs/blobs/ab517f76a5cbc921d870fb2293ccd712144c4901a0a5e479142b3a2ca01f88c3",
+      "bytes": 498
+    },
+    ".verythinker/tool-locks/codegraph-1.6.2.json": {
+      "hash": "b5eefaf61c8f52a71272f90edbe4eb953e9dcb9035118058b8920661ecb2f695",
+      "blob_path": ".verythinker/evidence/inputs/blobs/b5eefaf61c8f52a71272f90edbe4eb953e9dcb9035118058b8920661ecb2f695",
+      "bytes": 3626
+    },
+    ".verythinker/tools.json": {
+      "hash": "1a225fe4d66e6829e2b99c7cf820d488c918efd5657b74f6601f60cd0104ff1b",
+      "blob_path": ".verythinker/evidence/inputs/blobs/1a225fe4d66e6829e2b99c7cf820d488c918efd5657b74f6601f60cd0104ff1b",
+      "bytes": 136
+    }
+  },
+  "absent_context": [
+    ".verythinker/recipe-lock.json"
+  ],
+  "configuration_hashes": {
+    ".codex/config.toml": "9862bad0682a622fafe9fd8941b75cbaaa23cdaaa81dccbbeace04867d650523"
+  }
+}

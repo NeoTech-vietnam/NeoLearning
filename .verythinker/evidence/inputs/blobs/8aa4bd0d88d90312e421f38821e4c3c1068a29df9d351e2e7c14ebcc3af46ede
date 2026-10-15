@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "project_id": "VT-FB18E4DC",
+  "name": "My project",
+  "profile": "software",
+  "platforms": [
+    "codex",
+    "copilot"
+  ],
+  "models": {
+    "economy": {
+      "codex": "gpt-6-luna"
+    },
+    "balanced": {
+      "codex": "gpt-6-luna"
+    },
+    "strong": {
+      "codex": "gpt-6-luna"
+    }
+  },
+  "max_workers": 3,
+  "repair_attempts": 1
+}

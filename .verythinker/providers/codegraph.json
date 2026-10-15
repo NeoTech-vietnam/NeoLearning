@@ -1,0 +1,13 @@
+{
+  "id": "codegraph",
+  "package": "@colbymchenry/codegraph",
+  "version": "1.6.2",
+  "enabled": false,
+  "status": "unverified",
+  "required_checks": [
+    "windows",
+    "cpp",
+    "freshness"
+  ],
+  "note": "Legacy direct integration remains optional. The approved alpha.3 gateway installs this pinned provider when applicable and records freshness/availability."
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "package": "@openai/codex",
+  "version": "0.162.1",
+  "integrity": "sha512-NWZdi/kxyjv/8EUGFupziGU38YyleugZRM4JXgY5XFH7FUmaFA33NZS2Bmq0HPazf7S3jJQQWsZ/jAK9jsrV3Q==",
+  "protocol_sha256": "32f7919ff06f1506ecadf00082a0b45566d6f8baa4214401206f9d9b97b34a8c",
+  "launcher_sha256": "61b0194f3bb6534439c8d26a3ed57d0805f84b884588b761795323eeb92fcf70",
+  "binaries": {
+    "node_modules/@openai/codex-win32-x64/vendor/x86_64-pc-windows-msvc/bin/codex.exe": "dd13bdb162a184fa04039488b234a8258ef9b76f84e926c505d5742b19249a6a"
+  },
+  "dependencies": {
+    "node_modules/@openai/codex-win32-x64": {
+      "version": "0.162.1-win32-x64",
+      "integrity": "sha512-dfl4MhHuEi0ARKyNmrTxk+RQmsWNCQAoVLUtrYq+yrW1C8P2sg5ziwgHUUACHjYLKuACV7ARH5Nq5pnCz3GlaQ=="
+    }
+  }
+}

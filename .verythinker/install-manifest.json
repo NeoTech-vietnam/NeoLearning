@@ -1,0 +1,608 @@
+{
+  "schema_version": 1,
+  "version": "0.1.0-alpha.3.6",
+  "files": {
+    ".verythinker/roles/architect.md": {
+      "path": ".verythinker/roles/architect.md",
+      "kind": "file",
+      "hash": "ff8f482ed027110037196d846895622ca63f27208611736bd3ac47ea0104fa60",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/check-executor.md": {
+      "path": ".verythinker/roles/check-executor.md",
+      "kind": "file",
+      "hash": "db9d30d5e170589dc244a7fc0a030eb351f8411a9499e1a5b264f3d8cdf0d308",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/codebase-analyst.md": {
+      "path": ".verythinker/roles/codebase-analyst.md",
+      "kind": "file",
+      "hash": "173ad24b9157d9bdf71c2ba08e1fe5b9434b0375e818b12d26a04ed04614b350",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/component-owner.md": {
+      "path": ".verythinker/roles/component-owner.md",
+      "kind": "file",
+      "hash": "cd107fe7c00fe81a4fd62ace982dd5e81aaa05a2e8d2700d4d9f0e76eda40bb9",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/curator.md": {
+      "path": ".verythinker/roles/curator.md",
+      "kind": "file",
+      "hash": "048379b8daa99be784ee1275d29b543966db2f63e0276d23394101209c7e270d",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/developer.md": {
+      "path": ".verythinker/roles/developer.md",
+      "kind": "file",
+      "hash": "ebdc2287870db4627e118bedfef9f7dc6baef70bc6a7f50bd98b85b395cf0e6e",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/manager.md": {
+      "path": ".verythinker/roles/manager.md",
+      "kind": "file",
+      "hash": "6a452d871187dcf799b8f01fa50cf94a0461fc08593ffefbc0fc5e2f77f6326a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/release.md": {
+      "path": ".verythinker/roles/release.md",
+      "kind": "file",
+      "hash": "4eeb28e866cda770cb95903d8e6798db85f52bc2991c1ee0d45db2bf382d471e",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/requirements.md": {
+      "path": ".verythinker/roles/requirements.md",
+      "kind": "file",
+      "hash": "f965c93edc1b38038ac08c821bb1dd5b6a37dcc4a9819ffdbae7d4ace1562a98",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/researcher.md": {
+      "path": ".verythinker/roles/researcher.md",
+      "kind": "file",
+      "hash": "7318395e9a72cf1e0c454a4785a6bdfcc205128a7806b8e6ba7a49820912036a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/reviewer.md": {
+      "path": ".verythinker/roles/reviewer.md",
+      "kind": "file",
+      "hash": "a84b7a3473a85f07f299fae2745a7b55bae3c3769ab63c6c858897e58e9f646c",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/verifier.md": {
+      "path": ".verythinker/roles/verifier.md",
+      "kind": "file",
+      "hash": "888e8e05402626360ef595ee08088d243a9361ed4c234d7cc845fa0b97c2ba80",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/archive.md": {
+      "path": ".verythinker/guides/archive.md",
+      "kind": "file",
+      "hash": "4bdb146cd2429cd7a4990882198488965889dcd0b5bd57846fc62ea4420077b5",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/manager.md": {
+      "path": ".verythinker/guides/manager.md",
+      "kind": "file",
+      "hash": "bdd7d9dcd396c00685aabdf48a9de69aea5db52364cdd9f5c7ab56a2f5ec934a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/process.md": {
+      "path": ".verythinker/guides/process.md",
+      "kind": "file",
+      "hash": "2b85af598688a22ad5dd4e8783cf0beeb0eb09b601237680f320434032dc383a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/workflow.md": {
+      "path": ".verythinker/guides/workflow.md",
+      "kind": "file",
+      "hash": "e3e634edee8e72974d5617c7e6bc47d4799daf316f5b0ed39874f1a02bf5622f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/change.md": {
+      "path": ".verythinker/templates/change.md",
+      "kind": "file",
+      "hash": "8ffc71422146a0c39625b131749b74cfab22c0f4a81dd5d4e2d042bd984b1e04",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/check.md": {
+      "path": ".verythinker/templates/check.md",
+      "kind": "file",
+      "hash": "e85d62ec2d3e12effd666e2b3e7214b840840bec32ee52c3a686e713add6202a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/cornell-note.md": {
+      "path": ".verythinker/templates/cornell-note.md",
+      "kind": "file",
+      "hash": "8d98cad6ff345a4c65fe026aad8db3c0893f3f53a2b4622c9a74be59dce7f25d",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/design.md": {
+      "path": ".verythinker/templates/design.md",
+      "kind": "file",
+      "hash": "3490c4ca9c83275f24f3e52677d1ce820661930f813946d50674b44605a30901",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/evidence.md": {
+      "path": ".verythinker/templates/evidence.md",
+      "kind": "file",
+      "hash": "d723d596b190678790dff33bca19a6b07770eff12a4f4cbd705ea7c188090569",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/knowledge.md": {
+      "path": ".verythinker/templates/knowledge.md",
+      "kind": "file",
+      "hash": "a504857d4dc7fa9712c316a87402521b8cdd370f1abaa04695a630deed30c2cc",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/problem.md": {
+      "path": ".verythinker/templates/problem.md",
+      "kind": "file",
+      "hash": "fe4e6ba0a6c35ce65c259bc9a39cfccaba7ed8481ace41fda78684dd74bed3dd",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/requirement.md": {
+      "path": ".verythinker/templates/requirement.md",
+      "kind": "file",
+      "hash": "23629e8920394ba60af9f316e6fdfbf5e6ab58d4cfdd41c59aded58f259b3e0e",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/review.md": {
+      "path": ".verythinker/templates/review.md",
+      "kind": "file",
+      "hash": "9f4f227181fb8debc1ebf9a447433e40525e733a405382b21f7e118832cd75e8",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/task.md": {
+      "path": ".verythinker/templates/task.md",
+      "kind": "file",
+      "hash": "62eca8d85f5c7bea1548793e1c3a1b7e9af7cf29141d7298101a6eab8eea63ee",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/templates/work-record.md": {
+      "path": ".verythinker/templates/work-record.md",
+      "kind": "file",
+      "hash": "f94733c35f85850aea051970335fe22044216116d6eb92b378ae78d56a8b94fb",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-cornell/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-cornell/SKILL.md",
+      "kind": "file",
+      "hash": "6720873d54f17093586241a7dc970fcdb7aa8cf7ce805ec58baca1ceb7cbe2b1",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-design/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-design/SKILL.md",
+      "kind": "file",
+      "hash": "4f68f8e50608d83eec2820bcc970c243a4ef99258300ee231418a73ccc6a1fde",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-finish/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-finish/SKILL.md",
+      "kind": "file",
+      "hash": "3d86345a703e5a503bb7267fcf6503b96db9ce2f972868785814e84afd9ceb69",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-implement/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-implement/SKILL.md",
+      "kind": "file",
+      "hash": "eedc49248e48fda36de2e8ed646b02fbb8fbfb0e705571f9afc5973d001259be",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-manager/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-manager/SKILL.md",
+      "kind": "file",
+      "hash": "548aca47673bccfdf761b6e27ce2f55e0f618a2bced46e4761423e162b559db4",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-requirements/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-requirements/SKILL.md",
+      "kind": "file",
+      "hash": "d81b3c3fca369160fc63e5bbacff406539d8f65df6b36c7c8b94348f8b466023",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-research/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-research/SKILL.md",
+      "kind": "file",
+      "hash": "39cc6b702c743e8106311904fb60a437ba63d5e1d821451c72ce5a85b5a384bb",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/skills/verythinker-verify/SKILL.md": {
+      "path": ".verythinker/skills/verythinker-verify/SKILL.md",
+      "kind": "file",
+      "hash": "460f45fc3b3f3299a70fe4bed2de2ced8e7b9142190a657cb55653a3534c91d2",
+      "version": "0.1.0-alpha.3.6"
+    },
+    "AGENTS.md#instructions": {
+      "path": "AGENTS.md",
+      "kind": "block",
+      "key": "instructions",
+      "hash": "2b193a0d8fe3e4bbb096dd5108bc7e1e5d6a6dd7cf563ca63c99fd1e348a86af",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/config.toml#mcp": {
+      "path": ".codex/config.toml",
+      "kind": "block",
+      "key": "mcp",
+      "hash": "626a2084cdf36287c2f11c299a990795a71af43fec730c7e7cfdf6c0d8065307",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-architect.toml": {
+      "path": ".codex/agents/verythinker-architect.toml",
+      "kind": "file",
+      "hash": "0e4e3bfdea12faa3bce34f2fbe124ab0715c2bba0b6e1de5dcb3ac0a269f4405",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-check-executor.toml": {
+      "path": ".codex/agents/verythinker-check-executor.toml",
+      "kind": "file",
+      "hash": "14f57bed9a007e1e3cad097f5dcffcab6330c9804c50a33809f0a0500b10bfb7",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-codebase-analyst.toml": {
+      "path": ".codex/agents/verythinker-codebase-analyst.toml",
+      "kind": "file",
+      "hash": "3d943f0e7e52a01d4702ece20e9695a72e4e100b811bb4b4d2f47f8753aa1551",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-component-owner.toml": {
+      "path": ".codex/agents/verythinker-component-owner.toml",
+      "kind": "file",
+      "hash": "83e5ad367258f283bef1d0d2e4b73b85a81f052d713a15338d81c819e956484f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-curator.toml": {
+      "path": ".codex/agents/verythinker-curator.toml",
+      "kind": "file",
+      "hash": "cdeaa323b7fdc23b0de6a01bc0036698d234998b669fe2477ee374e8a6a74a5b",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-developer.toml": {
+      "path": ".codex/agents/verythinker-developer.toml",
+      "kind": "file",
+      "hash": "f2957a2597e4933307708644217a00462d89258fa5a5047a3cd26ba5311d9677",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-manager.toml": {
+      "path": ".codex/agents/verythinker-manager.toml",
+      "kind": "file",
+      "hash": "a496a78d862d427df24f7db0693aba12771a1eced0cb8080cccb5024df26b406",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-release.toml": {
+      "path": ".codex/agents/verythinker-release.toml",
+      "kind": "file",
+      "hash": "800f76831d12f5b0f9837cde82c9b35168b5856b49a0d4391dc086d174583265",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-requirements.toml": {
+      "path": ".codex/agents/verythinker-requirements.toml",
+      "kind": "file",
+      "hash": "9035b96ea4418f0cc8c2fe318b3fcb835ab5bd88e3c766d67f8082c9ef305808",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-researcher.toml": {
+      "path": ".codex/agents/verythinker-researcher.toml",
+      "kind": "file",
+      "hash": "54410ee8a5540f5d69dbe6d97ca6527ee6e6bfc1b11fb39d25f5ac93bb4d6b39",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-reviewer.toml": {
+      "path": ".codex/agents/verythinker-reviewer.toml",
+      "kind": "file",
+      "hash": "3fd9e084957cf21b7a2005afb180ffb6e0a829615a76e24b71aeb1290efb2346",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/agents/verythinker-verifier.toml": {
+      "path": ".codex/agents/verythinker-verifier.toml",
+      "kind": "file",
+      "hash": "2c410b9af491e7b15c8c9c3e2b9f8d7006a7e2d0780acb0f2d52e28f22126b89",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/hooks.json#hooks.SessionStart": {
+      "path": ".codex/hooks.json",
+      "kind": "json",
+      "key": "hooks.SessionStart",
+      "hash": "a2bde9aae047ddb0112301757ea1b9dcbdc51191a0793779bbf88f777f657336",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/hooks.json#hooks.PostToolUse": {
+      "path": ".codex/hooks.json",
+      "kind": "json",
+      "key": "hooks.PostToolUse",
+      "hash": "ef6b1e88b32ce2d6b186c0b6780fc30a0c33549139d7e12d44d1f91e22bab9b6",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".codex/hooks.json#hooks.Stop": {
+      "path": ".codex/hooks.json",
+      "kind": "json",
+      "key": "hooks.Stop",
+      "hash": "14fd0de78deb0a01e9a926aec812d1d195479b854e9a4d9bf54ccaec1faadd5f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/copilot-instructions.md#instructions": {
+      "path": ".github/copilot-instructions.md",
+      "kind": "block",
+      "key": "instructions",
+      "hash": "2b193a0d8fe3e4bbb096dd5108bc7e1e5d6a6dd7cf563ca63c99fd1e348a86af",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-architect.agent.md": {
+      "path": ".github/agents/verythinker-architect.agent.md",
+      "kind": "file",
+      "hash": "dfe2d76c44168c05f52564a7307de8e43899327d59aedca0c30b1a0cdd14abd2",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-check-executor.agent.md": {
+      "path": ".github/agents/verythinker-check-executor.agent.md",
+      "kind": "file",
+      "hash": "4db4e890dcbc8165890fcc8dccc8ad604cb3c24d394678196160055c1cbf3d3f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-codebase-analyst.agent.md": {
+      "path": ".github/agents/verythinker-codebase-analyst.agent.md",
+      "kind": "file",
+      "hash": "2efb0c0da5111b4056e6ab6ac9988ff929373ce98e747776a12750207f5b7b2e",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-component-owner.agent.md": {
+      "path": ".github/agents/verythinker-component-owner.agent.md",
+      "kind": "file",
+      "hash": "09f2f08ebab112bcfaee41e447eceed3cb48c025dd616dff6dc7c235f7a1f579",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-curator.agent.md": {
+      "path": ".github/agents/verythinker-curator.agent.md",
+      "kind": "file",
+      "hash": "784df556dc4d3f167dd66f23fc716e1ed18514e5ca6d887dcf8818e908724e88",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-developer.agent.md": {
+      "path": ".github/agents/verythinker-developer.agent.md",
+      "kind": "file",
+      "hash": "561b89a7c22f1abdc063d6c5bdc519ad222969b44e30f37818b89fa616442d74",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-manager.agent.md": {
+      "path": ".github/agents/verythinker-manager.agent.md",
+      "kind": "file",
+      "hash": "f046dd545796e0dcbaa4c0e8947ecd7ca8fff3b1ae64226ca43a288c8434a223",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-release.agent.md": {
+      "path": ".github/agents/verythinker-release.agent.md",
+      "kind": "file",
+      "hash": "a06f11c5b5293cd2407cfdeb7f42c5083707bfd9e4c778ddf6c130a8c0d06729",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-requirements.agent.md": {
+      "path": ".github/agents/verythinker-requirements.agent.md",
+      "kind": "file",
+      "hash": "1a77464d42a378162643cf2683f8be65cdd49683dc0242169fd4e48992bb8b5f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-researcher.agent.md": {
+      "path": ".github/agents/verythinker-researcher.agent.md",
+      "kind": "file",
+      "hash": "276f9fca5eef7e8da72030f71b8e76f225fcd4f345881d033e7c080c295a5b89",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-reviewer.agent.md": {
+      "path": ".github/agents/verythinker-reviewer.agent.md",
+      "kind": "file",
+      "hash": "20cbb4884877487cb0a77aed24b50330d862e959e7405b0ed81a6997449a36c9",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/agents/verythinker-verifier.agent.md": {
+      "path": ".github/agents/verythinker-verifier.agent.md",
+      "kind": "file",
+      "hash": "8e2e8bb72e2b29b61ab42a0fab5ddce039e3f637b5af334eda94fa9064bbc9ff",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/hooks/verythinker.json": {
+      "path": ".github/hooks/verythinker.json",
+      "kind": "file",
+      "hash": "aee1b44e129ad3130e3c596df09545477e08bb569f52819873f3aa016a9ac212",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".mcp.json#mcpServers.verythinker": {
+      "path": ".mcp.json",
+      "kind": "json",
+      "key": "mcpServers.verythinker",
+      "hash": "18233ad97569d8ded27dcf2f3b58d6370691f0baf971d60f5e22279a1509ec4e",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-cornell/SKILL.md": {
+      "path": ".agents/skills/verythinker-cornell/SKILL.md",
+      "kind": "file",
+      "hash": "6720873d54f17093586241a7dc970fcdb7aa8cf7ce805ec58baca1ceb7cbe2b1",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-cornell/SKILL.md": {
+      "path": ".github/skills/verythinker-cornell/SKILL.md",
+      "kind": "file",
+      "hash": "6720873d54f17093586241a7dc970fcdb7aa8cf7ce805ec58baca1ceb7cbe2b1",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-design/SKILL.md": {
+      "path": ".agents/skills/verythinker-design/SKILL.md",
+      "kind": "file",
+      "hash": "4f68f8e50608d83eec2820bcc970c243a4ef99258300ee231418a73ccc6a1fde",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-design/SKILL.md": {
+      "path": ".github/skills/verythinker-design/SKILL.md",
+      "kind": "file",
+      "hash": "4f68f8e50608d83eec2820bcc970c243a4ef99258300ee231418a73ccc6a1fde",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-finish/SKILL.md": {
+      "path": ".agents/skills/verythinker-finish/SKILL.md",
+      "kind": "file",
+      "hash": "3d86345a703e5a503bb7267fcf6503b96db9ce2f972868785814e84afd9ceb69",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-finish/SKILL.md": {
+      "path": ".github/skills/verythinker-finish/SKILL.md",
+      "kind": "file",
+      "hash": "3d86345a703e5a503bb7267fcf6503b96db9ce2f972868785814e84afd9ceb69",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-implement/SKILL.md": {
+      "path": ".agents/skills/verythinker-implement/SKILL.md",
+      "kind": "file",
+      "hash": "eedc49248e48fda36de2e8ed646b02fbb8fbfb0e705571f9afc5973d001259be",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-implement/SKILL.md": {
+      "path": ".github/skills/verythinker-implement/SKILL.md",
+      "kind": "file",
+      "hash": "eedc49248e48fda36de2e8ed646b02fbb8fbfb0e705571f9afc5973d001259be",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-manager/SKILL.md": {
+      "path": ".agents/skills/verythinker-manager/SKILL.md",
+      "kind": "file",
+      "hash": "548aca47673bccfdf761b6e27ce2f55e0f618a2bced46e4761423e162b559db4",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-manager/SKILL.md": {
+      "path": ".github/skills/verythinker-manager/SKILL.md",
+      "kind": "file",
+      "hash": "548aca47673bccfdf761b6e27ce2f55e0f618a2bced46e4761423e162b559db4",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-requirements/SKILL.md": {
+      "path": ".agents/skills/verythinker-requirements/SKILL.md",
+      "kind": "file",
+      "hash": "d81b3c3fca369160fc63e5bbacff406539d8f65df6b36c7c8b94348f8b466023",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-requirements/SKILL.md": {
+      "path": ".github/skills/verythinker-requirements/SKILL.md",
+      "kind": "file",
+      "hash": "d81b3c3fca369160fc63e5bbacff406539d8f65df6b36c7c8b94348f8b466023",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-research/SKILL.md": {
+      "path": ".agents/skills/verythinker-research/SKILL.md",
+      "kind": "file",
+      "hash": "39cc6b702c743e8106311904fb60a437ba63d5e1d821451c72ce5a85b5a384bb",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-research/SKILL.md": {
+      "path": ".github/skills/verythinker-research/SKILL.md",
+      "kind": "file",
+      "hash": "39cc6b702c743e8106311904fb60a437ba63d5e1d821451c72ce5a85b5a384bb",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".agents/skills/verythinker-verify/SKILL.md": {
+      "path": ".agents/skills/verythinker-verify/SKILL.md",
+      "kind": "file",
+      "hash": "460f45fc3b3f3299a70fe4bed2de2ced8e7b9142190a657cb55653a3534c91d2",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".github/skills/verythinker-verify/SKILL.md": {
+      "path": ".github/skills/verythinker-verify/SKILL.md",
+      "kind": "file",
+      "hash": "460f45fc3b3f3299a70fe4bed2de2ced8e7b9142190a657cb55653a3534c91d2",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/manager.capabilities.json": {
+      "path": ".verythinker/roles/manager.capabilities.json",
+      "kind": "file",
+      "hash": "8b388b8c36478f6cecc339ae8496db65848504a14f9722af715f08fc3f8b73b9",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/requirements.capabilities.json": {
+      "path": ".verythinker/roles/requirements.capabilities.json",
+      "kind": "file",
+      "hash": "52622ee7bf2c98598b4391266445a63289f3272e163bcee261e4ab7fb158d4e5",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/architect.capabilities.json": {
+      "path": ".verythinker/roles/architect.capabilities.json",
+      "kind": "file",
+      "hash": "35b7fd65c203cb12d96fad7e271a91fa3895ab41f80485fba686f5a2ebb9e7ce",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/component-owner.capabilities.json": {
+      "path": ".verythinker/roles/component-owner.capabilities.json",
+      "kind": "file",
+      "hash": "9434bca3567fe5395105c338c49ad5f7b8293ce75e1b3bfd2fd67abb7f93272c",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/verifier.capabilities.json": {
+      "path": ".verythinker/roles/verifier.capabilities.json",
+      "kind": "file",
+      "hash": "ef50f03fd9120d5fc0881df583ad784691cf27e483cdb61570163d6ff9daea3c",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/reviewer.capabilities.json": {
+      "path": ".verythinker/roles/reviewer.capabilities.json",
+      "kind": "file",
+      "hash": "fe354da1dde6b56fb775c822dc546036c2f4d6a820fb0fbcf2f01ab792cbfacc",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/researcher.capabilities.json": {
+      "path": ".verythinker/roles/researcher.capabilities.json",
+      "kind": "file",
+      "hash": "14aed562d6e3964c2a709f31d99b0b63ca706dfa41b873dbe7437cac87cea029",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/codebase-analyst.capabilities.json": {
+      "path": ".verythinker/roles/codebase-analyst.capabilities.json",
+      "kind": "file",
+      "hash": "ef40f4e81042beb6519b1286d0794afbb7d012f453179f9accfbcd76e5c212b8",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/curator.capabilities.json": {
+      "path": ".verythinker/roles/curator.capabilities.json",
+      "kind": "file",
+      "hash": "1934a0ab7f7ee1d0778d9b97255663727ad4204444e9cc7774c1dcdd4bcfc394",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/developer.capabilities.json": {
+      "path": ".verythinker/roles/developer.capabilities.json",
+      "kind": "file",
+      "hash": "6c98b2ad443cc870a78f6aa61cf4a907a09a82ab96a5257ea4cd912fcf21443a",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/check-executor.capabilities.json": {
+      "path": ".verythinker/roles/check-executor.capabilities.json",
+      "kind": "file",
+      "hash": "6fe32774db21bf38185f70bd81db472b6f6d007c78f6bce922d312dc21f72c30",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/roles/release.capabilities.json": {
+      "path": ".verythinker/roles/release.capabilities.json",
+      "kind": "file",
+      "hash": "329b90deca97444e4c3a1c1ac8dcb2df4e5be6d8570dffe8c5026b61c4fe6e72",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/providers/codegraph.json": {
+      "path": ".verythinker/providers/codegraph.json",
+      "kind": "file",
+      "hash": "8c55e7a20a9895a0319fd519332e870f080945de6db81ae1cd883a6b8beca19f",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/.gitignore#local-data": {
+      "path": ".verythinker/.gitignore",
+      "kind": "block",
+      "key": "local-data",
+      "hash": "03fb16b498477c502228a3bb8d6195aabacecfb5ad6c049d4b930c905f3bf021",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/fast-workflow.md": {
+      "path": ".verythinker/guides/fast-workflow.md",
+      "kind": "file",
+      "hash": "599b4e910b886b0c3622b7406fcd8bc65c9458605b8748040a332752ba746139",
+      "version": "0.1.0-alpha.3.6"
+    },
+    ".verythinker/guides/agent-tools.md": {
+      "path": ".verythinker/guides/agent-tools.md",
+      "kind": "file",
+      "hash": "4261faf91be91609c5f4340deda85f6f88a0f77a955e7d205361a3970690599a",
+      "version": "0.1.0-alpha.3.6"
+    }
+  }
+}

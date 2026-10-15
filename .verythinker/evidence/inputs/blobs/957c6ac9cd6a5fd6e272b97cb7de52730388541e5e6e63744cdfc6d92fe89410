@@ -1,0 +1,680 @@
+---
+schema_version: 1
+id: VT-FB18E4DC-TASK-0004
+type: task
+title: Run the reviewed DSP bootstrap on a task-local preserved baseline
+owner: check-executor
+status: ready
+revision: 11
+created_at: 2026-10-13T04:10:40.180Z
+updated_at: 2026-10-14T06:02:01.795Z
+links:
+  - type: satisfies
+    target: VT-FB18E4DC-REQ-0010
+  - type: implements
+    target: VT-FB18E4DC-DES-0001
+  - type: references
+    target: VT-FB18E4DC-TASK-0002
+  - type: references
+    target: VT-FB18E4DC-TASK-0003
+  - type: references
+    target: VT-FB18E4DC-REV-0083
+  - type: references
+    target: VT-FB18E4DC-REV-0084
+  - type: references
+    target: VT-FB18E4DC-CHK-0013
+  - type: references
+    target: VT-FB18E4DC-CHK-0012
+  - type: references
+    target: VT-FB18E4DC-KNW-0107
+  - type: references
+    target: VT-FB18E4DC-KNW-0109
+  - type: supersedes
+    target: VT-FB18E4DC-TASK-0003
+  - type: references
+    target: VT-FB18E4DC-REV-0085
+  - type: references
+    target: VT-FB18E4DC-REV-0086
+  - type: references
+    target: VT-FB18E4DC-REV-0088
+data:
+  workflow_id: VT-FB18E4DC-KNW-0001
+  stage: source-bootstrap
+  kind: verification
+  requirement_ids:
+    - VT-FB18E4DC-REQ-0010
+  design_ids:
+    - VT-FB18E4DC-DES-0001
+  check_ids:
+    - VT-FB18E4DC-CHK-0013
+    - VT-FB18E4DC-CHK-0012
+  acceptance_criteria:
+    - Execute only independently reviewed exact CORE source-bootstrap checks,
+      never the failed native command helper.
+    - Capture real Python/library/PDFskill/source identity/count evidence and
+      fresh operation-local workspace/source/solution/collision baseline against
+      all BOOT criteria; preserve expected values on failure.
+    - Archive actual CORE evidence and substantive seven-section record with
+      command, source/check hashes, environment, timestamps and limitations; no
+      claim of all-page coverage or final teaching acceptance.
+  allowed_paths:
+    - 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/
+  documentation_required: true
+  documentation_paths:
+    - 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/
+  source_paths:
+    - 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/03_resources/
+    - 07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/
+  baseline:
+    kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+    branch: feature/04-signal-processing-for-mechatronic-systems
+    head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+    runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+    requirement_revision: 2
+    requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+    design_revision: 7
+    design_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+    check_versions:
+      VT-FB18E4DC-CHK-0013:
+        revision: 7
+        fingerprint: 56d402901586c0d67be911931239bc4941e76755839a5a88fe4bec2cba9c59cc
+      VT-FB18E4DC-CHK-0012:
+        revision: 8
+        fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+    prior_check_plan_reviews:
+      VT-FB18E4DC-CHK-0013:
+        id: VT-FB18E4DC-REV-0084
+        fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+        target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+      VT-FB18E4DC-CHK-0012:
+        id: VT-FB18E4DC-REV-0083
+        fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+        target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+    superseded_task_chain:
+      - id: VT-FB18E4DC-TASK-0002
+        revision: 17
+        fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+        status: submitted
+        reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+          review and work-record findings.
+      - id: VT-FB18E4DC-TASK-0003
+        revision: 5
+        fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+        status: ready
+        attempts: 1
+        reason: CORE refused first check before execution because checks belonged to
+          TASK-0002. Task-level record_update to replace checked revision/review
+          baselines was refused as requiring a dedicated task operation;
+          preserve task, its refusal report and repair history.
+    preserved_existing_provenance_files:
+      07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+      07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+      07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+    actual_preservation_baseline: Pending new task-bound CHK-0013 execution;
+      recorded source/provenance hashes remain expected inputs, not current
+      evidence.
+    current_check_plan_reviews:
+      VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0089
+      VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0091
+    prior_design_review:
+      id: VT-FB18E4DC-REV-0064
+      fingerprint: e745391fea8143741b1cada6b535628b987b7739c44acc75f26a75f4cdeae8b8
+      target_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+      status: historical-review-of-DES-0001-rev6
+    current_design_review_pending: false
+    current_design_review:
+      id: VT-FB18E4DC-REV-0088
+      fingerprint: bb657621957df7e892b863f42fcf8da312004533bfd4896e2d131cd433e0497a
+      target_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+    current_check_plan_review_metadata:
+      VT-FB18E4DC-CHK-0013:
+        id: VT-FB18E4DC-REV-0091
+        fingerprint: dfb02c4133ae736642c07690a71973c89c8f29a9e58fdbf7567412470b0e77b0
+        target_fingerprint: 56d402901586c0d67be911931239bc4941e76755839a5a88fe4bec2cba9c59cc
+        baseline_hash: 492b6b25bb4b2d245bdb33503e3f0f5a6cef623dbefad55446f5dd021719be23
+        review_baseline_version: 2
+      VT-FB18E4DC-CHK-0012:
+        id: VT-FB18E4DC-REV-0089
+        fingerprint: a10e6c0cc50cb4ed007a891a77ee6f629027ffc7a966f9df0499c70da31656cf
+        target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        baseline_hash: 7823e3331112a59e610bddce893ed4c63dcc64e77a6795d14e30eb17068e237a
+        review_baseline_version: 2
+  dependencies: []
+  outputs:
+    - Fresh CORE source/runtime/library/PDF-skill and immutable source
+      identity/count evidence for BOOT-01..04/06/07
+    - Fresh task-bound workspace/source/protected-solution/collision
+      before/after baseline with the three existing provenance files included
+    - Archived CORE evidence and exact logs for the prescribed execution sequence
+    - Accurate seven-section work record bound to this successor task and its
+      actual final evidence
+  tools:
+    - CORE check_run
+    - CORE evidence_archive
+    - CORE task_submit
+  limits: Read-only CORE checks only in prescribed order CHK-0013 → CHK-0012 →
+    CHK-0013; no shell/helper, native command helper, network, source or
+    learning-file edits, note creation, direct managed-record edits, installs,
+    permission changes, acceptance bypass, or claim beyond bootstrap evidence.
+    If any run fails, preserve it and stop for manager diagnosis; no repair
+    attempt within this task.
+  escalation_conditions:
+    - Fresh ready/design-ready gate or exact current task/check/review binding
+      fails
+    - CORE check definition/command/tool permission is refused or differs from
+      reviewed procedure
+    - Current source hashes/page counts, preserved file hashes,
+      collision/preservation state or output baseline differs
+    - Any execution or evidence-archive failure
+  prescribed_execution_order:
+    - VT-FB18E4DC-CHK-0013
+    - VT-FB18E4DC-CHK-0012
+    - VT-FB18E4DC-CHK-0013
+  source_audit_not_complete: The three provenance files are existing preliminary
+    outputs from prior bootstrap attempts. This bootstrap task does not complete
+    exhaustive source audit, reading map, lecture inventory, Cornell knowledge
+    notes, practice suite, final CHK-0001..0008, or parent requirement
+    acceptance.
+  author_invocation_id: fc54474c-ddac-47aa-b926-32b71b372a27
+  invocation_role: manager
+  routing_required: true
+  baseline_history:
+    - task_revision: 1
+      task_fingerprint: ee7ddc35aae2f1f2695c9a1591c97e97a371d387c8667ee0055a08cc29d50620
+      baseline:
+        kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+        branch: feature/04-signal-processing-for-mechatronic-systems
+        head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+        runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+        requirement_revision: 2
+        requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+        design_revision: 6
+        design_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+        check_versions:
+          VT-FB18E4DC-CHK-0013:
+            revision: 5
+            fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            revision: 7
+            fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        prior_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0084
+            fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+            target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0083
+            fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+            target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        superseded_task_chain:
+          - id: VT-FB18E4DC-TASK-0002
+            revision: 17
+            fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+            status: submitted
+            reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+              review and work-record findings.
+          - id: VT-FB18E4DC-TASK-0003
+            revision: 5
+            fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+            status: ready
+            attempts: 1
+            reason: CORE refused first check before execution because checks belonged to
+              TASK-0002. Task-level record_update to replace checked
+              revision/review baselines was refused as requiring a dedicated
+              task operation; preserve task, its refusal report and repair
+              history.
+        preserved_existing_provenance_files:
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+        actual_preservation_baseline: Pending new task-bound CHK-0013 execution. This
+          task will not start until the existing checks have been
+          verifier-rebound to TASK-0004, both current exact fingerprints
+          independently reviewed, and this task baseline references those exact
+          reviewed definitions. The supplied provenance hashes are expectations
+          to recheck, not fresh evidence.
+        current_check_plan_reviews: {}
+      reason: Preserve the initial TASK-0004 proposal, including its superseded
+        CHK-0012/0013 versions and REV-0083/0084 references, before
+        synchronizing the exact current task-bound definitions and fresh
+        reviews.
+    - task_revision: 2
+      task_fingerprint: 2071d71afe512f754b9d1cb84ec6253f67e86fa0b6b2614a903527b50a621107
+      baseline:
+        kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+        branch: feature/04-signal-processing-for-mechatronic-systems
+        head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+        runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+        requirement_revision: 2
+        requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+        design_revision: 7
+        design_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        check_versions:
+          VT-FB18E4DC-CHK-0013:
+            revision: 6
+            fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            revision: 8
+            fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0084
+            fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+            target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0083
+            fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+            target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        superseded_task_chain:
+          - id: VT-FB18E4DC-TASK-0002
+            revision: 17
+            fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+            status: submitted
+            reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+              review and work-record findings.
+          - id: VT-FB18E4DC-TASK-0003
+            revision: 5
+            fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+            status: ready
+            attempts: 1
+            reason: CORE refused first check before execution because checks belonged to
+              TASK-0002. Task-level record_update to replace checked
+              revision/review baselines was refused as requiring a dedicated
+              task operation; preserve task, its refusal report and repair
+              history.
+        preserved_existing_provenance_files:
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+        actual_preservation_baseline: Pending new task-bound CHK-0013 execution;
+          recorded source/provenance hashes remain expected inputs, not current
+          evidence.
+        current_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0086
+            fingerprint: 36f571e4586bf3c33a21c527d254dead92e46a48465f655e0ac926b4cc9150c9
+            target_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0085
+            fingerprint: 9c98def987c172f6380508bcf372cf6635ffda33371b32ba637e5fde1b70612c
+            target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_design_review:
+          id: VT-FB18E4DC-REV-0064
+          fingerprint: e745391fea8143741b1cada6b535628b987b7739c44acc75f26a75f4cdeae8b8
+          target_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+          status: historical-review-of-DES-0001-rev6
+        current_design_review_pending: true
+      reason: Preserve TASK-0004 rev2 before adding exact independent DES-0001 rev7
+        review REV-0088.
+    - task_revision: 4
+      task_fingerprint: 61b4856e98e721b1b466a6b774d3128c4f0bf6e4663ea0825c30af8a46040368
+      baseline:
+        kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+        branch: feature/04-signal-processing-for-mechatronic-systems
+        head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+        runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+        requirement_revision: 2
+        requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+        design_revision: 7
+        design_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        check_versions:
+          VT-FB18E4DC-CHK-0013:
+            revision: 6
+            fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            revision: 8
+            fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0084
+            fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+            target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0083
+            fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+            target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        superseded_task_chain:
+          - id: VT-FB18E4DC-TASK-0002
+            revision: 17
+            fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+            status: submitted
+            reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+              review and work-record findings.
+          - id: VT-FB18E4DC-TASK-0003
+            revision: 5
+            fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+            status: ready
+            attempts: 1
+            reason: CORE refused first check before execution because checks belonged to
+              TASK-0002. Task-level record_update to replace checked
+              revision/review baselines was refused as requiring a dedicated
+              task operation; preserve task, its refusal report and repair
+              history.
+        preserved_existing_provenance_files:
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+        actual_preservation_baseline: Pending new task-bound CHK-0013 execution;
+          recorded source/provenance hashes remain expected inputs, not current
+          evidence.
+        current_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0086
+            fingerprint: 36f571e4586bf3c33a21c527d254dead92e46a48465f655e0ac926b4cc9150c9
+            target_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0085
+            fingerprint: 9c98def987c172f6380508bcf372cf6635ffda33371b32ba637e5fde1b70612c
+            target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_design_review:
+          id: VT-FB18E4DC-REV-0064
+          fingerprint: e745391fea8143741b1cada6b535628b987b7739c44acc75f26a75f4cdeae8b8
+          target_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+          status: historical-review-of-DES-0001-rev6
+        current_design_review_pending: false
+        current_design_review:
+          id: VT-FB18E4DC-REV-0088
+          fingerprint: bb657621957df7e892b863f42fcf8da312004533bfd4896e2d131cd433e0497a
+          target_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+      reason: Preserve TASK-0004 rev3 before normalizing only
+        current_check_plan_reviews value representation to predecessor task
+        schema.
+    - task_revision: 5
+      task_fingerprint: 9a797f71fbea6ff217b4a1e94b19022c43cbd1f0cd0fcb9dc01cc62c551314fd
+      baseline:
+        kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+        branch: feature/04-signal-processing-for-mechatronic-systems
+        head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+        runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+        requirement_revision: 2
+        requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+        design_revision: 7
+        design_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        check_versions:
+          VT-FB18E4DC-CHK-0013:
+            revision: 6
+            fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            revision: 8
+            fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0084
+            fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+            target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0083
+            fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+            target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        superseded_task_chain:
+          - id: VT-FB18E4DC-TASK-0002
+            revision: 17
+            fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+            status: submitted
+            reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+              review and work-record findings.
+          - id: VT-FB18E4DC-TASK-0003
+            revision: 5
+            fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+            status: ready
+            attempts: 1
+            reason: CORE refused first check before execution because checks belonged to
+              TASK-0002. Task-level record_update to replace checked
+              revision/review baselines was refused as requiring a dedicated
+              task operation; preserve task, its refusal report and repair
+              history.
+        preserved_existing_provenance_files:
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+        actual_preservation_baseline: Pending new task-bound CHK-0013 execution;
+          recorded source/provenance hashes remain expected inputs, not current
+          evidence.
+        current_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0086
+          VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0085
+        prior_design_review:
+          id: VT-FB18E4DC-REV-0064
+          fingerprint: e745391fea8143741b1cada6b535628b987b7739c44acc75f26a75f4cdeae8b8
+          target_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+          status: historical-review-of-DES-0001-rev6
+        current_design_review_pending: false
+        current_design_review:
+          id: VT-FB18E4DC-REV-0088
+          fingerprint: bb657621957df7e892b863f42fcf8da312004533bfd4896e2d131cd433e0497a
+          target_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        current_check_plan_review_metadata:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0086
+            fingerprint: 36f571e4586bf3c33a21c527d254dead92e46a48465f655e0ac926b4cc9150c9
+            target_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0085
+            fingerprint: 9c98def987c172f6380508bcf372cf6635ffda33371b32ba637e5fde1b70612c
+            target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+      reason: Preserve the exact TASK-0004 rev5 baseline and stale REV-0085/REV-0086
+        bindings before recording current independent review results.
+    - task_revision: 6
+      task_fingerprint: e8760e6cdf10ce4cd1efccefe5b166c9fd604c91e9689b11465a2ef511bee8fd
+      baseline:
+        kind: source-bootstrap-successor-after-preserved-task-local-binding-refusal
+        branch: feature/04-signal-processing-for-mechatronic-systems
+        head: d7016f359bbe6f8f6b6cddc35fd26a8e33cb55c4
+        runtime_executable: C:/Users/daveb/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe
+        requirement_revision: 2
+        requirement_fingerprint: 89a0bdc57a1165e60aeb24500c39084b7ee945dadc446d6f575bf7fb68506d5f
+        design_revision: 7
+        design_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        check_versions:
+          VT-FB18E4DC-CHK-0013:
+            revision: 6
+            fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            revision: 8
+            fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+        prior_check_plan_reviews:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0084
+            fingerprint: 7eafa9fd2db6d9e4723369fcc7b966e78b91260827e91b4ba9cc1339cf8aaba2
+            target_fingerprint: 887800302ec435264f43d265f72ca0c86a026c0b1a071b57749352ce023c1656
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0083
+            fingerprint: 81042c3f361bd91e4c88b29452facae7a128435ea53e08bccbb81a18a7faebc6
+            target_fingerprint: da62775024d4615f9daed457293bda2695620e42476ccd7d82c04ca84e6e4dbe
+        superseded_task_chain:
+          - id: VT-FB18E4DC-TASK-0002
+            revision: 17
+            fingerprint: 8f0f997fd99b9b454e82dd76f88105d11cf05c616efd0ddce5d636899709474c
+            status: submitted
+            reason: Preserve original failed runtime-inventory run, stale CHK-0013 evidence,
+              review and work-record findings.
+          - id: VT-FB18E4DC-TASK-0003
+            revision: 5
+            fingerprint: 3a95d0d3262e2c25475bf02604c2fcaf67534045b48d2e85027204e57ec7a4f2
+            status: ready
+            attempts: 1
+            reason: CORE refused first check before execution because checks belonged to
+              TASK-0002. Task-level record_update to replace checked
+              revision/review baselines was refused as requiring a dedicated
+              task operation; preserve task, its refusal report and repair
+              history.
+        preserved_existing_provenance_files:
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_audit.md: 57a854f9f22098f364682ee7fec23828258db0b2752aae9c4049f8f9fa8cc9da
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_exercise.md: 09d2aa703578c04b9018f6ab6fd7feab096a0998ceb55ae893405e6400f4a4e8
+          07_mechatronics_engineering_master_program/04_Signal-Processing-For-Mechatronic-System/01_learning/intro_dsp_study/provenance/source_navigation_answer.md: 0ee416e23e759e5d4d23275a06e02007d30cdda2d39c0a2ed46d9e9003360ed5
+        actual_preservation_baseline: Pending new task-bound CHK-0013 execution;
+          recorded source/provenance hashes remain expected inputs, not current
+          evidence.
+        current_check_plan_reviews:
+          VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0089
+          VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0090
+        prior_design_review:
+          id: VT-FB18E4DC-REV-0064
+          fingerprint: e745391fea8143741b1cada6b535628b987b7739c44acc75f26a75f4cdeae8b8
+          target_fingerprint: 1d755a1c73156f94a9e47044a2e352a53d223458ed04b1efe5c979ffdaf6d085
+          status: historical-review-of-DES-0001-rev6
+        current_design_review_pending: false
+        current_design_review:
+          id: VT-FB18E4DC-REV-0088
+          fingerprint: bb657621957df7e892b863f42fcf8da312004533bfd4896e2d131cd433e0497a
+          target_fingerprint: a7ad8f3c4f6d2862501886ae9475b1b3f45c30deb439957bd2d641665ead004d
+        current_check_plan_review_metadata:
+          VT-FB18E4DC-CHK-0013:
+            id: VT-FB18E4DC-REV-0086
+            fingerprint: 36f571e4586bf3c33a21c527d254dead92e46a48465f655e0ac926b4cc9150c9
+            target_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          VT-FB18E4DC-CHK-0012:
+            id: VT-FB18E4DC-REV-0085
+            fingerprint: 9c98def987c172f6380508bcf372cf6635ffda33371b32ba637e5fde1b70612c
+            target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+      reason: Preserve TASK-0004 revision 6 before syncing CHK-0013 rev7 and its
+        current independent review REV-0091.
+  task_binding_reconciliation:
+    status: current DES-0001 rev7 and CHK-0012 rev8 / CHK-0013 rev6 baselines, with
+      exact independent design/check reviews; fresh CORE gates pending
+    invocation_id: e08f0fad-2078-4d57-bedc-ffea8ce4fda1
+    reason: Use verifier-authored CHK-0012 rev8/CHK-0013 rev6 bound to TASK-0004,
+      their exact separate pass reviews REV-0085/0086, and architect-authored
+      DES-0001 rev7. Preserve the original task baseline and prior reviews.
+  review_map_schema_correction:
+    continuation_id: 82f9742b2691946b3f05111f0a588ba7d6df5a507dabe97034fe6ccd4efb4417
+    prior_task_revision: 4
+    prior_task_fingerprint: 61b4856e98e721b1b466a6b774d3128c4f0bf6e4663ea0825c30af8a46040368
+    before:
+      VT-FB18E4DC-CHK-0013:
+        id: VT-FB18E4DC-REV-0086
+        fingerprint: 36f571e4586bf3c33a21c527d254dead92e46a48465f655e0ac926b4cc9150c9
+        target_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+      VT-FB18E4DC-CHK-0012:
+        id: VT-FB18E4DC-REV-0085
+        fingerprint: 9c98def987c172f6380508bcf372cf6635ffda33371b32ba637e5fde1b70612c
+        target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+    after:
+      VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0086
+      VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0085
+    comparison: TASK-0002 rev18 and TASK-0003 rev5 both store string review IDs
+      under data.baseline.current_check_plan_reviews; TASK-0004 rev3 stored
+      objects at the same path. The nested path assertion in the continuation
+      was not confirmed; the value-shape mismatch was.
+    scope: Representation only. No checks, commands, oracles, criteria, review
+      records, dependencies, paths, permissions, or status changed.
+  review_rebind_history:
+    - at: 2026-10-14T01:25:46Z
+      prior:
+        VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0086
+        VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0085
+      current:
+        VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0089
+        VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0090
+      review_results:
+        VT-FB18E4DC-REV-0089:
+          decision: pass
+          check_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+          baseline_hash: 7823e3331112a59e610bddce893ed4c63dcc64e77a6795d14e30eb17068e237a
+          baseline_version: 2
+          invocation_id: d0e0d08f-ccc8-483e-adab-999a69ede079
+          report_id: VT-FB18E4DC-KNW-0131
+        VT-FB18E4DC-REV-0090:
+          decision: fail
+          check_fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+          baseline_hash: bfaed55d7bd7900edf7bb262c0e4d998fca1d977a626f53bd77ec0ebafc5d1b6
+          baseline_version: 2
+          invocation_id: 28ee752b-05be-4f02-8011-246438780297
+          report_id: VT-FB18E4DC-KNW-0132
+          finding_count: 2
+      reason: Bind the separate current independent reviews into the existing draft
+        task; preserve the pass for CHK-0012 and the fail for CHK-0013 rather
+        than concealing open findings.
+    - at: 2026-10-14T02:03:40.315Z
+      task_revision_before: 6
+      task_fingerprint_before: e8760e6cdf10ce4cd1efccefe5b166c9fd604c91e9689b11465a2ef511bee8fd
+      prior_check_versions:
+        VT-FB18E4DC-CHK-0013:
+          revision: 6
+          fingerprint: 0caf930d33085b16c78fee5c7b3498afb9d233b6cc6cb932e9f1dd8e52fd5ada
+        VT-FB18E4DC-CHK-0012:
+          revision: 8
+          fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+      prior_current_check_plan_reviews:
+        VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0089
+        VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0090
+      current_check_versions:
+        VT-FB18E4DC-CHK-0013:
+          revision: 7
+          fingerprint: 56d402901586c0d67be911931239bc4941e76755839a5a88fe4bec2cba9c59cc
+        VT-FB18E4DC-CHK-0012:
+          revision: 8
+          fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+      current_check_plan_reviews:
+        VT-FB18E4DC-CHK-0012: VT-FB18E4DC-REV-0089
+        VT-FB18E4DC-CHK-0013: VT-FB18E4DC-REV-0091
+      current_review_metadata:
+        VT-FB18E4DC-CHK-0013:
+          id: VT-FB18E4DC-REV-0091
+          fingerprint: dfb02c4133ae736642c07690a71973c89c8f29a9e58fdbf7567412470b0e77b0
+          target_fingerprint: 56d402901586c0d67be911931239bc4941e76755839a5a88fe4bec2cba9c59cc
+          baseline_hash: 492b6b25bb4b2d245bdb33503e3f0f5a6cef623dbefad55446f5dd021719be23
+          review_baseline_version: 2
+        VT-FB18E4DC-CHK-0012:
+          id: VT-FB18E4DC-REV-0089
+          fingerprint: a10e6c0cc50cb4ed007a891a77ee6f629027ffc7a966f9df0499c70da31656cf
+          target_fingerprint: 92336426c44d434d531ed06a5c4413dc69e115c5e68d73759e53e47791ee62bd
+          baseline_hash: 7823e3331112a59e610bddce893ed4c63dcc64e77a6795d14e30eb17068e237a
+          review_baseline_version: 2
+      rationale: Bind only the current independently reviewed CHK-0013 rev7
+        definition; preserve CHK-0012 rev8/REV-0089 and all prior
+        baseline/review data.
+      reviews:
+        CHK_0012: VT-FB18E4DC-REV-0089
+        CHK_0013: VT-FB18E4DC-REV-0091
+      manager_invocation_id: fc54474c-ddac-47aa-b926-32b71b372a27
+  invocation_id: ef50df16-11e4-4168-a1a3-7dcd3cf9e619
+  requested_model: gpt-6-luna
+  confirmed_model: gpt-6-luna
+  blocked_reason: null
+  submission: null
+  attempts: 1
+  feedback: "Independent review REV-0092 of submitted revision 10 failed with
+    three open findings: (1) BOOT-01 requires actual execution cwd evidence; the
+    configured working_directory is not an observation. (2) BOOT-05/06 require a
+    reviewable full first-before to last-after comparison across protected
+    scope/status/index/Examples/collisions plus CORE record/evidence
+    attribution; EVD-0004 and EVD-0006 logs exceed project_read's 2 MiB cap, so
+    summaries/per-run passes do not establish it. (3) EVD-0004/0005/0006 were
+    bound to TASK-0004 rev8, while current submitted task is rev10 and accepted
+    gate flags CHK-0012/0013 for reassessment. Preserve all existing receipts,
+    findings, task criteria, check definitions/oracles, user state and reports;
+    make one bounded repair only through supported task-bound CORE
+    check/reassessment/submission operations. Do not accept, run checks before
+    their current gates pass, or claim evidence without inspectable fresh
+    execution."
+  repair_requested_at: 2026-10-14T06:02:01.717Z
+  escalation_required: false
+---
+## Objective
+
+State the bounded deliverable and link its requirements.
+
+## Acceptance Criteria
+
+Identify the observable outcomes needed for review and acceptance.
+
+## Baseline, Inputs, and Decisions
+
+Record the source revision, required references, established decisions, and assumptions.
+
+## Allowed Changes and Dependencies
+
+Identify owned paths/artifacts, permitted tools, and blocking tasks.
+
+## Outputs and Verification
+
+List implementation and documentation deliverables and checks to execute before submission. Manager child tasks carry `workflow_id`, `documentation_required: true`, and `documentation_paths` for affected project docs within the allowed scope. Managed records are linked separately through the submitted work record.
+
+## Execution Limits and Escalation
+
+Define budget and the conditions requiring manager intervention.
+
+## Submission and Resumption
+
+Link actual artifacts, evidence, the substantive seven-section work record, remaining limitations, and the next executable action.

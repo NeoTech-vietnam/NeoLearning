@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'session-start' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "powershell": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'session-start' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "timeoutSec": 10
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'after-tool' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "powershell": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'after-tool' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "timeoutSec": 10
+      }
+    ],
+    "agentStop": [
+      {
+        "type": "command",
+        "bash": "'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'stop' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "powershell": "& 'C:\\Program Files\\nodejs\\node.exe' 'D:\\workspace\\NeoLearning\\node_modules\\verythinker\\dist\\cli.js' 'hook' '--event' 'stop' '--platform' 'copilot' '--project' 'D:\\workspace\\NeoLearning'",
+        "timeoutSec": 10
+      }
+    ]
+  }
+}

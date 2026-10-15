@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "11316659-0a2f-42e7-86c2-f81ce8654e27",
+  "recovered_at": "2026-10-12T08:12:17.247Z",
+  "project_id": "VT-FB18E4DC",
+  "workflow_id": "VT-FB18E4DC-KNW-0001",
+  "operation": "restore-public-trust-from-existing-local-private-key",
+  "authorization": "User explicitly requested the solution after the missing-trust diagnosis.",
+  "key_id": "ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55",
+  "repaired_paths": [
+    ".verythinker/native/keys/ef09506d00550cf54b9f9de7c9c2b0213036690afc88765f6892cb71c78e1a55.pem",
+    ".verythinker/native/trust.json"
+  ],
+  "existing_receipts_verified": 0,
+  "historical_receipts_recreated": false,
+  "private_key_preserved": true,
+  "all_record_bytes_preserved": true,
+  "record_fingerprints": {
+    "VT-FB18E4DC-KNW-0001": "33159dffeb4a5d67f40f3118897f96b63e5269b0d7227f26bd1bf2bef5d83960",
+    "VT-FB18E4DC-REQ-0001": "3a42d24be5b279f2bb3ca9d1a35e4451d6cd96853192f053d9803de7bf97bd04"
+  }
+}

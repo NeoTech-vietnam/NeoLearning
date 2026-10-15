@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "id": "engineering-basics",
+  "version": "0.1.0",
+  "description": "Portable requirements, evidence, review, and knowledge-reuse principles for small engineering increments.",
+  "domains": ["engineering"],
+  "technologies": [],
+  "applicability": ["Software or embedded projects using bounded increments with reviewed requirements and verification evidence."],
+  "assumptions": [],
+  "limitations": ["Guidance must be adapted to project risks and operating conditions.", "This pack does not establish an ASPICE capability rating or demonstrate hardware performance."],
+  "provenance": ["https://www.nasa.gov/reference/5-0-product-realization/", "https://www.nasa.gov/reference/6-0-crosscutting-technical-management/"],
+  "dependencies": []
+}
