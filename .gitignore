@@ -2,9 +2,7 @@ scripts/*
 *build
 *.exe
 .nimbalyst-generated
-<<<<<<< HEAD
 node_modules/
-=======
 .vscode
 *build
 node_modules/
@@ -25,4 +23,3 @@ archives/
 operations/
 capabilities/
 # END VERYTHINKER local-data
->>>>>>> 0db8151 (update: Ignore cache of verythinker)
