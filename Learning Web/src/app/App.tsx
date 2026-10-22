@@ -1,0 +1,95 @@
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
+import type { HealthResponse } from "../shared";
+import type { ReviewItem } from "../shared/learning";
+import { AtlasPage } from "../atlas/AtlasPage";
+import { WorldMapPreview } from "../atlas/WorldMapPreview";
+import { DesignSystemPage } from "../dev/design-system/DesignSystemPage";
+import { QuestPage } from "../quests";
+import { Skeleton } from "../ui";
+import { editorHash, parseHashRoute, type AppRoute } from "./routes";
+import "./app.css";
+import { ExplorerProvider, ExplorerBadge, ExplorerPanel } from "../explorer/Explorer";
+import { DiscoveryCompass } from "../atlas/DiscoveryCompass";
+
+const EditorPage = lazy(() => import("../editor/EditorPage").then((module) => ({ default: module.EditorPage })));
+
+export function App() {
+  return <ExplorerProvider><Application /></ExplorerProvider>;
+}
+
+function Application() {
+  const [route, setRoute] = useState<AppRoute>(() => parseHashRoute(window.location.hash));
+  const view = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !view.current?.animate) return;
+    const animation = view.current.animate([{ opacity: .7, transform: "translateY(4px)" }, { opacity: 1, transform: "none" }], { duration: 180, easing: "ease-out" });
+    return () => animation.cancel();
+  }, [route]);
+  useEffect(() => {
+    const updateRoute = () => setRoute(parseHashRoute(window.location.hash));
+    window.addEventListener("hashchange", updateRoute);
+    return () => window.removeEventListener("hashchange", updateRoute);
+  }, []);
+
+  const isDevelopmentServer = window.location.hostname === "localhost" && window.location.port === "5173";
+  if (route.name === "design-system" && isDevelopmentServer) return <DesignSystemPage />;
+  if (route.name === "map-preview") return <WorldMapPreview />;
+
+  return <div className="application">
+    <header className="application__bar">
+      <a className="application__brand" href="#/">NeoLearning</a>
+      <ExplorerBadge />
+      <nav aria-label="Primary navigation">
+        <a aria-current={route.name === "atlas" ? "page" : undefined} href="#/atlas">Atlas</a>
+        <a aria-current={route.name === "quests" ? "page" : undefined} href="#/quests">Quests</a>
+      </nav>
+    </header>
+    <div ref={view} className="journey-view">{route.name === "atlas" ? <AtlasPage mode={route.mode} questId={route.questId} selectedPath={route.path} />
+      : route.name === "quests" ? <QuestPage questId={route.questId} />
+      : route.name === "editor" ? <Suspense fallback={<main className="route-loading"><Skeleton lines={8} /></main>}><EditorPage path={route.path} /></Suspense>
+      : <HomePage />}</div>
+  </div>;
+}
+
+type HealthState = "checking" | "ready" | "unavailable";
+
+function HomePage() {
+  const [health, setHealth] = useState<HealthState>("checking");
+  const [reviewItems, setReviewItems] = useState<ReviewItem[]>([]);
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/health", { signal: controller.signal })
+      .then(async (response) => ({ ok: response.ok, payload: await response.json() as HealthResponse }))
+      .then(({ ok, payload }) => setHealth(ok && payload.status === "ok" ? "ready" : "unavailable"))
+      .catch((cause: unknown) => {
+        if (!(cause instanceof DOMException && cause.name === "AbortError")) setHealth("unavailable");
+      });
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch("/api/learning/review", { signal: controller.signal })
+      .then(async (response) => response.ok ? await response.json() as { items: ReviewItem[] } : { items: [] })
+      .then((payload) => setReviewItems(payload.items))
+      .catch(() => undefined);
+    return () => controller.abort();
+  }, []);
+
+  return <main className="home-page">
+    <section className="home-page__hero">
+      <p className="eyebrow">A world of embedded engineering</p>
+      <h1>Learn the land.<br />Build the proof.</h1>
+      <p>Explore the complete curriculum as a map, then take project quests that connect theory, architecture, implementation, and testing.</p>
+      <div className="home-page__actions"><a href="#/atlas">Enter the Atlas</a><a href="#/quests">Choose a Quest</a></div>
+      {reviewItems.length > 0 && <aside className="home-page__review">
+        <strong>{reviewItems.length} review{reviewItems.length === 1 ? "" : "s"} ready</strong>
+        <span>Start with {reviewItems[0].activityTitle} in {reviewItems[0].lessonTitle}.</span>
+        <a href={editorHash(reviewItems[0].lessonPath)}>Review lesson →</a>
+      </aside>}
+      <p aria-live="polite" className={`health health--${health}`}>Local API: {health}</p>
+      <ExplorerPanel />
+      <DiscoveryCompass />
+    </section>
+  </main>;
+}

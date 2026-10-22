@@ -1,0 +1,20 @@
+.discovery-compass { display: grid; gap: .75rem; margin: 1rem 0; padding: 1rem 1.25rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); }
+.discovery-compass__intro { display: flex; gap: 1rem; align-items: center; }
+.discovery-compass__intro strong { font-family: var(--font-display); font-size: 1.3rem; }
+.discovery-compass p { margin: .3rem 0; line-height: var(--leading-body); }
+.discovery-compass__dial { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; flex: 0 0 3.5rem; border: 2px solid var(--color-accent-strong); border-radius: 50%; color: var(--color-accent-strong); background: var(--color-surface-muted); font-size: 2.2rem; }
+.discovery-compass[data-phase="spinning"] .discovery-compass__dial span { animation: discovery-spin 1s cubic-bezier(.15,.7,.4,1) both; }
+.discovery-compass__actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.discovery-compass__status { min-height: 1.3rem; font-size: .85rem; color: var(--color-ink-muted); }
+.discovery-compass__result { display: grid; gap: .4rem; padding: .85rem 1rem; border-left: .25rem solid var(--color-accent); border-radius: .4rem; background: var(--color-surface-muted); scroll-margin-top: 7rem; overflow-wrap: anywhere; }
+.discovery-compass__result small { color: var(--color-ink-muted); }
+.discovery-compass__result strong { font-family: var(--font-display); font-size: 1.3rem; }
+.discovery-compass__result a { color: var(--color-action); font-weight: 800; min-height: 44px; display: inline-flex; align-items: center; }
+.discovery-compass__result:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+.discovery-compass--compact { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; }
+.discovery-compass--compact .discovery-compass__intro { flex: 1; min-width: 12rem; }
+.discovery-compass--compact .discovery-compass__dial { width: 2.5rem; height: 2.5rem; flex-basis: 2.5rem; font-size: 1.7rem; }
+.discovery-compass--compact[data-phase="idle"] .discovery-compass__status { display: none; }
+.discovery-compass--compact .discovery-compass__result { flex-basis: 100%; }
+@keyframes discovery-spin { from { transform: rotate(0); } to { transform: rotate(1080deg); } }
+@media (prefers-reduced-motion: reduce) { .discovery-compass[data-phase="spinning"] .discovery-compass__dial span { animation: none; } }

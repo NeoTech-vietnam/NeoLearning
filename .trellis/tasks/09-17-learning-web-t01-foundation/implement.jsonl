@@ -1,0 +1,4 @@
+{"file":"Learning Web/README.md","reason":"Initiative decisions, task waves, ownership rules, and target structure"}
+{"file":"Learning Web/tasks/T01-foundation.md","reason":"Authoritative T01 requirements, acceptance criteria, validation, and handoff"}
+{"file":".trellis/spec/guides/cross-layer-thinking-guide.md","reason":"Frontend/server shared-contract and API boundary guidance"}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Single ownership for shared contracts and constants"}

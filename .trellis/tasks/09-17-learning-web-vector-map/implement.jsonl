@@ -1,0 +1,4 @@
+{"file":"Learning Web/docs/world-map-art-spec.md","reason":"Authoritative map composition and deliverable contract"}
+{"file":"Learning Web/docs/visual-language.md","reason":"Existing cartographic tokens and interaction rules"}
+{"file":"Learning Web/tasks/T04-atlas-ui.md","reason":"Downstream atlas geometry and interaction requirements"}
+{"file":".trellis/spec/guides/code-reuse-thinking-guide.md","reason":"Keep map geometry under one stable contract"}

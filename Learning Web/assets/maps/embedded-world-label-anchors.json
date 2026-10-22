@@ -1,0 +1,92 @@
+{
+  "country-01": {
+    "label": {
+      "x": 0.1775,
+      "y": 0.41333
+    },
+    "capital": {
+      "x": 0.16184,
+      "y": 0.44947
+    },
+    "focus": {
+      "x": 0.1775,
+      "y": 0.41333
+    },
+    "recommendedLabelWidth": 0.15
+  },
+  "country-02": {
+    "label": {
+      "x": 0.71,
+      "y": 0.32667
+    },
+    "capital": {
+      "x": 0.70106,
+      "y": 0.20319
+    },
+    "focus": {
+      "x": 0.71,
+      "y": 0.32667
+    },
+    "recommendedLabelWidth": 0.15
+  },
+  "country-03": {
+    "label": {
+      "x": 0.84875,
+      "y": 0.49333
+    },
+    "capital": {
+      "x": 0.87857,
+      "y": 0.66641
+    },
+    "focus": {
+      "x": 0.84875,
+      "y": 0.49333
+    },
+    "recommendedLabelWidth": 0.15
+  },
+  "country-04": {
+    "label": {
+      "x": 0.26,
+      "y": 0.61333
+    },
+    "capital": {
+      "x": 0.25051,
+      "y": 0.696
+    },
+    "focus": {
+      "x": 0.26,
+      "y": 0.61333
+    },
+    "recommendedLabelWidth": 0.15
+  },
+  "country-05": {
+    "label": {
+      "x": 0.51875,
+      "y": 0.50667
+    },
+    "capital": {
+      "x": 0.52996,
+      "y": 0.69948
+    },
+    "focus": {
+      "x": 0.51875,
+      "y": 0.50667
+    },
+    "recommendedLabelWidth": 0.15
+  },
+  "country-06": {
+    "label": {
+      "x": 0.36875,
+      "y": 0.30667
+    },
+    "capital": {
+      "x": 0.36171,
+      "y": 0.21165
+    },
+    "focus": {
+      "x": 0.36875,
+      "y": 0.30667
+    },
+    "recommendedLabelWidth": 0.15
+  }
+}

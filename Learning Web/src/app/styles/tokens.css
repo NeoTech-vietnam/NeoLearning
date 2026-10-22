@@ -1,0 +1,65 @@
+:root {
+  /* Semantic palette: artwork comes from docs/world-map-art-spec.md. */
+  --color-canvas: #6e9995;
+  --color-canvas-deep: #17372f;
+  --color-surface: #efe4c7;
+  --color-surface-raised: #fff6d9;
+  --color-surface-muted: #e8d8ae;
+  --color-ink: #26382f;
+  --color-ink-strong: #2c2a22;
+  --color-ink-muted: #65766b;
+  --color-border: #8a765b;
+  --color-border-subtle: #b79a68;
+  --color-action: #294a3c;
+  --color-action-hover: #385d4c;
+  --color-action-text: #fff6d9;
+  --color-accent: #d6a448;
+  --color-accent-strong: #a87659;
+  --color-success: #46664f;
+  --color-danger: #9b4a3f;
+  --color-unavailable: #777d82;
+  --color-focus: #d6a448;
+  --color-country-hardware: #8a765b;
+  --color-country-software: #83956a;
+  --color-country-protocol: #8e9f91;
+  --color-country-skills: #a78a72;
+  --color-country-advanced: #777d82;
+  --color-country-product: #a87659;
+
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-code: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --text-map: clamp(0.78rem, 1vw, 1rem);
+  --text-country: clamp(1.35rem, 2.6vw, 2.25rem);
+  --text-region: clamp(1.12rem, 1.9vw, 1.5rem);
+  --text-body: 1rem;
+  --text-meta: 0.75rem;
+  --text-code: 0.875rem;
+  --leading-tight: 1.15;
+  --leading-body: 1.55;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-round: 999px;
+  --border-width: 1px;
+  --border-strong-width: 2px;
+  --elevation-1: 0 2px 7px color-mix(in srgb, var(--color-canvas-deep) 22%, transparent);
+  --elevation-2: 0 12px 30px color-mix(in srgb, var(--color-canvas-deep) 26%, transparent);
+  --layer-map: 0;
+  --layer-label: 10;
+  --layer-panel: 20;
+  --layer-tooltip: 30;
+  --layer-modal: 40;
+  --motion-fast: 140ms;
+  --motion-standard: 220ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --target-min: 2.75rem;
+}

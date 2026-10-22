@@ -1,0 +1,55 @@
+.lesson-reader { display: grid; grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr); gap: var(--space-4); align-items: start; }
+.lesson-reader__guide { position: sticky; top: 10rem; display: grid; gap: var(--space-2); max-height: calc(100vh - 11rem); overflow: auto; padding: var(--space-4); color: var(--color-ink); background: var(--color-surface-raised); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+.lesson-reader__guide h2, .lesson-reader__guide p { margin: 0; }
+.lesson-reader__guide h2 { font: 700 var(--text-region)/var(--leading-tight) var(--font-display); }
+.lesson-reader__guide progress { width: 100%; accent-color: var(--color-action); }
+.lesson-reader__guide button, .lesson-reader__guide a, .activity-card button, .pwm-lab button { min-height: 2.75rem; padding: var(--space-2) var(--space-3); color: var(--color-action-text); background: var(--color-action); border: 0; border-radius: var(--radius-sm); font: inherit; font-weight: 700; cursor: pointer; }
+.lesson-reader__guide a { display: inline-flex; align-items: center; text-decoration: none; }
+.lesson-reader__guide button:hover, .lesson-reader__guide a:hover, .activity-card button:hover, .pwm-lab button:hover { background: var(--color-action-hover); }
+.lesson-reader__guide button:disabled, .activity-card button:disabled, .pwm-lab button:disabled { opacity: .55; cursor: not-allowed; }
+.lesson-reader__guide details { border-top: var(--border-width) solid var(--color-border-subtle); padding-top: var(--space-2); }
+.lesson-reader__guide summary { cursor: pointer; font-weight: 700; }
+.lesson-reader__guide ol { display: grid; gap: var(--space-2); max-height: 14rem; overflow: auto; padding-left: var(--space-4); }
+.lesson-reader__guide li .lesson-reader__toc-link { min-height: 0; padding: 0; color: var(--color-action); background: none; font-weight: 500; text-align: left; }
+.lesson-reader__body { min-width: 0; }
+.lesson-reader__section { scroll-margin-top: 10rem; }
+.lesson-reader__unplaced { margin-top: var(--space-6); padding-top: var(--space-4); border-top: var(--border-width) solid var(--color-border-subtle); }
+.activity-card { display: grid; gap: var(--space-3); margin: var(--space-5) 0 var(--space-6); padding: var(--space-5); background: var(--color-surface-raised); border: var(--border-strong-width) solid var(--color-accent-strong); border-radius: var(--radius-lg); box-shadow: var(--elevation-1); }
+.activity-card__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); }
+.activity-card__eyebrow, .activity-card__status { font-size: var(--text-meta); font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.activity-card__eyebrow { color: var(--color-action); }
+.activity-card__status--due { color: var(--color-danger); }
+.activity-card h3, .activity-card p { margin: 0; }
+.activity-card__choices, .activity-card__reflection, .activity-card__order { display: grid; gap: var(--space-3); min-width: 0; }
+.activity-card__choices { border: 0; padding: 0; }
+.activity-card__choices legend { margin-bottom: var(--space-2); font-weight: 700; }
+.activity-card__choices label { display: flex; gap: var(--space-2); align-items: start; padding: var(--space-3); background: var(--color-surface); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius-sm); cursor: pointer; }
+.activity-card__choices input { margin-top: .3rem; accent-color: var(--color-action); }
+.activity-card__order ol { display: grid; gap: var(--space-2); padding-left: var(--space-5); }
+.activity-card__order li { padding: var(--space-2); background: var(--color-surface); border: var(--border-width) solid var(--color-border-subtle); border-radius: var(--radius-sm); }
+.activity-card__order li div { display: inline-flex; gap: var(--space-1); margin-left: var(--space-3); }
+.activity-card__order li button { min-width: 2.75rem; }
+.activity-card__reflection textarea { display: block; width: 100%; margin-top: var(--space-2); padding: var(--space-3); color: var(--color-ink); background: var(--color-surface); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); font: inherit; }
+.activity-card__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.activity-card__feedback { padding: var(--space-3); background: color-mix(in srgb, var(--color-danger) 14%, var(--color-surface)); border-left: .3rem solid var(--color-danger); border-radius: var(--radius-sm); animation: lesson-appear var(--motion-fast) var(--ease-standard); }
+.activity-card__feedback--correct { background: color-mix(in srgb, var(--color-success) 18%, var(--color-surface)); border-left-color: var(--color-success); }
+.activity-card__feedback p { margin-top: var(--space-2); }
+.activity-card__feedback a { display: inline-block; margin-top: var(--space-2); color: var(--color-action); font-weight: 800; }
+.activity-card__error { color: var(--color-danger); font-weight: 800; }
+.pwm-lab { display: grid; gap: var(--space-3); }
+.pwm-lab__controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
+.pwm-lab__controls label { display: grid; gap: var(--space-1); }
+.pwm-lab__controls input { width: 100%; accent-color: var(--color-action); }
+.pwm-lab__scope { overflow: hidden; background: var(--color-canvas-deep); border-radius: var(--radius-md); }
+.pwm-lab__scope svg { display: block; width: 100%; height: auto; }
+.pwm-lab__scope text { fill: var(--color-action-text); font-size: 12px; }
+.pwm-lab__grid { fill: none; stroke: color-mix(in srgb, var(--color-action-text) 25%, transparent); stroke-width: 1; }
+.pwm-lab__wave { fill: none; stroke: var(--color-accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.pwm-lab__scan { stroke: var(--color-action-text); stroke-width: 2; opacity: .7; animation: pwm-scan 2.4s linear infinite; }
+.pwm-lab__prediction input { display: block; width: min(12rem, 100%); min-height: 2.75rem; margin-top: var(--space-2); padding: var(--space-2); color: var(--color-ink); background: var(--color-surface); border: var(--border-width) solid var(--color-border); border-radius: var(--radius-sm); font: inherit; }
+.activity-card :focus-visible, .lesson-reader__guide :focus-visible { outline: .2rem solid var(--color-focus); outline-offset: .15rem; }
+@keyframes pwm-scan { to { transform: translateX(480px); } }
+@keyframes lesson-appear { from { opacity: 0; transform: translateY(.4rem); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 64rem) { .lesson-reader { grid-template-columns: 1fr; } .lesson-reader__guide { position: static; max-height: none; } }
+@media (max-width: 40rem) { .pwm-lab__controls { grid-template-columns: 1fr; } .activity-card { padding: var(--space-3); } }
+@media (prefers-reduced-motion: reduce) { .pwm-lab__scan, .activity-card__feedback { animation: none; } .lesson-reader__section { scroll-behavior: auto; } }

@@ -1,0 +1,2 @@
+{"file": ".trellis/spec/guides/cross-layer-thinking-guide.md", "reason": "Verify Markdown-to-API-to-UI data flow and backward compatibility."}
+{"file": ".trellis/spec/guides/code-reuse-thinking-guide.md", "reason": "Verify the existing route projection remains the single itinerary source."}

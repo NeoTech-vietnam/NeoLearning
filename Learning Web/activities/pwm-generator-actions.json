@@ -1,0 +1,82 @@
+{
+  "id": "pwm-generator-actions",
+  "lessonPath": "02_Software/03_Microcontrollers/04_PWM/01_esp32-s3/01_MCPWM/02_programming_guide/08_generator_actions_and_classical_waveforms.md",
+  "title": "PWM waveform workshop",
+  "activities": [
+    {
+      "id": "predict-edge-actions",
+      "kind": "choice",
+      "title": "Predict the output",
+      "prompt": "For an active-high, edge-aligned PWM signal in up-count mode, which two actions create the pulse?",
+      "afterHeading": "cue-column-questions-keywords-or-prompts",
+      "options": [
+        {
+          "id": "high-then-low",
+          "label": "HIGH at TEZ, then LOW at compare"
+        },
+        {
+          "id": "low-then-high",
+          "label": "LOW at TEZ, then HIGH at compare"
+        },
+        {
+          "id": "toggle-both",
+          "label": "TOGGLE at TEZ and again at compare"
+        }
+      ],
+      "answer": "high-then-low",
+      "explanation": "At timer-empty (TEZ) the period begins HIGH. The comparator ends the high interval by switching LOW."
+    },
+    {
+      "id": "order-pwm-setup",
+      "kind": "order",
+      "title": "Build the signal path",
+      "prompt": "Put the setup steps in a workable order before enabling the timer.",
+      "afterHeading": "notes-section-main-notes",
+      "items": [
+        {
+          "id": "events",
+          "label": "Program the generator's timer and compare actions"
+        },
+        {
+          "id": "resources",
+          "label": "Create a timer and operator, then connect them"
+        },
+        {
+          "id": "compare",
+          "label": "Create a comparator and generator on that operator"
+        }
+      ],
+      "answer": [
+        "resources",
+        "compare",
+        "events"
+      ],
+      "explanation": "The timer/operator relationship comes first; comparator and generator handles must exist before their event/action table can be configured."
+    },
+    {
+      "id": "waveform-lab",
+      "kind": "pwm-lab",
+      "title": "Tune a PWM waveform",
+      "prompt": "Set 1,000 Hz and 25% duty, then predict the HIGH interval in microseconds before checking.",
+      "afterHeading": "notes-section-main-notes",
+      "targetFrequencyHz": 1000,
+      "targetDutyPercent": 25,
+      "explanation": "Period = 1,000,000 / frequency in microseconds. At 1 kHz the period is 1,000 µs; 25% duty means HIGH for 250 µs. The visual is a timing model, not an electrical measurement."
+    },
+    {
+      "id": "explain-direction",
+      "kind": "self-check",
+      "title": "Explain the second compare event",
+      "prompt": "Why can one compare threshold trigger twice during an up-down PWM cycle, and what must an action rule specify?",
+      "afterHeading": "summary-section-summary-of-notes",
+      "modelAnswer": "The counter crosses the threshold once while counting up and once while counting down. A center-aligned action must include timer direction so the two crossings can apply different output actions."
+    }
+  ],
+  "questEvidence": [
+    {
+      "questId": "pwm-signal-lab",
+      "milestoneId": "prove-waveform",
+      "activityId": "waveform-lab"
+    }
+  ]
+}

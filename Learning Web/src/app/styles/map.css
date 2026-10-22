@@ -1,0 +1,21 @@
+.map-stage { position: relative; min-height: 28rem; overflow: hidden; padding: var(--space-6); background: radial-gradient(circle at 53% 40%, color-mix(in srgb, var(--color-canvas) 76%, var(--color-surface) 24%), var(--color-canvas) 56%, var(--color-canvas-deep)); }
+.map-stage::after { position: absolute; z-index: var(--layer-map); inset: 0; pointer-events: none; content: ""; box-shadow: inset 0 0 7rem color-mix(in srgb, var(--color-canvas-deep) 35%, transparent); }
+.map-landmark { position: relative; z-index: var(--layer-label); display: grid; min-width: 9rem; justify-items: center; padding: var(--space-2); color: var(--color-ink); background: transparent; border: 0; cursor: pointer; }
+.map-landmark__crest { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; color: var(--color-action-text); background: var(--color-action); border: 3px solid var(--color-surface-raised); outline: var(--border-strong-width) solid var(--color-border); border-radius: var(--radius-round); box-shadow: var(--elevation-1); font: 800 1.25rem/1 var(--font-display); transition: transform var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard); }
+.map-landmark__label { margin-top: var(--space-2); padding: var(--space-1) var(--space-2); color: var(--color-ink); background: color-mix(in srgb, var(--color-surface) 92%, transparent); border-radius: var(--radius-sm); font: 600 var(--text-map)/var(--leading-tight) var(--font-display); }
+.map-landmark__meta { margin-top: var(--space-1); color: var(--color-ink-strong); font-size: var(--text-meta); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.map-landmark:hover .map-landmark__crest, .map-landmark:focus-visible .map-landmark__crest, .map-landmark[data-state="selected"] .map-landmark__crest { transform: translateY(-0.2rem) scale(1.06); box-shadow: 0 0 0 0.375rem color-mix(in srgb, var(--color-accent) 34%, transparent), var(--elevation-2); }
+.map-landmark[data-state="visited"] .map-landmark__crest { background: var(--color-success); }
+.map-landmark[data-state="active-quest"] .map-landmark__crest { color: var(--color-ink-strong); background: var(--color-accent); }
+.map-landmark[data-state="completed"] .map-landmark__crest { background: var(--color-country-software); }
+.map-landmark[data-state="locked"], .map-landmark[data-state="unavailable"] { cursor: not-allowed; filter: saturate(0.2); opacity: 0.68; }
+.map-landmark[data-state="locked"] .map-landmark__crest::after { content: "Locked"; font: 700 0.53rem/1 var(--font-body); letter-spacing: 0.04em; text-transform: uppercase; }
+.map-landmark[data-state="unavailable"] .map-landmark__crest { background: var(--color-unavailable); }
+.map-boundary--country { fill: none; stroke: var(--color-ink-strong); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.map-boundary--region { fill: none; stroke: var(--color-border); stroke-dasharray: 2 5; stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.map-trail { fill: none; stroke: var(--color-accent); stroke-dasharray: 0.4rem 0.6rem; stroke-linecap: round; stroke-width: 0.25rem; vector-effect: non-scaling-stroke; }
+.map-trail--uncharted { stroke: var(--color-unavailable); stroke-dasharray: 0.12rem 0.5rem; }
+.map-quest-stop { fill: var(--color-accent); stroke: var(--color-surface-raised); stroke-width: 3; vector-effect: non-scaling-stroke; }
+@media (max-width: 64rem) { .map-stage { min-height: 24rem; padding: var(--space-4); } .map-landmark { min-width: 7.5rem; } }
+@media (max-width: 48rem) { .map-stage { min-height: 21rem; } .map-landmark__meta, .map-landmark[data-zoom="country"] .map-landmark__label { display: none; } .map-landmark { min-width: var(--target-min); } }
+@media (max-width: 32rem) { .map-stage { min-height: 18rem; } .map-landmark__label { display: none; } }

@@ -1,0 +1,91 @@
+import { useEffect, useState } from "react";
+import type { AllProgressResponse, Quest, QuestListResponse, QuestMilestoneStatus, QuestProgress, QuestJournalEntry, SetMilestoneProgressResponse } from "../shared";
+import type { QuestEvidenceOption } from "../shared/learning";
+import { ErrorState, Skeleton } from "../ui";
+import { QuestBoard } from "./QuestBoard";
+import { QuestDetail } from "./QuestDetail";
+
+type QuestPageState =
+  | { status: "loading" }
+  | { status: "error"; message: string }
+  | { status: "ready"; quests: Quest[]; progressByQuest: Record<string, QuestProgress | undefined> };
+
+export function QuestPage({ questId }: { questId?: string }) {
+  const [state, setState] = useState<QuestPageState>({ status: "loading" });
+  const [selected, setSelected] = useState<Quest>();
+  const [saveError, setSaveError] = useState<string>();
+  const [evidenceByMilestone, setEvidenceByMilestone] = useState<Record<string, QuestEvidenceOption[]>>({});
+
+  useEffect(() => {
+    const controller = new AbortController();
+    Promise.all([
+      fetch("/api/quests", { signal: controller.signal }),
+      fetch("/api/progress", { signal: controller.signal })
+    ]).then(async ([questResponse, progressResponse]) => {
+      if (!questResponse.ok || !progressResponse.ok) throw new Error("Quest services are unavailable.");
+      const questPayload = await questResponse.json() as QuestListResponse;
+      const progressPayload = await progressResponse.json() as AllProgressResponse;
+      setState({ status: "ready", quests: questPayload.quests, progressByQuest: progressPayload.progress.quests });
+      if (questId) setSelected(questPayload.quests.find((quest) => quest.id === questId));
+    }).catch((cause: unknown) => {
+      if (!(cause instanceof DOMException && cause.name === "AbortError")) {
+        setState({ status: "error", message: cause instanceof Error ? cause.message : "Quests could not be loaded." });
+      }
+    });
+    return () => controller.abort();
+  }, [questId]);
+
+  useEffect(() => {
+    if (!selected) { setEvidenceByMilestone({}); return; }
+    const controller = new AbortController();
+    Promise.all(selected.milestones.map(async (milestone) => {
+      const params = new URLSearchParams({ questId: selected.id, milestoneId: milestone.id });
+      const response = await fetch(`/api/learning/evidence?${params}`, { signal: controller.signal });
+      if (!response.ok) return [milestone.id, []] as const;
+      const payload = await response.json() as { options: QuestEvidenceOption[] };
+      return [milestone.id, payload.options] as const;
+    })).then((entries) => setEvidenceByMilestone(Object.fromEntries(entries)))
+      .catch(() => { if (!controller.signal.aborted) setEvidenceByMilestone({}); });
+    return () => controller.abort();
+  }, [selected]);
+
+  if (state.status === "loading") return <main className="quest-page"><Skeleton lines={6} /></main>;
+  if (state.status === "error") return <main className="quest-page"><ErrorState title="Quest board unavailable">{state.message}</ErrorState></main>;
+
+  const updateMilestone = async (quest: Quest, milestoneId: string, status: QuestMilestoneStatus, evidence?: string, journal?: QuestJournalEntry) => {
+    setSaveError(undefined);
+    try {
+      const response = await fetch(`/api/progress/${encodeURIComponent(quest.id)}/milestones/${encodeURIComponent(milestoneId)}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ status, ...(evidence?.trim() ? { evidence: evidence.trim() } : {}), ...(journal ? { journal } : {}) })
+      });
+      if (!response.ok) throw new Error(`Progress update failed with ${response.status}.`);
+      const payload = await response.json() as SetMilestoneProgressResponse;
+      window.dispatchEvent(new Event("neolearning:progress"));
+      setState((current) => current.status === "ready" ? {
+        ...current,
+        progressByQuest: { ...current.progressByQuest, [quest.id]: payload.progress }
+      } : current);
+    } catch (cause) {
+      setSaveError(cause instanceof Error ? cause.message : "Progress could not be saved.");
+    }
+  };
+
+  return <main className="quest-page">
+    {selected ? <>
+      {saveError && <ErrorState title="Progress not saved">{saveError} Try again.</ErrorState>}
+      <QuestDetail
+        key={selected.id}
+        evidenceByMilestone={evidenceByMilestone}
+        onBack={() => { setSaveError(undefined); setSelected(undefined); window.location.hash = "#/quests"; }}
+        onMilestoneChange={(milestoneId, status, evidence, journal) => updateMilestone(selected, milestoneId, status, evidence, journal)}
+        progress={state.progressByQuest[selected.id] ?? { milestones: {} }}
+        quest={selected}
+      />
+    </> : <>
+      <header className="quest-page__heading"><p className="eyebrow">Learning by making</p><h1>Quest Board</h1><p>Start with a real problem, travel through the knowledge map, and leave evidence that the project works.</p></header>
+      <QuestBoard onSelectQuest={(quest) => { setSaveError(undefined); setSelected(quest); }} progressByQuest={state.progressByQuest} quests={state.quests} />
+    </>}
+  </main>;
+}
