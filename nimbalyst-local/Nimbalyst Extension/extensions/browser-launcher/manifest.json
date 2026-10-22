@@ -1,0 +1,22 @@
+{
+  "id": "com.local.browser-launcher",
+  "name": "Browser Launcher",
+  "version": "0.1.0",
+  "description": "Open Nimbalyst's integrated Chromium browser from the activity bar.",
+  "main": "dist/index.js",
+  "apiVersion": "1.0.0",
+  "defaultEnabled": true,
+  "permissions": {},
+  "contributions": {
+    "panels": [
+      {
+        "id": "browser",
+        "title": "Browser",
+        "icon": "public",
+        "placement": "fullscreen",
+        "order": 50,
+        "tooltip": "Open integrated browser"
+      }
+    ]
+  }
+}

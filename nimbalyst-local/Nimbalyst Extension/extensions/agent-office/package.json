@@ -1,0 +1,12 @@
+{
+  "name": "local-agent-office",
+  "version": "0.17.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

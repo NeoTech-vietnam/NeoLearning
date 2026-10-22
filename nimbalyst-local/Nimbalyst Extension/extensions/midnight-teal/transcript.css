@@ -1,0 +1,45 @@
+/* AI session typography uses the active Nimbalyst theme palette.
+ * The Claude Extension Dark theme sets the full window palette in manifest.json.
+ * Font rules are scoped to the transcript's nested Markdown content.
+ */
+.rich-transcript-view {
+  background-color: var(--nim-bg, #191a1b) !important;
+  color: var(--nim-text, #bfbfbf);
+}
+
+.rich-transcript-message-content,
+.rich-transcript-message-content .markdown-content {
+  font-family: "Segoe UI", Arial, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  color: var(--nim-text, #bfbfbf) !important;
+}
+
+.rich-transcript-message-content .markdown-content :where(p, li, blockquote, td, th) {
+  font-family: "Segoe UI", Arial, sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+.rich-transcript-message-content .markdown-content :where(h1, h2, h3, h4, h5, h6) {
+  font-family: "Segoe UI", Arial, sans-serif !important;
+}
+
+.rich-transcript-message-content .markdown-content strong {
+  font-weight: 600;
+}
+
+.rich-transcript-message-content .markdown-content p {
+  margin-top: 0 !important;
+  margin-bottom: 16px !important;
+}
+
+.rich-transcript-message-content .markdown-content p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.rich-transcript-turn-elapsed {
+  color: var(--nim-text-faint, #888888) !important;
+}
+
+/* Code, icons, composer and document editors retain their own font rules. */

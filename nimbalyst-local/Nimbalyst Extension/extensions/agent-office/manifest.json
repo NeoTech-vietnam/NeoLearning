@@ -1,0 +1,34 @@
+{
+  "id": "com.local.agent-office",
+  "name": "Agent Office",
+  "version": "0.17.0",
+  "description": "An outdoor pixel-art crew aging with real context usage, with session activity and delivered handoffs.",
+  "main": "dist/index.js",
+  "styles": "dist/style.css",
+  "apiVersion": "1.0.0",
+  "defaultEnabled": true,
+  "permissions": {
+    "network": true,
+    "catalog": [
+      "nimbalyst-database-read"
+    ]
+  },
+  "contributions": {
+    "settingsPanel": {
+      "component": "OfficeWeatherSettings",
+      "title": "Agent Office · Thời tiết",
+      "icon": "cloud",
+      "order": 100
+    },
+    "panels": [
+      {
+        "id": "office",
+        "title": "Agent Office",
+        "icon": "apartment",
+        "placement": "fullscreen",
+        "order": 51,
+        "tooltip": "Agent Office · live workspace sessions"
+      }
+    ]
+  }
+}

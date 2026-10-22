@@ -1,0 +1,13 @@
+.nim-browser-navigation{flex:0 0 auto;min-width:0}
+.nim-browser-bookmarks{display:flex;align-items:center;gap:8px;min-width:0;height:34px;box-sizing:border-box;padding:3px 8px;border-bottom:1px solid var(--nim-border);background:var(--nim-bg-secondary);color:var(--nim-text);font:12px system-ui}
+.nim-browser-bookmarks button{font:inherit;cursor:pointer;color:inherit;background:transparent;border:0;border-radius:4px;height:25px}
+.nim-browser-bookmarks button:hover:not(:disabled){background:var(--nim-bg-hover)}
+.nim-browser-bookmarks button:focus-visible{outline:2px solid var(--nim-text-muted);outline-offset:-2px}
+.nim-browser-bookmarks button:disabled{opacity:.5;cursor:default}
+.nim-browser-bookmark-add{flex:none;white-space:nowrap;padding:0 6px}
+.nim-browser-bookmark-list{display:flex;align-items:center;gap:5px;min-width:0;flex:1;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.nim-browser-bookmark{display:inline-flex;align-items:center;flex:none;border:1px solid var(--nim-border);border-radius:5px;max-width:195px}
+.nim-browser-bookmark-open{max-width:165px;padding:0 7px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nim-browser-bookmark-remove{width:23px;flex:none;color:var(--nim-text-muted)!important}
+.nim-browser-bookmarks-empty{white-space:nowrap;color:var(--nim-text-muted)}
+.nim-browser-bookmarks-error{max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#e69982}

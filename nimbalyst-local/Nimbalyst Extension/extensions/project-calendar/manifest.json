@@ -1,0 +1,43 @@
+{
+  "id": "com.local.project-calendar",
+  "name": "Project Calendar",
+  "version": "0.1.4",
+  "description": "Workspace calendar with month, agenda, week timeline, and read-only tracker links.",
+  "main": "dist/index.js",
+  "styles": "dist/style.css",
+  "apiVersion": "1.0.0",
+  "defaultEnabled": true,
+  "permissions": {
+    "ai": true,
+    "filesystem": true,
+    "catalog": [
+      "nimbalyst-database-read",
+      "workspace-files"
+    ]
+  },
+  "contributions": {
+    "aiTools": ["calendar_add_event"],
+    "panels": [
+      {
+        "id": "calendar",
+        "title": "Project Calendar",
+        "icon": "calendar_month",
+        "placement": "fullscreen",
+        "order": 52,
+        "tooltip": "Open the workspace project calendar"
+      }
+    ],
+    "customEditors": [
+      {
+        "filePatterns": [
+          "*.project-calendar.json"
+        ],
+        "displayName": "Project Calendar",
+        "component": "CalendarEditor",
+        "supportsSourceMode": true,
+        "supportsDiffMode": false,
+        "showDocumentHeader": true
+      }
+    ]
+  }
+}

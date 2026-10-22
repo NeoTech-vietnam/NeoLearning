@@ -1,0 +1,13 @@
+{
+  "name": "local-project-calendar",
+  "version": "0.1.4",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "@nimbalyst/runtime": ">=1"
+  }
+}

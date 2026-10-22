@@ -1,0 +1,56 @@
+{
+  "prepared": "2026-10-22",
+  "extensions": [
+    {
+      "folder": "extensions/browser-internal-tabs",
+      "id": "com.nimbalyst.browser",
+      "version": "1.0.1-local.3",
+      "build": "passed"
+    },
+    {
+      "folder": "extensions/browser-launcher",
+      "id": "com.local.browser-launcher",
+      "version": "0.1.0",
+      "build": "passed"
+    },
+    {
+      "folder": "extensions/project-calendar",
+      "id": "com.local.project-calendar",
+      "version": "0.1.4",
+      "build": "passed"
+    },
+    {
+      "folder": "extensions/agent-office",
+      "id": "com.local.agent-office",
+      "version": "0.17.0",
+      "build": "passed"
+    },
+    {
+      "folder": "extensions/midnight-teal",
+      "id": "com.local.midnight-teal",
+      "version": "0.5.3",
+      "build": "passed"
+    },
+    {
+      "folder": "extensions/antigravity-cli",
+      "id": "com.local.antigravity-cli",
+      "version": "0.3.3",
+      "build": "passed"
+    }
+  ],
+  "excluded": [
+    "accounts",
+    "credentials",
+    "API keys",
+    "extension storage",
+    "workspace data",
+    "sessions",
+    "bookmarks",
+    "node_modules",
+    "tests",
+    "source maps"
+  ],
+  "verification": "All six staged projects rebuilt successfully on 2026-10-22. Full-file SHA-256 and manifest/runtime entry checks passed. Installation and account setup on the destination machine are not yet verified.",
+  "installation": "Prebuilt dist included. Rebuild first five with node build.mjs; Antigravity CLI rebuild requires Node 22.12+, npm ci and npm run build. agy executable/login supplied separately on target.",
+  "packagingNotes": "Install-only package scripts; source maps excluded; absolute dependency labels in the Antigravity MCP bundle normalized for portability. Runtime defaults preserved."
+}

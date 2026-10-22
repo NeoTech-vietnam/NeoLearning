@@ -1,0 +1,12 @@
+{
+  "name": "local-browser-internal-tabs",
+  "version": "1.0.1-local.3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "com.local.antigravity-cli",
+  "name": "Antigravity CLI",
+  "version": "0.3.3",
+  "description": "Run the signed-in Antigravity CLI in Nimbalyst, with streaming conversations and native CLI tools.",
+  "main": "dist/index.js",
+  "apiVersion": "1.0.0",
+  "defaultEnabled": true,
+  "permissions": {
+    "ai": true
+  },
+  "contributions": {
+    "hostComponents": ["UsageHost"],
+    "configuration": {
+      "title": "Antigravity account usage",
+      "properties": {
+        "usageIndicatorEnabled": {"type":"boolean","default":true,"scope":"user","description":"Show the account quota indicator and refresh it every five minutes."},
+        "usageGroup": {"type":"string","default":"gemini","enum":["gemini","other","argon"],"scope":"user","description":"Account quota group displayed by the indicator."}
+      }
+    },
+    "panels": [{"id":"account-usage","title":"Gemini Usage","icon":"gemini","placement":"bottom","order":300,"tooltip":"Antigravity account usage: 5-hour and weekly limits"}],
+    "aiAgentProviders": [
+      {
+        "id": "antigravity-cli",
+        "displayName": "Antigravity CLI",
+        "platform": "Antigravity CLI",
+        "modelDiscovery": "static",
+        "settingsPanelComponent": "AntigravitySettings",
+        "icon": "gemini",
+        "backendModuleId": "cli-runtime",
+        "supportsResume": true,
+        "supportsAttachments": true,
+        "supportsSkills": true,
+        "supportsSlashCommands": false,
+        "compaction": "unsupported",
+        "models": [
+          {
+            "id": "antigravity-cli:gemini-4-argon-medium",
+            "name": "Gemini 4 Argon (Medium)"
+          },
+          {
+            "id": "antigravity-cli:gemini-4-argon-high",
+            "name": "Gemini 4 Argon (High)"
+          },
+          {
+            "id": "antigravity-cli:gemini-4-argon-low",
+            "name": "Gemini 4 Argon (Low)"
+          },
+          {
+            "id": "antigravity-cli:gemini-3.8-flash-high",
+            "name": "Gemini 3.8 Flash (High)"
+          },
+          {
+            "id": "antigravity-cli:gemini-3.8-flash-medium",
+            "name": "Gemini 3.8 Flash (Medium)",
+            "default": true
+          },
+          {
+            "id": "antigravity-cli:gemini-3.8-flash-low",
+            "name": "Gemini 3.8 Flash (Low)"
+          },
+          {
+            "id": "antigravity-cli:claude-opus-5-5-low",
+            "name": "Claude Opus 5.5 (Low)"
+          },
+          {
+            "id": "antigravity-cli:claude-opus-5-5-medium",
+            "name": "Claude Opus 5.5 (Medium)"
+          },
+          {
+            "id": "antigravity-cli:claude-opus-5-5-high",
+            "name": "Claude Opus 5.5 (High)"
+          },
+          {
+            "id": "antigravity-cli:claude-sonnet-5-5-low",
+            "name": "Claude Sonnet 5.5 (Low)"
+          },
+          {
+            "id": "antigravity-cli:claude-sonnet-5-5-medium",
+            "name": "Claude Sonnet 5.5 (Medium)"
+          },
+          {
+            "id": "antigravity-cli:claude-sonnet-5-5-high",
+            "name": "Claude Sonnet 5.5 (High)"
+          },
+          {
+            "id": "antigravity-cli:gpt-oss-120b-medium",
+            "name": "GPT-OSS 120B (Medium)"
+          }
+        ]
+      }
+    ],
+    "backendModules": [
+      {
+        "id": "cli-runtime",
+      "entry": "dist/backend.mjs",
+        "runtime": "utility-process",
+        "permissions": [
+          "nimbalyst-database-write",
+          "mcp-server-register"
+        ],
+        "enablement": {
+          "default": "disabled",
+          "promptOn": "firstUse",
+          "purpose": "Run Antigravity CLI locally, use its coding and web tools, and save its transcript in Nimbalyst. Tool permissions remain controlled by the CLI."
+        }
+      }
+    ],
+    "settingsPanel": {
+      "component": "AntigravitySettings",
+      "title": "Antigravity CLI",
+      "icon": "settings"
+    }
+  }
+}
