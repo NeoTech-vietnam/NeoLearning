@@ -1,0 +1,1 @@
+Keep source and battery unchanged; reduce mean current to 20 A. Find R, RMS current, resistor loss and useful efficiency. Explain whether conduction angle changes.

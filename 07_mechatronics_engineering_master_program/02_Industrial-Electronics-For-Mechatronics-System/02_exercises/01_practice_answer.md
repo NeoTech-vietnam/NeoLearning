@@ -1,0 +1,1 @@
+Conduction angle unchanged since E/Vm is unchanged. R=4.64967061 ohm; RMS=25.51595967 A; resistor loss=3027.23407 W; battery power=2400 W. Useful efficiency remains 44.2214 percent.
