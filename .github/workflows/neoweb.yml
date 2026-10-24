@@ -1,0 +1,83 @@
+name: NeoLearning documentation
+
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: neolearning-docs-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate changed Markdown
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out candidate documentation as data
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          path: source
+          fetch-depth: 0
+          submodules: false
+          persist-credentials: false
+
+      - name: Check out the trusted validator separately
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.event.repository.default_branch }}
+          path: trusted
+          sparse-checkout: .github/neoweb
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+
+      - name: Validate only the changed Markdown
+        working-directory: source
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          if [ ! -f ../trusted/.github/neoweb/check-markdown.mjs ]; then
+            echo "::error::Install the reviewed NeoWeb validator bundle on the target/default branch first. See NeoWeb docs/deployment.md."
+            exit 1
+          fi
+          if [[ ! "$BASE_SHA" =~ ^[0-9a-f]{40}$ || ! "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Expected immutable Git commit SHAs for Markdown validation."
+            exit 1
+          fi
+          if [[ "$BASE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            node ../trusted/.github/neoweb/check-markdown.mjs --source . --head "$HEAD_SHA" --strict
+            exit $?
+          fi
+          node ../trusted/.github/neoweb/check-markdown.mjs --source . --base "$BASE_SHA" --head "$HEAD_SHA"
+
+  dispatch:
+    name: Request the updated learning portal
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Dispatch only the fixed NeoWeb default-branch workflow
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.NEOWEB_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::Configure NEOWEB_DISPATCH_TOKEN with Actions:write on NeoTech-vietnam/NeoWeb. Scheduled NeoWeb publication remains available."
+            exit 1
+          fi
+          gh api --method POST             repos/NeoTech-vietnam/NeoWeb/actions/workflows/pages.yml/dispatches             -f ref=main

@@ -75,6 +75,12 @@ For queued DMA, keep every transaction and buffer alive until `spi_device_get_tr
 
 Official cross-checks at `v6.0.1`: [master HD EEPROM](https://github.com/espressif/esp-idf/tree/v6.0.1/examples/peripherals/spi_master/hd_eeprom), [master LCD](https://github.com/espressif/esp-idf/tree/v6.0.1/examples/peripherals/spi_master/lcd), [normal slave sender/receiver](https://github.com/espressif/esp-idf/tree/v6.0.1/examples/peripherals/spi_slave), and [slave-HD segment/append modes](https://github.com/espressif/esp-idf/tree/v6.0.1/examples/peripherals/spi_slave_hd).
 
+#### Local runnable coverage
+
+Examples [`11`–`22`](../../../../../../Examples/ESP32/FreeRTOS/03_Interfaces-and-Protocols/01_Basic/03_SPI/01_note/03_study_guidance.md#implemented-advanced-practice-map) cover transaction phases, clock modes/bit order, CS timing/callbacks, timing compensation, recovery, polling/interrupt completion, dual/quad/octal, Slave-HD segment/append, private SCT, and LL CPU FIFO transfers.
+
+ESP-IDF `v6.0.1` build result: **37/37 supported configurations pass**. Hardware and analyzer checks remain pending. Example `18` is ESP32-S3-only. Examples `21` and `22` use unstable private/internal APIs solely for learning; production applications should use public driver APIs.
+
 #### Related notes
 
 - [Complete public/internal API inventory](15_spi_apis.md#public-functions)

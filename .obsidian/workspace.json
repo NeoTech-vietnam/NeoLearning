@@ -4,21 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "efb243d1ca80f145",
+        "id": "5c6d08a6cb64c6b3",
         "type": "tabs",
         "children": [
           {
-            "id": "25d53cd02f82dd56",
+            "id": "082a576e5fb9a71a",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "canvas",
               "state": {
-                "file": "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
-                "mode": "source",
-                "source": false
+                "file": "Embedded-Engineering-Topics.canvas",
+                "viewState": {
+                  "x": 935,
+                  "y": 905,
+                  "zoom": -1.4519680994521778
+                }
               },
-              "icon": "lucide-file",
-              "title": "01_demo_heap_idf_memory_managament"
+              "icon": "lucide-layout-dashboard",
+              "title": "Embedded-Engineering-Topics"
             }
           }
         ]
@@ -41,7 +44,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -185,20 +190,28 @@
   },
   "active": "11d8b750728fa289",
   "lastOpenFiles": [
+    "Embedded-Engineering-Topics.canvas",
+    "NeoLearning-Knowledge-Map.canvas",
+    "REPO_STRUCTURE.md",
+    "Topic_Review.canvas",
+    "02_Software/01_Programming-Languages/07_Go/01_learning/02_a_simple_start/11_file_organization.md",
+    "02_Software/01_Programming-Languages/07_Go/01_learning/02_a_simple_start/09_go_packages.md",
+    "02_Software/01_Programming-Languages/07_Go/01_learning/02_a_simple_start/08_five_important_questions.md",
+    "02_Software/01_Programming-Languages/07_Go/01_learning/01_getting_started/03_environment_setup.md",
+    "README.md",
+    "Embedded-Engineering-Roadmap.md",
+    "Examples/ESP32/FreeRTOS/02_Software/04_Operating-Systems/03_heap_memory_management/01_note/01_demo_heap_idf_memory_managament.md",
     "Examples/ESP32/FreeRTOS/02_Software/03_Microcontrollers/04_PWM/01_MCPWM/01_note/01_demo_project_for_mcpwm.md",
     "Examples/CLONE_GUIDE.md",
     "Examples/Window/README.md",
     "Examples/STM32/README.md",
     "06_Product_Concepts/04_NeoAssisstant/Learning_Tracker.md",
     "06_Product_Concepts/04_NeoAssisstant/Concept.md",
-    "Embedded-Engineering-Roadmap.md",
     "CLAUDE.md",
     "Untitled.canvas",
     "02_Software/04_Operating-Systems/03_RTOS/02_FreeRTOS/03_resources/01_FreeRTOS/01_Source/examples/README.md",
     "02_Software/01_Programming-Languages/02_Cpp/01_learning/05_controlling_program_flow/image-36.png",
     "03_Interfaces-and-Protocols/06_Network/02_UDP.md",
-    "README.md",
-    "REPO_STRUCTURE.md",
     "REPO_STRUCTURE.md.tmp.5664.db860106ddbf",
     "REPO_STRUCTURE.md.tmp.5664.d4fc9bf56232",
     "REPO_STRUCTURE.md.tmp.5664.5a6dac0ce2d2",

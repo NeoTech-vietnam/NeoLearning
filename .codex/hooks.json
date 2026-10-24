@@ -1,13 +1,24 @@
 {
   "hooks": {
-    "SubagentStart": [
+    "UserPromptSubmit": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "node 'D:\\workspace\\NeoLearning\\.neomind\\hooks\\codex.cjs' SubagentStart",
-            "commandWindows": "powershell.exe -NoProfile -NonInteractive -EncodedCommand JgAgAG4AbwBkAGUAIAAnAEQAOgBcAHcAbwByAGsAcwBwAGEAYwBlAFwATgBlAG8ATABlAGEAcgBuAGkAbgBnAFwALgBuAGUAbwBtAGkAbgBkAFwAaABvAG8AawBzAFwAYwBvAGQAZQB4AC4AYwBqAHMAJwAgAFMAdQBiAGEAZwBlAG4AdABTAHQAYQByAHQA",
-            "timeout": 10
+            "command": "python -X utf8 .codex/hooks/inject-workflow-state.py",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "^(?:trellis-implement|trellis-check|trellis-research)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 .codex/hooks/inject-subagent-context.py",
+            "timeout": 15
           }
         ]
       }
