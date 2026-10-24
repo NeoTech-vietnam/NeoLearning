@@ -37,3 +37,17 @@ project_doc_fallback_filenames = ["AGENTS.md"]
 # (this file) takes precedence over user-level `~/.codex/config.toml`.
 [agents]
 max_depth = 1
+
+# BEGIN NEOMIND mcp
+[mcp_servers.neomind]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
+# END NEOMIND mcp
+
+# BEGIN NEOMIND rea
+[mcp_servers.rea]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["D:\\workspace\\NeoLearning\\.neomind\\tools\\rea\\6.7.0\\node_modules\\rea-agents\\scripts\\rea.mjs","mcp"]
+enabled_tools = ["binary_session","analyze_javascript_application","inspect_analysis_view","get_evidence_bundle"]
+env = { "DO_NOT_TRACK" = "1", "REA_MCP_MAX_RESPONSE_BYTES" = "10485760" }
+# END NEOMIND rea
