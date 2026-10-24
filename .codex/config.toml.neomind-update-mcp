@@ -1,0 +1,5 @@
+# BEGIN NEOMIND mcp
+[mcp_servers.neomind]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
+# END NEOMIND mcp

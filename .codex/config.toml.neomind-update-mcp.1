@@ -1,0 +1,14 @@
+# BEGIN NEOMIND codegraph
+[mcp_servers.codegraph]
+command = "D:\\workspace\\NeoLearning\\.neomind\\tools\\codegraph\\1.6.2\\node_modules\\@colbymchenry\\codegraph-win32-x64\\node.exe"
+args = ["--liftoff-only","--disable-warning=ExperimentalWarning","D:\\workspace\\NeoLearning\\.neomind\\tools\\codegraph\\1.6.2\\node_modules\\@colbymchenry\\codegraph-win32-x64\\lib\\dist\\bin\\codegraph.js","serve","--mcp","--path","D:\\workspace\\NeoLearning"]
+enabled = true
+enabled_tools = ["codegraph_explore"]
+env = { "CODEGRAPH_TELEMETRY" = "0", "DO_NOT_TRACK" = "1", "CODEGRAPH_NO_DOWNLOAD" = "1", "CODEGRAPH_NO_DAEMON" = "1" }
+# END NEOMIND codegraph
+
+# BEGIN NEOMIND mcp
+[mcp_servers.neomind]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
+# END NEOMIND mcp

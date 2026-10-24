@@ -1,0 +1,20 @@
+# BEGIN NEOMIND codegraph
+[mcp_servers.codegraph]
+command = "D:\\workspace\\NeoLearning\\.neomind\\tools\\codegraph\\1.6.2\\node_modules\\@colbymchenry\\codegraph-win32-x64\\node.exe"
+args = ["--liftoff-only","--disable-warning=ExperimentalWarning","D:\\workspace\\NeoLearning\\.neomind\\tools\\codegraph\\1.6.2\\node_modules\\@colbymchenry\\codegraph-win32-x64\\lib\\dist\\bin\\codegraph.js","serve","--mcp","--path","D:\\workspace\\NeoLearning"]
+enabled = true
+enabled_tools = ["codegraph_explore"]
+env = { "CODEGRAPH_TELEMETRY" = "0", "DO_NOT_TRACK" = "1", "CODEGRAPH_NO_DOWNLOAD" = "1", "CODEGRAPH_NO_DAEMON" = "1" }
+# END NEOMIND codegraph
+
+[mcp_servers.neomind]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = [ "C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js", "mcp", "--project", "D:\\workspace\\NeoLearning" ]
+
+# BEGIN NEOMIND rea
+[mcp_servers.rea]
+command = "C:\\Program Files\\nodejs\\node.exe"
+args = ["D:\\workspace\\NeoLearning\\.neomind\\tools\\rea\\6.7.0\\node_modules\\rea-agents\\scripts\\rea.mjs","mcp"]
+enabled_tools = ["binary_session","analyze_javascript_application","inspect_analysis_view","get_evidence_bundle"]
+env = { "DO_NOT_TRACK" = "1", "REA_MCP_MAX_RESPONSE_BYTES" = "10485760" }
+# END NEOMIND rea

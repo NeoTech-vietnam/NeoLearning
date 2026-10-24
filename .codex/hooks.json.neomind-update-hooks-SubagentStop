@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node 'D:\\workspace\\NeoLearning\\.neomind\\hooks\\codex.cjs' SubagentStart",
+            "commandWindows": "powershell.exe -NoProfile -NonInteractive -EncodedCommand JgAgAG4AbwBkAGUAIAAnAEQAOgBcAHcAbwByAGsAcwBwAGEAYwBlAFwATgBlAG8ATABlAGEAcgBuAGkAbgBnAFwALgBuAGUAbwBtAGkAbgBkAFwAaABvAG8AawBzAFwAYwBvAGQAZQB4AC4AYwBqAHMAJwAgAFMAdQBiAGEAZwBlAG4AdABTAHQAYQByAHQA",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node 'D:\\workspace\\NeoLearning\\.neomind\\hooks\\codex.cjs' SubagentStop",
+            "commandWindows": "powershell.exe -NoProfile -NonInteractive -EncodedCommand JgAgAG4AbwBkAGUAIAAnAEQAOgBcAHcAbwByAGsAcwBwAGEAYwBlAFwATgBlAG8ATABlAGEAcgBuAGkAbgBnAFwALgBuAGUAbwBtAGkAbgBkAFwAaABvAG8AawBzAFwAYwBvAGQAZQB4AC4AYwBqAHMAJwAgAFMAdQBiAGEAZwBlAG4AdABTAHQAbwBwAA==",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
