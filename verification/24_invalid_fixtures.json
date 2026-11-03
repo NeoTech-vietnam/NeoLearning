@@ -1,0 +1,8 @@
+[
+  {"name":"unchanged_list","body":"return head;"},
+  {"name":"value_only_swaps","body":"for (struct ListNode *p = head; p != NULL && p->next != NULL; p = p->next->next) { int value = p->val; p->val = p->next->val; p->next->val = value; } return head;"},
+  {"name":"dropped_odd_tail","body":"struct ListNode dummy = {0, head}; struct ListNode *prev = &dummy; while (prev->next != NULL && prev->next->next != NULL) { struct ListNode *a = prev->next; struct ListNode *b = a->next; a->next = b->next; b->next = a; prev->next = b; prev = a; } prev->next = NULL; return dummy.next;"},
+  {"name":"lost_reconnection","body":"struct ListNode dummy = {0, head}; struct ListNode *prev = &dummy; while (prev->next != NULL && prev->next->next != NULL) { struct ListNode *a = prev->next; struct ListNode *b = a->next; a->next = b->next; b->next = a; prev = a; } return dummy.next;"},
+  {"name":"cycle_introduction","body":"struct ListNode dummy = {0, head}; struct ListNode *prev = &dummy; while (prev->next != NULL && prev->next->next != NULL) { struct ListNode *a = prev->next; struct ListNode *b = a->next; a->next = b->next; b->next = a; prev->next = b; prev = a; } if (prev != &dummy) prev->next = dummy.next; return dummy.next;"},
+  {"name":"value_mutation","body":"struct ListNode dummy = {0, head}; struct ListNode *prev = &dummy; while (prev->next != NULL && prev->next->next != NULL) { struct ListNode *a = prev->next; struct ListNode *b = a->next; a->next = b->next; b->next = a; prev->next = b; prev = a; } if (head != NULL) head->val = (head->val + 1) % 101; return dummy.next;"}
+]

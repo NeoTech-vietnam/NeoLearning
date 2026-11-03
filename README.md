@@ -41,6 +41,9 @@ A structured knowledge repository for Embedded Systems Engineering, organized fo
 ### [Programming Fundamentals](02_Software/02_Programming-Fundamentals/)
 - [Basic Discrete Mathematics](02_Software/02_Programming-Fundamentals/00_Basic-Discrete-Mathematics/)
 - [Algorithms and Data Structures](02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/)
+  - [LeetCode 24 — Swap Nodes in Pairs](02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/24_swap_nodes_in_pairs/)
+  - [LeetCode 121 — Best Time to Buy and Sell Stock](02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/121_best_time_to_buy_and_sell_stock/121_note.md)
+  - [LeetCode 160 — Intersection of Two Linked Lists](02_Software/02_Programming-Fundamentals/01_Algorithms-and-Data-Structures/02_practice/03_data_structures/02_contiguous_vs_linked_structures/160_intersection_of_two_linked_lists/)
 - [Design Patterns](02_Software/02_Programming-Fundamentals/02_Design-Patterns/)
 - [State Machines](02_Software/02_Programming-Fundamentals/03_State-Machines/)
 - [Memory Management](02_Software/02_Programming-Fundamentals/04_Memory-Management/)
@@ -77,13 +80,11 @@ A structured knowledge repository for Embedded Systems Engineering, organized fo
 - [RTOS Basics](02_Software/04_Operating-Systems/03_RTOS/01_RTOS-Basics/)
 - [FreeRTOS](02_Software/04_Operating-Systems/03_RTOS/02_FreeRTOS/)
 - [Zephyr](02_Software/04_Operating-Systems/03_RTOS/03_Zephyr/)
-- [QNX](02_Software/04_Operating-Systems/03_RTOS/04_QNX/)
-- [µC/OS](02_Software/04_Operating-Systems/03_RTOS/05_uCOS/)
-- [RT-Thread](02_Software/04_Operating-Systems/03_RTOS/06_RT-Thread/)
-- [NuttX](02_Software/04_Operating-Systems/03_RTOS/07_NuttX/)
-- [Mbed OS](02_Software/04_Operating-Systems/03_RTOS/08_Mbed-OS/)
-- [VxWorks](02_Software/04_Operating-Systems/03_RTOS/09_VxWorks/)
-- [Azure RTOS / ThreadX](02_Software/04_Operating-Systems/03_RTOS/10_Azure-RTOS-ThreadX/)
+- [NuttX](02_Software/04_Operating-Systems/03_RTOS/04_NuttX/)
+- [ThreadX](02_Software/04_Operating-Systems/03_RTOS/05_ThreadX/)
+- [Mbed OS](02_Software/04_Operating-Systems/03_RTOS/06_Mbed-OS/)
+- [VxWorks](02_Software/04_Operating-Systems/03_RTOS/07_VxWorks/)
+- [Azure RTOS / ThreadX](02_Software/04_Operating-Systems/03_RTOS/08_Azure-RTOS-ThreadX/)
 
 ### [Build System](02_Software/05_Build-System/)
 - [Compilers / GCC](02_Software/05_Build-System/01_Compilers-GCC/)
@@ -186,30 +187,9 @@ A structured knowledge repository for Embedded Systems Engineering, organized fo
 - [CoAP](03_Interfaces-and-Protocols/04_Industrial/05_CoAP/)
 - [RS485](03_Interfaces-and-Protocols/04_Industrial/06_RS485/)
 
-### [Automotive Protocols](03_Interfaces-and-Protocols/05_Automotive/)
-- [CAN](03_Interfaces-and-Protocols/05_Automotive/01_CAN/)
-- [LIN](03_Interfaces-and-Protocols/05_Automotive/02_LIN/)
-- [MOST](03_Interfaces-and-Protocols/05_Automotive/03_MOST/)
-- [FlexRay](03_Interfaces-and-Protocols/05_Automotive/04_FlexRay/)
-
-### [Network Protocols](03_Interfaces-and-Protocols/06_Network/)
-- [TCP/IP](03_Interfaces-and-Protocols/06_Network/01_TCP-IP/)
-- [UDP](03_Interfaces-and-Protocols/06_Network/02_UDP/)
-
-### [Cellular](03_Interfaces-and-Protocols/07_Cellular/)
-- [GSM / LTE](03_Interfaces-and-Protocols/07_Cellular/01_GSM-LTE/)
-- [LTE-M / 5G](03_Interfaces-and-Protocols/07_Cellular/02_LTE-M-5G/)
-- [NB-IoT](03_Interfaces-and-Protocols/07_Cellular/03_NB-IoT/)
-
-### [Digital Audio Protocols](03_Interfaces-and-Protocols/08_Digital-Audio-Protocols/)
-- [I2S](03_Interfaces-and-Protocols/08_Digital-Audio-Protocols/01_I2S/)
-- [PCM](03_Interfaces-and-Protocols/08_Digital-Audio-Protocols/02_PCM/)
-
-### [Display and Camera Protocols](03_Interfaces-and-Protocols/09_Display-and-Camera-Protocols/)
-- [SCCB](03_Interfaces-and-Protocols/09_Display-and-Camera-Protocols/01_SCCB/)
-- [MIPI CSI-2](03_Interfaces-and-Protocols/09_Display-and-Camera-Protocols/02_MIPI-CSI-2/)
-- [MIPI DSI](03_Interfaces-and-Protocols/09_Display-and-Camera-Protocols/03_MIPI-DSI/)
-- [HDMI](03_Interfaces-and-Protocols/09_Display-and-Camera-Protocols/04_HDMI/)
+### [Network Protocols](03_Interfaces-and-Protocols/05_Network/)
+- [TCP/IP](03_Interfaces-and-Protocols/05_Network/01_TCP-IP/)
+- [UDP](03_Interfaces-and-Protocols/05_Network/02_UDP/)
 
 ---
 

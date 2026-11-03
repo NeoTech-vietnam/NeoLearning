@@ -1,0 +1,7 @@
+[
+  {"name":"always_false","body":"(void)head; return false;"},
+  {"name":"always_true","body":"(void)head; return true;"},
+  {"name":"value_comparison","body":"struct ListNode *slow = head, *fast = head; while (fast != NULL && fast->next != NULL) { slow = slow->next; fast = fast->next->next; if (fast != NULL && slow->val == fast->val) return true; } return false;"},
+  {"name":"input_link_mutation","body":"if (head != NULL) head->next = NULL; return false;"},
+  {"name":"infinite_loop","body":"while (head != NULL) {} return false;"}
+]

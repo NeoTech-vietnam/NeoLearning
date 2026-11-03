@@ -15,11 +15,11 @@
 				"X-MCP-Toolsets": "repos"
 			}
     },
-    "neomind": {
+    "workforce": {
       "type": "stdio",
       "command": "C:\\Program Files\\nodejs\\node.exe",
       "args": [
-        "C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js",
+        "D:\\tools\\WorkForce\\0.2.0-alpha.1\\1f5902c3\\workforce\\dist\\cli.js",
         "mcp",
         "--project",
         "D:\\workspace\\NeoLearning"

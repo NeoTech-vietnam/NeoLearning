@@ -38,10 +38,10 @@ project_doc_fallback_filenames = ["AGENTS.md"]
 [agents]
 max_depth = 1
 
-# BEGIN NEOMIND mcp
-[mcp_servers.neomind]
+# BEGIN WORKFORCE mcp
+[mcp_servers.workforce]
 command = "C:\\Program Files\\nodejs\\node.exe"
-args = ["C:\\Users\\daveb\\AppData\\Roaming\\npm\\node_modules\\neomind\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
+args = ["D:\\tools\\WorkForce\\0.2.0-alpha.1\\1f5902c3\\workforce\\dist\\cli.js","mcp","--project","D:\\workspace\\NeoLearning"]
 required = true
-enabled_tools = ["manager_run", "manager_status", "manager_control"]
-# END NEOMIND mcp
+enabled_tools = ["request_submit","request_status","request_control"]
+# END WORKFORCE mcp

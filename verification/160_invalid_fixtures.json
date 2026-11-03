@@ -1,0 +1,7 @@
+[
+  {"name":"always_null","body":"(void)headA; (void)headB; return NULL;"},
+  {"name":"equal_value","body":"for (struct ListNode *p = headA; p; p = p->next) { for (struct ListNode *q = headB; q; q = q->next) { if (p->val == q->val) { return p; } } }\nreturn NULL;"},
+  {"name":"later_shared","body":"struct ListNode *p = headA, *q = headB; while (p != q) { p = p ? p->next : headB; q = q ? q->next : headA; } return p ? p->next : NULL;"},
+  {"name":"link_mutation","body":"struct ListNode *p = headA, *q = headB; while (p != q) { p = p ? p->next : headB; q = q ? q->next : headA; } if (headA) { headA->next = headA; } return p;"},
+  {"name":"value_mutation","body":"struct ListNode *p = headA, *q = headB; while (p != q) { p = p ? p->next : headB; q = q ? q->next : headA; } if (headA) { headA->val += 1; } return p;"}
+]

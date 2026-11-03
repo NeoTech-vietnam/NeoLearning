@@ -6,5 +6,6 @@
             "strings": "off"
         },
         "editor.snippetSuggestions": "top"
-    }
+    },
+    "chat.permissions.default": "autoApprove"
 }
